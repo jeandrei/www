@@ -1,0 +1,17 @@
+*Adiciona arquivo
+git add nome do arquivo
+*Adicionar tudo
+git add .
+*Atualizar coneúdo para o repositório
+git commit -m 'Descrição da atualização, o que foi feito'
+	ex: git commit -m 'Validação de CPF do formulário de clientes'
+*Upload das suas atualizações
+git push origin master
+*Download das atualizações realizadas pelos colaboradores
+git pull origin master
+*Cancelar uma atualização upload
+git reset --soft HEAD^
+*Reverter uma atualização
+git reset --hard HEAD^
+*Clonar o repositório para um diretório local
+git clone https://github.com/nome do usuario/nome do repositorio.git
