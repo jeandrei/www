@@ -1,7 +1,11 @@
+*Ver o status, arquivos modificados que precisam ser atualizados
+git status
 *Adiciona arquivo
 git add nome do arquivo
 *Adicionar tudo
 git add .
+*Adicionar tudo
+git add -A
 *Atualizar coneúdo para o repositório
 git commit -m 'Descrição da atualização, o que foi feito'
 	ex: git commit -m 'Validação de CPF do formulário de clientes'
@@ -21,3 +25,20 @@ git commit -m 'Remocao do arquivo ou pasta'
 git push origin master
 *Informações do repositório
 git remote -v
+
+******************Branching - Ramificação, usado para criar cópia do projeto e trabalhar na cópia para só depois de revisado e aprovado ser aplicado ao projeto original
+************************
+*Primeiro atualizamos o repositório
+git pull
+*Verificamos em qual branch estamos localizados master é o principal como se fosse o tronco da arvore branch são ramificações
+git branch
+*Adicionamos uma ramificação
+git branch nomedaramificacao
+	ex: git branch feature1
+*Listamos as ramificações
+git branch
+*Vai ter master e feature1 - feature1 vai ser uma cópia do master
+*Para trabalhar em feature1 ou seja mudar para o branche criado
+git checkout feature1
+
+
