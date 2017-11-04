@@ -40,5 +40,13 @@ git branch
 *Vai ter master e feature1 - feature1 vai ser uma cópia do master
 *Para trabalhar em feature1 ou seja mudar para o branche criado
 git checkout feature1
-
+*Aplicar as alterações ao master
+*Primeiro atualizamos o master
+git checkout master
+git pull origin master
+*Voltamos para o branch
+git checkout feature1
+*Aplicamos as alterações
+git merge master
+*Pode ser feita pelo ambiente onlido do git também
 
