@@ -15,3 +15,9 @@ git reset --soft HEAD^
 git reset --hard HEAD^
 *Clonar o repositório para um diretório local
 git clone https://github.com/nome do usuario/nome do repositorio.git
+*Remover um diretório ou arquivo
+git rm -r nome da pasta
+git commit -m 'Remocao do arquivo ou pasta'
+git push origin master
+*Informações do repositório
+git remote -v
