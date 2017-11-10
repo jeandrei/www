@@ -19,5 +19,6 @@ class Second extends First{
 $second = new Second;
 
 echo $second->getName();
+//$second->getName();
 //echo $second->name; essa linha não funciona pois $name está definido como protected logo apenas dentro da classe second eu tenho acesso, fora dela não, por isso eu crio uma função getName para pegar este valor.
 ?>
