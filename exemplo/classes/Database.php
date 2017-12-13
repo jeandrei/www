@@ -10,7 +10,7 @@ class Database{
 	private $host	=	'localhost';
 	private $user	=	'root';
 	private $pass	=	'rootadm';
-	private $dbnm	=	'myblog';
+	private $dbname = 	'myblog';
 
 	private $dbh;//db heandler manipulador do banco
 	private $error;
@@ -27,7 +27,7 @@ class Database{
 		);
 		//CREATE new PDO
 		try{//aqui monta completo PDO('mysql:host=localhost;dbname=myblog', 'root', 'rootadm');
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opptions);
+			$this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
 		} catch(PDOEception $e){//se der alguma exceção ele pega a menságem de erro e guarda na variável $e
 			$this->error = $e->getMessage();
 		}
@@ -54,11 +54,12 @@ class Database{
 
 	Execução
 	return $this->stmt->execute() - $s->execute();
-	*/
+	*/}//construct
+	
 	public function query($query){
 		$this->stmt = $this->dbh->prepare($query);
 	}
-
+	
 	public function bind($param, $value, $type = null){
 		if(is_null($type)){
 			switch(true){
@@ -83,9 +84,10 @@ class Database{
 	}//execute
 	
 	public function resultset(){
+		//execute é a função logo acima
 		$this->execute();
-		return $this->stm->fetchAll(PDO::FETCH_ASSOC);
+		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 	}//resultset
-	}//construct
+
 }//class
 ?>
