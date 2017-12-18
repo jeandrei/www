@@ -83,6 +83,10 @@ class Database{
 		return $this->stmt->execute();
 	}//execute
 	
+	public function lastInsertId(){
+		$this->dbh->lastInsertId();
+	}
+
 	public function resultset(){
 		//execute é a função logo acima
 		$this->execute();
