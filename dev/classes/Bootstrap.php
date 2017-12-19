@@ -16,7 +16,7 @@ class Bootstrap{
 		} else {
 			$this->action = $this->request['action'];
 		}
-	echo $this->controller;
+	
 	}
 	/*
 	No debian para funcionar o Mod_Rewrite que permite criar URLs simples e customizadas.
@@ -42,5 +42,30 @@ class Bootstrap{
  	O objetivo é ter uma pasta para cada função do projeto e a url será montada automaticamente por exemplo
  	se digitar dev/usuario ele vai passar para o controller usuario mesmo que a pasta usuario não exista
 	*/
+	public function createController(){
+		// Check Class
+		if(class_exists($this->controller)){
+			$parents = class_parents($this->controller);
+			// Check Extend
+			if(in_array("Controller", $parents)){
+				if(method_exists($this->controller, $this->action)){
+					return new $this->controller($this->action, $this->request);
+				} else {
+					// Method Does Not exist
+					echo '<h1>Method does not exist</h1>';
+					return;
+				}
+			
+			} else {
+					// Base Controller Does Not exist
+					echo '<h1>Base controller not found</h1>';
+					return;
+			}
+		} else {
+			// Controller Class Does Not exist
+			echo '<h1>Controller Class does not exist</h1>';
+			return;
+		}
+	}
 }
 ?>
