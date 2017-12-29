@@ -1,15 +1,19 @@
 <?php
 class Bootstrap{
-	private $controller;
-	private $action;
+	// 1 por padrão o $_GET passa sempre os valores  [controller] => [action] => [id] => 
+	//se ter um print_r($_GET) teremos como resultado Array ( [controller] => [action] => [id] => )
+	
+	private $controller;//ex users, shares
+	private $action;//register, delete
 	private $request;
 
 	public function __construct($request){
 		$this->request = $request;
-		if($this->request['controller'] == ""){
-			$this->controller = 'home';
+		//2 $request recebe o que foi passado pelo $_GET imaginemos que foi Array ( [controller] =>shares [action] => [id] => )
+		if($this->request['controller'] == ""){//** dev/users/register : users - controler ** register - action
+			$this->controller = 'home';			//então se o controler for em branco vai jogar para a home	
 		} else {
-			$this->controller = $this->request['controller'];
+			$this->controller = $this->request['controller'];//3 $this->request['controller'];vai trazer shares, poderia ser users
 		}
 		if($this->request['action'] == ""){
 			$this->action = 'index';
@@ -42,14 +46,18 @@ class Bootstrap{
  	O objetivo é ter uma pasta para cada função do projeto e a url será montada automaticamente por exemplo
  	se digitar dev/usuario ele vai passar para o controller usuario mesmo que a pasta usuario não exista
 	*/
-	public function createController(){
+	public function createController(){//4 vai passar o conroller shares
+										//chamado lá no índex $controller = $bootstrap->createController(); 
 		// Check Class
 		if(class_exists($this->controller)){
-			$parents = class_parents($this->controller);
+			$parents = class_parents($this->controller);//vai trazer o parente da classe controller 
+							  //$parents vai ficar com o valor Array ( [Controller] => Controller )			
 			// Check Extend
 			if(in_array("Controller", $parents)){
-				if(method_exists($this->controller, $this->action)){
-					return new $this->controller($this->action, $this->request);
+				if(method_exists($this->controller, $this->action)){//5 method_exists — Checks if the class method exists
+																	//neste caso temos a classe shares dentro de shares.php	
+					return new $this->controller($this->action, $this->request);//action index 
+										//request o do passado pelo get Array ( [controller] => shares [action] => [id] => )
 				} else {
 					// Method Does Not exist
 					echo '<h1>Method does not exist</h1>';
