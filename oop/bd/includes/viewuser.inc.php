@@ -1,5 +1,7 @@
 <?php
 
+//VIEW SHOW INFORMATION TO USER
+
 class ViewUser extends User {	
 
 	public function showAllUsers() {

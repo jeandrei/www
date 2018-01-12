@@ -9,6 +9,6 @@ define("DB_NAME", "shareboard");
 //Define URL
 
 define("ROOT_PATH", "/");
-define("ROOT_URL", "http://192.168.1.111/desenvolvimento/dev/");
+define("ROOT_URL", "http://10.0.0.111/desenvolvimento/dev/");
 
 ?>

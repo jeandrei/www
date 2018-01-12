@@ -1,5 +1,7 @@
 <?php
 
+//CONTROLLER GET INFORMATION FROM THE USER
+
 class User extends Dbh {	
 
 	protected function getAllUsers() {

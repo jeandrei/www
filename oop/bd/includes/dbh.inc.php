@@ -1,5 +1,5 @@
 <?php
-
+//MODEL DEAL WITH ALL CONNECTIONS TO THE DATABASE
 class Dbh {
 
 	private $servername;
