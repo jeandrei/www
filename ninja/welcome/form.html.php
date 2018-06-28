@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Passing Variables in Forms</title>
+	<title>Form Example</title>
 </head>
 <body>
-	<form action="name.php" method="post">
+	<form action="" method="post">
 		<div><label for="firstname">First name:
 			<input type="text" name="firstname" id="firstname"></label>
 		</div>
