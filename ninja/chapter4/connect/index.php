@@ -26,9 +26,13 @@ try
 }
 catch (PDOException $e)
 {
-	$output = 'Unable to connect to the database server.';
+	$output = 'Unable to connect to the database server.' . $e->getMessage();
+	//$e->getMessage() mostra a mensagem pega no PDOException para que o desenvolvedor saiba qual o problema essa opção pode ser removida após finalizar o projeto ou nesse caso a conexão com o banco para evitar menságens de erro do php.
 	include 'output.html.php';
+	exit();
 }
 $output = 'Database connection established.';
 include 'output.html.php';
+
+//$pdo = null; disconnect from the database server
 ?>
