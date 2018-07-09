@@ -24,9 +24,7 @@ if (get_magic_quotes_gpc())
 
 
 
-
-
-//1º CONECTAMOS NO BANCO DE DADOS
+// CONECTAMOS NO BANCO DE DADOS
 try
 {
 	$pdo = new PDO('mysql:host=localhost;dbname=ijdb','ijdbuser','mypassword');
@@ -39,16 +37,38 @@ catch (PDOException $e)
 	include 'output.html.php';
 	exit();
 }
-$output = 'Database connection established.';
-include 'output.html.php';
 
+//SE O addjoke ESTIVER COM VALOR QUER DIZER QUE O USUÁRIO CLICOU EM addjoke E QUER ADICIONAR UMA NOVA JOKE
 if (isset($_GET['addjoke']))
 {
 	include 'form.html.php';
 	exit();
 }
 
-//2º EXECUTAMOS A CONSULTA NO BD
+// SE joketext POSSUI UM VALOR QUER DIZER QUE O USUÁRIO JÁ ADICIONOU UMA JOKE E CLICOU EM ADD
+if (isset($_POST['joketext']))
+{
+	try
+	{	// CRIAMOS A SQL DA FORMA A UTILIZAR O METODO PREPARE :joketext AQUI É APENAS UM PLACEHOLDER
+		$sql = 'INSERT INTO joke SET
+		joketext = :joketext,
+		jokedate = CURDATE()';
+		$s = $pdo->prepare($sql);// INFORMAMOS AO MYSQL QUE IREMOS UTILIZAR O METODO prepare
+		$s->bindValue(':joketext', $_POST['joketext']);// PASSAMOS O VALOR $_POST['joketext'] PARA O PLACEHOLDER :joketext PARA SER EXECUTADO NA SQL
+		$s->execute();//EXECUTAMOS A SQL
+	}
+	catch (PDOException $e)
+	{
+		$error = 'Error adding submitted joke: ' . $e->getMessage();
+		include 'error.html.php';
+		exit();
+	}
+header('Location: .');
+exit();
+}
+
+
+// EXECUTAMOS A CONSULTA NO BD
 try {
 	$sql = 'SELECT joketext FROM joke';
 	$result = $pdo->query($sql);
