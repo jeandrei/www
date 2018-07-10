@@ -68,7 +68,7 @@ exit();
 
 // EXECUTAMOS A CONSULTA NO BD
 try {
-	$sql = 'SELECT joketext FROM joke';
+	$sql = 'SELECT id, joketext FROM joke';
 	$result = $pdo->query($sql);
 } catch (Exception $e) {
 	$error = 'Error fetching jokes: ' . $e->getMessage();
