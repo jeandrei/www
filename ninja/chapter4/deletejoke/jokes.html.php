@@ -10,7 +10,9 @@
 	<?php foreach ($jokes as $joke): ?>
 		<blockquote style="border: 1px solid black;">
 			<p>
-				<?php echo htmlspecialchars($joke, ENT_QUOTES, 'UTF-8'); ?>
+				<?php echo htmlspecialchars($joke['text'], ENT_QUOTES, 'UTF-8'); ?>
+				<input type="hidden" name="id" value="<?php echo $joke['id']; ?>">
+				<input type="submit" value="Delete">
 			</p>
 		</blockquote>
 	<?php endforeach; ?>

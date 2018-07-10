@@ -79,7 +79,7 @@ try {
 //while ($row = $result->fetch()) poderia ser feito assim
 foreach ($result as $row) //mas o correto é assim
 {
-	$jokes[] = $row['joketext'];
+	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
 }
 
 include 'jokes.html.php';
