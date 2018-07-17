@@ -66,6 +66,27 @@ exit();
 }
 
 
+// SE ?deletejoke PASSANDO PELO GET tiver valor quer dizer que O USUÁRIO CLICOU EM DELETE
+if (isset($_GET['deletejoke']))
+{
+	try
+	{	// CRIAMOS A SQL 
+		$sql = 'DELETE FROM joke WHERE id = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	}
+	catch (PDOException $e)
+	{
+		$error = 'Error delleting joke: ' . $e->getMessage();
+		include 'error.html.php';
+		exit();
+	}
+header('Location: .');
+echo 'aqui';
+exit();
+}
+
 // EXECUTAMOS A CONSULTA NO BD
 try {
 	$sql = 'SELECT id, joketext FROM joke';
