@@ -32,7 +32,7 @@ if (isset($_GET['addjoke']))
 // CONECTAMOS NO BANCO DE DADOS
 try
 {
-	$pdo = new PDO('mysql:host=localhost;dbname=ijdb','ijdbuser','mypassword');
+	$pdo = new PDO('mysql:host=www_db_1;dbname=ijdb','ijdbuser','mypassword');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$pdo->exec('SET NAMES "utf8"');
 }
