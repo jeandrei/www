@@ -1,0 +1,88 @@
+#COLOQUE ESTE ARQUIVO NO RAIZ DO HOST
+#VAI FICAR /www
+#COM O DOCKER INSTALADO ENTRE NO DIRETÓRIO /www E EXECUTE O COMANDO
+#docker-compose up -d
+#VERIFIQUE SE INSTALOU TUDO CORRETAMENTE
+#NO NAVEGADOR ACESSE localhost
+#TEM QUE APARECER A PAGINA DO PHP INFO
+#E EM localhost:8000
+#TEM QUE APARECER O PHPMYADMIN USUARIO:root E SENHA:rootadm
+#DEMORA UM POUCO PARA ACESSAR O PHPMYADMIN AS VEZES DA SENHA ERRADA MAS TEM QUE TENTAR ALGUMAS VEZES E DA CERTO
+
+#********************ALGUNS COMANDOS DO DOCKER*****************************
+# acessar o docker
+# docker exec -it container bash
+# remover todos os docker
+# lista todos primeiro
+# docker-compose ps
+# para todos
+# docker stop nomecontainer
+# removemos todos
+# docker-compose rm -v
+# iniciar o docker
+# docker-compose up -d
+# recriar o docker com as alterações
+# docker-compose up -d --build
+#atualizar tudo de uma vez só removendo e criando tudo novamente
+# docker stop www_db_1 www_phpmyadmin_1 www_webserver_1 && docker-compose rm -v -f && docker-compose up -d
+#**************************************************************************
+
+version: '2'
+
+services:
+  #container webserver onde teremos php e apache
+  webserver:
+    build: ./docker/webserver
+    image: runwaytest_web
+    ports:
+      #portas de acesso ao conectar na 80 do host redireciona para 80 do container
+      - "80:80"
+      - "443:443"
+    volumes:
+      #/www/desenvolvimento local no host onde vamos montar a pasta /var/www/html do container
+      - /www/desenvolvimento:/var/www/html
+    links:
+      #linka ou seja permite comunicação com o container abaixo db
+      - db
+    networks:
+      #nome da rede de comunicação entre containers
+      - default
+
+  #container separado para o nosso banco de dados bd mysql
+  db:
+    image: mysql:5.7
+    ports:
+    #porta de acesso ao banco de dados tanto para o host quanto para o container 3306 
+     - "3306:3306"    
+    environment:
+        #dados de conexão com o banco de dados
+        MYSQL_DATABASE: ijdb
+        MYSQL_USER: ijdbuser
+        MYSQL_PASSWORD: mypassword
+        MYSQL_ROOT_PASSWORD: rootadm 
+    volumes:
+        #aqui criamos um volume para o docker acessar nosso script de criação do banco de dados
+        #./dumps/ijdb.sql nosso backup do banco
+        #/docker-entrypoint-initdb.d/ijdb.sql inicializa a restauração do banco
+        - ./dumps/ijdb.sql:/docker-entrypoint-initdb.d/ijdb.sql       
+    networks:
+        #nome da rede de comunicação entre containers
+        - default
+  
+  #criamos mais um container para o phpmyadmin
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        #permite acesso ao container db
+        links: 
+            - db:db
+        ports:
+        #acessa no container atraves da prta 8000
+            - 8000:80
+        environment:
+        #dados de conexão com o banco de dados db
+            MYSQL_USER: ijdbuser
+            MYSQL_PASSWORD: mypassword
+            MYSQL_ROOT_PASSWORD: rootadm
+volumes:
+    dumps:
+ 
