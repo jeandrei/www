@@ -30,18 +30,7 @@ if (isset($_GET['addjoke']))
 }
 
 // CONECTAMOS NO BANCO DE DADOS
-try
-{
-	$pdo = new PDO('mysql:host=localhost;dbname=ijdb','ijdbuser','mypassword');
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$pdo->exec('SET NAMES "utf8"');
-}
-catch (PDOException $e)
-{
-	$output = 'Unable to connect to the database server.' . $e->getMessage();	
-	include 'output.html.php';
-	exit();
-}
+include '../connect/index.php';
 
 // SE joketext POSSUI UM VALOR QUER DIZER QUE O USUÁRIO JÁ ADICIONOU UMA JOKE E CLICOU EM ADD
 if (isset($_POST['joketext']))
