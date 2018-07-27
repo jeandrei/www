@@ -1,0 +1,306 @@
+*{
+	margin: 0px;
+	padding: 0px;	
+}
+
+body {
+ background-color: #BDBDBD;
+}
+
+
+#divPrincipal{
+	width: 1000px;
+	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
+	position: relative;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	box-shadow: 10px 10px 5px #888888;	
+}
+
+.banner{
+	width: 980px;
+	height: 90px;
+	border-bottom: 15px solid #848484;
+	background-color: #6495ED;
+	color: #00008B;
+	padding: 10px;		
+}
+.banner h1 {
+	margin-left: 50px;
+}
+
+.banner p {
+	margin-left: 50px;
+}
+
+
+/*----------------------------------------------MENU FLUTUANTE---------------------------------------------*/
+.menuPrincipal{
+	background-color: #2E2E2E;/*cor do menu*/	
+	height: 30px;	
+	padding: 0px;
+	width: 1000px;
+	text-align: center;/*centraliza todos os textos dentro da classe ou dive principal*/
+}
+
+.menuPrincipal ul {
+  font-family: Arial, Verdana;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menuPrincipal ul li {
+  display: block;
+  position: relative;
+  float: left;
+}
+.menuPrincipal li ul { display: none; }
+
+.menuPrincipal ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  border-top: 1px solid #00FFFF;/*cor da linha que separa os menus*/
+  padding: 5px 15px 5px 15px;
+  background: #2E2E2E;/*cor do menu*/ 
+  margin-left: 1px;
+  white-space: nowrap;
+}
+.menuPrincipal ul li a:hover { background: #6495ED; color: black;}/*cor do menu primario com o ponteiro em cima*/
+
+.menuPrincipal li:hover ul {
+  display: block;
+  position: absolute;
+  z-index: 2;/*define que este será a secunda camada para evitar que o menu fique atras do slideshow*/ 
+}
+.menuPrincipal li:hover li {
+  float: none;
+  font-size: 11px;  
+}
+.menuPrincipal li:hover a { background: #2E2E2E;}/*cor do menu*/
+.menuPrincipal li:hover li a:hover { background: #6495ED; color: black;}/*cor do menu secundario e fonte com o ponterio do mouse em cima/*
+/*----------------------------------------------EXEMPLO DO MENU---------------------------------------------*/
+
+/*------------------------------------------SLIDE SHOW--------------------------------------*/
+a,img {border: none;}
+.trs {-webkit-transition:all ease-out 0.5s;
+	-moz-transition:all ease-out 0.5s;
+	-o-transition:all ease-out 0.5s;
+	-ms-transition:all ease-out 0.5s;
+	transition:all ease-out 0.5s;}
+
+#slider {position: relative; z-index: 1;}
+#slider a { position: absolute; top: 0; left: 0; opacity: 0;filter:alpha(opacity=0);}
+.ativo {opacity: 1!important; filter:alpha(opacity=100)!important;}
+
+/*controladores*/
+span {background: #0190EE; cursor: pointer; opacity: 0;filter:alpha(opacity=0); position: absolute; bottom: 40%; width: 43px; height: 43px; z-index: 5;}
+.next {right: 10px;}
+.next:before,.next:after {left: 21px;}
+.next:before {
+	-webkit-transform: rotate(-42deg);
+	top: 5px;
+}
+.next:after {
+	-webkit-transform: rotate(-132deg);
+	top: 19px;
+}
+.next:before,.next:after,.prev:before,.prev:after {content: "";
+	height: 20px;
+	background: #fff;
+	width: 1px;
+	position: absolute;
+}
+
+.prev {left: 10px;}
+.prev:before,.prev:after {left: 18px;}
+.prev:before {
+	-webkit-transform: rotate(42deg);
+	top: 5px;
+}
+.prev:after {
+	-webkit-transform: rotate(132deg);
+	top: 19px;
+}
+
+
+figure:hover span {opacity: 0.76;filter:alpha(opacity=76);}
+
+figure {
+	max-width: 1000px;
+	height: 300px;
+	position: relative;
+	overflow: hidden;
+	margin: 0px auto;
+	z-index: 1;/*define que este será primeira camada para evitar que o menu fique atras do slideshow*/
+}
+
+figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato","arial"; font-size: 22px; background: rgba(1, 144, 238, 0.76); width: 100%; position: absolute; bottom: 0; left: 0; line-height: 55px; height: 55px; z-index: 5}
+
+.slides{
+	width: 1000px;
+	height: 300px;	
+	background-color: #FFBF00;
+	color: white;
+	z-index: 1;/*define que este será primeira camada para evitar que o menu fique atras do slideshow*/		
+}
+/*----------------------------------------FIM SLIDE SHOW-----------------------------------/*
+
+/*---------------------------PARTE REFERENTE DIV PRINCIPAL----------------------------------*/
+
+
+
+.sectionPrincipal{
+	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
+	width: 100%;		
+	float: left;		
+	margin-bottom: 15px;/*afasto a div debaixo aqui pois como ele ta como float a margin debaixo seria definida a partir do header*/	
+}
+
+.bloco100pr200px{	
+	width: 100%;
+	height:200px;
+	clear: both;
+}
+
+.bloco100pr600px{
+	width: 100%;
+	height:600px;
+	clear: both;
+}
+
+.esquerdo700px100pr{
+	background-color: #ffffff;
+	float: left;
+	width: 700px;
+	height:100%;
+	
+}
+
+.direito295px100pr{
+	background-color: #ffffff;
+	float: right;
+	width: 295px;
+	height:100%;	  	
+  	border-width: 1px 1px 1px 0;   			
+}
+
+.direito295px100pr p{
+	margin-left: 10px;
+	margin-top: 10px;
+	text-align: center;
+	padding-right: 10px;
+}
+.direito295px100pr img{
+	width: 140px;
+	height: 100px;	
+	text-align: center;	
+}
+
+.esquerdo332px100pr{
+	background-color: #ffffff;
+	float: left;
+	width: 332px;
+	height:100%;	  
+  	border-width: 0 1px 1px 0;
+}
+
+.centro332px100pr{
+	background-color: #ffffff;
+	float: left;
+	width: 332px;
+	height:100%;	
+  	border-width: 0 1px 1px 0;	
+}
+
+.direito332px100pr{
+	background-color: #ffffff;
+	float: right;
+	width: 332px;
+	height:100%;	
+  	border-width: 0 1px 1px 0;
+  	text-align: center;
+}
+.direito332px100pr img{
+	width: 120px;
+	height: 100px;	
+	text-align: center;
+}
+
+
+.inferior{
+	width: 980px;
+	height: 110px;
+	border-bottom: 30px solid #2E2E2E;
+	background-color: #6495ED;
+	color: #00008B;
+	clear: both;
+	padding: 10px;	
+}
+.inferior h1{
+	margin-left: 50px;
+}
+
+.inferior p{
+	margin-left: 50px;
+}
+
+.inferior a{
+	text-decoration: none;
+}
+
+/*---------------------------FIM PARTE REFERENTE A DIV PRINCIPAL----------------------------------*/
+/*--------------------------------------------------------------FOOTER------------------------------------------------*/
+footer {
+	height: 40px;
+	background-color:  #F0F0F0;	
+	margin-top: 10px;	
+	text-align: center;
+	padding: 20px;	
+	clear: both;
+
+}
+/*-------------------------------------------------------------FIM FOOTER------------------------------------------------*/
+/*
+
+
+.sectionPrincipal header{
+	text-align: center;	
+	height: 40px;	
+	background-color: #F0F0F0;
+	color: #383838;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 35px;
+}
+
+.sectionPrincipal article{	
+	padding: 15px;
+	font-size: 25px;
+	font-family: Helvetica, Arial, Sans-Serif;	
+}
+.sectionPrincipal p{
+	margin-left: 5px;
+	line-height: 16pt; 
+	text-align: justify;
+	/*text-indent: 2em; 
+}
+
+.sectionPrincipal article header{	
+	background-color: white;	
+	height: 20px;	
+	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 20px;
+}
+.sectionPrincipal ul{
+	margin-left: 25px;
+	line-height: 26pt; 
+	text-align: justify;
+	/*text-indent: 2em; /*faz o paragrafo recuar no inicio de cada P em dois em
+}
+*/
