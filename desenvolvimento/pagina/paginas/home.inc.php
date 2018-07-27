@@ -8,7 +8,7 @@
 					<img src="imagens\teamviwer.jpg">
 				</div>
 				<p>							
-					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="index.php?p=teamviwer">Clique aqui!</a>
 				</p>
 			</section><!--fim esquerdo b1-->
 

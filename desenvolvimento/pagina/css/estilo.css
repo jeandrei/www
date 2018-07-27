@@ -150,9 +150,7 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 }
 /*----------------------------------------FIM SLIDE SHOW-----------------------------------/*
 
-/*---------------------------PARTE REFERENTE DIV PRINCIPAL----------------------------------*/
-
-
+/*---------------------------CSS HOME----------------------------------*/
 
 .sectionPrincipal{
 	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
@@ -247,6 +245,50 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 	width: 80px;
 	float: left;	
 }
+
+/***********************************FIM CSS HOME***************************/
+
+/*************************************CSS PAGINAS*************************/
+
+.sectionPaginas{
+	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
+	width: 100%;		
+	float: left;		
+	margin-bottom: 15px;/*afasto a div debaixo aqui pois como ele ta como float a margin debaixo seria definida a partir do header*/	
+	padding-left: 2px;
+}
+
+
+.box_full{
+	background-color: #ffffff;	
+	width: 98%;
+	height:100%;	  	
+  	border-width: 1px 1px 1px 0;  	
+	box-shadow: 10px 10px 5px #888888;
+	margin: 5px 10px;	margin: 5px 10px;
+}
+
+.box_full p{
+	margin-left: 10px;
+	margin-top: 10px;
+	text-align: left;
+	padding-right: 10px;
+	color: grey;
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;	
+}
+
+.box_full h1{
+	font-size: 20px;
+	text-align: left;
+	float: left;
+	padding-bottom: 5px;
+	margin-left: 5px;
+	margin-top: 10px;
+	font-family: Arial, Helvetica, sans-serif;	
+	width: 100%;				
+}
+
 
 .inferior{
 	width: 980px;

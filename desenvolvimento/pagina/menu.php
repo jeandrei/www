@@ -2,7 +2,7 @@
 	<nav class="menuPrincipal">
 			<ul>
 			  <li><a href="index.php">Home</a></li>
-			  <li><a href="">About Us</a>
+			  <!--<li><a href="">About Us</a>
 			    <ul>
 			    <li><a href="index.php?p=theteam">The Team</a></li>			    
 			    <li><a href="index.php?p=history">History</a></li>
@@ -24,7 +24,7 @@
 			    <li><a href="">Online</a></li>
 			    <li><a href="">Right Here</a></li>
 			    <li><a href="">Somewhere Else</a></li>
-			    </ul>
+			    </ul>-->
 			  </li>
 			</ul>
 	</nav>
