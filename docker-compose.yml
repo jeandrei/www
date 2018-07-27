@@ -34,6 +34,7 @@ services:
   webserver:
     build: ./docker/webserver
     image: runwaytest_web
+    container_name: www
     ports:
       #portas de acesso ao conectar na 80 do host redireciona para 80 do container
       - "80:80"
@@ -51,6 +52,7 @@ services:
   #container separado para o nosso banco de dados bd mysql
   db:
     image: mysql:5.7
+    container_name: mysql
     ports:
     #porta de acesso ao banco de dados tanto para o host quanto para o container 3306 
      - "3306:3306"    
@@ -75,6 +77,7 @@ services:
         #permite acesso ao container db
         links: 
             - db:db
+        container_name: db
         ports:
         #acessa no container atraves da prta 8000
             - 8000:80
