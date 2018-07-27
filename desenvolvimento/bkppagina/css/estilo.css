@@ -156,24 +156,36 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 
 .sectionPrincipal{
 	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
-	width: 66%;		
+	width: 100%;		
 	float: left;		
 	margin-bottom: 15px;/*afasto a div debaixo aqui pois como ele ta como float a margin debaixo seria definida a partir do header*/	
-	padding-left: 2px;
+	padding-left: 20px;
+}
+/*
+.bloco100pr200px{	
+	width: 100%;
+	height:200px;
+	clear: both;	
 }
 
-.lateraldir{
-	height: inherit;/*faz com que se adapte ao conteúdo tamanho depende do conteúdo*/
-	width: 33%;		
-	float: right;		
-	margin-bottom: 15px;/*afasto a div debaixo aqui pois como ele ta como float a margin debaixo seria definida a partir do header*/	
-	padding-left: 2px;	
+.bloco100pr600px{
+	width: 100%;
+	height:600px;
+	clear: both;
 }
 
+.esquerdo700px100pr{
+	background-color: #ffffff;
+	float: left;
+	width: 700px;
+	height:100%;
+	
+}
+*/
 .box{
 	background-color: #ffffff;
 	float: left;
-	width: 310px;
+	width: 300px;
 	height:150px;	  	
   	border-width: 1px 1px 1px 0;  	
 	box-shadow: 10px 10px 5px #888888;
@@ -189,7 +201,11 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 	font-size: 15px;
 	font-family: Arial, Helvetica, sans-serif;	
 }
-
+.box img{
+	width: 140px;
+	height: 100px;	
+	float: left;	
+}
 
 .box h1{
 	font-size: 20px;
@@ -202,51 +218,46 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 	width: 100%;				
 }
 
-
-
-.box_v{
+.imagem {
+	border: 1px solid black;
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+/*
+.esquerdo332px100pr{
 	background-color: #ffffff;
 	float: left;
-	width: 310px;
-	height:310px;	  	
-  	border-width: 1px 1px 1px 0;  	
-	box-shadow: 10px 10px 5px #888888;
-	margin: 5px 10px;	margin: 5px 10px;
+	width: 332px;
+	height:100%;	  
+  	border-width: 0 1px 1px 0;
 }
 
-.box_v p{
-	margin-left: 10px;
-	margin-top: 10px;
-	text-align: left;
-	padding-right: 10px;
-	color: grey;
-	font-size: 15px;
-	font-family: Arial, Helvetica, sans-serif;	
-}
-.box_v img{
-	width: 140px;
-	height: 100px;	
-	float: left;	
-}
-
-.box_v h1{
-	font-size: 20px;
-	text-align: left;
+.centro332px100pr{
+	background-color: #ffffff;
 	float: left;
-	padding-bottom: 5px;
-	margin-left: 5px;
-	margin-top: 10px;
-	font-family: Arial, Helvetica, sans-serif;	
-	width: 100%;				
+	width: 332px;
+	height:100%;	
+  	border-width: 0 1px 1px 0;	
 }
 
-
-/*tamanho das imagens*/
-#imagem img{
-	height: 80px;	
-	width: 80px;
-	float: left;	
+.direito332px100pr{
+	background-color: #ffffff;
+	float: right;
+	width: 332px;
+	height:100%;	
+  	border-width: 0 1px 1px 0;
+  	text-align: center;
 }
+.direito332px100pr img{
+	width: 120px;
+	height: 100px;	
+	text-align: center;
+}
+
+*/
+
+
 
 .inferior{
 	width: 980px;
@@ -282,3 +293,43 @@ footer {
 
 }
 /*-------------------------------------------------------------FIM FOOTER------------------------------------------------*/
+/*
+
+
+.sectionPrincipal header{
+	text-align: center;	
+	height: 40px;	
+	background-color: #F0F0F0;
+	color: #383838;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 35px;
+}
+
+.sectionPrincipal article{	
+	padding: 15px;
+	font-size: 25px;
+	font-family: Helvetica, Arial, Sans-Serif;	
+}
+.sectionPrincipal p{
+	margin-left: 5px;
+	line-height: 16pt; 
+	text-align: justify;
+	/*text-indent: 2em; 
+}
+
+.sectionPrincipal article header{	
+	background-color: white;	
+	height: 20px;	
+	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-weight: bold;
+	font-size: 25px;
+	padding: 20px;
+}
+.sectionPrincipal ul{
+	margin-left: 25px;
+	line-height: 26pt; 
+	text-align: justify;
+	/*text-indent: 2em; /*faz o paragrafo recuar no inicio de cada P em dois em
+}
+*/

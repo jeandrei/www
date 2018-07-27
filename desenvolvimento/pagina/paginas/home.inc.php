@@ -1,38 +1,116 @@
 <!--********************05 PARTE PRINCIPAL DO SITE****************-->
 	<section class="sectionPrincipal">
 
-		<section class="bloco100pr200px">
-			
-			<section class="esquerdo700px100pr">
-				esquerdo b1
-			</section><!--fim esquerdo b1-->
-
-			<section class="direito295px100pr">
-				<p>
-					Instalação do TeamViwer
+		
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
 					<img src="imagens\teamviwer.jpg">
-					<br>
+				</div>
+				<p>							
 					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
 				</p>
 			</section><!--fim esquerdo b1-->
-		
-		</section><!--fim bloco 1-->
 
-		
-		<section class="bloco100pr200px">
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
+
+			<section class="box">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+			</section><!--fim esquerdo b1-->
 			
-			<section class="esquerdo332px100pr">
-				esquerdo b2
-			</section><!--fim esquerdo b1-->
-
-			<section class="centro332px100pr">
-				centro b2
-			</section><!--fim esquerdo b1-->
-
-			<section class="direito295px100pr">
-				<p>direito b2</p>
-			</section><!--fim esquerdo b1-->
 		
-		</section><!--fim bloco 1-->
+	</section><!--section principal-->
 
+
+
+	<section class="lateraldir">
+
+		<section class="box_v">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+		</section><!--fim esquerdo b1-->
+
+		<section class="box_v">				
+				<h1>Instalação do TeamViwer</h1>
+				<div id="imagem">
+					<img src="imagens\teamviwer.jpg">
+				</div>
+				<p>							
+					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+				</p>
+		</section><!--fim esquerdo b1-->
+
+	</section><!--fim esquerdo b1-->
+			
+			
+		
 	</section><!--section principal-->
