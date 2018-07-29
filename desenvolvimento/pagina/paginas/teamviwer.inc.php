@@ -12,25 +12,43 @@
 					<br>
 
 					<li>
-						Clique em Download.
+						Selecione a pasta para o Download e clique em Salvar.
 						<br>
-						<img src="paginas/imagens/teamviwer/1.png">
+						<img src="imagens\teamviwer\01.png">
 					</li>
 
 					<br>
 
 					<li>
-						Escolha o sistema operacional que você utiliza.
+						Após finalizar o download execute o instalador do Team Viwer.
 						<br>
-						<img src="paginas/imagens/teamviwer/2.png">
+						<img src="imagens\teamviwer\02.png">
 					</li>
 
 					<br>
 
 					<li>
-						Clique em B.
+						Na janela seguinte clique em Executar.
 						<br>
-						<img src="paginas/imagens/teamviwer/2.png">
+						<img src="imagens\teamviwer\03.png">
+					</li>
+
+					<br>
+
+					<li>
+						Na janela seguinte selecione as opções indicadas e clique em Aceitar - concluir.
+						<br>
+						<img src="imagens\teamviwer\04.png">
+					</li>
+
+					<br>
+
+					<li>
+						Ao final o Team Viwer será executado automaticamente e criará um atalho na área de trabalho.
+						<br>
+						Sempre que necessário solicitar suporte informe Sua ID e Senha como indicado.
+						<br>
+						<img src="imagens\teamviwer\05.png" style="width: 900px; height: 500px">
 					</li>
 				</ol>
 			</p>

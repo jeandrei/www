@@ -5,7 +5,7 @@
 			<section class="box">				
 				<h1>Instalação do TeamViwer</h1>
 				<div id="imagem">
-					<img src="imagens\teamviwer.jpg">
+					<img src="imagens\teamviwer\icone.png">
 				</div>
 				<p>							
 					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="index.php?p=teamviwer">Clique aqui!</a>
