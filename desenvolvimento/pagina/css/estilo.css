@@ -308,6 +308,11 @@ figcaption {padding-left: 20px;color: #fff; font-family: "Kaushan Script","Lato"
 	text-decoration: none;
 	color: black;
 }
+.inferior a:hover{
+	text-decoration: none;
+	color: blue;
+	font-style: italic;
+}
 
 /*---------------------------FIM PARTE REFERENTE A DIV PRINCIPAL----------------------------------*/
 /*--------------------------------------------------------------FOOTER------------------------------------------------*/
