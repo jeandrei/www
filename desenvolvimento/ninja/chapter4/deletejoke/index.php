@@ -79,7 +79,9 @@ exit();
 
 // EXECUTAMOS A CONSULTA NO BD
 try {
-	$sql = 'SELECT id, joketext FROM joke';
+	$sql = 'SELECT joke.id, joketext, name, email 
+	FROM joke INNER JOIN author
+	ON authorid = author.id';
 	$result = $pdo->query($sql);
 } catch (Exception $e) {
 	$error = 'Error fetching jokes: ' . $e->getMessage();
@@ -90,7 +92,12 @@ try {
 //while ($row = $result->fetch()) poderia ser feito assim
 foreach ($result as $row) //mas o correto é assim
 {
-	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
+	$jokes[] = array(
+		'id' => $row['id'], 
+		'text' => $row['joketext'],
+		'name' => $row['name'],
+		'email' => $row['email']
+	);
 }
 
 include 'jokes.html.php';
