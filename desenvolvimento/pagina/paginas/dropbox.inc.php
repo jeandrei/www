@@ -37,7 +37,7 @@
 
 					<li>
 						Na janela seguinte informe o E-mail e senha cadastrado na sua conta Dropbox.<br>
-						Ao final clique em Acessar sua conta
+						Ao final clique em Acesse sua conta
 						<br>
 						<img src="imagens\dropbox\04.png">
 					</li>
