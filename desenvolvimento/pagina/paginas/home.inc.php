@@ -53,13 +53,19 @@
 	<section class="lateraldir">
 
 		<section class="box_v">				
-				<h1>Instalação do TeamViwer</h1>
-				<div id="imagem">
-					<img src="imagens\teamviwer.jpg">
-				</div>
+				<h1>Informativo</h1>				
 				<p>							
-					Saiba como instalar o TeamViwer a fim de obter suporte remoto. <a href="#">Clique aqui!</a>
+					Transferências de alunos podem ser feitas diretamente na escola.<br>
 				</p>
+				<hr>
+				<p>
+					Alteração na forma de lançamento de avaliações descritivas para educação infantil.<br>
+					Disponível no manual do professor ítem 6 <a href="arquivos/manuais/ManualProfessorV12.pdf" target="_blank">Manual do Professor</a>
+				</p>
+				
+				<hr>
+				
+
 		</section><!--fim esquerdo b1-->
 		
 

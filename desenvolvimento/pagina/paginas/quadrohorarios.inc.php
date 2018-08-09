@@ -72,12 +72,12 @@
 					<br>
 
 					<li>
-						Monte o quadro de horários informando o código da disciplina como o indicado na ilustração a seguir.
+						Monte o quadro de horários informando o código do professor como o indicado na ilustração a seguir.
 						<br>
-						<img src="imagens\quadrohorarios\08.png" style="width: 500px; height: 300px">
+						<img src="imagens\quadrohorarios\08.png" style="width: 900px; height: 300px">
 					</li>
 
-					<br>
+					<br>					
 
 					<li>
 						Caso uma inconsistência seja encontrada os ítens serão apresentados em vermelho.

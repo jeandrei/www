@@ -45,11 +45,18 @@
 					<br>
 
 					<li>
-						Ao final o Team Viwer será executado automaticamente e criará um atalho na área de trabalho.
+						Para acessar a pasta do dropbox, abra o windows explorer clicando no ícone indicado.
 						<br>
-						Sempre que necessário solicitar suporte informe Sua ID e Senha como indicado.
+						<img src="imagens\dropbox\05.png" style="width: 400px; height: 150px">
+					</li>
+
+
+					<br>
+
+					<li>
+						Clique na pasta do dropbox.
 						<br>
-						<img src="imagens\teamviwer\05.png" style="width: 900px; height: 500px">
+						<img src="imagens\dropbox\06.png" style="width: 250px; height: 250px">
 					</li>
 				</ol>
 			</p>
