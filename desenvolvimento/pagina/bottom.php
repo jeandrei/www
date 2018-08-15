@@ -1,7 +1,7 @@
 
 	<!--*****************************07 RODAPÉ DO SITE********************-->
 	<footer>
-		<p>&#169; &nbsp; Jeandrei Walter</p>
+		<p><?php echo date('Y'); ?>&nbsp;&#169;&nbsp; Jeandrei Walter</p>
 	</footer>
 
 </div><!--**********FINAL DA DIV PRINCIPAL************-->
