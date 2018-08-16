@@ -1,6 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/magicquotes.inc.php';
-
+include 'includes/constants.inc.php';
 
 //SE O addjoke ESTIVER COM VALOR QUER DIZER QUE O USUÁRIO CLICOU EM addjoke E QUER ADICIONAR UMA NOVA JOKE NOTE QUE AQUI NÃO PRECISA DE CONEXÃO COM O BANCO DE DADOS
 if (isset($_GET['addjoke']))
@@ -10,13 +9,11 @@ if (isset($_GET['addjoke']))
 }
 
 
-
-
 // SE joketext POSSUI UM VALOR QUER DIZER QUE O USUÁRIO JÁ ADICIONOU UMA JOKE E CLICOU EM ADD
 if (isset($_POST['joketext']))
 {
 	// CONECTAMOS NO BANCO DE DADOS
-	include 'db.inc.php';
+	include_once ROOT . '/includes/db.inc.php';
 
 	try
 	{	// CRIAMOS A SQL DA FORMA A UTILIZAR O METODO PREPARE :joketext AQUI É APENAS UM PLACEHOLDER
@@ -42,7 +39,7 @@ exit();
 if (isset($_GET['deletejoke']))
 {
 	// CONECTAMOS NO BANCO DE DADOS
-	include 'db.inc.php';
+	include_once ROOT . '/includes/db.inc.php';
 
 	try
 	{	// CRIAMOS A SQL 
@@ -63,7 +60,7 @@ exit();
 }
 
 // CONECTAMOS NO BANCO DE DADOS
-	include 'db.inc.php';
+	include_once ROOT . '/includes/db.inc.php';
 
 // EXECUTAMOS A CONSULTA NO BD
 try {
@@ -92,4 +89,7 @@ foreach ($result as $row) //mas o correto é assim
 include 'jokes.html.php';
 
 //$row = $result->fetch(); returns the next row in the result set as an array until there is no more rows so that it return false.
+include ROOT . '/functions/totaljokes.inc.php';
+echo 'Total of all jokes you have in your database is ' . totalJokes() . '.';
+
 ?>
