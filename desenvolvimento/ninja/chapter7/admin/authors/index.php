@@ -26,7 +26,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 
 	//Delete joke category entries
 	try 
-	{
+	{	//feito assim pq como resultado da pesquisa na tablea joke vai vim ids diferentes por exemplo 1 e 2 logo não tem como remover todos com um único comando
 		$sql = 'DELETE FROM jokecategory WHERE jokeid = :id';
 		$s = $pdo->prepare($sql);
 
@@ -76,8 +76,6 @@ exit();
 }
 
 //**********************************************************************
-
-
 
 
 //**************************LIST AUTHOR***********************************
