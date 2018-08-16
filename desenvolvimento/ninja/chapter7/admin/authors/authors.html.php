@@ -19,8 +19,8 @@ include INCLUDES . '/helpers.inc.php';
 					<div>
 						<?php htmlout($author['name']); ?>
 						<input type="hidden" name="id" value="<?php echo $author['id']; ?>">
-						<input type="submit" name="action" value="Edit">
-						<input type="submit" name="action" value="Delete">						
+						<input type="submit" name="action" id="Edit" value="Edit">
+						<input type="submit" name="action" id="Delete" value="Delete">						
 					</div>
 				</form>
 			</li>
