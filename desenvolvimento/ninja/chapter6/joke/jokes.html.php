@@ -1,3 +1,7 @@
+<?php
+include_once ROOT . '/includes/helpers.inc.php';//Funões criadas pelo desenvolvedor que facilitam a programação ex: htmlout
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +15,11 @@
 		<form action="?deletejoke" method="post">
 			<blockquote style="border: 1px solid black;">
 				<p>
-					<?php echo htmlspecialchars($joke['text'], ENT_QUOTES, 'UTF-8'); ?>
+					<?php echo htmlout($joke['text']); ?>
 					<input type="hidden" name="id" value="<?php echo $joke['id']; ?>">
 					<input type="submit" value="Delete">
-					(by <a href="mailto:<?php echo htmlspecialchars($joke['email'], ENT_QUOTES, 'UTF-8');?>">
-						<?php echo htmlspecialchars($joke['name'], ENT_QUOTES, 'UTF-8'); ?></a>)
+					(by <a href="mailto:<?php echo htmlout($joke['email']);?>">
+						<?php echo htmlout($joke['name']); ?></a>)
 				</p>
 			</blockquote>
 		</form>

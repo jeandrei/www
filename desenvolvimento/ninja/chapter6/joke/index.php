@@ -1,5 +1,5 @@
 <?php
-include 'includes/constants.inc.php';
+define("ROOT",$_SERVER['DOCUMENT_ROOT'] . '/ninja/chapter6/joke');
 
 //SE O addjoke ESTIVER COM VALOR QUER DIZER QUE O USUÁRIO CLICOU EM addjoke E QUER ADICIONAR UMA NOVA JOKE NOTE QUE AQUI NÃO PRECISA DE CONEXÃO COM O BANCO DE DADOS
 if (isset($_GET['addjoke']))
