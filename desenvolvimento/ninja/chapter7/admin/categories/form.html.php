@@ -14,13 +14,7 @@ include INCLUDES . '/helpers.inc.php';
 			<label for="name">Name:
 				<input type="text" name="name" id="name" value="<?php htmlout($name); ?>">
 			</label>
-		</div>
-
-		<div>
-			<label for="name">Email:
-				<input type="text" name="email" id="email" value="<?php htmlout($email); ?>">
-			</label>
-		</div>
+		</div>		
 
 		<div>			
 				<input type="hidden" name="id" id="id" value="<?php htmlout($id); ?>">
