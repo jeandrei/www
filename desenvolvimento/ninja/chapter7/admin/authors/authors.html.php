@@ -8,6 +8,11 @@ include INCLUDES . '/helpers.inc.php';
 <head>
 	<meta charset="utf-8">
 	<title>Manage Authors</title>
+	<script type="text/javascript">
+		function question(ask){
+			return confirm (ask);
+		}	
+	</script>
 </head>
 <body>
 	<h1>Manage Authors</h1>
@@ -20,7 +25,15 @@ include INCLUDES . '/helpers.inc.php';
 						<?php htmlout($author['name']); ?>
 						<input type="hidden" name="id" value="<?php echo $author['id']; ?>">
 						<input type="submit" name="action" id="Edit" value="Edit">
-						<input type="submit" name="action" id="Delete" value="Delete">						
+						<input type="submit" name="action" id="Delete" value="Delete" onclick="if(question('Are you sure you want to delete?') == true)
+									{
+										document.forms[0].submit();
+									}
+									else
+									{										
+										return false;
+									}");  							
+    					">						
 					</div>
 				</form>
 			</li>

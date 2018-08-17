@@ -13,7 +13,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 		$sql = 'SELECT id FROM joke WHERE authorid = :id';
 		$s = $pdo->prepare($sql);
 		$s->bindValue(':id', $_POST['id']);
-		//$s->execute();
+		$s->execute();
 	} 
 	catch (Exception $e) 
 	{
@@ -35,7 +35,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 		{
 			$jokeId = $row['id'];
 			$s->bindValue(':id', $jokeId);
-			//$s->execute();
+			$s->execute();
 		}		
 	} catch (Exception $e) 
 	{
@@ -50,7 +50,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 		$sql = 'DELETE FROM joke WHERE authorid = :id';
 		$s = $pdo->prepare($sql);
 		$s->bindValue(':id', $_POST['id']);
-		//$s->execute();
+		$s->execute();
 	} catch (Exception $e) 
 	{
 		$error = 'Error deleting jokes for author.'	;
@@ -64,7 +64,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 		$sql = 'DELETE FROM author WHERE id = :id';
 		$s = $pdo->prepare($sql);
 		$s->bindValue(':id', $_POST['id']);
-		//$s->execute();
+		$s->execute();
 	} catch (Exception $e) 
 	{
 		$error = 'Error deleting author.';
