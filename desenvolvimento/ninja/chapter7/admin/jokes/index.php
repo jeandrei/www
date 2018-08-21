@@ -14,7 +14,7 @@ try
 
 foreach ($result as $row) 
 {
-	$authors = array('id' => $row['id'], 'name' => $row['name']);
+	$authors[] = array('id' => $row['id'], 'name' => $row['name']);	
 }
 
 
@@ -37,7 +37,5 @@ foreach ($result as $row)
 
 
 include 'searchform.html.php';
-
-
 
 ?>

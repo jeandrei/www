@@ -12,7 +12,16 @@ include INCLUDES . '/helpers.inc.php';
 	<h1>Manage Jokes</h1>
 	<p><a href="?add">Add new joke</a></p>
 	<form action="" method="get">
-		<p>continuar daqui pagina 214</p>
+		<p>View jokes satisfying the following criteria:</p>
+		<dir>
+			<label for="author">By author:</label>
+			<select name="author" id="author">
+				<option value="">Any author</option>
+				<?php foreach ($authors as $author): ?>
+					<option value="<?php htmlout($author['id']); ?>"> <?php htmlout($author['name']); ?> </option>
+				<?php endforeach; ?>
+			</select>
+		</dir>
 	</form>
 </body>
 </html>

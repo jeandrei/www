@@ -7,6 +7,17 @@ include INCLUDES . '/helpers.inc.php';
 <head>
 	<meta charset="utf-8">
 	<title><?php htmlout($pageTitle); ?></title>
+	<script type="text/javascript">
+		
+
+		function inputf(field) {			
+  		var input = document.getElementById(field).focus();
+  		return var;
+		}
+		var texto = inputf("name");
+
+		window.onload = alert("oi");
+	</script>
 </head>
 <body>
 	<form action="?<?php htmlout($action);?>" method="post">
