@@ -7,8 +7,13 @@ include INCLUDES . '/helpers.inc.php';
 <head>
 	<meta charset="utf-8">
 	<title><?php htmlout($pageTitle); ?></title>
+	<script src="../../funcoes/javascript.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+//seta o foco no campo name
+window.onload = function(){focofield("name");}		
+</script>
 	<form action="?<?php htmlout($action);?>" method="post">
 		<div>
 			<label for="name">Name:

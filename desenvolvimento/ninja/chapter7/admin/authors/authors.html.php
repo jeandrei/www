@@ -8,11 +8,7 @@ include INCLUDES . '/helpers.inc.php';
 <head>
 	<meta charset="utf-8">
 	<title>Manage Authors</title>
-	<script type="text/javascript">
-		function question(ask){
-			return confirm (ask);
-		}	
-	</script>
+	<script src="../../funcoes/javascript.js"></script>	
 </head>
 <body>
 	<h1>Manage Authors</h1>
