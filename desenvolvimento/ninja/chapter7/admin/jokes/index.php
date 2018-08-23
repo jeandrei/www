@@ -40,12 +40,33 @@ if(isset($_GET['action']) and $_GET['action'] == 'search')
 	include INCLUDES . '/db.inc.php';
 	//The basic statement	
 	$select = 'SELECT id, joketext';
-	$from = 'FROM joke';
-	$where = 'WHERE TRUE';
-	echo "parei pagina 216";
-	exit();
+	$from = ' FROM joke';
+	$where = 'WHERE TRUE';	
 }
 
+$placeholders = array();
+
+if($_GET['author'] != '')
+{
+	$where .= " AND authorid = :authorid";
+	$placeholders[':authorid'] = $_GET['authorid'];
+}
+
+if($_GET['category'] != '')
+{
+	$from .= ' INNER JOIN jokecategory ON id = jokeid';
+	$where .= " AND categoryid = :categoryid";
+	$placeholders[':categoryid'] = $_GET['categoryid'];
+}
+
+if($_GET['text'] =! '')
+{
+	$where .= " AND joketext LIKE :joketext";
+	$placeholders[':joketext'] = '%' . $_GET['joketext'] . '%';
+}
+
+echo $select.' '.$from.' '.$where;
+echo "parei pagina 218";
 include 'searchform.html.php';
 
 ?>
