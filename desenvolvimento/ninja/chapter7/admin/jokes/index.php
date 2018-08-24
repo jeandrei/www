@@ -35,13 +35,16 @@ foreach ($result as $row)
 	$categories[] = array('id' => $row['id'], 'name' => $row['name']);
 }
 
+include 'searchform.html.php';
+
+
 if(isset($_GET['action']) and $_GET['action'] == 'search')
 {
 	include INCLUDES . '/db.inc.php';
 	//The basic statement	
 	$select = 'SELECT id, joketext';
 	$from = ' FROM joke';
-	$where = 'WHERE TRUE';	
+	$where = ' WHERE TRUE';	
 }
 
 $placeholders = array();
@@ -64,9 +67,23 @@ if($_GET['text'] =! '')
 	$where .= " AND joketext LIKE :joketext";
 	$placeholders[':joketext'] = '%' . $_GET['joketext'] . '%';
 }
+$sql = $select . $from . $where;
+	echo $sql;
+try 
+{
+	$sql = $select . $from . $where;
+	$s = $pdo->prepare($sql);
+	$s->execute($placeholders);
+} catch (Exception $e) {
+	$error = 'Error fetching jokes.';
+	include 'error.html.php';
+	exit();
+}
 
-echo $select.' '.$from.' '.$where;
-echo "parei pagina 218";
-include 'searchform.html.php';
-
+foreach ($s as $row) 
+{
+	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
+}
+include 'jokes.html.php';
+exit();
 ?>

@@ -12,7 +12,7 @@ include INCLUDES . '/helpers.inc.php';
 <body>
 <script type="text/javascript">
 	//seta o foco no campo name
-	window.onload = function(){focofield("text");}		
+	//window.onload = function(){focofield("text");}		
 </script>
 	<h1>Manage Jokes</h1>
 	<p><a href="?add">Add new joke</a></p>
