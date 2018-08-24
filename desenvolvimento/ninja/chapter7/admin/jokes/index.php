@@ -49,49 +49,55 @@ if(isset($_GET['action']) and $_GET['action'] == 'search')
 	$where = ' WHERE TRUE';	
 
 
-$placeholders = array();
+	$placeholders = array();
 
-if($_GET['author'] != '')
-{
-	$where .= " AND authorid = :authorid";
-	$placeholders[':authorid'] = $_GET['author'];
-}
+	if($_GET['author'] != '')
+	{
+		$where .= " AND authorid = :authorid";
+		$placeholders[':authorid'] = $_GET['author'];
+	}
 
-if($_GET['category'] != '')
-{
-	$from .= ' INNER JOIN jokecategory ON id = jokeid';
-	$where .= " AND categoryid = :categoryid";	
-	$placeholders[':categoryid'] = $_GET['category'];
-}
+	if($_GET['category'] != '')
+	{
+		$from .= ' INNER JOIN jokecategory ON id = jokeid';
+		$where .= " AND categoryid = :categoryid";	
+		$placeholders[':categoryid'] = $_GET['category'];
+	}
 
 
 
-if($_GET['text'] != '')
-{
-	$where .= " AND joketext LIKE :joketext";	
-	$placeholders[':joketext'] = '%' . $_GET['text'] . '%';	
-}
+	if($_GET['text'] != '')
+	{
+		$where .= " AND joketext LIKE :joketext";	
+		$placeholders[':joketext'] = '%' . $_GET['text'] . '%';	
+	}
 
-try 
-{
-	$sql = $select . $from . $where;
-	$s = $pdo->prepare($sql);
-	$s->execute($placeholders);
-} 
-catch (Exception $e) 
-{
-	$error = 'Error fetching jokes.';
-	include 'error.html.php';
-	exit();
-}
+	try 
+	{
+		$sql = $select . $from . $where;
+		$s = $pdo->prepare($sql);
+		$s->execute($placeholders);
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching jokes.';
+		include 'error.html.php';
+		exit();
+	}
 
-foreach ($s as $row) 
-{
-	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
-}
-include 'jokes.html.php';
+	foreach ($s as $row) 
+	{
+		$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
+	}
+	include 'jokes.html.php';
+
+	if(empty($jokes))
+	{
+		$error = 'No record satisfy your query';
+		include 'error.html.php';
+	}
+
 exit();
 }
-
 include 'searchform.html.php';
 ?>
