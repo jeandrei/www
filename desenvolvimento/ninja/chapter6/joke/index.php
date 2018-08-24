@@ -1,6 +1,6 @@
 <?php
 define("ROOT",$_SERVER['DOCUMENT_ROOT'] . '/ninja/chapter6/joke');
-
+include_once ROOT . '/includes/db.inc.php';
 //SE O addjoke ESTIVER COM VALOR QUER DIZER QUE O USUÁRIO CLICOU EM addjoke E QUER ADICIONAR UMA NOVA JOKE NOTE QUE AQUI NÃO PRECISA DE CONEXÃO COM O BANCO DE DADOS
 if (isset($_GET['addjoke']))
 {
@@ -64,7 +64,6 @@ exit();
 
 // EXECUTAMOS A CONSULTA NO BD
 try {
-
 	$sql = 'SELECT joke.id, joketext, name, email 
 	FROM joke INNER JOIN author
 	ON authorid = author.id';

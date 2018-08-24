@@ -9,9 +9,11 @@ include_once ROOT . '/includes/helpers.inc.php';//Funões criadas pelo desenvolv
 	<title>List of Jokes</title>
 </head>
 <body>
-	<p><a href="?addjoke">Add your own joke</a></p><!--?addjoke vai passar addjoke para o GET (isset($_GET['addjoke'])) se for verdadeiro entra no if-->
+	<p><a href="?addjoke">Add your own joke</a></p>
+	<!--?addjoke vai passar addjoke para o GET (isset($_GET['addjoke'])) se for verdadeiro entra no if-->
 	<p>Here ara all tha jokes in the database:</p>
-	<?php foreach ($jokes as $joke): ?>
+	<?php 
+	foreach ($jokes as $joke): ?>
 		<form action="?deletejoke" method="post">
 			<blockquote style="border: 1px solid black;">
 				<p>

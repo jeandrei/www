@@ -34,13 +34,10 @@ catch (Exception $e)
 }
 
 
-
 foreach ($result as $row) 
 {
 	$categories[] = array('id' => $row['id'], 'name' => $row['name'], 'selected' => FALSE);
 }
-
-include 'searchform.html.php';
 
 
 if(isset($_GET['action']) and $_GET['action'] == 'search')
@@ -56,26 +53,25 @@ $placeholders = array();
 
 if($_GET['author'] != '')
 {
-	//$where .= " AND authorid = :authorid";
-	$where .= " AND authorid = " . $_GET['authorid'];
-	$placeholders[':authorid'] = $_GET['authorid'];
+	$where .= " AND authorid = :authorid";
+	$placeholders[':authorid'] = $_GET['author'];
 }
 
 if($_GET['category'] != '')
 {
 	$from .= ' INNER JOIN jokecategory ON id = jokeid';
-	//$where .= " AND categoryid = :categoryid";
-	$where .= " AND categoryid = " . $_GET['categoryid'];
-	$placeholders[':categoryid'] = $_GET['categoryid'];
+	$where .= " AND categoryid = :categoryid";	
+	$placeholders[':categoryid'] = $_GET['category'];
 }
 
-if($_GET['text'] =! '')
+
+
+if($_GET['text'] != '')
 {
-	//$where .= " AND joketext LIKE :joketext";
-	$where .= " AND joketext LIKE %" . $_GET['joketext'] . '%';
-	$placeholders[':joketext'] = '%' . $_GET['joketext'] . '%';
+	$where .= " AND joketext LIKE :joketext";	
+	$placeholders[':joketext'] = '%' . $_GET['text'] . '%';	
 }
-/*
+
 try 
 {
 	$sql = $select . $from . $where;
@@ -92,9 +88,10 @@ catch (Exception $e)
 foreach ($s as $row) 
 {
 	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
-}*/
-echo $select . $from . $where;
+}
 include 'jokes.html.php';
 exit();
 }
+
+include 'searchform.html.php';
 ?>
