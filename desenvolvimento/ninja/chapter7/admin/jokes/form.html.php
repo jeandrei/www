@@ -19,7 +19,7 @@ include INCLUDES . '/helpers.inc.php';
 		
 <script type="text/javascript">
 	//seta o foco no campo name
-	window.onload = function(){focofield("name");}		
+	window.onload = function(){focofield("text");}		
 </script>
 <h1><?php htmlout($pageTitle); ?></h1>
 	<form action="?<?php htmlout($action);?>" method="post">		
@@ -36,9 +36,9 @@ include INCLUDES . '/helpers.inc.php';
 			<label for="author">Author:</label>
 			<select name="author" id="author">
 				<option value="">Select one</option>
-				<?php foreach ($autors as $author): ?>
+				<?php foreach ($authors as $author): ?>
 					<option value="<?php htmlout($author['id']); ?>"<?php
-					if ($autor['id'] == $authorid)
+					if ($author['id'] == $authorid)
 						{
 							echo ' selected';
 						}
