@@ -57,6 +57,44 @@ exit();
 //------------------------------------------------------------------------------------------------
 
 
+
+//*****************************************WRITE THE JOKE INTO THE DATABASE***********************
+if (isset($_GET['addform']))
+{
+	include INCLUDES . '/db.inc.php';
+
+	if ($_POST['author'] == '')
+	{
+		$error = 'You must choose an author for this joke.
+			Click &lsquo;back&rsquo; and try again.';
+		include 'error.html.php';
+		exit();
+	}
+
+	try 
+	{
+		$sql = 'INSERT INTO joke SET
+				joketext = :joketext,
+				jokedate = CURDATE(),
+				authorid = :authorid';
+		$sql = $pdo->prepare($sql);
+		$s->bindValue(':joketext', $_POST['text']);
+		$s->bindValue(':authorid', $_POST['author']);
+		$s->execute();
+	} catch (Exception $e) 
+	{
+		$error = 'Error adding submitted joke.';
+		include 'error.html.php';
+		exit();
+	}
+
+	$jokeid = $pdo->lastInsertID();
+
+}
+//------------------------------------------------------------------------------------------------
+
+
+
 //*************************************EDITING JOKES**********************************************
 if (isset($_POST['action']) and $_POST['action'] == 'Edit')
 {
