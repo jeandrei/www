@@ -2,6 +2,7 @@
 include_once('../../includes/constants.inc.php');
 include INCLUDES . '/magicquotes.inc.php';
 
+
 //***********************************ADD A NEW JOKE***************************************
 if (isset($_GET['add']))
 {

@@ -54,10 +54,7 @@
 
 		<section class="box_v">				
 				<h1>Informativo</h1>				
-				<p>							
-					Transferências de alunos podem ser feitas diretamente na escola.<br>
-				</p>
-				<hr>
+				
 				<p>
 					Alteração na forma de lançamento de avaliações descritivas para educação infantil.<br>
 					Disponível no manual do professor ítem 6 <a href="arquivos/manuais/ManualProfessorV12.pdf" target="_blank">Manual do Professor</a>
