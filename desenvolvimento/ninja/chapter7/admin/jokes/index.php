@@ -49,7 +49,10 @@ if (isset($_GET['add']))
 
 	foreach ($result as $row) 
 	{
-		$categories[] = array('id' => $row['id'], 'name' => $row['name'], 'selected' => FALSE);
+		$categories[] = array(
+			'id' => $row['id'], 
+			'name' => $row['name'], 
+			'selected' => FALSE);
 	}
 
 include 'form.html.php';
@@ -78,10 +81,10 @@ if (isset($_GET['addform']))
 				joketext = :joketext,
 				jokedate = CURDATE(),
 				authorid = :authorid';
-		$sql = $pdo->prepare($sql);
+		$s = $pdo->prepare($sql);
 		$s->bindValue(':joketext', $_POST['text']);
 		$s->bindValue(':authorid', $_POST['author']);
-		$s->execute();
+		$s->execute();		
 	} catch (Exception $e) 
 	{
 		$error = 'Error adding submitted joke.';
@@ -90,8 +93,32 @@ if (isset($_GET['addform']))
 	}
 
 	$jokeid = $pdo->lastInsertID();
-
+	if (isset($_POST['categories']))
+	{
+		try
+		{
+			$sql = 'INSERT INTO jokecategory SET
+			jokeid = :jokeid,
+			categoryid = :categoryid';
+			$s = $pdo->prepare($sql);
+			foreach ($_POST['categories'] as $categoryid)
+			{
+				$s->bindValue(':jokeid', $jokeid);
+				$s->bindValue(':categoryid', $categoryid);
+				$s->execute();					
+			}
+		}
+		catch (PDOException $e)
+		{
+			$error = 'Error inserting joke into selected categories.';
+			include 'error.html.php';
+			exit();
+		}
+	}
+header('Location: .');
+exit();
 }
+
 //------------------------------------------------------------------------------------------------
 
 
@@ -183,6 +210,79 @@ if (isset($_POST['action']) and $_POST['action'] == 'Edit')
 
 	include 'form.html.php';
 	exit();
+}
+//------------------------------------------------------------------------------------------------
+
+
+
+//************************************WRITE DATE EDITING JOKE*************************************
+if (isset($_GET['editform']))
+{
+	include INCLUDES . '/db.inc.php';
+	if ($_POST['author'] == '')
+	{
+		$error = 'You must choose an author for this joke.
+			Click &lsquo;back&rsquo; and try again.';
+		include 'error.html.php';
+		exit();
+	}
+
+	try 
+	{
+		$sql = 'UPDATE joke SET
+		joketext = :joketext,
+		authorid = :authorid
+		WHERE id = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->bindValue(':joketext', $_POST['text']);
+		$s->bindValue(':authorid', $_POST['author']);		
+		$s->execute();
+	} catch (Exception $e) 
+	{
+		$error = 'Error updating submitted joke.';
+		include 'error.html.php';
+		exit();	
+	}
+
+	try 
+	{
+		$sql = 'DELETE FROM jokecategory WHERE jokeid = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	} catch (Exception $e) 
+	{
+		$error = 'Error removing obsolete joke category entries.';
+		include 'error.html.php';
+		exit();
+	}
+
+	if (isset($_POST['categories']))
+	{
+		try 
+		{
+			$sql = 'INSERT INTO jokecategory SET
+			jokeid = :jokeid,
+			categoryid = :categoryid';
+			$s = $pdo->prepare($sql);
+
+			foreach ($_POST['categories'] as $categoryid) 
+			{
+				$s->bindValue(':jokeid', $_POST['id']);
+				$s->bindValue(':categoryid', $categoryid);
+				$s->execute();
+			}
+
+		} catch (Exception $e) 
+		{
+			$error = 'Error inserting joke into selected categories.';
+			include 'error.html.php';
+			exit();	
+		}
+	}					
+header('Location: .');
+exit();
 }
 //------------------------------------------------------------------------------------------------
 

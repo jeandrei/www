@@ -55,7 +55,7 @@ include INCLUDES . '/helpers.inc.php';
 				<div><label for="category<?php htmlout($category['id']);
 				?>"><input type="checkbox" name="categories[]" 
 				id="category<?php htmlout($category['id']); ?>"
-				value="<?php htmlout($cagetory['id']); ?>"<?php 
+				value="<?php htmlout($category['id']); ?>"<?php 
 				if ($category['selected'])
 					{
 						echo 'checked';
@@ -67,7 +67,7 @@ include INCLUDES . '/helpers.inc.php';
 
 
 		<div>			
-				<input type="hidden" name="id" id="id" value="<?php htmlout($id); ?>">
+				<input type="hidden" name="id" value="<?php htmlout($id); ?>">
 				<input type="submit" name="submit" value="<?php htmlout($button); ?>">	
 		</div>
 	</form>
