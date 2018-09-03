@@ -1,0 +1,205 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#login{
+	text-align: right;
+}
+#titulo{
+	text-align: center;
+	font-size: 30px;			
+}
+#enderecos{
+	width: 500px;	
+	background-color: #B0B0B0;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	box-shadow: 10px 10px 5px #888888;
+	position: relative;
+}
+#enderecos ul{
+	text-align: left;
+	background-color: #F0F0F0;
+	font-size: 18px;
+	font-style: italic;	
+	list-style-type: none;
+	border-radius: 10px;
+	margin: 10px;
+	padding: 3px;
+}
+
+#objetivo{
+	text-align: left;	
+	padding: 1px;
+	background-color: #FFFFFF ;
+	font-size: 18px;
+	font-style: italic;
+	border-radius: 10px;
+	
+}
+
+#login{
+	width: 400px;
+	padding: 10px;
+	background-color: #B0B0B0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 220px;
+	margin-bottom: auto;
+	border: 1px solid black;
+	box-shadow: 10px 10px 5px #888888;
+	position: relative;
+	text-align: left;
+}
+
+#linkLogin{
+	text-align: right;
+	padding: 2px;	
+}
+
+.inputText{
+	padding: 2px;
+	margin-bottom: 3px;
+}
+
+.inputPassword{
+	padding: 2px;
+	margin-bottom: 3px;	
+}
+.alerta{
+	font-style: italic;
+	font-size: 18px;
+	color: yellow;
+}
+.erro{
+	font-style: italic;
+	font-size: 18px;
+	color: red;
+}
+.botao	{	
+	border-color: #999 #000 #000 #999;
+	border: 1px solid;
+	width: 70px;
+	padding: 2px;
+	border-radius: 3px;
+	background: #FFFF66; 
+	color: #000;
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	margin-bottom: 3px;
+}
+	 
+.botao:hover{
+	position: relative;
+	top: 1px;
+	left: 1px;
+	border-color: #000 #999 #999 #000; 
+	background: #FFFF00;
+}
+
+
+
+.link{
+	padding: 5px;	
+}
+
+
+#area
+{
+    position:relative;
+    left:25%;
+    top:10em;
+    width:320px;
+    height:230px;
+}
+#area #formulario
+{
+    position:absolute;
+    display:block;  
+}
+ 
+ #areaUser
+{
+    position:relative;
+    left:35%;
+    top:10em;
+    width:320px;
+    height:280px;
+}
+#areaUser #formulario
+{
+    position:absolute;
+    display:block;  
+}
+ 
+#area fieldset
+{
+    background-color:#A7C0DC;
+    width:482px;
+    height:155px;
+}
+#areaUser fieldset
+{
+    background-color:#A7C0DC;
+    width:400px;
+    height:220px;
+}
+
+legend
+{
+    font-weight:bold;
+    font-family: "Segoe UI","Arial","Times New Roman";
+}
+#formulario label
+{
+    position:absolute;
+    left:9px;
+    margin-right:5px;
+}
+#formulario input.campo_description
+{
+    background-color:#ffffff;
+    position:absolute;
+    left:125px;
+    top:15px;
+    width:225px;    
+}
+#formulario input.campo_address
+{  
+    background-color:#ffffff;
+    position:absolute;
+    left:125px;    
+    width:350px;
+}
+#formulario textarea.obj
+{
+    position:absolute;
+    background-color:#ffffff;
+}
+#formulario input.campo_name
+{
+    background-color:#ffffff;
+    position:absolute;
+    left:55px;
+    top:16px;
+    width:225px;    
+}
+#formulario input.campo_email
+{
+   background-color:#ffffff;
+    position:absolute;
+    left:55px;    
+    width:225px;
+}
+#formulario input.campo_password
+{
+   background-color:#ffffff;
+    position:absolute;
+    left:55px;    
+    width:225px;
+}
