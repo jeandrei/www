@@ -325,6 +325,8 @@ exit();
 //------------------------------------------------------------------------------------------------
 
 
+
+
 //**************************************SEARCH JOKES**********************************************
 if(isset($_GET['action']) and $_GET['action'] == 'search')
 {
@@ -385,5 +387,50 @@ if(isset($_GET['action']) and $_GET['action'] == 'search')
 
 exit();
 }
+//------------------------------------------------------------------------------------------------
+
+
+//***************************************retrieve data for a new search**************************
+include INCLUDES . '/db.inc.php';
+
+	//Build the list of authors
+	try 
+	{
+		$result = $pdo->query('SELECT id, name FROM author');
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching authors from the database';
+		include 'error.html.php';
+		exit();
+	}
+
+
+	foreach ($result as $row) 
+	{	//a sacada para montar as listas está aqui sempre monta um array com o resultado da pesquisa
+		$authors[] = array('id' => $row['id'], 'name' => $row['name']);	
+	}
+
+
+	//Build the list of categories
+	try 
+	{
+		$result = $pdo->query('SELECT id, name FROM category');
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching categories from database';
+		include 'error.html.php';
+		exit();
+	}
+
+
+	foreach ($result as $row) 
+	{
+		$categories[] = array(
+			'id' => $row['id'], 
+			'name' => $row['name']);
+	}
+//----------------------------------------------------------------------------------------	
 include 'searchform.html.php';
 ?>
