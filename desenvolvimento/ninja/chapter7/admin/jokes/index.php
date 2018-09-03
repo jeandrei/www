@@ -286,7 +286,46 @@ exit();
 }
 //------------------------------------------------------------------------------------------------
 
+//**************************************DELETING JOKES********************************************
 
+if (isset($_POST['action']) and $_POST['action'] == 'Delete')
+{
+	include INCLUDES . '/db.inc.php';
+	//Delete category assigments for this joke
+	try 
+	{
+		$sql = 'DELETE FROM jokecategory WHERE jokeid = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	} catch (Exception $e) 
+	{
+		$error = 'Error removing joke from categories.';
+		include 'error.html.php';
+		exit();
+	}
+
+	//Delete the joke
+	try 
+	{
+		$sql = 'DELETE FROM joke WHERE id = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	} catch (Exception $e) 
+	{
+		$error = 'Error deleting joke.';
+		include 'error.html.php';
+		exit();
+	}
+header('Location: .');
+exit();
+}
+
+//------------------------------------------------------------------------------------------------
+
+
+//**************************************SEARCH JOKES**********************************************
 if(isset($_GET['action']) and $_GET['action'] == 'search')
 {
 	include INCLUDES . '/db.inc.php';

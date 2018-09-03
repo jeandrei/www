@@ -23,7 +23,15 @@ include_once INCLUDES . '/helpers.inc.php';
 				<div>
 					<input type="hidden" name="id" value="<?php htmlout($joke['id']); ?>">
 					<input type="submit" name="action" value="Edit">
-					<input type="submit" name="action" value="Delete">
+					<input type="submit" name="action" id="Delete" value="Delete" onclick="if(question('Are you sure you want to delete?') == true)
+									{
+										document.forms[0].submit();
+									}
+									else
+									{										
+										return false;
+									}");  							
+    					">			
 				</div>
 			</form>
 		</td>
