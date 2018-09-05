@@ -1,6 +1,5 @@
 <?php
 include_once 'includes/magicquotes.inc.php';
-include_once 'includes/helpers.inc.php';
 
 $items = array(
     array('id' => '1', 'desc' => 'Canadian-Australian Dictionary',
@@ -44,9 +43,9 @@ if (isset($_GET['cart']))
     {
       if ($product['id'] == $id)
       {
-        $cart[] = $product;
+        $cart[] = $product;//$cart[] recebe todo o array product desde que o id tenha sido adicionado no carrinho
         $total += $product['price'];
-        break;
+        break;//uma vez que achou o produto ele para com break
       }
     }
   }

@@ -1,4 +1,5 @@
-<?php include_once 'includes/magicquotes.inc.php'; ?>
+<?php include_once 'includes/magicquotes.inc.php'; 
+      include_once 'includes/helpers.inc.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
