@@ -1,6 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] .
-    '/includes/magicquotes.inc.php';
+include_once 'includes/magicquotes.inc.php';
+include_once 'includes/helpers.inc.php';
 
 $items = array(
     array('id' => '1', 'desc' => 'Canadian-Australian Dictionary',
