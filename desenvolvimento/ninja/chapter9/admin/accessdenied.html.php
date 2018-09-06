@@ -1,4 +1,4 @@
-<?php include_once('../includes/constants.inc.php');
+<?php include_once '../../includes/constants.inc.php';
 	  include INCLUDES . '/helpers.inc.php';
 ?>
 <!DOCTYPE html>

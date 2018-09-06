@@ -2,6 +2,12 @@
 
 function userIsLoggedIn()
 {
+		//session_start();
+		//unset($_SESSION['loggedIn']);
+		//unset($_SESSION['email']);
+		//unset($_SESSION['password']);
+
+
 	if (isset($_POST['action']) and $_POST['action'] == 'login')
 	{
 		if(!isset($_POST['email']) or $_POST['email'] == '' or

@@ -46,7 +46,7 @@ if (isset($_GET['add']))
 	foreach ($result as $row) 
 	{
 		$roles[] = array(
-			'id' => $row['id']),
+			'id' => $row['id'],
 			'description' => $row['description'],
 			'selected' => FALSE);
 	}
@@ -77,6 +77,53 @@ if (isset($_GET['addform']))
 		$error = 'Error adding submitted author.';
 		include 'error.html.php';
 		exit();
+	}
+
+	$authorid = $pdo->lastInsertId();
+
+	if ($_POST['password'] != '')
+	{
+		$password = md5($_POST['password'] . 'ijdb');
+		
+		try 
+		{
+			$sql = 'UPDATE author SET
+				password = :password
+				WHERE id = :id';
+			$s = $pdo->prepare($sql);
+			$s->bindValue(':password', $password);
+			$s->bindValue(':id', $authorid);
+			$s->execute();
+		} 
+		catch (Exception $e) 
+		{
+			$error = 'Error setting author password.';
+			include 'error.html.php';
+			exit();
+		}
+	}
+
+	if (isset($_POST['role']))
+	{
+		foreach ($_POST['role'] as $role) 
+		{
+			try 
+			{
+				$sql = 'INSERT INTO authorrole SET
+					authorid = :authorid,
+					roleid = :roleid';
+				$s = $pdo->prepare($sql)	;
+				$s->bindValue(':authorid', $authorid);
+				$s->bindValue(':roleid', $role);
+				$s->execute();
+			} 
+			catch (Exception $e) 
+			{
+				$error = 'Error assigning select role to author.';
+				include 'error.html.php';
+				exit();
+			}
+		}
 	}
  header('Location: .');
  exit();
@@ -112,6 +159,47 @@ if(isset($_POST['action']) and $_POST['action'] == 'Edit')
 	$id = $row['id'];
 	$button = 'Update author';
 
+	//Get list of roles assigned to this author
+	try 
+	{
+		$sql = 'SELECT roleid FROM authorrole WHERE authorid = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $id);
+		$s->execute();
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching list of assigned roles.';
+		include 'error.html.php';
+		exit();
+	}
+
+	$selectedRoles = array();
+	foreach ($s as $row) 
+	{
+		$selectedRoles[] = $row['roleid'];
+	}
+
+	//Build the list of all roles
+	try 
+	{
+		$result = $pdo->query('SELECT id, description FROM role');
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching list of roles.';
+		include 'error.html.php';
+		exit();
+	}
+
+	foreach ($result as $row) 
+	{
+		$roles[] = array(
+			'id' => $row['id'],
+			'description' => $row['description'],
+			'selected' => in_array($row['id'], $selectedRoles));
+	}
+
 	include 'form.html.php';
 	exit();
 }
@@ -142,6 +230,66 @@ if (isset(($_GET['editform'])))
 		include 'error.html.php';
 		exit();
 	}
+
+	if ($_POST['password'] != '')
+	{
+		$password = md5($_POST['password'] . 'ijdb');
+
+		try 
+		{
+			$sql =	'UPDATE author SET
+				password = :password
+				WHERE id = :id'	;
+			$s = $pdo->prepare($sql);
+			$s->bindValue(':password', $password);
+			$s->bindValue(':id', $_POST['id']);
+			$s->execute();
+		} 
+		catch (Exception $e) 
+		{
+			$error = 'Error setting author password.';
+			include 'error.html.php';
+			exit();
+		}
+	}
+
+	try 
+	{
+		$sql = 'DELETE FROM authorrole WHERE authorid = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error removing obsolete author role entries.';
+		include 'error.html.php';
+		exit();
+	}
+
+	if (isset($_POST['roles']))
+	{
+		foreach ($_POST['roles'] as $role) 
+		{
+			try 
+			{
+				$sql = 'INSERT INTO authorrole SET
+					authorid = :authorid,
+					roleid = :roleid';
+				$s = $pdo->prepare($sql);
+				$s->bindValue(':authorid', $_POST['id']);
+				$s->bindValue(':roleid', $role);
+				$s->execute();
+
+			} 
+			catch (Exception $e) 
+			{
+				$error = 'Error assigning selected role to author.';
+				include 'error.html.php';
+				exit();
+			}
+		}
+	}
  header('Location: .');
  exit();
 }
@@ -155,8 +303,24 @@ if (isset(($_GET['editform'])))
 if (isset($_POST['action']) and $_POST['action'] == 'Delete')
 {
 	include INCLUDES . '/db.inc.php';
-	//Get jokes belonging to author
 	
+	//Delete role assignments for this author
+	try 
+	{
+		$sql = 'DELETE FROM authorrole WHERE authorid = :id';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	} 
+	catch (Exception $e) 
+	{
+		$error = 'Error removing author from roles.';
+		include 'error.html.php';
+		exit();
+	}
+
+
+	//Get jokes belonging to author
 	try 
 	{
 		$sql = 'SELECT id FROM joke WHERE authorid = :id';
