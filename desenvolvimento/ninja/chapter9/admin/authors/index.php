@@ -2,15 +2,54 @@
 include_once('../../includes/constants.inc.php');
 include_once INCLUDES . '/magicquotes.inc.php';
 
+//******************************LOGIN************************************
+require_once INCLUDES . '/access.inc.php';
+if (!userIsLoggedIn())
+{
+	include '../login.html.php';
+	exit();
+}
+
+
+if (!userHasRole('Account Administrator'))
+{
+	$error = 'Only Account Administrators may access this page.';
+	include '../accessdenied.html.php';
+	exit();
+}
+//-----------------------------------------------------------------------
+
+
 //****************************ADD AUTHOR**********************************
 if (isset($_GET['add']))
 {
+	include INCLUDES . '/db.inc.php';
 	$pageTitle = 'New Author';
 	$action = 'addform';
 	$name = '';
 	$email = '';
 	$id = '';
 	$button = 'Add author';
+
+	//Build the list of roles
+	try 
+	{
+		$result = $pdo->query('SELECT id, description FROM role');
+	}
+	catch (Exception $e) 
+	{
+		$error = 'Error fetching list of roles.';
+		include 'error.html.php';
+		exit();
+	}
+
+	foreach ($result as $row) 
+	{
+		$roles[] = array(
+			'id' => $row['id']),
+			'description' => $row['description'],
+			'selected' => FALSE);
+	}
 
 	include 'form.html.php';
 	exit();
