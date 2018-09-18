@@ -33,6 +33,9 @@ WHERE User='root';
 FLUSH PRIVILEGES;
 
 ***********************************CRIAÇÃO DE TABELAS EXEMPLO**************************
+SEMPRE USAR TIPO DE TABELA InnoDB pois da suporte a transactions MyISAM não da esse suporte
+ENGINE=InnoDB
+
 CREATE TABLE IF NOT EXISTS subjects (
 id INT(11) NOT NULL AUTO_INCREMENT,
 menu_name VARCHAR(30) NOT NULL,
