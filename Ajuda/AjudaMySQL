@@ -1,0 +1,75 @@
+logar no mysql como root para outro usuário basta alterar em root
+sudo -u root mysql -p
+
+Listar os usuários do mysql
+select user, host from mysql.user;
+
+criar um novo usuário
+CREATE USER 'novo_user'@'localhost' IDENTIFIED BY 'senha';
+
+apagar um usuário
+DELETE FROM mysql.user WHERE user='username' and host='localhost';
+FLUSH PRIVILEGES;
+
+
+Criar um usuário para ter acesso a um determinado banco de dados.
+GRANT ALL PRIVILEGES ON bancodedados.* TO 'usuario'@'localhost' IDENTIFIED BY 'password';
+exemplo:
+GRANT ALL PRIVILEGES ON widget_corp.* TO 'widget_cms'@'localhost' IDENTIFIED BY 'secretpassword';
+para mostrar se criou 
+SHOW GRANTS FOR 'widget_cms'@'localhost';
+para logar com o usuário no banco específico
+mysql -u usuario -p banco
+ex:
+mysql -u widget_cms -p widget_corp
+
+mostra as colunas da tabela
+SHOW COLUMNS FROM tabela;
+
+
+alterar a senha do root no mysql
+UPDATE mysql.user SET Password=PASSWORD('rootadm')
+WHERE User='root';
+FLUSH PRIVILEGES;
+
+***********************************CRIAÇÃO DE TABELAS EXEMPLO**************************
+CREATE TABLE IF NOT EXISTS subjects (
+id INT(11) NOT NULL AUTO_INCREMENT,
+menu_name VARCHAR(30) NOT NULL,
+position INT(3) NOT NULL, 
+visible TINYINT(1) NOT NULL,
+PRIMARY KEY (id)
+)DEFAULT CHARACTER SET utf8 ENGINE=InnoDB
+
+CREATE TABLE IF NOT EXISTS pages (
+id INT(11) NOT NULL AUTO_INCREMENT,
+subjects_id INT(11) NOT NULL,
+menu_name VARCHAR(30) NOT NULL,
+position INT(3) NOT NULL,
+visible TINYINT(1) NOT NULL,
+content TEXT,
+PRIMARY KEY (id),
+FOREIGN KEY (subjects_id) REFERENCES subjects(id) ON DELETE CASCADE
+)
+*****************************************************************************************
+
+
+
+********************************************************************UTILIZANDO O JOIN****************************
+Or you can use the JOIN statement to select from both tables at once. For example, look closely
+at you do this first, then I’ll go over how it works:
+SELECT artist_name, album_name
+FROM artists
+JOIN albums
+USING (artist_id)
+WHERE artist_id = 1
+*********************************************************************************************************
+
+SELECT id, LEFT(joketext, 20), jokedate FROM joke - mostra apenas os 20 caracteres do campo joketext da tabela joke
+
+selecionar juntando todos os registros iguais em um determinado campo
+a mailing list using the following query:
+SELECT DISTINCT authorname, authoremail FROM joke
+neste caso vai trazer agrupado todos os campos em qual o nome do autor e email for igual
+
+
