@@ -16,6 +16,10 @@
 CLASSES = são templates como se fosse um projeto, uma receita usados para gerar objetos, sendo que esses objetos podem executar tarefas ou seja métodos, mais que isso, uma das grandes diferenças entre funções e classes é que a classe tem as duas coisas, variáveis e funções que formam o que chamamos de objeto, quando criamos uma variavel detro de uma classe a chamamos de propriedade.
 	Vantagens evita ter um monte de funções e variaveis flutuando ao redor do código.
 
+OBJETOS = são o resultado gerado pela classe, se a classe fosse uma receita de bolo, o objeto seria o bolo.
+
+METODOS = são ações executadas pelo objeto.
+
 */
 
 //Passo 1 separamos as classes em um arquivo separado, neste caso class.lib.php
