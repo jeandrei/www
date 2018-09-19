@@ -1,6 +1,19 @@
 <?php
 /*
-CLASSES = são templates usados para definir objetos, mais que isso, uma das grandes diferenças entre funções e classes é que a classe tem as duas coisas, variáveis e funções que formam o que chamamos de objeto, quando criamos uma variavel detro de uma classe a chamamos de propriedade.
+ ____________
+|			|->Objeto->metodo();
+|	classe  |->Objeto->metodo();
+|			|->Objeto->metodo();
+|___________|
+
+ ____________
+|			|->cão->latir();
+|	 cão    |->cão->andar();
+|			|->cão->correr();
+|___________|
+
+
+CLASSES = são templates como se fosse um projeto, uma receita usados para gerar objetos, sendo que esses objetos podem executar tarefas ou seja métodos, mais que isso, uma das grandes diferenças entre funções e classes é que a classe tem as duas coisas, variáveis e funções que formam o que chamamos de objeto, quando criamos uma variavel detro de uma classe a chamamos de propriedade.
 	Vantagens evita ter um monte de funções e variaveis flutuando ao redor do código.
 
 */
@@ -11,6 +24,12 @@ CLASSES = são templates usados para definir objetos, mais que isso, uma das gra
 class person {
 	//Passo 3 Adicionamos dados na classe
 	var $name;//Propriedade
+
+	/*
+	Passo 13 Constructor
+	Constructor permite a inicialização de objetos.
+	Ou seja atribui valores as propriedades quando inicia/cria um objeto.
+	*/
 
 	//Passo 4 Adicionamos funções a classe
 	function set_name($new_name){	/*
