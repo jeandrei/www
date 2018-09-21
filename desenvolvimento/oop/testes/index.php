@@ -14,7 +14,10 @@ $jeandrei = new Pessoa("Jeandrei");
 
 echo "<br>O nome da pessoa é: " . $jeandrei->getNome();
 
-
+$sportsCar1 = new SportsCar();
+$sportsCar1->setModel('Mercedes Benz');
+echo "<br>" . $sportsCar1->hello();
+//echo $sportsCar1->driveItWithStyle();
 
 ?>
 </body>
