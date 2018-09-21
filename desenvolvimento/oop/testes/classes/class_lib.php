@@ -27,7 +27,7 @@ class Pessoa
 }
 
 class Car {//Classe Pai
-	private $model;
+	protected $model; //protected pode ser acessada pelas classes filho
 
 	public function setModel($model)
 	{
@@ -39,6 +39,11 @@ class Car {//Classe Pai
 		return $this->$model;
 	}
 
+	public function hello() //final public function hello() impede que os filhos dessa classe sobescrevão a função
+	{
+		return "beep";
+	}
+
 	
 }
 
@@ -46,13 +51,14 @@ class SportsCar extends Car {//Classe filho, herda todas as propriedades e méto
 							// da classe pai que não seja private
 	private $style = 'fast and furious';
 
-	/*public function driveItWithStyle()
+	public function driveItWithStyle()
 	{
 		return 'Drive a ' . $this->getModel(). ' <i>' . $this->style . '</i>';
-	}*/
+	}
 
-	public function hello(){
-		return "beep! I am a <i>" . $this->modejhl . "</i><br />";
+	public function hello() //sobescreve a função helo da classe pai
+	{
+		return "beep! I am a <i>" . $this->model . "</i><br />";
 	}
 
 }
