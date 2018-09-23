@@ -1,0 +1,65 @@
+
+
+acessar o docker
+docker exec -it container bash
+
+
+remover todos os docker
+lista todos primeiro
+docker-compose ps
+para todos
+docker stop nomecontainer
+removemos todos
+docker-compose rm -v
+
+iniciar o docker
+docker-compose up -d
+
+recriar o docker com as alterações
+docker-compose up -d --build
+
+
+
+atualizar tudo de uma vez só
+docker stop www mysql phpmyadmin && docker-compose rm -v -f && docker-compose up -d
+
+
+para listar diretórios no browser
+entre no container 
+docker exec -it www_webserver_1 bash
+edite o arquivo apache2.conf
+vim /etc/apache2/apache2.conf
+Procure habilite e altere como abaixo
+
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    Require all granted
+</Directory>
+
+
+
+POSTGRES
+conectar direto no container
+docker exec -it postgres psql -U postgres
+\q sai
+
+
+se der erro primeiro para restarurar, primeiro teste outro arquivo de restauração
+se mesmo assim não funcionar altere o arquivo no container
+docker exec -it container bash
+/var/lib/postgresql/data/pg_hba.conf
+adicione a linha
+host all     all     0.0.0.0/0       trust
+
+
+FAZER O BACKUP DO IEDUCAR 08/2018
+não precisa mudar nada
+remova os backups existentes
+reinicie a máquina
+inicie o docker
+docker-compose up -d
+execute o arquivo backup.sh
+sh backup.sh
+
+
