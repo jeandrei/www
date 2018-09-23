@@ -1,4 +1,6 @@
 <?php
+
+
 class Cars{
 	
 	function gretting()
@@ -6,7 +8,15 @@ class Cars{
 		echo "Hello Students";
 	}
 
-$mercedes = new Cars();
+
 	
 }
+
+$bmw = new Cars();
+$mercedes = new Cars();
+
+$bmw->gretting();
+
+
+
 ?>
