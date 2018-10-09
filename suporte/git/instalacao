@@ -13,3 +13,8 @@ git init
 *Configuramos o repositório
 git remote add origin https://github.com/nome do usuario/nome do repositorio.git
 	exemplo: git remote add origin https://github.com/Jeandrei/www.git
+
+*Se fizer a configuração errada TENTAR EU NÃO TESTEI AINDA
+git config --global --unset-all user.name
+pode tentar
+git config --global --replace-all user.name "Nome do Usuario"
