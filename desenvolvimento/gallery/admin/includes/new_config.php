@@ -12,19 +12,14 @@
 
 	Ou simplesmente adicione a linha no arquivo www\docker\webserver\Dockerfile
 	RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+	Se estiver trabalhando com docker no host define('DB_HOST','mysql'); mysql é o nome do container que verificamos com docker-composer ps
 */
 
-define('DB_HOST','192.168.1.100');
+define('DB_HOST','mysql');
 define('DB_USER','root');
 define('DB_PASS','rootadm');
 define('DB_NAME','gallery_db');
 
-$connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-
-
-
-if($connection){
-	echo "true";
-}
 
 ?>
