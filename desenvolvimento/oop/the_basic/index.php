@@ -14,7 +14,7 @@
 
 //Passo 9 a palavra chave new
 //podemos criar vários objetos da mesma classe
-//no ponte de vista do php cada objeto é sua própria entidade
+//no ponto de vista do php cada objeto é sua própria entidade
 //os dois são da mesma classe person mas são objetos totalmente diferentes
 //$jimmy = new person();
 $stefan = new person("Stefan Mischook");
