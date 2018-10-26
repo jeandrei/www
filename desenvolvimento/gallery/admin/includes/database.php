@@ -11,6 +11,10 @@ class Database {
 		$this->open_db_connection();
 	}
 
+	/*
+	mysqli_connect_errno()
+	Irá retornar o número do código de erro da ultima chamada a função mysqli_connect(). Se não houve erro, esta função irá retornar zero. 
+	*/
 	public function open_db_connection(){
 	//$this->connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 	$this->connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
@@ -34,6 +38,10 @@ class Database {
 		}
 	}
 
+	/*
+	real_escape_string
+	This function is used to create a legal SQL string that you can use in an SQL statement. The given string is encoded to an escaped SQL string, taking into account the current character set of the connection.
+	*/
 	public function scape_string($string){
 		$escape_string = $this->connection->real_escape_string($string);
 		return $escape_string;
