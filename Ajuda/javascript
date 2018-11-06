@@ -1,0 +1,10 @@
+
+
+Chamar função onclic getElementById
+no index.html
+<a id="special" class="link" href="http://yourpage.com">Your page</a>
+Observe a id special
+No arquivo .js
+document.getElementById("special").onclick = function() {
+    alert("You clicked me?");
+    }

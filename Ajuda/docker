@@ -3,6 +3,9 @@
 acessar o docker
 docker exec -it container bash
 
+iniciar uma imagem em específico
+docker build -t myimage
+
 
 remover todos os docker
 lista todos primeiro
