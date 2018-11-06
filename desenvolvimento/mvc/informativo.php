@@ -27,6 +27,9 @@ tera todo resto da aplicação, mvc estrutura, o arquivo de configuração, toda
 
 app/libries 
 basicamente o coração da aplicação.
+Todos os arquivos aquid dentro devem começar com a primeira letra em maiúsculo
+Todos os arquivos referentes a classes tem que começar com a primeira letra em maiúsculo
+
 
 app/libries/core.php
 olhará nas urls e basicamente pegará o necessário delas 
@@ -57,6 +60,7 @@ para redirecionar, teremos uma função redirect aqui dentro para fazer isso
 session hellper que permitirá ter menságens rápidas que quando logado o sistema vai informar
 que você está logado.
 
+
 /app/config
 onde os parâmetros do banco de dados vão ficar
 
@@ -86,6 +90,15 @@ localhost/mvc/public/teste.php
 ele vai redirecionar para 
 localhost/mvc/public/index.php
 a não ser que o arquivo exista
+
+/.htaccess
+Arquivo responsável para tirar o public da url
+nosso sistema para o acesso externo está em
+/mvc/public/arquivos.php
+este arquivo .htaccess faz com que a url fique apenas
+/mvc/arquivos.php
+
+
 
 
 */
