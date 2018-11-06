@@ -28,7 +28,7 @@ class Core{
         // E CARREGAMOS NO SCRIPT
         //***************MANIPULAÇÃO DO CONTROLLER POST**********************************
 
-        // Lok in contrller for first value
+        // Look in contrller for first value
         // na linha abaixo ele vai verificar a existencia de um arquivo dentro da pasta /app/controllers
         // função file_exists
         // para o Array ( [0] => post [1] => edit [2] => 1 )
@@ -67,7 +67,7 @@ class Core{
     public function getUrl(){
         //testamos se existe alguma coisa no GET
         if(isset($_GET['url'])){
-            //tiramos a / da url
+            //tiramos a / no final da url rtrim retira espaço em branco ou caractere no final de uma string
             $url = rtrim($_GET['url'], '/');
             // vamos usar filter_var para validar/verificar se é uma url válida
             $url = filter_var($url, FILTER_SANITIZE_URL);
