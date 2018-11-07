@@ -342,7 +342,7 @@ if($a > $b)
 {
 	echo "a é maior que b";
 }	
-else if ($a < $b)
+elseif ($a < $b)
 {
 	echo "a é menor que b";
 }
@@ -350,6 +350,16 @@ else
 {
 	echo "a é igual a b";
 }
+
+elseif pode ser colocado quantos forem necessários, no entanto else tem que ser a última condição
+
+junto com html pode ser usado assim
+<?php if ($variable): ?>
+ 	<p>html code</p>
+ <?php else: ?>
+	<p>more html code</p>
+<?php endif; ?>
+
 
 obs.: == ele avalia se os valores são iguais, se uma variável for = "123" string e outra for 123 número ele vai avaliar como igual, agora
 se você quiser avaliar se são completamente iguais valor e tipo você deve usar ===
