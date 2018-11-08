@@ -53,6 +53,10 @@ Estrutura MVC
 /app/views
 /app/controllers
 
+/app/views/inc
+Temos o header e o footer padrão
+que é adicionado em todas as páginas
+
 
 /app/helpers
 para coisas menores, teremos um redirect helper para não precisar usar o php location
@@ -62,7 +66,7 @@ que você está logado.
 
 
 /app/config
-onde os parâmetros do banco de dados vão ficar
+onde os parâmetros do banco de dados e  approot vão ficar
 
 /app/bootstrap.php
 neste arquivo que vamos requerer todos os arquivos necessários para a aplicação
@@ -98,7 +102,8 @@ nosso sistema para o acesso externo está em
 este arquivo .htaccess faz com que a url fique apenas
 /mvc/arquivos.php
 
-
+Quando quiser incluir algo que está na pasta app utilize a constante APPROOT e quando quiser 
+incluir o que está no public use URLROOT
 
 
 */
