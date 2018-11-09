@@ -106,6 +106,66 @@ Quando quiser incluir algo que está na pasta app utilize a constante APPROOT e 
 incluir o que está no public use URLROOT
 
 
+
+
+**********************SEQUÊNCIA DE FUNCIONAMENTO**********************************************************
+na requisição
+
+/mvc
+
+1 - É chamado o arquivo /public/index.php
+
+2 - O arquivo /public/inidex.php
+		require /app/bootstrap.php
+		ao qual require todos os arquivos da pasta libraries que incluem
+			Controller.php
+			Core.php
+			Database.php
+		por fim cria uma instância da classe Core
+
+3 - A classe Core tem as seguintes propriedades e valores padrão
+	currentControler = Pages //equivalente ao que está na pasta /mvc/controllers
+	currentMethod = index
+	param = []
+	executa o que está na construct
+	como nada foi passado pela url vai requerer o arquivo com base nos valores padrões das propriedades
+	require /app/controllers/Pages.php
+	instancia o controller na propriedade currentController
+	currentController = new Pages; continua a execução mas aqui continua no item 4
+	através da fução call_user_func_array dentro da pasta app/controller executa a classe Pages,metodo index e parâmetro vazio
+	a qual o método index é atribuido a variável $posts o resultado da função postModel->getPosts
+	a propriedade postmodel é setada na construct da classe pages colocando como valor Post
+	sendo assim a variável $posts é atribuido o valor do método Posts->getPosts();
+	o método index chama outro método o getPosts() que está no modelo /models/Posts
+	que vai retornar o resultado da consulta sql select * from posts para a variável $data	
+	depois chama o método view do arquivo /libraries/Controller.php da classe Controller
+	que vai requerer/adicionar através do método view
+	$this->view('pages/index' ,$data);
+	o arquivo require_once '../app/views/pages/index.php'; e os dados através da variável $data
+
+
+
+testar só parte acima
+
+
+4 - Ao instanciar a class Pages no passo anterior
+	na classe Pages vai iniciar o que está no contruct
+	vai atribuir a uma nova propriedade postModel o resultado do método model()
+	que está na classe Controller a qual a classe Pages extends
+	então postModel = $this->model('Post');
+	que terá como resultado o retorno do método require_once '../app/models/' . $model . '.php';
+	ou seja require_once '../app/models/Post.php';
+
+5 - Ao chamar /app/models/Post.php
+	irá iniciar a contruct()
+	que inicia o banco de dados atribuindo toda a classe Database a propriedade db
+	db = new Database;
+
+***********************************************************************************************************
+
+
+
+
 */
 echo "it works";
 

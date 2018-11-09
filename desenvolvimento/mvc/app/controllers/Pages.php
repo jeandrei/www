@@ -16,6 +16,9 @@ class Pages extends Controller{
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
     public function index(){
+        //como na construct setamos o valor da propriedade postModel para Post
+        // a linha abaixo vai ficar
+        //$posts = $this->Post->getPosts();   
         $posts = $this->postModel->getPosts();       
        
         $data = [
