@@ -6,7 +6,7 @@
 */
 class Pages extends Controller{
     public function __construct(){
-   
+        $this->postModel = $this->model('Post');        
     }
 
     // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
@@ -16,12 +16,16 @@ class Pages extends Controller{
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
     public function index(){
+        $posts = $this->postModel->getPosts();       
        
         $data = [
-           'title' => 'Welcome'
+           'title' => 'Welcome',
+           'posts' => $posts
        ];    
        
-       $this->view('pages/index' ,$data) ;
+     
+
+       $this->view('pages/index' ,$data);
     }
 
     //url /mvc/pages/about
@@ -30,7 +34,7 @@ class Pages extends Controller{
             'title' => 'About Us'
         ];            
         
-        $this->view('pages/about', $data) ;
+        $this->view('pages/about', $data);
     } 
     
 }
