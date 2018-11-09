@@ -68,5 +68,6 @@ $books =[
                 <li><?php echo printableTitle($book); ?> </li>            
         <?php endforeach; ?>
     </ul>
+    <?php echo "O diretório root deste arquivo é -> " . __DIR__ ; ?>
 </body>
 </html>
