@@ -7,7 +7,7 @@
 * queremos também passar parametros pela url
 * por exemplo app.com/index.php?url=post
 * sendo assim com a url podemos ler o post controller
-* teremos uma pasta chamada controller com um arquivo chamado post.php
+* teremos uma pasta chamada models com um arquivo chamado post.php
 * e dentro do arquivo post.php teremos a classe Posts{ }
 * se a url passar app.com/index.php?url=post/add
 * dentro da classe Posts será chamado o método function add(){}
@@ -230,7 +230,7 @@ na requisição /mvc/pages/about/33
 						 Instancia a classe Core
 
 3 - /app/bootstrap.php -> Lê config/config.php
-						  Lê todo os arquuivos da pasta Libraries -> Controller.php
+						  Lê todo os arquivos da pasta Libraries -> Controller.php
 						  											 Core.php
 						  											 Database.php
 
