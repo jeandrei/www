@@ -222,6 +222,40 @@ na requisição /mvc/pages/about/33
 
 
 
+*****************************************************************************************************************************
+															RESUMO
+
+1 - Lê o arquivo  /public/index.php
+2 - /public/index.php -> Lê /app/bootstrap.php
+						 Instancia a classe Core
+
+3 - /app/bootstrap.php -> Lê config/config.php
+						  Lê todo os arquuivos da pasta Libraries -> Controller.php
+						  											 Core.php
+						  											 Database.php
+
+4 - Continuação passo 2 Instancia classe Core -> Lê /app/controllers/Pages.php
+												 Instancia a classe Pages
+												 Chama a fução call_user_func_array dentro da pasta app/controller executa a classe Pages,metodo index e parâmetro vazio
+
+5 - Ao Instancia a classe Pages no passo anterior na construct
+	Executa o método model('Post'); da classe Controller que apenas 
+		Lê o arquivo /app/models/Post.php
+		E retorna a classe instanciada para a variável postModel
+	Então postModel tem a classe instanciada Post
+	Que através da construct inicia o banco de dados db = new Database;
+
+6 - Como no passo 4 através da função call_user_func_array foi executado o método index e postModel agora tem instancisdo a classe Post
+	A linha $posts = $this->postModel->getPosts();
+	Significa $posts = $this->Post->getPosts();
+
+7 - Chama a função getPosts da classe Post
+
+*****************************************************************************************************************************
+
+
+
+
 */
 echo "it works";
 
