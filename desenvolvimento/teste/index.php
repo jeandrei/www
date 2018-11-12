@@ -6,33 +6,10 @@ if($submitted){
     setcookie('username', $_POST['username']);
 }
 
-$books =[
-
-    [
-        'title'     =>  'To kill a Mockingbird',
-        'author'    =>  'Harper Lee',
-        'available' =>  true,
-        'pages'     => 336,
-        'isbn'      => 978006112084
-    ],
-
-    [
-        'title'     =>  '1984',
-        'author'    =>  'George Orwell',
-        'available' =>  true,
-        'pages'     => 267,
-        'isbn'      => 874589654241
-    ],
-
-    [
-        'title'     =>  'One Hundred Yers of Solitude',
-        'author'    =>  'Gabriel Garcia Marquez',
-        'available' =>  false,
-        'pages'     => 457,
-        'isbn'      => 897456218965
-    ]
-
-];
+//lê o array contido no arquivo books.json
+$booksJason = file_get_contents('books.json');
+$books = json_decode($booksJason, true);
+//var_dump($books);
 
 ?>
 <!DOCTYPE html>
