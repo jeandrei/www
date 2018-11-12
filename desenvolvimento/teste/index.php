@@ -7,7 +7,7 @@ if($submitted){
 }
 
 //lê o array contido no arquivo books.json
-$booksJason = file_get_contents('books.json');
+$booksJason = file_get_contents(__DIR__ . '/books.json');
 $books = json_decode($booksJason, true);
 //var_dump($books);
 
