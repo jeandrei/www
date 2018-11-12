@@ -165,7 +165,8 @@ testar só parte acima
 na requisição /mvc/pages/about/33
 /mvc
 
-1 - É chamado o arquivo /mvc/app/views/pages/about.php
+1 - É chamado o arquivo /public/index.php devido a configuração do nosso arquivo .htacces
+	mas o arquivo final de leitura será /mvc/app/views/pages/about.php
 
 2 - O arquivo /public/inidex.php
 		require /app/bootstrap.php
