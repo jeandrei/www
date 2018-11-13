@@ -15,7 +15,7 @@ class Core{
     // montamos um array vazio
     protected $params = [];
 
-    // 3) PASSAMOS A URL TRATADA PARA A VARIÁVEL $url
+    // 2) PASSAMOS A URL TRATADA PARA A VARIÁVEL $url
     public function __construct(){
         // print_r($this->getUrl());
         // ao iniciar a classe Core
@@ -24,7 +24,7 @@ class Core{
         $url = $this->getUrl();
 
 
-        // 4) VERIFICAMOS SE O ARQUIVO REFERENTE AO CONTROLAOR EXISTE DENTRO DA PASTA CONTROLLERS
+        // 3) VERIFICAMOS SE O ARQUIVO REFERENTE AO CONTROLAOR EXISTE DENTRO DA PASTA CONTROLLERS
         // E CARREGAMOS NO SCRIPT
         //***************CAPTURAR O CONTROLLER DA URL**************************************
         // Look in contrller for first value
@@ -59,7 +59,7 @@ class Core{
 
 
 
-        // 5) **********************CAPTURAR O METODO DA URL******************************
+        // 4) **********************CAPTURAR O METODO DA URL******************************
         // Check for second part of URL method
         // no exemplo localhost/mvc/pages/about/33 - about é o método
         // logo verificaremos dentro da classe Pages se existe o método about
@@ -81,7 +81,7 @@ class Core{
 
 
 
-        // 6)**********************CAPTURAR O PARÂMETRO DA URL***************************
+        // 5)**********************CAPTURAR O PARÂMETRO DA URL***************************
         // Primeira coisa como lá no passo 4 e 5 no final demos um unset($url[0]);
         // ficou apenas um valor no array que é o parametro
         // array(1)  [2]=> string(2) "33"}
@@ -110,7 +110,7 @@ class Core{
         }//construct
 
    
-    // 2) EXTRAIMOS E PREPARAMOS A URL
+    // 2.1) EXTRAIMOS E PREPARAMOS A URL
     /*   
     dentro do metodo getUrl se dermos um echo $_GET['url'];
     ele vai retornar apenas o que está depois do /mvc

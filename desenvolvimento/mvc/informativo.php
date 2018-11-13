@@ -162,7 +162,62 @@ testar só parte acima
 	db = new Database;
 
 ***********************************************************************************************************
+na requisição /mvc/pages/about/33
+/mvc
 
+1 - É chamado o arquivo /mvc/pages/about/33
+
+2 - O arquivo /public/inidex.php
+		require /app/bootstrap.php
+		ao qual require todos os arquivos da pasta libraries que incluem
+			Controller.php
+			Core.php
+			Database.php
+		por fim cria uma instância da classe Core
+
+3 - A classe Core tem as seguintes propriedades e valores padrão
+	currentControler = Pages //equivalente ao que está na pasta /mvc/controllers
+	currentMethod = index
+	param = []
+	executa o que está na construct
+	Neste caso temos que separar os valores da url então chamamos o método getUrl da classe Core
+	A função getUrl pega a url através do metodo $_GET['url']
+	ao final retorna para a variável $url um array com a url pronta para manipulação
+	Array ( [0] => pages [1] => about [2] => 33 ) 
+	Verifica se existe o controller 
+	if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
+	vai ficar assim ../app/controllers/Pages.php'
+	Se exister ele atribui o valor ao atributo currentController
+	currentController = Pages;
+	da um require do controller require_once '../app/controllers/' . $this->currentController . '.php';
+	require_once '../app/controllers/Pages.php';
+	Remove o indice 0 do array unset($url[0]); ficando apenas [1] => about [2] => 33
+	e instancia a classe
+	$this->currentController = new $this->currentController;
+	$currentController = new Pages;
+	Continua o script
+	Verifica se tem valor no array referente ao método
+	if(isset($url[1])){ que neste caso é [1] => about
+	Verifica se o método existe if(method_exists($this->currentController, $url[1])){
+	neste caso if(method_exists($this->currentController, 'about'){
+	se existe coloca o valor na propriedade currentMethod = $url[1]; neste caso about
+	Remove o indice 1 do array unset($url[1]); ficando [2] => 33
+	Verifica se a url possui algum valor se sim atribui a propriedade params se não atribui um array vazio
+	$this->params = $url ? array_values($url) : [];
+	neste caso
+	$this->params = $url --->true
+	array_values([2] => 33) : [];
+	$this->params = 33;
+	ao final temos as propriedades
+	currentController = Pages;
+	currentMethod = about;
+	params = 33;
+	currentController = new Pages;
+	através da fução call_user_func_array dentro da pasta app/controller executa a classe Pages,metodo about e parâmetro vazio	
+	que chama o método view do arquivo /libraries/Controller.php da classe Controller
+	que vai requerer/adicionar através do método view
+	$this->view('pages/about' ,$data);
+	o arquivo require_once '../app/views/pages/about.php'; e os dados através da variável $data
 
 
 
