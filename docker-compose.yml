@@ -41,7 +41,7 @@ services:
       - "443:443"
     volumes:
       #/www/desenvolvimento local no host onde vamos montar a pasta /var/www/html do container
-      - /www/desenvolvimento:/var/www/html      
+      - /www/desenvolvimento:/var/www/html
     links:
       #linka ou seja permite comunicação com o container abaixo db
       - db
@@ -58,15 +58,15 @@ services:
      - "3306:3306"    
     environment:
         #dados de conexão com o banco de dados
-        MYSQL_DATABASE: ijdb
-        MYSQL_USER: ijdbuser
+        MYSQL_DATABASE: mvc
+        MYSQL_USER: mvcuser
         MYSQL_PASSWORD: mypassword
         MYSQL_ROOT_PASSWORD: rootadm 
     volumes:
         #aqui criamos um volume para o docker acessar nosso script de criação do banco de dados
         #./dumps/ijdb.sql nosso backup do banco
         #/docker-entrypoint-initdb.d/ijdb.sql inicializa a restauração do banco
-        - ./dumps/ijdb.sql:/docker-entrypoint-initdb.d/ijdb.sql       
+        - ./dumps/mvc.sql:/docker-entrypoint-initdb.d/mvc.sql       
     networks:
         #nome da rede de comunicação entre containers
         - default
@@ -83,7 +83,7 @@ services:
             - 8000:80
         environment:
         #dados de conexão com o banco de dados db
-            MYSQL_USER: ijdbuser
+            MYSQL_USER: mvcuser
             MYSQL_PASSWORD: mypassword
             MYSQL_ROOT_PASSWORD: rootadm
 volumes:

@@ -1,6 +1,6 @@
 #FROM php:7-apache
 FROM runwaytest_web
-
+#RUN apt-get update || apt-get update
 RUN apt-get update -y && apt-get install -y libpng-dev curl libcurl4-openssl-dev
 RUN apt-get install -y vim
 RUN docker-php-ext-install pdo pdo_mysql gd curl
