@@ -6,7 +6,7 @@
 */
 class Pages extends Controller{
     public function __construct(){
-               
+        $this->postModel = $this->model('Post');        
     }
 
     // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
@@ -15,9 +15,15 @@ class Pages extends Controller{
     // no arquivo Controller ele monta o  require_once '../app/views/' . $view . '.php';
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
-    public function index(){  
+    public function index(){
+        //como na construct setamos o valor da propriedade postModel para Post
+        // a linha abaixo vai ficar
+        //$posts = $this->Post->getPosts();   
+        $posts = $this->postModel->getPosts();       
+       
         $data = [
-           'title' => 'Welcome',           
+           'title' => 'Welcome',
+           'posts' => $posts
        ];    
        
      

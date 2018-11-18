@@ -1,14 +1,5 @@
 <?php
 /*
-* ARQUIVOS QUE DEVEM SER ALTERADOS PARA INICIAR UM NOVO PROJETO
-* Alterar as configurações do banco de dados no arquivo 
-* mvc/app/config.php
-* Alterar a linha dentro do arquivo .htaccess para o diretório do site site/public
-* public/.htaccess
-* RewriteBase /mvc/public
-* RewriteBase /site/public
-* 
-*
 * MVC framework
 * na url tudo irá acontecer através do nosso arquivo index.php
 * iremos usar um arquivo .htaccess para fazer isso
