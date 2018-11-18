@@ -27,7 +27,7 @@ class Pages extends Controller{
        ];    
        
      
-
+       //método view está em /libraries/Controller
        $this->view('pages/index' ,$data);
     }
 

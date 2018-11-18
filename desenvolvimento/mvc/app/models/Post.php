@@ -8,7 +8,9 @@ class Post {
     }
 
     public function getPosts(){
-        $this->db->query("SELECT * FROM posts");        
+        //$this->db->query é um método da classe Database que faz o prepare da sql
+        $this->db->query("SELECT * FROM posts");
+        //$this->db->resultSet(); é um método da classe Database que retorna um array com mais de um o resultado
         return $this->db->resultSet();
 
     }
