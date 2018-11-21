@@ -12,7 +12,8 @@ define('APPROOT', dirname(dirname(__FILE__)));
 // valor que está nesta constante /var/www/html/mvc/app
 
 // URL ROOT
-define('URLROOT', 'http://localhost/shareposts');
+define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/shareposts');
+//define('URLROOT', 'http://localhost/shareposts');
 
 // Site Name
 define('SITENAME', 'SharePosts');
