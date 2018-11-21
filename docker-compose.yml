@@ -33,7 +33,8 @@ services:
   #container webserver onde teremos php e apache
   webserver:
     build: ./docker/webserver
-    image: runwaytest_web
+    #image: runwaytest_web
+    image: php:7-apache
     container_name: www
     ports:
       #portas de acesso ao conectar na 80 do host redireciona para 80 do container
