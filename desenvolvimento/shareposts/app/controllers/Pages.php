@@ -17,7 +17,8 @@ class Pages extends Controller{
     //url /mvc/pages
     public function index(){  
         $data = [
-           'title' => 'Welcome',           
+           'title' => 'SharePosts', 
+           'description' => 'Simple social network build on the mvc template php framework'       
        ];    
        
      
@@ -28,7 +29,8 @@ class Pages extends Controller{
     //url /mvc/pages/about
     public function about(){
         $data = [
-            'title' => 'About Us'
+            'title' => 'About Us',
+            'description' => 'App to share posts with other users'
         ];            
         
         $this->view('pages/about', $data);
