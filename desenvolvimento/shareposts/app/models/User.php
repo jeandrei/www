@@ -22,7 +22,7 @@
             }
         }
 
-        //Find usr by email
+        //Find user by email
         public function findUserByEmail($email){
             $this->db->query('SELECT * FROM users WHERE email = :email');
             // Bind values

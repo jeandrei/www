@@ -1,6 +1,8 @@
 <?php
     Class Users extends Controller{
         public function __construct(){
+            // a linha abaixo através da função model() que está no arquivo libraries/Controller.php
+            // da um require_once no /app/models/Users.php
             $this->userModel = $this->model('User');
         }
 
