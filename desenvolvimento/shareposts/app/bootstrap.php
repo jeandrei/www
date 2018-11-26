@@ -5,6 +5,8 @@ require_once 'config/config.php';
 // Load Helpers
 require_once 'helpers/url_helper.php';
 
+require_once 'helpers/session_helper.php';
+
 // Load Libraries
 // apenas carrega todos os arquivos necessários
 // para não ter que adicionar uma lista de arquivos em todas as páginas
