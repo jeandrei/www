@@ -22,9 +22,6 @@
             }
         }
 
-<<<<<<< HEAD
-        //Find user by email
-=======
         // Login User
         public function login($email, $password){
             $this->db->query('SELECT * FROM users WHERE email = :email');
@@ -43,7 +40,6 @@
 
 
         //Find usr by email
->>>>>>> 7cfdf28225b9d1002edcc29173cc3fc68c6c010c
         public function findUserByEmail($email){
             $this->db->query('SELECT * FROM users WHERE email = :email');
             // Bind values
