@@ -2,6 +2,8 @@
     Class Users extends Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
+            // ele instancia lá no controller
+            // fica assim $this->userModel = new User;
         }
 
         public function register(){
@@ -123,11 +125,30 @@
                 if(empty($data['password'])){
                 $data['password_err'] = 'Please enter your password';
                 }
+                
+                // Check for user/email
+                if($this->userModel->findUserByEmail($data['email'])){
+                    // User found
+                } else {
+                    // User not found
+                    $data['email_err'] = 'No user found';
+                }
 
                 //Make sure errors are empty
                 if(empty($data['email_err']) && empty($data['password_err'])){
                     //Validate
-                    die('SUCCESS');
+                    // Check and set logged in user
+                    // vai ter como resposta a linha com os dados do usuário ou falso
+                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                    
+                    if($loggedInUser){//se não for falso o valor da variável criamos a sessão
+                        //Create Session
+                        $this->createUserSession($loggedInUser);
+                    } else {
+                        $data['password_err'] = 'Password incorrect';
+                        $this->view('users/login', $data);
+                    }
+
                  } else {
                      //Load view with errors
                      $this->view('users/login', $data);
@@ -149,6 +170,27 @@
                
             }
         }
+    
+        public function createUserSession($user){
+            $_SESSION['user_id'] = $user->id;
+            $_SESSION['user_email'] = $user->email;
+            $_SESSION['user_name'] = $user->name;
+            redirect('pages/index');
+        }
 
+        public function logout(){
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_email']);
+            unset($_SESSION['user_name']);
+            session_destroy();
+            redirect('users/login');
+        }
 
+        public function isLoggedIn(){
+            if(isset($_SESSION['user_id'])){
+                return true;
+            } else {
+                return false;
+            }
+        }
     }//controller

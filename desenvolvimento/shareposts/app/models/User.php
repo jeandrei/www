@@ -22,6 +22,23 @@
             }
         }
 
+        // Login User
+        public function login($email, $password){
+            $this->db->query('SELECT * FROM users WHERE email = :email');
+            $this->db->bind(':email', $email);
+            // $row vai ter todos os dados do usuário id, name, password etc
+            // lá na função createUserSession do arquivo controllers/Users.php
+            // o valor $user->id; vem daqui   
+            $row = $this->db->single();
+            $hashed_password = $row->password;
+            if(password_verify($password, $hashed_password)){
+                return $row;
+            } else {
+                return false;
+            }
+        }
+
+
         //Find usr by email
         public function findUserByEmail($email){
             $this->db->query('SELECT * FROM users WHERE email = :email');
