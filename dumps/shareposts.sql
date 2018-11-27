@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 21/11/2018 às 22:08
--- Versão do servidor: 5.7.23
+-- Tempo de geração: 27/11/2018 às 20:01
+-- Versão do servidor: 5.7.24
 -- Versão do PHP: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -36,6 +36,14 @@ CREATE TABLE `posts` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Fazendo dump de dados para tabela `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created_at`) VALUES
+(1, 1, 'Post One', 'This is a test for post one', '2018-11-27 20:01:26'),
+(2, 1, 'Post Two', 'This is a test for post two', '2018-11-27 20:01:26');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +57,14 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
+(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq', '2018-11-23 10:19:18'),
+(2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36');
 
 --
 -- Índices de tabelas apagadas
@@ -74,13 +90,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
