@@ -16,6 +16,12 @@ class Pages extends Controller{
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
     public function index(){  
+        // Se o usuário estiver logado ao invés de quando ele clicar em home
+        // direcionar para o home ele vai direcionar para os posts
+        if(isLoggedIn()){
+            redirect('posts');
+        }
+
         $data = [
            'title' => 'SharePosts', 
            'description' => 'Simple social network build on the mvc template php framework'       
