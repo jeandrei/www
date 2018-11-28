@@ -5,11 +5,15 @@
           redirect('users/login');
         }
        
+     $this->postModel = $this->model('Post');
     }
 
      public function index(){
-        $data = [];
-        $teste = new Posts();
+        $posts = $this->postModel->getPosts();
+        $data = [
+            'posts' => $posts
+        ];
+        
         $this->view('posts/index', $data);      
 
      }
