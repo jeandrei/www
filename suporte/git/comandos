@@ -50,3 +50,8 @@ git checkout feature1
 git merge master
 *Pode ser feita pelo ambiente onlido do git também
 
+para restaurar para uma versão anterior
+para ver as versões
+git log
+para restaurar 
+git checkout 631123e4d6276b49059a7ae96b1de86c928f71c2
