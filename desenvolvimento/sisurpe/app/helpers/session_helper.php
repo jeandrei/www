@@ -28,8 +28,8 @@
   }
 
   function isLoggedIn(){
-     if(isset($_SESSION['user_id'])){
-         return true;
+     if(isset($_SESSION['id_aluno'])){       
+        return true;
      } else {
          return false;
      }

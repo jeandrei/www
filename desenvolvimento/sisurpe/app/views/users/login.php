@@ -1,12 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <div class="card card-body bg-ligth mt-5">
-            <?php flash('register_success'); ?>
+        <div class="card card-body bg-ligth mt-5">          
             <h2>Login</h2>
             <p>Por favor insira sua chave de acesso</p>
-            <form action="<?php echo URLROOT; ?>/users/login" method="post">
-                                
+            <form action="<?php echo URLROOT; ?>/users/login" method="post">                                
                 <!--CHAVE-->
                 <div class="form-group">
                 <label for="chave">Chave de acesso: <sup>*</sup></label>               
