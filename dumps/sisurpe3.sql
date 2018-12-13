@@ -21,7 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sisurpe`
 --
+CREATE DATABASE sisurpe CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+use sisurpe;
 -- --------------------------------------------------------
 
 --

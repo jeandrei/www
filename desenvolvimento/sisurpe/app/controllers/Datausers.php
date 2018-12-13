@@ -1,6 +1,7 @@
 <?php
  class Datausers extends Controller {
     public function __construct(){                
+        //isLoggedIn do arquivo session_helper.php
         if(!isLoggedIn()){
           redirect('users/login');
         }

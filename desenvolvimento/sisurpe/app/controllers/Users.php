@@ -22,26 +22,25 @@
                     
                 ];
                 
-                // Valida chave
-                if($this->userModel->findUserByKey($data['chave'])){                   
+                // Valida chave                
+                if(empty($data['chave'])){
+                    $data['chave_err'] = 'Por favor insira sua chave de acesso!';
+                } elseif ($this->userModel->findUserByKey($data['chave'])){                   
                     $loggedInUser = $this->userModel->findUserByKey($data['chave']);
                     if($loggedInUser){                       
-                    $this->createUserSession($loggedInUser);
-                    } else {
-                        die('erro de login');
-                    }               
+                        $this->createUserSession($loggedInUser);
+                        } else {
+                            die('Um erro interno ocorreu!');
+                        }               
                 } else {
                     $data['chave_err'] = 'Chave não encontrada!'; 
                 }
-                          
-                if(empty($data['chave'])){
-                    $data['chave_err'] = 'Por favor insira sua chave de acesso!';
-                }
+            
                      
                 if(!empty($data['chave_err'])){
                     $this->view('users/login', $data);
                 }               
-                $this->createUserSession(); 
+                
             } else {
                 // Init data
                 $data =[                   
@@ -58,7 +57,8 @@
         public function createUserSession($user){
             $_SESSION['id_aluno'] = $user->id_aluno; 
             $_SESSION['chave'] = $user->chave;            
-            $_SESSION['nome_aluno'] = $user->nome_aluno;                         
+            $_SESSION['nome_aluno'] = $user->nome_aluno;
+            //controllers/Datausers                                     
             redirect('datausers');            
         }
 
@@ -69,11 +69,11 @@
             redirect('users/login');
         }
 
-        public function isLoggedIn(){
+        /*public function isLoggedIn(){
             if(isset($_SESSION['id_aluno'])){
                 return true;
             } else {
                 return false;
             }
-        }
+        }*/
     }//controller
