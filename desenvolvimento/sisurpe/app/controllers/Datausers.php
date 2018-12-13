@@ -11,9 +11,10 @@
     }
 
      public function index(){
-        //$posts = $this->postModel->getPosts();
-       /* $data = [
-            'posts' => $posts
+        $datauser = $this->postModel->getDatauserByid($_SESSION['id_aluno']);
+        //var_dump($datausers);
+        $data = [
+            'datauer' => $datauser
         ];
         
        // $this->view('posts/index', $data);      

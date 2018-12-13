@@ -6,23 +6,18 @@
         $this->db = new Database;        
     }
 
-    public function getPosts(){
-        $this->db->query('SELECT *,
-                          posts.id as postId,
-                          users.id as userId, 
-                          posts.created_at as postCreated,
-                          users.created_at as userCreated
-                          FROM posts
-                          INNER JOIN users
-                          ON posts.user_id = users.id
-                          ORDER BY posts.created_at DESC
+    public function getDatauserByid($id){
+        $this->db->query('SELECT *
+                          FROM aluno 
+                          WHERE id_aluno = :id                       
                           ');
 
-        $results = $this->db->resultSet();
+        $this->db->bind(':id', $id);        
+        $row = $this->db->single();
 
-        return $results;
+        return $row;
     }
-
+    /*
     public function addPost($data){
         $this->db->query('INSERT INTO posts (title, user_id, body) VALUES (:title, :user_id, :body)');
         // Bind values
@@ -78,6 +73,6 @@
             return false;
         }
 
-    }
+    }*/
 
   }
