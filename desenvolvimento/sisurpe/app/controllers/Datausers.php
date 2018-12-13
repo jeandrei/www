@@ -1,11 +1,11 @@
 <?php
- class Posts extends Controller {
+ class Datausers extends Controller {
     public function __construct(){                
         if(!isLoggedIn()){
           redirect('users/login');
         }
        
-     $this->postModel = $this->model('Post');
+     $this->postModel = $this->model('Datauser');
      $this->userModel = $this->model('User');
     }
 
@@ -17,7 +17,7 @@
         
        // $this->view('posts/index', $data);      
        //var_dump(isset($_SESSION['id_aluno']));*/
-       die("pagina com registros");
+       $this->view('datausers/index', $data);
 
      }
     }//class

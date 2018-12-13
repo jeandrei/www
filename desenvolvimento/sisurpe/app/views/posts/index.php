@@ -1,1 +1,0 @@
-<?php echo "pagina index posts vai listar os registros"; ?>

@@ -59,7 +59,7 @@
             $_SESSION['id_aluno'] = $user->id_aluno; 
             $_SESSION['chave'] = $user->chave;            
             $_SESSION['nome_aluno'] = $user->nome_aluno;                         
-            redirect('posts');            
+            redirect('datausers');            
         }
 
         public function logout(){

@@ -2,6 +2,9 @@
 // DB Params
 // Quando estiver trabalhando com container do docker-compose
 // DB_HOST é o nome do container que está rodando o banco de dados
+header('Content-Type: text/html; charset=utf-8');
+
+
 define('DB_HOST', 'mysql');
 define('DB_USER', 'root');
 define('DB_PASS', 'rootadm');

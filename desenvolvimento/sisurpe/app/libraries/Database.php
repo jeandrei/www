@@ -7,7 +7,7 @@
  * Retun rows and results
  */
 
- class Database { 
+ class Database {    
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
@@ -24,7 +24,8 @@
         $options = array(
             // persistent connections increase performance checking the connection to the database
             PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
         );
     
         // Ceate PDO instance
@@ -34,6 +35,7 @@
             $this->error = $e->getMessage();
             echo $this->error;
         }
+              
     }
 
     // Prepare statement with query

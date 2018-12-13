@@ -1,7 +1,9 @@
+<?php ini_set('default_charset', 'utf-8'); ?>
+<?php header("Content-type: text/html; charset=utf-8"); ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--Linha abaixo é o link para o bootstrap direto da internet-->    
@@ -16,3 +18,4 @@
 <!-- a linha abaixo inicia um container do bootstrap ela vai fechr no arquivo footer.php-->
 <div class="container">
     
+<?php //echo utf8_encode('Olá pessoal.');?>

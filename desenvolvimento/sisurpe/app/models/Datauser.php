@@ -1,5 +1,5 @@
 <?php
-  class Post {
+  class Datauser {
     private $db;
 
     public function __construct(){
