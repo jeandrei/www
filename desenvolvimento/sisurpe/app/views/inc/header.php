@@ -11,7 +11,9 @@
     <!--Link abaixo é do Font Awesome cdn-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
-    <script src="<?php echo URLROOT; ?>/public/js/main.js"></script>    
+    <script src="<?php echo URLROOT; ?>/public/js/main.js"></script>
+    <script src="<?php echo URLROOT; ?>/public/js/jquery-3.3.1.min.js"></script> 
+    <script src="<?php echo URLROOT; ?>/public/js/jquery.mask.js" data-autoinit="true"></script> 
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>

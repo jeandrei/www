@@ -4,12 +4,10 @@
     <div class="col-md-8">
         <h1>Dados do Aluno</h1>
         
-        
-      
+            
         <form>
        
-       
-
+               
 
 <!--NOME-->
         <div class="form-group ">
@@ -46,7 +44,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="telefone">Telefone</label>
-      <input type="text" name="telefone" id="telefone" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">      
+      <input type="tel" name="telefone" id="telefone" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">      
     </div>
     <div class="form-group col-md-6">
       <label for="email_aluno">Email</label>
@@ -63,7 +61,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="telefone_pai">Telefone do pai</label>
-      <input type="text" name="telefone_pai" id="telefone_pai" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
+      <input type="tel" name="telefone_pai" id="telefone_pai" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
     </div>
   </div>
 
@@ -76,7 +74,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="telefone_mae">Telefone da mãe</label>
-      <input type="text" name="telefone_mae" id="telefone_mae" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
+      <input type="tel" name="telefone_mae" id="telefone_mae" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
     </div>
   </div>
 
@@ -89,7 +87,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="telefone_responsavel">Telefone do reponsavel</label>
-      <input type="text" name="telefone_responsavel" id="telefone_responsavel" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
+      <input type="tel" name="telefone_responsavel" id="telefone_responsavel" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="Telefone do aluno">    
     </div>
   </div>
 
