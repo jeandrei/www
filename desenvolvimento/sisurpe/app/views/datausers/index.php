@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <?php flash('post_message');?>
  <div class="row align-items-center mb-3">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h1>Dados do Aluno</h1>
         
             
@@ -15,9 +15,9 @@
             <input class="form-control form-control-sm" type="text" placeholder="<?php echo $data['nome_aluno']; ?>" readonly>         
         </div>
 
-<!--NASCIMENTO NACIONALIDADE E NATURALIDADE-->
+<!--NASCIMENTO NACIONALIDADE E NATURALIDADE TELEFONE-->
 <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
     <label for="nascimento">Nascimento</label>
     <input class="form-control" name="nascimento" type="date" value="">
     </div>
@@ -28,16 +28,16 @@
     <div class="form-group col-md-4">
     <label for="naturalidade">Naturalidade</label>
       <input type="text" class="form-control" id="naturalidade" placeholder="Naturalidade do aluno">
-    </div>
+    </div>    
   </div>
 
   <!--TELEFONE EMAIL E SEXO-->
 <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
         <label for="telefone">Telefone</label>
           <input type="tel" name="telefone" id="telefone" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
         <label for="email_aluno">Email</label>
           <input type="email" class="form-control" id="email_aluno" placeholder="Email do aluno">        
         </div>
@@ -67,7 +67,7 @@
       <label for="nome_pai">Nome do pai</label>
       <input type="text" class="form-control" id="nome_pai" placeholder="Nome do pai">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
       <label for="telefone_pai">Telefone do pai</label>
       <input type="tel" name="telefone_pai" id="telefone_pai" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">    
     </div>
@@ -80,7 +80,7 @@
       <label for="nome_mae">Nome da mãe</label>
       <input type="text" class="form-control" id="nome_mae" placeholder="Nome da mãe">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
       <label for="telefone_mae">Telefone da mãe</label>
       <input type="tel" name="telefone_mae" id="telefone_mae" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">  
     </div>
@@ -89,26 +89,42 @@
 
   <!--NOME RESPONSAVEL E TELEFONE-->  
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-8">
       <label for="nome_responsavel">Nome do responsavel</label>
       <input type="text" class="form-control" id="nome_responsavel" placeholder="Nome do responsavel">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
       <label for="telefone_responsavel">Telefone do reponsavel</label>
       <input type="tel" name="telefone_responsavel" id="telefone_responsavel" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">    
     </div>
   </div>
 
 
- <!--NATURALIDADE E NACIONALIDADE-->  
+ <!--RG E TITULO-->  
  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="naturalidade">Naturalidade</label>
-      <input type="text" class="form-control" id="naturalidade" placeholder="Naturalidade do aluno">
+    <div class="form-group col-md-2">
+      <label for="rg">RG</label>
+      <input type="text" class="form-control" id="rg" placeholder="RG do aluno">
     </div>
-    <div class="form-group col-md-6">
-      <label for="nacionalidade">Nacionalidade</label>
-      <input type="text" name="nacionalidade" id="nacionalidade" class="form-control" placeholder="Nacionalidade do aluno">    
+    <div class="form-group col-md-1">
+      <label for="ufrg">UF RG</label>
+      <input type="text" name="ufrg" id="ufrg" class="form-control" placeholder="UF RG">    
+    </div>
+    <div class="form-group col-md-2">
+      <label for="ufrg">Órgão Emissor</label>
+      <input type="text" name="rg_oremis" id="rg_oremis" class="form-control" placeholder="Órgão emissor do RG">    
+    </div>
+    <div class="form-group col-md-2">
+      <label for="ufrg">Título de eleitor</label>
+      <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Número do título de eleitor">    
+    </div>
+    <div class="form-group col-md-2">
+      <label for="ufrg">Zona</label>
+      <input type="text" name="zona" id="zona" class="form-control" placeholder="Zona eleitoral">    
+    </div>
+    <div class="form-group col-md-2">
+      <label for="ufrg">Seção</label>
+      <input type="text" name="secao" id="secao" class="form-control" placeholder="Seção eleitoral">    
     </div>
   </div>
 
