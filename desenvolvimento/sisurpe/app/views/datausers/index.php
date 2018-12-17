@@ -114,30 +114,54 @@
 </div>
 
 
-  <!--NOME MÃE E TELEFONE-->  
-  <div class="form-row">
+<!--NOME MÃE E TELEFONE-->  
+<div class="form-row">
     <div class="form-group col-md-8">
-      <label for="nome_mae">Nome da mãe</label>
-      <input type="text" class="form-control" name="nome_mae" id="nome_mae" placeholder="Nome da mãe">
+        <label for="nome_mae">Nome da mãe</label>
+        <input
+          class="form-control"  
+          type="text"           
+          name="nome_mae" 
+          id="nome_mae" 
+          placeholder="Nome da mãe">
     </div>
     <div class="form-group col-md-2">
-      <label for="telefone_mae">Telefone da mãe</label>
-      <input type="tel" name="telefone_mae" id="telefone_mae" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">  
+        <label for="telefone_mae">Telefone da mãe</label>
+        <input 
+          class="form-control" 
+          type="tel" 
+          name="telefone_mae" 
+          id="telefone_mae"          
+          maxlength="15" 
+          placeholder="(99) 99999-9999"
+          onkeypress="mascara( this, mtel );" >  
     </div>
-  </div>
+</div>
 
 
-  <!--NOME RESPONSAVEL E TELEFONE-->  
-  <div class="form-row">
+<!--NOME RESPONSAVEL E TELEFONE-->  
+<div class="form-row">
     <div class="form-group col-md-8">
-      <label for="nome_responsavel">Nome do responsavel</label>
-      <input type="text" class="form-control" name="nome_responsavel" id="nome_responsavel" placeholder="Nome do responsavel">
+        <label for="nome_responsavel">Nome do responsavel</label>
+        <input 
+          class="form-control" 
+          type="text"           
+          name="nome_responsavel" 
+          id="nome_responsavel" 
+          placeholder="Nome do responsavel">
     </div>
     <div class="form-group col-md-2">
-      <label for="telefone_responsavel">Telefone do reponsavel</label>
-      <input type="tel" name="telefone_responsavel" id="telefone_responsavel" onkeypress="mascara( this, mtel );" maxlength="15" class="form-control" placeholder="(99) 99999-9999">    
+        <label for="telefone_responsavel">Telefone do reponsavel</label>
+        <input 
+          class="form-control" 
+          type="tel" 
+          name="telefone_responsavel" 
+          id="telefone_responsavel"           
+          maxlength="15"           
+          placeholder="(99) 99999-9999"
+          onkeypress="mascara( this, mtel );" >    
     </div>
-  </div>
+</div>
 
 
  <!--RG E TITULO-->  
