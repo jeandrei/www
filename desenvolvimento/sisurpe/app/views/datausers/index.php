@@ -14,7 +14,9 @@
             <label for="nome_aluno">Nome do Aluno:</label>  
             <input class="form-control form-control-sm" type="text" placeholder="<?php echo $data['nome_aluno']; ?>" readonly>         
         </div>
-
+        
+<legend>Dados pessoais do Aluno</legend>
+<fieldset>
 <!--NASCIMENTO NACIONALIDADE E NATURALIDADE TELEFONE-->
 <div class="form-row">
     <div class="form-group col-md-2">
@@ -86,9 +88,11 @@
             </div>
         </div>
   </div>
+</fieldset>
 
 
-
+<legend>Dados de contato</legend>
+<fieldset>
 <!--NOME PAI E TELEFONE-->  
 <div class="form-row">
     <div class="form-group col-md-8">
@@ -162,70 +166,189 @@
           onkeypress="mascara( this, mtel );" >    
     </div>
 </div>
+</fieldset>
 
-
- <!--RG E TITULO-->  
- <div class="form-row">
+<legend>Documentos</legend>
+<fieldset>
+<!--RG E TITULO-->  
+<div class="form-row">
     <div class="form-group col-md-2">
-      <label for="rg">RG</label>
-      <input type="text" class="form-control" name="rg" id="rg" placeholder="RG do aluno">
+        <label for="rg">RG</label>
+        <input 
+          class="form-control"
+          type="text"           
+          name="rg" 
+          id="rg" 
+          placeholder="RG do aluno">
     </div>
     <div class="form-group col-md-1">
-      <label for="ufrg">UF</label>
-      <input type="text" class="form-control" name="ufrg" id="ufrg"  placeholder="UF RG">    
+        <label for="ufrg">UF</label>
+        <input 
+          class="form-control"
+          type="text"            
+          name="ufrg" 
+          id="ufrg"  
+          placeholder="UF RG">    
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Órgão Emissor</label>
-      <input type="text" class="form-control" name="rg_oremis" id="rg_oremis" placeholder="Órgão emissor do RG">    
+        <label for="ufrg">Órgão Emissor</label>
+        <input
+          class="form-control" 
+          type="text"            
+          name="rg_oremis" 
+          id="rg_oremis"
+          placeholder="Órgão emissor do RG">    
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Título de eleitor</label>
-      <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Número do título de eleitor">    
+        <label for="ufrg">Título de eleitor</label>
+        <input 
+          class="form-control"
+          type="text"            
+          name="titulo" 
+          id="titulo" 
+          placeholder="Número do título de eleitor">    
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Zona</label>
-      <input type="text" class="form-control" name="zona" id="zona" placeholder="Zona eleitoral">    
+        <label for="ufrg">Zona</label>
+        <input 
+          class="form-control"
+          type="text"           
+          name="zona" id="zona"
+          id="zona" 
+          placeholder="Zona eleitoral">    
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Seção</label>
-      <input type="text" class="form-control" name="secao" id="secao" placeholder="Seção eleitoral">    
+        <label for="ufrg">Seção</label>
+        <input 
+          class="form-control"
+          type="text"            
+          name="secao" 
+          id="secao" 
+          placeholder="Seção eleitoral">    
     </div>
-  </div>
+</div>
 
 
 
- <!--DADOS DA CERTIDÃO-->  
- <div class="form-row">
-    <div class="form-group col-md-2">
-      <label for="rg">Certidão de nascimento</label>
-      <input type="text" class="form-control" name="num_cert" id="num_cert" placeholder="Número da certidão">
+<!--DADOS DA CERTIDÃO-->  
+<div class="form-row">
+    <div class="form-group col-md-5">
+        <label for="rg">Certidão de nascimento</label>
+        <input 
+          class="form-control"
+          type="text"           
+          name="num_cert" 
+          id="num_cert" 
+          placeholder="Número da certidão">
     </div>
     <div class="form-group col-md-1">
-      <label for="ufrg">UF</label>
-      <input type="text" name="uf_cert" id="uf_cert" class="form-control" placeholder="UF">    
+      <label for="uf_cert">UF</label>
+      <select
+        class="form-control"        
+        name="uf_cert"
+        id="uf_cert">
+            <option>AC</option>
+            <option>AL</option>
+            <option>AM</option>
+            <option>AP</option>
+            <option>BA</option>
+            <option>CE</option>
+            <option>DF</option>
+            <option>ES</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>MG</option>
+            <option>MS</option>
+            <option>MT</option>
+            <option>PA</option>
+            <option>PB</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>PR</option>
+            <option>RJ</option>
+            <option>RN</option>
+            <option>RO</option>
+            <option>RR</option>
+            <option>RS</option>
+            <option selected>SC
+            <option>SE</option>
+            <option>SP</option>
+            <option>TO</option>
+      </select>
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Cartório Certidão</label>
-      <input type="text" name="cart_cert" id="cart_cert" class="form-control" placeholder="Cartório certidão">    
+      <label for="modelo">Modelo</label>
+      <select
+        class="form-control"        
+        name="modelo"
+        id="modelo">
+          <option selected>Novo</option>
+          <option>Antigo</option>
+      </select>
+    </div>
+    <div class="form-group col-md-1">
+        <label for="ufrg">Folha</label>
+        <input 
+          class="form-control"
+          type="text" 
+          name="folha" 
+          id="folha"           
+          placeholder="Folha">    
     </div>
     <div class="form-group col-md-2">
-      <label for="ufrg">Modelo</label>
-      <input type="text" name="modelo" id="modelo" class="form-control" placeholder="Modelo">    
-    </div>    
-    <div class="form-group col-md-2">
-      <label for="ufrg">Folha</label>
-      <input type="text" name="folha" id="folha" class="form-control" placeholder="Folha">    
-    </div>
-    <div class="form-group col-md-2">
-      <label for="ufrg">Data emissão</label>
-      <input type="text" name="data_em" id="data_em" class="form-control" placeholder="Data emissão">    
-    </div>
-    <div class="form-group col-md-2">
-      <label for="ufrg">Município da certidão</label>
-      <input type="text" name="mun_cert" id="mun_cert" class="form-control" placeholder="Município certidão">    
-    </div>
-  </div>
+        <label for="ufrg">Livro</label>
+        <input 
+          class="form-control"
+          type="text" 
+          name="livro" 
+          id="livro"           
+          placeholder="Livro">    
+    </div>        
+</div>
 
+<!--CONTINUAÇÃO CERTIDÃO-->  
+<div class="form-row"> 
+<div class="form-group col-md-2">
+        <label for="ufrg">Município da certidão</label>
+        <input 
+          class="form-control" 
+          type="text" 
+          name="mun_cert" 
+          id="mun_cert"          
+          placeholder="Município certidão">    
+    </div>
+<div class="form-group col-md-2">
+        <label for="ufrg">Cartório Certidão</label>
+        <input 
+          class="form-control"
+          type="text" 
+          name="cart_cert" 
+          id="cart_cert"            
+          placeholder="Cartório certidão">    
+    </div>   
+    <div class="form-group col-md-2">
+        <label for="ufrg">Data emissão</label>
+        <input 
+          class="form-control" 
+          type="text" 
+          name="data_em" 
+          id="data_em"           
+          placeholder="Data emissão"          
+          >    
+    </div>
+    <div class="form-group col-md-2">
+        <label for="cpf">CPF</label>
+        <input 
+          class="form-control" 
+          type="text" 
+          name="cpf" 
+          id="cpf"           
+          placeholder="CPF do aluno"
+          onkeypress="mascaraMutuario(this,cpfCnpj);">
+    </div>
+    
+</div>
+</fieldset>
 
 
 
