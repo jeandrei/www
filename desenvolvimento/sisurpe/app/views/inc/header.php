@@ -1,5 +1,4 @@
 <?php ini_set('default_charset', 'utf-8'); ?>
-<?php header("Content-type: text/html; charset=utf-8"); ?>
 <!DOCTYPE html>
 <html lang="br">
 <head> 
@@ -11,13 +10,13 @@
     <!--CSS MIDIFICAÇÕES SOBESCREVER Botstrap-->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
     <!--Botstrap main-->
-    <script src="<?php echo URLROOT; ?>/public/js/bootstrap.min.js"></script>
-    <!--Javascript funções-->
-    <script src="<?php echo URLROOT; ?>/public/js/main.js"></script>
+    <script src="<?php echo URLROOT; ?>/public/js/bootstrap.min.js"></script>    
      <!--jquery-->
     <script src="<?php echo URLROOT; ?>/public/js/jquery-3.3.1.min.js"></script> 
     <!--jquery mask-->
     <script src="<?php echo URLROOT; ?>/public/js/jquery.mask.js" data-autoinit="true"></script> 
+    <!--Javascript funções-->
+    <script src="<?php echo URLROOT; ?>/public/js/main.js"></script>
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>

@@ -1,10 +1,11 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php';
+      require APPROOT . '/helpers/functions.php';
+?>
 <?php flash('post_message');?>
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Dados do Aluno</h1>
-        
-            
+        <h1>Dados do Aluno</h1>        
+           
         <form>
        
                
@@ -54,13 +55,13 @@
     <div class="form-group col-md-2">
         <label for="telefone">Telefone</label>
         <input 
-          class="form-control" 
+          class="form-control telefone" 
           type="tel" 
           name="telefone" 
           id="telefone"          
           maxlength="15"          
           placeholder="(99) 99999-9999"
-          onkeypress="mascara( this, mtel );">
+          >
     </div>
     <div class="form-group col-md-6">
         <label for="email_aluno">Email</label>
@@ -183,12 +184,15 @@
     </div>
     <div class="form-group col-md-1">
         <label for="ufrg">UF</label>
-        <input 
+        <select
           class="form-control"
-          type="text"            
-          name="ufrg" 
-          id="ufrg"  
-          placeholder="UF RG">    
+          name="ufrg"
+          id="ufrg"          
+          placeholder="UF RG">
+          <option value="">UF</option>
+          <?php
+            echo(imprimeuf("PA"));
+          ?>               
     </div>
     <div class="form-group col-md-2">
         <label for="ufrg">Órgão Emissor</label>
@@ -247,34 +251,10 @@
         class="form-control"        
         name="uf_cert"
         id="uf_cert">
-            <option>AC</option>
-            <option>AL</option>
-            <option>AM</option>
-            <option>AP</option>
-            <option>BA</option>
-            <option>CE</option>
-            <option>DF</option>
-            <option>ES</option>
-            <option>GO</option>
-            <option>MA</option>
-            <option>MG</option>
-            <option>MS</option>
-            <option>MT</option>
-            <option>PA</option>
-            <option>PB</option>
-            <option>PE</option>
-            <option>PI</option>
-            <option>PR</option>
-            <option>RJ</option>
-            <option>RN</option>
-            <option>RO</option>
-            <option>RR</option>
-            <option>RS</option>
-            <option selected>SC
-            <option>SE</option>
-            <option>SP</option>
-            <option>TO</option>
-      </select>
+        <option value="">UF</option>
+          <?php
+            echo(imprimeuf("SC"));
+          ?>
     </div>
     <div class="form-group col-md-2">
       <label for="modelo">Modelo</label>
@@ -339,7 +319,7 @@
     <div class="form-group col-md-2">
         <label for="cpf">CPF</label>
         <input 
-          class="form-control" 
+          class="form-control cpf" 
           type="text" 
           name="cpf" 
           id="cpf"           
