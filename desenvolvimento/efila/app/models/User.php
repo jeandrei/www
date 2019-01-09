@@ -8,10 +8,32 @@
 
         // Register user
         public function register($data){
-            $this->db->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+            $this->db->query('INSERT INTO 
+                                users ( 
+                                        name, 
+                                        email, 
+                                        telefone1,
+                                        desctel1,
+                                        telefone2,
+                                        desctel2,
+                                        password)
+                                 VALUES (
+                                        :name, 
+                                        :email,
+                                        :telefone1,
+                                        :desctel1,
+                                        :telefone2,
+                                        :desctel2,
+                                        :password
+                                        )'
+                            );
             // Bind values
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':email', $data['email']);
+            $this->db->bind(':telefone1', $data['telefone1']);
+            $this->db->bind(':desctel1', $data['desctel1']);
+            $this->db->bind(':telefone2', $data['telefone2']);
+            $this->db->bind(':desctel2', $data['desctel2']);
             $this->db->bind(':password', $data['password']);    
             
             //Execute

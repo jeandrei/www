@@ -18,47 +18,60 @@
                 $data =[
                     'name' => trim($_POST['name']),
                     'email' => trim($_POST['email']),
+                    'telefone1' => trim($_POST['telefone1']),
+                    'desctel1' => trim($_POST['desctel1']),
+                    'telefone2' => trim($_POST['telefone2']),
+                    'desctel2' => trim($_POST['desctel2']),
                     'password' => trim($_POST['password']),
                     'confirm_password' => trim($_POST['confirm_password']),
                     'name_err' => '',
                     'email_err' => '',
+                    'telefone1_err' => '',
+                    'desctel1_err' => '',
+                    'telefone2_err' => '',
+                    'desctel2_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => ''
                 ];
 
                 // Validate Email
                 if(empty($data['email'])){
-                    $data['email_err'] = 'Please enter email';
+                    $data['email_err'] = 'Por favor insira um e-mail';
                 } else {
                     // Check email                    
                     if($this->userModel->findUserByEmail($data['email'])){
-                        $data['email_err'] = 'Email is already taken';        
+                        $data['email_err'] = 'Email já cadastrado';        
                     }
                 }
 
                 // Validate Name
                 if(empty($data['name'])){
-                    $data['name_err'] = 'Please enter name';
+                    $data['name_err'] = 'Por favor insira seu nome';
+                }
+
+                // Validate Name
+                if(empty($data['telefone1'])){
+                    $data['telefone1_err'] = 'Por favor informe ao menos um telefone';
                 }
 
                 // Validate Password
                 if(empty($data['password'])){
-                    $data['password_err'] = 'Please enter password';
+                    $data['password_err'] = 'Por favor insira uma senha';
                 }   elseif(strlen($data['password']) < 6){
-                    $data['password_err'] = 'Password must be at least 6 characters';
+                    $data['password_err'] = 'A senha deve ter no mínimo 6 caracteres';
                 }
                 
                  // Validate Password
                  if(empty($data['confirm_password'])){
-                    $data['confirm_password_err'] = 'Please confirm password';
+                    $data['confirm_password_err'] = 'Por favor confirme sua senha';
                  }  else {
                      if($data['password'] != $data['confirm_password']){
-                         $data['confirm_password_err'] = 'Passwords do not match';
+                         $data['confirm_password_err'] = 'As senhas não são iguais, por favor digite novamente';
                      }
                  }
 
                  //Make sure the errors are ampty
-                 if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+                 if(empty($data['email_err']) && empty($data['name_err']) && empty($data['telefone1_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
                     //Validate
                     
                     // Hash Password
@@ -66,10 +79,10 @@
 
                     // Register User
                     if($this->userModel->register($data)){
-                        flash('register_success', 'You are registered and can log in');
+                        flash('register_success', 'Agora você está registrado e pode acessar o sistema');
                         redirect('users/login');
                     } else {
-                        die ('something wrong');
+                        die ('Ops! Algo deu errado.');
                     }
                  } else {
                      //Load view with errors

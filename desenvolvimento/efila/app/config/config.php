@@ -16,7 +16,7 @@ define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/efila');
 //define('URLROOT', 'http://localhost/shareposts');
 
 // Site Name
-define('SITENAME', 'e-fila');
+define('SITENAME', 'SharePosts');
 
 //App Version
 define('APPVERSION', '1.0.0');
