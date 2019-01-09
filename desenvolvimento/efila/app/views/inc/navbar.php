@@ -14,7 +14,31 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
           </li>          
+        
+
+
+
+       <!--FAZ A VERIFICAÇÃO SE O USUÁRIO É ADMINISTRADOR, SE SIM CARREGA OS MENUS DE CADASTRO-->
+         <?php if(isset($_SESSION['user_type']) && ($_SESSION['user_type']) == "admin") : ?>           
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cadastros
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/estabelecimentos">Estabelecimento</a>
+                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>            
+              </div>
+            </li>
+
+
+
+
+
+        <?php endif; ?>         
         </ul>
+
+
+
 
         <ul class="navbar-nav ml-auto">
          <?php if(isset($_SESSION['user_id'])) : ?>
