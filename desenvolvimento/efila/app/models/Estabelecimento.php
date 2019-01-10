@@ -49,9 +49,9 @@
         }
 
     }
-
-    public function getPostById($id){
-        $this->db->query('SELECT * FROM posts WHERE id = :id');
+*/
+    public function getEstabelecimentosById($id){
+        $this->db->query('SELECT * FROM estabelecimento WHERE id = :id');
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
@@ -59,8 +59,8 @@
         return $row;
     }
 
-    public function deletePost($id){
-        $this->db->query('DELETE FROM posts WHERE id = :id');
+    public function deleteEstabelecimento($id){
+        $this->db->query('DELETE FROM estabelecimento WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $id);          
         
@@ -71,6 +71,6 @@
             return false;
         }
 
-    }*/
+    }
 
   }

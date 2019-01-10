@@ -45,7 +45,7 @@
             if(empty($data['endereco'])){
                 $data['endereco_err'] = 'Por favor informe o endereço do estabelecimento';
             }
-
+            
             // Make sure no errors
             if(empty($data['nome_err']) && empty($data['endereco_err'])){
               // Validated
@@ -72,7 +72,7 @@
      }//add
 
 
-     /*
+     
      public function edit($id){
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -81,55 +81,48 @@
            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
            
            $data = [
-               'id' => $id,
-               'title' => trim($_POST['title']),
-               'body' => trim($_POST['body']),
-               'user_id' => $_SESSION['user_id'],
-               'title_err' => '',
-               'body_err' => ''
-           ];
+            'nome' => trim($_POST['nome']),
+            'endereco' => trim($_POST['endereco']),                
+            'nome_err' => '',
+            'endereco_err' => ''
+        ];        
 
            // Validate title
-           if(empty($data['title'])){
-               $data['title_err'] = 'Please enter title';
-           }
-           if(empty($data['body'])){
-               $data['body_err'] = 'Please enter body text';
-           }
+           if(empty($data['nome'])){
+                $data['nome_err'] = 'Por favor informe o nome do estabelecimento';
+            }
+            if(empty($data['endereco'])){
+                $data['endereco_err'] = 'Por favor informe o endereço do estabelecimento';
+            }
 
            // Make sure no errors
-           if(empty($data['title_err']) && empty($data['body_err'])){
+           if(empty($data['nome_err']) && empty($data['endereco_err'])){
              // Validated
              if($this->postModel->updatePost($data)){
-               flash('post_message', 'Post Update');
-               redirect('posts');
+               flash('post_message', 'Registro atualizado com sucesso');
+               redirect('estabelecimentos');
              } else {
-               die('Something went wrong');
+               die('Ops! Algo deu errado.');
              }
            } else {
                // Load view with errors
-               $this->view('posts/edit', $data);
+               $this->view('estabelecimentos/edit', $data);
            }
 
         } else {
             // Get existing pst for model
-            $post = $this->postModel->getPostById($id);
-
-            //Check for owner
-            if($post->user_id != $_SESSION['user_id']){
-                redirect('posts');
-            }
-        
+            $post = $this->postModel->getEstabelecimentosById($id);
+                    
            $data = [
                'id' => $id,
-               'title' => $post->title,
-               'body' => $post->body
+               'nome' => $post->nome,
+               'endereco' => $post->endereco
        ];
        
-       $this->view('posts/edit', $data);        
+       $this->view('estabelecimentos/edit', $data);        
        }
     }//add
-
+/*
      public function show($id){
          $post = $this->postModel->getPostById($id);
          $user = $this->userModel->getUserById($post->user_id);
