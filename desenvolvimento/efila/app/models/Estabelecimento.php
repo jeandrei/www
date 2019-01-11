@@ -32,14 +32,12 @@
 
     }
 
-
-/*
-    public function updatePost($data){
-        $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
+    public function updateEstabelecimento($data){        
+        $this->db->query('UPDATE estabelecimento SET nome = :nome, endereco = :endereco WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $data['id']);
-        $this->db->bind(':title', $data['title']);        
-        $this->db->bind(':body', $data['body']);    
+        $this->db->bind(':nome', $data['nome']);        
+        $this->db->bind(':endereco', $data['endereco']);    
         
         //Execute
         if($this->db->execute()){
@@ -49,8 +47,8 @@
         }
 
     }
-*/
-    public function getEstabelecimentosById($id){
+
+    public function getEstabelecimentoById($id){
         $this->db->query('SELECT * FROM estabelecimento WHERE id = :id');
         $this->db->bind(':id', $id);
 

@@ -6,7 +6,7 @@
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
         <hr>
-        <h1>Cadastro de Estabelecimento de Ensino</h1>        
+        <h1>Adicionando Estabelecimento de Ensino</h1>        
         <hr>
 
         <form action="<?php echo URLROOT; ?>/estabelecimentos/add" method="post">    

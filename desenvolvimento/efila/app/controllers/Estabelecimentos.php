@@ -50,7 +50,7 @@
             if(empty($data['nome_err']) && empty($data['endereco_err'])){
               // Validated
               if($this->postModel->addEstabelecimento($data)){
-                flash('post_message', 'Registro realizado com sucesso');
+                flash('post_message', 'Registro realizado com sucesso!');
                 redirect('estabelecimentos');
               } else {
                 die('Ops! Algo deu errado.');
@@ -73,14 +73,15 @@
 
 
      
-     public function edit($id){
-        
+     public function edit($id){ 
+            
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-         
+                     
            // Sanitize POST array
            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
            
            $data = [
+            'id' => $id,
             'nome' => trim($_POST['nome']),
             'endereco' => trim($_POST['endereco']),                
             'nome_err' => '',
@@ -89,17 +90,17 @@
 
            // Validate title
            if(empty($data['nome'])){
-                $data['nome_err'] = 'Por favor informe o nome do estabelecimento';
+                $data['nome_err'] = 'Por favor informe o nome do estabelecimento atual';
             }
             if(empty($data['endereco'])){
-                $data['endereco_err'] = 'Por favor informe o endereço do estabelecimento';
+                $data['endereco_err'] = 'Por favor informe o endereço do estabelecimento!';
             }
 
            // Make sure no errors
            if(empty($data['nome_err']) && empty($data['endereco_err'])){
              // Validated
-             if($this->postModel->updatePost($data)){
-               flash('post_message', 'Registro atualizado com sucesso');
+             if($this->postModel->updateEstabelecimento($data)){                 
+               flash('post_message', 'Registro atualizado com sucesso!');
                redirect('estabelecimentos');
              } else {
                die('Ops! Algo deu errado.');
@@ -111,7 +112,7 @@
 
         } else {
             // Get existing pst for model
-            $post = $this->postModel->getEstabelecimentosById($id);
+            $post = $this->postModel->getEstabelecimentoById($id);
                     
            $data = [
                'id' => $id,
@@ -121,8 +122,8 @@
        
        $this->view('estabelecimentos/edit', $data);        
        }
-    }//add
-/*
+    }//edit
+
      public function show($id){
          $post = $this->postModel->getPostById($id);
          $user = $this->userModel->getUserById($post->user_id);
@@ -134,24 +135,15 @@
          $this->view('posts/show', $data);
      }
 
-     public function delete($id){         
-         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-              // Get existing pst for model
-            $post = $this->postModel->getPostById($id);
 
-            //Check for owner
-            if($post->user_id != $_SESSION['user_id']){
-                redirect('posts');
-            }             
-            
-            if($this->postModel->deletePost($id)){
-                flash('post_message', 'Post Removed');
-                redirect('posts');
-            } else {
-                die('Someting went wrong');
-            }
-         } else {
-             redirect('posts');
-         }         
-     }*/
+     public function delete($id){         
+         $registro = $this->postModel->getEstabelecimentoById($id); 
+         if($this->postModel->deleteEstabelecimento($id)){
+            flash('post_message', 'Registro removido com sucesso!');
+            redirect('estabelecimentos');
+        } else {
+            die('Ops! Algo deu errado!');
+        }
+         var_dump($registro);
+     }
  }//class
