@@ -30,7 +30,19 @@
             <span class="table-edit"><a href="<?php echo URLROOT; ?>/estabelecimentos/edit/<?php echo $registro->id; ?>" class="btn btn-primary btn-rounded btn-sm my-0">Editar</a></span>            
           </td>
           <td>
-            <span class="table-remove"><a href="<?php echo URLROOT; ?>/estabelecimentos/delete/<?php echo $registro->id; ?>" class="btn btn-danger btn-rounded btn-sm my-0">Remover</a></span>            
+            <span class="table-remove">
+            <a href="<?php echo URLROOT; ?>/estabelecimentos/delete/<?php echo $registro->id; ?>" 
+                class="btn btn-danger btn-rounded btn-sm my-0"
+                onclick="if(question('Tem certeza que deseja remover o registro?') == true)
+                    {
+                      document.forms[0].submit();
+                    }
+                    else
+                    {										
+                      return false;
+                    }");
+              >Remover
+            </a></span>            
           </td>
         </tr>
         <?php endforeach; ?>  

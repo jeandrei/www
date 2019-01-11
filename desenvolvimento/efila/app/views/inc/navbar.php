@@ -26,7 +26,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                 <a class="dropdown-item" href="<?php echo URLROOT; ?>/estabelecimentos">Estabelecimento</a>
-                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>            
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/atendimentos">Atendimento</a>            
               </div>
             </li>
 

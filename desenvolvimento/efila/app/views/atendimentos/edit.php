@@ -2,21 +2,14 @@
       require APPROOT . '/helpers/functions.php';
 ?>
 
-<!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
-<script>
-window.onload = function(){focofield("nome");}
-</script>
-
-<!--MENSÁGEM NO TOPO DO FORMULÁRIO-->
 <?php flash('post_message');?>
-
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
         <hr>
-        <h1>Adicionando Estabelecimento de Ensino</h1>        
+        <h1>Editando Estabelecimento de Ensino</h1>        
         <hr>
 
-        <form action="<?php echo URLROOT; ?>/estabelecimentos/add" method="post">    
+        <form action="<?php echo URLROOT; ?>/estabelecimentos/edit/<?php echo $data['id']; ?>" method="post">   
 
         <legend>Dados do Estabelecimento</legend>
         <fieldset>
@@ -29,11 +22,8 @@ window.onload = function(){focofield("nome");}
                   class="form-control <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
                   type="text"  
                   name="nome"
-                  id="nome";
                   placeholder="Nome do estabelecimento de Ensino"
-                  value="<?php echo $data['nome']; ?>"
-                  onkeydown="upperCaseF(this)"
-                  > 
+                  value="<?php echo $data['nome']; ?>"> 
                   <span class="invalid-feedback"><?php echo $data['nome_err']; ?></span>
             </div>
         </div>

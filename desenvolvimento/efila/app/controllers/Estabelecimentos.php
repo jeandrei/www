@@ -143,7 +143,6 @@
             redirect('estabelecimentos');
         } else {
             die('Ops! Algo deu errado!');
-        }
-         var_dump($registro);
+        }         
      }
  }//class
