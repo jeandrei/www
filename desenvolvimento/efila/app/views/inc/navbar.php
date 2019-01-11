@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark md-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark md-3" style="margin-bottom:10px;">
   <div class="container">
       <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,10 +9,10 @@
         
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>">Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
           </li>          
         
 
@@ -38,22 +38,20 @@
         </ul>
 
 
-
-
         <ul class="navbar-nav ml-auto">
          <?php if(isset($_SESSION['user_id'])) : ?>
          <li class="nav-item">
-            <a class="nav-link" href="#">Welcome <?php echo $_SESSION['user_name']; ?></a>
+            <a class="nav-link" href="#">Bem vindo <?php echo $_SESSION['user_name']; ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Sair</a>
           </li>
          <?php else : ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/register">Register</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/register">Se registrar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Login</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Entrar</a>
           </li> 
         <?php endif; ?>         
         </ul>

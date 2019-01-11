@@ -39,12 +39,10 @@
                 'descricao' => trim($_POST['descricao']),
                 'estabelecimentos' => $estabelecimentos,
                 'estebelecimento_id' => $_POST['estabelecimento'],
-                'idade_minima' => $_POST['idade_minima'],
-                'completar_ate' => $_POST['completar_ate'],
+                'idade_minima' => $_POST['idade_minima'],               
                 'idade_maxima' => $_POST['idade_maxima'], 
                 'descricao_err' => '',
-                'estebelecimento_id_err' => '',
-                'completar_ate_err' => '',
+                'estebelecimento_id_err' => '',                
                 'idade_maxima_err' => ''                
             ];
 
@@ -54,10 +52,7 @@
             }
             if(($data['estebelecimento']) == NULL){
                 $data['estebelecimento_err'] = 'Por favor selecione o estabelecimento';                
-            }
-            if(empty($data['completar_ate'])){
-                $data['completar_ate_err'] = 'Por favor informe a data limite para o enquadramento do aluno';
-            }
+            }           
             if(empty($data['idade_minima'])){
                 $data['idade_minima_err'] = 'Por favor informe a idade mínima';
             }
@@ -67,8 +62,7 @@
             
             // Make sure no errors
             if( empty($data['descricao_err']) && 
-                empty($data['estebelecimento_id_err']) && 
-                empty($data['completar_ate_err']) && 
+                empty($data['estebelecimento_id_err']) &&                
                 empty($data['idade_minima_err']) && 
                 empty($data['idade_maxima_err']) 
                 
@@ -94,8 +88,7 @@
                 //PASSA A LISTA DE ESTABELECIMENTOS PARA MONTAR O LISTBOX
                 'estabelecimentos' => $estabelecimentos,
                 'descricao' => '',
-                'estebelecimento_id' => '',
-                'completar_ate' => '',                
+                'estebelecimento_id' => '',                              
                 'idade_minima' => '',
                 'idade_maxima' => ''
         ];
@@ -104,35 +97,51 @@
         }
      }//add
 
-/*
+
      
      public function edit($id){ 
             
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
                      
            // Sanitize POST array
-           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  
+           $estabelecimentos = $this->postModel->getEstabelecimentos();        
            
+
            $data = [
-            'id' => $id,
-            'nome' => trim($_POST['nome']),
-            'endereco' => trim($_POST['endereco']),                
-            'nome_err' => '',
-            'endereco_err' => ''
-        ];        
+               'descricao' => trim($_POST['descricao']),
+               'estabelecimentos' => $estabelecimentos,
+               'estebelecimento_id' => $_POST['estabelecimento'],
+               'idade_minima' => $_POST['idade_minima'],               
+               'idade_maxima' => $_POST['idade_maxima'], 
+               'descricao_err' => '',
+               'estebelecimento_id_err' => '',                
+               'idade_maxima_err' => ''                
+           ];
 
            // Validate title
-           if(empty($data['nome'])){
-                $data['nome_err'] = 'Por favor informe o nome do estabelecimento atual';
-            }
-            if(empty($data['endereco'])){
-                $data['endereco_err'] = 'Por favor informe o endereço do estabelecimento!';
-            }
-
+           if(empty($data['descricao'])){
+               $data['descricao_err'] = 'Por favor informe a descrição';
+           }
+           if(($data['estebelecimento']) == NULL){
+               $data['estebelecimento_err'] = 'Por favor selecione o estabelecimento';                
+           }           
+           if(empty($data['idade_minima'])){
+               $data['idade_minima_err'] = 'Por favor informe a idade mínima';
+           }
+           if(empty($data['idade_maxima'])){
+               $data['idade_maxima_err'] = 'Por favor informe a idade máxima';
+           }
+           
            // Make sure no errors
-           if(empty($data['nome_err']) && empty($data['endereco_err'])){
+           if( empty($data['descricao_err']) && 
+               empty($data['estebelecimento_id_err']) &&                
+               empty($data['idade_minima_err']) && 
+               empty($data['idade_maxima_err']) 
+               
+               ){
              // Validated
-             if($this->postModel->updateAtendimento($data)){                 
+             if($this->postModel->addAtendimento($data)){
                flash('post_message', 'Registro atualizado com sucesso!');
                redirect('atendimentos');
              } else {
@@ -141,16 +150,23 @@
            } else {
                // Load view with errors
                $this->view('atendimentos/edit', $data);
-           }
-
+           } 
+        
         } else {
             // Get existing pst for model
             $post = $this->postModel->getAtendimentoById($id);
+            $estabelecimentos = $this->postModel->getEstabelecimentos();            
                     
            $data = [
-               'id' => $id,
-               'nome' => $post->nome,
-               'endereco' => $post->endereco
+               'id' => $id, 
+               'descricao' => $post->descricao,
+               'estabelecimentos' => $estabelecimentos,
+               'estebelecimento_id' => $post->estebelecimento_id,
+               'idade_minima' => $post->idade_minima,           
+               'idade_maxima' => $post->idade_maxima,
+               'descricao_err' => '',
+               'estebelecimento_id_err' => '',                
+               'idade_maxima_err' => ''                
        ];
        
        $this->view('atendimentos/edit', $data);        
@@ -158,7 +174,7 @@
     }//edit
 
     
-     public function delete($id){         
+     public function delete($id){   
          $registro = $this->postModel->getAtendimentoById($id); 
          if($this->postModel->deleteAtendimento($id)){
             flash('post_message', 'Registro removido com sucesso!');
@@ -166,5 +182,5 @@
         } else {
             die('Ops! Algo deu errado!');
         }         
-     }*/
+     }
  }//class

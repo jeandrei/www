@@ -6,6 +6,13 @@
 <!--MENSAGEM NO TOPO DO FORMULÁRIO-->
 <?php flash('post_message');?>
 
+<!-- Adicionar -->
+<div class="container-fluid text-right">
+    <a href="<?php echo URLROOT; ?>/estabelecimentos/add" class="btn btn-success">
+        <i class="fa fa-pencil"></i> Adicionar
+    </a>
+</div>
+
 <hr>
 
 <!-- TABELA -->
@@ -53,12 +60,5 @@
 <!-- Editable table -->
 
 <hr>
-
-<!-- Adicionar -->
-<div class="col-md-6">
-    <a href="<?php echo URLROOT; ?>/estabelecimentos/add" class="btn btn-success float-left">
-        <i class="fa fa-pencil"></i> Adicionar
-    </a>
-</div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

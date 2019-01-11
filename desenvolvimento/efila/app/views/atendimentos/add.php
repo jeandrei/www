@@ -66,10 +66,10 @@ window.onload = function(){focofield("estabelecimento");}
                  
 
 
-        <!--IDADE MÍNIMA-->
+        <!--IDADE MÍNIMA EM MESES-->
         <div class="form-row">
             <div class="form-group">
-                <label for="idade_minima">Idade Mínima: <sup>*</sup></label>
+                <label for="idade_minima">Idade Mínima em Meses: <sup>*</sup></label>
                 <input style="width:70px;"
                   class="form-control onlynumbers <?php echo (!empty($data['idade_minima_err'])) ? 'is-invalid' : ''; ?>" 
                   type="number" 
@@ -80,28 +80,11 @@ window.onload = function(){focofield("estabelecimento");}
                   <span class="invalid-feedback"><?php echo $data['idade_minima_err']; ?></span>        
             </div>
         </div> 
-
-
-         <!--COMPLETOS ATÉ-->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="completar_ate">Completos até: <sup>*</sup></label>
-                <input 
-                  class="form-control <?php echo (!empty($data['completar_ate_err'])) ? 'is-invalid' : ''; ?>" 
-                  type="date" 
-                  name="completar_ate" 
-                  id="completar_ate"
-                  value="<?php echo $data['completar_ate']; ?>"          
-                  >
-                  <span class="invalid-feedback"><?php echo $data['completar_ate_err']; ?></span>        
-            </div>
-        </div>     
         
-
         <!--IDADE MÁXIMA-->
         <div class="form-row">
             <div class="form-group">
-                <label for="idade_maxima">Idade Máxima: <sup>*</sup></label>
+                <label for="idade_maxima">Idade Máxima em Meses: <sup>*</sup></label>
                 <input style="width:70px;" 
                   class="form-control onlynumbers <?php echo (!empty($data['idade_maxima_err'])) ? 'is-invalid' : ''; ?>" 
                   type="number" 
