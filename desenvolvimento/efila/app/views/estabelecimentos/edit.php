@@ -2,12 +2,13 @@
       require APPROOT . '/helpers/functions.php';
 ?>
 
-<?php flash('post_message');?>
- <div class="row align-items-center mb-3">
-    <div class="col-md-12">
-        <hr>
-        <h1>Editando Estabelecimento de Ensino</h1>        
-        <hr>
+<?php //flash('post_message');?>
+
+<hr>
+
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">EDITANDO ESTABELECIMENTO</h3>
+    <div class="card-body">
 
         <form action="<?php echo URLROOT; ?>/estabelecimentos/edit/<?php echo $data['id']; ?>" method="post">   
 
@@ -55,7 +56,7 @@
         </form>
         
 
-    </div><!--col-md-12-->
-</div><!--div class="row align-items-center mb-3-->    
+    </div><!--class="card-body"-->
+</div><!--class="card"-->    
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 

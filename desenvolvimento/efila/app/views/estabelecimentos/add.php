@@ -7,14 +7,10 @@
 window.onload = function(){focofield("nome");}
 </script>
 
-<!--MENSÁGEM NO TOPO DO FORMULÁRIO-->
-<?php flash('post_message');?>
-
- <div class="row align-items-center mb-3">
-    <div class="col-md-12">
-        <hr>
-        <h1>Adicionando Estabelecimento de Ensino</h1>        
-        <hr>
+<hr>
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE ESTABELECIMENTO</h3>
+    <div class="card-body">
 
         <form action="<?php echo URLROOT; ?>/estabelecimentos/add" method="post">    
 
@@ -50,7 +46,9 @@ window.onload = function(){focofield("nome");}
                   name="endereco" 
                   id="endereco"
                   value="<?php echo $data['endereco']; ?>"          
-                  placeholder="Endereço do estabelecimento de Ensino">
+                  placeholder="Endereço do estabelecimento de Ensino"
+                  onkeydown="upperCaseF(this)"
+                  >
                   <span class="invalid-feedback"><?php echo $data['endereco_err']; ?></span>        
             </div>   
 
@@ -65,7 +63,7 @@ window.onload = function(){focofield("nome");}
         </form>
         
 
-    </div><!--col-md-12-->
-</div><!--div class="row align-items-center mb-3-->    
+    </div><!--card-body-->
+</div><!--class="card"-->    
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 

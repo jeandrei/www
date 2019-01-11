@@ -10,6 +10,23 @@ $(document).ready(function() {
 	});
 //********************fim mascaras**************** */
 
+//FUNÇÃO PARA PERMITIR APENAS NÚMEROS
+//PARA USAR BASTA COLOCAR O CAMPO COMO CLASSE onlynumbers
+//E PARA EXIBIR A MENSAGEM COLOCAR UM <span id="errmsg"></span>
+//USE TAMBÉM O TIPO NUMBER NO INPUT type="number" 
+$(document).ready(function () {
+	//called when key is pressed in textbox
+	$(".onlynumbers").keypress(function (e) {
+	   //if the letter is not digit then display error and don't type anything
+	   if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		  //display error message
+		  alert("Ops! Apenas números são permitidos.");
+				 return false;
+	  }
+	 });
+  });
+
+
 
 //função seta o foco para o campo passado na funçao
 //um exemplo para dar o foco no campo name ao carregar a página

@@ -31,15 +31,17 @@
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
           
             // Sanitize POST array
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  
+            $estabelecimentos = $this->postModel->getEstabelecimentos();         
             
 
             $data = [
                 'descricao' => trim($_POST['descricao']),
-                'estebelecimento_id' => $_POST['endereco'],
-                'idade_minima' => $_POST['descricao'],
-                'completar_ate' => $_POST['endereco'],
-                'idade_maxima' => $_POST['descricao'], 
+                'estabelecimentos' => $estabelecimentos,
+                'estebelecimento_id' => $_POST['estabelecimento'],
+                'idade_minima' => $_POST['idade_minima'],
+                'completar_ate' => $_POST['completar_ate'],
+                'idade_maxima' => $_POST['idade_maxima'], 
                 'descricao_err' => '',
                 'estebelecimento_id_err' => '',
                 'completar_ate_err' => '',
@@ -50,8 +52,8 @@
             if(empty($data['descricao'])){
                 $data['descricao_err'] = 'Por favor informe a descrição';
             }
-            if(empty($data['estebelecimento_id'])){
-                $data['estebelecimento_id_err'] = 'Por favor selecione o estabelecimento';
+            if(($data['estebelecimento']) == NULL){
+                $data['estebelecimento_err'] = 'Por favor selecione o estabelecimento';                
             }
             if(empty($data['completar_ate'])){
                 $data['completar_ate_err'] = 'Por favor informe a data limite para o enquadramento do aluno';

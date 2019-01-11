@@ -5,20 +5,16 @@
 
 <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
 <script>
-window.onload = function(){focofield("descricao");}
+window.onload = function(){focofield("estabelecimento");}
 </script>
 
 <!--MENSÁGEM NO TOPO DO FORMULÁRIO-->
 <?php flash('post_message');?>
 
-
-
-
- <div class="row align-items-center mb-3">
-    <div class="col-md-12">
-        <hr>
-        <h1>Adicionando Atendimento</h1>        
-        <hr>
+<hr>
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE ATENDIMENTOS</h3>
+    <div class="card-body">
 
         <form action="<?php echo URLROOT; ?>/atendimentos/add" method="post">    
 
@@ -28,32 +24,43 @@ window.onload = function(){focofield("descricao");}
         <!--LISTBOX $estabelecimento->id VEM DE CONTROLER FUNÇÃO ADD QUE PEGA OS DADOS
         DA FUNÇÃO getEstabelecimentos DO MODEL ATENDIMENTO
         -->
+        
         <div class="form-row">
             <div class="form-group col-md-8">
-            <label for="estabelecimento">Selecione o Estabelecimento:</label>
-            <select class="form-control" id="estabelecimento">
-                <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
-                    <option value="<?php echo $estabelecimento->id;?>"><?php echo $estabelecimento->nome;?></option>
-                <?php endforeach; ?>  
-            </select>
+                <label for="estabelecimento">Estabelecimento:</label>                             
+                <select 
+                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                    name="estabelecimento" 
+                    id="estabelecimento"
+                >
+
+                    <option value="NULL">Selecione o estabelecimento</option>
+                    <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
+                        <option value="<?php echo $estabelecimento->id;?>">
+                            <?php echo $estabelecimento->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+                
+                </select>   
+                <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
             </div>
         </div>
         
 
-        <!--NOME-->
+        <!--DESCRIÇÃO-->
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="nome">Descrição: <sup>*</sup></label>
+                <label for="descricao">Descrição: <sup>*</sup></label>
                 <input 
-                  class="form-control <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
+                  class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
                   type="text"  
-                  name="nome"
-                  id="nome";
+                  name="descricao"
+                  id="descricao";
                   placeholder="Descrição do atendimento"
-                  value="<?php echo $data['nome']; ?>"
+                  value="<?php echo $data['descricao']; ?>"
                   onkeydown="upperCaseF(this)"
                   > 
-                  <span class="invalid-feedback"><?php echo $data['nome_err']; ?></span>
+                  <span class="invalid-feedback"><?php echo $data['descricao_err']; ?></span>
             </div>
         </div>
                  
@@ -64,46 +71,50 @@ window.onload = function(){focofield("descricao");}
             <div class="form-group">
                 <label for="idade_minima">Idade Mínima: <sup>*</sup></label>
                 <input style="width:70px;"
-                  class="form-control <?php echo (!empty($data['endereco_err'])) ? 'is-invalid' : ''; ?>" 
-                  type="text" 
+                  class="form-control onlynumbers <?php echo (!empty($data['idade_minima_err'])) ? 'is-invalid' : ''; ?>" 
+                  type="number" 
                   name="idade_minima" 
                   id="idade_minima"
-                  value="<?php echo $data['idade_minima']; ?>"          
+                  value="<?php echo $data['idade_minima']; ?>"                           
                   >
                   <span class="invalid-feedback"><?php echo $data['idade_minima_err']; ?></span>        
             </div>
-        </div>   
+        </div> 
 
-            <!--COMPLETOS ATÉ-->
-        <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="endereco">Completos até: <sup>*</sup></label>
-                <input 
-                  class="form-control <?php echo (!empty($data['endereco_err'])) ? 'is-invalid' : ''; ?>" 
-                  type="date" 
-                  name="endereco" 
-                  id="endereco"
-                  value="<?php echo $data['endereco']; ?>"          
-                  >
-                  <span class="invalid-feedback"><?php echo $data['endereco_err']; ?></span>        
-            </div>
-        </div>
 
-             <!--IDADE MÁXIMA-->
+         <!--COMPLETOS ATÉ-->
         <div class="form-row">
             <div class="form-group">
-                <label for="endereco">Idade Máxima: <sup>*</sup></label>
-                <input style="width:70px;" 
-                  class="form-control <?php echo (!empty($data['endereco_err'])) ? 'is-invalid' : ''; ?>" 
-                  type="text" 
-                  name="endereco" 
-                  id="endereco"
-                  value="<?php echo $data['endereco']; ?>"          
+                <label for="completar_ate">Completos até: <sup>*</sup></label>
+                <input 
+                  class="form-control <?php echo (!empty($data['completar_ate_err'])) ? 'is-invalid' : ''; ?>" 
+                  type="date" 
+                  name="completar_ate" 
+                  id="completar_ate"
+                  value="<?php echo $data['completar_ate']; ?>"          
                   >
-                  <span class="invalid-feedback"><?php echo $data['endereco_err']; ?></span>        
+                  <span class="invalid-feedback"><?php echo $data['completar_ate_err']; ?></span>        
+            </div>
+        </div>     
+        
+
+        <!--IDADE MÁXIMA-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="idade_maxima">Idade Máxima: <sup>*</sup></label>
+                <input style="width:70px;" 
+                  class="form-control onlynumbers <?php echo (!empty($data['idade_maxima_err'])) ? 'is-invalid' : ''; ?>" 
+                  type="number" 
+                  name="idade_maxima" 
+                  id="idade_maxima"
+                  value="<?php echo $data['idade_maxima']; ?>"          
+                  >
+                  <span class="invalid-feedback"><?php echo $data['idade_maxima_err']; ?></span>                        
             </div> 
         </div>    
 
+       
+       
         </fieldset>
 
 
@@ -112,10 +123,13 @@ window.onload = function(){focofield("descricao");}
         <button type="submit" class="btn btn-primary">Salvar</button>
         <a href="<?php echo URLROOT; ?>/atendimentos" class="btn btn-light"><i class="fa fa-backward"></i>Voltar</a>
         
+
+
         </form>
         
 
-    </div><!--col-md-12-->
-</div><!--div class="row align-items-center mb-3-->    
+    </div><!--<div class="card-body">-->    
+</div><!--<div class="card">-->   
+<hr> 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 
