@@ -37,13 +37,13 @@ window.onload = function(){focofield("estabelecimento");}
 
                     <option value="NULL">Selecione o estabelecimento</option>
                     <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
-                        <option value="<?php echo $estabelecimento->id;?>" <?php if($estabelecimento->id == $data['estebelecimento_id']){echo " selected";};?>>
+                        <option value="<?php echo $estabelecimento->id;?>" <?php if($estabelecimento->id == $data['estabelecimento_id']){echo " selected";};?>>
                             <?php echo $estabelecimento->nome;?>
                         </option>
                     <?php endforeach; ?>  
                 
                 </select>   
-                <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
+                <span class="invalid-feedback"><?php echo $data['estabelecimento_err']; ?></span>
             </div>
         </div>
         

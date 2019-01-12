@@ -8,8 +8,8 @@
 
     public function getFilas(){
         $this->db->query('SELECT 
-                                estabelecimento.nome, 
-                                atendimento.descricao, 
+                                estabelecimento.nome as estabelecimento, 
+                                atendimento.descricao as atendimento, 
                                 atendimento.idade_minima,
                                 atendimento.idade_maxima,
                                 fila.dataini,
@@ -19,9 +19,9 @@
                             FROM 
                                 estabelecimento, atendimento, fila
                             WHERE
-                                atendimento.estebelecimento_id = estabelecimento.id  
+                                atendimento.estabelecimento_id = estabelecimento.id  
                             AND
-                                fila.estebelecimento_id = estabelecimento.id
+                                fila.estabelecimento_id = estabelecimento.id
                             AND
                                 fila.atedimento_id = atendimento.id
 
@@ -32,18 +32,18 @@
 
         return $results;
     }
-/*
+
     public function addFila($data){
         $this->db->query('INSERT INTO 
-                            Fila 
-                            (descricao, estebelecimento_id, idade_minima, idade_maxima) 
+                            fila 
+                            (estabelecimento_id, atedimento_id, dataini, datafim) 
                             VALUES 
-                            (:descricao, :estebelecimento_id, :idade_minima, :idade_maxima)');
+                            (:estabelecimento_id, :atedimento_id, :dataini, :datafim)');
         // Bind values
-        $this->db->bind(':descricao', $data['descricao']);
-        $this->db->bind(':estebelecimento_id', $data['estebelecimento_id']);
-        $this->db->bind(':idade_minima', $data['idade_minima']);         
-        $this->db->bind(':idade_maxima', $data['idade_maxima']);
+        $this->db->bind(':estabelecimento_id', $data['estabelecimento_id']);
+        $this->db->bind(':atedimento_id', $data['atedimento_id']);
+        $this->db->bind(':dataini', $data['dataini']);         
+        $this->db->bind(':datafim', $data['datafim']);
                
         //Execute
         if($this->db->execute()){
@@ -104,6 +104,18 @@
         return $results;
     }
 
-*/
+
+
+    public function getAtendimentos(){
+        $this->db->query('SELECT id, descricao
+                          FROM atendimento                                                
+                          ORDER BY descricao DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
 
   }

@@ -38,11 +38,11 @@
             $data = [
                 'descricao' => trim($_POST['descricao']),
                 'estabelecimentos' => $estabelecimentos,
-                'estebelecimento_id' => $_POST['estabelecimento'],
+                'estabelecimento_id' => $_POST['estabelecimento'],
                 'idade_minima' => $_POST['idade_minima'],               
                 'idade_maxima' => $_POST['idade_maxima'], 
                 'descricao_err' => '',
-                'estebelecimento_id_err' => '',                
+                'estabelecimento_id_err' => '',                
                 'idade_maxima_err' => ''                
             ];
 
@@ -50,8 +50,8 @@
             if(empty($data['descricao'])){
                 $data['descricao_err'] = 'Por favor informe a descrição';
             }
-            if(($data['estebelecimento']) == NULL){
-                $data['estebelecimento_err'] = 'Por favor selecione o estabelecimento';                
+            if(($data['estabelecimento']) == NULL){
+                $data['estabelecimento_err'] = 'Por favor selecione o estabelecimento';                
             }           
             if(empty($data['idade_minima'])){
                 $data['idade_minima_err'] = 'Por favor informe a idade mínima';
@@ -62,7 +62,7 @@
             
             // Make sure no errors
             if( empty($data['descricao_err']) && 
-                empty($data['estebelecimento_id_err']) &&                
+                empty($data['estabelecimento_id_err']) &&                
                 empty($data['idade_minima_err']) && 
                 empty($data['idade_maxima_err']) 
                 
@@ -88,7 +88,7 @@
                 //PASSA A LISTA DE ESTABELECIMENTOS PARA MONTAR O LISTBOX
                 'estabelecimentos' => $estabelecimentos,
                 'descricao' => '',
-                'estebelecimento_id' => '',                              
+                'estabelecimento_id' => '',                              
                 'idade_minima' => '',
                 'idade_maxima' => ''
         ];
@@ -111,11 +111,11 @@
            $data = [
                'descricao' => trim($_POST['descricao']),
                'estabelecimentos' => $estabelecimentos,
-               'estebelecimento_id' => $_POST['estabelecimento'],
+               'estabelecimento_id' => $_POST['estabelecimento'],
                'idade_minima' => $_POST['idade_minima'],               
                'idade_maxima' => $_POST['idade_maxima'], 
                'descricao_err' => '',
-               'estebelecimento_id_err' => '',                
+               'estabelecimento_id_err' => '',                
                'idade_maxima_err' => ''                
            ];
 
@@ -123,8 +123,8 @@
            if(empty($data['descricao'])){
                $data['descricao_err'] = 'Por favor informe a descrição';
            }
-           if(($data['estebelecimento']) == NULL){
-               $data['estebelecimento_err'] = 'Por favor selecione o estabelecimento';                
+           if(($data['estabelecimento']) == NULL){
+               $data['estabelecimento_err'] = 'Por favor selecione o estabelecimento';                
            }           
            if(empty($data['idade_minima'])){
                $data['idade_minima_err'] = 'Por favor informe a idade mínima';
@@ -135,7 +135,7 @@
            
            // Make sure no errors
            if( empty($data['descricao_err']) && 
-               empty($data['estebelecimento_id_err']) &&                
+               empty($data['estabelecimento_id_err']) &&                
                empty($data['idade_minima_err']) && 
                empty($data['idade_maxima_err']) 
                
@@ -161,11 +161,11 @@
                'id' => $id, 
                'descricao' => $post->descricao,
                'estabelecimentos' => $estabelecimentos,
-               'estebelecimento_id' => $post->estebelecimento_id,
+               'estabelecimento_id' => $post->estabelecimento_id,
                'idade_minima' => $post->idade_minima,           
                'idade_maxima' => $post->idade_maxima,
                'descricao_err' => '',
-               'estebelecimento_id_err' => '',                
+               'estabelecimento_id_err' => '',                
                'idade_maxima_err' => ''                
        ];
        

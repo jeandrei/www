@@ -45,22 +45,56 @@ window.onload = function(){focofield("estabelecimento");}
                 <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
             </div>
         </div>
-        
 
-        <!--DESCRIÇÃO-->
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="descricao">Descrição: <sup>*</sup></label>
+                <label for="estabelecimento">Atendimento:</label>                             
+                <select 
+                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                    name="estabelecimento" 
+                    id="estabelecimento"
+                >
+
+                    <option value="NULL">Selecione o atendimento</option>
+                    <?php foreach($data['atendimentos'] as $atendimento) : ?> 
+                        <option value="<?php echo $atendimento->id;?>">
+                            <?php echo $atendimento->descricao;?>
+                        </option>
+                    <?php endforeach; ?>  
+                
+                </select>   
+                <span class="invalid-feedback"><?php echo $data['atendimento_err']; ?></span>
+            </div>
+        </div>
+        
+
+        <!--DATA INICIAL-->
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="dataini">Data início: <sup>*</sup></label>
                 <input 
-                  class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
-                  type="text"  
-                  name="descricao"
-                  id="descricao";
-                  placeholder="Descrição do fila"
-                  value="<?php echo $data['descricao']; ?>"
-                  onkeydown="upperCaseF(this)"
+                  class="form-control <?php echo (!empty($data['dataini_err'])) ? 'is-invalid' : ''; ?>"
+                  type="date"  
+                  name="dataini"
+                  id="dataini";                 
+                  value="<?php echo $data['dataini']; ?>"                  
                   > 
-                  <span class="invalid-feedback"><?php echo $data['descricao_err']; ?></span>
+                  <span class="invalid-feedback"><?php echo $data['dataini_err']; ?></span>
+            </div>
+        </div>
+
+         <!--DATA FINAL-->
+         <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="datafim">Data termino: <sup>*</sup></label>
+                <input 
+                  class="form-control <?php echo (!empty($data['dataini_err'])) ? 'is-invalid' : ''; ?>"
+                  type="date"  
+                  name="datafim"
+                  id="datafim";                 
+                  value="<?php echo $data['datafim']; ?>"                  
+                  > 
+                  <span class="invalid-feedback"><?php echo $data['datafim_err']; ?></span>
             </div>
         </div>
                  

@@ -7,10 +7,10 @@
     }
 
     public function getAtendimentos(){
-        $this->db->query('SELECT atendimento.id as id, descricao, idade_minima, idade_maxima, estebelecimento_id, nome as nome_estabelecimento
+        $this->db->query('SELECT atendimento.id as id, descricao, idade_minima, idade_maxima, estabelecimento_id, nome as nome_estabelecimento
                           FROM atendimento, estabelecimento
                           WHERE
-                          atendimento.estebelecimento_id = estabelecimento.id                      
+                          atendimento.estabelecimento_id = estabelecimento.id                      
                           ORDER BY descricao DESC
                           ');
 
@@ -22,12 +22,12 @@
     public function addAtendimento($data){
         $this->db->query('INSERT INTO 
                             atendimento 
-                            (descricao, estebelecimento_id, idade_minima, idade_maxima) 
+                            (descricao, estabelecimento_id, idade_minima, idade_maxima) 
                             VALUES 
-                            (:descricao, :estebelecimento_id, :idade_minima, :idade_maxima)');
+                            (:descricao, :estabelecimento_id, :idade_minima, :idade_maxima)');
         // Bind values
         $this->db->bind(':descricao', $data['descricao']);
-        $this->db->bind(':estebelecimento_id', $data['estebelecimento_id']);
+        $this->db->bind(':estabelecimento_id', $data['estabelecimento_id']);
         $this->db->bind(':idade_minima', $data['idade_minima']);         
         $this->db->bind(':idade_maxima', $data['idade_maxima']);
                
