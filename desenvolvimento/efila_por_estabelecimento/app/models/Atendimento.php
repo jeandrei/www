@@ -7,8 +7,10 @@
     }
 
     public function getAtendimentos(){
-        $this->db->query('SELECT atendimento.id as id, descricao, idade_minima, idade_maxima
-                          FROM atendimento                                               
+        $this->db->query('SELECT atendimento.id as id, descricao, idade_minima, idade_maxima, estabelecimento_id, nome as nome_estabelecimento
+                          FROM atendimento, estabelecimento
+                          WHERE
+                          atendimento.estabelecimento_id = estabelecimento.id                      
                           ORDER BY descricao DESC
                           ');
 
@@ -20,11 +22,12 @@
     public function addAtendimento($data){
         $this->db->query('INSERT INTO 
                             atendimento 
-                            (descricao, idade_minima, idade_maxima) 
+                            (descricao, estabelecimento_id, idade_minima, idade_maxima) 
                             VALUES 
-                            (:descricao, :idade_minima, :idade_maxima)');
+                            (:descricao, :estabelecimento_id, :idade_minima, :idade_maxima)');
         // Bind values
-        $this->db->bind(':descricao', $data['descricao']);       
+        $this->db->bind(':descricao', $data['descricao']);
+        $this->db->bind(':estabelecimento_id', $data['estabelecimento_id']);
         $this->db->bind(':idade_minima', $data['idade_minima']);         
         $this->db->bind(':idade_maxima', $data['idade_maxima']);
                
@@ -38,11 +41,11 @@
     }
 
     public function updateAtendimento($data){        
-        $this->db->query('UPDATE atendimento SET descricao = :descricao, idade_minima = :idade_minima, idade_maxima = :idade_maxima WHERE id = :id');
+        $this->db->query('UPDATE estabelecimento SET nome = :nome, endereco = :endereco WHERE id = :id');
         // Bind values
-        $this->db->bind(':descricao', $data['descricao']);
-        $this->db->bind(':idade_minima', $data['idade_minima']);        
-        $this->db->bind(':idade_maxima', $data['idade_maxima']);    
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':nome', $data['nome']);        
+        $this->db->bind(':endereco', $data['endereco']);    
         
         //Execute
         if($this->db->execute()){
@@ -75,5 +78,18 @@
         }
 
     }
-    
+    // PARA MONTAR O LISTBOX NOS FORMULÁRIOS
+    public function getEstabelecimentos(){
+        $this->db->query('SELECT id, nome
+                          FROM estabelecimento                          
+                          ORDER BY nome DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+
   }

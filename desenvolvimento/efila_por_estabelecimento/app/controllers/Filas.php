@@ -19,33 +19,60 @@
             
         $data = [
             'filas' => $registros,            
-        ];        
-       
+        ];
+        
+        //die(var_dump($estabelecimentos));
         $this->view('filas/index', $data);      
 
      }
-    
+
+     //2 combo box 
+     // recebe o id da linha $.get?.../filas/getAtendimento?search=" + idEstab, function(data){
+     // lá do arquivo filas/add da junção jquery
+     //2 passa o id pelo search
+     public function getAtendimento(){
+        echo "<option>Selecione um atendimento</option>";
+        if (isset($_GET['search'])){
+            //faz a pesquisa chamando o método do aqruivo /model/fila/getAtendimentosByIdEstabelecimento($_GET['search']);
+            //passando o id
+            $atendimentos = $this->postModel->getAtendimentosByIdEstabelecimento($_GET['search']);                       
+            //monta os options com base no resultado da pesquisa
+            foreach($atendimentos as $atendimento){
+            echo "<option value=".$atendimento->id . ">" .$atendimento->descricao."</option>";
+            }
+            
+        }
+     }
+
+
      public function add(){
         
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
           
             // Sanitize POST array
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  
+            $estabelecimentos = $this->postModel->getEstabelecimentos(); 
             $atendimentos = $this->postModel->getAtendimentos();
             
 
-            $data = [                
-                'atendimentos' => $atendimentos,                
+            $data = [
+                'estabelecimentos' => $estabelecimentos,
+                'atendimentos' => $atendimentos,
+                'estabelecimento_id' => $_POST['estabelecimento'],
                 'atendimento_id' => $_POST['atendimento'],
                 'dataini' => $_POST['dataini'],               
                 'datafim' => $_POST['datafim'], 
-                'descricao_err' => '',                                
+                'descricao_err' => '',
+                'estabelecimento_id_err' => '',                
                 'atendimento_id_err' => '',
                 'dataini_err' => '',
                 'datafim_err' => ''                
             ];
             
-            // Validate title  
+            // Validate title            
+            if(($data['estabelecimento_id']) == 'NULL'){               
+                $data['estabelecimento_id_err'] = 'Por favor selecione o estabelecimento';                
+            } 
             if(($data['atendimento_id']) == 'NULL'){
                 $data['atendimento_id_err'] = 'Por favor selecione o atendimento';                
             } 
@@ -57,7 +84,8 @@
             }
             
             // Make sure no errors
-            if( empty($data['atendimento_id_err']) &&                
+            if( empty($data['estabelecimento_id_err']) && 
+                empty($data['atendimento_id_err']) &&                
                 empty($data['dataini_err']) && 
                 empty($data['datafim_err']) 
                 
@@ -75,15 +103,21 @@
             }
 
          } else {
-             //busca lista de atendimentos                    
+            //BUSCA A LISTA DE ESTABELECIMENTOS NO BANCO DE DADOS
+            //MODELS Fila
+            $estabelecimentos = $this->postModel->getEstabelecimentos();
             $atendimentos = $this->postModel->getAtendimentos();
          
-            $data = [                       
-                'atendimentos' => $atendimentos,                
+            $data = [
+                //PASSA A LISTA DE ESTABELECIMENTOS PARA MONTAR O LISTBOX
+                'estabelecimentos' => $estabelecimentos,
+                'atendimentos' => $atendimentos,
+                'estabelecimento_id' => '',
                 'atendimento_id' => '',
                 'dataini' => '',               
                 'datafim' => '', 
-                'descricao_err' => '',                                
+                'descricao_err' => '',
+                'estabelecimento_id_err' => '',                
                 'atendimento_id_err' => '',
                 'dataini_err' => '',
                 'datafim_err' => ''      

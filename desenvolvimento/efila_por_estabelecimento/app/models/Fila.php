@@ -8,6 +8,7 @@
 
     public function getFilas(){
         $this->db->query('SELECT 
+                                estabelecimento.nome as estabelecimento, 
                                 atendimento.descricao as atendimento, 
                                 atendimento.idade_minima,
                                 atendimento.idade_maxima,
@@ -16,11 +17,15 @@
                                 fila.status
 
                             FROM 
-                                atendimento, fila
-                            WHERE 
+                                estabelecimento, atendimento, fila
+                            WHERE
+                                atendimento.estabelecimento_id = estabelecimento.id  
+                            AND
+                                fila.estabelecimento_id = estabelecimento.id
+                            AND
                                 fila.atedimento_id = atendimento.id
 
-                            ORDER BY atendimento.descricao DESC
+                            ORDER BY estabelecimento.nome DESC
                           ');
 
         $results = $this->db->resultSet();
@@ -87,7 +92,20 @@
         }
 
     }
-    
+    // PARA MONTAR O LISTBOX NOS FORMULÁRIOS
+    public function getEstabelecimentos(){
+        $this->db->query('SELECT id, nome
+                          FROM estabelecimento                          
+                          ORDER BY nome DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+
     public function getAtendimentos(){
         $this->db->query('SELECT id, descricao
                           FROM atendimento                                                
@@ -98,6 +116,22 @@
 
         return $results;
     }
+
+    //3 combobox
+    //faz a pesquisa no banco com base no id passado pela função
+    public function getAtendimentosByIdEstabelecimento($id){
+        $this->db->query('SELECT id, descricao
+        FROM atendimento      
+        WHERE estabelecimento_id = :id                                         
+        ORDER BY descricao DESC
+        ');
+    $this->db->bind(':id', $id);
+
+    $results = $this->db->resultSet();
+
+    return $results;
+}
+
 
   }
 

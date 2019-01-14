@@ -11,15 +11,41 @@ window.onload = function(){focofield("estabelecimento");}
 <!--MENSÁGEM NO TOPO DO FORMULÁRIO-->
 <?php flash('post_message');?>
 
+
 <hr>
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE ATENDIMENTOS</h3>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">ALTERANDO filas</h3>
     <div class="card-body">
+        
+        <form action="<?php echo URLROOT; ?>/filas/edit/<?php echo $data['id']; ?>" method="post">    
 
-        <form action="<?php echo URLROOT; ?>/atendimentos/add" method="post">    
+        <legend>Dados do fila</legend>
+        <fieldset>
 
-        <legend>Dados do Atendimento</legend>
-        <fieldset>    
+        <!--LISTBOX $estabelecimento->id VEM DE CONTROLER FUNÇÃO ADD QUE PEGA OS DADOS
+        DA FUNÇÃO getEstabelecimentos DO MODEL fila
+        -->
+     
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="estabelecimento">Estabelecimento:</label>                             
+                <select 
+                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                    name="estabelecimento" 
+                    id="estabelecimento"
+                >
+
+                    <option value="NULL">Selecione o estabelecimento</option>
+                    <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
+                        <option value="<?php echo $estabelecimento->id;?>" <?php if($estabelecimento->id == $data['estebelecimento_id']){echo " selected";};?>>
+                            <?php echo $estabelecimento->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+                
+                </select>   
+                <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
+            </div>
+        </div>
         
 
         <!--DESCRIÇÃO-->
@@ -31,7 +57,7 @@ window.onload = function(){focofield("estabelecimento");}
                   type="text"  
                   name="descricao"
                   id="descricao";
-                  placeholder="Descrição do atendimento"
+                  placeholder="Descrição do fila"
                   value="<?php echo $data['descricao']; ?>"
                   onkeydown="upperCaseF(this)"
                   > 
@@ -79,7 +105,7 @@ window.onload = function(){focofield("estabelecimento");}
        
         
         <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="<?php echo URLROOT; ?>/atendimentos" class="btn btn-light"><i class="fa fa-backward"></i>Voltar</a>
+        <a href="<?php echo URLROOT; ?>/filas" class="btn btn-light"><i class="fa fa-backward"></i>Voltar</a>
         
 
 
