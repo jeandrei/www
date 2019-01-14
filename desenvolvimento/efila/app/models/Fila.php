@@ -71,7 +71,7 @@
     }
 
     public function getFilaById($id){
-        $this->db->query('SELECT * FROM Fila WHERE id = :id');
+        $this->db->query('SELECT * FROM fila WHERE id = :id');
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
@@ -80,7 +80,7 @@
     }
 
     public function deleteFila($id){
-        $this->db->query('DELETE FROM Fila WHERE id = :id');
+        $this->db->query('DELETE FROM fila WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $id);          
         
@@ -117,5 +117,22 @@
         return $results;
     }
 
+    //3 combobox
+    //faz a pesquisa no banco com base no id passado pela função
+    public function getAtendimentosByIdEstabelecimento($id){
+        $this->db->query('SELECT id, descricao
+        FROM atendimento      
+        WHERE estabelecimento_id = :id                                         
+        ORDER BY descricao DESC
+        ');
+    $this->db->bind(':id', $id);
+
+    $results = $this->db->resultSet();
+
+    return $results;
+}
+
 
   }
+
+  

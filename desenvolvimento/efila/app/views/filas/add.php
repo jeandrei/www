@@ -4,31 +4,25 @@
 ?>
 
 <script>
-$( document ).ready(function() {
+//1 combo box 
+//depois que a página for carregada $(document).ready(function() {
+$(document).ready(function() {
+        //pega o objeto cuja id #estabelecimento no evento on change
         $("#estabelecimento").on("change",function(){
+            //atribui o valor do objeto #estabelecimento a variável idEstab
             var idEstab = $("#estabelecimento").val();
-            $.ajax({
-                url: 'pega_atendimentos.php',
-                type: 'POST',
-                data:{id:idEstab},
-                beforeSend: function(){
-                    $("#atendimento").css({'display':'block'});
-                    $("#atendimento").html("Carregando...");
-                },
-                success: function(data){
-                    $("#atendimento").css({'display':'block'});
-                    $("#atendimento").html(data);
-                },
-                error: function(data){
-                    $("#atendimento").css({'display':'block'});
-                    $("#atendimento").html("Houve um erro ao carregar");
-                }
+            //passa o valor da variável para o método getAtendimento do controller
+            $.get("<?php echo URLROOT; ?>/filas/getAtendimento?search=" + idEstab, function(data){ 
+                //remove todos os valores do option primeiro para não acumular a cada mudança
+                $("#atendimento").find("option").remove();                         
+                //adiciona o que veio do método /filas/getAtendimentos no objeto #atendimento
+                $("#atendimento").append(data);
+             });
 
-            });
+                               
+            });//change function            
             
-            
-        });
-    });
+});//document ready
 </script>
 
 <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
@@ -77,10 +71,9 @@ window.onload = function(){focofield("estabelecimento");}
        
        
        
-       <div>
-        <select id="atendimento" style="display:none;"></select>
+        <div>
+        <select id="atendimento" style="display:block;"></select>
     </div>
-        
 
        
         

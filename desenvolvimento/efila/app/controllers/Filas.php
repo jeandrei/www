@@ -26,6 +26,25 @@
 
      }
 
+     //2 combo box 
+     // recebe o id da linha $.get?.../filas/getAtendimento?search=" + idEstab, function(data){
+     // lá do arquivo filas/add da junção jquery
+     //2 passa o id pelo search
+     public function getAtendimento(){
+        
+        if (isset($_GET['search'])){
+            //faz a pesquisa chamando o método do aqruivo /model/fila/getAtendimentosByIdEstabelecimento($_GET['search']);
+            //passando o id
+            $atendimentos = $this->postModel->getAtendimentosByIdEstabelecimento($_GET['search']);                       
+            //monta os options com base no resultado da pesquisa
+            foreach($atendimentos as $atendimento){
+            echo "<option>".$atendimento->descricao."</option>";
+            }
+            
+        }
+     }
+
+
      public function add(){
         
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
