@@ -3,6 +3,34 @@
      
 ?>
 
+<script>
+$( document ).ready(function() {
+        $("#estabelecimento").on("change",function(){
+            var idEstab = $("#estabelecimento").val();
+            $.ajax({
+                url: 'pega_atendimentos.php',
+                type: 'POST',
+                data:{id:idEstab},
+                beforeSend: function(){
+                    $("#atendimento").css({'display':'block'});
+                    $("#atendimento").html("Carregando...");
+                },
+                success: function(data){
+                    $("#atendimento").css({'display':'block'});
+                    $("#atendimento").html(data);
+                },
+                error: function(data){
+                    $("#atendimento").css({'display':'block'});
+                    $("#atendimento").html("Houve um erro ao carregar");
+                }
+
+            });
+            
+            
+        });
+    });
+</script>
+
 <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
 <script>
 window.onload = function(){focofield("estabelecimento");}
@@ -45,27 +73,16 @@ window.onload = function(){focofield("estabelecimento");}
                 <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
             </div>
         </div>
+       
+       
+       
+       
+       <div>
+        <select id="atendimento" style="display:none;"></select>
+    </div>
+        
 
-        <div class="form-row">
-            <div class="form-group col-md-8">
-                <label for="estabelecimento">Atendimento:</label>                             
-                <select 
-                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
-                    name="estabelecimento" 
-                    id="estabelecimento"
-                >
-
-                    <option value="NULL">Selecione o atendimento</option>
-                    <?php foreach($data['atendimentos'] as $atendimento) : ?> 
-                        <option value="<?php echo $atendimento->id;?>">
-                            <?php echo $atendimento->descricao;?>
-                        </option>
-                    <?php endforeach; ?>  
-                
-                </select>   
-                <span class="invalid-feedback"><?php echo $data['atendimento_err']; ?></span>
-            </div>
-        </div>
+       
         
 
         <!--DATA INICIAL-->

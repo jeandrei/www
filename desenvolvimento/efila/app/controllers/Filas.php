@@ -107,7 +107,11 @@
         $this->view('filas/add', $data);        
         }
      }//add
-
+        
+    // public function pega_atendimento(){
+      //      echo '<option>Teste</option>';
+            
+       // }
 
      /*
      public function edit($id){ 
