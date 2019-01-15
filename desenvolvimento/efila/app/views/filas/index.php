@@ -33,8 +33,7 @@
           <th style="width:5%" class="text-center"></th>
         </tr>
 
-        <?php //die(var_dump($data['filas']));?>
-        
+                
         <?php foreach($data['filas'] as $registro) : ?> 
 
         <tr>
@@ -49,7 +48,7 @@
         <td class="pt-3-half text-center"><?php echo $registro->idade_maxima;?></td> 
         <td class="pt-3-half text-center"><?php echo $registro->dataini;?></td> 
         <td class="pt-3-half text-center"><?php echo $registro->datafim;?></td>               
-          <td>
+        <td>
             <span class="table-edit"><a href="<?php echo URLROOT; ?>/filas/edit/<?php echo $registro->id; ?>" class="btn btn-primary btn-rounded btn-sm my-0">Editar</a></span>            
           </td>
           <td>

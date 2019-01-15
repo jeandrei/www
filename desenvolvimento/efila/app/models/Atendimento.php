@@ -37,9 +37,11 @@
 
     }
 
-    public function updateAtendimento($data){        
+    public function updateAtendimento($data){
+        
         $this->db->query('UPDATE atendimento SET descricao = :descricao, idade_minima = :idade_minima, idade_maxima = :idade_maxima WHERE id = :id');
         // Bind values
+        $this->db->bind(':id', $data['id']);
         $this->db->bind(':descricao', $data['descricao']);
         $this->db->bind(':idade_minima', $data['idade_minima']);        
         $this->db->bind(':idade_maxima', $data['idade_maxima']);    

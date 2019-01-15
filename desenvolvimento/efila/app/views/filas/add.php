@@ -24,11 +24,11 @@ window.onload = function(){focofield("estabelecimento");}
         
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="estabelecimento">Atendimento:</label>                             
+                <label for="atendimento">Atendimento:</label>                             
                 <select 
                     class="form-control <?php echo (!empty($data['atendimento_id_err'])) ? 'is-invalid' : ''; ?>"
-                    name="atendimento" 
-                    id="atendimento"
+                    name="atendimento_id" 
+                    id="atendimento_id"
                 >
 
                     <option value="NULL">Selecione o estabelecimento</option>

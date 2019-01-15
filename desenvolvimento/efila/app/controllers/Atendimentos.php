@@ -87,7 +87,6 @@
 
      
      public function edit($id){ 
-            
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
                      
            // Sanitize POST array
@@ -96,13 +95,14 @@
            
 
            $data = [
+               'id' => $id,
                'descricao' => trim($_POST['descricao']),               
                'idade_minima' => $_POST['idade_minima'],               
                'idade_maxima' => $_POST['idade_maxima'], 
                'descricao_err' => '',                              
                'idade_maxima_err' => ''                
            ];
-
+           //die(var_dump($data));
            // Validate title
            if(empty($data['descricao'])){
                $data['descricao_err'] = 'Por favor informe a descrição';
@@ -121,7 +121,7 @@
                
                ){
              // Validated
-             if($this->postModel->addAtendimento($data)){
+             if($this->postModel->updateAtendimento($data)){
                flash('post_message', 'Registro atualizado com sucesso!');
                redirect('atendimentos');
              } else {

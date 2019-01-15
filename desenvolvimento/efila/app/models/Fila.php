@@ -7,7 +7,8 @@
     }
 
     public function getFilas(){
-        $this->db->query('SELECT 
+        $this->db->query('SELECT
+                                fila.id as id,
                                 atendimento.descricao as atendimento, 
                                 atendimento.idade_minima,
                                 atendimento.idade_maxima,
@@ -50,11 +51,13 @@
     }
 
     public function updateFila($data){        
-        $this->db->query('UPDATE estabelecimento SET nome = :nome, endereco = :endereco WHERE id = :id');
+        $this->db->query('UPDATE fila SET atendimento_id = :atendimento_id, dataini = :dataini, datafim = :datafim , status = :status WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $data['id']);
-        $this->db->bind(':nome', $data['nome']);        
+        $this->db->bind(':atendimento_id', $data['atendimento_id']);        
         $this->db->bind(':endereco', $data['endereco']);    
+        $this->db->bind(':endereco', $data['endereco']);  
+        $this->db->bind(':endereco', $data['endereco']);  
         
         //Execute
         if($this->db->execute()){

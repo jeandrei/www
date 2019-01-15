@@ -24,7 +24,9 @@
                   type="text"  
                   name="nome"
                   placeholder="Nome do estabelecimento de Ensino"
-                  value="<?php echo $data['nome']; ?>"> 
+                  value="<?php echo $data['nome']; ?>"
+                  onkeydown="upperCaseF(this)"
+                  > 
                   <span class="invalid-feedback"><?php echo $data['nome_err']; ?></span>
             </div>
         </div>
@@ -40,8 +42,10 @@
                   type="text" 
                   name="endereco" 
                   id="endereco"
-                  value="<?php echo $data['endereco']; ?>"          
-                  placeholder="Endereço do estabelecimento de Ensino">
+                  value="<?php echo $data['endereco']; ?>"                           
+                  placeholder="Endereço do estabelecimento de Ensino"
+                  onkeydown="upperCaseF(this)" 
+                  >
                   <span class="invalid-feedback"><?php echo $data['endereco_err']; ?></span>        
             </div>   
 
