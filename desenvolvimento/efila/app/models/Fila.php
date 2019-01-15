@@ -19,7 +19,7 @@
                             FROM 
                                 atendimento, fila
                             WHERE 
-                                fila.atedimento_id = atendimento.id
+                                fila.atendimento_id = atendimento.id
 
                             ORDER BY atendimento.descricao DESC
                           ');
@@ -32,12 +32,11 @@
     public function addFila($data){
         $this->db->query('INSERT INTO 
                             fila 
-                            (estabelecimento_id, atedimento_id, dataini, datafim) 
+                            (atendimento_id, dataini, datafim) 
                             VALUES 
-                            (:estabelecimento_id, :atedimento_id, :dataini, :datafim)');
+                            (:atendimento_id, :dataini, :datafim)');
         // Bind values
-        $this->db->bind(':estabelecimento_id', $data['estabelecimento_id']);
-        $this->db->bind(':atedimento_id', $data['atedimento_id']);
+        $this->db->bind(':atendimento_id', $data['atendimento_id']);
         $this->db->bind(':dataini', $data['dataini']);         
         $this->db->bind(':datafim', $data['datafim']);
                
@@ -92,7 +91,7 @@
     }
     
     public function getAtendimentos(){
-        $this->db->query('SELECT id, descricao
+        $this->db->query('SELECT id as atendimento_id, descricao
                           FROM atendimento                                                
                           ORDER BY descricao DESC
                           ');

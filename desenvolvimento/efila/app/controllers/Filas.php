@@ -37,7 +37,7 @@
             $data = [     
                 'id' => $_POST['id'],            
                 'atendimentos' => $atendimentos,                
-                'atendimento_id' => $_POST['atendimento'],
+                'atendimento_id' => $_POST['atendimento_id'],
                 'dataini' => $_POST['dataini'],               
                 'datafim' => $_POST['datafim'], 
                 'descricao_err' => '',                                
@@ -106,7 +106,7 @@
             $data = [ 
                 'id' => $_POST['id'],               
                 'atendimentos' => $atendimentos,                
-                'atendimento_id' => $_POST['atendimento'],
+                'atendimento_id' => $_POST['atendimento_id'],
                 'dataini' => $_POST['dataini'],               
                 'datafim' => $_POST['datafim'], 
                 'descricao_err' => '',                                
@@ -148,7 +148,7 @@
              //busca lista de atendimentos  
             $post = $this->postModel->getFilaById($id);                  
             $atendimentos = $this->postModel->getAtendimentos();
-         
+           
             $data = [ 
                 'id' => $post->id,                      
                 'atendimentos' => $atendimentos,                

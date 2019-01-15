@@ -33,7 +33,7 @@ window.onload = function(){focofield("estabelecimento");}
 
                     <option value="NULL">Selecione o estabelecimento</option>
                     <?php foreach($data['atendimentos'] as $atendimento) : ?> 
-                        <option value="<?php echo $atendimento->id;?>">
+                        <option value="<?php echo $atendimento->atendimento_id;?>">
                             <?php echo $atendimento->descricao;?>
                         </option>
                     <?php endforeach; ?>  

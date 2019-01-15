@@ -32,8 +32,9 @@ window.onload = function(){focofield("estabelecimento");}
                 >
 
                     <option value="NULL">Selecione o estabelecimento</option>
+                    
                     <?php foreach($data['atendimentos'] as $atendimento) : ?> 
-                        <option value="<?php echo $atendimento->id;?>"<?php if($atendimento->id == $data['atendimento_id']){echo " selected";};?>>
+                        <option value="<?php echo $atendimento->atendimento_id;?>"<?php if($atendimento->atendimento_id == $data['atendimento_id']){echo " selected";};?>>
                             <?php echo $atendimento->descricao;?>
                         </option>
                     <?php endforeach; ?>  
@@ -41,10 +42,9 @@ window.onload = function(){focofield("estabelecimento");}
                 </select>   
                 <span class="invalid-feedback"><?php echo $data['atendimento_id_err']; ?></span>
             </div>
-        </div>       
+        </div>            
         
-        
-        <?php //não está trazendo o id do atendimento_id die(var_dump($data));?>
+        <?php //não está trazendo o id do atendimento_id  die(var_dump($data));?>
         
 
         <!--DATA INICIAL-->

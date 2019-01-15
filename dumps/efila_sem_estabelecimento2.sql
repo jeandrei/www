@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: 14-Jan-2019 às 20:48
--- Versão do servidor: 5.7.24
--- versão do PHP: 7.2.13
+-- Tempo de geração: 15/01/2019 às 12:52
+-- Versão do servidor: 5.7.23
+-- Versão do PHP: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `efila`
+-- Banco de dados: `efila`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura para tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
@@ -37,7 +37,7 @@ CREATE TABLE `aluno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `aluno`
+-- Fazendo dump de dados para tabela `aluno`
 --
 
 INSERT INTO `aluno` (`id`, `usuario_id`, `nascimento`, `endereco`, `Nome`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `aluno` (`id`, `usuario_id`, `nascimento`, `endereco`, `Nome`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `atendimento`
+-- Estrutura para tabela `atendimento`
 --
 
 CREATE TABLE `atendimento` (
@@ -58,18 +58,20 @@ CREATE TABLE `atendimento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `atendimento`
+-- Fazendo dump de dados para tabela `atendimento`
 --
 
 INSERT INTO `atendimento` (`id`, `idade_minima`, `idade_maxima`, `descricao`) VALUES
-(3, 2, 3, 'MATERNAL 1'),
-(12, 20, 20, 'NOVO ESTABELECIMENTO'),
-(17, 2, 20, 'TESTE SEDUC');
+(3, 2, 3, 'MATERNAL I'),
+(12, 20, 20, 'MATERNAL II'),
+(19, 20, 20, 'PRÉ'),
+(20, 20, 20, 'PRÉ II'),
+(21, 24, 48, 'PENHA MATERNAL II');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `estabelecimento`
+-- Estrutura para tabela `estabelecimento`
 --
 
 CREATE TABLE `estabelecimento` (
@@ -79,42 +81,42 @@ CREATE TABLE `estabelecimento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `estabelecimento`
+-- Fazendo dump de dados para tabela `estabelecimento`
 --
 
 INSERT INTO `estabelecimento` (`id`, `nome`, `endereco`) VALUES
-(4, 'TESTE', 'ADAFD'),
+(4, 'TESTE ESTABELECIMENTO', 'ADAFD'),
 (6, 'CEI ANJOS DO ITAPOCOROI', 'RUA DAS NEVES, 96 BAIRRO GRAVATÃ DKJDKK'),
-(7, 'RUBENS', 'RUA TESTE'),
-(8, 'TESTE NOVO', 'AKDLKAJKLD');
+(7, 'RUBENS', 'RUA TESTE');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fila`
+-- Estrutura para tabela `fila`
 --
 
 CREATE TABLE `fila` (
   `id` int(11) NOT NULL,
-  `atedimento_id` int(11) NOT NULL,
+  `atendimento_id` int(11) NOT NULL,
   `dataini` date NOT NULL,
   `datafim` date NOT NULL,
   `status` char(10) NOT NULL DEFAULT 'ativo'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `fila`
+-- Fazendo dump de dados para tabela `fila`
 --
 
-INSERT INTO `fila` (`id`, `atedimento_id`, `dataini`, `datafim`, `status`) VALUES
+INSERT INTO `fila` (`id`, `atendimento_id`, `dataini`, `datafim`, `status`) VALUES
 (1, 3, '2019-02-01', '2019-03-01', 'ativo'),
 (2, 3, '2018-08-05', '2019-01-08', 'inativo'),
-(3, 12, '2018-10-07', '2019-01-10', 'inativo');
+(3, 12, '2018-10-07', '2019-01-10', 'inativo'),
+(4, 21, '2018-11-01', '2019-01-15', 'ativo');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `filaespera`
+-- Estrutura para tabela `filaespera`
 --
 
 CREATE TABLE `filaespera` (
@@ -126,7 +128,7 @@ CREATE TABLE `filaespera` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `filaespera`
+-- Fazendo dump de dados para tabela `filaespera`
 --
 
 INSERT INTO `filaespera` (`id`, `fila_id`, `aluno_id`, `ordem_fila`, `stuacao`) VALUES
@@ -136,7 +138,7 @@ INSERT INTO `filaespera` (`id`, `fila_id`, `aluno_id`, `ordem_fila`, `stuacao`) 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `posts`
+-- Estrutura para tabela `posts`
 --
 
 CREATE TABLE `posts` (
@@ -148,7 +150,7 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `posts`
+-- Fazendo dump de dados para tabela `posts`
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created_at`) VALUES
@@ -158,7 +160,7 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -175,7 +177,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `users`
+-- Fazendo dump de dados para tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `telefone1`, `desctel1`, `telefone2`, `desctel2`, `type`) VALUES
@@ -187,37 +189,37 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `telefone1
 (7, 'Arlete', 'arlete@gmail.com', '$2y$10$nUAZY2gpZvobmJDNEKJHr.cT4B1xpB89xDgu94hxyTjGmhp4/O5lG', '2019-01-09 17:35:50', '(55) 12315-4545', 'casa', '(54) 54654-5456', 'trabalho', 'user');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `aluno`
+-- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indexes for table `atendimento`
+-- Índices de tabela `atendimento`
 --
 ALTER TABLE `atendimento`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `estabelecimento`
+-- Índices de tabela `estabelecimento`
 --
 ALTER TABLE `estabelecimento`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fila`
+-- Índices de tabela `fila`
 --
 ALTER TABLE `fila`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `atedimento_id` (`atedimento_id`);
+  ADD KEY `atedimento_id` (`atendimento_id`);
 
 --
--- Indexes for table `filaespera`
+-- Índices de tabela `filaespera`
 --
 ALTER TABLE `filaespera`
   ADD PRIMARY KEY (`id`),
@@ -226,81 +228,81 @@ ALTER TABLE `filaespera`
   ADD KEY `fila_id` (`fila_id`);
 
 --
--- Indexes for table `posts`
+-- Índices de tabela `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `aluno`
+-- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `atendimento`
+-- AUTO_INCREMENT de tabela `atendimento`
 --
 ALTER TABLE `atendimento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `estabelecimento`
+-- AUTO_INCREMENT de tabela `estabelecimento`
 --
 ALTER TABLE `estabelecimento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `fila`
+-- AUTO_INCREMENT de tabela `fila`
 --
 ALTER TABLE `fila`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `filaespera`
+-- AUTO_INCREMENT de tabela `filaespera`
 --
 ALTER TABLE `filaespera`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `aluno`
+-- Restrições para tabelas `aluno`
 --
 ALTER TABLE `aluno`
   ADD CONSTRAINT `aluno_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `fila`
+-- Restrições para tabelas `fila`
 --
 ALTER TABLE `fila`
-  ADD CONSTRAINT `atendimento_id` FOREIGN KEY (`atedimento_id`) REFERENCES `atendimento` (`id`);
+  ADD CONSTRAINT `atendimento_id` FOREIGN KEY (`atendimento_id`) REFERENCES `atendimento` (`id`);
 
 --
--- Limitadores para a tabela `filaespera`
+-- Restrições para tabelas `filaespera`
 --
 ALTER TABLE `filaespera`
   ADD CONSTRAINT `filaespera_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id`),
