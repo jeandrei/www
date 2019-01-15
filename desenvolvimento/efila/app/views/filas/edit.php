@@ -75,7 +75,42 @@ window.onload = function(){focofield("estabelecimento");}
                   > 
                   <span class="invalid-feedback"><?php echo $data['datafim_err']; ?></span>
             </div>
-        </div>    
+        </div>  
+
+
+        <span>Status da fila</span>
+        <div class="form-row">
+            <div class="form-check col-md-8">
+                <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="status" 
+                        id="status_ativo" 
+                        value="ativo"  <?php echo ($data['status'] == "ativo") ? "checked" : null; ?>
+                    >
+                    <label class="form-check-label" for="status_ativo">
+                        Ativo
+                    </label>
+                    </div>
+                    <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="status" 
+                        id="status_inativo" 
+                        value="inativo" <?php echo ($data['status']  == "inativo") ? "checked" : null; ?>
+                    >
+                    <label class="form-check-label" for="status_inativo">
+                        Inativo
+                    </label>
+                </div>                            
+            </div>
+        </div>
+
+
+
+
        
         </fieldset>
 
