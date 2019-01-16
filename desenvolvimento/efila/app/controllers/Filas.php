@@ -163,14 +163,14 @@
         }
      }//edit
 
-    /*
+    
      public function delete($id){   
          $registro = $this->postModel->getFilaById($id); 
          if($this->postModel->deleteFila($id)){
             flash('post_message', 'Registro removido com sucesso!');
-            redirect('Filas');
+            redirect('filas');
         } else {
             die('Ops! Algo deu errado!');
         }         
-     }*/
+     }
  }//class

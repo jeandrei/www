@@ -20,6 +20,6 @@
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>
-<?php require APPROOT . '/views/inc/navbar.php'; ?>
+<?php require_once APPROOT . '/views/inc/navbar.php'; ?>
 <!-- a linha abaixo inicia um container do bootstrap ela vai fechr no arquivo footer.php-->
 <div class="container-fluid">   

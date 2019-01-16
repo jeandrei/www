@@ -1,5 +1,5 @@
-<?php require APPROOT . '/views/inc/header.php';
-      require APPROOT . '/helpers/functions.php';
+<?php require_once APPROOT . '/views/inc/header.php';
+      require_once APPROOT . '/helpers/functions.php';
      
 ?>
 
@@ -13,7 +13,7 @@ window.onload = function(){focofield("estabelecimento");}
 
 <hr>
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE filas</h3>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">EDITANDO FILAS</h3>
     <div class="card-body">
 
          <form action="<?php echo URLROOT; ?>/filas/edit/<?php echo $data['id']; ?>" method="post">    
