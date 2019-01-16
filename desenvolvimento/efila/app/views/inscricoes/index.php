@@ -8,7 +8,7 @@
 
 <!-- Adicionar -->
 <div class="container-fluid text-right">
-    <a href="<?php echo URLROOT; ?>/inscricoes/add" class="btn btn-success">
+    <a href="<?php echo URLROOT; ?>/alunos" class="btn btn-success">
         <i class="fa fa-pencil"></i> Adicionar
     </a>
 </div>
@@ -25,9 +25,12 @@
         <tr>
           <th class="text-left col-md-6">NOME DO ALUNO</th> 
           <th class="text-center col-md-6">ATENDIMENTO</th> 
-          <th class="text-center col-md-6">POSIÇÃO</th>   
-          <th class="text-center"></th>
+          <th class="text-center col-md-6">POSIÇÃO</th> 
+          <th style="width:5%" class="text-center"></th>
+          <th style="width:5%" class="text-center"></th>
         </tr>
+
+       
         
         <?php foreach($data['inscricoes'] as $registro) : ?> 
 
@@ -35,7 +38,10 @@
         <td style="width:50%" class="pt-3-half text-left"><?php echo $registro->nome;?></td>
         <td style="width:30%" class="pt-3-half text-center"><?php echo $registro->descricao;?></td>
         <td style="width:10%" class="pt-3-half text-center"><?php echo $registro->ordem_fila . "º";?></td>
-         
+        <td>
+            <span class="table-edit"><a href="<?php echo URLROOT; ?>/filas/ver/<?php echo $registro->fila_id; ?>" class="btn btn-primary btn-rounded btn-sm my-0">Ver</a></span>            
+        </td>
+        
           
           <td>
             <span class="table-remove">
