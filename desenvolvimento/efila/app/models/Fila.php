@@ -49,14 +49,14 @@
 
     }
 
-    public function updateFila($data){        
+    public function updateFila($data){       
         $this->db->query('UPDATE fila SET atendimento_id = :atendimento_id, dataini = :dataini, datafim = :datafim , status = :status WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':atendimento_id', $data['atendimento_id']);        
-        $this->db->bind(':endereco', $data['endereco']);    
-        $this->db->bind(':endereco', $data['endereco']);  
-        $this->db->bind(':endereco', $data['endereco']);  
+        $this->db->bind(':dataini', $data['dataini']);    
+        $this->db->bind(':datafim', $data['datafim']);  
+        $this->db->bind(':status', $data['status']);  
         
         //Execute
         if($this->db->execute()){

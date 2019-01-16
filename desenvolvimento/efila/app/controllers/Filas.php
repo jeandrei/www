@@ -102,19 +102,20 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             $atendimentos = $this->postModel->getAtendimentos();
             
-
+            
             $data = [ 
-                'id' => $_POST['id'],               
+                'id' => $id,               
                 'atendimentos' => $atendimentos,                
                 'atendimento_id' => $_POST['atendimento_id'],
                 'dataini' => $_POST['dataini'],               
-                'datafim' => $_POST['datafim'], 
+                'datafim' => $_POST['datafim'],
+                'status' => $_POST['status'],                 
                 'descricao_err' => '',                                
                 'atendimento_id_err' => '',
                 'dataini_err' => '',
                 'datafim_err' => ''                
             ];
-            
+           
             // Validate title  
             if(($data['atendimento_id']) == 'NULL'){
                 $data['atendimento_id_err'] = 'Por favor selecione o atendimento';                
@@ -148,13 +149,14 @@
              //busca lista de atendimentos  
             $post = $this->postModel->getFilaById($id);                  
             $atendimentos = $this->postModel->getAtendimentos();
-           
+            
             $data = [ 
                 'id' => $post->id,                      
                 'atendimentos' => $atendimentos,                
                 'atendimento_id' => $post->atendimento_id,
                 'dataini' => $post->dataini,               
-                'datafim' => $post->datafim                     
+                'datafim' => $post->datafim,
+                'status' => $post->status                     
         ];
         
         $this->view('filas/edit', $data);        
