@@ -19,8 +19,10 @@
         $this->view('inscricoes/index', $data);      
 
      }
-/*
+
      public function add(){
+         die("inscrição");
+         /*        
         
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
           
@@ -47,13 +49,13 @@
               // Validated
               if($this->postModel->addinscricao($data)){
                 flash('post_message', 'Registro realizado com sucesso!');
-                redirect('Inscricoes');
+                redirect('inscricoes');
               } else {
                 die('Ops! Algo deu errado.');
               }
             } else {
                 // Load view with errors
-                $this->view('Inscricoes/add', $data);
+                $this->view('inscricoes/add', $data);
             }
 
          } else {
@@ -63,12 +65,12 @@
                 'endereco' => ''
         ];
         
-        $this->view('Inscricoes/add', $data);        
-        }
+        $this->view('inscricoes/add', $data);        
+        }*/
      }//add
 
 
-     
+     /*
      public function edit($id){ 
             
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

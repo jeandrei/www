@@ -12,8 +12,10 @@
 
      public function index(){
         $registros = $this->postModel->getAlunos($_SESSION['user_id']);
+        $inscricoes = $this->postModel->getInscricoes($_SESSION['user_id']);
         $data = [
-            'alunos' => $registros
+            'alunos' => $registros,
+            'inscricoes' => $inscricoes
         ];
         
         $this->view('alunos/index', $data);      

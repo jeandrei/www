@@ -27,14 +27,38 @@
           <th class="text-center"></th>
           <th class="text-center"></th>          
         </tr>
-       
+       <?php //die(var_dump($data['inscricoes']));?>
         <?php foreach($data['alunos'] as $registro) : ?> 
 
         <tr>
         <td class="pt-3-half text-left"><?php echo $registro->nome;?></td>
          
           <td>
-            <span class="table-edit"><a href="<?php echo URLROOT; ?>/alunos/edit/<?php echo $registro->id; ?>" class="btn btn-success btn-rounded btn-sm my-0">Inscrever</a></span>            
+            <span class="table-edit"><a href="<?php 
+              if (!in_array($registro->id, $data['inscricoes'])){
+                echo URLROOT; ?>/inscricoes/add/<?php echo $registro->id; 
+              }
+              ?>" 
+              class="btn 
+              <?php
+                if (in_array($registro->id, $data['inscricoes'])){
+                  echo "btn-secondary disabled";
+                }
+                else{
+                  echo "btn-success";
+                }
+              ?>
+              btn-rounded btn-sm my-0">
+              <?php
+                if (in_array($registro->id, $data['inscricoes'])){
+                  echo "Inscrito";
+                }
+                else{
+                  echo "Inscrever";
+                }
+              ?> 
+              </a></span>
+            
           </td>
           
           <td>

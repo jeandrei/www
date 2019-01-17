@@ -94,4 +94,43 @@
 
     }
 
+    public function getInscricoes($id){
+        $this->db->query('SELECT                             
+                            insc.aluno_id as id_aluno    
+                        FROM 
+                            inscricoes insc, 
+                            fila, 
+                            atendimento, 
+                            aluno, 
+                            users
+                          WHERE
+                            insc.fila_id = fila.id
+                         AND
+                            fila.atendimento_id = atendimento.id
+                         AND
+                            insc.aluno_id = aluno.id
+                         AND
+                            aluno.usuario_id = users.id
+                         AND
+                            users.id = :id;                      
+                          ORDER BY aluno.nome DESC
+                          ');
+        
+        $this->db->bind(':id', $id);
+        //converte o objeto em um array simples para depois utilizar a 
+        //função in_array do php para verificar se o aluno já está inscrito
+        //aqui ele vai retornar apenas os alunos inscritos
+        //então na hora de montar a tabela e exibir o botão de inscrição
+        //verifica se o registro que vai ser exibido na tabela possui inscrição
+        //se possuir não apresenta o botão inscrever
+        $inscricoes = $this->db->resultSet();
+        foreach ($inscricoes as $registro){
+            $results[] = $registro->id_aluno;
+        }
+
+        return $results;
+    }
+
+
+
   }
