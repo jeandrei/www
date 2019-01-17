@@ -20,10 +20,9 @@
 
      }
 
-     public function add(){
-         die("inscrição");
-         /*        
-        
+     public function add($id_aluno){
+               
+
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
           
             // Sanitize POST array
@@ -59,14 +58,21 @@
             }
 
          } else {
-         
+            $aluno = $this->postModel->getAlunoById($id_aluno);
+            $filas = $this->postModel->getFilas();
+            $estabelecimentos = $this->postModel->getEstabelecimentos();
+            
+         //die(var_dump($aluno));
             $data = [
+                'aluno' => $aluno,
+                'filas' => $filas,
+                'estabelecimentos' => $estabelecimentos,
                 'nome' => '',
                 'endereco' => ''
         ];
         
         $this->view('inscricoes/add', $data);        
-        }*/
+        }
      }//add
 
 

@@ -100,4 +100,53 @@
 
     }
 
+    public function getAlunoById($id){
+        $this->db->query('SELECT * FROM aluno WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    public function getFilas(){
+        $this->db->query('SELECT
+                                fila.id as id,
+                                atendimento.descricao as atendimento, 
+                                atendimento.idade_minima,
+                                atendimento.idade_maxima,
+                                fila.dataini,
+                                fila.datafim,
+                                fila.status
+
+                            FROM 
+                                atendimento, fila
+                            WHERE 
+                                fila.atendimento_id = atendimento.id
+                            AND
+                                fila.status = "ativo"
+
+                            ORDER BY atendimento.descricao DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+    public function getEstabelecimentos(){
+        $this->db->query('SELECT *
+                          FROM estabelecimento                          
+                          ORDER BY nome DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+
+
   }
