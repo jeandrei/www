@@ -6,11 +6,15 @@
         $this->db = new Database;        
     }
 
-    public function getAlunos(){
+    public function getAlunos($id_user){
         $this->db->query('SELECT *
-                          FROM aluno                          
+                          FROM aluno 
+                          WHERE
+                          usuario_id = :usuario_id;                         
                           ORDER BY nome DESC
                           ');
+        
+        $this->db->bind(':usuario_id', $id_user);
 
         $results = $this->db->resultSet();
 
@@ -18,10 +22,29 @@
     }
 
     public function addAluno($data){
-        $this->db->query('INSERT INTO aluno (nome, endereco) VALUES (:nome, :endereco)');
+        //die(var_dump($data));
+        $this->db->query('INSERT INTO 
+                                aluno (
+                                    usuario_id, 
+                                    nome, 
+                                    nascimento, 
+                                    endereco
+                                    ) 
+                            VALUES 
+                                    (
+                                    :usuario_id, 
+                                    :nome, 
+                                    :nascimento,
+                                    :endereco
+                                    )                                                        
+                        ');
         // Bind values
+        
+        $this->db->bind(':usuario_id', $data['usuario_id']);
         $this->db->bind(':nome', $data['nome']);
-        $this->db->bind(':endereco', $data['endereco']);         
+        $this->db->bind(':nascimento', $data['nascimento']);  
+        $this->db->bind(':endereco', $data['endereco']);  
+            
         
         //Execute
         if($this->db->execute()){

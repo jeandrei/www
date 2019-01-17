@@ -8,8 +8,8 @@
 
 <!-- Adicionar -->
 <div class="container-fluid text-right">
-    <a href="<?php echo URLROOT; ?>/alunos/add" class="btn btn-success">
-        <i class="fa fa-pencil"></i> Adicionar
+    <a href="<?php echo URLROOT; ?>/alunos/add/<?php echo $_SESSION['user_id']; ?>" class="btn btn-success">
+        <i class="fa fa-pencil"></i> Adicionar Aluno
     </a>
 </div>
 
@@ -23,12 +23,11 @@
       
       <table class="table table-bordered table-responsive-md table-striped text-center">
         <tr>
-          <th class="text-left col-md-6">NOME DO aluno</th>          
+          <th class="text-left col-md-6">NOME DO ALUNO</th>          
           <th class="text-center"></th>
-          <th class="text-center"></th>
-          <th class="text-center"></th>
+          <th class="text-center"></th>          
         </tr>
-        
+       
         <?php foreach($data['alunos'] as $registro) : ?> 
 
         <tr>
@@ -37,9 +36,7 @@
           <td>
             <span class="table-edit"><a href="<?php echo URLROOT; ?>/alunos/edit/<?php echo $registro->id; ?>" class="btn btn-success btn-rounded btn-sm my-0">Inscrever</a></span>            
           </td>
-          <td>
-            <span class="table-edit"><a href="<?php echo URLROOT; ?>/alunos/edit/<?php echo $registro->id; ?>" class="btn btn-primary btn-rounded btn-sm my-0">Editar</a></span>            
-          </td>
+          
           <td>
             <span class="table-remove">
             <a href="<?php echo URLROOT; ?>/alunos/delete/<?php echo $registro->id; ?>" 

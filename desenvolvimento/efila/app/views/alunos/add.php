@@ -9,12 +9,12 @@ window.onload = function(){focofield("nome");}
 
 <hr>
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE ESTABELECIMENTO</h3>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">CADASTRO DE ALUNOS</h3>
     <div class="card-body">
 
-        <form action="<?php echo URLROOT; ?>/estabelecimentos/add" method="post">    
+        <form action="<?php echo URLROOT; ?>/alunos/add/<?php echo $_SESSION['user_id']; ?>" method="post">    
 
-        <legend>Dados do Estabelecimento</legend>
+        <legend>Dados do Aluno</legend>
         <fieldset>
 
         <!--NOME-->
@@ -26,7 +26,7 @@ window.onload = function(){focofield("nome");}
                   type="text"  
                   name="nome"
                   id="nome";
-                  placeholder="Nome do estabelecimento de Ensino"
+                  placeholder="Nome do aluno"
                   value="<?php echo $data['nome']; ?>"
                   onkeydown="upperCaseF(this)"
                   > 
@@ -46,11 +46,27 @@ window.onload = function(){focofield("nome");}
                   name="endereco" 
                   id="endereco"
                   value="<?php echo $data['endereco']; ?>"          
-                  placeholder="Endereço do estabelecimento de Ensino"
+                  placeholder="Endereço do aluno"
                   onkeydown="upperCaseF(this)"
                   >
                   <span class="invalid-feedback"><?php echo $data['endereco_err']; ?></span>        
-            </div>   
+            </div>          
+        </div> 
+
+        <!--NASCIMENTO-->
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="nascimento">Data de nascimento: <sup>*</sup></label>
+                <input 
+                  class="form-control <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>"
+                  type="date"  
+                  name="nascimento"
+                  id="nascimento";                 
+                  value="<?php echo $data['nascimento']; ?>"                  
+                  > 
+                  <span class="invalid-feedback"><?php echo $data['nascimento_err']; ?></span>
+            </div>
+        </div>
 
         </fieldset>
 
@@ -58,7 +74,7 @@ window.onload = function(){focofield("nome");}
        
         
         <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="<?php echo URLROOT; ?>/estabelecimentos" class="btn btn-light"><i class="fa fa-backward"></i>Voltar</a>
+        <a href="<?php echo URLROOT; ?>/alunos" class="btn btn-light"><i class="fa fa-backward"></i>Voltar</a>
         
         </form>
         

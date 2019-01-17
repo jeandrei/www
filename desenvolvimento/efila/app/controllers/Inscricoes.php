@@ -5,10 +5,6 @@
             
           redirect('users/login');
         } 
-        elseif(($_SESSION['user_type']) <> "admin")
-        {
-            die("Você deve ser um administrador para acessar esta página!");
-        }    
        
      $this->postModel = $this->model('Inscricao');
      $this->userModel = $this->model('User');
