@@ -34,26 +34,38 @@
         <td class="pt-3-half text-left"><?php echo $registro->nome;?></td>
          
           <td>
-            <span class="table-edit"><a href="<?php 
-              if (!in_array($registro->id, $data['inscricoes'])){
-                echo URLROOT; ?>/inscricoes/add/<?php echo $registro->id; 
+            <span class="table-edit"><a href="<?php
+             if($data['inscricoes'] <> NULL){ 
+                if (!in_array($registro->id, $data['inscricoes'])){
+                  echo URLROOT; ?>/inscricoes/add/<?php echo $registro->id; 
+                }
+              }else{
+                echo URLROOT; ?>/inscricoes/add/<?php echo $registro->id;
               }
               ?>" 
               class="btn 
               <?php
-                if (in_array($registro->id, $data['inscricoes'])){
-                  echo "btn-secondary disabled";
-                }
-                else{
+              if($data['inscricoes'] <> NULL){
+                  if (in_array($registro->id, $data['inscricoes'])){
+                    echo "btn-secondary disabled";
+                  }
+                  else{
+                    echo "btn-success";
+                  }
+              }else{
                   echo "btn-success";
                 }
               ?>
               btn-rounded btn-sm my-0">
               <?php
-                if (in_array($registro->id, $data['inscricoes'])){
-                  echo "Inscrito";
-                }
-                else{
+                if($data['inscricoes'] <> NULL){
+                  if (in_array($registro->id, $data['inscricoes'])){
+                    echo "Inscrito";
+                  }
+                  else{
+                    echo "Inscrever";
+                  }
+                }else{
                   echo "Inscrever";
                 }
               ?> 
