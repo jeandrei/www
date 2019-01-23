@@ -1,0 +1,1068 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="msapplication-TileImage"
+          content="http://www.itapema.sc.gov.br/wp-content/themes/site-pmi-2017/assets/img/icone_120.png">
+    <link rel="apple-touch-icon"
+          href="http://www.itapema.sc.gov.br/wp-content/themes/site-pmi-2017/assets/img/icone_120.png">
+    <link rel="icon" sizes="192x192"
+          href="http://www.itapema.sc.gov.br/wp-content/themes/site-pmi-2017/assets/img/icone_192.png">
+    <link rel="icon" sizes="72x72"
+          href="http://www.itapema.sc.gov.br/wp-content/themes/site-pmi-2017/assets/img/icone_72.png">
+    <meta name="description" content="Prefeitura Municipal de Itapema">
+    <meta name="author" content="@itapema">
+    <meta name="msapplication-TileColor" content="#0D54AA">
+    <meta name="theme-color" content="#0D54AA">
+
+    <title>Prefeitura Municipal de Itapema</title>
+    <link href="../assets/app.min.css" type="text/css" rel="stylesheet">
+<script>
+
+    $("#tabs").tabs({
+        activate: function (event, ui) {
+            var active = $('#tabs').tabs('option', 'active');
+            $("#tabid").html('the tab id is ' 
+            + $("#tabs ul>li a").eq(active).attr("href")
+            );
+        }
+        });
+
+        $("button").on('click', function(){
+            $("#tabs").tabs('option', 'active', 1);
+            /*index da aba que você quer selecionar*/
+        });
+</script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #0D54AA; border: none; color: #ffffff !important;">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#" style="color: white;">Prefeitura Municipal de Itapema</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#">
+						<i class="fa fa-home" aria-hidden="true"></i>
+						Inicio
+					</a>
+				</li>
+
+				<!--<li>
+					<a href="/itanet/filadeespera/">
+					<a href="/itanet/filadeespera/">
+						<i class="fa fa-users" aria-hidden="true"></i>
+						Fila de espera CMEI
+					</a>
+				</li>-->
+				<!--  <li><a href="#contact">Contact</a></li>-->
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="modal_titulo">Mensagem</h4>
+            </div>
+            <div class="modal-body" id="conteudo_modal">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Fechar
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div><div class="container" style="margin-top: 90px;">
+
+	        <div class="row">
+            <div class="col-lg-12">
+                <blockquote style="border-left-color: #0D54AA; ">
+                    <i class="fa fa-child" aria-hidden="true"></i>
+                    Fila Única
+                </blockquote>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-lg-2">
+                <button class="btn btn-default btn-block" onclick="window.history.go(-1); return false;">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    Voltar
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-lg-12" id="result">
+                <ul class="nav nav-tabs" role="tablist" id="tabs">
+
+                    <li role="presentation" class="active">
+                        <a href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            1º Etapa
+                        </a>
+                    </li>
+
+                    <li role="presentation">
+                        <a href="#childrem" aria-controls="childrem" role="tab" data-toggle="tab">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            2º Etapa
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" style="padding-top: 20px;">
+
+                    <div role="tabpanel" class="tab-pane active" id="identificacao">
+
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <blockquote style="border-left-color: #008a00; font-size: unset;">
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="responsavel">
+                                                    Nome completo do responsável:
+                                                </label>
+                                                <input type="text" name="responsavel" id="responsavel"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-4">
+                                            <label for="cpf">
+                                                CPF do responsável:
+                                            </label>
+                                            <input type="text" name="cpf" id="cpf" class="form-control" maxlength="14">
+                                        </div>
+
+                                        <div class="col-lg-8">
+                                            <label for="email">
+                                                E-mail:
+                                            </label>
+                                            <input type="email" name="email" id="email" class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <label for="telefone1">
+                                                1 - *Celular para contato:
+                                            </label>
+                                            <input type="text" name="telefone1" id="telefone1" maxlength="15"
+                                                   class="form-control">
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="telefone2">
+                                                2 - Celular para contato:
+                                            </label>
+                                            <input type="text" name="telefone2" id="telefone2" maxlength="15"
+                                                   class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="bairro">
+                                                Bairro:
+                                            </label>
+                                            <select name="bairro" id="bairro" class="form-control">
+                                                <option value="5">Alto São Bento</option>
+                                                <option value="6">Andorinha</option>
+                                                <option value="18">Areal</option>
+                                                <option value="7">Canto da Praia</option>
+                                                <option value="8">Casa Branca</option>
+                                                <option value="3">Centro</option>
+                                                <option value="9">Ilhota</option>
+                                                <option value="4">Jardim Praia Mar</option>
+                                                <option value="10">Leopoldo Zarling</option>
+                                                <option value="1">Meia Praia</option>
+                                                <option value="2">Morretes</option>
+                                                <option value="12">Sertão do Trombudo</option>
+                                                <option value="13">Sertãozinho</option>
+                                                <option value="17">Taboleiro dos Oliveira</option>
+                                                <option value="15">Várzea</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="rua">
+                                                Rua:
+                                            </label>
+                                            <input type="text" name="rua" id="rua" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label for="numero">
+                                                Número:
+                                            </label>
+                                            <input type="text" name="numero" id="numero" class="form-control">
+                                        </div>
+
+                                        <div class="col-lg-8">
+                                            <label for="complemento">
+                                                Complemento:
+                                            </label>
+                                            <input type="text" name="complemento" id="complemento" class="form-control">
+                                        </div>
+                                    </div>
+
+                                </blockquote>
+                                <blockquote style="border-left-color: #F4C20B; font-size: unset;">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="nome">
+                                                    Nome completo da criança :
+                                                </label>
+                                                <input type="text" name="nome" id="nome" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="form-group">
+                                                <label for="nascimento">
+                                                    Data de nascimento:
+                                                </label>
+                                                <input type="text" name="nascimento" id="nascimento"
+                                                       class="form-control" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="form-group">
+                                                <label for="certidao">
+                                                    Certidão de nascimento:
+                                                </label>
+                                                <input type="text" name="certidao" id="certidao" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="alert alert-warning" role="alert">
+                                                <div class="checkbox checkbox-primary checkbox-inline">
+                                                    <input id="checkbox_portador" type="checkbox" name="portador"   value="1">
+                                                    <label for="checkbox_portador">
+                                                        <strong>Criança com deficiência ?</strong>
+                                                    </label>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </blockquote>
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <blockquote style="border-left-color: #0c85d0; font-size: unset;">
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-info" role="alert">
+                                                Você pode escolher até três escolas
+                                                de preferência sendo obrigatório <strong>escolher pelo menos
+                                                    uma.</strong>
+                                                Será chamados de acordo com a disponibilidade das escolas abaixo e sua
+                                                posição na fila.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <label for="setor1" class="help-block">
+                                                *Escola:
+                                            </label>
+                                            <select name="setor1" id="setor1" class="form-control">
+                                                <option value="0">-</option>
+                                                <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
+                                                <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
+                                                <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
+                                                <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
+                                                <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
+                                                <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
+                                                <option value="127">CMEI - Clube do Mickey (Varzea)</option>
+                                                <option value="29">CMEI - Ilhota (Ilhota)</option>
+                                                <option value="114">CMEI - Maria Iracema (Morretes)</option>
+                                                <option value="110">CMEI - Meia Praia (Meia Praia)</option>
+                                                <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
+                                                <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
+                                                <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
+                                                <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
+                                                <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            </select>
+                                            <label class="help-block">Campo obrigatório</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="turno1" class="help-block">
+                                                    Turno
+                                                </label>
+                                                <select class="form-control" id="turno1">
+                                                    <option></option>
+			                                        <option value="1">Matutino</option><option value="2">Vespertino</option><option value="3">Integral</option>                                                </select>
+                                                <label class="help-block">Campo obrigatório</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="setor2">
+                                                Escola :
+                                            </label>
+                                            <select name="setor2" id="setor2" class="form-control">
+                                                <option value="0">-</option>
+                                                <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
+                                                <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
+                                                <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
+                                                <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
+                                                <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
+                                                <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
+                                                <option value="127">CMEI - Clube do Mickey (Varzea)</option>
+                                                <option value="29">CMEI - Ilhota (Ilhota)</option>
+                                                <option value="114">CMEI - Maria Iracema (Morretes)</option>
+                                                <option value="110">CMEI - Meia Praia (Meia Praia)</option>
+                                                <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
+                                                <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
+                                                <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
+                                                <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
+                                                <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="turno2">
+                                                    Turno
+                                                </label>
+                                                <select class="form-control" id="turno2">
+                                                    <option></option>
+			                                        <option value="1">Matutino</option><option value="2">Vespertino</option><option value="3">Integral</option>                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="setor3">
+                                                Escola :
+                                            </label>
+                                            <select name="setor3" id="setor3" class="form-control">
+                                                <option value="0">-</option>
+                                                <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
+                                                <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
+                                                <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
+                                                <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
+                                                <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
+                                                <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
+                                                <option value="127">CMEI - Clube do Mickey (Varzea)</option>
+                                                <option value="29">CMEI - Ilhota (Ilhota)</option>
+                                                <option value="114">CMEI - Maria Iracema (Morretes)</option>
+                                                <option value="110">CMEI - Meia Praia (Meia Praia)</option>
+                                                <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
+                                                <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
+                                                <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
+                                                <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
+                                                <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="turno3">
+                                                Turno
+                                            </label>
+                                            <select class="form-control" id="turno3">
+                                                <option></option>
+			                                    <option value="1">Matutino</option><option value="2">Vespertino</option><option value="3">Integral</option>                                            </select>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="obs">
+                                                    Observação
+                                                </label>
+                                                <textarea class="form-control" id="obs"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </blockquote>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <button class="btn btn-primary btn-block" onclick="segunda('childrem');">
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                    Proximo
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="childrem">
+
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="alert alert-warning" role="alert">
+                                            Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
+                                            residência,
+                                            com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comprovante_residencia">
+                                            Comprovante de residência
+                                        </label>
+                                        <input id="comprovante_residencia" name="comprovante_residencia" type="file">
+                                        <label id="kv-error-2"></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="alert alert-warning" role="alert">
+                                            Em um <strong>único</strong> arquivo deve ser enviado a certidão de
+                                            nascimento,
+                                            com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="certidaonascimento">
+                                            Comprovante de nascimento da criança
+                                        </label>
+                                        <input id="certidaonascimento" name="certidaonascimento" type="file">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-lg-12">
+                                    <div class="alert alert-warning text-center" role="alert">
+                                        <strong>
+                                            Marque a caixa abaixo para liberar o botão para finalizar o cadastro.
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 0;">
+
+                                <div class="col-lg-12" style="text-align: -webkit-center;"><br>
+                                    <div class="captcha_wrapper">
+                                        <div id="myCaptcha">
+                                            <div style="width: 304px; height: 78px;">
+                                                <div class="form-group text-center">
+                                                    <div class="g-recaptcha text-center"
+                                                         data-sitekey="6LcXJV8UAAAAAAPCLZm_AoT4B2K5DqUOEWE9g7kf"
+                                                         data-callback="recaptchaCallback"></div>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="errors" id="errors" style="display: none"></div>
+
+                                    <button type="button" value="Gravar" name="gravar" id="gravar" style="display:none;"
+                                            class="btn btn-primary btn-lg  btn-block submit ">
+                                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                        Cadastrar
+                                    </button>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-success btn-block btn-lg"
+                                        onclick="submeterCadasstro();" id="submitBtn" style="display: none;">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    Enviar dados
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" style="padding-bottom: 100px;">
+
+            </div>
+        </div>
+		
+</div>
+</body>
+
+<script>
+
+    let er = /^[a-z\d](?:[a-z\d]| (?! |$)){0,15}$/i;
+
+    var portador = false;
+
+    var setor_turno = {'setor1':'0','setor2':'0','setor3':'0'};
+
+    $(document).ready(function () {
+
+        $("#checkbox_bolsa_3").on('change', function () {
+
+            $("#qual_if").toggle();
+            $("#verifica_prouni").toggle();
+
+        });
+        $("#cpf").mask('000.000.000-00');
+        $("#telefone_residencial").mask('(00) 0000-0000');
+        $("#telefone1").mask('(00) 00000-0000');
+        $("#telefone2").mask('(00) 00000-0000');
+        $("#nascimento").datepicker({
+            language: 'pt-BR',
+            format: 'dd/mm/yyyy',
+        });
+
+        //#region Validação de dados
+
+
+        $("#responsavel").on("change", function () {
+
+            return validaCampo(this, 10);
+
+        });
+        $("#cpf").on("change", function () {
+            return validaCampo(this, 1);
+        });
+        $("#email").on("change", function () {
+            return validaCampo(this, 10);
+        });
+        $("#telefone1").on("change", function () {
+            return validaCampo(this, 8);
+        });
+        $("#telefone2").on("change", function () {
+            return validaCampo(this, 8);
+        });
+        $("#bairro").on("change", function () {
+            return validaCampo(this, 1);
+        });
+        $("#rua").on("change", function () {
+            return validaCampo(this, 1);
+        });
+        $("#numero").on("change", function () {
+            return validaCampo(this, 1);
+        });
+
+        $("#nome").on("change", function () {
+            return validaCampo(this, 10);
+        });
+        $("#nascimento").on("change", function () {
+            // return validaCampo(this, 6);
+            return validaDataNascimentoFILADEESPERA(this);
+
+        });
+        $("#certidao").on("change", function () {
+            return validaCampo(this, 6);
+        });
+
+        $("#setor1").on("change", function () {
+            return validaCampo(this, 2);
+        });
+
+        $("#turno1").on("change", function () {
+            return validaCampo(this, 1);
+        });
+
+        $("#setor1").on("change",function () {
+
+            setor_turno.setor1 = this.value;
+            return trataTurnoForm("setor1","turno1",this.value);
+        });
+        $("#setor2").on("change",function () {
+
+            setor_turno.setor2 = this.value;
+            return trataTurnoForm("setor2","turno2",this.value);
+        });
+        $("#setor3").on("change",function () {
+
+            setor_turno.setor3 = this.value;
+            return trataTurnoForm("setor3","turno3",this.value);
+        });
+
+
+        //#endregion
+
+        jQuery(function ($) {
+
+
+            $("#comprovante_residencia").fileinput({
+                showUpload: false,
+                previewFileType: false,
+                preview: false,
+                dropZoneEnabled: false,
+                language: "pt-BR",
+                uploadUrl: "consulta.php?ACAO=Upload",
+                uploadAsync: true,
+                allowedFileExtensions: ["pdf", "PDF", "jpg", "JPG", "jpeg", "JPEG", "png", "PNG"],
+                maxFileSize: 100000,
+                maxFileCount: 1,
+
+                uploadExtraData: function (previewId, index) {
+                    var info = {
+                        tipo: "comprovante_residencia",
+                        codigo: "0",
+                        ACAO: "Upload"
+                    };
+                    return info;
+                }
+            }).on("filebatchselected", function (event, files) {
+                $("#comprovante_residencia").fileinput("upload");
+            });
+            $("#certidaonascimento").fileinput({
+                showUpload: false,
+                previewFileType: false,
+                preview: false,
+                dropZoneEnabled: false,
+                language: "pt-BR",
+                uploadUrl: "consulta.php?ACAO=Upload",
+                uploadAsync: true,
+                allowedFileExtensions: ["pdf", "PDF", "jpg", "JPG","jpeg", "JPEG", "png", "PNG"],
+                maxFileSize: 100000,
+                maxFileCount: 1,
+
+                uploadExtraData: function (previewId, index) {
+                    var info = {
+                        tipo: "certidaonascimento",
+                        codigo: "0",
+                        ACAO: "Upload"
+                    };
+                    return info;
+                }
+            }).on("filebatchselected", function (event, files) {
+                $("#certidaonascimento").fileinput("upload");
+            });
+
+
+        });
+
+        if (verificaMobile()) {
+
+            console.log('é mobile');
+
+        }
+
+
+
+    });
+
+    function recaptchaCallback() {
+        return $('#submitBtn').show();
+    }
+
+    function submeterCadasstro() {
+
+        var responsavel = $("#responsavel").val();
+        var cpf = $("#cpf").val();
+        var email = $("#email").val();
+        var telefone1 = $("#telefone1").val();
+        var telefone2 = $("#telefone2").val();
+        var bairro = $("#bairro").val();
+        var rua = $("#rua").val();
+        var numero = $("#numero").val();
+        var complemento = $("#complemento").val();
+
+
+        var nome = $("#nome").val();
+        var nascimento = $("#nascimento").val();
+        var certidao = $("#certidao").val();
+
+        var setor1 = $("#setor1").val();
+        var setor2 = $("#setor2").val();
+        var setor3 = $("#setor3").val();
+
+        var turno1 = $("#turno1").val();
+        var turno2 = $("#turno2").val();
+        var turno3 = $("#turno3").val();
+
+        var certidaonascimento_upload = $("#certidaonascimento_upload").val();
+        var comprovante_residencia_upload = $("#comprovante_residencia_upload").val();
+
+        if ($('#checkbox_portador').is(':checked')) {
+            portador = true;
+        }
+
+        //#region Validação de dados
+
+
+        if (!validaCampo($("#responsavel"), 10)) {
+            return MsgModal('#myModal', 'Por favor informe o nome do responsável corretamente.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+        if (!validaCampo($("#cpf"), 11)) {
+            return MsgModal('#myModal', 'Por favor informe o CPF.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+        if (!validaCampo($("#email"), 10)) {
+            return MsgModal('#myModal', 'Por favor informe seu e-mail.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+        if (!validaCampo($("#telefone1"), 10)) {
+            return MsgModal('#myModal', 'Por favor informe celular para contato.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+
+        if (!validaCampo($("#nascimento"), 4)) {
+            return MsgModal('#myModal', 'Por favor informe a data de nascimento.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+
+        if (!validaCampo($("#turno1"), 1)) {
+            return MsgModal('#myModal', 'Por favor informe o turno.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+
+        if (comprovante_residencia_upload === undefined || comprovante_residencia_upload == "" || comprovante_residencia_upload === null) {
+
+            return MsgModal('#myModal', 'Por favor inserir o comprovante de residência para prosseguir com o cadastro.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+        if (certidaonascimento_upload === undefined || certidaonascimento_upload == "" || certidaonascimento_upload === null) {
+
+            return MsgModal('#myModal', 'Por favor inserir a certidão de nascimento para prosseguir com o cadastro', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+        }
+
+
+        var data_nascimento = new Date(nascimento.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3'));
+        var data_hoje = new Date();
+
+        if (data_nascimento > data_hoje) {
+
+            return MsgModal('#myModal', 'Informe uma data válida ', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Atenção !');
+
+        }
+        else {
+
+            var validaData = retornarDiferencaDataFILADEESPERA2(data_nascimento, data_hoje);
+
+            if (validaData === false) {
+
+                return MsgModal('#myModal', 'Somente alunos com idade superior há 6 meses e até 5 anos de idade .', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Atenção !');
+
+            }
+
+        }
+
+
+        //waitingDialog.show();
+
+
+        //#endregion
+
+        waitingDialog.show();
+
+        $.ajax({
+            type: "POST",
+            url: "consulta.php?ACAO=CadastroInscricao",
+            dataType: "json",
+            data: {
+                ACAO: 'CadastroInscricao',
+                responsavel: responsavel,
+                cpf: cpf,
+                email: email,
+                telefone1: telefone1,
+                telefone2: telefone2,
+                bairro: bairro,
+                rua: rua,
+                numero: numero,
+                complemento: complemento,
+
+
+                nome: nome,
+                nascimento: nascimento,
+                certidao: certidao,
+                portador: portador,
+                setor1: setor1,
+                setor2: setor2,
+                setor3: setor3,
+
+                turno1: turno1,
+                turno2: turno2,
+                turno3: turno3,
+
+                comprovante_residencia_upload: comprovante_residencia_upload,
+                certidaonascimento_upload: certidaonascimento_upload,
+
+            },
+            success: function (data) {
+
+                waitingDialog.hide();
+
+
+
+                if (data.status) {
+
+                    return $("#result").html(data.html);
+
+                }
+
+                return MsgModal('#myModal', data.msg, '<i class="fa fa-bell-o" aria-hidden="true"></i> Atenção !');
+
+            },
+
+
+        });
+
+    }
+
+    function validaCampo(campo, tamanho) {
+
+        if ($(campo).val() === undefined || $(campo).val() === null || $(campo).val() === "") {
+            // ✖️ inválido
+            $(campo.parentElement).removeClass("has-success");
+            $(campo.parentElement).addClass("has-error");
+            return false;
+        }
+
+        if ($(campo).val().length >= tamanho) {
+            // ✔️ válido
+            $(campo.parentElement).removeClass("has-error");
+            $(campo.parentElement).addClass("has-success");
+            return true;
+        } else {
+            // ✖️ inválido
+            $(campo.parentElement).removeClass("has-success");
+            $(campo.parentElement).addClass("has-error");
+            return false;
+        }
+    }
+
+    function criarCampoForm() {
+
+        var html = '' +
+            '<div class="row">' +
+            '<div class="col-lg-3"> ' +
+            '<div class="form-group"> ' +
+            '<label>Nome</label>' +
+            '<input type="text" name="pessoa[]" class="form-control"> ' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-2"> ' +
+            '<div class="form-group"> ' +
+            '<label>Parentesco</label>' +
+            '<input type="text" name="parentesco[]" class="form-control"> ' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-2"> ' +
+            '<div class="form-group"> ' +
+            '<label>Renda</label>' +
+            '<input type="text" name="renda[]" class="form-control"> ' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-3"> ' +
+            '<div class="form-group"> ' +
+            '<label>Atividade/Profissão</label>' +
+            '<input type="text" name="atividade[]" class="form-control"> ' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-2"> ' +
+            '<div class="form-group" style="padding-top: 23px;"> ' +
+            '<button class="btn btn-danger" onclick="removerLinha(this);"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button> ' +
+            '</div>' +
+            '</div>' +
+            '</div><div class="clearfix"></div>';
+
+        return $("#reside_pessoa").append(html);
+
+    }
+
+    function adiconarPessoa() {
+
+        return criarCampoForm();
+    }
+
+    function removerLinha(e) {
+
+        $(e.parentElement.parentElement.parentElement).remove();
+
+    }
+
+    function segunda(aba) {
+        return $('#myTabs a[href="#' + aba + '"]').tab('show');
+    }
+
+    function retornarDiferencaDataFILADEESPERA(date1, date2) {
+
+        var diferenca = Math.abs(date1.getTime() - date2.getTime());
+        var ano_partial = (1000 * 60 * 60 * 24);
+        var total = Math.round(diferenca / ano_partial);
+        var final = (total / 365);
+
+        if (final < 0.6) {
+            return false;
+        }
+
+        if (final > 5) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function retornarDiferencaDataFILADEESPERA2(date1, date2) {
+
+       var diferenca =  Math.round((date2-date1)/(1000*60*60*24));
+
+        if (diferenca < 182) {
+            return false;
+        }
+
+        if (diferenca > 2115) {
+            return false;
+        }
+
+
+
+        return true;
+    }
+
+    function validaDataNascimentoFILADEESPERA(campo) {
+
+
+        var nascimento = $("#nascimento").val();
+
+        var data_nascimento = new Date(nascimento.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3'));
+        var data_hoje = new Date();
+
+        //console.log('Data de nascimento '+data_nascimento);
+        //  console.log('Data atual '+data_hoje);
+        if (data_nascimento > data_hoje) {
+
+            $(campo.parentElement).removeClass("has-success");
+            $(campo.parentElement).addClass("has-error");
+
+            return MsgModal('#myModal', 'Informe uma data válida ', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Atenção !');
+
+        }
+        else {
+
+            var validaData = retornarDiferencaDataFILADEESPERA2(data_nascimento, data_hoje);
+
+            if (validaData === false) {
+
+                $(campo.parentElement).removeClass("has-success");
+                $(campo.parentElement).addClass("has-error");
+
+                return MsgModal('#myModal', 'Somente alunos com idade superior há 6 meses e até 5 anos de idade .', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Atenção !');
+
+            }
+
+            $(campo.parentElement).removeClass("has-error");
+            $(campo.parentElement).addClass("has-success");
+
+        }
+    }
+
+    function moeda(a, e, r, t) {
+        let n = ""
+            , h = j = 0
+            , u = tamanho2 = 0
+            , l = ajd2 = ""
+            , o = window.Event ? t.which : t.keyCode;
+        if (13 == o || 8 == o)
+            return !0;
+        if (n = String.fromCharCode(o),
+        -1 == "0123456789".indexOf(n))
+            return !1;
+        for (u = a.value.length,
+                 h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
+            ;
+        for (l = ""; h < u; h++)
+            -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
+        if (l += n,
+        0 == (u = l.length) && (a.value = ""),
+        1 == u && (a.value = "0" + r + "0" + l),
+        2 == u && (a.value = "0" + r + l),
+        u > 2) {
+            for (ajd2 = "",
+                     j = 0,
+                     h = u - 3; h >= 0; h--)
+                3 == j && (ajd2 += e,
+                    j = 0),
+                    ajd2 += l.charAt(h),
+                    j++;
+            for (a.value = "",
+                     tamanho2 = ajd2.length,
+                     h = tamanho2 - 1; h >= 0; h--)
+                a.value += ajd2.charAt(h);
+            a.value += r + l.substr(u - 2, u)
+        }
+        return !1
+    }
+
+    function trataTurnoForm(setor,turno,codigo_setor) {
+
+
+
+        //turno
+
+        $("#"+turno).html('');
+
+
+        $.ajax({
+            type: "POST",
+            url: "consulta.php?ACAO=ConsultaTurno",
+            dataType: "json",
+            data: {
+                ACAO: 'ConsultaTurno',
+                setor :setor,
+                turno :turno,
+                codigo_setor :codigo_setor,
+            },
+            success: function (retorno) {
+
+
+                return  $("#"+turno).append(retorno.html);
+
+            },
+
+
+        });
+
+
+    }
+
+
+</script>
+</html>
