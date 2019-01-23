@@ -62,6 +62,69 @@ function upperCaseF(a){
     }, 1);
 }
 
+$("#responsavel").on("change", function () {
+
+	return validaCampo(this, 10);
+
+});
+
+
+function submeterCadasstro() 
+{
+	var responsavel = $("#responsavel").val();
+	var cpf = $("#cpf").val();
+	var email = $("#email").val();
+	var telefone1 = $("#telefone1").val();
+	var telefone2 = $("#telefone2").val();
+	var bairro = $("#bairro").val();
+	var rua = $("#rua").val();
+	var numero = $("#numero").val();
+	var complemento = $("#complemento").val();
+
+
+	var nome = $("#nome").val();
+	var nascimento = $("#nascimento").val();
+	var certidao = $("#certidao").val();
+
+	var setor1 = $("#setor1").val();
+	var setor2 = $("#setor2").val();
+	var setor3 = $("#setor3").val();
+
+	var turno1 = $("#turno1").val();
+	var turno2 = $("#turno2").val();
+	var turno3 = $("#turno3").val();
+
+	var certidaonascimento_upload = $("#certidaonascimento_upload").val();
+	var comprovante_residencia_upload = $("#comprovante_residencia_upload").val();
+
+	if (!validaCampo($("#responsavel"), 10)) {
+		return MsgModal('#myModal', 'Por favor informe o nome do responsável corretamente.', '<i class="fa fa-exclamation" aria-hidden="true"></i> Atenção !');
+		//console.log('campo');
+	}
 
 
 	
+}
+
+function validaCampo(campo, tamanho) {
+
+	if ($(campo).val() === undefined || $(campo).val() === null || $(campo).val() === "") {
+		// ✖️ inválido
+		$(campo.parentElement).removeClass("has-success");
+		$(campo.parentElement).addClass("has-error");
+		return false;
+	}
+
+	if ($(campo).val().length >= tamanho) {
+		// ✔️ válido
+		$(campo.parentElement).removeClass("has-error");
+		$(campo.parentElement).addClass("has-success");
+		return true;
+	} else {
+		// ✖️ inválido
+		$(campo.parentElement).removeClass("has-success");
+		$(campo.parentElement).addClass("has-error");
+		return false;
+	}
+}
+
