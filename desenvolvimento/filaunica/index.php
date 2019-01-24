@@ -40,46 +40,85 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //valida responsável
     if(empty($data['responsavel'])){
         $data['responsavel_err'] = 'Por favor informe o responsável';
+    }else{
+        $data['responsavel_err'] = '' ;
     }
     //valida telefone 1
     if(empty($data['telefone1'])){
         $data['telefone1_err'] = 'Por favor informe o telefone';
-    }else{
-        if(!validacelular($data['telefone1'])){
-            $data['telefone1_err'] = 'Telefone inválido';   
-        }
     }
+    elseif(!validacelular($data['telefone1'])){
+        $data['telefone1_err'] = 'Telefone inválido';   
+    }else{
+        $data['telefone1_err'] = '';
+    }
+    
 
     //valida telefone 2
     if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
         $data['telefone2_err'] = 'Telefone inválido';
+    }else{
+        $data['telefone2_err'] = '';
     }
 
     //valida nome
     if(empty($data['nome'])){
         $data['nome_err'] = 'Por favor informe o nome da criança';
     }
+    else{
+        $data['nome_err'] = '';
+    }
 
     //valida nascimento
     if(empty($data['nascimento'])){        
         $data['nascimento_err'] = 'Por favor informe a data de nascimento';
-    }else{                    
-        if(!validanascimento($data['nascimento'])){
-            $data['nascimento_err'] = 'Data inválida';
-        }
+    }                    
+    elseif(!validanascimento($data['nascimento'])){
+        $data['nascimento_err'] = 'Data inválida';
+    }else{
+        $data['nome_err'] = '';
+    }
  
         
-    }
+    
 
     //valida email
     if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
         $data['email_err'] = 'Email inválido';
+    }else{
+        $data['email_err'] = '';
     }
 
     //valida cpf
     if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
         $data['cpf_err'] = 'CPF inválido';    
+    }else{
+        $data['cpf_err'] = '';
     }
+
+    //verifica para submeter
+    // Make sure no errors
+    if( empty($data['responsavel_err']) &&                               
+    empty($data['telefone1_err']) && 
+    empty($data['telefone2_err']) && 
+    empty($data['nome_err']) && 
+    empty($data['email_err']) && 
+    empty($data['cpf_err']) &&   
+    empty($data['idade_maxima_err']) 
+    
+    ){
+        die("tudo certo");
+    // Validated
+    /*if($this->postModel->updateAtendimento($data)){
+        flash('post_message', 'Registro atualizado com sucesso!');
+        redirect('atendimentos');
+    } else {
+        die('Ops! Algo deu errado.');
+    }
+    } else {
+        // Load view with errors
+        $this->view('atendimentos/edit', $data);*/
+    } 
 
     
 
