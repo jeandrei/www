@@ -1,7 +1,12 @@
-<?php ini_set('default_charset', 'utf-8'); 
+<?php 
 // URL ROOT
-define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/filaunica');
-//define('URLROOT', 'http://localhost/filaunica');
+require_once 'inc/db.inc.php';
+require_once 'inc/helpers.inc.php';
+
+
+	
+
+
 
 
 
@@ -28,21 +33,57 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'turno3' => trim($_POST['turno3']),
         'obs'  => trim($_POST['obs'])
         ];
-        
+   
+        // CONEXÃO COM O BANCO
 
+    
+    //valida responsável
     if(empty($data['responsavel'])){
         $data['responsavel_err'] = 'Por favor informe o responsável';
     }
+    //valida telefone 1
     if(empty($data['telefone1'])){
         $data['telefone1_err'] = 'Por favor informe o telefone';
+    }else{
+        if(!validacelular($data['telefone1'])){
+            $data['telefone1_err'] = 'Telefone inválido';   
+        }
     }
+
+    //valida telefone 2
+    if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
+        $data['telefone2_err'] = 'Telefone inválido';
+    }
+
+    //valida nome
     if(empty($data['nome'])){
         $data['nome_err'] = 'Por favor informe o nome da criança';
     }
-    if(empty($data['nascimento'])){
+
+    //valida nascimento
+    if(empty($data['nascimento'])){        
         $data['nascimento_err'] = 'Por favor informe a data de nascimento';
+    }else{                    
+        if(!validanascimento($data['nascimento'])){
+            $data['nascimento_err'] = 'Data inválida';
+        }
+ 
+        
     }
-}
+
+    //valida email
+    if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
+        $data['email_err'] = 'Email inválido';
+    }
+
+    //valida cpf
+    if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
+        $data['cpf_err'] = 'CPF inválido';    
+    }
+
+    
+
+}//post
 
 
 
@@ -160,7 +201,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             name="responsavel" 
                                             id="responsavel"
                                             class="form-control <?php echo (!empty($data['responsavel_err'])) ? 'is-invalid' : ''; ?>"
-                                            value="<?php echo $_POST['responsavel']; ?>"
+                                            value="<?php htmlout($data['responsavel']); ?>"
                                             onkeydown="upperCaseF(this)"                                            
                                             >
                                         <span class="invalid-feedback"><?php echo $data['responsavel_err']; ?></span>
@@ -184,9 +225,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         name="cpf" 
                                         id="cpf" 
                                         class="form-control cpf <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>"
-                                        value="<?php echo $_POST['cpf']; ?>"
+                                        value="<?php htmlout($data['cpf']); ?>"
                                         maxlength="14"
                                     >
+                                <span class="invalid-feedback"><?php echo $data['cpf_err']; ?></span>
                                 </div>
                                 <!--EIMAIL-->
                                  <div class="col-lg-8">
@@ -194,12 +236,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         E-mail:
                                     </label>
                                     <input 
-                                        type="email" 
+                                        type="text" 
                                         name="email" 
                                         id="email" 
                                         class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-                                        value="<?php echo $_POST['email']; ?>"
+                                        value="<?php htmlout($data['email']); ?>"
                                     >
+                                <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
                                 </div>
 
                             </div><!-- class="row"-->
@@ -222,9 +265,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         id="telefone1" 
                                         maxlength="15"
                                         class="form-control telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
-                                        value="<?php echo $_POST['telefone1']; ?>"
+                                        value="<?php htmlout($data['telefone1']); ?>"
                                         >
-                                    <span class="invalid-feedback"><?php echo $data['telefone1_err']; ?></span>
+                                <span class="invalid-feedback"><?php echo $data['telefone1_err']; ?></span>
                                 </div>
 
                                 <!--CELULAR 2-->
@@ -237,9 +280,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         name="telefone2" 
                                         id="telefone2" 
                                         maxlength="15"
-                                        class="form-control telefone"
-                                        value="<?php echo $_POST['telefone2']; ?>"
+                                        class="form-control telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
+                                        value="<?php htmlout($data['telefone2']); ?>"
                                     >
+                                    <span class="invalid-feedback"><?php echo $data['telefone2_err']; ?></span>
                                 </div>
 
                             </div><!--<div class="row">-->
@@ -259,21 +303,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         id="bairro" 
                                         class="form-control"
                                         >
-                                        <option value="5">Alto São Bento</option>
-                                        <option value="6">Andorinha</option>
-                                        <option value="18">Areal</option>
-                                        <option value="7">Canto da Praia</option>
-                                        <option value="8">Casa Branca</option>
-                                        <option value="3">Centro</option>
-                                        <option value="9">Ilhota</option>
-                                        <option value="4">Jardim Praia Mar</option>
-                                        <option value="10">Leopoldo Zarling</option>
-                                        <option value="1">Meia Praia</option>
-                                        <option value="2">Morretes</option>
-                                        <option value="12">Sertão do Trombudo</option>
-                                        <option value="13">Sertãozinho</option>
-                                        <option value="17">Taboleiro dos Oliveira</option>
-                                        <option value="15">Várzea</option>
+                                        
+                                        <option value="NULL">Selecione o Bairro</option>
+                                            <?php 
+                                            $bairros = getBairros($pdo);
+                                            foreach($bairros as $bairro) : ?> 
+                                                <option value="<?php echo $bairro['id']; ?>"
+                                                               <?php echo $data['bairro'] == $bairro['id'] ? 'selected':'';?>
+                                                >
+                                                    <?php echo $bairro['nome'];?>
+                                                </option>
+                                            <?php endforeach; ?>  
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
@@ -285,7 +325,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         name="rua" 
                                         id="rua"
                                         class="form-control"
-                                        value="<?php echo $_POST['rua']; ?>"
+                                        value="<?php htmlout($data['rua']); ?>"
                                         onkeydown="upperCaseF(this)" 
                                         >
                                 </div>                               
@@ -304,7 +344,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         name="numero" 
                                         id="numero" 
                                         class="form-control onlynumbers"
-                                        value="<?php echo $_POST['numero']; ?>"
+                                        value="<?php htmlout($data['numero']); ?>"
                                         >
                                 </div>
 
@@ -317,7 +357,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         name="complemento" 
                                         id="complemento" 
                                         class="form-control"
-                                        value="<?php echo $_POST['complemento']; ?>"
+                                        value="<?php htmlout($data['complemento']); ?>"
                                         onkeydown="upperCaseF(this)" 
                                     >
                                 </div>
@@ -346,7 +386,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             name="nome" 
                                             id="nome" 
                                             class="form-control <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
-                                            value="<?php echo $_POST['nome']; ?>"
+                                            value="<?php htmlout($data['nome']); ?>"
                                             onkeydown="upperCaseF(this)" 
                                             >
                                     <span class="invalid-feedback"><?php echo $data['nome_err']; ?></span>
@@ -367,7 +407,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             name="nascimento" 
                                             id="nascimento"
                                             class="form-control <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>" 
-                                            value="<?php echo $_POST['nascimento']; ?>"
+                                            value="<?php htmlout($data['nascimento']); ?>"
                                             maxlength="10"
                                             >
                                     <span class="invalid-feedback"><?php echo $data['nascimento_err']; ?></span>
@@ -383,7 +423,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             name="certidao" 
                                             id="certidao" 
                                             class="form-control"
-                                            value="<?php echo $_POST['certidao']; ?>"
+                                            value="<?php htmlout($data['certidao']); ?>"
                                         >
                                     </div>
                                 </div>
@@ -444,22 +484,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         id="setor1" 
                                         class="form-control <?php echo (!empty($data['setor1_err'])) ? 'is-invalid' : ''; ?>"                                        
                                     >
-                                        <option value="0">-</option>
-                                        <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
-                                        <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
-                                        <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
-                                        <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
-                                        <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
-                                        <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
-                                        <option value="127">CMEI - Clube do Mickey (Varzea)</option>
-                                        <option value="29">CMEI - Ilhota (Ilhota)</option>
-                                        <option value="114">CMEI - Maria Iracema (Morretes)</option>
-                                        <option value="110">CMEI - Meia Praia (Meia Praia)</option>
-                                        <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
-                                        <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
-                                        <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
-                                        <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
-                                        <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            <option value="NULL">Selecione a Escola</option>
+                                            <?php 
+                                            $escolas = getEscolas($pdo);
+                                            foreach($escolas as $escola) : ?> 
+                                                <option value="<?php echo $escola['id']; ?>"
+                                                               <?php echo $data['setor1'] == $escola['id'] ? 'selected':'';?>
+                                                >
+                                                    <?php echo $escola['nome'];?>
+                                                </option>
+                                            <?php endforeach; ?>  
                                     </select>
                                     <label class="help-block">Campo obrigatório</label>
                                 <span class="invalid-feedback"><?php echo $data['setor1_err']; ?></span>
@@ -472,11 +506,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <select 
                                             class="form-control <?php echo (!empty($data['turno1_err'])) ? 'is-invalid' : ''; ?>"
                                             id="turno1"
+                                            name="turno1"
                                         >
                                             <option></option>
-                                            <option value="1">Matutino</option>
-                                            <option value="2">Vespertino</option>
-                                            <option value="3">Integral</option>
+                                            <option value="1" <?php echo $data['turno1'] == '1' ? 'selected':'';?>>Matutino</option>
+                                            <option value="2" <?php echo $data['turno1'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                            <option value="3" <?php echo $data['turno1'] == '3' ? 'selected':'';?>>Integral</option>
                                         </select>
                                         <span class="invalid-feedback"><?php echo $data['turno1_err']; ?></span>                                         
                                     </div>
@@ -496,22 +531,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         id="setor2" 
                                         class="form-control"
                                     >
-                                        <option value="0">-</option>
-                                        <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
-                                        <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
-                                        <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
-                                        <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
-                                        <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
-                                        <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
-                                        <option value="127">CMEI - Clube do Mickey (Varzea)</option>
-                                        <option value="29">CMEI - Ilhota (Ilhota)</option>
-                                        <option value="114">CMEI - Maria Iracema (Morretes)</option>
-                                        <option value="110">CMEI - Meia Praia (Meia Praia)</option>
-                                        <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
-                                        <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
-                                        <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
-                                        <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
-                                        <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            <option value="NULL">Selecione a Escola</option>
+                                            <?php 
+                                            $escolas = getEscolas($pdo);
+                                            foreach($escolas as $escola) : ?> 
+                                                <option value="<?php echo $escola['id']; ?>"
+                                                               <?php echo $data['setor2'] == $escola['id'] ? 'selected':'';?>
+                                                >
+                                                    <?php echo $escola['nome'];?>
+                                                </option>
+                                            <?php endforeach; ?>  
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
@@ -522,11 +551,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <select 
                                             class="form-control" 
                                             id="turno2"
+                                            name="turno2"
                                         >
                                             <option></option>
-                                            <option value="1">Matutino</option>
-                                            <option value="2">Vespertino</option>
-                                            <option value="3">Integral</option>                                                
+                                            <option value="1" <?php echo $data['turno2'] == '1' ? 'selected':'';?>>Matutino</option>
+                                            <option value="2" <?php echo $data['turno2'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                            <option value="3" <?php echo $data['turno2'] == '3' ? 'selected':'';?>>Integral</option>                                                
                                         </select>
                                     </div>
                                 </div>
@@ -545,22 +575,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         id="setor3" 
                                         class="form-control"
                                     >
-                                        <option value="0">-</option>
-                                        <option value="102">CMEI - Abelhinha Feliz 1 (Alto São Bento)</option>
-                                        <option value="120">CMEI - Abelhinha Feliz 2 (Alto São Bento)</option>
-                                        <option value="35">CMEI - Alto São Bento (Alto São Bento)</option>
-                                        <option value="128">CMEI - Antônio Russi Filho (Morretes)</option>
-                                        <option value="43">CMEI - Branca de Neve (Meia Praia)</option>
-                                        <option value="46">CMEI - Caminhos do Saber (Leopoldo Z.)</option>
-                                        <option value="127">CMEI - Clube do Mickey (Varzea)</option>
-                                        <option value="29">CMEI - Ilhota (Ilhota)</option>
-                                        <option value="114">CMEI - Maria Iracema (Morretes)</option>
-                                        <option value="110">CMEI - Meia Praia (Meia Praia)</option>
-                                        <option value="41">CMEI - Pequeno Príncipe (Morretes)</option>
-                                        <option value="34">CMEI - Rita Maria (Tabuleiro)</option>
-                                        <option value="33">CMEI - Soldadinho de Chumbo (Centro)</option>
-                                        <option value="45">CMEI - Universo da Criança (Meia Praia)</option>
-                                        <option value="42">EMEB - Paulo Reis (Sertão do Trombudo)</option>
+                                            <option value="NULL">Selecione a Escola</option>
+                                            <?php 
+                                            $escolas = getEscolas($pdo);
+                                            foreach($escolas as $escola) : ?> 
+                                                <option value="<?php echo $escola['id']; ?>"
+                                                               <?php echo $data['setor3'] == $escola['id'] ? 'selected':'';?>
+                                                >
+                                                    <?php echo $escola['nome'];?>
+                                                </option>
+                                            <?php endforeach; ?>  
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
@@ -571,11 +595,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <select 
                                             class="form-control" 
                                             id="turno3"
+                                            name="turno3"
                                         >
                                             <option></option>
-                                            <option value="1">Matutino</option>
-                                            <option value="2">Vespertino</option>
-                                            <option value="3">Integral</option>                                            
+                                            <option value="1" <?php echo $data['turno3'] == '1' ? 'selected':'';?>>Matutino</option>
+                                            <option value="2" <?php echo $data['turno3'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                            <option value="3" <?php echo $data['turno3'] == '3' ? 'selected':'';?>>Integral</option>                                            
                                         </select>
                                     </div>
                                 </div>
@@ -596,7 +621,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         >
                                         <?php
                                             if(!empty($_POST['obs'])){
-                                                echo $_POST['obs'];
+                                                htmlout($data['obs']);
                                             }
                                         ?>
                                         </textarea>
