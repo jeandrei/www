@@ -340,7 +340,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         Número:
                                     </label>
                                     <input 
-                                        type="text" 
+                                        type="number" 
                                         name="numero" 
                                         id="numero" 
                                         class="form-control onlynumbers"
