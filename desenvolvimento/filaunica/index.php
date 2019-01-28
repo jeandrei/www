@@ -4,10 +4,62 @@ require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
 
-	
+
+//função para fazer upload do arquivo
+// obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
+// para fazer upload de arquivos tem que ter essa parte
+function upload_file($file){    
+    $name = $_FILES[$file]['name'];
+    $temp_name = $_FILES[$file]['tmp_name'];
+    $size = $_FILES[$file]['size'];
+    $error = $_FILES[$file]['error'];
+    $type = $_FILES[$file]['type'];
+    $data = file_get_contents($_FILES[$file]['tmp_name']);
+    
+    //pegamos a extenção do arquivo
+    $file_extention = explode('.', $name);
+    $extention = strtolower(end($file_extention));
+
+    // definimos as extenções permitidas
+    $allowed = array('jpg','jpeg','png','pdf');
+
+    if(in_array($extention,$allowed)){
+        if($error === 0){
+            if($size <= 20971520){
+                $file_uploaded = [
+                    'nome' => $name,
+                    'type' => $type,
+                    'data' => $data
+                ];
+                return $file_uploaded;
+            }else{
+                $file_uploaded['error'] = "Apenas arquivos com até 20MB são permitidos";
+                return $file_uploaded;
+            }
+        }
+        else{
+            $file_uploaded['error'] = "Houve um erro ao carregar seu arquivo";
+            return $file_uploaded;
+        }
+    }else{
+        $file_uploaded['error'] = "Tipo de arquivo não permitido";
+        return $file_uploaded;
+    }    
+
+}
+
+    if(empty($_FILES['comprovante_residencia']['name'])){
+        echo 'você deve anexar o comprovante de residência';
+    }else{
+        $arquivo = upload_file('comprovante_residencia');
+        if (!empty($arquivo['error'])){
+            echo $arquivo['error'];
+        }
+    }
+        
 
 
-
+    
 
 
 //VALIDAÇÃO
@@ -31,8 +83,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'turno2' => trim($_POST['turno2']),
         'setor3' => trim($_POST['setor3']),
         'turno3' => trim($_POST['turno3']),
-        'obs'  => trim($_POST['obs'])
+        'portador' => ($_POST['portador']),
+        'obs'  => trim($_POST['obs'])        
         ];
+
+        
+        
    
         // CONEXÃO COM O BANCO
 
@@ -95,6 +151,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else{
         $data['cpf_err'] = '';
     }
+
+    //valida arquivos anexo
+    if(!empty($data['comp_residencia_name'])){        
+        $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
+    }
+    else{
+        $data['comp_residencia_name_err'] = '';
+    }                  
+
 
     //verifica para submeter
     // Make sure no errors
@@ -189,7 +254,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
 
     <div class="row" style="background-color:#FFFAF0">
-    <form action="index.php" method="post">  
+    <form action="index.php" method="post" enctype="multipart/form-data">  
         <!--abas-->
         <div class="col-lg-14" id="result">
             
@@ -476,7 +541,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                     <div class="form-group">
                                         <div class="alert alert-warning" role="alert">
                                         <div class="checkbox checkbox-primary checkbox-inline">
-                                            <input id="checkbox_portador" type="checkbox" name="portador"   value="1">
+                                            <input id="checkbox_portador" type="checkbox" name="portador"   value="1" <?php echo (!empty($data['portador'])) ? 'checked="checked"' : ''; ?>>
                                             <label for="checkbox_portador">
                                                 <strong>Criança com deficiência ?</strong>
                                             </label>
@@ -717,13 +782,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div class="form-group">
                             <label for="comprovante_residencia">
                                 Comprovante de residência
+                                <div style="color:red; font-size:25px;">
+                                <span><?php echo $data['comp_residencia_name_err']; ?></span>
+                                </div>
+                                
                             </label><br>
-                            <input id="comprovante_residencia" name="comprovante_residencia" type="file">
+                            <input id="comprovante_residencia" name="comprovante_residencia" type="file" class="form-control <?php echo (!empty($data['comp_residencia_name_err'])) ? 'is-invalid' : ''; ?>">
                             <label id="kv-error-2"></label>
                         </div>
                         
+                    
                     </div>
-
+                    
                                         
 
                     
@@ -750,7 +820,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <!--BOTÃO ENVIAR DADOS-->
                 <div class="row">
                     <div class="col-lg-12">
-                        <input type="submit" class="btn btn-success btn-block btn-lg" value="Enviar dados">                        
+                        <input type="submit" class="btn btn-success btn-block btn-lg" value="Enviar dados" name="btn_enviar">                        
                     </div>
                 </div>
 
