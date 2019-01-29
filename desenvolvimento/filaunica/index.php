@@ -8,7 +8,7 @@ require_once 'inc/helpers.inc.php';
 //função para fazer upload do arquivo
 // obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
 // para fazer upload de arquivos tem que ter essa parte
-function upload_file($file){    
+function upload_file($file,$newname){    
     $name = $_FILES[$file]['name'];
     $temp_name = $_FILES[$file]['tmp_name'];
     $size = $_FILES[$file]['size'];
@@ -22,12 +22,12 @@ function upload_file($file){
 
     // definimos as extenções permitidas
     $allowed = array('jpg','jpeg','png','pdf');
-
+    
     if(in_array($extention,$allowed)){
-        if($error === 0){
+        if($error === 0){ 
             if($size <= 20971520){
                 $file_uploaded = [
-                    'nome' => $name,
+                    'nome' => $newname,
                     'type' => $type,
                     'data' => $data
                 ];
@@ -48,14 +48,7 @@ function upload_file($file){
 
 }
 
-    if(empty($_FILES['comprovante_residencia']['name'])){
-        echo 'você deve anexar o comprovante de residência';
-    }else{
-        $arquivo = upload_file('comprovante_residencia');
-        if (!empty($arquivo['error'])){
-            echo $arquivo['error'];
-        }
-    }
+    
         
 
 
@@ -153,12 +146,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     //valida arquivos anexo
-    if(!empty($data['comp_residencia_name'])){        
+        
+    if(empty($_FILES['comprovante_residencia']['name'])){
         $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
+    }else{        
+        $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'].'_'.'COMP_RESIDENCIA');        
+        if (!empty($arquivo['error'])){
+            $data['comp_residencia_name_err'] = $arquivo['error'];
+        }
     }
-    else{
-        $data['comp_residencia_name_err'] = '';
-    }                  
+
 
 
     //verifica para submeter
