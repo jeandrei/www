@@ -77,11 +77,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'setor3' => trim($_POST['setor3']),
         'turno3' => trim($_POST['turno3']),
         'portador' => ($_POST['portador']),
-        'obs'  => trim($_POST['obs'])        
+        'obs'  => trim($_POST['obs'])       
         ];
 
         
-        
+        die(var_dump($data));
    
         // CONEXÃO COM O BANCO
 
@@ -184,6 +184,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     
 
+}//post
+else{
+    $data = [
+        'responsavel' => '',
+        'cpf' => '',
+        'email' => '',
+        'telefone1' => '',
+        'telefone2' => '',
+        'bairro' => '',
+        'rua' => '',
+        'numero' => '',
+        'complemento' => '',
+        'nome' => '',
+        'nascimento' => '',
+        'certidao' => '',
+        'setor1' => '',
+        'turno1' => '',
+        'setor2' => '',
+        'turno2' => '',
+        'setor3' => '',
+        'turno3' => '',
+        'portador' => '',
+        'obs'  => ''      
+        ];
+    //die(var_dump($data));
 }//post
 
 
@@ -538,8 +563,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                     <div class="form-group">
                                         <div class="alert alert-warning" role="alert">
                                         <div class="checkbox checkbox-primary checkbox-inline">
-                                            <input id="checkbox_portador" type="checkbox" name="portador"   value="1" <?php echo (!empty($data['portador'])) ? 'checked="checked"' : ''; ?>>
-                                            <label for="checkbox_portador">
+                                            <input id="portador" type="checkbox" name="portador"   value="1" <?php echo (!empty($data['portador'])) ? 'checked="checked"' : ''; ?>>
+                                            <label for="portador">
                                                 <strong>Criança com deficiência ?</strong>
                                             </label>
                                         </div>
