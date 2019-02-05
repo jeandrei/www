@@ -2,7 +2,7 @@
 // URL ROOT
 require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
-
+$foco = array();
 
 
 //função para fazer upload do arquivo
@@ -22,6 +22,10 @@ function upload_file($file,$newname){
 
     // definimos as extenções permitidas
     $allowed = array('jpg','jpeg','png','pdf');
+
+
+
+    
     
     if(in_array($extention,$allowed)){
         if($error === 0){ 
@@ -57,7 +61,8 @@ function upload_file($file,$newname){
 
 //VALIDAÇÃO
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $data = [
+
+  $data = [
         'responsavel' => trim($_POST['responsavel']),
         'cpf' => trim($_POST['cpf']), 
         'email' => trim($_POST['email']), 
@@ -75,37 +80,43 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'setor2' => trim($_POST['setor2']),
         'turno2' => trim($_POST['turno2']),
         'setor3' => trim($_POST['setor3']),
-        'turno3' => trim($_POST['turno3']),
-        'portador' => ($_POST['portador']),
+        'turno3' => trim($_POST['turno3']),        
         'obs'  => trim($_POST['obs'])       
         ];
+    //checkbox não manda valor no post se não for marcado
+    //por isso tem que verificar se foi marcado
+    //caso contrário o php vai acusar o erro
+    //undefined index
+    if(isset($_POST['portador'])){
+        $data['portador'] = $_POST['portador'];
+    }
 
         
-        die(var_dump($data));
    
-        // CONEXÃO COM O BANCO
-
-    
     //valida responsável
     if(empty($data['responsavel'])){
         $data['responsavel_err'] = 'Por favor informe o responsável';
+        $foco[] = 'responsavel';
     }else{
-        $data['responsavel_err'] = '' ;
+        $data['responsavel_err'] = '' ;       
     }
     //valida telefone 1
     if(empty($data['telefone1'])){
-        $data['telefone1_err'] = 'Por favor informe o telefone';
+        $data['telefone1_err'] = 'Por favor informe o telefone';    
+        $foco[] = 'telefone1';
     }
     elseif(!validacelular($data['telefone1'])){
-        $data['telefone1_err'] = 'Telefone inválido';   
+        $data['telefone1_err'] = 'Telefone inválido'; 
+        $foco[] = 'telefone1';  
     }else{
-        $data['telefone1_err'] = '';
+        $data['telefone1_err'] = '';       
     }
     
 
     //valida telefone 2
     if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
         $data['telefone2_err'] = 'Telefone inválido';
+        $foco[] = 'telefone2';
     }else{
         $data['telefone2_err'] = '';
     }
@@ -113,6 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //valida nome
     if(empty($data['nome'])){
         $data['nome_err'] = 'Por favor informe o nome da criança';
+        $foco[] = 'nome';
     }
     else{
         $data['nome_err'] = '';
@@ -121,26 +133,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //valida nascimento
     if(empty($data['nascimento'])){        
         $data['nascimento_err'] = 'Por favor informe a data de nascimento';
+        $foco[] = 'nascimento';
     }                    
     elseif(!validanascimento($data['nascimento'])){
         $data['nascimento_err'] = 'Data inválida';
+        $foco[] = 'nascimento';
     }else{
         $data['nome_err'] = '';
     }
  
-        
+           
     
-
     //valida email
     if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
         $data['email_err'] = 'Email inválido';
+        $foco[] = 'email';
     }else{
         $data['email_err'] = '';
     }
 
     //valida cpf
     if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
-        $data['cpf_err'] = 'CPF inválido';    
+        $data['cpf_err'] = 'CPF inválido';   
+        $foco[] = 'cpf'; 
     }else{
         $data['cpf_err'] = '';
     }
@@ -166,6 +181,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     empty($data['nome_err']) && 
     empty($data['email_err']) && 
     empty($data['cpf_err']) &&   
+    empty($data['nascimento_err']) &&
     empty($data['idade_maxima_err']) 
     
     ){
@@ -197,7 +213,7 @@ else{
         'numero' => '',
         'complemento' => '',
         'nome' => '',
-        'nascimento' => '',
+        'nascimento' => '', 
         'certidao' => '',
         'setor1' => '',
         'turno1' => '',
@@ -243,7 +259,7 @@ else{
 
   <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
     <script>
-        window.onload = function(){focofield("responsavel");}
+        window.onload = function(){focofield(<?php  echo "'$foco[0]'"; ?>);}
     </script>
   
 
