@@ -2,23 +2,67 @@
 // URL ROOT
 require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
+$foco = array();
 
 
-function upload_file(){
-    var_dump($_FILES);
-    $temp_name = $_FILES['comprovante_residencia']['tmp_name'];
+//função para fazer upload do arquivo
+// obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
+// para fazer upload de arquivos tem que ter essa parte
+function upload_file($file,$newname){    
+    $name = $_FILES[$file]['name'];
+    $temp_name = $_FILES[$file]['tmp_name'];
+    $size = $_FILES[$file]['size'];
+    $error = $_FILES[$file]['error'];
+    $type = $_FILES[$file]['type'];
+    $data = file_get_contents($_FILES[$file]['tmp_name']);
+    
+    //pegamos a extenção do arquivo
+    $file_extention = explode('.', $name);
+    $extention = strtolower(end($file_extention));
+
+    // definimos as extenções permitidas
+    $allowed = array('jpg','jpeg','png','pdf');
+
+
+
+    
+    
+    if(in_array($extention,$allowed)){
+        if($error === 0){ 
+            if($size <= 20971520){
+                $file_uploaded = [
+                    'nome' => $newname,
+                    'type' => $type,
+                    'data' => $data
+                ];
+                return $file_uploaded;
+            }else{
+                $file_uploaded['error'] = "Apenas arquivos com até 20MB são permitidos";
+                return $file_uploaded;
+            }
+        }
+        else{
+            $file_uploaded['error'] = "Houve um erro ao carregar seu arquivo";
+            return $file_uploaded;
+        }
+    }else{
+        $file_uploaded['error'] = "Tipo de arquivo não permitido";
+        return $file_uploaded;
+    }    
 
 }
 
-	
+    
+        
 
-upload_file();
 
+    
 
 
 //VALIDAÇÃO
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $data = [
+
+  $data = [
         'responsavel' => trim($_POST['responsavel']),
         'cpf' => trim($_POST['cpf']), 
         'email' => trim($_POST['email']), 
@@ -36,37 +80,43 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'setor2' => trim($_POST['setor2']),
         'turno2' => trim($_POST['turno2']),
         'setor3' => trim($_POST['setor3']),
-        'turno3' => trim($_POST['turno3']),
-        'portador' => ($_POST['portador']),
-        'obs'  => trim($_POST['obs'])        
+        'turno3' => trim($_POST['turno3']),        
+        'obs'  => trim($_POST['obs'])       
         ];
+    //checkbox não manda valor no post se não for marcado
+    //por isso tem que verificar se foi marcado
+    //caso contrário o php vai acusar o erro
+    //undefined index
+    if(isset($_POST['portador'])){
+        $data['portador'] = $_POST['portador'];
+    }
 
-        
         
    
-        // CONEXÃO COM O BANCO
-
-    
     //valida responsável
     if(empty($data['responsavel'])){
         $data['responsavel_err'] = 'Por favor informe o responsável';
+        $foco[] = 'responsavel';
     }else{
-        $data['responsavel_err'] = '' ;
+        $data['responsavel_err'] = '' ;       
     }
     //valida telefone 1
     if(empty($data['telefone1'])){
-        $data['telefone1_err'] = 'Por favor informe o telefone';
+        $data['telefone1_err'] = 'Por favor informe o telefone';    
+        $foco[] = 'telefone1';
     }
     elseif(!validacelular($data['telefone1'])){
-        $data['telefone1_err'] = 'Telefone inválido';   
+        $data['telefone1_err'] = 'Telefone inválido'; 
+        $foco[] = 'telefone1';  
     }else{
-        $data['telefone1_err'] = '';
+        $data['telefone1_err'] = '';       
     }
     
 
     //valida telefone 2
     if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
         $data['telefone2_err'] = 'Telefone inválido';
+        $foco[] = 'telefone2';
     }else{
         $data['telefone2_err'] = '';
     }
@@ -74,6 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //valida nome
     if(empty($data['nome'])){
         $data['nome_err'] = 'Por favor informe o nome da criança';
+        $foco[] = 'nome';
     }
     else{
         $data['nome_err'] = '';
@@ -82,37 +133,44 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //valida nascimento
     if(empty($data['nascimento'])){        
         $data['nascimento_err'] = 'Por favor informe a data de nascimento';
+        $foco[] = 'nascimento';
     }                    
     elseif(!validanascimento($data['nascimento'])){
         $data['nascimento_err'] = 'Data inválida';
+        $foco[] = 'nascimento';
     }else{
         $data['nome_err'] = '';
     }
  
-        
+           
     
-
     //valida email
     if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
         $data['email_err'] = 'Email inválido';
+        $foco[] = 'email';
     }else{
         $data['email_err'] = '';
     }
 
     //valida cpf
     if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
-        $data['cpf_err'] = 'CPF inválido';    
+        $data['cpf_err'] = 'CPF inválido';   
+        $foco[] = 'cpf'; 
     }else{
         $data['cpf_err'] = '';
     }
 
     //valida arquivos anexo
-    if(!empty($data['comp_residencia_name'])){        
+        
+    if(empty($_FILES['comprovante_residencia']['name'])){
         $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
+    }else{        
+        $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'].'_'.'COMP_RESIDENCIA');        
+        if (!empty($arquivo['error'])){
+            $data['comp_residencia_name_err'] = $arquivo['error'];
+        }
     }
-    else{
-        $data['comp_residencia_name_err'] = '';
-    }                  
+
 
 
     //verifica para submeter
@@ -123,6 +181,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     empty($data['nome_err']) && 
     empty($data['email_err']) && 
     empty($data['cpf_err']) &&   
+    empty($data['nascimento_err']) &&
     empty($data['idade_maxima_err']) 
     
     ){
@@ -141,6 +200,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     
 
+}//post
+else{
+    $data = [
+        'responsavel' => '',
+        'cpf' => '',
+        'email' => '',
+        'telefone1' => '',
+        'telefone2' => '',
+        'bairro' => '',
+        'rua' => '',
+        'numero' => '',
+        'complemento' => '',
+        'nome' => '',
+        'nascimento' => '', 
+        'certidao' => '',
+        'setor1' => '',
+        'turno1' => '',
+        'setor2' => '',
+        'turno2' => '',
+        'setor3' => '',
+        'turno3' => '',
+        'portador' => '',
+        'obs'  => ''      
+        ];
+    //die(var_dump($data));
 }//post
 
 
@@ -175,7 +259,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
     <script>
-        window.onload = function(){focofield("responsavel");}
+        window.onload = function(){focofield(<?php  echo "'$foco[0]'"; ?>);}
     </script>
   
 
@@ -208,7 +292,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
 
     <div class="row" style="background-color:#FFFAF0">
-    <form action="index.php" method="post">  
+    <form action="index.php" method="post" enctype="multipart/form-data">  
         <!--abas-->
         <div class="col-lg-14" id="result">
             
@@ -495,8 +579,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                     <div class="form-group">
                                         <div class="alert alert-warning" role="alert">
                                         <div class="checkbox checkbox-primary checkbox-inline">
-                                            <input id="checkbox_portador" type="checkbox" name="portador"   value="1" <?php echo (!empty($data['portador'])) ? 'checked="checked"' : ''; ?>>
-                                            <label for="checkbox_portador">
+                                            <input id="portador" type="checkbox" name="portador"   value="1" <?php echo (!empty($data['portador'])) ? 'checked="checked"' : ''; ?>>
+                                            <label for="portador">
                                                 <strong>Criança com deficiência ?</strong>
                                             </label>
                                         </div>

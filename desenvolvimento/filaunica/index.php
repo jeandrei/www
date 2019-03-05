@@ -8,24 +8,66 @@ $foco = array();
 //função para fazer upload do arquivo
 // obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
 // para fazer upload de arquivos tem que ter essa parte
-function upload_file($file,$newname){    
+function upload_file($file,$newname){ 
+    $errors = array();
+    $allowed = array('jpg','jpeg','png','pdf');
+    $maxsize = 20971520;
+    
     $name = $_FILES[$file]['name'];
     $temp_name = $_FILES[$file]['tmp_name'];
-    $size = $_FILES[$file]['size'];
-    $error = $_FILES[$file]['error'];
     $type = $_FILES[$file]['type'];
+    $size = $_FILES[$file]['size'];
     $data = file_get_contents($_FILES[$file]['tmp_name']);
+
+   
+
+
+    //$data = file_get_contents($_FILES[$file]['tmp_name']); 
     
-    //pegamos a extenção do arquivo
-    $file_extention = explode('.', $name);
-    $extention = strtolower(end($file_extention));
+    
+    if(($_FILES[$file]['name']) == "")
+        {
+            $errors[] = "Por favor selecione um arquivo";
+            return $errors;
+        }
+     
 
-    // definimos as extenções permitidas
-    $allowed = array('jpg','jpeg','png','pdf');
+     //pegamos a extenção do arquivo
+     $file_extention = explode('.', $name);
+     $extention = strtolower(end($file_extention));
+    
+      
+        
+
+    // definimos as extenções permitidas  
+    if(!in_array($extention,$allowed)){
+        $errors[] = "Tipo de arquivo não permitido";
+        return $errors;
+    }
 
 
+
+    if($size > $maxsize){
+
+        $errors[] = "Apenas arquivos com até 20MB são permitidos";
+        return $errors; 
+    }
+
+
+    if (empty($errors)){
+        $file_uploaded = [
+            'nome' => $newname,
+            'type' => $type,
+            'data' => $data
+        ];        
+        return $file_uploaded;
+    }
 
     
+
+
+
+    /*
     
     if(in_array($extention,$allowed)){
         if($error === 0){ 
@@ -49,8 +91,10 @@ function upload_file($file,$newname){
         $file_uploaded['error'] = "Tipo de arquivo não permitido";
         return $file_uploaded;
     }    
+*/
 
-}
+
+}//fim função upload
 
     
         
@@ -63,25 +107,25 @@ function upload_file($file,$newname){
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $data = [
-        'responsavel' => trim($_POST['responsavel']),
-        'cpf' => trim($_POST['cpf']), 
-        'email' => trim($_POST['email']), 
-        'telefone1' => trim($_POST['telefone1']),
-        'telefone2' => trim($_POST['telefone2']),
-        'bairro' => trim($_POST['bairro']),
-        'rua' => trim($_POST['rua']),
-        'numero' => trim($_POST['numero']),
-        'complemento' => trim($_POST['complemento']),
-        'nome' => trim($_POST['nome']),
+        'responsavel' => html($_POST['responsavel']),
+        'cpf' => html($_POST['cpf']), 
+        'email' => html($_POST['email']), 
+        'telefone1' => html($_POST['telefone1']),
+        'telefone2' => html($_POST['telefone2']),
+        'bairro' => html($_POST['bairro']),
+        'rua' => html($_POST['rua']),
+        'numero' => html($_POST['numero']),
+        'complemento' => html($_POST['complemento']),
+        'nome' => html($_POST['nome']),
         'nascimento' => trim($_POST['nascimento']),
-        'certidao' => trim($_POST['certidao']),
-        'setor1' => trim($_POST['setor1']),
-        'turno1' => trim($_POST['turno1']),
-        'setor2' => trim($_POST['setor2']),
-        'turno2' => trim($_POST['turno2']),
-        'setor3' => trim($_POST['setor3']),
-        'turno3' => trim($_POST['turno3']),        
-        'obs'  => trim($_POST['obs'])       
+        'certidao' => html($_POST['certidao']),
+        'setor1' => html($_POST['setor1']),
+        'turno1' => html($_POST['turno1']),
+        'setor2' => html($_POST['setor2']),
+        'turno2' => html($_POST['turno2']),
+        'setor3' => html($_POST['setor3']),
+        'turno3' => html($_POST['turno3']),        
+        'obs'  => html($_POST['obs'])       
         ];
     //checkbox não manda valor no post se não for marcado
     //por isso tem que verificar se foi marcado
@@ -161,7 +205,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     //valida arquivos anexo
-        
+  
+   
+   
+    $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'].'_'.'COMP_RESIDENCIA');
+    die(var_dump($arquivo));
     if(empty($_FILES['comprovante_residencia']['name'])){
         $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
     }else{        

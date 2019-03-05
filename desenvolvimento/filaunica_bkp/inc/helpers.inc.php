@@ -1,11 +1,8 @@
 <?php
 
-function html($data)
+function html($text)
 {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
-	return $data;
+	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 }
 
 function htmlout($text)

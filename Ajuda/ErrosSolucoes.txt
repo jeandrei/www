@@ -1,0 +1,15 @@
+
+
+
+*php banco de dados could not fid driver
+se estiver dando erro no banco de dados could not fid driver é porque está faltando instalar 
+    docker-php-ext-install pdo pdo_mysql gd curl
+que já coloquei no arquivo de criação do container, logo basta remver os container e recrica novamente
+paramos os containers
+    docker stop www
+    docker stop mysql
+    docker stop phpmyadmin
+removemos todos os containers
+    docker-compose rm -v
+recriamos os containers
+    docker-compose up -d --build
