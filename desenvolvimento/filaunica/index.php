@@ -4,32 +4,26 @@ require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 $foco = array();
 
-
 //função para fazer upload do arquivo
 // obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
 // para fazer upload de arquivos tem que ter essa parte
 function upload_file($myfile,$newname,$description){ 
-    
-    
 
+$file_uploaded['error'] = "";
 
-//descobrir como verificar se é imagem ou pdf
-
-
-
-
-    
-    
+$type = $_FILES[$myfile]['type'];
+if ($type == NULL){
+    $file_uploaded['error'] = "Por favor informe um arquivo válido!";
+    return $file_uploaded;
+}    
+   
     //verifica se é uma imagem
-    //$check = getimagesize($_FILES[$myfile]["tmp_name"]);
-    
+    //$check = getimagesize($_FILES[$myfile]["tmp_name"]);  
     
 
-
-/*
     if (empty($newname)){
-        $errors[] = "Você deve informar o nome do responsável!";
-        return $errors;
+        $file_uploaded['error'] = "Você deve informar o nome do responsável!";
+        return $file_uploaded;
     }
 
     $error = array();
@@ -37,61 +31,49 @@ function upload_file($myfile,$newname,$description){
     $maxsize = 20971520;
     
     $tmp_file = $_FILES[$myfile]['tmp_name'];
-    
-    
+
 
    
+    $data = addslashes(file_get_contents($_FILES[$myfile]['tmp_name']));
+    $file_name = addslashes($_FILES[$myfile]['name']);
+    $file_size = $_FILES[$myfile]['size'];  
     
 
+    
+    
 
+    //pegamos a extenção do arquivo
+    $file_extention = explode('.', $file_name);   
+    $extention = strtolower(end($file_extention));
 
-   if (!isset($_FILES[$myfile]['name']) || $_FILES[$myfile]['name'] == ""){
-        $errors[] = "Por favor selecione um arquivo";
-        return $errors;
-   }
-   else
-   {    
-
-            $data = addslashes(file_get_contents($_FILES[$myfile]['tmp_name']));
-            $file_name = addslashes($_FILES[$myfile]['name']);
-            $file_size = $_FILES[$myfile]['size'];  
-            
+    
+    
         
-            
-            
 
-            //pegamos a extenção do arquivo
-            $file_extention = explode('.', $file_name);   
-            $extention = strtolower(end($file_extention));
-        
-            
-            
-                
-
-            // definimos as extenções permitidas  
-            if(!in_array($extention,$allowed)){
-                $errors[] = "Tipo de arquivo não permitido";
-                return $errors;
-            }
+    // definimos as extenções permitidas  
+    if(!in_array($extention,$allowed)){
+        $file_uploaded['error'] = "Tipo de arquivo não permitido";
+        return $file_uploaded;
+    }
 
 
 
-            if($size > $maxsize){
+    if($size > $maxsize){
 
-                $errors[] = "Apenas arquivos com até 20MB são permitidos";
-                return $errors; 
-            }
+        $file_uploaded['error'] = "Apenas arquivos com até 20MB são permitidos";
+        return $file_uploaded; 
+    }
 
 
-            if (empty($errors)){
-                $file_uploaded = [
-                    'nome' => $newname . "_" . $description,
-                    'type' => $type,
-                    'data' => $data
-                ];        
-                return $file_uploaded;
-            }   
-    }*/
+    if (empty($errors)){
+        $file_uploaded = [
+            'nome' => $newname . "_" . $description,
+            'type' => $type,
+            'data' => $data
+        ];        
+        return $file_uploaded;
+    }   
+    
 }//fim função upload
 
     
@@ -202,22 +184,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data['cpf_err'] = '';
     }
 
-    //valida arquivos anexo
-  
-    $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');
-    var_dump($arquivo);
-   
     
-   /*
-    if(empty($_FILES['comprovante_residencia']['name'])){
-        $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
-    }else{        
-        $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');      
-        if (!empty($arquivo['error'])){
-            $data['comp_residencia_name_err'] = $arquivo['error'];
-        }
+    //valida arquivos deanexo 
+  
+    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');  
+    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
+    
+    if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
+    {
+        $data['comp_residencia_name_err'] = ($comp_res['error']);
+        $data['certidaonascimento_err'] = ($cert_nasc['error']);
+        
     }
-*/
+    
+
+    
+    
+    
+   
 
 
     //verifica para submeter
@@ -229,20 +213,78 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     empty($data['email_err']) && 
     empty($data['cpf_err']) &&   
     empty($data['nascimento_err']) &&
-    empty($data['idade_maxima_err']) 
+    empty($data['idade_maxima_err']) &&
+    empty($data['comp_residencia_name_err']) &&
+    empty($data['certidaonascimento_err'])
     
     ){
-        //die("tudo certo");
-    // Validated
-    /*if($this->postModel->updateAtendimento($data)){
-        flash('post_message', 'Registro atualizado com sucesso!');
-        redirect('atendimentos');
-    } else {
-        die('Ops! Algo deu errado.');
-    }
-    } else {
-        // Load view with errors
-        $this->view('atendimentos/edit', $data);*/
+
+
+        try 
+        {
+            $sql = 'INSERT INTO fila SET
+                    registro = CURDATE(),
+                    responsavel = :responsavel,  
+                    email = :email, 
+                    celular1 = :celular1, 
+                    celular2 = :celular2, 
+                    bairro_id = :bairro_id, 
+                    logradouro = :logradouro,
+                    numero = :numero, 
+                    complemento = :complemento, 
+                    nomecrianca = :nomecrianca,
+                    nascimento = :nascimento, 
+                    certidaonascimento = :certidaonascimento,                  
+                    
+                    opcao1_id = :opcao1_id,
+                    opcao2_id = :opcao2_id,
+                    opcao3_id = :opcao3_id,
+                    turno1 = :turno1,
+                    turno2 = :turno2,
+                    turno3 = :turno3,
+                    comprovanteres = :comprovanteres,
+                    comprovantenasc = :comprovantenasc,
+                    cpfresponsavel = :cpfresponsavel';
+
+																						
+
+
+            $s = $pdo->prepare($sql);
+            $s->bindValue(':responsavel', $data['responsavel']);
+            $s->bindValue(':email', $data['email']);
+            $s->bindValue(':celular1', $data['telefone1']);
+            $s->bindValue(':celular2', $data['telefone2']);
+            $s->bindValue(':bairro_id', $data['bairro']);
+            $s->bindValue(':logradouro', $data['rua']);
+            $s->bindValue(':numero', $data['numero']);
+            $s->bindValue(':complemento', $data['complemento']);
+            $s->bindValue(':nomecrianca', $data['nome']);
+            $s->bindValue(':nascimento', $data['nascimento']);
+            $s->bindValue(':certidaonascimento', $data['certidao']);
+            
+            $s->bindValue(':opcao1_id', $data['setor1']);
+            $s->bindValue(':opcao2_id', $data['setor2']);
+            $s->bindValue(':opcao3_id', $data['setor3']);
+            $s->bindValue(':turno1', $data['turno1']);
+            $s->bindValue(':turno2', $data['turno2']);
+            $s->bindValue(':turno3', $data['turno3']);
+            $s->bindValue(':comprovanteres', $comp_res);
+            $s->bindValue(':comprovantenasc', $cert_nasc);
+            $s->bindValue(':cpfresponsavel', $data['cpf']);
+           // $s->bindValue(':protocolo', $data['responsavel']);
+            //$s->bindValue(':etapa_id', $data['responsavel']);
+            //echo debugPDO($s);
+           
+            $s->execute() or die(print_r($s->errorInfo(), true));
+
+            //$s->execute();		
+        } catch (Exception $e) {          
+            
+            echo $e->getMessage();
+            $error = 'Error adding.';
+            include 'error.html.php';
+            exit();
+        }
     } 
 
     
@@ -893,8 +935,12 @@ else{
                         <div class="form-group">
                             <label for="certidaonascimento">
                                 Comprovante de nascimento da criança
+                                <div style="color:red; font-size:25px;">
+                                <span><?php echo $data['certidaonascimento_err']; ?></span>
+                                </div>
+
                             </label><br>
-                            <input id="certidaonascimento" name="certidaonascimento" type="file">
+                            <input id="certidaonascimento" name="certidaonascimento" type="file" class="form-control <?php echo (!empty($data['certidaonascimento_err'])) ? 'is-invalid' : ''; ?>">
                         </div>
                     </div>         
                     
