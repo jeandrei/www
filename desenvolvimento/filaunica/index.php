@@ -8,92 +8,90 @@ $foco = array();
 //função para fazer upload do arquivo
 // obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
 // para fazer upload de arquivos tem que ter essa parte
-function upload_file($file,$newname){ 
-    $errors = array();
-    $allowed = array('jpg','jpeg','png','pdf');
-    $maxsize = 20971520;
-    
-    $name = $_FILES[$file]['name'];
-    $temp_name = $_FILES[$file]['tmp_name'];
-    $type = $_FILES[$file]['type'];
-    $size = $_FILES[$file]['size'];
-    $data = file_get_contents($_FILES[$file]['tmp_name']);
-
-   
-
-
-    //$data = file_get_contents($_FILES[$file]['tmp_name']); 
+function upload_file($myfile,$newname,$description){ 
     
     
-    if(($_FILES[$file]['name']) == "")
-        {
-            $errors[] = "Por favor selecione um arquivo";
-            return $errors;
-        }
-     
 
-     //pegamos a extenção do arquivo
-     $file_extention = explode('.', $name);
-     $extention = strtolower(end($file_extention));
+
+//descobrir como verificar se é imagem ou pdf
+
+
+
+
     
-      
-        
+    
+    //verifica se é uma imagem
+    //$check = getimagesize($_FILES[$myfile]["tmp_name"]);
+    
+    
 
-    // definimos as extenções permitidas  
-    if(!in_array($extention,$allowed)){
-        $errors[] = "Tipo de arquivo não permitido";
+
+/*
+    if (empty($newname)){
+        $errors[] = "Você deve informar o nome do responsável!";
         return $errors;
     }
 
+    $error = array();
+    $allowed = array("jpg","jpeg","png","pdf");
+    $maxsize = 20971520;
+    
+    $tmp_file = $_FILES[$myfile]['tmp_name'];
+    
+    
 
-
-    if($size > $maxsize){
-
-        $errors[] = "Apenas arquivos com até 20MB são permitidos";
-        return $errors; 
-    }
-
-
-    if (empty($errors)){
-        $file_uploaded = [
-            'nome' => $newname,
-            'type' => $type,
-            'data' => $data
-        ];        
-        return $file_uploaded;
-    }
-
+   
     
 
 
 
-    /*
-    
-    if(in_array($extention,$allowed)){
-        if($error === 0){ 
-            if($size <= 20971520){
+   if (!isset($_FILES[$myfile]['name']) || $_FILES[$myfile]['name'] == ""){
+        $errors[] = "Por favor selecione um arquivo";
+        return $errors;
+   }
+   else
+   {    
+
+            $data = addslashes(file_get_contents($_FILES[$myfile]['tmp_name']));
+            $file_name = addslashes($_FILES[$myfile]['name']);
+            $file_size = $_FILES[$myfile]['size'];  
+            
+        
+            
+            
+
+            //pegamos a extenção do arquivo
+            $file_extention = explode('.', $file_name);   
+            $extention = strtolower(end($file_extention));
+        
+            
+            
+                
+
+            // definimos as extenções permitidas  
+            if(!in_array($extention,$allowed)){
+                $errors[] = "Tipo de arquivo não permitido";
+                return $errors;
+            }
+
+
+
+            if($size > $maxsize){
+
+                $errors[] = "Apenas arquivos com até 20MB são permitidos";
+                return $errors; 
+            }
+
+
+            if (empty($errors)){
                 $file_uploaded = [
-                    'nome' => $newname,
+                    'nome' => $newname . "_" . $description,
                     'type' => $type,
                     'data' => $data
-                ];
+                ];        
                 return $file_uploaded;
-            }else{
-                $file_uploaded['error'] = "Apenas arquivos com até 20MB são permitidos";
-                return $file_uploaded;
-            }
-        }
-        else{
-            $file_uploaded['error'] = "Houve um erro ao carregar seu arquivo";
-            return $file_uploaded;
-        }
-    }else{
-        $file_uploaded['error'] = "Tipo de arquivo não permitido";
-        return $file_uploaded;
-    }    
-*/
-
-
+            }   
+    }*/
 }//fim função upload
 
     
@@ -206,19 +204,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //valida arquivos anexo
   
+    $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');
+    var_dump($arquivo);
    
-   
-    $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'].'_'.'COMP_RESIDENCIA');
-    die(var_dump($arquivo));
+    
+   /*
     if(empty($_FILES['comprovante_residencia']['name'])){
         $data['comp_residencia_name_err'] = 'Por favor anexe o comprovante de residência';
     }else{        
-        $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'].'_'.'COMP_RESIDENCIA');        
+        $arquivo = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');      
         if (!empty($arquivo['error'])){
             $data['comp_residencia_name_err'] = $arquivo['error'];
         }
     }
-
+*/
 
 
     //verifica para submeter
@@ -233,7 +232,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     empty($data['idade_maxima_err']) 
     
     ){
-        die("tudo certo");
+        //die("tudo certo");
     // Validated
     /*if($this->postModel->updateAtendimento($data)){
         flash('post_message', 'Registro atualizado com sucesso!');
