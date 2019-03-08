@@ -2,77 +2,56 @@
 // URL ROOT
 require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
+
+flash('post_message');
+
+
 $foco = array();
+
+
+
 
 //função para fazer upload do arquivo
 // obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
 // para fazer upload de arquivos tem que ter essa parte
 function upload_file($myfile,$newname,$description){ 
+    
+    $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
 
-$file_uploaded['error'] = "";
+    $fileName = $_FILES[$myfile]['name'];
+    $fileSize = $_FILES[$myfile]['size'];
+    $fileTmpName  = $_FILES[$myfile]['tmp_name'];
+    $fileType = $_FILES[$myfile]['type'];
+    $fileExtension = strtolower(end(explode('.',$fileName)));
 
-$type = $_FILES[$myfile]['type'];
-if ($type == NULL){
-    $file_uploaded['error'] = "Por favor informe um arquivo válido!";
-    return $file_uploaded;
-}    
-   
-    //verifica se é uma imagem
-    //$check = getimagesize($_FILES[$myfile]["tmp_name"]);  
+    //$uploadPath = $currentDir . $uploadDirectory . basename($fileName); 
+
     
 
-    if (empty($newname)){
-        $file_uploaded['error'] = "Você deve informar o nome do responsável!";
-        return $file_uploaded;
-    }
+        if (! in_array($fileExtension,$fileExtensions)) {
+            $file_uploaded['error'] = "Apenas arquivo do tipo JPEG, PNG ou PDF são permitidos";
+            return $file_uploaded;
+        }
 
-    $error = array();
-    $allowed = array("jpg","jpeg","png","pdf");
-    $maxsize = 20971520;
-    
-    $tmp_file = $_FILES[$myfile]['tmp_name'];
+        if ($fileSize > 20971520) {
+            $file_uploaded['error'] = "Apenas arquivos até 20MB são permitidos";
+            return $file_uploaded;
+        }
 
+        if (empty($newname)){
+            $file_uploaded['error'] = "Você deve informar o nome do responsável!";
+            return $file_uploaded;
+        }
 
-   
-    $data = addslashes(file_get_contents($_FILES[$myfile]['tmp_name']));
-    $file_name = addslashes($_FILES[$myfile]['name']);
-    $file_size = $_FILES[$myfile]['size'];  
-    
-
-    
-    
-
-    //pegamos a extenção do arquivo
-    $file_extention = explode('.', $file_name);   
-    $extention = strtolower(end($file_extention));
-
-    
-    
+        if (empty($file_uploaded['error'])){
+            $file_uploaded = [
+                'nome' => $newname . "_" . $description,
+                'extensao' => $fileExtension,
+                'data' => $data
+            ];        
+            return $file_uploaded;
+        } 
         
-
-    // definimos as extenções permitidas  
-    if(!in_array($extention,$allowed)){
-        $file_uploaded['error'] = "Tipo de arquivo não permitido";
-        return $file_uploaded;
-    }
-
-
-
-    if($size > $maxsize){
-
-        $file_uploaded['error'] = "Apenas arquivos com até 20MB são permitidos";
-        return $file_uploaded; 
-    }
-
-
-    if (empty($errors)){
-        $file_uploaded = [
-            'nome' => $newname . "_" . $description,
-            'type' => $type,
-            'data' => $data
-        ];        
-        return $file_uploaded;
-    }   
     
 }//fim função upload
 
@@ -187,8 +166,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     //valida arquivos deanexo 
   
-    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');  
+    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
+    $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
     $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
+    $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
     
     if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
     {
@@ -220,8 +201,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     ){
 
 
+
+
         try 
         {
+            //vai montar o progocolo pegando o último id do banco mais o ano exemplo 42019
+            $sql = $pdo->prepare("SELECT max(id) FROM fila");
+            $sql->execute();
+            $result = $sql->fetch();
+            $lastid = $result[0]; 
+            $year = date('Y');           
+            $protocolo = $lastid . $year;    
+
             $sql = 'INSERT INTO fila SET
                     registro = CURDATE(),
                     responsavel = :responsavel,  
@@ -234,8 +225,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     complemento = :complemento, 
                     nomecrianca = :nomecrianca,
                     nascimento = :nascimento, 
-                    certidaonascimento = :certidaonascimento,                  
-                    
+                    certidaonascimento = :certidaonascimento,
                     opcao1_id = :opcao1_id,
                     opcao2_id = :opcao2_id,
                     opcao3_id = :opcao3_id,
@@ -243,8 +233,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     turno2 = :turno2,
                     turno3 = :turno3,
                     comprovanteres = :comprovanteres,
+                    comprovante_res_nome = :comprovante_res_nome,
                     comprovantenasc = :comprovantenasc,
-                    cpfresponsavel = :cpfresponsavel';
+                    comprovante_nasc_nome = :comprovante_nasc_nome,
+                    cpfresponsavel = :cpfresponsavel,
+                    protocolo = :protocolo';
+                    
 
 																						
 
@@ -261,7 +255,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':nomecrianca', $data['nome']);
             $s->bindValue(':nascimento', $data['nascimento']);
             $s->bindValue(':certidaonascimento', $data['certidao']);
-            
             $s->bindValue(':opcao1_id', $data['setor1']);
             $s->bindValue(':opcao2_id', $data['setor2']);
             $s->bindValue(':opcao3_id', $data['setor3']);
@@ -269,19 +262,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':turno2', $data['turno2']);
             $s->bindValue(':turno3', $data['turno3']);
             $s->bindValue(':comprovanteres', $comp_res);
+            $s->bindValue(':comprovante_res_nome', $nome_comp_res); 
             $s->bindValue(':comprovantenasc', $cert_nasc);
+            $s->bindValue(':comprovante_nasc_nome', $nome_comp_nasc);
             $s->bindValue(':cpfresponsavel', $data['cpf']);
+            $s->bindValue(':protocolo', $protocolo);
+            
            // $s->bindValue(':protocolo', $data['responsavel']);
             //$s->bindValue(':etapa_id', $data['responsavel']);
             //echo debugPDO($s);
            
-            $s->execute() or die(print_r($s->errorInfo(), true));
+            $s->execute() or die(print_r($s->errorInfo(), true));            
+            include 'sucesso.html.php';
+            exit();
 
             //$s->execute();		
         } catch (Exception $e) {          
             
             echo $e->getMessage();
-            $error = 'Error adding.';
+            $error = 'Erro ao tentar gravar no banco de dados.';
             include 'error.html.php';
             exit();
         }
