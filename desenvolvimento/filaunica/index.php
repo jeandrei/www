@@ -29,7 +29,7 @@ function upload_file($myfile,$newname,$description){
     
 
         if (! in_array($fileExtension,$fileExtensions)) {
-            $file_uploaded['error'] = "Apenas arquivo do tipo JPEG, PNG ou PDF são permitidos";
+            $file_uploaded['error'] = "Por favor informe arquivos do tipo JPEG, PNG ou PDF.";
             return $file_uploaded;
         }
 
@@ -310,7 +310,7 @@ else{
         'setor3' => '',
         'turno3' => '',
         'portador' => '',
-        'obs'  => ''      
+        'obs'  => ''         
         ];
     //die(var_dump($data));
 }//post
@@ -344,7 +344,7 @@ else{
 
   <!--Javascript funções-->
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
-
+  
   <!--FUNÇÃO QUE SETA O FOCO AO CARREGAR O FORMULÁRIO-->
     <script>
         window.onload = function(){focofield(<?php  echo "'$foco[0]'"; ?>);}
@@ -909,11 +909,16 @@ else{
                             <label for="comprovante_residencia">
                                 Comprovante de residência
                                 <div style="color:red; font-size:25px;">
-                                <span><?php echo $data['comp_residencia_name_err']; ?></span>
+                                <span id="res_erro"><?php echo $data['comp_residencia_name_err']; ?></span>
                                 </div>
                                 
                             </label><br>
-                            <input id="comprovante_residencia" name="comprovante_residencia" type="file" class="form-control <?php echo (!empty($data['comp_residencia_name_err'])) ? 'is-invalid' : ''; ?>">
+                            <input 
+                                id="comprovante_residencia" 
+                                name="comprovante_residencia" 
+                                type="file" class="form-control <?php echo (!empty($data['comp_residencia_name_err'])) ? 'is-invalid' : ''; ?>"
+                                onchange="return fileValidation('comprovante_residencia','res_erro');"
+                                >
                             <label id="kv-error-2"></label>
                         </div>
                         
@@ -935,11 +940,17 @@ else{
                             <label for="certidaonascimento">
                                 Comprovante de nascimento da criança
                                 <div style="color:red; font-size:25px;">
-                                <span><?php echo $data['certidaonascimento_err']; ?></span>
+                                <span id="cert_error"><?php echo $data['certidaonascimento_err']; ?></span>
                                 </div>
 
                             </label><br>
-                            <input id="certidaonascimento" name="certidaonascimento" type="file" class="form-control <?php echo (!empty($data['certidaonascimento_err'])) ? 'is-invalid' : ''; ?>">
+                            <input 
+                                id="certidaonascimento" 
+                                name="certidaonascimento" 
+                                type="file" 
+                                class="form-control <?php echo (!empty($data['certidaonascimento_err'])) ? 'is-invalid' : ''; ?>"
+                                onchange="return fileValidation('certidaonascimento','cert_error');"
+                               >
                         </div>
                     </div>         
                     
@@ -990,7 +1001,6 @@ else{
 
 
 </div><!--container-->
-
 
 </body>
 </html>
