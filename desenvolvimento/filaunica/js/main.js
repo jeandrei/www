@@ -62,7 +62,7 @@ function fileValidation(myfiel,span)
 	var fileInput = document.getElementById(myfiel);
 	var filePath = fileInput.value;
 	var errorspan = span;
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf)$/i;
     if(!allowedExtensions.exec(filePath)){				
 		document.getElementById(errorspan).textContent="Apenas arquivo do tipo JPEG, PNG ou PDF são permitidos!";
         fileInput.value = '';

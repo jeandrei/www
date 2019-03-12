@@ -47,34 +47,6 @@ function htmlout($text)
 	echo html($text);
 }
 
-function markdown2html($text)
-{
-	$text = html($text);
-	//Convert plain-text formatting to HTML
-	// strong emphasis
-	$text = preg_replace('/__(.+?)__/s', '<strong>$1</strong>', $text);
-	$text = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $text);
-	// emphasis
-	$text = preg_replace('/_([^_]+)_/', '<em>$1</em>', $text);
-	$text = preg_replace('/\*([^\*]+)\*/', '<em>$1</em>', $text);
-	// Convert Windows (\r\n) to Unix (\n)
-	$text = str_replace("\r\n", "\n", $text);
-	// Convert Macintosh (\r) to Unix (\n)
-	$text = str_replace("\r", "\n", $text);
-	// Paragraphs
-	$text = '<p>' . str_replace("\n\n", '</p><p>', $text) . '</p>';
-	// Line breaks
-	$text = str_replace("\n", '<br>', $text);
-	// [linked text](link URL)
-	$text = preg_replace('/\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/i','<a href="$2">$1</a>', $text);
-return $text;
-}
-
-function markdownout($text)
-{
-	echo markdown2html($text);
-}
-
 
 function validaCPF($cpf) {
  
@@ -162,9 +134,70 @@ return $bairros;
 
 
 
+//função para fazer upload do arquivo
+// obs tem que ter enctype="multipart/form-data no cabeçalho do form para funcionar
+// para fazer upload de arquivos tem que ter essa parte
+function upload_file($myfile,$newname,$description){ 
+    
+    $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
+
+    $fileName = $_FILES[$myfile]['name'];
+    $fileSize = $_FILES[$myfile]['size'];
+    $fileTmpName  = $_FILES[$myfile]['tmp_name'];
+    $fileType = $_FILES[$myfile]['type'];
+    $fileExtension = strtolower(end(explode('.',$fileName)));
+
+    //$uploadPath = $currentDir . $uploadDirectory . basename($fileName); 
+
+    
+
+        if (! in_array($fileExtension,$fileExtensions)) {
+            $file_uploaded['error'] = "Por favor informe arquivos do tipo JPEG, PNG ou PDF.";
+            return $file_uploaded;
+        }
+
+        if ($fileSize > 20971520) {
+            $file_uploaded['error'] = "Apenas arquivos até 20MB são permitidos";
+            return $file_uploaded;
+        }
+
+        if (empty($newname)){
+            $file_uploaded['error'] = "Você deve informar o nome do responsável!";
+            return $file_uploaded;
+        }
+
+        if (empty($file_uploaded['error'])){
+            $file_uploaded = [
+                'nome' => $newname . "_" . $description,
+                'extensao' => $fileExtension,
+                'data' => $data
+            ];        
+            return $file_uploaded;
+        } 
+        
+    
+}//fim função upload
 
 
-
+function verificaexistecrianca($conn,$nome,$nasc){
+	$sql = "SELECT * FROM fila where nomecrianca = :nomecrianca AND nascimento = :nascimento";
+	//$sql = "SELECT count(*) FROM fila where nomecrianca LIKE :nomecrianca AND nascimento = :nascimento";
+	$s = $conn->prepare($sql);
+	$s->bindValue(':nomecrianca',$nome);
+    //$s->bindValue(':nomecrianca', '%' . $nome . '%');
+    $s->bindValue(':nascimento', $nasc);     
+    $s->execute();
+	$result = $s->rowCount();	
+	if($result >0)
+	{
+		return true;
+	}  
+	else
+	{
+		return false;
+	}
+}
 
 
 ?>
+
