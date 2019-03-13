@@ -64,7 +64,7 @@
             
             <ul class="nav nav-tabs" role="tablist" id="myTabs">
 
-                <li role="presentation" class="nav-item">
+                <li id="aba1" class="btnPrevious" role="presentation" class="nav-item">
                     <a class="nav-link active" href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">
                         <i class="fa fa-list" aria-hidden="true"></i>
                         1º Etapa
@@ -112,12 +112,14 @@
                                             value="<?php htmlout($data['responsavel']); ?>"
                                             onkeydown="upperCaseF(this)"                                            
                                             >
-                                        <span class="invalid-feedback"><?php echo $data['responsavel_err']; ?></span>
+                                        <span id="responsavel_err" class="text-danger"><?php echo $data['responsavel_err']; ?></span>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
 
-
+                            <span >erro</span>
 
 
 
@@ -639,7 +641,12 @@
                 <!--BOTÃO ENVIAR DADOS-->
                 <div class="row">
                     <div class="col-lg-12">
-                        <input type="submit" class="btn btn-success btn-block btn-lg" value="Enviar dados" name="btn_enviar">                        
+                        <input 
+                            type="submit" 
+                            class="btn btn-success btn-block btn-lg" 
+                            value="Enviar dados" 
+                            name="btn_enviar"                            
+                        >                        
                     </div>
                 </div>
 

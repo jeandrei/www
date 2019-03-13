@@ -94,3 +94,15 @@ $(document).ready(function() {
 });
 
 
+
+
+// tem que colocar no <form action="" ...onsubmit="return validation()"
+function validation(){
+	var responsavel = document.getElementById('responsavel').value;
+	if(responsavel == ""){	
+		window.history.go(-1);	
+		document.getElementById('responsavel_err').innerHTML = "Mano que isso Por favor informe o responsável";
+		return false;		
+	}
+}//validation	
+
