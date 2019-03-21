@@ -82,16 +82,41 @@ function upperCaseF(a){
 }
 
 //função para o botão avançar do formulário
-$(document).ready(function() {
-		
-	$('.btnNext').click(function() {
-		$('.nav-tabs .active').parent().next('li').find('a').trigger('click');
-		});
+$(document).ready(function () {
+	//Initialize tooltips
+	$('.nav-tabs > li a[title]').tooltip();
+	
+	//Wizard
+	$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 
-		$('.btnPrevious').click(function() {
-			$('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
+		var $target = $(e.target);
+	
+		if ($target.parent().hasClass('disabled')) {
+			return false;
+		}
+	});
+
+	$(".next-step").click(function (e) {
+
+		var $active = $('.nav-tabs li>a.active');
+		$active.parent().next().removeClass('disabled');
+		nextTab($active);
+
+	});
+	$(".prev-step").click(function (e) {
+
+		var $active = $('.nav-tabs li>a.active');
+		prevTab($active);
+
 	});
 });
+
+function nextTab(elem) {
+	$(elem).parent().next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+	$(elem).parent().prev().find('a[data-toggle="tab"]').click();
+}
 
 
 
@@ -99,9 +124,10 @@ $(document).ready(function() {
 // tem que colocar no <form action="" ...onsubmit="return validation()"
 function validation(){
 	var responsavel = document.getElementById('responsavel').value;
-	if(responsavel == ""){	
-		window.history.go(-1);	
-		document.getElementById('responsavel_err').innerHTML = "Mano que isso Por favor informe o responsável";
+	if(responsavel == ""){			
+		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável";
+		document.getElementById('voltar').click();
+		focofield('responsavel')
 		return false;		
 	}
 }//validation	

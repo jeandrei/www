@@ -29,7 +29,6 @@
     </script>
   
 
-
 </head>
 <body style="background-color:#DCDCDC">
 <div class="container" style="margin-top: 90px;">
@@ -50,7 +49,7 @@
      <!--BOTÃO VOLTAR-->
     <div class="row" style="margin-bottom: 10px;">
         <div class="col-lg-2">
-            <button class="btn btn-default btn-block" style="background-color:#FFFAF0" onclick="window.history.go(-1); return false;">
+            <button id="voltar" class="prev-step btn btn-default btn-block" style="background-color:#FFFAF0">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 Voltar
             </button>
@@ -58,13 +57,13 @@
     </div>
 
     <div class="row" style="background-color:#FFFAF0">
-    <form action="index.php" method="post" enctype="multipart/form-data">  
+    <form action="index.php" method="post" enctype="multipart/form-data" onsubmit="return validation()">  
         <!--abas-->
         <div class="col-lg-14" id="result">
             
             <ul class="nav nav-tabs" role="tablist" id="myTabs">
 
-                <li id="aba1" class="btnPrevious" role="presentation" class="nav-item">
+                <li id="aba1" role="presentation" class="nav-item">
                     <a class="nav-link active" href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">
                         <i class="fa fa-list" aria-hidden="true"></i>
                         1º Etapa
@@ -554,7 +553,7 @@
                 <!--BOTÃO PRÓXIMO-->
                 <div class="row">
                     <div class="col-lg-12">
-                        <a class="btnNext btn btn-primary btn-block" style="color:white;">
+                        <a class="next-step btn btn-primary btn-block" style="color:white;">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             Proximo
                         </a>
@@ -648,22 +647,13 @@
                             name="btn_enviar"                            
                         >                        
                     </div>
-                </div>
-
-
-            <!--FIM 2ª ETAPA-->
+                </div>   
+           
             </div>
-
-
-
-
 
         </div><!--class="tab-content"-->
     </form>
-    </div><!--<div class=row>"-->
-
-    </div><!--class="col-lg-12" id="result"-->
-    </div><!--<div class="row">-->
+    </div>
 
 </div><!--container-->
 
