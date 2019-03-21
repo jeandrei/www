@@ -10,6 +10,42 @@ $(document).ready(function() {
 	});
 //********************fim mascaras**************** */
 
+
+//****************VALIDAÇÃO DE CPF******************* */
+function validacpf(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+  if (strCPF == "00000000000") return false;
+     
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+   
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+   
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+   
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+//**********************FIM FUNÇÃO VALIDAÇÃO DE CPF */
+
+//***************** VALIDAÇÃO DE EMAIL
+function validaemail(email){
+    var exclude=/[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
+    var check=/@[w-]+./;
+    var checkend=/.[a-zA-Z]{2,3}$/;
+    if(((email.search(exclude) != -1)||(email.search(check)) == -1)||(email.search(checkend) == -1)){return false;}
+    else {return true;}
+}
+//************* */FIM VALIDAÇÃO DE EMAIL
+
+
+
 //FUNÇÃO PARA PERMITIR APENAS NÚMEROS
 //PARA USAR BASTA COLOCAR O CAMPO COMO CLASSE onlynumbers
 //E PARA EXIBIR A MENSAGEM COLOCAR UM <span id="errmsg"></span>
@@ -124,11 +160,39 @@ function prevTab(elem) {
 // tem que colocar no <form action="" ...onsubmit="return validation()"
 function validation(){
 	var responsavel = document.getElementById('responsavel').value;
+	var cpf = document.getElementById('cpf').value;
+	var email = document.getElementById('email').value;
+
+	
 	if(responsavel == ""){			
-		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável";
+		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável java";
 		document.getElementById('voltar').click();
-		focofield('responsavel')
-		return false;		
+		focofield('responsavel');
+		return false;
 	}
+
+	if(cpf != ""){			
+		if(validacpf(cpf)){
+			document.getElementById('cpf_err').innerHTML = "CPF inválido";
+			document.getElementById('voltar').click();
+			focofield('cpf');
+			return false;	
+	
+		}	
+	}
+
+	if(email != ""){			
+		if(validaemail(email)){
+			document.getElementById('email_err').innerHTML = "e-mail inválido";
+			document.getElementById('voltar').click();
+			focofield('email');
+			return false;	
+	
+		}	
+	}	
+	
+
+	
+
 }//validation	
 
