@@ -133,7 +133,7 @@ function fileValidation(myfiel,span)
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf)$/i;
     if(!allowedExtensions.exec(filePath)){				
 		document.getElementById(errorspan).textContent="Apenas arquivo do tipo JPEG, PNG ou PDF são permitidos!";
-        fileInput.value = '';
+		fileInput.value = '';			
         return false;
     }else{
 		document.getElementById(errorspan).textContent="";
@@ -195,6 +195,9 @@ function validation(){
 	var cpf = document.getElementById('cpf').value;
 	var email = document.getElementById('email').value;
 	var telefone1 = document.getElementById('telefone1').value;
+	var telefone2 = document.getElementById('telefone2').value;
+	var bairro = document.getElementById('bairro').value;
+	
 	
 	if(responsavel == ""){			
 		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável java";
@@ -243,6 +246,23 @@ function validation(){
 			return false;	
 		}
 
+	}
+
+
+	if(telefone2 !== ""){
+		if(!validatetelefone(telefone2)){
+			document.getElementById('telefone2_err').innerHTML = "Telefone inválido java";
+			document.getElementById('voltar').click();
+			focofield('telefone2');
+			return false;	
+		}	
+	}
+
+	if(bairro == null){
+		document.getElementById('bairro_err').innerHTML = "Por favor selecione um bairro java";
+		document.getElementById('voltar').click();
+		focofield('bairro');
+		return false;	
 	}
 
 

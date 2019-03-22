@@ -89,6 +89,7 @@
 
     <!--SEGUNDA DIV-->
     <div class="row" style="background-color:#FFFAF0">
+        <!--onsubmit="return validation()"-->
         <form action="index.php" method="post" enctype="multipart/form-data" onsubmit="return validation()">  
                             
             <!--DIV TODO O CONTEÚDO DENTRO DAS ABAS-->
@@ -216,7 +217,7 @@
                                                 class="form-control telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
                                                 value="<?php htmlout($data['telefone2']); ?>"
                                             >
-                                            <span class="invalid-feedback"><?php echo $data['telefone2_err']; ?></span>
+                                            <span id="telefone2_err" class="text-danger"><?php echo $data['telefone2_err']; ?></span>
                                         </div>
                                      <!--LINHA NOVA PARA OS CELULARES-->
                                     </div>
@@ -234,7 +235,7 @@
                                                 class="form-control"
                                                 >
                                                 
-                                                <option value="NULL">Selecione o Bairro</option>
+                                                <option value="">Selecione o Bairro</option>
                                                     <?php 
                                                     $bairros = getBairros($pdo);
                                                     foreach($bairros as $bairro) : ?> 
@@ -245,6 +246,7 @@
                                                         </option>
                                                     <?php endforeach; ?>  
                                             </select>
+                                            <span id="bairro_err" class="text-danger"><?php echo $data['bairro_err']; ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="rua">
@@ -258,7 +260,9 @@
                                                 value="<?php htmlout($data['rua']); ?>"
                                                 onkeydown="upperCaseF(this)" 
                                                 >
-                                        </div>                               
+                                        <span id="rua_err" class="text-danger"><?php echo $data['rua_err']; ?></span>
+                                        </div>
+                                                                      
                                     <!--NOVA LINHA PARA BAIRRO E RUA-->
                                     </div>
 
@@ -317,7 +321,7 @@
                                                     value="<?php htmlout($data['nome']); ?>"
                                                     onkeydown="upperCaseF(this)" 
                                                     >
-                                            <span class="invalid-feedback"><?php echo $data['nome_err']; ?></span>
+                                            <span id="nome_err" class="text-danger"><?php echo $data['nome_err']; ?></span>
                                             </div>
                                         </div>
                                     <!--NOME DA CRIANÇA-->
@@ -339,7 +343,7 @@
                                                     value="<?php htmlout($data['nascimento']); ?>"
                                                     maxlength="10"
                                                     >
-                                            <span class="invalid-feedback"><?php echo $data['nascimento_err']; ?></span>
+                                            <span id="nascimento_err" class="text-danger"><?php echo $data['nascimento_err']; ?></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-7">
@@ -416,7 +420,7 @@
                                                 id="setor1" 
                                                 class="form-control <?php echo (!empty($data['setor1_err'])) ? 'is-invalid' : ''; ?>"                                        
                                             >
-                                                    <option value="NULL">Selecione a Escola</option>
+                                                    <option value="">Selecione a Escola</option>
                                                     <?php 
                                                     $escolas = getEscolas($pdo);
                                                     foreach($escolas as $escola) : ?> 
@@ -426,9 +430,8 @@
                                                             <?php echo $escola['nome'];?>
                                                         </option>
                                                     <?php endforeach; ?>  
-                                            </select>
-                                            <label class="help-block">Campo obrigatório</label>
-                                        <span class="invalid-feedback"><?php echo $data['setor1_err']; ?></span>
+                                            </select>                                           
+                                        <span id="setor1_err" class="text-danger"><?php echo $data['setor1_err']; ?></span>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -440,12 +443,12 @@
                                                     id="turno1"
                                                     name="turno1"
                                                 >
-                                                <option value="NULL">Selecione o turno</option>
+                                                <option value="">Selecione o turno</option>
                                                     <option value="1" <?php echo $data['turno1'] == '1' ? 'selected':'';?>>Matutino</option>
                                                     <option value="2" <?php echo $data['turno1'] == '2' ? 'selected':'';?>>Vespertino</option>
                                                     <option value="3" <?php echo $data['turno1'] == '3' ? 'selected':'';?>>Integral</option>
                                                 </select>
-                                                <span class="invalid-feedback"><?php echo $data['turno1_err']; ?></span>                                         
+                                                <span id="turno1_err" class="text-danger"><?php echo $data['turno1_err']; ?></span>                                      
                                             </div>
                                         </div>
                                     <!--ESCOLA E TURNO OPÇÃO 1-->

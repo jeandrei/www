@@ -6,9 +6,6 @@ require_once 'inc/helpers.inc.php';
 flash('post_message');
 
 
-$foco = array();     
-
-
     
 
 
@@ -40,48 +37,43 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //por isso tem que verificar se foi marcado
     //caso contrário o php vai acusar o erro
     //undefined index
+    
     if(isset($_POST['portador'])){
         $data['portador'] = $_POST['portador'];
     }    
    
     //valida responsável
     if(empty($data['responsavel'])){
-        $data['responsavel_err'] = 'Por favor informe o responsável';
-        $foco[] = 'responsavel';
+        $data['responsavel_err'] = 'Por favor informe o responsável';       
     }else{
         $data['responsavel_err'] = '' ;       
     }
 
     //valida telefone 1
     if(empty($data['telefone1'])){
-        $data['telefone1_err'] = 'Por favor informe o telefone';    
-        $foco[] = 'telefone1';
+        $data['telefone1_err'] = 'Por favor informe o telefone'; 
     }
     elseif(!validacelular($data['telefone1'])){
-        $data['telefone1_err'] = 'Telefone inválido'; 
-        $foco[] = 'telefone1';  
+        $data['telefone1_err'] = 'Telefone inválido';
     }else{
         $data['telefone1_err'] = '';       
     }
     
     //valida telefone 2
     if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
-        $data['telefone2_err'] = 'Telefone inválido';
-        $foco[] = 'telefone2';
+        $data['telefone2_err'] = 'Telefone inválido';        
     }else{
         $data['telefone2_err'] = '';
     }
 
     //valida nome
     if(empty($data['nome'])){
-        $data['nome_err'] = 'Por favor informe o nome da criança';        
-        $foco[] = 'nome';
+        $data['nome_err'] = 'Por favor informe o nome da criança';
     }
     else{
         if (verificaexistecrianca($pdo,$data['nome'],$data['nascimento']))
         {
-            $data['nome_err'] = 'Já existe um cadastro com esse nome e data de nascimento!';
-            $foco[] = 'nome';
+            $data['nome_err'] = 'Já existe um cadastro com esse nome e data de nascimento!';            
         }else{
             $data['nome_err'] = '';   
         }
@@ -89,32 +81,48 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //valida nascimento
     if(empty($data['nascimento'])){        
-        $data['nascimento_err'] = 'Por favor informe a data de nascimento';
-        $foco[] = 'nascimento';
+        $data['nascimento_err'] = 'Por favor informe a data de nascimento';       
     }                    
     elseif(!validanascimento($data['nascimento'])){
-        $data['nascimento_err'] = 'Data inválida';
-        $foco[] = 'nascimento';
+        $data['nascimento_err'] = 'Data inválida';       
     }else{
         $data['nascimento_err'] = '';
     }           
     
     //valida email
     if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
-        $data['email_err'] = 'Email inválido';
-        $foco[] = 'email';
+        $data['email_err'] = 'Email inválido';        
     }else{
         $data['email_err'] = '';
     }
 
     //valida cpf
     if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
-        $data['cpf_err'] = 'CPF inválido';   
-        $foco[] = 'cpf'; 
+        $data['cpf_err'] = 'CPF inválido';  
+        
     }else{
         $data['cpf_err'] = '';
     }
     
+    
+    if(empty($data['bairro'])){       
+        $data['bairro_err'] = 'Por favor selecione um bairro';
+    }
+
+    if(empty($data['rua'])){       
+        $data['rua_err'] = 'Por favor informe a rua';
+    }
+   
+    
+   
+    if(empty($data['setor1'])){
+        $data['setor1_err'] = 'Por favor informe ao menos uma opção';
+    }
+    
+    if(empty($data['turno1'])){
+        $data['turno1_err'] = 'Por favor informe o turno';        
+    }
+
     
    
 
@@ -128,7 +136,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
     {
         $data['comp_residencia_name_err'] = ($comp_res['error']);
-        $data['certidaonascimento_err'] = ($cert_nasc['error']);
+        $data['certidaonascimento_err'] = ($cert_nasc['error']);    
         
     } 
 
@@ -145,6 +153,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         empty($data['nascimento_err']) &&
         empty($data['idade_maxima_err']) &&
         empty($data['comp_residencia_name_err']) &&
+        empty($data['bairro_err']) &&
+        empty($data['rua_err']) &&
+        empty($data['setor1_err']) &&
+        empty($data['turno1_err']) &&
         empty($data['certidaonascimento_err'])    
     ){
         try 
@@ -194,7 +206,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':celular2', $data['telefone2']);
             $s->bindValue(':bairro_id', $data['bairro']);
             $s->bindValue(':logradouro', $data['rua']);
-            $s->bindValue(':numero', $data['numero']);
+            
+            
+            if(empty($data['numero'])){
+                $s->bindValue(':numero', 0);
+            }
+
+            
             $s->bindValue(':complemento', $data['complemento']);
             $s->bindValue(':nomecrianca', $data['nome']);
             $s->bindValue(':nascimento', $data['nascimento']);
