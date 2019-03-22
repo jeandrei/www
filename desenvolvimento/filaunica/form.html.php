@@ -200,7 +200,7 @@
                                                 class="form-control telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
                                                 value="<?php htmlout($data['telefone1']); ?>"
                                                 >
-                                        <span class="invalid-feedback"><?php echo $data['telefone1_err']; ?></span>
+                                                <span id="telefone1_err" class="text-danger"><?php echo $data['telefone1_err']; ?></span>
                                         </div>
 
                                         <!--CELULAR 2-->

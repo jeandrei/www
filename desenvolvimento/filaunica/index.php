@@ -74,11 +74,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //valida nome
     if(empty($data['nome'])){
-        $data['nome_err'] = 'Por favor informe o nome da criança';
+        $data['nome_err'] = 'Por favor informe o nome da criança';        
         $foco[] = 'nome';
     }
     else{
-        $data['nome_err'] = '';
+        if (verificaexistecrianca($pdo,$data['nome'],$data['nascimento']))
+        {
+            $data['nome_err'] = 'Já existe um cadastro com esse nome e data de nascimento!';
+            $foco[] = 'nome';
+        }else{
+            $data['nome_err'] = '';   
+        }
     }
 
     //valida nascimento
@@ -90,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data['nascimento_err'] = 'Data inválida';
         $foco[] = 'nascimento';
     }else{
-        $data['nome_err'] = '';
+        $data['nascimento_err'] = '';
     }           
     
     //valida email
@@ -109,13 +115,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data['cpf_err'] = '';
     }
     
-    if (verificaexistecrianca($pdo,$data['nome'],$data['nascimento']))
-    {
-        $data['nome_err'] = 'Já existe um cadastro com esse nome e data de nascimento!';
-        $foco[] = 'nome';
-    }else{
-        $data['nome_err'] = '';   
-    }
+    
    
 
     
@@ -132,6 +132,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
     } 
 
+   
     //verifica para submeter
     // Make sure no errors
     if(     
