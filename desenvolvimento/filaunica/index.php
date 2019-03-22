@@ -207,7 +207,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':bairro_id', $data['bairro']);
             $s->bindValue(':logradouro', $data['rua']);
             
-            
+
             if(empty($data['numero'])){
                 $s->bindValue(':numero', 0);
             }
@@ -239,8 +239,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
          
            
             $s->execute() or die(print_r($s->errorInfo(), true));            
-            //include 'sucesso.html.php';
-            //exit();
+            
+            include 'sucesso.html.php';
+            exit();
 
             //$s->execute();		
         } catch (Exception $e) {          
