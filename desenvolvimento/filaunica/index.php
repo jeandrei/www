@@ -5,8 +5,13 @@ require_once 'inc/helpers.inc.php';
 
 flash('post_message');
 
+/*$start_time = '2000-01-01';
+$start_time = date_create_from_format('Y-m-d H:i:s', $start_time);
+$current_date = new DateTime();
+$diff = $start_time->diff($current_date);
+$aa  = (string)$diff->format('%R%a');
+echo gettype($aa);*/
 
-    
 
 
 //VALIDAÇÃO
@@ -168,7 +173,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $lastid = $result[0]; 
             $lastid = $lastid +1;
             $year = date('Y');           
-            $protocolo = $lastid . $year;    
+            $protocolo = $lastid . $year; 
+
+            $dias = dias($data['nascimento']);
+            
+            
+            
+            
+           
 
             $sql = 'INSERT INTO fila SET
                     registro = CURDATE(),

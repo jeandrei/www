@@ -466,7 +466,7 @@
                                                 id="setor2" 
                                                 class="form-control"
                                             >
-                                                    <option value="NULL">Selecione a Escola</option>
+                                                    <option value="">Selecione a Escola</option>
                                                     <?php 
                                                     $escolas = getEscolas($pdo);
                                                     foreach($escolas as $escola) : ?> 
@@ -488,7 +488,7 @@
                                                     id="turno2"
                                                     name="turno2"
                                                 >
-                                                    <option value="NULL">Selecione o turno</option>
+                                                    <option value="">Selecione o turno</option>
                                                     <option value="1" <?php echo $data['turno2'] == '1' ? 'selected':'';?>>Matutino</option>
                                                     <option value="2" <?php echo $data['turno2'] == '2' ? 'selected':'';?>>Vespertino</option>
                                                     <option value="3" <?php echo $data['turno2'] == '3' ? 'selected':'';?>>Integral</option>                                                

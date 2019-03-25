@@ -132,6 +132,27 @@ function getEscolas($conn) {
 return $bairros;
 }
 
+function getEscola($pdo,$id) {
+    $stmt = $pdo->prepare('SELECT nome FROM escola WHERE id=:id');
+    $stmt->execute(['id' => $id]); 
+    $escola = $stmt->fetch();  
+    if(count($escola) > 0){
+        return $escola['nome'];
+    }
+    else{
+        return false;
+    }
+}
+
+//retorna o número de dias de entre a data e a data atual formato 2018-07-10 ano mes e dia
+// dias('2018-07-10');
+function dias($data){
+    $hoje = new DateTime();
+    $date2=date_create($data);
+    $diff=date_diff($hoje,$date2);
+    $dias = $diff->format("%a");
+    return $dias;
+}
 
 
 //função para fazer upload do arquivo
