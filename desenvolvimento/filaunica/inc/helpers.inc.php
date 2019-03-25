@@ -144,6 +144,18 @@ function getEscola($pdo,$id) {
     }
 }
 
+function getEtapa($pdo,$dias) {
+    $stmt = $pdo->prepare('SELECT * FROM etapa WHERE :dias>=idade_minima AND :dias<=idade_maxima');
+    $stmt->execute(['dias' => $dias]);      
+	$etapa = $stmt->fetch();  
+    if(count($etapa) > 0){
+        return $etapa['descricao'];
+    }
+    else{
+        return false;
+    }
+}
+
 //retorna o número de dias de entre a data e a data atual formato 2018-07-10 ano mes e dia
 // dias('2018-07-10');
 function dias($data){

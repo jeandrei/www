@@ -12,6 +12,11 @@ $diff = $start_time->diff($current_date);
 $aa  = (string)$diff->format('%R%a');
 echo gettype($aa);*/
 
+//parei aqui
+$dias = dias('2017-12-06');
+$etapa = getEtapa($pdo,$dias);
+die(var_dump($etapa));
+
 
 
 //VALIDAÇÃO
@@ -174,10 +179,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $lastid = $lastid +1;
             $year = date('Y');           
             $protocolo = $lastid . $year; 
-
+/*
             $dias = dias($data['nascimento']);
-            //if($)
-            
+            $etapa = getEtapa($pdo,$dias);
+            die(var_dump($etapa));
+            */
             
             
             
