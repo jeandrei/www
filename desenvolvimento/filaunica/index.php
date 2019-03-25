@@ -176,6 +176,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $protocolo = $lastid . $year; 
 
             $dias = dias($data['nascimento']);
+            //if($)
             
             
             
