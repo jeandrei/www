@@ -41,16 +41,18 @@
             <p class="mb-0">
               <?php  
                     echo "O nome do aluno é: <b>" . $data['nome'] . "</b><br>";
-                    echo "As opções que você escolheu são:<b>";
+                    echo "As opções que você escolheu são: <b>";
                       if(!empty($data['setor1'])){
-                        echo getEscola($pdo,$data['setor1']) . ", ";
+                        echo getEscola($pdo,$data['setor1']);
                       }
                       if(!empty($data['setor2'])){
-                        echo getEscola($pdo,$data['setor2']) . ", ";
+                        echo ",opcao2 " . getEscola($pdo,$data['setor2']);
                       }
                       if(!empty($data['setor3'])){
-                        echo getEscola($pdo,$data['setor3']);
-                      }                    
+                        echo ", " . getEscola($pdo,$data['setor3']);
+                      } 
+                      
+                      echo "</b><br>A etapa para a data de nascimento do aluno é: <b>" . getDescricaoEtapa($pdo,$etapa) . "</b>";
                      
               ?>
             </p>

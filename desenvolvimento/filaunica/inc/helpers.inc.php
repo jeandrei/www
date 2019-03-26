@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
  // Flash message helper
   // Chama 2 vezes a função
@@ -135,8 +135,9 @@ return $bairros;
 function getEscola($pdo,$id) {
     $stmt = $pdo->prepare('SELECT nome FROM escola WHERE id=:id');
     $stmt->execute(['id' => $id]); 
-    $escola = $stmt->fetch();  
-    if(count($escola) > 0){
+    $escola = $stmt->fetch(); 
+    $count = (is_array($escola) ? count($escola) : 0);
+    if($count > 0){
         return $escola['nome'];
     }
     else{
@@ -148,8 +149,20 @@ function getEtapa($pdo,$dias) {
     $stmt = $pdo->prepare('SELECT * FROM etapa WHERE :dias>=idade_minima AND :dias<=idade_maxima');
     $stmt->execute(['dias' => $dias]);      
 	$etapa = $stmt->fetch();  
-    if(count($etapa) > 0){
-        return $etapa['descricao'];
+    if(!empty($etapa['id'])){
+        return $etapa['id'];
+    }
+    else{
+        return false;
+    }
+}
+
+function getDescricaoEtapa($pdo,$id) {
+    $stmt = $pdo->prepare('SELECT descricao FROM etapa WHERE id = :id');
+    $stmt->execute(['id' => $id]);      
+	$descricao = $stmt->fetch();  
+    if(!empty($descricao['descricao'])){
+        return $descricao['descricao'];
     }
     else{
         return false;

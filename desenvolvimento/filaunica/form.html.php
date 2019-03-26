@@ -31,11 +31,13 @@
 <!--********************************************DIV PRINCIPAL***********************************************-->
 <div class="container" style="margin-top: 90px;">
 
+<?php 
 
+
+?>
 
 <span id="MsgModal"></span>
     
-
 
 
 
@@ -510,7 +512,7 @@
                                                 id="setor3" 
                                                 class="form-control"
                                             >
-                                                    <option value="NULL">Selecione a Escola</option>
+                                                    <option value="">Selecione a Escola</option>
                                                     <?php 
                                                     $escolas = getEscolas($pdo);
                                                     foreach($escolas as $escola) : ?> 

@@ -3,21 +3,12 @@
 require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
-flash('post_message');
 
-/*$start_time = '2000-01-01';
-$start_time = date_create_from_format('Y-m-d H:i:s', $start_time);
-$current_date = new DateTime();
-$diff = $start_time->diff($current_date);
-$aa  = (string)$diff->format('%R%a');
-echo gettype($aa);*/
-
-//parei aqui
-$dias = dias('2017-12-06');
-$etapa = getEtapa($pdo,$dias);
-die(var_dump($etapa));
-
-
+/*
+if(!empty($error)){
+flash('alert-danger',$error,'alert alert-danger');
+echo flash('alert-danger');}
+*/
 
 //VALIDAÇÃO
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -91,13 +82,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //valida nascimento
     if(empty($data['nascimento'])){        
-        $data['nascimento_err'] = 'Por favor informe a data de nascimento';       
+        $data['nascimento_err'] = 'Por favor informe a da$errorta de nascimento';       
     }                    
     elseif(!validanascimento($data['nascimento'])){
         $data['nascimento_err'] = 'Data inválida';       
     }else{
         $data['nascimento_err'] = '';
-    }           
+    }    
+    
+    //valida etapa
+    //função dias retorna o número de dias da data de nascimento até a data atual
+    $dias = dias($data['nascimento']);    
+    if(getEtapa($pdo,$dias)){
+        $etapa = getEtapa($pdo,$dias);
+    }else
+    {
+        $data['nascimento_err'] = 'Data de nascimento não corresponde a nenhuma etapa da Fila Única';
+    }
+    
     
     //valida email
     if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
@@ -134,6 +136,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     
+
+    
    
 
     
@@ -166,8 +170,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         empty($data['bairro_err']) &&
         empty($data['rua_err']) &&
         empty($data['setor1_err']) &&
-        empty($data['turno1_err']) &&
-        empty($data['certidaonascimento_err'])    
+        empty($data['turno1_err']) &&       
+        empty($data['certidaonascimento_err'])
     ){
         try 
         {
@@ -215,6 +219,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     cpfresponsavel = :cpfresponsavel,
                     protocolo = :protocolo,
                     deficiencia = :deficiencia,
+                    etapa_id = :etapa,
                     observacao = :observacao
                     ';   
                     
@@ -242,6 +247,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':turno1', $data['turno1']);
             $s->bindValue(':turno2', $data['turno2']);
             $s->bindValue(':turno3', $data['turno3']);
+            $s->bindValue(':etapa', $etapa);
             $s->bindValue(':comprovanteres', $comp_res);
             $s->bindValue(':comprovante_res_nome', $nome_comp_res); 
             $s->bindValue(':comprovantenasc', $cert_nasc);
