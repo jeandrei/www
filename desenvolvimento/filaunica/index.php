@@ -4,11 +4,7 @@ require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
 
-/*
-if(!empty($error)){
-flash('alert-danger',$error,'alert alert-danger');
-echo flash('alert-danger');}
-*/
+
 
 //VALIDAÇÃO
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -97,7 +93,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $etapa = getEtapa($pdo,$dias);
     }else
     {
-        $data['nascimento_err'] = 'Data de nascimento não corresponde a nenhuma etapa da Fila Única';
+        $data['nascimento_err'] = 'Data de nascimento inválida';
+        $error = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';
     }
     
     
@@ -149,8 +146,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
     {
-        $data['comp_residencia_name_err'] = ($comp_res['error']);
-        $data['certidaonascimento_err'] = ($cert_nasc['error']);    
+        $data['comp_residencia_name_err'] = ($comp_res['error']);         
+        $data['certidaonascimento_err'] = ($cert_nasc['error']); 
+        $error = 'Ops! Você selecionou arquivos inválidos';
         
     } 
 

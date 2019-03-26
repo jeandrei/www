@@ -33,11 +33,10 @@
 
 <?php 
 
-
-?>
-
-<span id="MsgModal"></span>
-    
+if(!empty($error)){
+flash('alert-danger',$error,'alert alert-danger');
+echo flash('alert-danger');}
+?>   
 
 
 

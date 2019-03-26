@@ -200,7 +200,7 @@ function validation(){
 	
 	
 	if(responsavel == ""){			
-		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável java";
+		document.getElementById('responsavel_err').innerHTML = "Por favor informe o responsável";
 		document.getElementById('voltar').click();
 		focofield('responsavel');
 		return false;
@@ -208,7 +208,7 @@ function validation(){
 
 	if(cpf !== ""){			
 		if(!validacpf(cpf)){
-			document.getElementById('cpf_err').innerHTML = "CPF inválido java";
+			document.getElementById('cpf_err').innerHTML = "CPF inválido";
 			document.getElementById('voltar').click();
 			focofield('cpf');
 			return false;	
@@ -221,7 +221,7 @@ function validation(){
 
 	if(email !== ""){		
 		if(!validaemail(email)){
-			document.getElementById('email_err').innerHTML = "e-mail inválido java";
+			document.getElementById('email_err').innerHTML = "e-mail inválido";
 			document.getElementById('voltar').click();
 			focofield('email');
 			return false;	
@@ -232,7 +232,7 @@ function validation(){
 
 	
 	if(telefone1 == ""){
-		document.getElementById('telefone1_err').innerHTML = "Você deve informar ao menos um telefone java";
+		document.getElementById('telefone1_err').innerHTML = "Você deve informar ao menos um telefone";
 		document.getElementById('voltar').click();
 		focofield('telefone1');
 		return false;	
@@ -240,7 +240,7 @@ function validation(){
 	else
 	{
 		if(!validatetelefone(telefone1)){
-			document.getElementById('telefone1_err').innerHTML = "Telefone inválido java";
+			document.getElementById('telefone1_err').innerHTML = "Telefone inválido";
 			document.getElementById('voltar').click();
 			focofield('telefone1');
 			return false;	
@@ -251,7 +251,7 @@ function validation(){
 
 	if(telefone2 !== ""){
 		if(!validatetelefone(telefone2)){
-			document.getElementById('telefone2_err').innerHTML = "Telefone inválido java";
+			document.getElementById('telefone2_err').innerHTML = "Telefone inválido";
 			document.getElementById('voltar').click();
 			focofield('telefone2');
 			return false;	
@@ -259,7 +259,7 @@ function validation(){
 	}
 
 	if(bairro == null){
-		document.getElementById('bairro_err').innerHTML = "Por favor selecione um bairro java";
+		document.getElementById('bairro_err').innerHTML = "Por favor selecione um bairro";
 		document.getElementById('voltar').click();
 		focofield('bairro');
 		return false;	
