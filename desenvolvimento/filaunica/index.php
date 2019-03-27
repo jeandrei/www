@@ -90,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //função dias retorna o número de dias da data de nascimento até a data atual
     $dias = dias($data['nascimento']);    
     if(getEtapa($pdo,$dias)){
-        $etapa = getEtapa($pdo,$dias);
+        $id_etapa = getEtapa($pdo,$dias);
     }else
     {
         $data['nascimento_err'] = 'Data de nascimento inválida';
@@ -216,8 +216,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     comprovante_nasc_nome = :comprovante_nasc_nome,
                     cpfresponsavel = :cpfresponsavel,
                     protocolo = :protocolo,
-                    deficiencia = :deficiencia,
-                    etapa_id = :etapa,
+                    deficiencia = :deficiencia,                    
                     observacao = :observacao
                     ';   
                     
@@ -244,8 +243,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $s->bindValue(':opcao3_id', $data['setor3']);
             $s->bindValue(':turno1', $data['turno1']);
             $s->bindValue(':turno2', $data['turno2']);
-            $s->bindValue(':turno3', $data['turno3']);
-            $s->bindValue(':etapa', $etapa);
+            $s->bindValue(':turno3', $data['turno3']);            
             $s->bindValue(':comprovanteres', $comp_res);
             $s->bindValue(':comprovante_res_nome', $nome_comp_res); 
             $s->bindValue(':comprovantenasc', $cert_nasc);

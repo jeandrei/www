@@ -1,6 +1,20 @@
 <?php
 session_start();
 
+
+/*
+sql para montar a lista
+SET @contador := 0;
+SELECT (SELECT @contador := @contador +1) as linha, fila.registro, fila.responsavel, fila.nomecrianca, fila.nascimento,
+(SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
+FROM fila 
+WHERE
+(SELECT id FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) = 19 id da etapa
+ORDER BY fila.registro
+*/
+
+
+
  // Flash message helper
   // Chama 2 vezes a função
   // 1 no Controller EXAMPLE - flash('register_succes', 'You are now registered', alert alert-danger);

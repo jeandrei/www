@@ -52,7 +52,7 @@
                         echo ", " . getEscola($pdo,$data['setor3']);
                       } 
                       
-                      echo "</b><br>A etapa para a data de nascimento do aluno é: <b>" . getDescricaoEtapa($pdo,$etapa) . "</b>";
+                      echo "</b><br>A etapa para a data de nascimento do aluno é: <b>" . getDescricaoEtapa($pdo,$id_etapa) . "</b>";
                      
               ?>
             </p>
