@@ -4,8 +4,6 @@ require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
 
-
-
 //VALIDAÇÃO
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -303,7 +301,14 @@ else{
         'obs'  => ''         
         ];
     //die(var_dump($data));
-    include 'form.html.php';
+    if(isset($_GET['add'])){
+        include 'form.html.php';
+    }
+    else{
+        include 'home.html.php';
+    }
 }//post
+
+
 
 
