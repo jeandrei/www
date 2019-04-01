@@ -91,7 +91,7 @@ echo flash('alert-danger');}
     <!--SEGUNDA DIV-->
     <div class="row" style="background-color:#FFFAF0">
         <!--onsubmit="return validation()"-->
-        <form action="index.php" method="post" enctype="multipart/form-data" onsubmit="return validation()">  
+        <form action="?act=save" method="post" enctype="multipart/form-data" onsubmit="return validation()">  
                             
             <!--DIV TODO O CONTEÚDO DENTRO DAS ABAS-->
             <div class="col-lg-14" id="result">                                

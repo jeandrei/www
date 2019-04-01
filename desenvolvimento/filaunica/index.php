@@ -4,9 +4,23 @@ require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
 
-//VALIDAÇÃO
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+if(($_REQUEST["act"]) && $_REQUEST["act"] == "add"){
+    include 'form.html.php';
+    exit();
+}
+
+
+
+if(($_REQUEST["act"]) && $_REQUEST["act"] == "search"){
+    include 'buscar.html.php';
+    exit();
+}
+
+
+//VALIDAÇÃO
+if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
+  
   $data = [
         'responsavel' => html($_POST['responsavel']),
         'cpf' => html($_POST['cpf']), 
@@ -128,9 +142,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if(empty($data['turno1'])){
         $data['turno1_err'] = 'Por favor informe o turno';        
-    }
-
-    
+    }   
 
     
    
@@ -300,14 +312,10 @@ else{
         'portador' => '',
         'obs'  => ''         
         ];
-    //die(var_dump($data));
-    if(isset($_GET['add'])){
-        include 'form.html.php';
-    }
-    else{
         include 'home.html.php';
-    }
+    
 }//post
+
 
 
 
