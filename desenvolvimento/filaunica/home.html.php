@@ -5,21 +5,7 @@
     <title>Fila Única</title>
 
     
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        #principal{
-          margin: 10px 40px;
-          width: 80%;         
-        }
-      
-
-
-        .d-inline.mx-auto.center {
-            text-align: center!important;
-            display:block!important;
-        }
-    </style>  
-  
+    <link rel="stylesheet" href="css/bootstrap.min.css">   
 
    
   </head>
@@ -43,13 +29,40 @@
 
     
       <div class="row">
-      <div class="col-lg-4"></div>
+          <div class="col-lg-4"></div>
           <div class="col-lg-4">
-                <a href="?act=add" class="btn btn-primary btn-lg btn-block" role="button">Cadastrar</a>  
-                <a href="act=search" class="btn btn-primary btn-lg btn-block" role="button">Consultar</a>        
+                <a href="?act=add" class="btn btn-primary btn-lg btn-block" role="button">Cadastrar</a>                         
                 <a href="#" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a>                
           </div>
-        </div>
+     </div>
+
+     <hr>
+     
+     
+     <div class="row">
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-4">
+
+
+
+                              <form action="?act=search" class="form-inline" method="post">                                
+                                <div class="form-group mx-sm-3 mb-2">
+                                  <label for="protocolo" class="sr-only"></label>                                 
+                                  <input type="text" class="form-control" id="protocolo" placeholder="Protocolo">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Consultar</button>
+                              </form>
+
+
+
+
+                    
+                                      
+                  </div>
+     </div>
+
+
+     
      
   </body>
 </html>
