@@ -13,9 +13,47 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "add"){
 
 
 if(($_REQUEST["act"]) && $_REQUEST["act"] == "search"){
-    include 'buscar.html.php';
-    exit();
-}
+    
+
+    //verifica se o protocolo está vazio
+    if(!enumero($_POST['protocolo']) || ($_POST['protocolo']) == ""){
+        $data =[
+            'protocolo_err' => 'Ops! Protocolo inválido'
+          ];
+    }else{
+      $data = [
+          'protocolo' => html($_POST['protocolo'])
+      ];
+    }
+
+
+    
+        try{
+            //função buscaprotocolo busca o protocolo passado
+            if(buscaProtocolo($pdo,$_POST['protocolo']))
+            {
+              $protocolo = buscaProtocolo($pdo,$_POST['protocolo']);              
+            }else{
+              $data['protocolo_err'] = "Ops! Protocolo não encontrado!";             
+            }
+          } catch (Exception $e) {          
+            
+            echo $e->getMessage();
+            $error = 'Erro ao tentar realizar a consulta no banco de dados.';
+            include 'error.html.php';
+            exit();
+          }
+          
+        //se não tiver erros imprime o resultado da busca caso contrário volta para o home 
+        if(empty($data['protocolo_err'])){   
+            include 'buscar.html.php';
+            exit();
+      }else{           
+           include 'home.html.php';
+           exit();
+      }    
+  
+}//fim search
 
 
 //VALIDAÇÃO

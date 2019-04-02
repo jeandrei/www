@@ -259,5 +259,54 @@ function verificaexistecrianca($conn,$nome,$nasc){
 }
 
 
+function enumero($var){
+    if(is_numeric($var)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function buscaProtocolo($pdo,$protocolo) {
+    $stmt = $pdo->prepare('
+                            SELECT 
+                                fila.registro as registro, 
+                                fila.responsavel as responsavel, 
+                                fila.nomecrianca as nome, 
+                                fila.nascimento as nascimento,
+                                fila.protocolo as protocolo,
+                                fila.status as status,
+                                (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
+                            FROM 
+                                fila 
+                            WHERE
+                            fila.protocolo = :protocolo
+                            ORDER BY 
+                            fila.registro  
+                        ');
+    
+    
+    
+    $stmt->execute(['protocolo' => $protocolo]); 
+    $result = $stmt->fetch(); 
+    $count = (is_array($result) ? count($result) : 0);
+    if($count > 0){
+        $data = [
+            'registro' => $result['registro'],
+            'nome' => $result['nome'],
+            'responsavel' => $result['responsavel'],
+            'nascimento' => $result['nascimento'],
+            'etapa' => $result['etapa'],
+            'status' => $result['status']
+            
+        ];
+        return $data;
+    }
+    else{
+        return false;
+    }
+}
+
+
 ?>
 
