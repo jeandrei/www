@@ -11,6 +11,30 @@ FROM fila
 WHERE
 (SELECT id FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) = 19 id da etapa
 ORDER BY fila.registro
+
+
+
+
+RETORNAR A COLOCAÇÃO
+
+SELECT  rank,    
+        fila.registro, 
+        fila.responsavel,
+        fila.nomecrianca, fila.nascimento
+        
+FROM
+
+        (
+        SELECT t.*, 
+               @rownum := @rownum + 1 AS rank
+          FROM fila t, 
+               (SELECT @rownum := 0) r
+        )
+
+ fila 
+WHER fila.protocolo=22019
+
+
 */
 
 
@@ -277,7 +301,7 @@ function buscaProtocolo($pdo,$protocolo) {
                                 fila.protocolo as protocolo,
                                 fila.status as status,
                                 (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
-                            FROM 
+                            FROM                                 
                                 fila 
                             WHERE
                             fila.protocolo = :protocolo
