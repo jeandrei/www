@@ -32,7 +32,31 @@ FROM
         )
 
  fila 
-WHER fila.protocolo=22019
+WHERE fila.protocolo=72019
+
+
+
+
+--esse estou tentando tentar substituir o 21 por pesquisa no banco
+SELECT  rank,    
+        fila.registro, 
+        fila.responsavel,
+        fila.nomecrianca, fila.nascimento
+        
+FROM
+
+        (
+        SELECT t.*, 
+               @rownum := @rownum + 1 AS rank
+          FROM fila t, 
+               (SELECT @rownum := 0) r
+        )
+
+ fila 
+WHERE (SELECT id FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) = 21 AND fila.protocolo=32019
+
+
+
 
 
 */
@@ -293,7 +317,7 @@ function enumero($var){
 
 function buscaProtocolo($pdo,$protocolo) {
     $stmt = $pdo->prepare('
-                            SELECT 
+                            SELECT  posicao,    
                                 fila.registro as registro, 
                                 fila.responsavel as responsavel, 
                                 fila.nomecrianca as nome, 
@@ -301,12 +325,18 @@ function buscaProtocolo($pdo,$protocolo) {
                                 fila.protocolo as protocolo,
                                 fila.status as status,
                                 (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
-                            FROM                                 
-                                fila 
-                            WHERE
-                            fila.protocolo = :protocolo
-                            ORDER BY 
-                            fila.registro  
+                                
+                            FROM
+
+                                (
+                                SELECT t.*, 
+                                    @rownum := @rownum + 1 AS posicao
+                                FROM fila t, 
+                                    (SELECT @rownum := 0) r
+                                )
+
+                            fila 
+                            WHERE fila.protocolo=:protocolo
                         ');
     
     
@@ -316,6 +346,7 @@ function buscaProtocolo($pdo,$protocolo) {
     $count = (is_array($result) ? count($result) : 0);
     if($count > 0){
         $data = [
+            'posicao' => $result['posicao'],
             'registro' => $result['registro'],
             'nome' => $result['nome'],
             'responsavel' => $result['responsavel'],
