@@ -20,7 +20,9 @@ RETORNAR A COLOCAÇÃO
 SELECT  rank,    
         fila.registro, 
         fila.responsavel,
-        fila.nomecrianca, fila.nascimento
+        fila.nomecrianca, 
+        fila.nascimento,
+        (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
         
 FROM
 
@@ -41,7 +43,9 @@ WHERE fila.protocolo=72019
 SELECT  rank,    
         fila.registro, 
         fila.responsavel,
-        fila.nomecrianca, fila.nascimento
+        fila.nomecrianca, 
+        fila.nascimento,
+        (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
         
 FROM
 
