@@ -59,6 +59,37 @@ FROM
  fila 
 WHERE (SELECT id FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) = 21 AND fila.protocolo=32019
 
+traz a etapa id a partir do número de dias de vida da criança
+set @diasnasc = 150;
+
+SELECT etapa.id FROM etapa,fila WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima AND etapa.idade_minima <= @diasnasc and etapa.idade_maxima >= @diasnasc
+
+
+
+
+set @protocolo = 102019;
+SELECT                          
+    (SELECT 
+        count(fila.id) as posicao 
+    FROM 
+        etapa,fila 
+    WHERE 
+        DATEDIFF(NOW(), fila.nascimento)>=etapa.idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=etapa.idade_maxima 
+    AND
+        fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = @protocolo)
+    ) as count,
+    fila.registro as registro,
+    fila.responsavel as responsavel, 
+    fila.nomecrianca as nome, 
+    fila.nascimento as nascimento,
+    fila.protocolo as protocolo,
+    fila.status as status,
+    (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
+    
+FROM
+fila 
+WHERE fila.protocolo=@protocolo
+
 
 
 
@@ -321,8 +352,17 @@ function enumero($var){
 
 function buscaProtocolo($pdo,$protocolo) {
     $stmt = $pdo->prepare('
-                            SELECT  posicao,    
-                                fila.registro as registro, 
+                            SELECT                          
+                                (SELECT 
+                                    count(fila.id) as posicao 
+                                FROM 
+                                    etapa,fila 
+                                WHERE 
+                                    DATEDIFF(NOW(), fila.nascimento)>=etapa.idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=etapa.idade_maxima 
+                                AND
+                                    fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                                ) as count,
+                                fila.registro as registro,
                                 fila.responsavel as responsavel, 
                                 fila.nomecrianca as nome, 
                                 fila.nascimento as nascimento,
@@ -331,16 +371,8 @@ function buscaProtocolo($pdo,$protocolo) {
                                 (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
                                 
                             FROM
-
-                                (
-                                SELECT t.*, 
-                                    @rownum := @rownum + 1 AS posicao
-                                FROM fila t, 
-                                    (SELECT @rownum := 0) r
-                                )
-
                             fila 
-                            WHERE fila.protocolo=:protocolo
+                            WHERE fila.protocolo= :protocolo
                         ');
     
     
@@ -350,7 +382,7 @@ function buscaProtocolo($pdo,$protocolo) {
     $count = (is_array($result) ? count($result) : 0);
     if($count > 0){
         $data = [
-            'posicao' => $result['posicao'],
+            'posicao' => $result['count'],
             'registro' => $result['registro'],
             'nome' => $result['nome'],
             'responsavel' => $result['responsavel'],
