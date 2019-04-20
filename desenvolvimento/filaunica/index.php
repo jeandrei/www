@@ -32,7 +32,9 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "search"){
             //função buscaprotocolo busca o protocolo passado
             if(buscaProtocolo($pdo,$_POST['protocolo']))
             {
-              $protocolo = buscaProtocolo($pdo,$_POST['protocolo']);              
+              $registro = buscaProtocolo($pdo,$_POST['protocolo']);
+              $posicao =   buscaPosicaoFila($pdo, $_POST['protocolo']);
+              $protocolo = $_POST['protocolo'];
             }else{
               $data['protocolo_err'] = "Ops! Protocolo não encontrado!";             
             }
