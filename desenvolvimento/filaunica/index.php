@@ -33,7 +33,13 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "search"){
             if(buscaProtocolo($pdo,$_POST['protocolo']))
             {
               $registro = buscaProtocolo($pdo,$_POST['protocolo']);
-              $posicao =   buscaPosicaoFila($pdo, $_POST['protocolo']);
+              if($registro['status'] == "Aguardando"){
+                $posicao =   buscaPosicaoFila($pdo, $_POST['protocolo']);
+              }
+              else
+              {
+                $posicao['posicao'] = '-';
+              }
               $protocolo = $_POST['protocolo'];
             }else{
               $data['protocolo_err'] = "Ops! Protocolo não encontrado!";             

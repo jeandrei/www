@@ -48,14 +48,20 @@
     </thead>
     <tbody>
       <tr>
-        <td><?php echo $registro['registro'];?>
+        <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?>
         <td><?php echo $protocolo;?>
-        <td><?php echo $posicao['posicao'] . 'º';?>
+        <td><?php echo $posicao['posicao'];?>
         <td><?php echo $registro['responsavel'];?>
-        <td><?php echo $registro['nome'];?>
-        <td><?php echo $registro['nascimento'];?>
+        <td><?php echo iniciais($registro['nome']);?>
+        <td><?php echo date('d/m/Y', strtotime($registro['nascimento']));?>
         <td><?php echo $registro['etapa'];?>
-        <td><?php echo $registro['status'];?>
+        <td>
+            <span class="badge 
+                    <?php echo (($registro['status']) == "Aguardando") ? 'badge-success' : 'badge-danger'; ?>
+                    align-middle">        
+                    <?php echo $registro['status']; ?>
+            </span> 
+        </td>        
       </tr>
       <hr>
     </tbody>

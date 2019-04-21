@@ -384,7 +384,9 @@ function buscaPosicaoFila($pdo,$protocolo) {
                                                     fila.protocolo = :protocolo
                                             )
                             AND 
-                                    fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)                            
+                                    fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                            AND
+                                    fila.status = "Aguardando"                            
     
                         ');
     
@@ -395,7 +397,7 @@ function buscaPosicaoFila($pdo,$protocolo) {
     $count = (is_array($result) ? count($result) : 0);
     if($count > 0){
         $data = [
-            'posicao' => $result['posicao']          
+            'posicao' => $result['posicao'] . 'º'          
             
         ];
         return $data;
@@ -403,6 +405,19 @@ function buscaPosicaoFila($pdo,$protocolo) {
     else{
         return false;
     }
+}
+
+
+function iniciais($str){
+    $pos = 0;
+    $saida = '';
+    while(($pos = strpos($str, ' ', $pos)) !== false ){
+        if(isset($str[$pos +1]) && $str[$pos +1] != ' '){
+            $saida .= substr($str, $pos +1, 1);
+        }   
+        $pos++;
+    }
+    return $str[0]. $saida;
 }
 
 
