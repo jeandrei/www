@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 24/01/2019 às 23:20
--- Versão do servidor: 5.7.23
--- Versão do PHP: 7.2.8
+-- Tempo de geração: 22/04/2019 às 19:41
+-- Versão do servidor: 5.7.25
+-- Versão do PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,14 +34,18 @@ CREATE TABLE `bairro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `bairro`
+-- Despejando dados para a tabela `bairro`
 --
 
 INSERT INTO `bairro` (`id`, `nome`) VALUES
-(1, 'ARMAÇÃO'),
-(2, 'GRAVATA'),
-(3, 'SANTA LIDIA'),
-(4, 'PRAIA ALEGRE');
+(5, 'Armação'),
+(6, 'Gravata'),
+(7, 'Santa Lídia'),
+(8, 'Praia Alegra'),
+(9, 'Centro'),
+(10, 'São Nicolau'),
+(11, 'NSra de Fátima'),
+(12, 'São Cristovão');
 
 -- --------------------------------------------------------
 
@@ -58,13 +62,19 @@ CREATE TABLE `escola` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `escola`
+-- Despejando dados para a tabela `escola`
 --
 
 INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
-(1, 'RUBENS', 1, '', 20),
-(2, 'RQUEL', 2, '', 30),
-(3, 'JOÃO ANTONIO PINTO', 2, '', 20);
+(4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
+(5, 'CEI DONA BELINHA', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
+(8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
+(9, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 5, 'Rua Lauro Zimerman Filho', 200),
+(10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
+(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
+(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
 
 -- --------------------------------------------------------
 
@@ -80,15 +90,14 @@ CREATE TABLE `etapa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `etapa`
+-- Despejando dados para a tabela `etapa`
 --
 
 INSERT INTO `etapa` (`id`, `idade_minima`, `idade_maxima`, `descricao`) VALUES
-(3, 2, 3, 'MATERNAL I'),
-(12, 20, 20, 'MATERNAL II'),
-(19, 20, 20, 'PRÉ'),
-(20, 20, 20, 'PRÉ II'),
-(21, 24, 48, 'PENHA MATERNAL II');
+(23, 120, 358, 'BERÇÁRIO I'),
+(24, 359, 723, 'BERÇÁRIO II'),
+(25, 724, 1088, 'MATERNAL'),
+(26, 1089, 1454, 'PRÉ I');
 
 -- --------------------------------------------------------
 
@@ -100,28 +109,32 @@ CREATE TABLE `fila` (
   `id` int(11) NOT NULL,
   `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `responsavel` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `celular1` varchar(16) NOT NULL,
-  `celular2` varchar(16) NOT NULL,
-  `bairro_id` int(11) NOT NULL,
-  `logradouro` varchar(255) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `complemento` varchar(255) NOT NULL,
+  `celular2` varchar(16) DEFAULT NULL,
+  `bairro_id` int(11) DEFAULT NULL,
+  `logradouro` varchar(255) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
   `nomecrianca` varchar(255) NOT NULL,
   `nascimento` date NOT NULL,
   `certidaonascimento` varchar(50) NOT NULL,
-  `deficiencia` char(3) NOT NULL DEFAULT 'Não',
-  `opcao1_id` int(11) NOT NULL,
-  `opcao2_id` int(11) NOT NULL,
-  `opcao3_id` int(11) NOT NULL,
-  `turno` varchar(20) NOT NULL,
-  `observacao` varchar(255) NOT NULL,
+  `deficiencia` varchar(1) NOT NULL DEFAULT '0',
+  `opcao1_id` varchar(11) DEFAULT NULL,
+  `opcao2_id` varchar(11) DEFAULT NULL,
+  `opcao3_id` varchar(11) DEFAULT NULL,
+  `turno1` varchar(20) DEFAULT NULL,
+  `observacao` varchar(255) DEFAULT NULL,
   `comprovanteres` blob NOT NULL,
   `comprovantenasc` blob NOT NULL,
-  `cpfresponsavel` varchar(15) NOT NULL,
-  `protocolo` varchar(255) NOT NULL,
-  `etapa_id` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL
+  `cpfresponsavel` varchar(15) DEFAULT NULL,
+  `protocolo` varchar(255) DEFAULT NULL,
+  `etapa_id` int(11) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
+  `turno2` varchar(20) DEFAULT NULL,
+  `turno3` varchar(20) DEFAULT NULL,
+  `comprovante_res_nome` varchar(60) DEFAULT NULL,
+  `comprovante_nasc_nome` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -150,13 +163,7 @@ ALTER TABLE `etapa`
 -- Índices de tabela `fila`
 --
 ALTER TABLE `fila`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cpfresponsavel` (`cpfresponsavel`),
-  ADD KEY `bairro_id` (`bairro_id`),
-  ADD KEY `opcao1_id` (`opcao1_id`),
-  ADD KEY `opcao2_id` (`opcao2_id`),
-  ADD KEY `opcao3_id` (`opcao3_id`),
-  ADD KEY `etapa_id` (`etapa_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de tabelas apagadas
@@ -166,39 +173,25 @@ ALTER TABLE `fila`
 -- AUTO_INCREMENT de tabela `bairro`
 --
 ALTER TABLE `bairro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `escola`
 --
 ALTER TABLE `escola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `etapa`
 --
 ALTER TABLE `etapa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `fila`
 --
 ALTER TABLE `fila`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para dumps de tabelas
---
-
---
--- Restrições para tabelas `fila`
---
-ALTER TABLE `fila`
-  ADD CONSTRAINT `fila_ibfk_1` FOREIGN KEY (`bairro_id`) REFERENCES `bairro` (`id`),
-  ADD CONSTRAINT `fila_ibfk_2` FOREIGN KEY (`opcao1_id`) REFERENCES `escola` (`id`),
-  ADD CONSTRAINT `fila_ibfk_3` FOREIGN KEY (`opcao2_id`) REFERENCES `escola` (`id`),
-  ADD CONSTRAINT `fila_ibfk_4` FOREIGN KEY (`opcao3_id`) REFERENCES `escola` (`id`),
-  ADD CONSTRAINT `fila_ibfk_5` FOREIGN KEY (`etapa_id`) REFERENCES `etapa` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
