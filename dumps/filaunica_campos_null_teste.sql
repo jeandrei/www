@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 22/04/2019 às 19:41
+-- Tempo de geração: 23/04/2019 às 11:53
 -- Versão do servidor: 5.7.25
 -- Versão do PHP: 7.2.14
 
@@ -94,10 +94,10 @@ CREATE TABLE `etapa` (
 --
 
 INSERT INTO `etapa` (`id`, `idade_minima`, `idade_maxima`, `descricao`) VALUES
-(1, 120, 387, 'BERÇÁRIO I'),
-(2, 388, 752, 'BERÇÁRIO II'),
-(3, 753, 1117, 'MATERNAL'),
-(4, 1118, 1483, 'PRÉ I');
+(23, 120, 358, 'BERÇÁRIO I'),
+(24, 359, 723, 'BERÇÁRIO II'),
+(25, 724, 1088, 'MATERNAL'),
+(26, 1089, 1454, 'PRÉ I');
 
 -- --------------------------------------------------------
 
@@ -118,15 +118,15 @@ CREATE TABLE `fila` (
   `complemento` varchar(255) DEFAULT NULL,
   `nomecrianca` varchar(255) NOT NULL,
   `nascimento` date NOT NULL,
-  `certidaonascimento` varchar(50) NOT NULL,
+  `certidaonascimento` varchar(50) DEFAULT NULL,
   `deficiencia` varchar(1) NOT NULL DEFAULT '0',
   `opcao1_id` varchar(11) DEFAULT NULL,
   `opcao2_id` varchar(11) DEFAULT NULL,
   `opcao3_id` varchar(11) DEFAULT NULL,
   `turno1` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
-  `comprovanteres` blob NOT NULL,
-  `comprovantenasc` blob NOT NULL,
+  `comprovanteres` blob,
+  `comprovantenasc` blob,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
   `protocolo` varchar(255) DEFAULT NULL,
   `etapa_id` int(11) DEFAULT NULL,
