@@ -212,6 +212,16 @@ function getEscola($pdo,$id) {
 }
 
 function getEtapa($pdo,$nasc) {
+    //verifica se tem mínimo de 4 meses
+    $stmt = $pdo->prepare("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
+    $stmt->execute(['datanasc' => $nasc]); 
+    $stmt->execute();   
+    $num_meses = $stmt->fetch();
+   
+    if($num_meses['meses']<4){        
+        return false;
+    }
+
     //pega a data mais recente de configuração das etapas
     $sql = 'SELECT MAX(data_ini) FROM etapa';
     $stm = $pdo->prepare($sql);
@@ -224,8 +234,8 @@ function getEtapa($pdo,$nasc) {
         $stmt = $pdo->prepare("SELECT id FROM etapa WHERE data_ini=:dataini LIMIT 1");
         $stmt->execute(['dataini' => $datacorte_idade_minima]); 
         $stmt->execute();   
-        $iddatacorte = $stmt->fetch();
-        return $iddatacorte;             
+        $iddatacorte = $stmt->fetch();        
+        return $iddatacorte['id'];             
     }else//caso contrário retorna o id da etapa que corresponde a data de nascimento
     {
         $stmt = $pdo->prepare('SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin');
