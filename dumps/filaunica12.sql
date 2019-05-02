@@ -94,7 +94,7 @@ CREATE TABLE `etapa` (
 --
 
 INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
-(1, '2018-04-01', NULL, 'BERÇÁRIO-I'),
+(1, '2018-04-01', '2019-12-31', 'BERÇÁRIO-I'),
 (2, '2017-04-01', '2018-03-31', 'BERÇÁRIO-II'),
 (3, '2016-04-01', '2017-03-31', 'MATERNAL'),
 (4, '2015-04-01', '2016-03-31', 'PRÉ-I');

@@ -355,7 +355,7 @@ function buscaProtocolo($pdo,$protocolo) {
                                 fila.nascimento as nascimento,
                                 fila.protocolo as protocolo,
                                 fila.status as status,
-                                (SELECT descricao FROM etapa WHERE DATEDIFF(NOW(), fila.nascimento)>=idade_minima AND DATEDIFF(NOW(), fila.nascimento)<=idade_maxima) as etapa
+                                (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                                 
                             FROM                               
                                 fila 
@@ -394,9 +394,9 @@ function buscaPosicaoFila($pdo,$protocolo) {
                             FROM 
                                     fila, etapa
                             WHERE 
-                                    DATEDIFF(NOW(), fila.nascimento)>=etapa.idade_minima 
+                                    fila.nascimento>=data_ini
                             AND 
-                                    DATEDIFF(NOW(), fila.nascimento)<=etapa.idade_maxima
+                                    fila.nascimento<=data_fin
                             AND 
                                     etapa.id = (
                                                 SELECT 
@@ -404,9 +404,9 @@ function buscaPosicaoFila($pdo,$protocolo) {
                                                 FROM etapa,
                                                     fila 
                                                 WHERE 
-                                                    DATEDIFF(NOW(), fila.nascimento)>=etapa.idade_minima 
+                                                    fila.nascimento>=data_ini
                                                 AND 
-                                                    DATEDIFF(NOW(), fila.nascimento)<=etapa.idade_maxima 
+                                                    fila.nascimento<=data_fin
                                                 AND 
                                                     fila.protocolo = :protocolo
                                             )
