@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: 25-Mar-2019 às 19:52
--- Versão do servidor: 5.7.24
--- versão do PHP: 7.2.13
+-- Tempo de geração: 02/05/2019 às 15:53
+-- Versão do servidor: 5.7.25
+-- Versão do PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,21 +19,19 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `filaunica`
+-- Banco de dados: `filaunica`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `bairro`
+-- Estrutura para tabela `bairro`
 --
 
 CREATE TABLE `bairro` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE bairro AUTO_INCREMENT = 1;
 
 --
 -- Despejando dados para a tabela `bairro`
@@ -49,12 +47,10 @@ INSERT INTO `bairro` (`id`, `nome`) VALUES
 (11, 'NSra de Fátima'),
 (12, 'São Cristovão');
 
-
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `escola`
+-- Estrutura para tabela `escola`
 --
 
 CREATE TABLE `escola` (
@@ -65,7 +61,6 @@ CREATE TABLE `escola` (
   `numero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE escola AUTO_INCREMENT = 1;
 --
 -- Despejando dados para a tabela `escola`
 --
@@ -81,25 +76,33 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 (11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
 (12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
 
+-- --------------------------------------------------------
+
 --
--- Estrutura da tabela `etapa`
+-- Estrutura para tabela `etapa`
 --
 
 CREATE TABLE `etapa` (
   `id` int(11) NOT NULL,
-  `data_ini` DATE,
-   `data_fin` DATE,
+  `data_ini` date DEFAULT NULL,
+  `data_fin` date DEFAULT NULL,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `etapa`
+-- Despejando dados para a tabela `etapa`
 --
 
-ALTER TABLE etapa AUTO_INCREMENT = 1;
+INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
+(1, '2018-04-01', NULL, 'BERÇÁRIO-I'),
+(2, '2017-04-01', '2018-03-31', 'BERÇÁRIO-II'),
+(3, '2016-04-01', '2017-03-31', 'MATERNAL'),
+(4, '2015-04-01', '2016-03-31', 'PRÉ-I');
+
+-- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fila`
+-- Estrutura para tabela `fila`
 --
 
 CREATE TABLE `fila` (
@@ -133,58 +136,59 @@ CREATE TABLE `fila` (
   `comprovante_res_nome` varchar(60) DEFAULT NULL,
   `comprovante_nasc_nome` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
-ALTER TABLE fila AUTO_INCREMENT = 1;
+
 --
--- Indexes for table `bairro`
+-- Índices de tabela `bairro`
 --
 ALTER TABLE `bairro`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `escola`
+-- Índices de tabela `escola`
 --
 ALTER TABLE `escola`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `etapa`
+-- Índices de tabela `etapa`
 --
 ALTER TABLE `etapa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fila`
+-- Índices de tabela `fila`
 --
 ALTER TABLE `fila`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `bairro`
+-- AUTO_INCREMENT de tabela `bairro`
 --
 ALTER TABLE `bairro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `escola`
+--
+ALTER TABLE `escola`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `etapa`
+--
+ALTER TABLE `etapa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `escola`
---
-ALTER TABLE `escola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `etapa`
---
-ALTER TABLE `etapa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `fila`
+-- AUTO_INCREMENT de tabela `fila`
 --
 ALTER TABLE `fila`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;

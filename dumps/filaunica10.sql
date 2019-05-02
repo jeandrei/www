@@ -33,6 +33,20 @@ CREATE TABLE `bairro` (
   `nome` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Despejando dados para a tabela `bairro`
+--
+
+INSERT INTO `bairro` (`id`, `nome`) VALUES
+(5, 'Armação'),
+(6, 'Gravata'),
+(7, 'Santa Lídia'),
+(8, 'Praia Alegra'),
+(9, 'Centro'),
+(10, 'São Nicolau'),
+(11, 'NSra de Fátima'),
+(12, 'São Cristovão');
+
 
 
 -- --------------------------------------------------------
@@ -49,7 +63,20 @@ CREATE TABLE `escola` (
   `numero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Despejando dados para a tabela `escola`
+--
 
+INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
+(4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
+(5, 'CEI DONA BELINHA', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
+(8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
+(9, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 5, 'Rua Lauro Zimerman Filho', 200),
+(10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
+(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
+(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
 
 --
 -- Estrutura da tabela `etapa`
