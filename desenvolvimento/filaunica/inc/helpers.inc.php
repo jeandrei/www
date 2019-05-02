@@ -211,16 +211,33 @@ function getEscola($pdo,$id) {
     }
 }
 
-function getEtapa($pdo,$dias) {
-    $stmt = $pdo->prepare('SELECT * FROM etapa WHERE :dias>=idade_minima AND :dias<=idade_maxima');
-    $stmt->execute(['dias' => $dias]);      
-	$etapa = $stmt->fetch();  
-    if(!empty($etapa['id'])){
-        return $etapa['id'];
-    }
-    else{
-        return false;
-    }
+function getEtapa($pdo,$nasc) {
+    //pega a data mais recente de configuração das etapas
+    $sql = 'SELECT MAX(data_ini) FROM etapa';
+    $stm = $pdo->prepare($sql);
+    $stm->execute();   
+    $datacorte_idade_minima = $stm->fetchColumn();
+    
+    //se a data de nascimento for maior que a data mais recente de etapa configurado no banco
+    //como esta data mais recente não tem data final retorna o id da etapa com data mais recente
+    if($nasc>=$datacorte_idade_minima){
+        $stmt = $pdo->prepare("SELECT id FROM etapa WHERE data_ini=:dataini LIMIT 1");
+        $stmt->execute(['dataini' => $datacorte_idade_minima]); 
+        $stmt->execute();   
+        $iddatacorte = $stmt->fetch();
+        return $iddatacorte;             
+    }else//caso contrário retorna o id da etapa que corresponde a data de nascimento
+    {
+        $stmt = $pdo->prepare('SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin');
+        $stmt->execute(['nasc' => $nasc]);      
+        $etapa = $stmt->fetch();  
+        if(!empty($etapa['id'])){
+            return $etapa['id'];
+        }
+        else{
+            return false;
+        }
+    }   
 }
 
 function getDescricaoEtapa($pdo,$id) {

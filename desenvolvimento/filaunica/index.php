@@ -144,11 +144,9 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
         $data['nascimento_err'] = '';
     }    
     
-    //valida etapa
-    //função dias retorna o número de dias da data de nascimento até a data atual
-    $dias = dias($data['nascimento']);    
-    if(getEtapa($pdo,$dias)){
-        $id_etapa = getEtapa($pdo,$dias);
+    //valida etapa  
+    if(getEtapa($pdo,$data['nascimento'])){
+        $id_etapa = getEtapa($pdo,$data['nascimento']);
     }else
     {
         $data['nascimento_err'] = 'Data de nascimento inválida';
