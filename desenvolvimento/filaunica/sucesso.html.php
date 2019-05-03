@@ -51,8 +51,9 @@
                       if(!empty($data['setor3'])){
                         echo ", " . getEscola($pdo,$data['setor3']);
                       } 
-                      
+                      $posicao = buscaPosicaoFila($pdo,$protocolo);
                       echo "</b><br>A etapa para a data de nascimento do aluno é: <b>" . getDescricaoEtapa($pdo,$id_etapa) . "</b>";
+                      echo "<br>A posição na fila é: <b>" . $posicao['posicao'] . "</b>";
                      
               ?>
             </p>

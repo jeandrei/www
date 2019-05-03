@@ -84,8 +84,8 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 
 CREATE TABLE `etapa` (
   `id` int(11) NOT NULL,
-  `idade_minima` int(11) NOT NULL,
-  `idade_maxima` int(11) NOT NULL,
+  `data_ini` date NOT NULL,
+  `data_fin` date NOT NULL,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -93,11 +93,11 @@ CREATE TABLE `etapa` (
 -- Despejando dados para a tabela `etapa`
 --
 
-INSERT INTO `etapa` (`id`, `idade_minima`, `idade_maxima`, `descricao`) VALUES
-(23, 120, 387, 'BERÇÁRIO I'),
-(24, 388, 752, 'BERÇÁRIO II'),
-(25, 753, 1117, 'MATERNAL'),
-(26, 1118, 1483, 'PRÉ I');
+INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
+(1, '2018-04-01', '2019-12-31', 'BERÇÁRIO-I'),
+(2, '2017-04-01', '2018-03-31', 'BERÇÁRIO-II'),
+(3, '2016-04-01', '2017-03-31', 'MATERNAL'),
+(4, '2015-04-01', '2016-03-31', 'PRÉ-I');
 
 -- --------------------------------------------------------
 
