@@ -27,8 +27,7 @@
     
 <div id="principal">
       <div class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Cadastro realizado com sucesso!</h4>
-          <p>Seu cadastro na Fila Única de Penha/SC foi realizado com sucesso.</p>
+          <h4 class="alert-heading">Cadastro realizado com sucesso!</h4>         
           <p> Anote o número do seu protocolo:<h1>Potocolo:<?php echo  $protocolo; ?></h1></p>
           <p>Quando da disponibilidade de uma vaga para a sua solicitação e respeitando a ordem de inscrição, a secretaria de educação entrará em contato
             para o processo de matrícula do aluno.
@@ -58,6 +57,9 @@
               ?>
             </p>
         </div>
+
+        <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
+
 </div>
   </body>
 </html>
