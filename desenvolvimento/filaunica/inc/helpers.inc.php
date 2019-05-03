@@ -296,7 +296,7 @@ function upload_file($myfile,$newname,$description){
                 'nome' => $newname . "_" . $description,
                 'extensao' => $fileExtension,
                 'tipo' => $fileType,
-                'data' => file_get_contents($file),
+                'data' => file_get_contents($file)
             ];        
             return $file_uploaded;
         } 
@@ -371,6 +371,52 @@ function buscaProtocolo($pdo,$protocolo) {
         return false;
     }
 }
+
+
+
+function getFila($pdo) {
+    $sql = 
+            'SELECT      
+                fila.registro as registro, 
+                fila.responsavel as responsavel, 
+                fila.nomecrianca as nome, 
+                fila.nascimento as nascimento,
+                fila.protocolo as protocolo,
+                fila.comprovanteres,
+                fila.comprovante_res_nome,
+                fila.comprovanteres_tipo,
+                fila.status as status,
+                (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
+                
+            FROM                               
+                fila'
+            ;
+    $result = $pdo->query($sql);      
+	
+	foreach ($result as $row)
+	{
+	$data[] = array(        
+            'registro' => $row['registro'],
+            'nome' => $row['nome'],
+            'responsavel' => $row['responsavel'],
+            'nascimento' => $row['nascimento'],
+            'etapa' => $row['etapa'],
+            'protocolo' => $row['protocolo'],
+            'status' => $row['status']  
+	    );
+	}
+return $data;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
