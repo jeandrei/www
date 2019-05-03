@@ -264,11 +264,12 @@ function dias($data){
 function upload_file($myfile,$newname,$description){ 
     
     $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
-
-    $fileName = $_FILES[$myfile]['name'];
+    $file     = $_FILES[$myfile]['tmp_name'];
     $fileSize = $_FILES[$myfile]['size'];
-    $fileTmpName  = $_FILES[$myfile]['tmp_name'];
     $fileType = $_FILES[$myfile]['type'];
+    $fileName = $_FILES[$myfile]['name']; 
+  
+
     $fileExtension = strtolower(end(explode('.',$fileName)));
 
     //$uploadPath = $currentDir . $uploadDirectory . basename($fileName); 
@@ -294,7 +295,8 @@ function upload_file($myfile,$newname,$description){
             $file_uploaded = [
                 'nome' => $newname . "_" . $description,
                 'extensao' => $fileExtension,
-                'data' => $data
+                'tipo' => $fileType,
+                'data' => $file,
             ];        
             return $file_uploaded;
         } 

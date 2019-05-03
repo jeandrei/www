@@ -193,10 +193,16 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
 
     
     //valida arquivos deanexo   
-    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
+    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');
+    $comp_res_dados = $comp_res ['data'];
     $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
+    $comp_res_tipo = $comp_res['tipo'];
+    
+
     $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
+    $cert_nasc_dados = $cert_nasc ['data'];
     $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
+    $cert_nasc_tipo = $comp_res['tipo'];
     
     if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
     {
@@ -266,8 +272,10 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
                     turno3 = :turno3,
                     comprovanteres = :comprovanteres,
                     comprovante_res_nome = :comprovante_res_nome,
+                    comprovanteres_tipo = :comprovanteres_tipo,
                     comprovantenasc = :comprovantenasc,
                     comprovante_nasc_nome = :comprovante_nasc_nome,
+                    comprovantenasc_tipo = :comprovantenasc_tipo,
                     cpfresponsavel = :cpfresponsavel,
                     protocolo = :protocolo,
                     deficiencia = :deficiencia,                    
@@ -298,10 +306,12 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
             $s->bindValue(':turno1', $data['turno1']);
             $s->bindValue(':turno2', $data['turno2']);
             $s->bindValue(':turno3', $data['turno3']);            
-            $s->bindValue(':comprovanteres', $comp_res);
+            $s->bindValue(':comprovanteres', $comp_res_dados);
             $s->bindValue(':comprovante_res_nome', $nome_comp_res); 
-            $s->bindValue(':comprovantenasc', $cert_nasc);
+            $s->bindValue(':comprovanteres_tipo', $comp_res_tipo); 
+            $s->bindValue(':comprovantenasc', $cert_nasc_dados);
             $s->bindValue(':comprovante_nasc_nome', $nome_comp_nasc);
+            $s->bindValue(':comprovantenasc_tipo', $cert_nasc_tipo);            
             $s->bindValue(':cpfresponsavel', $data['cpf']);
             $s->bindValue(':protocolo', $protocolo);
             if($data['portador'] == '1')

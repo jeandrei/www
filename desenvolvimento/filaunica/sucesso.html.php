@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Fila Única</title>
+    <title><?php echo SITENAME; ?></title>
 
     
     <link rel="stylesheet" href="css/bootstrap.min.css">
