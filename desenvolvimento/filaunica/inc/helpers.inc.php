@@ -296,7 +296,7 @@ function upload_file($myfile,$newname,$description){
                 'nome' => $newname . "_" . $description,
                 'extensao' => $fileExtension,
                 'tipo' => $fileType,
-                'data' => $file,
+                'data' => file_get_contents($file),
             ];        
             return $file_uploaded;
         } 

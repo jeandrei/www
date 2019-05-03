@@ -196,7 +196,7 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
     $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');
     $comp_res_dados = $comp_res ['data'];
     $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
-    $comp_res_tipo = $comp_res['tipo'];
+    $comp_res_tipo = $comp_res['tipo'];    
     
 
     $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
