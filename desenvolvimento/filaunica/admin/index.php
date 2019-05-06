@@ -2,7 +2,22 @@
 // URL ROOT
 require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
-include 'registros.html.php';
+
+ //$fila = getFila($pdo);
+ 
+
+if($fila = getFilaPorEtapa($pdo,$_POST['etapa']))
+{
+  include 'registros.html.php';
+}
+else
+{
+  echo "não encontrado";
+  die();
+}
+
+
+
 
 
 

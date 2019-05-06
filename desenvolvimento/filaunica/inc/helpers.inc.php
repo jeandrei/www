@@ -13,6 +13,16 @@ WHERE
 ORDER BY fila.registro
 
 
+//nova
+SET @contador := 0;
+SELECT (SELECT @contador := @contador +1) as linha, fila.registro, fila.responsavel, fila.nomecrianca, fila.nascimento,
+(SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
+FROM fila 
+WHERE
+(SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = 1 
+order by
+fila.registro
+
 
 
 RETORNAR A COLOCAÇÃO
@@ -197,6 +207,26 @@ function getEscolas($conn) {
 	}
 return $bairros;
 }
+
+
+
+function getEtapas($conn) {
+    $sql = 'SELECT * FROM etapa ORDER BY descricao';
+    $result = $conn->query($sql);      
+	
+	foreach ($result as $row)
+	{
+	$etapas[] = array(
+        'id' => $row['id'],
+        'data_ini' => $row['data_ini'],
+        'data_fin' => $row['data_fin'],
+		'descricao' => $row['descricao']
+	);
+	}
+return $etapas;
+}
+
+
 
 function getEscola($pdo,$id) {
     $stmt = $pdo->prepare('SELECT nome FROM escola WHERE id=:id');
@@ -436,14 +466,6 @@ function getFila($pdo,$nome=NULL) {
 
 
 
-
-
-
-
-
-
-
-
 function buscaPosicaoFila($pdo,$protocolo) {
     $stmt = $pdo->prepare('  
                             SELECT 
@@ -490,6 +512,79 @@ function buscaPosicaoFila($pdo,$protocolo) {
         return false;
     }
 }
+
+
+
+
+
+
+function getFilaPorEtapa($pdo,$etapa_id) {
+    
+    $sql = "SET @contador = 0";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $sql = "
+            SELECT 
+                (SELECT @contador := @contador +1) as posicao, 
+                fila.id as fila_id,     
+                fila.registro as registro, 
+                fila.responsavel as responsavel, 
+                fila.nomecrianca as nome, 
+                fila.nascimento as nascimento,
+                fila.protocolo as protocolo,
+                fila.comprovanteres,
+                fila.comprovante_res_nome,
+                fila.comprovanteres_tipo,
+                fila.comprovantenasc,
+                fila.comprovantenasc_tipo,
+                fila.comprovante_nasc_nome,
+                fila.status as status,
+                (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
+            FROM 
+                fila 
+            WHERE
+                (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
+            ORDER BY
+                fila.registro
+         "
+    ;
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['etapa_id' => $etapa_id]); 
+    $result = $stmt->fetchAll(); 
+
+    
+
+    //verifica se obteve algum resultado
+    if($result >0)
+    {
+    foreach ($result as $row)
+    {
+        $data[] = array( 
+            'posicao' => $row['posicao'] . 'º', 
+            'fila_id' => $row['fila_id'],
+            'registro' => $row['registro'],
+            'nome' => $row['nome'],
+            'responsavel' => $row['responsavel'],
+            'nascimento' => $row['nascimento'],
+            'etapa' => $row['etapa'],
+            'protocolo' => $row['protocolo'],
+            'comprovante_res_nome' => $row['comprovante_res_nome'],
+            'comprovante_nasc_nome' => $row['comprovante_nasc_nome'],
+            'status' => $row['status']  
+        );
+    }
+    return $data;
+    }
+    else
+    {
+    return false;
+    } 
+}
+
+
+
+
 
 
 function iniciais($str){
