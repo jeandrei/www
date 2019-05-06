@@ -106,5 +106,6 @@
               <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
       </div> 
 </form>
+    <span class="badge align-middle"> <?php echo $error; ?></span> 
 </body>
 </html>

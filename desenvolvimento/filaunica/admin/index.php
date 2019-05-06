@@ -12,8 +12,8 @@ if($fila = getFilaPorEtapa($pdo,$_POST['etapa']))
 }
 else
 {
-  echo "não encontrado";
-  die();
+  $error = "Nenhum registro encontrado."; 
+  include 'error.html.php';
 }
 
 
