@@ -4,15 +4,15 @@ require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 include 'registros.html.php';
 
-$fila = getFila($pdo);
+
+
+
 
 
 
 
 
 /*
-apresenta comprovante residencia
-
   $pdo->exec("set names utf8");
   $sql = "SELECT id,comprovanteres,comprovante_res_nome,comprovanteres_tipo  FROM fila WHERE id = 22";
   

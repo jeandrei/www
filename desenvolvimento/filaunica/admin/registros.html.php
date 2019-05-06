@@ -30,7 +30,8 @@
 <hr>
 <h1 align="center">FILA</h1>
 
-<?php $fila = getFila($pdo); ?>
+<?php $fila = getFila($pdo);?>
+
 
 <div class="text-center">
     <table class="table table-sm">
@@ -42,6 +43,8 @@
           <th scope="col">Responsável</th> 
           <th scope="col">Protocolo</th>
           <th scope="col">Registro</th>
+          <th scope="col">Comp Residência</th>
+          <th scope="col">Comp Nascimento</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -55,7 +58,9 @@
             <td><?php echo $registro['etapa'];?>
             <td><?php echo $registro['responsavel'];?>
             <td><?php echo $registro['protocolo'];?>
-            <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?>    
+            <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?> 
+            <td><a download="<?php echo $registro['comprovante_res_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=res&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>   
+            <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>  
             <td>
                 <span class="badge 
                         <?php echo (($registro['status']) == "Aguardando") ? 'badge-success' : 'badge-danger'; ?>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 
 /*
@@ -374,9 +374,10 @@ function buscaProtocolo($pdo,$protocolo) {
 
 
 
-function getFila($pdo) {
+function getFila($pdo,$nome=NULL) {
     $sql = 
-            'SELECT      
+            "SELECT 
+                fila.id as fila_id,     
                 fila.registro as registro, 
                 fila.responsavel as responsavel, 
                 fila.nomecrianca as nome, 
@@ -385,27 +386,50 @@ function getFila($pdo) {
                 fila.comprovanteres,
                 fila.comprovante_res_nome,
                 fila.comprovanteres_tipo,
+                fila.comprovantenasc,
+                fila.comprovantenasc_tipo,
+                fila.comprovante_nasc_nome,
                 fila.status as status,
                 (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                 
             FROM                               
-                fila'
+                fila"
             ;
-    $result = $pdo->query($sql);      
+
+    
+    if($nome <> NULL){
+    $sql .= " WHERE fila.nomecrianca LIKE '%$nome%'";   
+    }
+
+
+    $result = $pdo->query($sql); 
+    
+    //verifica se obteve algum resultado
+    if($result >0)
+    {
+        foreach ($result as $row)
+        {
+        $data[] = array(  
+                'fila_id' => $row['fila_id']      ,
+                'registro' => $row['registro'],
+                'nome' => $row['nome'],
+                'responsavel' => $row['responsavel'],
+                'nascimento' => $row['nascimento'],
+                'etapa' => $row['etapa'],
+                'protocolo' => $row['protocolo'],
+                'comprovante_res_nome' => $row['comprovante_res_nome'],
+                'comprovante_nasc_nome' => $row['comprovante_nasc_nome'],
+                'status' => $row['status']  
+            );
+        }
+        return $data;
+    }
+    else
+    {
+        return false;
+    }   
 	
-	foreach ($result as $row)
-	{
-	$data[] = array(        
-            'registro' => $row['registro'],
-            'nome' => $row['nome'],
-            'responsavel' => $row['responsavel'],
-            'nascimento' => $row['nascimento'],
-            'etapa' => $row['etapa'],
-            'protocolo' => $row['protocolo'],
-            'status' => $row['status']  
-	    );
-	}
-return $data;
+	
 }
 
 
