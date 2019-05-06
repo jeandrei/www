@@ -4,16 +4,22 @@ require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 
  //$fila = getFila($pdo);
- 
-
-if($fila = getFilaPorEtapa($pdo,$_POST['etapa']))
+ if(($_REQUEST["act"]) && $_REQUEST["act"] == "search")
 {
-  include 'registros.html.php';
+    if($fila = getFilaPorEtapa($pdo,$_POST['etapa']))
+    {
+      include 'registros.html.php';
+    }
+    else
+    {
+      $error = "Nenhum registro encontrado."; 
+      include 'error.html.php';
+    }
 }
 else
 {
-  $error = "Nenhum registro encontrado."; 
-  include 'error.html.php';
+  $fila = getFila($pdo);
+  include 'registros.html.php';
 }
 
 
