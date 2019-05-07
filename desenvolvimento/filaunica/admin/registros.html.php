@@ -44,29 +44,49 @@
 <form class="form-inline" action="?act=search" method="post" enctype="multipart/form-data" onsubmit="return validation()"> 
 
   <div class="form-group mb-2">
-    <label for="etapa" class="sr-only">Etapa</label>
-    <input type="text" readonly class="form-control-plaintext" id="Etapa" value="Etapa:">
+    <label for="etapa" class="sr-only">Selecione os dados de busca</label>
+    <input type="text" readonly class="form-control-plaintext" id="Etapa" value="Dados da busca:">
   </div>
   
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="etapas" class="sr-only">Selecione uma etapa</label>
-    <select 
-                  name="etapa" 
-                  id="etapa" 
-                  class="form-control <?php echo (!empty($data['etapa_err'])) ? 'is-invalid' : ''; ?>"                                        
-              >
-                      <option value="">Selecione a Etapa</option>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="etapas" class="sr-only">Selecione os dados de busca</label>
+        <select 
+                      name="etapa" 
+                      id="etapa" 
+                      class="form-control <?php echo (!empty($data['etapa_err'])) ? 'is-invalid' : ''; ?>"                                        
+                  >
+                          <option value="">Selecione a Etapa</option>
+                          <?php 
+                          $etapas = getEtapas($pdo);                     
+                          foreach($etapas as $etapa) : ?> 
+                              <option value="<?php echo $etapa['id']; ?>"
+                                          <?php echo $_POST['etapa'] == $etapa['id'] ? 'selected':'';?>
+                              >
+                                  <?php echo $etapa['descricao'];?>
+                              </option>
+                          <?php endforeach; ?>  
+          </select>
+      </div>
+
+      <div class="form-group mx-sm-3 mb-2">
+          <select 
+                          name="status" 
+                          id="status" 
+                          class="form-control"                                                                
+                      >
+                      <option value="">Selecione o status</option>                   
                       <?php 
-                      $etapas = getEtapas($pdo);                     
-                      foreach($etapas as $etapa) : ?> 
-                          <option value="<?php echo $etapa['id']; ?>"
-                                      <?php echo $_POST['etapa'] == $etapa['id'] ? 'selected':'';?>
+                      $status = array('Aguardando','Matriculado','Cancelado');                    
+                      foreach($status as $row => $value) : ?> 
+                          <option value="<?php echo $row; ?>"
+                                      <?php echo $value == $registro['status'] ? 'selected':'';?>
                           >
-                              <?php echo $etapa['descricao'];?>
+                              <?php echo $value;?>
                           </option>
                       <?php endforeach; ?>  
-      </select>
-  </div>         
+                      </select> 
+        </div>   
+       
   
   <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
     
@@ -117,6 +137,7 @@
                               <?php echo $value;?>
                           </option>
                       <?php endforeach; ?>  
+                      </select>
                 </td>        
             </tr>
         <?php endforeach; ?>
