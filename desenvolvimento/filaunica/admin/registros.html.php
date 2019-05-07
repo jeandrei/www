@@ -76,10 +76,10 @@
                       >
                       <option value="">Selecione o status</option>                   
                       <?php 
-                      $status = array('Aguardando','Matriculado','Cancelado');                    
+                      $status = array('Todos','Aguardando','Matriculado','Cancelado');                    
                       foreach($status as $row => $value) : ?> 
-                          <option value="<?php echo $row; ?>"
-                                      <?php echo $value == $registro['status'] ? 'selected':'';?>
+                          <option value="<?php echo $value; ?>"
+                                      <?php echo $value == $_POST['status'] ? 'selected':'';?>
                           >
                               <?php echo $value;?>
                           </option>
@@ -124,8 +124,8 @@
                 <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>  
                 <td>  
                       <select 
-                          name="status" 
-                          id="status" 
+                          name="statuslista" 
+                          id="statuslista" 
                           class="form-control"                                                                
                       >                   
                       <?php 

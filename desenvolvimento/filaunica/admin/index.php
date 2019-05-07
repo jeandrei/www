@@ -3,10 +3,11 @@
 require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 
+
  //$fila = getFila($pdo);
  if(($_REQUEST["act"]) && $_REQUEST["act"] == "search")
 {
-    if($fila = getFilaPorEtapa($pdo,$_POST['etapa']))
+    if($fila = getFilaPorEtapa($pdo,($_POST['etapa']),($_POST['status'])))
     {
       include 'registros.html.php';
     }
