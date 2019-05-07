@@ -423,7 +423,7 @@ echo flash('alert-danger');}
                                             >
                                                     <option value="">Selecione a Escola</option>
                                                     <?php 
-                                                    $escolas = getEscolas($pdo);
+                                                    $escolas = getEscolas($pdo);                                                  
                                                     foreach($escolas as $escola) : ?> 
                                                         <option value="<?php echo $escola['id']; ?>"
                                                                     <?php echo $data['setor1'] == $escola['id'] ? 'selected':'';?>

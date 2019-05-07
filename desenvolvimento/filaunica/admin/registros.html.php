@@ -22,10 +22,20 @@
 
   <!--Javascript funções-->
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+  <style>
+    .Aguardando {	
+    color: blue;
+   }
+   .Matriculado {	
+    color: green;
+   }
+   .Cancelado {	
+    color: red;
+   }
+  </style>
    
 </head>
 
-<body>
 <img src="../img/LOGO.png" class="img-fluid" alt="Responsive image">
 <hr>
 <h1 align="center">FILA</h1>
@@ -82,7 +92,7 @@
 
 
         <?php foreach ($fila as $registro): ?>
-            <tr> 
+            <tr class="<?php echo $registro['status'];?>"> 
                 <td><?php echo $registro['posicao'];?>          
                 <td><?php echo $registro['nome'];?>
                 <td><?php echo date('d/m/Y', strtotime($registro['nascimento']));?>
@@ -92,12 +102,21 @@
                 <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?> 
                 <td><a download="<?php echo $registro['comprovante_res_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=res&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>   
                 <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>  
-                <td>
-                    <span class="badge 
-                            <?php echo (($registro['status']) == "Aguardando") ? 'badge-success' : 'badge-danger'; ?>
-                            align-middle">        
-                            <?php echo $registro['status']; ?>
-                    </span> 
+                <td>  
+                      <select 
+                          name="status" 
+                          id="status" 
+                          class="form-control"                                                                
+                      >                   
+                      <?php 
+                      $status = array('Aguardando','Matriculado','Cancelado');                    
+                      foreach($status as $row => $value) : ?> 
+                          <option value="<?php echo $row; ?>"
+                                      <?php echo $value == $registro['status'] ? 'selected':'';?>
+                          >
+                              <?php echo $value;?>
+                          </option>
+                      <?php endforeach; ?>  
                 </td>        
             </tr>
         <?php endforeach; ?>

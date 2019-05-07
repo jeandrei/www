@@ -210,6 +210,7 @@ return $bairros;
 
 
 
+
 function getEtapas($conn) {
     $sql = 'SELECT * FROM etapa ORDER BY descricao';
     $result = $conn->query($sql);      
