@@ -125,9 +125,9 @@ CREATE TABLE `fila` (
   `opcao3_id` varchar(11) DEFAULT NULL,
   `turno1` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
-  `comprovanteres` blob NOT NULL,
+  `comprovanteres` longblob NOT NULL,
   `comprovanteres_tipo` varchar(50) DEFAULT NULL,
-  `comprovantenasc` blob NOT NULL,
+  `comprovantenasc` longblob NOT NULL,
   `comprovantenasc_tipo` varchar(50) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
   `protocolo` varchar(255) DEFAULT NULL,
@@ -135,8 +135,8 @@ CREATE TABLE `fila` (
   `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
   `turno2` varchar(20) DEFAULT NULL,
   `turno3` varchar(20) DEFAULT NULL,
-  `comprovante_res_nome` varchar(60) DEFAULT NULL,
-  `comprovante_nasc_nome` varchar(60) DEFAULT NULL
+  `comprovante_res_nome` varchar(255) DEFAULT NULL,
+  `comprovante_nasc_nome` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

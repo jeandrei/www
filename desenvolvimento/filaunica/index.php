@@ -294,6 +294,10 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
             if(empty($data['numero'])){
                 $s->bindValue(':numero', 0);
             }
+            else
+            {
+                $s->bindValue(':numero', $data['numero']);   
+            }
 
             
             $s->bindValue(':complemento', $data['complemento']);
@@ -321,8 +325,8 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
                 $s->bindValue(':deficiencia', '0');
             }
             $s->bindValue(':observacao', $data['obs']);
-         
-           
+            
+                    
             $s->execute() or die(print_r($s->errorInfo(), true));            
             
             include 'sucesso.html.php';
