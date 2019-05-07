@@ -24,13 +24,13 @@
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
   <style>
     .Aguardando {	
-    color: blue;
+    color: #4169E1;
    }
    .Matriculado {	
-    color: green;
+    color: #008000;
    }
    .Cancelado {	
-    color: red;
+    color: #B22222;
    }
   </style>
    
