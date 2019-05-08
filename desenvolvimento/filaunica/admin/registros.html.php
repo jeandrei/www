@@ -22,6 +22,35 @@
 
   <!--Javascript funções-->
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+
+  <script>
+      //espera a página carregar completamente
+      $(document).ready(function(){  
+           //seleciona o objeto select da página    
+           $(document).on('change','select', function(){ 
+            //atribui os valores dos ids dos objetos para as variáveis
+            var idRegistro=$("#id_reg_fila").val();
+            var statusRegistro=$("#status_reg_fila").val();   
+            $.ajax({
+                    //arquivo que será transmitido os valores
+                    url:'update_status.php',
+                    //o método que será utilizado
+                    method:'POST',
+                    //as variáveis que serão enviadas
+                    data:{
+                      idRegistro:idRegistro,
+                      statusRegistro:statusRegistro
+                    },
+                    //se um erro ocorrer vai traser o echo do update_status se quiser que seja quando der certo mudar para success
+                    error:function(response){
+                        alert(response);
+                    }
+                });
+           });
+        });
+    </script>
+ 
+
   <style>
     .Aguardando {	
     color: #4169E1;
@@ -125,19 +154,27 @@
                 <td>  
                       <select 
                           name="statuslista" 
-                          id="statuslista" 
-                          class="form-control"                                                                
+                          id="<?php echo  $registro['fila_id'];?>" 
+                          class="form-control" 
+                          onChange="
+                                    document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>;
+                                    document.getElementById('status_reg_fila').value = this.value;
+                                    "                                                               
                       >                   
                       <?php 
                       $status = array('Aguardando','Matriculado','Cancelado');                    
                       foreach($status as $row => $value) : ?> 
-                          <option value="<?php echo $row; ?>"
+                          <option value="<?php echo $value; ?>" 
                                       <?php echo $value == $registro['status'] ? 'selected':'';?>
                           >
                               <?php echo $value;?>
                           </option>
                       <?php endforeach; ?>  
                       </select>
+                      <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
+                      <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="">
+                      <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
+                      <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="">     
                 </td>        
             </tr>
         <?php endforeach; ?>
@@ -147,5 +184,7 @@
       </div> 
 </form>
     <span class="badge align-middle"> <?php echo $error; ?></span> 
+    
+    <input type="button" name="teste2" value="Result" onClick="question(document.getElementById('id_reg_fila').value);">
 </body>
 </html>
