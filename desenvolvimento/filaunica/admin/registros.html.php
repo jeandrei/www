@@ -183,8 +183,6 @@
               <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
       </div> 
 </form>
-    <span class="badge align-middle"> <?php echo $error; ?></span> 
-    
-    <input type="button" name="teste2" value="Result" onClick="question(document.getElementById('id_reg_fila').value);">
+    <span class="badge align-middle"> <?php echo $error; ?></span>    
 </body>
 </html>
