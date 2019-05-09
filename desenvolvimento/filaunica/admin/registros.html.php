@@ -106,14 +106,14 @@ function validabusca(){
         <select 
                       name="etapa" 
                       id="etapa" 
-                      class="form-control <?php echo (!empty($data['etapa_err'])) ? 'is-invalid' : ''; ?>"                                        
+                      class="form-control"                                        
                   >
                           <option value="">Selecione a Etapa</option>
                           <?php 
                           $etapas = getEtapas($pdo);                     
                           foreach($etapas as $etapa) : ?> 
                               <option value="<?php echo $etapa['id']; ?>"
-                                          <?php echo $_POST['etapa'] == $etapa['id'] ? 'selected':'';?>
+                                          <?php echo $pag_etapa == $etapa['id'] ? 'selected':'';?>
                               >
                                   <?php echo $etapa['descricao'];?>
                               </option>
@@ -132,7 +132,7 @@ function validabusca(){
                       $status = array('Todos','Aguardando','Matriculado','Cancelado');                    
                       foreach($status as $row => $value) : ?> 
                           <option value="<?php echo $value; ?>"
-                                      <?php echo $value == $_POST['select_status'] ? 'selected':'';?>
+                                      <?php echo $value == $pag_status ? 'selected':'';?>
                           >
                               <?php echo $value;?>
                           </option>
@@ -217,6 +217,17 @@ function validabusca(){
               <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
       </div> 
 </form>
-    <span class="badge align-middle"> <?php echo $error; ?></span>   
+    <span class="badge align-middle"> <?php echo $error; ?></span>  
+
+    <?php        
+      $total_records = $row[100];  
+      $total_pages = 10;
+      $pagLink = "<div class='pagination'>";  
+      for ($i=1; $i<=$total_pages; $i++) {  
+                  $pagLink .= "<a href='index.php?page=".$i."&etapa=".$pag_etapa."&status=".$pag_status."'>".$i."</a>";  
+      };  
+      echo $pagLink . "</div>";  
+      ?>
+
 </body>
 </html>

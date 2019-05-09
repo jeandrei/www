@@ -516,8 +516,10 @@ function buscaPosicaoFila($pdo,$protocolo) {
 
 
 
-function getFilaPorEtapa($pdo,$etapa_id,$status) {
-    
+function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
+    echo "etapa " . $etapa_id;
+    echo "<br>status " . $status;  
+    echo "<br>inicio" . $inicio_pag;
     $sql = "SET @contador = 0";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -546,30 +548,37 @@ function getFilaPorEtapa($pdo,$etapa_id,$status) {
         
             ";
     
-    
+   
     if($status<>'Todos'){
             $sql .= "
                     AND
                         fila.status = :reg_status   
                     ORDER BY
-                        fila.registro     
+                        fila.registro 
+                    DESC LIMIT
+                        $inicio_pag,
+                        $fim_pag
+                            
                     ";
             $sql_prepare = [
                 'reg_status' => $status,
-                'etapa_id' => $etapa_id        
+                'etapa_id' => $etapa_id      
                 ];
     }else
     {
         $sql .= "         
             ORDER BY
                 fila.registro
+                DESC LIMIT
+                $inicio_pag,
+                $fim_pag
             ";    
 
         $sql_prepare = [
             'etapa_id' => $etapa_id      
         ];   
-    }  
-
+    }     
+    //var_dump($sql) ;
     $stmt = $pdo->prepare($sql);
     $stmt->execute($sql_prepare); 
     $result = $stmt->fetchAll(); 

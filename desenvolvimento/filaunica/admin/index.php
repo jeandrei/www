@@ -3,9 +3,28 @@
 require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 
- if(($_REQUEST["act"]) && $_REQUEST["act"] == "search")
+
+
+$limit = 2;  
+if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
+$start_from = ($page-1) * $limit;
+
+
+if(isset($_POST['etapa'])){
+  $pag_etapa = $_POST['etapa'];
+  $pag_status = $_POST['select_status'];
+}
+else
 {
-    if($fila = getFilaPorEtapa($pdo,($_POST['etapa']),($_POST['select_status'])))
+  $pag_etapa = $_GET['etapa'];
+  $pag_status = $_GET['status'];
+}
+
+
+
+ //if(($_REQUEST["act"]) && $_REQUEST["act"] == "search" || isset($_POST['submit']))
+//{
+    if($fila = getFilaPorEtapa($pdo,$pag_etapa,$pag_status,$start_from,$limit))
     {
       include 'registros.html.php';
     }
@@ -14,12 +33,12 @@ require_once '../inc/helpers.inc.php';
       $error = "Nenhum registro encontrado."; 
       include 'error.html.php';
     }
-}
-else
+//}
+/*else
 {
   $fila = getFila($pdo);
   include 'registros.html.php';
-}
+}*/
 
 
 
