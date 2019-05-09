@@ -48,6 +48,28 @@
                 });
            });
         });
+
+
+       
+function validabusca(){
+	var etapa = document.getElementById('etapa').value;
+	var status = document.getElementById('select_status').value;	
+	
+	if(etapa == ""){			
+		document.getElementById('busca_err').innerHTML = "Por favor selecione uma etapa";	
+		return false;
+	}	
+
+  if(status == ""){			
+		document.getElementById('busca_err').innerHTML = "Por favor selecione um status";	
+		return false;
+	}
+
+
+}//validation	
+
+
+
     </script>
  
 
@@ -66,11 +88,13 @@
 </head>
 
 <img src="../img/LOGO.png" class="img-fluid" alt="Responsive image">
+
 <hr>
-<h1 align="center">FILA</h1>
+<p class="font-weight-light text-center font-weight-bold">Fila Única de Penha/SC</p>
+<hr>
 
 
-<form class="form-inline" action="?act=search" method="post" enctype="multipart/form-data" onsubmit="return validation()"> 
+<form class="form-inline" action="?act=search" method="post" enctype="multipart/form-data" onsubmit="return validabusca()"> 
 
   <div class="form-group mb-2">
     <label for="etapa" class="sr-only">Selecione os dados de busca</label>
@@ -99,8 +123,8 @@
 
       <div class="form-group mx-sm-3 mb-2">
           <select 
-                          name="status" 
-                          id="status" 
+                          name="select_status" 
+                          id="select_status" 
                           class="form-control"                                                                
                       >
                       <option value="">Selecione o status</option>                   
@@ -108,7 +132,7 @@
                       $status = array('Todos','Aguardando','Matriculado','Cancelado');                    
                       foreach($status as $row => $value) : ?> 
                           <option value="<?php echo $value; ?>"
-                                      <?php echo $value == $_POST['status'] ? 'selected':'';?>
+                                      <?php echo $value == $_POST['select_status'] ? 'selected':'';?>
                           >
                               <?php echo $value;?>
                           </option>
@@ -118,7 +142,7 @@
        
   
   <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
-    
+  <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
 
 
     <div class="text-center">
@@ -139,16 +163,26 @@
           </thead>
           <tbody>
 
-
+      
         <?php foreach ($fila as $registro): ?>
             <tr class="<?php echo $registro['status'];?>"> 
-                <td><?php echo $registro['posicao'];?>          
-                <td><?php echo $registro['nome'];?>
-                <td><?php echo date('d/m/Y', strtotime($registro['nascimento']));?>
-                <td><?php echo $registro['etapa'];?>
-                <td><?php echo $registro['responsavel'];?>
-                <td><?php echo $registro['protocolo'];?>
-                <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?> 
+                <td><?php 
+                  if($registro['status'] == "Aguardando" && $_POST['select_status'] <> "Todos" ){                    
+                    echo $registro['posicao'];
+                    }
+                    else
+                    {
+                      echo "-";
+                    }
+                    ?> 
+                
+                </td>         
+                <td><?php echo $registro['nome'];?>  </td>  
+                <td><?php echo date('d/m/Y', strtotime($registro['nascimento']));?> </td>  
+                <td><?php echo $registro['etapa'];?> </td>  
+                <td><?php echo $registro['responsavel'];?> </td>  
+                <td><?php echo $registro['protocolo'];?> </td>  
+                <td><?php echo date('d/m/Y H:i:s', strtotime($registro['registro']));?>  </td>  
                 <td><a download="<?php echo $registro['comprovante_res_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=res&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>   
                 <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='abrir_arquivo.php?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>  
                 <td>  
@@ -183,6 +217,6 @@
               <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
       </div> 
 </form>
-    <span class="badge align-middle"> <?php echo $error; ?></span>    
+    <span class="badge align-middle"> <?php echo $error; ?></span>   
 </body>
 </html>
