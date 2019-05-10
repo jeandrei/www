@@ -5,7 +5,7 @@ require_once '../inc/helpers.inc.php';
 
 
 //quantos registros serão apresentados na paginação
-$limit = 10;  
+$limit = 15;  
 
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;
@@ -22,6 +22,14 @@ else
 }
 
 
+if($_REQUEST["act"] == NULL && $_GET['status'] == NULL && $_GET['etapa'] == NULL)
+{
+  $count =getFila($pdo,$pag_etapa,$pag_status);
+  $fila = getFilaPaginacao($pdo,$start_from,$limit);  
+  include 'registros.html.php';
+  exit();
+}
+
 
 
  if(($_REQUEST["act"]) && $_REQUEST["act"] == "search" || isset($_GET['etapa']))
@@ -33,20 +41,36 @@ else
       //chama a função getFilaPorEtapa para pegar o número de registros no banco que satisfazem a consulta
       $count = getFilaPorEtapa($pdo,$pag_etapa,$pag_status);      
       include 'registros.html.php';
+      exit();
     }
     else
     {
       $error = "Nenhum registro encontrado."; 
       include 'error.html.php';
+      exit();
     }
 }
-else
-{
-  $fila = getFila($pdo);
-  include 'registros.html.php';
-}
 
 
+
+//faz a busca por nome
+if(($_REQUEST["act"]) && $_REQUEST["act"] == "searchname") {
+    if($fila = getFila($pdo,$_POST['buscanome']))
+    {
+      $fila = getFila($pdo,$_POST['buscanome']); 
+      include 'registros.html.php';
+      exit(); 
+    }
+    else
+    {
+      $error = "Nenhum registro encontrado."; 
+      include 'error.html.php'; 
+      exit(); 
+    } 
+ }
+ 
+ 
+ 
 
 
 
