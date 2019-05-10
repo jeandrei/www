@@ -4,8 +4,9 @@ require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 
 
+//quantos registros serão apresentados na paginação
+$limit = 10;  
 
-$limit = 2;  
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
 $start_from = ($page-1) * $limit;
 
@@ -22,10 +23,15 @@ else
 
 
 
- //if(($_REQUEST["act"]) && $_REQUEST["act"] == "search" || isset($_POST['submit']))
-//{
-    if($fila = getFilaPorEtapa($pdo,$pag_etapa,$pag_status,$start_from,$limit))
+
+ if(($_REQUEST["act"]) && $_REQUEST["act"] == "search" || isset($_GET['etapa']))
+{
+    //atribui a fila os registros que satisfazem a consulta trazendo um intervalo de registros
+    //que vão de start_from até limit 
+    if($fila = getFilaPorEtapaPaginacao($pdo,$pag_etapa,$pag_status,$start_from,$limit))
     {
+      //chama a função getFilaPorEtapa para pegar o número de registros no banco que satisfazem a consulta
+      $count = getFilaPorEtapa($pdo,$pag_etapa,$pag_status);      
       include 'registros.html.php';
     }
     else
@@ -33,12 +39,12 @@ else
       $error = "Nenhum registro encontrado."; 
       include 'error.html.php';
     }
-//}
-/*else
+}
+else
 {
   $fila = getFila($pdo);
   include 'registros.html.php';
-}*/
+}
 
 
 

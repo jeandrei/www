@@ -516,10 +516,7 @@ function buscaPosicaoFila($pdo,$protocolo) {
 
 
 
-function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
-    echo "etapa " . $etapa_id;
-    echo "<br>status " . $status;  
-    echo "<br>inicio" . $inicio_pag;
+function getFilaPorEtapaPaginacao($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {   
     $sql = "SET @contador = 0";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -555,7 +552,7 @@ function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
                         fila.status = :reg_status   
                     ORDER BY
                         fila.registro 
-                    DESC LIMIT
+                    ASC LIMIT
                         $inicio_pag,
                         $fim_pag
                             
@@ -569,7 +566,7 @@ function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
         $sql .= "         
             ORDER BY
                 fila.registro
-                DESC LIMIT
+                ASC LIMIT
                 $inicio_pag,
                 $fim_pag
             ";    
@@ -577,8 +574,7 @@ function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
         $sql_prepare = [
             'etapa_id' => $etapa_id      
         ];   
-    }     
-    //var_dump($sql) ;
+    }         
     $stmt = $pdo->prepare($sql);
     $stmt->execute($sql_prepare); 
     $result = $stmt->fetchAll(); 
@@ -612,7 +608,90 @@ function getFilaPorEtapa($pdo,$etapa_id,$status,$inicio_pag,$fim_pag) {
     } 
 }
 
+function getFilaPorEtapa($pdo,$etapa_id,$status) {   
+    $sql = "SET @contador = 0";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $sql = "
+            SELECT 
+                (SELECT @contador := @contador +1) as posicao, 
+                fila.id as fila_id,     
+                fila.registro as registro, 
+                fila.responsavel as responsavel, 
+                fila.nomecrianca as nome, 
+                fila.nascimento as nascimento,
+                fila.protocolo as protocolo,
+                fila.comprovanteres,
+                fila.comprovante_res_nome,
+                fila.comprovanteres_tipo,
+                fila.comprovantenasc,
+                fila.comprovantenasc_tipo,
+                fila.comprovante_nasc_nome,
+                fila.status as status,
+                (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
+            FROM 
+                fila 
+            WHERE
+                (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
+        
+            ";
+    
+   
+    if($status<>'Todos'){
+            $sql .= "
+                    AND
+                        fila.status = :reg_status   
+                    ORDER BY
+                        fila.registro                            
+                    ";
+            $sql_prepare = [
+                'reg_status' => $status,
+                'etapa_id' => $etapa_id      
+                ];
+    }else
+    {
+        $sql .= "         
+            ORDER BY
+                fila.registro                
+            ";    
 
+        $sql_prepare = [
+            'etapa_id' => $etapa_id      
+        ];   
+    }         
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($sql_prepare); 
+    $result = $stmt->fetchAll(); 
+
+    
+
+    //verifica se obteve algum resultado
+    if($result >0)
+    {
+    foreach ($result as $row)
+    {
+        $data[] = array( 
+            'posicao' => $row['posicao'] . 'º', 
+            'fila_id' => $row['fila_id'],
+            'registro' => $row['registro'],
+            'nome' => $row['nome'],
+            'responsavel' => $row['responsavel'],
+            'nascimento' => $row['nascimento'],
+            'etapa' => $row['etapa'],
+            'protocolo' => $row['protocolo'],
+            'comprovante_res_nome' => $row['comprovante_res_nome'],
+            'comprovante_nasc_nome' => $row['comprovante_nasc_nome'],
+            'status' => $row['status']  
+        );
+    }
+    return $data;
+    }
+    else
+    {
+    return false;
+    } 
+}
 
 
 

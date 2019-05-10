@@ -163,17 +163,23 @@ function validabusca(){
           </thead>
           <tbody>
 
-      
+        
         <?php foreach ($fila as $registro): ?>
             <tr class="<?php echo $registro['status'];?>"> 
-                <td><?php 
-                  if($registro['status'] == "Aguardando" && $_POST['select_status'] <> "Todos" ){                    
-                    echo $registro['posicao'];
-                    }
-                    else
+                <td><?php                     
+                    if(buscaProtocolo($pdo,$registro['protocolo']))
                     {
-                      echo "-";
+                      $result = buscaProtocolo($pdo,$registro['protocolo']);
+                      if($result['status'] == "Aguardando"){
+                        $posicao =   buscaPosicaoFila($pdo, $registro['protocolo']);
+                      }
+                      else
+                      {
+                        $posicao['posicao'] = '-';
+                      }
+                    
                     }
+                    echo $posicao['posicao']            ;
                     ?> 
                 
                 </td>         
@@ -213,21 +219,36 @@ function validabusca(){
             </tr>
         <?php endforeach; ?>
         </tbody>
-        </table>    
-              <a class="btn btn-secondary" href="<?php echo URLROOT; ?>">Voltar</a>
+        </table>                  
       </div> 
 </form>
     <span class="badge align-middle"> <?php echo $error; ?></span>  
 
-    <?php        
-      $total_records = $row[100];  
-      $total_pages = 10;
-      $pagLink = "<div class='pagination'>";  
-      for ($i=1; $i<=$total_pages; $i++) {  
-                  $pagLink .= "<a href='index.php?page=".$i."&etapa=".$pag_etapa."&status=".$pag_status."'>".$i."</a>";  
-      };  
-      echo $pagLink . "</div>";  
-      ?>
+   
+      <!--PAGINAÇÃO-->
+      <ul class="pagination list-inline justify-content-center">
+
+        <?php                        
+        //count($count) retorna o número de registros trazido na consulta
+        $total_records = count($count);
+        $total_pages = ceil($total_records / $limit);          
+        for ($i=1; $i<=$total_pages; $i++) {
+                    // SE O CONTADOR FOR IGUAL AO NÚMERO DA PAGINA PASSADA PELO GET ATRIBUI O VALOR ACTIVE A VARIÁVEL ACTIVE
+                    // E COLOCA NA CLASSE class=page-item
+                    if($i == $_GET['page']){$active = 'active';}else{ $active = "";}  
+                    $pagLink .= "<li class='page-item $active'><a class='page-link' href='index.php?page=".$i."&etapa=".$pag_etapa."&status=".$pag_status."'>".$i."</a></li>";  
+        };  
+        echo $pagLink . "</div>";  
+        ?>  
+    
+    </ul>
+  
+    <!--BOTÃO VOLTAR-->
+    <div class="row">
+        <div class="mx-auto">
+        <a class="btn btn-secondary list-inline justify-content-center" href="<?php echo URLROOT; ?>">Voltar</a>
+        </div>
+    </div>
 
 </body>
 </html>
