@@ -813,13 +813,12 @@ function getFilaPorEtapaRelatorio($pdo,$etapa_id,$status) {
 
 
 
-
-
-
-
-
 function iniciais($str){
-    $pos = 0;
+    
+    preg_match_all('/\b\w/u', $str, $m);
+    $iniciais = implode('',$m[0]);
+    return $iniciais;
+    /*$pos = 0;
     $saida = '';
     while(($pos = strpos($str, ' ', $pos)) !== false ){
         if(isset($str[$pos +1]) && $str[$pos +1] != ' '){
@@ -827,6 +826,6 @@ function iniciais($str){
         }   
         $pos++;
     }
-    return $str[0]. $saida;
+    return $str[0]. $saida;*/
 }
 ?>

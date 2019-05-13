@@ -29,7 +29,7 @@ $etapas = getEtapas($pdo);
             $pdf->Cell(0, 5,utf8_decode("Listagem " . $etapa['descricao']), 0, 1, "C");
             $i=0;
             foreach($colunas as $coluna){
-                $i++;  
+                $i++;                  
                 $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode($coluna),1);
             }
             foreach($registros as $row) {       
@@ -37,8 +37,15 @@ $etapas = getEtapas($pdo);
                 $pdf->Ln();
                 $i=0;
                 foreach($row as $column){
-                    $i++;        
-                    $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode($column),1);
+                    $i++;   
+                    //se a coluna for a de número 3 quer dizer que é o nome então executa a função iniciais
+                    if($i == 3){
+                        $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode(iniciais($column)),1);
+                    }
+                    else
+                    {
+                        $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode($column),1); 
+                    }
                 }
             } 
         }
