@@ -2,6 +2,16 @@
 // URL ROOT
 require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
+require_once 'inc/access.inc.php';
+
+//***********************************LOGIN***************************************
+
+if (!userIsLoggedIn())
+{
+  include 'login.html.php';
+  exit();
+}
+//**********************************FIM DO LOGIN*********************************
 
 
 //quantos registros serão apresentados na paginação
