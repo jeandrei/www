@@ -59,7 +59,7 @@
       <div class="row justify-content-center align-items-center">         
           <div class="col-lg-4">
                 <a href="?act=add" class="btn btn-primary btn-lg btn-block" role="button">Cadastrar</a>                         
-                <a href="#" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a>                
+                <a href="?act=list" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a>                
           </div>
      </div>
 

@@ -3,6 +3,11 @@
 require_once 'inc/db.inc.php';
 require_once 'inc/helpers.inc.php';
 
+if(($_REQUEST["act"]) && $_REQUEST["act"] == "list"){
+    include 'listachamada.php';
+    exit();
+}
+
 
 
 if(($_REQUEST["act"]) && $_REQUEST["act"] == "add"){

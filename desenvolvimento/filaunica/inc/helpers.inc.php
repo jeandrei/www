@@ -752,6 +752,71 @@ function getFilaPorEtapa($pdo,$etapa_id,$status) {
 
 
 
+function getFilaPorEtapaRelatorio($pdo,$etapa_id,$status) {   
+    $sql = "SET @contador = 0";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $sql = "
+            SELECT 
+                (SELECT @contador := @contador +1) as posicao,                    
+                fila.registro as registro, 
+                fila.responsavel as responsavel, 
+                fila.nomecrianca as nome, 
+                fila.nascimento as nascimento,
+                fila.protocolo as protocolo,                 
+                (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
+            FROM 
+                fila 
+            WHERE
+                (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
+            AND
+                fila.status = :reg_status
+            ORDER BY
+                fila.registro        
+            ";
+    
+    $sql_prepare = [
+        'reg_status' => $status,
+        'etapa_id' => $etapa_id
+    ]; 
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($sql_prepare); 
+    $result = $stmt->fetchAll(); 
+
+    
+
+    //verifica se obteve algum resultado
+    if($result >0)
+    {
+    foreach ($result as $row)
+    {
+        $data[] = array( 
+            'posicao' => $row['posicao'] . 'º',             
+            'registro' => $row['registro'],
+            'nome' => $row['nome'],
+            'responsavel' => $row['responsavel'],
+            'nascimento' => $row['nascimento'],
+            'etapa' => $row['etapa'],
+            'protocolo' => $row['protocolo']   
+        );
+    }
+    return $data;
+    }
+    else
+    {
+    return false;
+    } 
+}
+
+
+
+
+
+
+
+
 
 function iniciais($str){
     $pos = 0;
@@ -764,7 +829,4 @@ function iniciais($str){
     }
     return $str[0]. $saida;
 }
-
-
 ?>
-
