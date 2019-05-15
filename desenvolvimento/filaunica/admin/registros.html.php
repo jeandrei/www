@@ -76,27 +76,17 @@
     }	  
   }//validation	
 
-</script>
- 
-
-  <style>
-    .Aguardando {	
-    color: #4169E1;
-   }
-   .Matriculado {	
-    color: #008000;
-   }
-   .Cancelado {	
-    color: #B22222;
-   }
-  </style>
+</script>  
    
 </head>
 
-<br>
-<?php include 'inc/logout.inc.html.php';?>
+<div class="container">
+    <div class="row">
+        <div class="col"><img src="../img/LOGO.png" class="img-fluid" alt="Responsive image"></div>  
+        <div class="col text-right"><a class="link" href="users/index.php">Gerenciar Usuários</a><?php include 'inc/logout.inc.html.php';?></div>          
+    </div>    
+</div>
 
-<img src="../img/LOGO.png" class="img-fluid" alt="Responsive image">
 
 <hr>
 <p class="font-weight-light text-center font-weight-bold">Fila Única de Penha/SC</p>

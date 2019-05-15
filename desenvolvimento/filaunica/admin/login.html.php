@@ -61,6 +61,14 @@
     <body>
     <div class="row">
     <div class="col-md-4 mx-auto">
+    
+    <?php   
+    if(!empty($GLOBALS['loginError'])){
+        flash('alert-danger',$GLOBALS['loginError'],'alert alert-danger');
+        echo flash('alert-danger');}
+    ?>   
+
+
         <div class="card card-body bg-ligth mt-5">
             <?php flash('register_success'); ?>
             <h2>Login</h2>
@@ -93,6 +101,5 @@
         </div>
     </div>
 </div>
-<?php echo $GLOBALS['loginError']; ?>
-    </body>
+</body>
 </html>
