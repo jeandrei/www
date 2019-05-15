@@ -1,8 +1,7 @@
 <?php
-include_once ('../../includes/constantes.php');
-include_once AUXILIARES.'/magicquotes.inc.php';
-include_once AUXILIARES.'/access.inc.php';
-include_once AUXILIARES.'/db.inc.php';
+require_once '../../inc/db.inc.php';
+require_once '../../inc/config.inc.php';
+require_once '../inc/access.inc.php';
 
 if (!userIsLoggedIn())
 {
@@ -10,12 +9,16 @@ if (!userIsLoggedIn())
 	exit();
 }
 
-if (!userHasRole('Account Administrator'))
+
+if (!userHasRole('Administrador'))
 {
 	$error = 'Apenas usuários com acesso de administrador tem acesso a esta página.';
 	include '../accessdenied.html.php';
 	exit();
 }
+
+
+/*
 
 //********************************ADICIONAR UM NOVO USUÁRIO*****************************
 
@@ -451,7 +454,7 @@ if (isset($_GET['editform']))
   exit();
 }
 //*******************FIM GRAVAR OS DADOS EDITADOS NO PASSO ANTERIOR*********************
-
+*/
 
 //********************************BUSCA A LISTA COM TODOS OS USUÁRIOS*******************
 try

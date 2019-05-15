@@ -1,6 +1,6 @@
 <?php 
-include_once ('../../includes/constantes.php');
-include_once AUXILIARES.'/helpers.inc.php'; 
+//include_once ('../../includes/constantes.php');
+//include_once AUXILIARES.'/helpers.inc.php'; 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

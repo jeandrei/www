@@ -54,7 +54,7 @@ function userIsLoggedIn()
 
 
 function databaseContainsUser($email, $password)
-{	require '../inc/db.inc.php';
+{	require APPROOT . '/inc/db.inc.php';
 	try
 	{
 		$sql = 'SELECT COUNT(*) FROM user
@@ -83,5 +83,39 @@ function databaseContainsUser($email, $password)
 	}
 }//end function databaseContainsAuthor
 
+
+function userHasRole($role)
+{
+	require  APPROOT . '/inc/db.inc.php';
+
+	try
+	{
+		$sql = "SELECT COUNT(*) FROM user
+			INNER JOIN userrole ON user.id = userid
+			INNER JOIN role ON roleid = role.id
+			WHERE email = :email AND role.description = :description";			
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':email', $_SESSION['email']);
+		$s->bindValue(':description', $role);
+		$s->execute();
+	}
+	catch (PDOExeption $e)
+	{
+		$error = 'Erro ao tentar recuperar os dados de atribuições do usuário.';
+		include 'error.html.php';
+		exit();
+	}// end try
+
+	$row = $s->fetch();
+
+	if ($row[0] > 0)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}// end function userHasRole
 
 ?>

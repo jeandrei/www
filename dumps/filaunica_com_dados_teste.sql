@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 06/05/2019 às 19:02
+-- Tempo de geração: 15/05/2019 às 19:22
 -- Versão do servidor: 5.7.25
 -- Versão do PHP: 7.2.14
 
@@ -244,6 +244,49 @@ INSERT INTO `fila` (`id`, `registro`, `responsavel`, `email`, `celular1`, `celul
 (119, '2019-03-22 01:38:00', '	ADRIANA RIBEIRO DE CAMPOS	', '	responsavel@gmail.com	', '	(47) 99116-9267', NULL, 8, '	Rua teste	', 107, '	Teste	', '	ENZO LUIZ VICENTE	', '2016-04-06', '9999', '1', '5', NULL, NULL, '1', NULL, 0x4172726179, NULL, 0x4172726179, NULL, '	891.029.329-20', '982019', NULL, 'Aguardando', NULL, NULL, '	arquivo.pdf	', '	arquivo.pdf	'),
 (120, '2019-03-22 01:39:00', '	SANDRA REGINA GONÇALVES	', '	responsavel@gmail.com	', '	(47) 99116-9267', NULL, 5, '	Rua teste	', 108, '	Teste	', '	SAMUEL HENRIQUE SALES	', '2016-11-02', '9999', '1', '6', NULL, NULL, '1', NULL, 0x4172726179, NULL, 0x4172726179, NULL, '	009.359.239-69', '992019', NULL, 'Aguardando', NULL, NULL, '	arquivo.pdf	', '	arquivo.pdf	');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `role`
+--
+
+CREATE TABLE `role` (
+  `id` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `password`) VALUES
+(1, 'Jeandrei Walter', 'jeandreiwalter@gmail.com', '579d6a5205364b0bc7eb5038db7362af'),
+(3, 'Jeandrei', 'jeandreiwalter@yahoo.com.br', 'df259e9d75542c1345609e781e152804');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `userrole`
+--
+
+CREATE TABLE `userrole` (
+  `userid` int(11) NOT NULL,
+  `roleid` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Índices de tabelas apagadas
 --
@@ -273,6 +316,25 @@ ALTER TABLE `fila`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Índices de tabela `userrole`
+--
+ALTER TABLE `userrole`
+  ADD PRIMARY KEY (`userid`,`roleid`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -299,32 +361,12 @@ ALTER TABLE `etapa`
 --
 ALTER TABLE `fila`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-CREATE TABLE `user` (
-`id` INT NOT NULL,
-`name` VARCHAR(255),
-`email` VARCHAR(255) UNIQUE NOT NULL,
- `password` varchar(255) NOT NULL
-) DEFAULT CHARACTER SET utf8 ENGINE=InnoDB;
-
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
---
-
---
--- AUTO_INCREMENT de tabela `users`
+-- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
