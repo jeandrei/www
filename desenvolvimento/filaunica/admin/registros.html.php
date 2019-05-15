@@ -93,11 +93,15 @@
    
 </head>
 
+<br>
+<?php include 'inc/logout.inc.html.php';?>
+
 <img src="../img/LOGO.png" class="img-fluid" alt="Responsive image">
 
 <hr>
 <p class="font-weight-light text-center font-weight-bold">Fila Única de Penha/SC</p>
 <hr>
+
 
 
 <form action="?act=search" method="post" enctype="multipart/form-data" onsubmit="return validabusca()"> 

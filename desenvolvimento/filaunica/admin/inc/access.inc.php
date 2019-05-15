@@ -13,7 +13,7 @@ function userIsLoggedIn()
 			return FALSE;
 		}// end if(!isset($_POST['email'])
 		
-		$password = md5($_POST['password'] . 'labdb');		
+		$password = md5($_POST['password'] . 'filaunica');		
 
 		if (databaseContainsUser($_POST['email'], $password))//alterei o nome da funçao databaseContainsAuthor
 		{
@@ -53,8 +53,8 @@ function userIsLoggedIn()
 }//end function userIsLoggedIn
 
 
-function databaseContainsUser($pdo,$email, $password)
-{
+function databaseContainsUser($email, $password)
+{	require '../inc/db.inc.php';
 	try
 	{
 		$sql = 'SELECT COUNT(*) FROM user

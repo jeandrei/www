@@ -3,15 +3,36 @@
 require_once '../inc/db.inc.php';
 require_once '../inc/helpers.inc.php';
 require_once 'inc/access.inc.php';
+/*
+$name = 'Jeandrei';
+$email = 'jeandreiwalter@yahoo.com.br';
+$password = md5('123456' . 'filaunica');
+$sql = 'INSERT INTO user SET
+			name = :name,
+      email = :email,
+      password = :password';
+		$s = $pdo->prepare($sql);
+		$s->bindValue(':name', $name);
+    $s->bindValue(':email', $email);
+    $s->bindValue(':password', $password);
+		$s->execute();		
+*/
+
+//var_dump($_POST);
+
+/*if(isset($_POST['action']) && ($_POST['action'] == "logout"))
+{
+  echo "você clocou em logout";
+}*/
 
 //***********************************LOGIN***************************************
-
 if (!userIsLoggedIn())
 {
   include 'login.html.php';
   exit();
 }
 //**********************************FIM DO LOGIN*********************************
+
 
 
 //quantos registros serão apresentados na paginação

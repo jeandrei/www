@@ -60,12 +60,12 @@
     </head>
     <body>
     <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-4 mx-auto">
         <div class="card card-body bg-ligth mt-5">
             <?php flash('register_success'); ?>
             <h2>Login</h2>
             <p>Please fill your credentials to log in</p>
-            <form action="<?php echo URLROOT; ?>/users/login" method="post">
+            <form action="" method="post">
                                 
                 <!--EMAIL-->
                 <div class="form-group">
@@ -84,7 +84,8 @@
 
                  <!--BOTÃ•ES-->
                  <div class="row">
-                    <div class="col">                    
+                    <div class="col">
+                        <input type="hidden" name="action" value="login">                    
                         <input type="submit" value="Log in" class="btn btn-success btn-block">                        
                     </div>                    
                  </div>
@@ -92,5 +93,6 @@
         </div>
     </div>
 </div>
+<?php echo $GLOBALS['loginError']; ?>
     </body>
 </html>
