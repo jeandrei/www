@@ -5,7 +5,7 @@ require_once '../inc/helpers.inc.php';
 require_once 'inc/access.inc.php';
 /*
 $name = 'Jeandrei';
-$email = 'jeandreiwalter@yahoo.com.br';
+$email = 'jeandreiwalter@gmail.com';
 $password = md5('123456' . 'filaunica');
 $sql = 'INSERT INTO user SET
 			name = :name,

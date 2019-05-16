@@ -1,6 +1,6 @@
 <?php 
-include_once ('../../includes/constantes.php');
-include_once AUXILIARES.'/helpers.inc.php';
+//include_once ('../../includes/constantes.php');
+//include_once AUXILIARES.'/helpers.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,7 +40,7 @@ include_once AUXILIARES.'/helpers.inc.php';
 			<br>
 
 		
-			<legend>Atribuições:</legend>
+			<legend>Atribuição:</legend>
 			<?php for ($i = 0; $i < count($roles); $i++): ?>
 				<div>
 					<label style="position:relative;font-weight:bold;font-style:italic;font-size:18px;" for="role<?php echo $i; ?>"><input
@@ -51,9 +51,8 @@ include_once AUXILIARES.'/helpers.inc.php';
 						{
 							echo ' checked';
 						}
-						?>><?php htmlout($roles[$i]['id']); ?>
-					</label>:
-					<p style="position:relative; margin-left:22px;"><?php htmlout($roles[$i]['description']); ?></p>
+						?>><?php htmlout($roles[$i]['description']); ?>
+					</label>					
 				</div>
 		 	<?php endfor; ?>
 		</fieldset>	

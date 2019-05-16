@@ -205,7 +205,7 @@ CREATE TABLE `user` (
 `id` INT NOT NULL,
 `name` VARCHAR(255),
 `email` VARCHAR(255) UNIQUE NOT NULL,
- `password` varchar(255) NOT NULL
+ `password` varchar(255) NULL
 ) DEFAULT CHARACTER SET utf8 ENGINE=InnoDB;
 
 ALTER TABLE `user`

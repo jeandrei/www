@@ -1,5 +1,6 @@
 <?php
 require_once '../../inc/db.inc.php';
+require_once '../../inc/helpers.inc.php';
 require_once '../../inc/config.inc.php';
 require_once '../inc/access.inc.php';
 
@@ -18,7 +19,7 @@ if (!userHasRole('Administrador'))
 }
 
 
-/*
+
 
 //********************************ADICIONAR UM NOVO USUÁRIO*****************************
 
@@ -58,10 +59,7 @@ if (isset($_GET['add']))//Monta o formulário para a inserção de dados
 if (isset($_GET['addform']))// ao clicar no botão gravar
 {
 
-		if (!isset($_POST['roles']))
-		{
-			$ValidarErro = "Você deve selecionar ao um privilégio."; 
-		}
+	
 		if (!preg_match("/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST['password']))
 		{
 			$ValidarErro = "Senha deve conter no mínimo 8 caracteres uma letra maiúscula e um algarismo. " . $_POST['id'];
@@ -107,6 +105,7 @@ if (isset($_GET['addform']))// ao clicar no botão gravar
 			exit();
 		}
 
+	
 	try
 	{
 		$sql = 'INSERT INTO user SET
@@ -119,7 +118,7 @@ if (isset($_GET['addform']))// ao clicar no botão gravar
 	}
 	catch (PDOException $e)
 	{
-		$error = 'Erro ao tentar gravar os dados do usuário.';
+		$error = 'Erro ao tentar gravar os dados do usuário.' . $e;
 		include 'error.html.php';
 		exit();
 	}// end try
@@ -128,7 +127,7 @@ if (isset($_GET['addform']))// ao clicar no botão gravar
 
 	if ($_POST['password'] != '')
 	{
-		$password = md5($_POST['password'] . 'labdb');
+		$password = md5($_POST['password'] . 'filaunica');
 
 		try
 		{
@@ -240,7 +239,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Edite') //se o usuário cli
 	//Get list of roles assigned to this author
 	try
 	{
-	  $sql = 'SELECT roleid FROM userrole WHERE userid = :id';
+	  $sql = 'SELECT userrole.roleid, role.description  FROM userrole, role WHERE userrole.roleid = role.id AND userid = :id';
 	  $s = $pdo->prepare($sql);
 	  $s->bindValue(':id', $id);
 	  $s->execute();
@@ -286,10 +285,7 @@ if (isset($_POST['action']) and $_POST['action'] == 'Edite') //se o usuário cli
 //********************GRAVAR OS DADOS EDITADOS NO PASSO ANTERIOR**************************
 if (isset($_GET['editform']))
 {
-		if (!isset($_POST['roles']))
-		{
-			$ValidarErro = "Você deve selecionar ao um privilégio."; 
-		}
+	
 		if (!preg_match("/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST['password']))
 		{
 			$ValidarErro = "Senha deve conter no mínimo 8 caracteres uma letra maiúscula e um algarismo.";
@@ -393,7 +389,7 @@ if (isset($_GET['editform']))
 
   if ($_POST['password'] != '')
   {
-    $password = md5($_POST['password'] . 'labdb');
+    $password = md5($_POST['password'] . 'filaunica');
 
     try
     {
@@ -413,6 +409,7 @@ if (isset($_GET['editform']))
     }//end try
   }//end if ($_POST
 
+	
   try
   {
     $sql = 'DELETE FROM userrole WHERE userid =:id';
@@ -426,6 +423,7 @@ if (isset($_GET['editform']))
     include 'error.html.php';
     exit();
   }// end try
+
 
   if (isset($_POST['roles']))
   {
@@ -454,7 +452,7 @@ if (isset($_GET['editform']))
   exit();
 }
 //*******************FIM GRAVAR OS DADOS EDITADOS NO PASSO ANTERIOR*********************
-*/
+
 
 //********************************BUSCA A LISTA COM TODOS OS USUÁRIOS*******************
 try
