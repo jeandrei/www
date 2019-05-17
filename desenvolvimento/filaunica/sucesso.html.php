@@ -45,7 +45,7 @@
                         echo getEscola($pdo,$data['setor1']);
                       }
                       if(!empty($data['setor2'])){
-                        echo ",opcao2 " . getEscola($pdo,$data['setor2']);
+                        echo ", " . getEscola($pdo,$data['setor2']);
                       }
                       if(!empty($data['setor3'])){
                         echo ", " . getEscola($pdo,$data['setor3']);

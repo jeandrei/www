@@ -219,8 +219,8 @@ function upload_file($myfile,$newname,$description){
     $fileType = $_FILES[$myfile]['type'];
     $fileName = $_FILES[$myfile]['name']; 
   
-
-    $fileExtension = strtolower(end(explode('.',$fileName)));
+    $strings =  explode('.',$fileName);
+    $fileExtension = strtolower(end($strings));
 
     //$uploadPath = $currentDir . $uploadDirectory . basename($fileName); 
 
@@ -713,10 +713,10 @@ function getFilaPorEtapaRelatorio($pdo,$etapa_id,$status) {
     {
         $data[] = array( 
             'posicao' => $row['posicao'] . 'º',             
-            'registro' => $row['registro'],
+            'registro' => date('d/m/Y h:i:s', strtotime($row['registro'])),
             'nome' => $row['nome'],
             'responsavel' => $row['responsavel'],
-            'nascimento' => $row['nascimento'],
+            'nascimento' => date('d/m/Y', strtotime($row['nascimento'])),
             'etapa' => $row['etapa'],
             'protocolo' => $row['protocolo']   
         );

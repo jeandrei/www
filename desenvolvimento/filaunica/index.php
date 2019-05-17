@@ -256,8 +256,7 @@ if(($_REQUEST["act"]) && $_REQUEST["act"] == "save"){
             
            
 
-            $sql = 'INSERT INTO fila SET
-                    registro = CURDATE(),
+            $sql = 'INSERT INTO fila SET                    
                     responsavel = :responsavel,  
                     email = :email, 
                     celular1 = :celular1, 
