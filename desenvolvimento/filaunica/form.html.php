@@ -1,7 +1,8 @@
 
 <?php
-require 'inc/header.inc.php';
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/header.inc.php');
 ?>
+
 
 
 <body style="background-color:#DCDCDC">
@@ -673,7 +674,5 @@ echo flash('alert-danger');}
 </body>
 
 <?php
-
-require 'inc/footer.inc.php';
-
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/footer.inc.php';
 ?>

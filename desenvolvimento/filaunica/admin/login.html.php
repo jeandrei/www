@@ -1,63 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title><?php echo SITENAME; ?></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!--Bootstrap CSS-->
-   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
-   
-   <!--CSS MIDIFICAÇÕES SOBESCREVER Botstrap-->
-   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
-
-  <!--jquery-->
-  <script src="<?php echo URLROOT; ?>/js/jquery-3.3.1.min.js"></script> 
-
-   <!--jquery mask-->
-   <script src="<?php echo URLROOT; ?>/js/jquery.mask.js" data-autoinit="true"></script>
-   
-
-  <!--Botstrap main-->
-  <script src="<?php echo URLROOT; ?>/js/bootstrap.min.js"></script>
-
-  <!--Javascript funções-->
-  <script src="<?php echo URLROOT; ?>/js/main.js"></script>
-       
-        <script type="text/javascript">
-       
-            function mandar()
-            {
-                var meuform= document.getElementById("meuform");
-                var login= document.getElementById("login");
-                var senha= document.getElementById("senha");
-                meuform.action="logar.php";
-                meuform.method="post";
-                var l=login.value;
-                var s= senha.value;
-
-
-                for(i=0;i<=6;i++)
-                {
-                    l=window.btoa(l);
-                    s=window.btoa(s);
-                }
-               
-                login.value=l;
-                senha.value=s;
-               
-                meuform.appendChild(login);
-                meuform.appendChild(senha);
-               
-                meuform.submit();
-               
-            }
-
-        </script>
-       
-       
-       
-       
-    </head>
+<?php
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/header.inc.php');
+?>
     <body>
     <div class="row">
     <div class="col-md-4 mx-auto">
@@ -102,4 +45,7 @@
     </div>
 </div>
 </body>
-</html>
+
+<?php
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/footer.inc.php');
+?>

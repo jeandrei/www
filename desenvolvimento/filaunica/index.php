@@ -1,6 +1,6 @@
 <?php 
 // URL ROOT
-require_once 'inc/init.inc.php';
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/init.inc.php');
 
 if(($_REQUEST["act"]) && $_REQUEST["act"] == "list"){
     include 'listachamada.php';

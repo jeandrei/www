@@ -1,8 +1,9 @@
 <?php
 // URL ROOT
-require_once '../inc/db.inc.php';
-require_once '../inc/helpers.inc.php';
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/init.inc.php');
 require_once 'inc/access.inc.php';
+
+
 /*
 $name = 'Jeandrei';
 $email = 'jeandreiwalter@gmail.com';

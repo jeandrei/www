@@ -1,84 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title><?php echo SITENAME; ?></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!--Bootstrap CSS-->
-   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
+<?php
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/header.inc.php');
+?>
+
+<body>
+  
+  
+    <script>
+        //espera a página carregar completamente
+        $(document).ready(function(){  
+            //seleciona o objeto select da página    
+            $(document).on('change','select', function(){ 
+              //atribui os valores dos ids dos objetos para as variáveis
+              var idRegistro=$("#id_reg_fila").val();
+              var statusRegistro=$("#status_reg_fila").val();   
+              $.ajax({
+                      //arquivo que será transmitido os valores
+                      url:'update_status.php',
+                      //o método que será utilizado
+                      method:'POST',
+                      //as variáveis que serão enviadas
+                      data:{
+                        idRegistro:idRegistro,
+                        statusRegistro:statusRegistro
+                      },
+                      //se um erro ocorrer vai traser o echo do update_status se quiser que seja quando der certo mudar para success
+                      error:function(response){
+                          alert(response);
+                      }
+                  });
+            });
+          });
+
+
+        
+        function validabusca(){
+          var etapa = document.getElementById('etapa').value;
+          var status = document.getElementById('select_status').value;	
+          
+          if(etapa == ""){			
+            document.getElementById('busca_err').innerHTML = "Por favor selecione uma etapa";	
+            return false;
+          }	
+
+          if(status == ""){			
+            document.getElementById('busca_err').innerHTML = "Por favor selecione um status";	
+            return false;
+          }
+        }//validation	
+
+
+        function validabuscanome(){
+          var nome = document.getElementById('buscanome').value;	
+          
+          if(nome == ""){			
+            document.getElementById('busca_nome_err').innerHTML = "Por favor informe um nome";	
+            return false;    
+          }	  
+        }//validation	
+
+    </script>  
    
-   <!--CSS MIDIFICAÇÕES SOBESCREVER Botstrap-->
-   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
 
-  <!--jquery-->
-  <script src="<?php echo URLROOT; ?>/js/jquery-3.3.1.min.js"></script> 
-
-   <!--jquery mask-->
-   <script src="<?php echo URLROOT; ?>/js/jquery.mask.js" data-autoinit="true"></script>
-   
-
-  <!--Botstrap main-->
-  <script src="<?php echo URLROOT; ?>/js/bootstrap.min.js"></script>
-
-  <!--Javascript funções-->
-  <script src="<?php echo URLROOT; ?>/js/main.js"></script>
-
-  <script>
-      //espera a página carregar completamente
-      $(document).ready(function(){  
-           //seleciona o objeto select da página    
-           $(document).on('change','select', function(){ 
-            //atribui os valores dos ids dos objetos para as variáveis
-            var idRegistro=$("#id_reg_fila").val();
-            var statusRegistro=$("#status_reg_fila").val();   
-            $.ajax({
-                    //arquivo que será transmitido os valores
-                    url:'update_status.php',
-                    //o método que será utilizado
-                    method:'POST',
-                    //as variáveis que serão enviadas
-                    data:{
-                      idRegistro:idRegistro,
-                      statusRegistro:statusRegistro
-                    },
-                    //se um erro ocorrer vai traser o echo do update_status se quiser que seja quando der certo mudar para success
-                    error:function(response){
-                        alert(response);
-                    }
-                });
-           });
-        });
-
-
-       
-  function validabusca(){
-    var etapa = document.getElementById('etapa').value;
-    var status = document.getElementById('select_status').value;	
-    
-    if(etapa == ""){			
-      document.getElementById('busca_err').innerHTML = "Por favor selecione uma etapa";	
-      return false;
-    }	
-
-    if(status == ""){			
-      document.getElementById('busca_err').innerHTML = "Por favor selecione um status";	
-      return false;
-    }
-  }//validation	
-
-
-  function validabuscanome(){
-    var nome = document.getElementById('buscanome').value;	
-    
-    if(nome == ""){			
-      document.getElementById('busca_nome_err').innerHTML = "Por favor informe um nome";	
-      return false;    
-    }	  
-  }//validation	
-
-</script>  
-   
-</head>
 
 <div class="container">
     <div class="row">
@@ -309,7 +291,9 @@
     <a class="btn btn-secondary list-inline justify-content-center" href="<?php echo URLROOT; ?>">Voltar</a>
     </div>
 </div>
-
-
 </body>
-</html>
+
+
+<?php
+require ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/footer.inc.php');
+?>

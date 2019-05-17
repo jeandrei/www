@@ -1,8 +1,6 @@
 <?php
-require_once '../../inc/db.inc.php';
-require_once '../../inc/helpers.inc.php';
-require_once '../../inc/config.inc.php';
-require_once '../inc/access.inc.php';
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/inc/init.inc.php');
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/filaunica/admin/inc/access.inc.php');
 
 if (!userIsLoggedIn())
 {
