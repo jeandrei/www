@@ -1,7 +1,6 @@
 <?php 
 // URL ROOT
-require_once 'inc/db.inc.php';
-require_once 'inc/helpers.inc.php';
+require_once 'inc/init.inc.php';
 
 if(($_REQUEST["act"]) && $_REQUEST["act"] == "list"){
     include 'listachamada.php';
