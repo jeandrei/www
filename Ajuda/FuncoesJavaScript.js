@@ -123,6 +123,7 @@ function question(ask)
 }	
 
 
+//função para validação de arquivo
 //fileValidation(campo tipo field,id do span para apresentar o erro);"
 // onchange="return fileValidation('comprovante_residencia','res_erro');"
 function fileValidation(myfiel,span)
@@ -142,7 +143,10 @@ function fileValidation(myfiel,span)
 }
 	
 	
-
+/*
+Para chamar a função uperCaseF no input
+onkeydown="upperCaseF(this)" 
+*/
 function upperCaseF(a){
     setTimeout(function(){
         a.value = a.value.toUpperCase();
@@ -150,6 +154,12 @@ function upperCaseF(a){
 }
 
 //função para o botão avançar do formulário
+/*no formulário
+    <a class="next-step btn btn-primary btn-block" style="color:white;">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        Proximo
+    </a>
+*/
 $(document).ready(function () {
 	//Initialize tooltips
 	$('.nav-tabs > li a[title]').tooltip();
@@ -268,3 +278,12 @@ function validation(){
 
 }//validation	
 
+/*
+Chamar função onclic getElementById
+no index.html
+<a id="special" class="link" href="http://yourpage.com">Your page</a>
+Observe a id special
+No arquivo .js*/
+document.getElementById("special").onclick = function() {
+    alert("You clicked me?");
+    }
