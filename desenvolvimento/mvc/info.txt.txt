@@ -1,0 +1,72 @@
+A pasta app não queremos que seja acessada logo criamos um arquivo .htaccess para impedir o acesso.
+Então dentro da pasta app criamos um arquivo .htaccess e dentro desse arquivo apenas colocamos a linha
+Options -Indexes
+Que apenas diz -Indexes tirar o index o que nega o acesso
+Se colocasse +Indexes iria habilitar a navegação dentro da pasta novamente
+
+Para redirecionar toda url para o Index vamos usar o model rewrite do apache
+se o usuário digitar ip/mvc/teste supondo que teste não existe
+vai ser redirecionado para ip/mvc/public/index.php
+Esse .htaccess colocamos na pasta public
+dentro desse arquivo colocamos o seguinte código
+<ifModule mod_rewrite.c>
+  Options -Multiviews
+  RewriteEngine On
+  RewriteBase /mvc/public
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+) index.php?url=$1 [QSA,L]
+</IfModule>
+Se o arquivo existir carrega o arquivo
+
+Na linha RewriteBase /mvc/public está o diretório do projeto
+Logo todo projeto se quiser usar esse mvc tem que mudar de /mvc/public para /nomedoprojeto/public
+Agora toda vez que digitar uma url que não existe ele vai redirecionar para o index
+Essa linha RewriteRule ^(.+) index.php?url=$1 [QSA,L] onde tem o $1 é uma variável
+isso permite que ao invez de ter que digitar o ? para passar parâmetros como
+public?url=post possamos passar apenas public/post
+
+O arquivo bootstrap.php vai ter um require com todos os arquivos necessários para a aplicação
+então damos um require do bootstrap.php no index.php assim o index.php passa a ter todos os arquivos
+necessários da aplicação.
+
+Adicionamos mais um .htaccess na raiz da aplicação, no mesmo diretório onde está app e public
+neste caso na pasta mvc para tirar o /public da url
+não queremos que o usuário tenha que digitar ip/mvc/public e sim apenas ip/mvc
+Colocamos o seguinte código
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteRule ^$ public/ [L]
+  RewriteRule (.*) public/$1 [L]
+</IfModule>
+
+Todos os arquivos dentro de libreries tem que ser com a primeira letra em maiúscula pois como são classes
+quando chamarmos na aplicação chamaremos com a primeira letra em maiúscula que é o padrão das classes
+
+Adicionamos os arquivo da pasta libraries no arquivo bootstrap.php, que é chamado pelo index
+    require_once 'libraries/Core.php';
+    require_once 'libraries/Controller.php';
+    require_once 'libraries/Database.php';
+
+Dentro do arquivo Core.php criamos a classe Core
+Dentro da classe core temos as prorpriedades
+     protected $currentController = 'Pages';
+     protected $currentMethod = 'index';
+     protected $params = [];
+Que precisamos para saber que controller, que método e os parametros para carregar a página
+por padrão sempre vai carrecar o controller Pages e o método index do controller Pages
+Precisamos pegar a url e quebrar ela em um array para termos esses parametros
+quando for digitado pelo usuário
+exemplo
+mvc/posts/edit/3
+temos que explodir a url e colocar em um array para jogar os valores nos parâmetros
+     protected $currentController = 'Posts';
+     protected $currentMethod = 'edit';
+     protected $params = [3];
+
+
+
+
+
+
+
