@@ -1,15 +1,22 @@
 <?php
-    class Pages{
+    class Pages extends Controller{
         public function __construct(){
            
         }
 
         public function index(){
-            
+            // Posso passar valores aqui pois no view está definido um array para isso
+            // public function view($view, $data = []){
+            $data = [
+                'title' => 'Welcome'
+            ];
+            $this->view('pages/index', $data);
         }
 
-        public function about($id){
-            echo 'This is about and the ID is: ' . $id;
-
+        public function about(){
+            $data = [
+                'title' => 'About Us'
+            ];
+            $this->view('pages/about', $data);           
         }
 }
