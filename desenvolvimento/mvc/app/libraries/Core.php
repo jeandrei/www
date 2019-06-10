@@ -31,7 +31,25 @@
          // exemplo $pages = new Pages;
          $this->currentController = new $this->currentController;
 
+         // Check for second part of url
+         if(isset($url[1])){
+           // Check to see if the method exist in the controller
+           if(method_exists($this->currentController, $url[1])){
+             $this->currentMethod = $url[1];
+             // Unset 0 index
+             unset($url[1]);
+           }
+         }
 
+         // Get params
+         // se tiver valor na url ele passa para a propriedade
+         // params caso contrário passa um array vazio
+         $this->params = $url ? array_values($url) :[];
+
+         
+
+         // Call a callback with array of params
+         call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
      }
 
      public function getUrl(){
