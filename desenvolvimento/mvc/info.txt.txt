@@ -77,10 +77,62 @@ require_once('../app/models/' . $model . '.php');
 que vai ser:
 require_once('../app/models/index.php');
 
+Workflow classe Posts
 
+1 Model /models/Post.php 
+obs.: no singular
+como a classe database está disponível aqui? Porque ela está sendo carregada no bootstrap.php no outoload
+tudo que está na pasta libraries que é carregado no index
+logo fica sempre disponível
+class Post{
+        private $db;
 
+        public function __construct(){
+            $this->db = new Database;
+        }
 
+        public function getPosts(){
+            $this->db->query("SELECT * FROM posts");
 
+            return $this->db->resultSet();
+        }
+
+    }
+
+2 Controller /controllers/Posts.php
+obs.: no plural
+class Posts extends Controller{
+        public function __construct(){
+            // 1 Chama o model
+          $this->postModel = $this->model('Post');
+        }
+
+        public function index(){
+            // Posso passar valores aqui pois no view está definido um array para isso
+            // public function view($view, $data = []){
+                // 2 Chama um método
+                $posts = $this->postModel->getPosts();
+                
+                // 3 coloca os valores no array
+                $data = [
+                'title' => 'Welcome',
+                'posts' => $posts
+            ];
+
+            // 4 Chama o view passando os dados
+            $this->view('pages/index', $data);
+        }       
+}
+
+3 view /views/posts/index.php
+<?php require APPROOT . '/views/inc/header.php'; ?>
+<h1><?php echo $data['title'];?></h1>
+<ul>
+    <?php foreach($data['posts'] as $post) : ?>
+        <li><?php echo $post->title; ?></li>
+    <?php endforeach; ?>
+</ul>
+<?php require APPROOT . '/views/inc/footer.php'; ?>
 
 
 
