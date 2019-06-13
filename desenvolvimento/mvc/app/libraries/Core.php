@@ -48,7 +48,12 @@
 
          
 
-         // Call a callback with array of params
+         /* Call a callback with array of params
+         * cunção call_user_func_array chama a classe e o método da classe
+         * exemplo imagine uma classe User com o método getUsers($idade,$sexo);
+         * $user = new User;
+         * call_user_func_array($user, "getUsers"), array("20", "Masculino"));
+         */
          call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
      }
 
