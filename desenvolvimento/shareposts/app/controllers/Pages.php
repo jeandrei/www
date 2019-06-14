@@ -13,7 +13,8 @@
                 
                 // 3 coloca os valores no array
                 $data = [
-                'title' => 'SharePosts'                
+                'title' => 'SharePosts',
+                'description'=> 'Simple Social Network build on the MVC PHP framework'
             ];
 
             // 4 Chama o view passando os dados
@@ -22,7 +23,8 @@
 
         public function about(){
             $data = [
-                'title' => 'About Us'
+                'title' => 'About Us',
+                'description'=> 'App to share posts with other users'
             ];
             $this->view('pages/about', $data);           
         }
