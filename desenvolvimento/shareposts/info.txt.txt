@@ -136,3 +136,15 @@ class Posts extends Controller{
 
 
 
+SEQUENCIA DE CRIAÇÃO DE NOVO CONTROLLER/MODEL/VIEW
+1 - CRIAR UM NOVO CONTROLLER /controllers/Novocontroller
+    obs.: Primeira letra em maiúsculo e no plural
+    cria dentro desse arquivo a classe do controller, extende a classe Controler e cria os métodos
+    class Users extends Controller{
+        public function register(){
+            echo 'Registro';
+        }
+    }
+    neste momento se digitar no navegador localhost/shareposts/users/register
+    tem que apareces Registro
+2 - 
