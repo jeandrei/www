@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <div class="card card-body bg-light mt-5">
+            <div class="card card-body bg-light mt-2">
                 <h2>Create An Account</h2>
                 <p>Please fill out this form to register with us</p>                               
                 <form action="<?php echo URLROOT; ?>/users/register" method="post">  
@@ -43,7 +43,7 @@
                      <!--PASSWORD-->
                      <div class="form-group">   
                         <label 
-                            for="password">Email: <sup>*</sup>
+                            for="password">Password: <sup>*</sup>
                         </label>                        
                         <input 
                             type="password" 
@@ -59,7 +59,7 @@
                      <!--CONFIRM PASSWORD-->
                      <div class="form-group">   
                         <label 
-                            for="confirm_password">Email: <sup>*</sup>
+                            for="confirm_password">Confirm Password: <sup>*</sup>
                         </label>                        
                         <input 
                             type="password" 

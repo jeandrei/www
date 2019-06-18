@@ -1,10 +1,12 @@
 <?php 
     class Users extends Controller{
         public function __construct(){
-           
+            //vai procurar na pasta model um arquivo chamado User.php e incluir
+            $this->userModel = $this->model('User');
         }
 
         public function register(){
+            
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Process form
@@ -29,6 +31,11 @@
                 // Validate Email
                 if(empty($data['email'])){
                     $data['email_err'] = 'Please enter email';
+                } else {
+                    // Check email userModel foi instansiado na construct
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email is already taken'; 
+                    }
                 }
 
                 // Validate Name
@@ -59,8 +66,20 @@
                     empty($data['password_err']) &&
                     empty($data['confirm_password_err']) 
                     ){
-                      //Validate
-                      die('SUCCESS');
+                      //Validated
+                      
+                      // Hash Password criptografa o password
+                      $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                      // Register User
+                      if($this->userModel->register($data)){
+                        redirect('users/login');
+                      } else {
+                          die('Something went wrong');
+                      }
+                      
+
+                      
                     } else {
                       // Load the view with errors
                       $this->view('users/register', $data);
@@ -85,20 +104,62 @@
         }
 
         public function login(){
+            
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Process form
+
+                // Sanitize POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                //init data
+                $data = [                    
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['password']),  
+                    'email_err' => '',
+                    'password_err' => ''
+                    
+                ];      
+
+                // Validate Email
+                if(empty($data['email'])){
+                    $data['email_err'] = 'Please enter email';
+                } 
+               
+
+                 // Validate Password
+                 if(empty($data['password'])){
+                    $data['password_err'] = 'Please enter password';
+                } 
+                               
+                // Make sure errors are empty
+                if(                    
+                    empty($data['email_err']) &&                     
+                    empty($data['password_err'])                     
+                    ){
+                      //Validate
+                      die('SUCCESS');
+                    } else {
+                      // Load the view with errors
+                      $this->view('users/login', $data);
+                    }               
+
+            
             } else {
                 // Init data
-                $data = [                    
+                $data = [
+                    'name' => '',
                     'email' => '',
-                    'password' => '',  
+                    'password' => '',
+                    'confirm_password' => '',
+                    'name_err' => '',
                     'email_err' => '',
-                    'password_err' => ''                    
+                    'password_err' => '',
+                    'confirm_password_err' => ''
                 ];
                 // Load view
                 $this->view('users/login', $data);
             }
-        }
     }
+}   
 ?>
