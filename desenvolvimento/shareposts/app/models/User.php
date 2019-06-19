@@ -24,7 +24,7 @@
             }
         }
 
-        // Login User
+        // 2 Login User                
         public function login($email, $password){
             $this->db->query('SELECT * FROM users WHERE email = :email');
             $this->db->bind(':email', $email);
@@ -32,6 +32,10 @@
             $row = $this->db->single();
 
             $hashed_password = $row->password;
+            // password_verify — Verifica se um password corresponde com um hash criptografado
+            // Logo para verificar não precisa descriptografar 
+            // aqui $password vem do formulário ou seja digitado pelo usuário  
+            // e $hashed_password vem da consulta do banco e está criptografado
             if(password_verify($password, $hashed_password)){
                 return $row;
             } else {

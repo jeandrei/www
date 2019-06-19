@@ -148,7 +148,8 @@
                     empty($data['password_err'])                     
                     ){
                       //Validate
-                      // Check and set loged in user
+                      // 1 Check and set loged in user
+                      // 2 models/User login();
                       $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                       
                       if($loggedInUser){
