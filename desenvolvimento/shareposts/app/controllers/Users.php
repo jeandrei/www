@@ -73,6 +73,9 @@
 
                       // Register User
                       if($this->userModel->register($data)){
+                        // Cria a menságem antes de chamar o view va para 
+                        // views/users/login a segunda parte da menságem
+                        flash('register_success', 'You are registreded and can log in');                        
                         redirect('users/login');
                       } else {
                           die('Something went wrong');
