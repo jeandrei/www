@@ -1,5 +1,7 @@
 <?php
-// Simple page redirect
+$javacode = "<script>function validation(){";
+
+  // Simple page redirect
 
 function redirect($page){
     header('location: ' . URLROOT . '/' . $page);
@@ -21,7 +23,16 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
           <?php echo $error;?>
       </span>
     </div>
-  <?php  }
+  <?php  global $javacode; 
+                $javacode.="var $name = document.getElementById('$name').value;";
+                $javacode.="if($name == ''){";
+                $javacode.="alert('.$name vazio');";
+                //$javacode.='document.getElementById("email_err").innerHTML = "Por favor informe o email";';                
+                //$javacode.="document.getElementById('.$name._err').innerHTML = 'Por favor informe o email';return false;";
+                $javacode.="return false;";
+                $javacode.="}";//fim de if($name)
+                              
+  }//fim função text
 
 
   

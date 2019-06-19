@@ -7,7 +7,7 @@
                 ?>
                 <h2>Login</h2>
                 <p>Por favor informe suas credenciais para logar no sistema</p>                               
-                <form action="<?php echo URLROOT; ?>/users/login" method="post">  
+                <form action="<?php echo URLROOT; ?>/users/login" method="post" enctype="multipart/form-data" onsubmit="return validation()">   
                 <?php 
                     //EMAIL
                     text('email', 'email', 'Email', 'Informe um email válido','text',$data['email_err']); 
@@ -28,4 +28,5 @@
             </div>
         </div>
     </div>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+<?php global $javacode; $javacode.="}</script>"; echo $javacode; require APPROOT . '/views/inc/footer.php'; ?>
+<script>//alert(password.value);</script>
