@@ -4,7 +4,13 @@
             <div class="card card-body bg-light mt-2">
                 <h2>Criar uma conta</h2>
                 <p>Por favor preencha os dados abaixo para se registrar</p> 
-                <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation()">   
+                <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation(
+                                                                                                                                               [noempty=['name']],
+                                                                                                                                               [validemail=['email']],
+                                                                                                                                               [validphone=['telefone']],
+                                                                                                                                               [minchar=[[6,'password']]]                                                                                                                                              
+
+                                                                                                                                            )">   
                     
                     <?php
                          //Nome
@@ -15,7 +21,9 @@
                         text('password', 'password', 'Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);
                         //PASSWORD
                         text('confirm_password', 'confirm_password', 'Confirmação de senha', 'Confirme a senha','password',$data['password_err']);
-
+                        //TELEFONE  
+                        text('telefone', 'telefone', 'Telefone', 'Informe o telefone','text',$data['telefone_err']="");            
+                        
                     ?>           
                     
                     <!--BUTTONS-->
@@ -31,13 +39,5 @@
                 </form>
             </div>
         </div>
-    </div>
-<script> // noempty campos que não podem ficar em branco
-    noempty.push('name');
-    validemail.push('email');
-    //validphone.push('telefone');
-    //validacpf.push('cpf');    
-    minchar.push([6,'password']);    
-    //minchar.push([6,'minimo'],[7,'password']);     
-</script>
+    </div
 <?php require APPROOT . '/views/inc/footer.php'; ?>

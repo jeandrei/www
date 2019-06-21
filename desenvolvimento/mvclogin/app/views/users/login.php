@@ -1,4 +1,3 @@
-
 <?php require APPROOT . '/views/inc/header.php'; ?>
     <div class="row">
         <div class="col-md-6 mx-auto">
@@ -8,12 +7,15 @@
                 ?>
                 <h2>Login</h2>
                 <p>Por favor informe suas credenciais para logar no sistema</p>                               
-                <form action="<?php echo URLROOT; ?>/users/login" method="post" enctype="multipart/form-data" onsubmit="return validation()">   
+                <form action="<?php echo URLROOT; ?>/users/login" method="post" enctype="multipart/form-data" onsubmit="return validation(
+                                                                                                                                            [noempty=['password']],
+                                                                                                                                            [validemail=['email']]
+                                                                                                                                            )">
                 <?php 
                     //EMAIL
                     text('email', 'email', 'Email', 'Informe um email válido','text',$data['email_err']); 
-                    //PASSWORD
-                    text('password', 'password', 'Senha', 'Informe uma senha de 6 caracteres','text',$data['password_err']);                     
+                     //PASSWORD
+                     text('password', 'password', 'Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);                  
                     ?>       
 
                     <!--BUTTONS-->
@@ -29,8 +31,4 @@
             </div>
         </div>
     </div>
-<script> // noempty campos que não podem ficar em branco
-    noempty.push('password');
-    validemail.push('email');        
-</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

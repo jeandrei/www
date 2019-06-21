@@ -1,12 +1,3 @@
-<script>
-    // 1  noempty declaração da variável noempty campos que não podem ficar em branco javascript
-    //código está em main.js
-    var noempty = [];  
-    var validemail = [];  
-    var validphone = [];  
-    var validacpf = [];
-    var minchar = [];    
-</script>
 <?php ini_set('default_charset', 'utf-8'); ?>
 <!DOCTYPE html>
 <html lang="en">

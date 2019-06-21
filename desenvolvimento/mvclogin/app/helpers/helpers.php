@@ -15,7 +15,8 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
           id="<?php echo $id; ?>" 
           placeholder="<?php echo $placeholder; ?>"
           class="form-control form-control-lg <?php echo (!empty($error)) ? 'is-invalid' : ''; ?>"           
-          value="<?php echo isset($_POST[$name]) ? ($_POST[$name]) : ''; ?>">
+          value="<?php echo isset($_POST[$name]) ? ($_POST[$name]) : ''; ?>"
+          onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'>
           <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
     </div>
   <?php                               
