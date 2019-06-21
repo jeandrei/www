@@ -3,75 +3,21 @@
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-2">
                 <h2>Criar uma conta</h2>
-                <p>Por favor preencha os dados abaixo para se registrar</p>                               
-                <form action="<?php echo URLROOT; ?>/users/register" method="post">  
+                <p>Por favor preencha os dados abaixo para se registrar</p> 
+                <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation()">   
                     
-                    <!--NAME-->
-                    <div class="form-group">   
-                        <label 
-                            for="name">Nome: <sup>*</sup>
-                        </label>                        
-                        <input 
-                            type="text" 
-                            name="name" 
-                            class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>" 
-                            value="<?php echo $data['name'];?>"
-                        >
-                        <span class="invalid-feedback">
-                            <?php echo $data['name_err']; ?>
-                        </span>
-                    </div>
-                   
-                
+                    <?php
+                         //Nome
+                        text('name', 'name', 'Nome', 'Informe um nome','text',$data['name_err']);
+                        //EMAIL
+                        text('email', 'email', 'Email', 'Informe um email válido','text',$data['email_err']); 
+                        //PASSWORD
+                        text('password', 'password', 'Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);
+                        //PASSWORD
+                        text('confirm_password', 'confirm_password', 'Confirmação de senha', 'Confirme a senha','password',$data['password_err']);
+
+                    ?>           
                     
-                     <!--EMAIL-->
-                     <div class="form-group">   
-                        <label 
-                            for="email">Email: <sup>*</sup>
-                        </label>                        
-                        <input 
-                            type="text" 
-                            name="email" 
-                            class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"                             
-                            value="<?php echo $data['email'];?>"
-                        >
-                        <span class="invalid-feedback">
-                            <?php echo $data['email_err']; ?>
-                        </span>
-                    </div>
-
-                     <!--PASSWORD-->
-                     <div class="form-group">   
-                        <label 
-                            for="password">Senha: <sup>*</sup>
-                        </label>                        
-                        <input 
-                            type="password" 
-                            name="password" 
-                            class="form-control form-control-lg <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"                             
-                            value="<?php echo $data['password'];?>"
-                        >
-                        <span class="invalid-feedback">
-                            <?php echo $data['password_err']; ?>
-                        </span>
-                    </div>
-
-                     <!--CONFIRM PASSWORD-->
-                     <div class="form-group">   
-                        <label 
-                            for="confirm_password">Confirma Senha: <sup>*</sup>
-                        </label>                        
-                        <input 
-                            type="password" 
-                            name="confirm_password" 
-                            class="form-control form-control-lg <?php echo (!empty($data['confirm_password'])) ? 'is-invalid' : ''; ?>"                             
-                            value="<?php echo $data['password'];?>"
-                        >
-                        <span class="invalid-feedback">
-                            <?php echo $data['confirm_password_err']; ?>
-                        </span>
-                    </div>
-
                     <!--BUTTONS-->
                     <div class="row">
                         <div class="col">
@@ -86,4 +32,12 @@
             </div>
         </div>
     </div>
+<script> // noempty campos que não podem ficar em branco
+    noempty.push('name');
+    validemail.push('email');
+    //validphone.push('telefone');
+    //validacpf.push('cpf');    
+    minchar.push([6,'password']);    
+    //minchar.push([6,'minimo'],[7,'password']);     
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

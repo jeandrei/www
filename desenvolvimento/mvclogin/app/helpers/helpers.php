@@ -1,12 +1,9 @@
+
 <?php
-$javacode = "<script>function validation(){";
-
   // Simple page redirect
-
 function redirect($page){
     header('location: ' . URLROOT . '/' . $page);
 }
-
 
 function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
     
@@ -18,22 +15,11 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
           id="<?php echo $id; ?>" 
           placeholder="<?php echo $placeholder; ?>"
           class="form-control form-control-lg <?php echo (!empty($error)) ? 'is-invalid' : ''; ?>"           
-          value="<?php echo isset($_POST[$name]) ? ($_POST[$name]) : ''; ?>">    
-      <span class="invalid-feedback">
-          <?php echo $error;?>
-      </span>
+          value="<?php echo isset($_POST[$name]) ? ($_POST[$name]) : ''; ?>">
+          <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
     </div>
-  <?php  global $javacode; 
-                $javacode.="var $name = document.getElementById('$name').value;";
-                $javacode.="if($name == ''){";
-                $javacode.="alert('.$name vazio');";
-                //$javacode.='document.getElementById("email_err").innerHTML = "Por favor informe o email";';                
-                //$javacode.="document.getElementById('.$name._err').innerHTML = 'Por favor informe o email';return false;";
-                $javacode.="return false;";
-                $javacode.="}";//fim de if($name)
-                              
+  <?php                               
   }//fim função text
-
 
   
   function checkbox( $name, $id, $label, $options = array() ) {?>
@@ -51,27 +37,6 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
   function submit($value = 'submit', $class = 'btn btn-primary') {?>
     <button type="submit" class="<?php echo $class; ?>"><?php echo $value; ?></button>
   <?php }
+?>
 
 
-
-
-/*
-exemplo checkbox
-  $options = array(
-    'acrobatics' => 'Acrobatics',
-    'acting' => 'Acting',
-    'antiques' => 'Antiques',
-    'sports' => 'Sports',
-  );
-
-  checkbox( 'interests', 'interests', 'Select your interests', $options );
-  
-exemplo text
-        $name,   $id,     $label,  $placeholder,      $type = 'text' 
-  text('state', 'state', 'State', 'Enter your state');
-  
-exemplo submit
-  submit('Go To Step 4 &raquo;');
-*/              
-              
-              ?>
