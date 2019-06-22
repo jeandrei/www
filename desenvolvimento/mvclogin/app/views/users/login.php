@@ -13,18 +13,18 @@
                                                                                                                                             )">
                 <?php 
                     //EMAIL
-                    text('email', 'email', 'Email', 'Informe um email válido','text',$data['email_err']); 
+                    text('email', 'email', '<b class="obrigatorio">* </b>Email', 'Informe um email válido','text',$data['email_err']); 
                      //PASSWORD
-                     text('password', 'password', 'Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);                  
+                     text('password', 'password', '<b class="obrigatorio">* </b>Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);                  
                     ?>       
 
                     <!--BUTTONS-->
                     <div class="row">
                         <div class="col">
-                            <input type="submit" value="Login" class="btn btn-success btn-block">                           
+                            <?php  submit('Login'); ?>                            
                         </div>
-                        <div class="col">
-                            <a href="<?php echo URLROOT ;?>/users/register" class="btn btn-light btn-block">Não tem uma conta? Registre-se</a>
+                        <div class="col">                            
+                            <?php linkbutton(URLROOT.'/users/register', 'Não tem uma conta? Registre-se'); ?>
                         </div>
                     </div>                     
                 </form>

@@ -4,7 +4,7 @@
     define('DB_USER', 'root');
     define('DB_PASS', 'rootadm');
     define('DB_NAME', 'mvclogin');
-
+        
     /* App Root
      Temos que pegar do root até a pasta app
      só __FILE__ traz todo o caminho

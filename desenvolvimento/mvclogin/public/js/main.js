@@ -7,6 +7,7 @@
   var validacpf = null;
   var minchar = null;
   var validphone = null;
+  var selectlist = null;
 
   
  // **********************INICIO VALIDAÇÕES***************************************************************
@@ -106,12 +107,33 @@
     }
   }
 
+  // valida selectlists
+  if(selectlist != null){   
+    for(var i=0; i<selectlist.length;){
+      if(document.body.contains(document.getElementById(selectlist[i]))){        
+        if((document.getElementById(selectlist[i]).value) == 0 ){
+          var element = document.getElementById(selectlist[i]);
+          selectlisterr = selectlist[i].concat('_err');
+          element.classList.add("is-invalid");
+          document.getElementById(selectlisterr).innerHTML = 'Selecione uma opção.';
+          count++;
+          } else {
+            document.getElementById(selectlisterr).innerHTML = '';                  
+          }
+      }      
+    i++;
+    }  
+  } 
+  
+      
+    
+  
+
 
   // DEFINI NÚMERO MÍNIMO DE CARACTERES
   // minimo caracteres exemplo na vunção validation [minchar=[[6,'minnumero'],[7,'password']]]
   //onde 6 é o numero mínimo de caracteres e minimo é o nome do campo
   //[linha][coluna]
-  if(minchar != null){     
     if(minchar != null){     
       for(var i=0; i<minchar.length;){
         if(document.body.contains(document.getElementById(minchar[i][1]))){  
@@ -129,8 +151,7 @@
         i++;
       }
     }           
-  }           
-
+    
    
   
     // se count é maior que um tem valor em branco então atribuo a menságem Campo obrigatório em cada campo em branco e retorno falso para não submeter o formulário
@@ -143,8 +164,18 @@
 };  
 //** ***************************************FIM VALIDAÇÕES ******************************************************************** */
 
-
-
+function confirmasenha(senha,confirma,campoerro){
+  if(senha != "" && confirma != ""){
+    if(senha != confirma){
+      document.getElementById(campoerro).innerHTML = 'Senhas não são iguais';
+      return false;
+    } else {
+      return true;
+    }
+  } else { 
+    return false;
+  }  
+}
 
 function validaemail(email)
 	{

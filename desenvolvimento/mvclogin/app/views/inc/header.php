@@ -1,4 +1,4 @@
-<?php ini_set('default_charset', 'utf-8'); ?>
+<?php ini_set('default_charset', 'utf-8');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
