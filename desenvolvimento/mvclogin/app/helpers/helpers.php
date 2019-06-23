@@ -31,17 +31,22 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
     }
   }
   
-  function checkbox( $name, $id, $label, $options = array() ) {?>
+  
+
+  
+  function checkbox( $name, $id, $label, $options, $checked) {?>
     <div class="form-group">
       <p><?php echo $label; ?></p>
-      <?php foreach ( $options as $value => $title ) : ?>
+      <?php foreach ( $options as $value => $title ) : ?>      
         <label class="checkbox-inline" for="<?php echo $id; ?>">
-          <input type="checkbox" name="<?php echo $name; ?>[]" value="<?php echo $value; ?>" <?php isset($_SESSION['interests']) ? checked($value, $_SESSION['interests']) : ''; ?>>
+          <input type="checkbox" name="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php isset($checked) ? checked($title, $checked) : ''; ?>>    
           <span class="checkbox-title"><?php echo $title; ?></span>
         </label>
       <?php endforeach; ?>
     </div>
   <?php }
+
+
   
   function submit($value = 'submit', $class = 'btn btn-success btn-block') {?>
     <button type="submit" class="<?php echo $class; ?>"><?php echo $value; ?></button>

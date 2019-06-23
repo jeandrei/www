@@ -26,13 +26,25 @@
                         text('password', 'password', '<b class="obrigatorio">* </b>Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);
                         //PASSWORD
                         text('confirm_password', 'confirm_password', '<b class="obrigatorio">* </b>Confirmação de senha', 'Confirme a senha','password',$data['password_err']);
+                        
+                          //CPF
+                          text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
+                         
+
                         $options = array(
                             'acrobatics' => 'Acrobatics',
                             'acting' => 'Acting',
                             'antiques' => 'Antiques',
                             'sports' => 'Sports',
                           );
-                          checkbox( 'interests', 'interests', 'Select your interests', $options );
+
+                        $checked = array(  
+                            'acrobatics' => 'Acrobatics',                          
+                            'antiques' => 'Antiques',
+                            'sports' => 'Sports',
+                          );
+                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked);
+
                          
                        
                          $valores = [['01','Praia alegre'],['02','Armação'],['03','Centro']];
@@ -58,5 +70,9 @@
                 </form>
             </div>
         </div>
-    </div
+    </div>   
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+<script>  
+    //ADICIONA MASCARA DE CPF
+    addclass('cpf','cpfmask');   
+</script>

@@ -161,7 +161,7 @@
       return true;
     } 
 	
-};  
+}  
 //** ***************************************FIM VALIDAÇÕES ******************************************************************** */
 
 function confirmasenha(senha,confirma,campoerro){
@@ -243,7 +243,42 @@ function validacaocpf(cpf) {
 //**********************FIM FUNÇÃO VALIDAÇÃO DE CPF */
 
 
+// FUNÇÃO PARA ADICIONAR CLASSE
+// função para adicionar nova classe a objetos
+// exemplo para adicionar a classe cpf que tem a mascara do cpf
+// no final do formulário basta colocar
+// <script>  addclass('cpf','cpf'); </script>
+// onde id é o id do campo e new class é a nova classe a ser adicionada neste caso cpfmask que coloca mascara no cpf
+function addclass(id,newclass){
+  var element = document.getElementById(id);
+  var addclass = newclass;
+  element.classList.add(addclass);
+}
 
+// FUNÇÃO PARA COLOCAR TUDO EM MAIÚSCULO
+// onkeydown="upperCaseF(this)" 
+function upperCaseF(a){
+  setTimeout(function(){
+      a.value = a.value.toUpperCase();
+  }, 1);
+}
+
+
+//FUNÇÃO PARA PERMITIR APENAS NÚMEROS
+//PARA USAR BASTA COLOCAR O CAMPO COMO CLASSE onlynumbers
+//E PARA EXIBIR A MENSAGEM COLOCAR UM <span id="errmsg"></span>
+//USE TAMBÉM O TIPO NUMBER NO INPUT type="number" 
+$(document).ready(function () {
+	//called when key is pressed in textbox
+	$(".onlynumbers").keypress(function (e) {
+	   //if the letter is not digit then display error and don't type anything
+	   if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		  //display error message
+		  alert("Ops! Apenas números são permitidos.");
+				 return false;
+	  }
+	 });
+  });
 
 
 
@@ -255,7 +290,9 @@ function validacaocpf(cpf) {
 //por isso esta dentro da (document).ready()
 //tem que colocar o footer que está neste projeto para lincar com maskedinput.min.js
 $(document).ready(function() {
-	$('.cpf').mask('000.000.000-00', {reverse: true});
+	$('.cpfmask').mask('000.000.000-00', {reverse: true});
 	$(".telefone").mask("(00) 00000-0009");
 	});
 //********************fim mascaras**************** */
+
+
