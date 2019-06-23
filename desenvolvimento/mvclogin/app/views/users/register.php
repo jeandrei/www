@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php';?>;
+<?php require APPROOT . '/views/inc/header.php';?>
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-2">
@@ -9,6 +9,7 @@
                                                                                                                                                [validemail=['email']],
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro']],
+                                                                                                                                               [is_checked=['interests','teste']],                                                                                                                                                                                                                                                                                                                                                                                                                                            
                                                                                                                                                [minchar=[[6,'password']]]                                                                                                                                              
 
                                                                                                                                             ),confirmasenha(
@@ -27,8 +28,8 @@
                         //PASSWORD
                         text('confirm_password', 'confirm_password', '<b class="obrigatorio">* </b>Confirmação de senha', 'Confirme a senha','password',$data['password_err']);
                         
-                          //CPF
-                          text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
+                        //CPF
+                        text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
                          
 
                         $options = array(
@@ -43,17 +44,22 @@
                             'antiques' => 'Antiques',
                             'sports' => 'Sports',
                           );
+                         
                           checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked);
+                          
 
                          
                        
-                         $valores = [['01','Praia alegre'],['02','Armação'],['03','Centro']];
-                         $selected =['0'];
-                         selectlist('bairro','bairro','Bairro','Selecione um bairro',$valores,$selected,$data['bairro_err']='');
-
-                         $valores = [['01','Casa'],['02','Apartamento'],['03','Sala comercial']];
-                         $selected =['1'];
-                         selectlist('imovel','imovel','Tipo de imóvel','Selecione um imóvel',$valores,$selected,$data['imovel_err']='');
+                         
+                          $options = array(
+                            '01' => 'Centro',
+                            '02' => 'Praia Alegre',
+                            '03' => 'Armação',
+                            '04' => 'São Cristovão',
+                          );
+                          $selected =['id' => '0'];
+                          selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro']='');
+                        
                         
                     ?>           
                     

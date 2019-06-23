@@ -37,14 +37,20 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
   function checkbox( $name, $id, $label, $options, $checked) {?>
     <div class="form-group">
       <p><?php echo $label; ?></p>
-      <?php foreach ( $options as $value => $title ) : ?>      
+      <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
+      <!--se no checked eu passo 'acrobatics' => 'Acrobatics' no $checked_id eu passo [0] => 'acrobatics'-->
+      <!--no foreach ( $options as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
+      <!--dai fica assim in_array(acrobatics,acrobatics)-->
+      <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>
+      <?php foreach ( $options as $value => $title ) : ?>          
         <label class="checkbox-inline" for="<?php echo $id; ?>">
-          <input type="checkbox" name="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php isset($checked) ? checked($title, $checked) : ''; ?>>    
+          <input type="checkbox" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>" <?php isset($checked) ? checked($value, $checked_ids) : ''; ?>>           
           <span class="checkbox-title"><?php echo $title; ?></span>
         </label>
       <?php endforeach; ?>
     </div>
   <?php }
+
 
 
   
@@ -54,32 +60,35 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
 
   function linkbutton($link, $text, $class = 'btn btn-light btn-block') {?>
     <a href="<?php echo $link; ?>" class="btn btn-light btn-block"><?php echo $text; ?></a>  
-  <?php }
+  <?php }  
   
-  
-  //GERA SELECT 
-  function selectlist($name,$id,$label,$text,$array,$selected,$error){ $i=0;?>
+ 
+
+
+//GERA SELECT 
+function selectlist($name,$id_field,$label,$text,$options,$selected,$error){ $i=0;?>
   <div class="form-group">
   <label for="<?php echo $id; ?>"><?php echo $label; ?></label>
     <select
         name="<?php echo $name; ?>" 
-        id="<?php echo $id; ?>" 
+        id="<?php echo $id_field; ?>" 
         placeholder="<?php echo $placeholder; ?>"
         class="form-control form-control-lg <?php echo (!empty($error)) ? 'is-invalid' : ''; ?>"
         onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'>          
     >
         <option value="0"><?php echo $text; ?></option>
-        <? foreach($array as $option) : ?> 
-              <option value="<?php echo $option[0]; ?>"
-                <?php echo $option[0] == $selected[0] ? 'selected':'';?>
+        <? foreach($options as $id => $option) : ?> 
+              <option value="<?php echo $id; ?>"
+                <?php echo $id == $selected['id'] ? 'selected':'';?>
               >
-              <?php echo $option[1];?>
+              <?php echo $option;?>
               </option>
         <?php endforeach; ?>  
     </select>
     <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
   </div>
   <?php }
+
 
 
 

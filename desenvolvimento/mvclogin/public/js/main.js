@@ -8,6 +8,7 @@
   var minchar = null;
   var validphone = null;
   var selectlist = null;
+  var is_checked = null;
 
   
  // **********************INICIO VALIDAÇÕES***************************************************************
@@ -28,7 +29,7 @@
             // atribuo o valor do valor noempty[0]).value a variável fieldsvalue
             fieldsvalue = document.getElementById(noempty[i]).value;
             // monto o id que vai receber a mensagem de erro noempty=nome concateno com _err vai ficar nome_err que é o id que receberá o erro
-            fielderror = noempty[i].concat('_err');
+            noemptyerr = noempty[i].concat('_err');            
             // verifico se o campo está em branco
             if(fieldsvalue == ''){
               // se sim 
@@ -36,11 +37,11 @@
               var element = document.getElementById(noempty[i]);
               element.classList.add("is-invalid");
               //imprimo o erro no id de erro neste caso nome_err
-              document.getElementById(fielderror).innerHTML = 'Campo obrigatório';
+              document.getElementById(noemptyerr).innerHTML = 'Campo obrigatório';
               count++;
             } else {
               // caso contrário limpo o id de erro nome_err
-              document.getElementById(fielderror).innerHTML = '';
+              document.getElementById(noemptyerr).innerHTML = '';
             }
         }          
         i++;
@@ -107,26 +108,23 @@
     }
   }
 
-  // valida selectlists
+  
   if(selectlist != null){   
     for(var i=0; i<selectlist.length;){
-      if(document.body.contains(document.getElementById(selectlist[i]))){        
+      if(document.body.contains(document.getElementById(selectlist[i]))){
         if((document.getElementById(selectlist[i]).value) == 0 ){
           var element = document.getElementById(selectlist[i]);
-          selectlisterr = selectlist[i].concat('_err');
+          selecterr = selectlist[i].concat('_err');
           element.classList.add("is-invalid");
-          document.getElementById(selectlisterr).innerHTML = 'Selecione uma opção.';
-          count++;
-          } else {
-            document.getElementById(selectlisterr).innerHTML = '';                  
-          }
-      }      
+          document.getElementById(selecterr).innerHTML = 'Selecione uma opção.';
+          count++;                    
+        }
+      } 
     i++;
-    }  
-  } 
+    }
+  }
   
-      
-    
+  
   
 
 
@@ -150,10 +148,19 @@
         }
         i++;
       }
-    }           
+    }
     
-   
-  
+    if(is_checked != null){
+      alert(is_checked[0]);
+      for(var i=0; i<is_checked.length;){
+        if(document.body.contains(document.getElementById(is_checked[i]))){
+         alert('ok');
+        }
+        i++;
+      }
+    }
+      
+ 
     // se count é maior que um tem valor em branco então atribuo a menságem Campo obrigatório em cada campo em branco e retorno falso para não submeter o formulário
     if(count>0){        
         return false;  
