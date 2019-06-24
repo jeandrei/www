@@ -150,15 +150,24 @@
       }
     }
     
-    if(is_checked != null){
-      alert(is_checked[0]);
+    if(is_checked != null){      
       for(var i=0; i<is_checked.length;){
         if(document.body.contains(document.getElementById(is_checked[i]))){
-         alert('ok');
+          if(document.getElementById(is_checked[i]).checked){
+            result = true;                        
+          } else {
+            result = false;
+            var check_element = document.getElementById(is_checked[i]);
+            checkerr = is_checked[i].concat('_err');
+            check_element.classList.add("is-invalid");
+            document.getElementById(checkerr).innerHTML = 'Selecione uma opção.';            
+            count++;                        
+          }
         }
         i++;
-      }
-    }
+      }  
+  }
+    
       
  
     // se count é maior que um tem valor em branco então atribuo a menságem Campo obrigatório em cada campo em branco e retorno falso para não submeter o formulário

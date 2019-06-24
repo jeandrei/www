@@ -45,7 +45,7 @@
                             'sports' => 'Sports',
                           );
                          
-                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked);
+                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
                           
 
                          
