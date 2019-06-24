@@ -49,7 +49,25 @@
                           
 
                          
-                       
+                          $options = array(
+                            'acrobatics' => 'Acrobatics',
+                            'acting' => 'Acting',
+                            'antiques' => 'Antiques',
+                            'sports' => 'Sports',
+                          );
+
+                        $checked = array(  
+                            'acrobatics' => 'Acrobatics',                          
+                            'antiques' => 'Antiques',
+                            'sports' => 'Sports',
+                          );
+                         
+                          checkbox( 'teste', 'teste', 'Select your interests 2', $options,  $checked, $data['teste_err']="");
+                          
+
+
+
+
                          
                           $options = array(
                             '01' => 'Centro',

@@ -150,23 +150,24 @@
       }
     }
     
-    if(is_checked != null){      
+    if(is_checked != null){       
       for(var i=0; i<is_checked.length;){
-        if(document.body.contains(document.getElementById(is_checked[i]))){
+        checkerr = is_checked[i].concat('_err');     
+        if(document.body.contains(document.getElementById(is_checked[i]))){         
           if(document.getElementById(is_checked[i]).checked){
-            result = true;                        
+            result = true;
+            document.getElementById(checkerr).innerHTML = '';                                    
           } else {
             result = false;
-            var check_element = document.getElementById(is_checked[i]);
-            checkerr = is_checked[i].concat('_err');
+            var check_element = document.getElementById(is_checked[i]);                        
             check_element.classList.add("is-invalid");
             document.getElementById(checkerr).innerHTML = 'Selecione uma opção.';            
             count++;                        
           }
         }
         i++;
-      }  
-  }
+      }          
+    }
     
       
  
