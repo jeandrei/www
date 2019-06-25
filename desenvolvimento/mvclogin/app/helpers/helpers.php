@@ -31,9 +31,6 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
     }
   }
   
-  
-
-  
   function checkbox( $name, $id, $label, $options, $checked, $error) {?>
     <div class="form-group">
       <p><?php echo $label; ?></p>
@@ -53,6 +50,44 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
       </div>
     </div>
   <?php }
+   
+  
+
+
+function checkbox2( $name, $id, $label, $options, $checked, $error) {?>
+  <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>  
+    <?php foreach ( $options as $value => $title ) : ?>
+    <div class="custom-control custom-checkbox">
+      <input class="custom-control-input" name="<?php echo $name; ?>[]" type="checkbox" value="<?php echo $value?>" id="<?php echo $value;?>">
+      <label class="custom-control-label" for="<?php echo $value;?>">
+        <?php echo $title;?>
+      </label>
+    </div>      
+      <?php endforeach; ?>  
+<?php }
+
+function checkbox3( $name, $id, $label, $options, $checked, $error) {?>
+  <div class="form-group">
+    <p><?php echo $label; ?></p>
+    <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
+    <!--se no checked eu passo 'acrobatics' => 'Acrobatics' no $checked_id eu passo [0] => 'acrobatics'-->
+    <!--no foreach ( $options as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
+    <!--dai fica assim in_array(acrobatics,acrobatics)-->
+    <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>
+    <?php foreach ( $options as $value => $title ) : ?> 
+    <div class="custom-control custom-checkbox">
+            <label class="checkbox-inline" for="<?php echo $value; ?>">
+              <input type="custom-control-inpu" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>" <?php isset($checked) ? checked($value, $checked_ids) : ''; ?>>           
+              <span class="checkbox-title"><?php echo $title; ?></span>
+            </label>
+          <?php endforeach; ?>
+          <div class="form-group">
+            <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
+          </div>
+    </div>
+  </div>
+<?php }
+ 
 
 
 
