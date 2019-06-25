@@ -45,9 +45,9 @@
                             'sports' => 'Sports',
                           );
                          
-                          //checkbox3( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
+                          checkbox3( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
                           
-                          checkbox2( 'teste', 'teste', 'Select your interests', $options,  $checked, $data['teste_err']="");
+                          //checkbox( 'teste', 'teste', 'Select your interests', $options,  $checked, $data['teste_err']="");
 
                          
                           $options = array(
@@ -80,9 +80,7 @@
                           selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro']='');
                         
                         
-                    ?>          
-
-
+                    ?>   
                     
                     <!--BUTTONS-->
                     <div class="row">

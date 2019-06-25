@@ -75,19 +75,22 @@ function checkbox3( $name, $id, $label, $options, $checked, $error) {?>
     <!--dai fica assim in_array(acrobatics,acrobatics)-->
     <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>
     <?php foreach ( $options as $value => $title ) : ?> 
-    <div class="custom-control custom-checkbox">
-            <label class="checkbox-inline" for="<?php echo $value; ?>">
-              <input type="custom-control-inpu" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>" <?php isset($checked) ? checked($value, $checked_ids) : ''; ?>>           
-              <span class="checkbox-title"><?php echo $title; ?></span>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>"><?php echo $title; ?>
             </label>
-          <?php endforeach; ?>
+        </div>   
+        <?php endforeach; ?>
           <div class="form-group">
             <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
-          </div>
-    </div>
+          </div>    
   </div>
 <?php }
  
+
+
+ 
+  
 
 
 
