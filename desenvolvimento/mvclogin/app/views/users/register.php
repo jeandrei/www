@@ -45,26 +45,9 @@
                             'sports' => 'Sports',
                           );
                          
-                          checkbox3( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
-                          
-                          //checkbox( 'teste', 'teste', 'Select your interests', $options,  $checked, $data['teste_err']="");
+                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
-                         
-                          $options = array(
-                            'acrobatics' => 'Acrobatics',
-                            'acting' => 'Acting',
-                            'antiques' => 'Antiques',
-                            'sports' => 'Sports',
-                          );
 
-                        $checked = array(  
-                            'acrobatics' => 'Acrobatics',                          
-                            'antiques' => 'Antiques',
-                            'sports' => 'Sports',
-                          );
-                         
-                         // checkbox2( 'teste', 'teste', 'Select your interests 2', $options,  $checked, $data['teste_err']="");
-                          
 
 
 
@@ -80,7 +63,7 @@
                           selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro']='');
                         
                         
-                    ?>   
+                    ?>
                     
                     <!--BUTTONS-->
                     <div class="row">
