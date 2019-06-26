@@ -150,12 +150,14 @@
       }
     }
     
-    if(is_checked != null){       
-      for(var i=0; i<is_checked.length;){
-        checkerr = is_checked[i].concat('_err'); 
-        alert(array_check[1]);
-        alert(document.getElementById(array_check[1]).checked);        
-          i++;
+    if(is_checked != null){
+      for(var i=0; i<is_checked.length;){        
+      //linha e coluna  
+      if(document.body.contains(document.getElementById(is_checked[0][0]))){       
+        opcao = document.getElementById(is_checked[0][0]).checked;
+        alert(opcao);
+      } 
+      i++;
       }
     }
     
