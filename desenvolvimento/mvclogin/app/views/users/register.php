@@ -64,7 +64,8 @@
                           selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro_err']='');
                         
                        
-                          textarea('conceito','conceito','Digite seu conceito','conceito',3,$data['conceito_err']='');
+                          textarea('conceito','conceito','Digite seu conceito',3,'valor passado pelo post do php',$data['conceito_err']='');
+                         
                     ?>
 
                     
