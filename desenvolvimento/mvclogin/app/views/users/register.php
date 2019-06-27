@@ -9,7 +9,8 @@
                                                                                                                                                [validemail=['email']],
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro']],
-                                                                                                                                               [is_checked=['interests','teste']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                               [is_checked=['interests','teste']],
+                                                                                                                                               [noemptytextarea=['conceito','conceitoteste']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                                                                                                                                                [minchar=[[6,'password']]]                                                                                                                                              
 
                                                                                                                                             ),confirmasenha(
@@ -60,9 +61,10 @@
                             '04' => 'São Cristovão',
                           );
                           $selected =['id' => '0'];
-                          selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro']='');
+                          selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro_err']='');
                         
-                        
+                       
+                          textarea('conceito','conceito','Digite seu conceito','conceito',3,$data['conceito_err']='');
                     ?>
 
                     

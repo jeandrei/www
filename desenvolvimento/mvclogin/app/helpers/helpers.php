@@ -110,6 +110,21 @@ function selectlist($name,$id_field,$label,$text,$options,$selected,$error){ $i=
   <?php }
 
 
+function textarea($name,$id_field,$label,$text,$rows,$error){?>
+  <div class="form-group">
+    <label for="$id_field"><?php echo $label;?></label>
+    <textarea 
+      class="form-control" 
+      id="<?php echo $id_field?>" 
+      rows="<?php echo $rows;?>" 
+      onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'></textarea>
+      <div class="form-group">
+            <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
+      </div>  
+  </div>
+<?php }
+
+
 
 
 

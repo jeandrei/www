@@ -9,6 +9,7 @@
   var validphone = null;
   var selectlist = null;
   var is_checked = null;  
+  var noemptytextarea = null;
 
   
  // **********************INICIO VALIDAÇÕES***************************************************************
@@ -169,6 +170,30 @@
           }                 
         }
       i++;
+      }
+    }
+
+    // VALIDA TEXTAREA
+    if(noemptytextarea != null){
+      for(var i=0; i<noemptytextarea.length;){
+        if(document.body.contains(document.getElementById(noemptytextarea[i]))){
+          textareavalue = document.getElementById(noemptytextarea[i]).value;
+          textareaerr = noemptytextarea[i].concat('_err');            
+            // verifico se o campo está em branco
+            if(textareavalue == ''){
+              // se sim 
+              // atribuo a classe is-invalid ao campo              
+              var textareaelement = document.getElementById(noemptytextarea[i]);
+              textareaelement.classList.add("is-invalid");
+              //imprimo o erro no id de erro neste caso nome_err
+              document.getElementById(textareaerr).innerHTML = 'Campo obrigatório';
+              count++;
+            } else {
+              // caso contrário limpo o id de erro nome_err
+              document.getElementById(textareaerr).innerHTML = '';
+            }
+        }
+        i++;
       }
     }
     
