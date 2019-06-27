@@ -80,7 +80,7 @@ function checkbox( $name, $id, $label, $options, $checked, $error) {?>
     <?php foreach ( $options as $value => $title ) : ?> 
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>"><?php echo $title; ?>
+                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>" <?php isset($checked) ? checked($value, $checked_ids) : ''; ?>><?php echo $title; ?>
             </label>
         </div>   
         <?php endforeach; ?>
