@@ -158,7 +158,7 @@
         if(document.body.contains(document.getElementById(is_checked[i]))){
           // elemento vai ficar com interests[]
           elemento = is_checked[i].concat('[]');
-          elementoerr = is_checked[i].concat('_err'); 
+          elementoerr = is_checked[i].concat('_err');            
           // através da função CheckForm vai verificar se existe o elemtnto interests[]
           if(!CheckForm(elemento)){                 
             element.classList.add("is-invalid");              
