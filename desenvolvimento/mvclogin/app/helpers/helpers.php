@@ -88,7 +88,7 @@ function checkbox( $name, $id, $label, $options, $checked, $error) {?>
 //GERA SELECT 
 function selectlist($name,$id_field,$label,$text,$options,$selected,$error){ $i=0;?>
   <div class="form-group">
-  <label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+  <label for="<?php echo $id_field; ?>"><?php echo $label; ?></label>
     <select
         name="<?php echo $name; ?>" 
         id="<?php echo $id_field; ?>" 
