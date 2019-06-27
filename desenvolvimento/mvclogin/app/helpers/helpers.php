@@ -32,7 +32,7 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
   }
   
   
-  function checkbox( $name, $id, $label, $options, $checked, $error) {?>
+  function checkbox2( $name, $id, $label, $options, $checked, $error) {?>
     <div class="form-group"><script>var array_check = [];</script>
       <p><?php echo $label; ?></p>
       <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
@@ -57,7 +57,7 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
   
 
 
-function checkbox2( $name, $id, $label, $options, $checked, $error) {?>
+function checkbox3( $name, $id, $label, $options, $checked, $error) {?>
   <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>  
     <?php foreach ( $options as $value => $title ) : ?>
     <div class="custom-control custom-checkbox">
@@ -69,7 +69,7 @@ function checkbox2( $name, $id, $label, $options, $checked, $error) {?>
       <?php endforeach; ?>  
 <?php }
 
-function checkbox3( $name, $id, $label, $options, $checked, $error) {?>
+function checkbox( $name, $id, $label, $options, $checked, $error) {?>
   <div class="form-group">
     <p><?php echo $label; ?></p>
     <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
@@ -80,7 +80,7 @@ function checkbox3( $name, $id, $label, $options, $checked, $error) {?>
     <?php foreach ( $options as $value => $title ) : ?> 
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[<?php echo $value;?>]" id=<?php echo $id; ?> value="<?php echo $value; ?>"><?php echo $title; ?>
+                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>"><?php echo $title; ?>
             </label>
         </div>   
         <?php endforeach; ?>

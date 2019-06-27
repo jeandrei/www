@@ -9,7 +9,7 @@
                                                                                                                                                [validemail=['email']],
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro']],
-                                                                                                                                               is_checked=[['interests','acrobatics'],['interests','acting'],['interests','antiques']['interests','sports'],],                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                               [is_checked=['interests','teste']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                                                                                                                                                [minchar=[[6,'password']]]                                                                                                                                              
 
                                                                                                                                             ),confirmasenha(
@@ -45,7 +45,7 @@
                             'sports' => 'Sports',
                           );
                          
-                          checkbox3( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
+                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
 
 
@@ -64,6 +64,7 @@
                         
                         
                     ?>
+
                     
                     <!--BUTTONS-->
                     <div class="row">
@@ -82,5 +83,5 @@
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <script>  
     //ADICIONA MASCARA DE CPF
-    addclass('cpf','cpfmask');   
+    addclass('cpf','cpfmask');     
 </script>

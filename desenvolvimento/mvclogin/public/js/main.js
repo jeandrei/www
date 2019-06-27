@@ -150,13 +150,24 @@
       }
     }
     
+
+    // VERIFICAÇÃO DO CHECKBOX
     if(is_checked != null){
-      for(var i=0; i<is_checked.length;){        
-      //linha e coluna  
-      if(document.body.contains(document.getElementById(is_checked[0][0]))){       
-        opcao = document.getElementById(is_checked[0][0]).checked;
-        alert(opcao);
-      } 
+      //is_checked[i] vai trazer o id do checkbox exemplo interests
+      for(var i=0; i<is_checked.length;){
+        if(document.body.contains(document.getElementById(is_checked[i]))){
+          // elemento vai ficar com interests[]
+          elemento = is_checked[0].concat('[]');
+          elementoerr = is_checked[i].concat('_err'); 
+          // através da função CheckForm vai verificar se existe o elemtnto interests[]
+          if(!CheckForm(elemento)){                 
+            element.classList.add("is-invalid");              
+            document.getElementById(elementoerr).innerHTML = 'Selecione eo menos uma opção.';
+            count++;   
+          } else {
+            document.getElementById(elementoerr).innerHTML = ''; 
+          }                 
+        }
       i++;
       }
     }
@@ -309,4 +320,18 @@ $(document).ready(function() {
 	});
 //********************fim mascaras**************** */
 
+
+function CheckForm(id){
+	var checked=false;
+	var elements = document.getElementsByName(id);
+	for(var i=0; i < elements.length; i++){
+		if(elements[i].checked) {
+			checked = true;
+		}
+	}
+	if (!checked) {
+		checked = false;
+	}
+	return checked;
+}
 
