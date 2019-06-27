@@ -47,7 +47,7 @@
                          
                           checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
-
+                          checkbox( 'teste', 'teste', 'Select your teste', $options,  $checked, $data['teste_err']="");
 
 
 

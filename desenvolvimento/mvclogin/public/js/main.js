@@ -157,7 +157,7 @@
       for(var i=0; i<is_checked.length;){
         if(document.body.contains(document.getElementById(is_checked[i]))){
           // elemento vai ficar com interests[]
-          elemento = is_checked[0].concat('[]');
+          elemento = is_checked[i].concat('[]');
           elementoerr = is_checked[i].concat('_err'); 
           // através da função CheckForm vai verificar se existe o elemtnto interests[]
           if(!CheckForm(elemento)){                 
