@@ -24,6 +24,26 @@ function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>
   <?php                               
   }//fim função text
 
+  
+  // GERA INPUT TEXT OU PASSWORD
+function text2($attributes) {?>   
+  <div class="<?php echo isset($attributes['div_class']) ? $attributes['div_class'] : 'form-group';?>">
+      <label for="<?php echo $attributes['id']; ?>"><?php echo $attributes['label']; ?></label>
+      <input 
+          type="<?php echo $attributes['type']; ?>" 
+          name="<?php echo $attributes['name']; ?>" 
+          id="<?php echo $attributes['id']; ?>" 
+          placeholder="<?php echo $attributes['placeholder']; ?>"
+          class="<?php echo isset($attributes['input_class']) ? $attributes['input_class'] : 'form-control form-control-lg';  echo (!empty($error)) ? 'is-invalid' : ''; ?>"           
+          value="<?php echo isset($_POST[$attributes['name']]) ? ($_POST[$attributes['name']]) : ''; ?>"
+          onfocus="this.classList.remove('is-invalid'), document.getElementById('<?php echo $attributes['name'];?>_err').innerHTML = '';"
+      >
+      <span id="<?php echo $attributes['name'];?>_err" class="text-danger"><?php echo $attributes['error'];?></span>
+    
+  </div>
+<?php                               
+}//fim função text
+
   // GERA CHEKBOX
   function checked($value, $array) {
     if ( in_array( $value, $array ) ) {

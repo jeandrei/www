@@ -5,7 +5,7 @@
                 <h2>Criar uma conta</h2>
                 <p>Por favor preencha os dados abaixo para se registrar</p> 
                 <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation(
-                                                                                                                                               [noempty=['name']],
+                                                                                                                                               [noempty=['name','mytest']],
                                                                                                                                                [validemail=['email']],
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro']],
@@ -31,7 +31,17 @@
                         
                         //CPF
                         text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
-                         
+                        
+                        text2($attributes = [
+                            'id' => 'mytest',
+                            'name' => 'mytest',
+                            'type' => 'text',
+                            'label' => 'Informe seu nome teste',
+                            'placeholder' => 'Informe um nove válido',
+                            'div_class' => 'form-group',
+                            'input_class' => 'form-control form-control-sm',
+                            'error' => $data['mytest_err'] = ""
+                        ]);
 
                         $options = array(
                             'acrobatics' => 'Acrobatics',
