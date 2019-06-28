@@ -51,6 +51,16 @@
                           checkbox( 'teste', 'teste', 'Select your teste', $options,  $checked, $data['teste_err']="");
 
 
+                          $options = array(
+                            '01' => 'A pé',
+                            '02' => 'Carro',
+                            '03' => 'Ônibus',
+                            '04' => 'Moto',
+                            '05' => 'Bicicleta'                            
+                          );
+
+                          $default =['id' => '01'];                          
+                          radio( 'escolha', 'escolha', 'Como você vem ao trabalho?', $options,  $default, $data['escolha_err']="");
 
 
                          
@@ -60,13 +70,18 @@
                             '03' => 'Armação',
                             '04' => 'São Cristovão',
                           );
-                          $selected =['id' => '0'];
+                          $selected =['id' => '0'];                          
                           selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro_err']='');
                         
                        
                           textarea('conceito','conceito','Digite seu conceito',3,'valor passado pelo post do php',$data['conceito_err']='');
                          
+                          
                     ?>
+
+
+
+
 
                     
                     <!--BUTTONS-->
