@@ -163,7 +163,7 @@
           // através da função CheckForm vai verificar se existe o elemtnto interests[]
           if(!CheckForm(elemento)){                 
             element.classList.add("is-invalid");              
-            document.getElementById(elementoerr).innerHTML = 'Selecione eo menos uma opção.';
+            document.getElementById(elementoerr).innerHTML = 'Selecione ao menos uma opção.';
             count++;   
           } else {
             document.getElementById(elementoerr).innerHTML = ''; 

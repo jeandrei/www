@@ -58,7 +58,26 @@
                          
                           checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
-                          checkbox( 'teste', 'teste', 'Select your teste', $options,  $checked, $data['teste_err']="");
+                        $options = array(
+                            'agua' => 'Água',
+                            'luz' => 'Luz',
+                            'telefone' => 'Telefone',
+                            'aluguel' => 'Aluguel',
+                          );
+
+                        $checked = array(  
+                            'luz' => 'Luz',                          
+                            'telefone' => 'Telefone',                            
+                          );
+                          checkboxnovo($attributes = [
+                            'id' => 'teste',
+                            'name' => 'teste',                            
+                            'label' => 'Comprovantes anexados', 
+                            'options' => $options,
+                            'checked' => $checked,                            
+                            'error' => $data['teste_err'] = ""
+                        ]);
+                        
 
 
                           $options = array(
