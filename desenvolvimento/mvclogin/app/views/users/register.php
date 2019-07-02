@@ -32,6 +32,10 @@
                         //CPF
                         text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
                         
+                        
+                        
+                        
+                        
                         text2($attributes = [
                             'id' => 'mytest',
                             'name' => 'mytest',
@@ -42,6 +46,10 @@
                             'input_class' => 'form-control form-control-sm',
                             'error' => $data['mytest_err'] = ""
                         ]);
+
+
+
+
 
                         $options = array(
                             'acrobatics' => 'Acrobatics',
@@ -58,6 +66,13 @@
                          
                           checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         $options = array(
                             'agua' => 'Água',
                             'luz' => 'Luz',
@@ -69,6 +84,7 @@
                             'luz' => 'Luz',                          
                             'telefone' => 'Telefone',                            
                           );
+                          
                           checkboxnovo($attributes = [
                             'id' => 'teste',
                             'name' => 'teste',                            
@@ -78,6 +94,12 @@
                             'error' => $data['teste_err'] = ""
                         ]);
                         
+
+
+
+
+
+
 
 
                           $options = array(
@@ -91,6 +113,30 @@
                           $default =['id' => '01'];                          
                           radio( 'escolha', 'escolha', 'Como você vem ao trabalho?', $options,  $default, $data['escolha_err']="");
 
+                          
+
+
+
+                          $options = array(
+                            '01' => 'Casa',
+                            '02' => 'Apartamento',
+                            '03' => 'Comércio',
+                            '04' => 'Sítio',
+                            '05' => 'Sobrado'                            
+                          );
+
+                          $default =['id' => '02'];                          
+                          radionovo($attributes = [
+                            'name' => 'moradia',
+                            'id' => 'moradia',                            
+                            'label' => 'Tipo de moradia', 
+                            'options' => $options,
+                            'default' => $default,                            
+                            'error' => $data['moradia_err'] = ""
+                          ]);
+
+
+
 
                          
                           $options = array(
@@ -102,6 +148,15 @@
                           $selected =['id' => '0'];                          
                           selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro_err']='');
                         
+
+
+
+
+
+
+
+
+
                        
                           textarea('conceito','conceito','Digite seu conceito',3,'valor passado pelo post do php',$data['conceito_err']='');
                          

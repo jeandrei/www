@@ -129,6 +129,22 @@ function radio( $name, $id, $label, $options, $default, $error) {?>
   </div>
 <?php }
 
+function radionovo($attributes) {?>
+  <div class="form-group">
+    <p><?php echo $attributes['label']; ?></p>      
+    <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php $default = $attributes['default']; echo $value == $default['id'] ? 'checked':'';?>>
+          <label class="form-check-label" for="<?php echo $value; ?>">
+            <?php echo $title;?>
+          </label>
+        </div>
+        <?php endforeach; ?>
+          <div class="form-group">
+            <span id="<?php echo $attributes['name'];?>_err" class="text-danger"><?php echo $attributes['error'];?></span>
+          </div>    
+  </div>
+<?php }
 
 
   
