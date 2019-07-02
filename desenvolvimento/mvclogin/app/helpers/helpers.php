@@ -92,9 +92,9 @@ function checkbox( $name, $id, $label, $options, $checked, $error) {?>
 function checkboxnovo($attributes) {?>
   <div class="form-group">
     <p><?php echo $attributes['label']; ?></p>
-    <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
-    <!--se no checked eu passo 'acrobatics' => 'Acrobatics' no $checked_id eu passo [0] => 'acrobatics'-->
-    <!--no foreach ( $options as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
+    <!--na linha abaixo eu pego o array associativo $attributes['checked'] e passo as chaves para a variável cheked_ids-->
+    <!--se no $attributes['checked'] eu passo 'acrobatics' => 'Acrobatics' no $checked_id eu passo [0] => 'acrobatics'-->
+    <!--no foreach ( $attributes['options'] as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
     <!--dai fica assim in_array(acrobatics,acrobatics)-->
     <?php $checked_ids = array(); foreach($attributes['checked'] as $key=>$value){array_push($checked_ids,$key);}?>
     <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
