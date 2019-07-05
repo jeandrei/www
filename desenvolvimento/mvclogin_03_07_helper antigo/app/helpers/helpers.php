@@ -1,10 +1,32 @@
+
 <?php
   // Simple page redirect
 function redirect($page){
     header('location: ' . URLROOT . '/' . $page);
 }
+
+
+
+// GERA INPUT TEXT OU PASSWORD
+function text( $name, $id, $label, $placeholder, $type = 'text', $error) {?>    
+    <div class="form-group">
+      <label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+      <input 
+          type="<?php echo $type; ?>" 
+          name="<?php echo $name; ?>" 
+          id="<?php echo $id; ?>" 
+          placeholder="<?php echo $placeholder; ?>"
+          class="form-control form-control-lg <?php echo (!empty($error)) ? 'is-invalid' : ''; ?>"           
+          value="<?php echo isset($_POST[$name]) ? ($_POST[$name]) : ''; ?>"
+          onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'>
+          <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
+    </div>
+  <?php                               
+  }//fim função text
+
+  
   // GERA INPUT TEXT OU PASSWORD
-function text($attributes) {?>   
+function text2($attributes) {?>   
   <div class="<?php echo isset($attributes['div_class']) ? $attributes['div_class'] : 'form-group';?>">
       <label for="<?php echo $attributes['id']; ?>"><?php echo $attributes['label']; ?></label>
       <input 
@@ -28,7 +50,46 @@ function text($attributes) {?>
       echo 'checked="checked"';
     }
   }
-function checkbox($attributes) {?>
+  
+// esse não funciona a validação javascript usar o checkbox até correção
+function checkbox_temp( $name, $id, $label, $options, $checked, $error) {?>
+  <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>  
+    <?php foreach ( $options as $value => $title ) : ?>
+    <div class="custom-control custom-checkbox">
+      <input class="custom-control-input" name="<?php echo $name; ?>[]" type="checkbox" value="<?php echo $value?>" id="<?php echo $value;?>">
+      <label class="custom-control-label" for="<?php echo $value;?>">
+        <?php echo $title;?>
+      </label>
+    </div>      
+      <?php endforeach; ?>
+      <div class="form-group">
+        <span id="<?php echo $id;?>_err" class="text-danger"><?php echo $error;?></span>
+      </div>    
+<?php }
+
+function checkbox( $name, $id, $label, $options, $checked, $error) {?>
+  <div class="form-group">
+    <p><?php echo $label; ?></p>
+    <!--na linha abaixo eu pego o array associativo cheked e passo as chaves para a variável cheked_ids-->
+    <!--se no checked eu passo 'acrobatics' => 'Acrobatics' no $checked_id eu passo [0] => 'acrobatics'-->
+    <!--no foreach ( $options as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
+    <!--dai fica assim in_array(acrobatics,acrobatics)-->
+    <?php $checked_ids = array(); foreach($checked as $key=>$value){array_push($checked_ids,$key);}?>
+    <?php foreach ( $options as $value => $title ) : ?> 
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="<?php echo $name; ?>[]" id=<?php echo $id; ?> value="<?php echo $value; ?>" <?php isset($checked) ? checked($value, $checked_ids) : ''; ?>><?php echo $title; ?>
+            </label>
+        </div>   
+        <?php endforeach; ?>
+          <div class="form-group">
+            <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
+          </div>    
+  </div>
+<?php }
+
+
+function checkboxnovo($attributes) {?>
   <div class="form-group">
     <p><?php echo $attributes['label']; ?></p>
     <!--na linha abaixo eu pego o array associativo $attributes['checked'] e passo as chaves para a variável cheked_ids-->
@@ -48,7 +109,9 @@ function checkbox($attributes) {?>
           </div>    
   </div>
 <?php }
-// GERA CHEKBOX
+
+
+
 function radio( $name, $id, $label, $options, $default, $error) {?>
   <div class="form-group">
     <p><?php echo $label; ?></p>      
@@ -65,18 +128,13 @@ function radio( $name, $id, $label, $options, $default, $error) {?>
           </div>    
   </div>
 <?php }
-function radiochecked($post, $value) {
-  if ($post == $value ) {
-    echo 'checked';
-  }
-}
-// radio vou ter que fazer a função javascript para verificar se ao menos um foi marcado pois ao invés do default tenho que colocar o valor passado pelo post
-function radionovo($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST[$attributes['id']];}?>
+
+function radionovo($attributes) {?>
   <div class="form-group">
     <p><?php echo $attributes['label']; ?></p>      
     <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php isset($id) ? radiochecked($id, $value) : ''; ?>>
+          <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php $default = $attributes['default']; echo $value == $default['id'] ? 'checked':'';?>>
           <label class="form-check-label" for="<?php echo $value; ?>">
             <?php echo $title;?>
           </label>
@@ -87,13 +145,20 @@ function radionovo($attributes) { if (isset($_POST[$attributes['id']])){$id = $_
           </div>    
   </div>
 <?php }
+
+
+  
   function submit($value = 'submit', $class = 'btn btn-success btn-block') {?>
     <button type="submit" class="<?php echo $class; ?>"><?php echo $value; ?></button>
   <?php }
 
   function linkbutton($link, $text, $class = 'btn btn-light btn-block') {?>
     <a href="<?php echo $link; ?>" class="btn btn-light btn-block"><?php echo $text; ?></a>  
-  <?php } 
+  <?php }  
+  
+ 
+
+
 //GERA SELECT 
 function selectlist($name,$id_field,$label,$placeholder,$options,$selected,$error){ $i=0;?>
   <div class="form-group">
@@ -117,6 +182,7 @@ function selectlist($name,$id_field,$label,$placeholder,$options,$selected,$erro
     <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
   </div>
   <?php }
+
   //GERA SELECT 
 function selectlistnovo($attributes){ $i=0;(isset($_POST[$attributes['name']])) ? $selected = $_POST[$attributes['name']] : $selected = '00' ;?>
   <div class="form-group">
@@ -140,6 +206,8 @@ function selectlistnovo($attributes){ $i=0;(isset($_POST[$attributes['name']])) 
     <span id="<?php echo $attributes['name'];?>_err" class="text-danger"><?php echo $attributes['error'];?></span>
   </div>
   <?php }
+
+
 function textarea($name,$id_field,$label,$rows,$value,$error){?>
   <div class="form-group">
     <label for="$id_field"><?php echo $label;?></label>
@@ -153,6 +221,8 @@ function textarea($name,$id_field,$label,$rows,$value,$error){?>
       </div>  
   </div>
 <?php }
+
+
 function textareanovo($attributes){?>
   <div class="form-group">
     <label for="$id_field"><?php echo $attributes['label'];?></label>
@@ -167,7 +237,14 @@ function textareanovo($attributes){?>
       </div>  
   </div>
 <?php }
+
+
+
+
+
+
 ?>
+
 <?/*
 exemplo checkbox
   $options = array(

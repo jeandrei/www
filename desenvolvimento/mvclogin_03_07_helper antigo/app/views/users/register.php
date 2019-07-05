@@ -5,12 +5,11 @@
                 <h2>Criar uma conta</h2>
                 <p>Por favor preencha os dados abaixo para se registrar</p> 
                 <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation(
-                                                                                                                                               [noempty=['name']],
+                                                                                                                                               [noempty=['name','mytest']],
                                                                                                                                                [validemail=['email']],
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro','funcao']],
                                                                                                                                                [is_checked=['interests','teste']],
-                                                                                                                                               [validacpf=['cpf']]
                                                                                                                                                [noemptytextarea=['conceito','infadicional']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                                                                                                                                                [minchar=[[6,'password']]]                                                                                                                                              
 
@@ -21,63 +20,37 @@
                                                                                                                                                 )">   
                     
                     <?php
-                         //Nome                        
-                        text($attributes = [
-                          'id' => 'name',
-                          'name' => 'name',
-                          'type' => 'text',
-                          'label' => '<b class="obrigatorio">* </b>Nome',
-                          'placeholder' => 'Informe um nome',                          
-                          'error' => $data['name_err'] = ""
-                      ]);
+                         //Nome
+                        text('name', 'name', '<b class="obrigatorio">* </b>Nome' , 'Informe um nome','text',$data['name_err']);
+                        //EMAIL
+                        text('email', 'email', '<b class="obrigatorio">* </b>Email', 'Informe um email válido','text',$data['email_err']); 
+                        //PASSWORD
+                        text('password', 'password', '<b class="obrigatorio">* </b>Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);
+                        //PASSWORD
+                        text('confirm_password', 'confirm_password', '<b class="obrigatorio">* </b>Confirmação de senha', 'Confirme a senha','password',$data['password_err']);
+                        
+                        //CPF
+                        text('cpf', 'cpf', '<b class="obrigatorio">* </b>CPF' , 'Informe um cpf','text',$data['cpf_err']="");
                         
                         
-                        //EMAIL                       
-                        text($attributes = [
-                          'id' => 'email',
-                          'name' => 'email',
-                          'type' => 'text',
-                          'label' => '<b class="obrigatorio">* </b>Email',
-                          'placeholder' => 'Informe um email válido',                          
-                          'error' => $data['email_err'] = ""
-                      ]);
                         
                         
-                        //PASSWORD                        
-                        text($attributes = [
-                          'id' => 'password',
-                          'name' => 'password',
-                          'type' => 'password',
-                          'label' => '<b class="obrigatorio">* </b>Senha',
-                          'placeholder' => 'Informe uma senha de 6 caracteres',                          
-                          'error' => $data['password_err'] = ""
-                      ]);
                         
-                        //CONFIRM PASSWORD                       
-                        text($attributes = [
-                          'id' => 'confirm_password',
-                          'name' => 'confirm_password',
-                          'type' => 'password',
-                          'label' => '<b class="obrigatorio">* </b>Senha',
-                          'placeholder' => 'Informe uma senha de 6 caracteres',                          
-                          'error' => $data['confirm_password_err'] = ""
-                      ]);
+                        text2($attributes = [
+                            'id' => 'mytest',
+                            'name' => 'mytest',
+                            'type' => 'text',
+                            'label' => 'Informe seu nome teste',
+                            'placeholder' => 'Informe um nove válido',
+                            'div_class' => 'form-group',
+                            'input_class' => 'form-control form-control-sm',
+                            'error' => $data['mytest_err'] = ""
+                        ]);
 
-/*
-                        //CPF                       
-                        text($attributes = [
-                          'id' => 'cpf',
-                          'name' => 'cpf',
-                          'type' => 'text',
-                          'label' => '<b class="obrigatorio">* </b>CPF',
-                          'placeholder' => 'Informe um CPF',                          
-                          'error' => $data['cpf_err'] = ""
-                      ]);
-                                         
-                        
 
-                        
-                      //INTERESTS
+
+
+
                         $options = array(
                             'acrobatics' => 'Acrobatics',
                             'acting' => 'Acting',
@@ -89,22 +62,17 @@
                             'acrobatics' => 'Acrobatics',                          
                             'antiques' => 'Antiques',
                             'sports' => 'Sports',
-                          );    
+                          );
+                         
+                          checkbox( 'interests', 'interests', 'Select your interests', $options,  $checked, $data['interests_err']="");
 
-                          checkbox($attributes = [
-                            'id' => 'interests',
-                            'name' => 'interests',                            
-                            'label' => 'Select your interests', 
-                            'options' => $options,
-                            'checked' => $checked,                            
-                            'error' => $data['interests_err'] = ""
-                        ]);
                         
                         
                         
                         
                         
-                        // COMPROVANTE
+                        
+                        
                         $options = array(
                             'agua' => 'Água',
                             'luz' => 'Luz',
@@ -117,7 +85,7 @@
                             'telefone' => 'Telefone',                            
                           );
                           
-                          checkbox($attributes = [
+                          checkboxnovo($attributes = [
                             'id' => 'teste',
                             'name' => 'teste',                            
                             'label' => 'Comprovantes anexados', 
@@ -134,7 +102,16 @@
 
 
 
-                          
+                          $options = array(
+                            '01' => 'A pé',
+                            '02' => 'Carro',
+                            '03' => 'Ônibus',
+                            '04' => 'Moto',
+                            '05' => 'Bicicleta'                            
+                          );
+
+                          $default =['id' => '01'];                          
+                          radio( 'escolha', 'escolha', 'Como você vem ao trabalho?', $options,  $default, $data['escolha_err']="");
 
                           
 
@@ -148,15 +125,16 @@
                             '05' => 'Sobrado'                            
                           );
 
-                                                  
-                         
+                          $default =['id' => '02'];                          
                           radionovo($attributes = [
                             'name' => 'moradia',
                             'id' => 'moradia',                            
                             'label' => 'Tipo de moradia', 
-                            'options' => $options,                                                        
+                            'options' => $options,
+                            'default' => $default,                            
                             'error' => $data['moradia_err'] = ""
                           ]);
+
 
 
 
@@ -204,7 +182,7 @@
                        
                           textarea('conceito','conceito','Digite seu conceito',3,'valor passado pelo post do php',$data['conceito_err']='');
                          
-                          */
+                          
                     ?>
 
 
