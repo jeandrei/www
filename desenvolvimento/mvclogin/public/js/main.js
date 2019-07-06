@@ -10,6 +10,7 @@
   var selectlist = null;
   var is_checked = null;  
   var noemptytextarea = null;
+  var confirmasenha = null;
 
   
  // **********************INICIO VALIDAÇÕES***************************************************************
@@ -49,6 +50,28 @@
       }
     }
 
+
+    // CONFIRMAÇÃO DE SENHA COLOCAR O CAMPO CONFIRMA SENHA SEMPRE EM SEGUNDO NO ARRAY
+    // [confirmasenha=['password','confirm_password']],
+    if(confirmasenha != null){
+      var val = Array();
+      for(var i=0; i<confirmasenha.length;){
+        if(document.body.contains(document.getElementById(confirmasenha[i]))){      
+          val[i] = document.getElementById(confirmasenha[i]).value;        
+        }
+      i++;
+      }
+      noemptyconfirmasenha = confirmasenha[1].concat('_err');
+      var element = document.getElementById(confirmasenha[1]);              
+      if(val[0] != val[1]){
+        element.classList.add("is-invalid");
+        document.getElementById(noemptyconfirmasenha).innerHTML = 'Senhas não conferem';
+        count++;
+      } else {
+        document.getElementById(noemptyconfirmasenha).innerHTML = '';
+      }
+    }   
+    
 
     // VALIDAÇÃO DE EMAILS
     if(validemail != null){      
@@ -214,10 +237,9 @@
 }  
 //** ***************************************FIM VALIDAÇÕES ******************************************************************** */
 
-function confirmasenha(senha,confirma,campoerro){
+function confirmasenha(senha,confirma){
   if(senha != "" && confirma != ""){
-    if(senha != confirma){
-      document.getElementById(campoerro).innerHTML = 'Senhas não são iguais';
+    if(senha != confirma){      
       return false;
     } else {
       return true;

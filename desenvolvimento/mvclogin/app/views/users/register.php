@@ -10,15 +10,11 @@
                                                                                                                                                [validphone=['telefone']],
                                                                                                                                                [selectlist=['bairro','funcao']],
                                                                                                                                                [is_checked=['interests','teste']],
-                                                                                                                                               [validacpf=['cpf']]
+                                                                                                                                               [validacpf=['cpf']],
                                                                                                                                                [noemptytextarea=['conceito','infadicional']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                               [minchar=[[6,'password']]]                                                                                                                                              
-
-                                                                                                                                            ),confirmasenha(
-                                                                                                                                                document.getElementById('password').value,
-                                                                                                                                                document.getElementById('confirm_password').value,
-                                                                                                                                                'confirm_password_err'
-                                                                                                                                                )">   
+                                                                                                                                               [minchar=[[6,'password']]],
+                                                                                                                                               [confirmasenha=['password','confirm_password']],   
+                                                                                                                                               )">   
                     
                     <?php
                          //Nome                        
@@ -39,7 +35,7 @@
                           'type' => 'text',
                           'label' => '<b class="obrigatorio">* </b>Email',
                           'placeholder' => 'Informe um email válido',                          
-                          'error' => $data['email_err'] = ""
+                          'error' => $data['email_err']
                       ]);
                         
                         
@@ -63,7 +59,7 @@
                           'error' => $data['confirm_password_err'] = ""
                       ]);
 
-/*
+
                         //CPF                       
                         text($attributes = [
                           'id' => 'cpf',
@@ -75,7 +71,7 @@
                       ]);
                                          
                         
-
+/*
                         
                       //INTERESTS
                         $options = array(

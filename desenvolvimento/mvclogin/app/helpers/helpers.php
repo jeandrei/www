@@ -3,7 +3,8 @@
 function redirect($page){
     header('location: ' . URLROOT . '/' . $page);
 }
-  // GERA INPUT TEXT OU PASSWORD
+
+// GERA INPUT TEXT OU PASSWORD
 function text($attributes) {?>   
   <div class="<?php echo isset($attributes['div_class']) ? $attributes['div_class'] : 'form-group';?>">
       <label for="<?php echo $attributes['id']; ?>"><?php echo $attributes['label']; ?></label>
@@ -22,7 +23,8 @@ function text($attributes) {?>
 <?php                               
 }//fim função text
 
-  // GERA CHEKBOX
+
+// GERA CHEKBOX
   function checked($value, $array) {
     if ( in_array( $value, $array ) ) {
       echo 'checked="checked"';
@@ -48,7 +50,9 @@ function checkbox($attributes) {?>
           </div>    
   </div>
 <?php }
-// GERA CHEKBOX
+
+
+// GERA RADIO
 function radio( $name, $id, $label, $options, $default, $error) {?>
   <div class="form-group">
     <p><?php echo $label; ?></p>      
