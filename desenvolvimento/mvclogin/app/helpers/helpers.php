@@ -4,6 +4,8 @@ function redirect($page){
     header('location: ' . URLROOT . '/' . $page);
 }
 
+
+
 // GERA INPUT TEXT OU PASSWORD
 function text($attributes) {?>   
   <div class="<?php echo isset($attributes['div_class']) ? $attributes['div_class'] : 'form-group';?>">
@@ -22,6 +24,9 @@ function text($attributes) {?>
   </div>
 <?php                               
 }//fim função text
+
+
+
 
 
 // GERA CHEKBOX
@@ -52,29 +57,9 @@ function checkbox($attributes) {?>
 <?php }
 
 
-// GERA RADIO
-function radio( $name, $id, $label, $options, $default, $error) {?>
-  <div class="form-group">
-    <p><?php echo $label; ?></p>      
-    <?php foreach ( $options as $value => $title ) : ?> 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="<?php echo $name; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php echo $value == $default['id'] ? 'checked':'';?>>
-          <label class="form-check-label" for="<?php echo $value; ?>">
-            <?php echo $title;?>
-          </label>
-        </div>
-        <?php endforeach; ?>
-          <div class="form-group">
-            <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
-          </div>    
-  </div>
-<?php }
-function radiochecked($post, $value) {
-  if ($post == $value ) {
-    echo 'checked';
-  }
-}
-// radio vou ter que fazer a função javascript para verificar se ao menos um foi marcado pois ao invés do default tenho que colocar o valor passado pelo post
+
+
+//GERA RADIO
 function radionovo($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST[$attributes['id']];}?>
   <div class="form-group">
     <p><?php echo $attributes['label']; ?></p>      
@@ -98,31 +83,13 @@ function radionovo($attributes) { if (isset($_POST[$attributes['id']])){$id = $_
   function linkbutton($link, $text, $class = 'btn btn-light btn-block') {?>
     <a href="<?php echo $link; ?>" class="btn btn-light btn-block"><?php echo $text; ?></a>  
   <?php } 
-//GERA SELECT 
-function selectlist($name,$id_field,$label,$placeholder,$options,$selected,$error){ $i=0;?>
-  <div class="form-group">
-  <label for="<?php echo $id_field; ?>"><?php echo $label; ?></label>
-    <select
-        name="<?php echo $name; ?>" 
-        id="<?php echo $id_field; ?>" 
-        placeholder="<?php echo $placeholder; ?>"
-        class="form-control form-control-lg <?php echo (!empty($error)) ? 'is-invalid' : ''; ?>"
-        onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'>          
-    >
-        <option value="0"><?php echo $placeholder; ?></option>
-        <? foreach($options as $id => $option) : ?> 
-              <option value="<?php echo $id; ?>"
-                <?php echo $id == $selected['id'] ? 'selected':'';?>
-              >
-              <?php echo $option;?>
-              </option>
-        <?php endforeach; ?>  
-    </select>
-    <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
-  </div>
-  <?php }
+
+
+
+
+
   //GERA SELECT 
-function selectlistnovo($attributes){ $i=0;(isset($_POST[$attributes['name']])) ? $selected = $_POST[$attributes['name']] : $selected = '00' ;?>
+function selectlist($attributes){ $i=0;(isset($_POST[$attributes['name']])) ? $selected = $_POST[$attributes['name']] : $selected = '00' ;?>
   <div class="form-group">
   <label for="<?php echo $attributes['id']; ?>"><?php echo $attributes['label']; ?></label>
     <select
@@ -144,20 +111,12 @@ function selectlistnovo($attributes){ $i=0;(isset($_POST[$attributes['name']])) 
     <span id="<?php echo $attributes['name'];?>_err" class="text-danger"><?php echo $attributes['error'];?></span>
   </div>
   <?php }
-function textarea($name,$id_field,$label,$rows,$value,$error){?>
-  <div class="form-group">
-    <label for="$id_field"><?php echo $label;?></label>
-    <textarea 
-      class="form-control" 
-      id="<?php echo $id_field?>" 
-      rows="<?php echo $rows;?>" 
-      onfocus='this.classList.remove("is-invalid"), document.getElementById("<?php echo $name;?>_err").innerHTML = "";'><?php echo $value; ?></textarea>
-      <div class="form-group">
-            <span id="<?php echo $name;?>_err" class="text-danger"><?php echo $error;?></span>
-      </div>  
-  </div>
-<?php }
-function textareanovo($attributes){?>
+
+
+
+
+//TEXTAREA
+function textarea($attributes){?>
   <div class="form-group">
     <label for="$id_field"><?php echo $attributes['label'];?></label>
     <textarea 

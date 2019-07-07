@@ -14,6 +14,7 @@
                                                                                                                                                [noemptytextarea=['conceito','infadicional']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                                                                                                                                                [minchar=[[6,'password']]],
                                                                                                                                                [confirmasenha=['password','confirm_password']],   
+                                                                                                                                               [validaradio=['moradia']]                                                                                                                                               
                                                                                                                                                )">   
                     
                     <?php
@@ -71,7 +72,7 @@
                       ]);
                                          
                         
-/*
+
                         
                       //INTERESTS
                         $options = array(
@@ -124,18 +125,8 @@
                         
 
 
-
-
-
-
-
-
-                          
-
-                          
-
-
-
+                              
+                          //MORADIA
                           $options = array(
                             '01' => 'Casa',
                             '02' => 'Apartamento',
@@ -156,25 +147,17 @@
 
 
 
-                         
-                          $options = array(
-                            '01' => 'Centro',
-                            '02' => 'Praia Alegre',
-                            '03' => 'Armação',
-                            '04' => 'São Cristovão',
-                          );
-                          $selected =['id' => '0'];                          
-                          selectlist('bairro','bairro','Tipo de imóvel','Selecione um bairro',$options,$selected,$data['bairro_err']='');
-                        
 
+                          //FUNÇÃO
                           $options = array(
                             '01' => 'Aluno',
                             '02' => 'Professor',
                             '03' => 'Especialista',
                             '04' => 'Secretária',
                           );
+                          
                                                 
-                          selectlistnovo($attributes = [
+                          selectlist($attributes = [
                             'name' => 'funcao',
                             'id' => 'funcao',                            
                             'label' => 'Função', 
@@ -186,21 +169,17 @@
                           
 
                           
-                          textareanovo($attributes = [
+                          textarea($attributes = [
                             'name' => 'infadicional',
                             'id' => 'infadicional',                            
                             'label' => 'Informação adicional',                             
                             'rows' => 03,                                                                                   
                             'error' => $data['infadicional_err'] = ""
                           ]);
-
-
-
-
                        
-                          textarea('conceito','conceito','Digite seu conceito',3,'valor passado pelo post do php',$data['conceito_err']='');
+                        
                          
-                          */
+                          
                     ?>
 
 

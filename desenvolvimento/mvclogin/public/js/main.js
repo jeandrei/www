@@ -11,6 +11,7 @@
   var is_checked = null;  
   var noemptytextarea = null;
   var confirmasenha = null;
+  var validaradio = null;
 
   
  // **********************INICIO VALIDAÇÕES***************************************************************
@@ -18,7 +19,7 @@
 
   // passo os campos que quero validar na função validation() no submit do formulário
   // onsubmit="return validation([noempty=['password','email']],[validemail=['email']]  
-  function validation(fields){
+  function validation(){
     var count = 0;      
 
     // VALIDAÇÃO DE CAMPOS EM BRANCO
@@ -195,6 +196,31 @@
       i++;
       }
     }
+
+
+
+
+    if(validaradio != null){
+      for(var i=0; i<validaradio.length;){
+        if(document.body.contains(document.getElementsByName(validaradio[i])[0])){
+          elemento = validaradio[i];
+          elementoerr = validaradio[i].concat('_err');
+          if(!checkedRadioBtn(elemento)){
+            element.classList.add("is-invalid");
+            document.getElementById(elementoerr).innerHTML = 'Selecione uma opção.';
+            count++;          
+          } else {
+            document.getElementById(elementoerr).innerHTML = '';
+          }
+        }
+      i++;
+      }
+    }
+
+
+
+
+
 
     // VALIDA TEXTAREA
     if(noemptytextarea != null){
@@ -381,4 +407,18 @@ function CheckForm(id){
 	}
 	return checked;
 }
+
+function checkedRadioBtn(sGroupName)
+    {   
+        var group = document.getElementsByName(sGroupName);
+
+        for ( var i = 0; i < group.length; i++) {
+            if (group.item(i).checked) {
+                return group.item(i).id;
+            } else if (group[0].type !== 'radio') {
+                //if you find any in the group not a radio button return null
+                return null;
+            }
+        }
+    }
 

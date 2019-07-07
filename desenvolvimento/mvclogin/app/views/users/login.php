@@ -12,10 +12,27 @@
                                                                                                                                             [validemail=['email']]
                                                                                                                                             )">
                 <?php 
-                    //EMAIL
-                    text('email', 'email', '<b class="obrigatorio">* </b>Email', 'Informe um email válido','text',$data['email_err']); 
-                     //PASSWORD
-                     text('password', 'password', '<b class="obrigatorio">* </b>Senha', 'Informe uma senha de 6 caracteres','password',$data['password_err']);                  
+                   //EMAIL                       
+                   text($attributes = [
+                    'id' => 'email',
+                    'name' => 'email',
+                    'type' => 'text',
+                    'label' => '<b class="obrigatorio">* </b>Email',
+                    'placeholder' => 'Informe um email válido',                          
+                    'error' => $data['email_err']
+                ]);
+                  
+                  
+                  //PASSWORD                        
+                  text($attributes = [
+                    'id' => 'password',
+                    'name' => 'password',
+                    'type' => 'password',
+                    'label' => '<b class="obrigatorio">* </b>Senha',
+                    'placeholder' => 'Informe uma senha de 6 caracteres',                          
+                    'error' => $data['password_err']
+                ]);    
+                              
                     ?>       
 
                     <!--BUTTONS-->
