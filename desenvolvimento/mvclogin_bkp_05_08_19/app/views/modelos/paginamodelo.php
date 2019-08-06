@@ -18,21 +18,6 @@
                                                                                                                                                )">   
                     
                     <?php
-
-                      $options = array(
-                        'acrobatics' => 'Acrobatics',
-                        'acting' => 'Acting',
-                        'antiques' => 'Antiques',
-                        'sports' => 'Sports',
-                      );
-
-                        customcheck($attributes = [
-                          'id' => 'name',
-                          'name' => 'name',    
-                          'options' => $options,  
-                          'error' => $data['custom_err'] = ""
-                      ]);
-                    
                          //Nome                        
                         text($attributes = [
                           'id' => 'name',
@@ -198,6 +183,9 @@
                     ?>
 
 
+
+
+
                     
                     <!--BUTTONS-->
                     <div class="row">
@@ -213,20 +201,7 @@
             </div>
         </div>
     </div>   
-
-
-
-
-
-
-    
 <?php require APPROOT . '/views/inc/footer.php'; ?>
-
-
-
-
-
-
 <script>  
     //ADICIONA MASCARA DE CPF
     addclass('cpf','cpfmask');     
