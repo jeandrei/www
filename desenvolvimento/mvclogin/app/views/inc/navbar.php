@@ -13,7 +13,10 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
-          </li>          
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/modelo_pagina">Modelo</a>
+          </li>             
         
 
 
@@ -54,6 +57,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Entrar</a>
           </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/modelos/paginamodelo">Página Modelo</a>
+          </li>
         <?php endif; ?>         
         </ul>
 

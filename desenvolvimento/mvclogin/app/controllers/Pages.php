@@ -28,4 +28,12 @@
             ];
             $this->view('pages/about', $data);           
         }
+
+        public function modelo_pagina(){
+            $data = [
+                'title' => 'Página de modelo',
+                'description'=> 'Modelo de página simples'
+            ];
+            $this->view('pages/modelo_pagina', $data);           
+        }
 }
