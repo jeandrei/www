@@ -1,23 +1,20 @@
 <?php require APPROOT . '/views/inc/header.php';?>
+    
+    
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-2">
                 <h2>Criar uma conta</h2>
                 <p>Por favor preencha os dados abaixo para se registrar</p> 
-                <form action="<?php echo URLROOT; ?>/modelos/paginamodelo" method="post" enctype="multipart/form-data" onsubmit="return validation(
-                                                                                                                                               [noempty=['name']],
-                                                                                                                                               [validemail=['email']],
-                                                                                                                                               [validphone=['telefone']],
-                                                                                                                                               [selectlist=['bairro','funcao']],
-                                                                                                                                               [is_checked=['interests','teste']],
-                                                                                                                                               [validacpf=['cpf']],
-                                                                                                                                               [noemptytextarea=['conceito','infadicional']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                               [minchar=[[6,'password']]],
-                                                                                                                                               [confirmasenha=['password','confirm_password']],   
-                                                                                                                                               [validaradio=['moradia']]                                                                                                                                               
-                                                                                                                                               )">   
+                <form id="modelo" class="form" action="<?php echo URLROOT; ?>/modelos/paginamodelo" method="post" enctype="multipart/form-data" >   
                     
                     <?php
+
+                    $checked = array(  
+                      'acrobatics' => 'Acrobatics',                          
+                      'antiques' => 'Antiques',
+                      'sports' => 'Sports',
+                    );    
 
                       $options = array(
                         'acrobatics' => 'Acrobatics',
@@ -30,6 +27,7 @@
                           'id' => 'name',
                           'name' => 'name',    
                           'options' => $options,  
+                          'checked' => $checked,   
                           'error' => $data['custom_err'] = ""
                       ]);
                     
@@ -228,6 +226,47 @@
 
 
 <script>  
-    //ADICIONA MASCARA DE CPF
-    addclass('cpf','cpfmask');     
+ $(document).ready(function(){
+	$('#modelo').validate({
+		rules : {
+			name : {
+				required : true,
+				minlength : 3
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			password : {
+				required : true,
+				minlength : 3,
+				maxlength : 20
+			},
+			confirm_password : {
+				required : true,
+				equalTo : '#senha'
+			}
+		},
+		messages : {
+			name : {
+				required : 'Informe o seu nome.',
+				minlength : 'O seu nome deve ter no mínimo 3 caracteres.'
+			},
+			email : {
+				required : 'Informe o seu e-mail.',
+				email : 'Informe um e-mail válido.'
+			},
+			password : {
+				required : 'Informe a sua senha.',
+				minlength : 'A senha deve ter, no mínimo, 3 caracteres.',
+				maxlength : 'A senha deve ter, no máximo, 20 caracteres.'
+			},
+			confirm_password : {
+				required : 'Confirme a sua senha.',
+				equalTo : 'As senhas não se correspondem.'
+			}
+		}
+	});
+});
+</script>
 </script>

@@ -25,35 +25,21 @@ function text($attributes) {?>
 <?php                               
 }//fim função text
 
+
+
+//CHECKBOX CUSTOMIZADO
 function customcheck($attributes){?>
+ <?php $checked_ids = array(); foreach($attributes['checked'] as $key=>$value){array_push($checked_ids,$key);}?>
   <div class="form-group">
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $attributes(['options' => 'acrobatics']);?>">
-        <label class="custom-control-label" for="<?php echo $options[1];?>[]">Check 1</label> 
-           
-      </div> 
-
-      
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" name="gender" id="homem" value="Homem">
-        <label class="custom-control-label" for="homem">Homem</label>   
-      </div>
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" name="gender" id="mulher" value="Mulher">
-        <label class="custom-control-label" for="mulher">Mulher</label>   
-      </div>
-
-      
-
-
-
-      </div>     
+      <?php foreach ( $attributes['options'] as $id => $value ) : ?> 
+          <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $id?>" <?php isset($attributes['checked']) ? checked($id, $checked_ids) : ''; ?>>
+            <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>            
+          </div> 
+      <?php endforeach; ?> 
   </div>
 <?php
 }
-
-
-
 
 
 // GERA CHEKBOX
