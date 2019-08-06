@@ -1,266 +1,35 @@
 
-  // todos os campos que crio para atribuir os ids que quero conferir tenho que declarar como variável global para funcionar
-  // logo se for criar outra verificação dentro da função validation(fields) onde temos o exemplo if(noempty != null){ 
-  // a variável corresponente a noempty tem que ser declarada aqui em cima
-  var noempty = null;
-  var validemail = null;
-  var validacpf = null;
-  var minchar = null;
-  var validphone = null;
-  var selectlist = null;
-  var is_checked = null;  
-  var noemptytextarea = null;
-  var confirmasenha = null;
-  var validaradio = null;
-
   
- // **********************INICIO VALIDAÇÕES***************************************************************
+jQuery.validator.addMethod("cpf", function(value, element) {
+  value = jQuery.trim(value);
 
+   value = value.replace('.','');
+   value = value.replace('.','');
+   cpf = value.replace('-','');
+   while(cpf.length < 11) cpf = "0"+ cpf;
+   var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+   var a = [];
+   var b = new Number;
+   var c = 11;
+   for (i=0; i<11; i++){
+       a[i] = cpf.charAt(i);
+       if (i < 9) b += (a[i] * --c);
+   }
+   if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11-x }
+   b = 0;
+   c = 11;
+   for (y=0; y<10; y++) b += (a[y] * c--);
+   if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
 
-  // passo os campos que quero validar na função validation() no submit do formulário
-  // onsubmit="return validation([noempty=['password','email']],[validemail=['email']]  
-  function validation(){
-    var count = 0;      
+   var retorno = true;
+   if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
 
-    // VALIDAÇÃO DE CAMPOS EM BRANCO
-    // verifico se foi passado alguma cois no parâmetro noempty
-    if(noempty != null){
-      // dou um for no array noempty para varrer todos os campos
-      for(var i=0; i<noempty.length;){
-        // verifico se existe o compontnte com esse id no formulário
-        if(document.body.contains(document.getElementById(noempty[i]))){
-            // atribuo o valor do valor noempty[0]).value a variável fieldsvalue
-            fieldsvalue = document.getElementById(noempty[i]).value;
-            // monto o id que vai receber a mensagem de erro noempty=nome concateno com _err vai ficar nome_err que é o id que receberá o erro
-            noemptyerr = noempty[i].concat('_err');            
-            // verifico se o campo está em branco
-            if(fieldsvalue == ''){
-              // se sim 
-              // atribuo a classe is-invalid ao campo              
-              var element = document.getElementById(noempty[i]);
-              element.classList.add("is-invalid");
-              //imprimo o erro no id de erro neste caso nome_err
-              document.getElementById(noemptyerr).innerHTML = 'Campo obrigatório';
-              count++;
-            } else {
-              // caso contrário limpo o id de erro nome_err
-              document.getElementById(noemptyerr).innerHTML = '';
-            }
-        }          
-        i++;
-      }
-    }
+   return this.optional(element) || retorno;
 
-
-    // CONFIRMAÇÃO DE SENHA COLOCAR O CAMPO CONFIRMA SENHA SEMPRE EM SEGUNDO NO ARRAY
-    // [confirmasenha=['password','confirm_password']],
-    if(confirmasenha != null){
-      var val = Array();
-      for(var i=0; i<confirmasenha.length;){
-        if(document.body.contains(document.getElementById(confirmasenha[i]))){      
-          val[i] = document.getElementById(confirmasenha[i]).value;        
-        }
-      i++;
-      }
-      noemptyconfirmasenha = confirmasenha[1].concat('_err');
-      var element = document.getElementById(confirmasenha[1]);              
-      if(val[0] != val[1]){
-        element.classList.add("is-invalid");
-        document.getElementById(noemptyconfirmasenha).innerHTML = 'Senhas não conferem';
-        count++;
-      } else {
-        document.getElementById(noemptyconfirmasenha).innerHTML = '';
-      }
-    }   
-    
-
-    // VALIDAÇÃO DE EMAILS
-    if(validemail != null){      
-      for(var i=0; i<validemail.length;){
-        if(document.body.contains(document.getElementById(validemail[i]))){
-            email = document.getElementById(validemail[i]).value;
-            emailerr = validemail[i].concat('_err'); 
-            if(!validaemail(email)){ 
-              var element = document.getElementById(validemail[i]);
-              element.classList.add("is-invalid");    
-              document.getElementById(emailerr).innerHTML = 'Email inválido';
-              count++;
-              } else {
-                document.getElementById(emailerr).innerHTML = '';
-              }
-        }
-        i++;
-      }
-    }   
-    
-    
-    // VALIDAÇÃO DE TELEFONES
-    if(validphone != null){   
-      for(var i=0; i<validphone.length;){
-        if(document.body.contains(document.getElementById(validphone[i]))){
-            phone = document.getElementById(validphone[i]).value;
-            phoneerr = validphone[i].concat('_err'); 
-            if(!validatetelefone(phone)){
-              var element = document.getElementById(validphone[i]);
-              element.classList.add("is-invalid");     
-              document.getElementById(phoneerr).innerHTML = 'Telefone inválido';
-              count++;
-              } else {
-                document.getElementById(phoneerr).innerHTML = '';
-              }            
-        }
-        i++;
-      }
-  }
-  
-
-  // VALIDAÇÃO DE CPF
-  if(validacpf != null){   
-    for(var i=0; i<validacpf.length;){
-      if(document.body.contains(document.getElementById(validacpf[i]))){
-          cpf = document.getElementById(validacpf[i]).value;
-          cpferr = validacpf[i].concat('_err'); 
-          if(!validacaocpf(cpf)){  
-            var element = document.getElementById(validacpf[i]);
-            element.classList.add("is-invalid");   
-            document.getElementById(cpferr).innerHTML = 'CPF inválido';
-            count++;
-            } else {
-              document.getElementById(cpferr).innerHTML = '';
-            }
-      }
-      i++;
-    }
-  }
-
-  
-  if(selectlist != null){   
-    for(var i=0; i<selectlist.length;){
-      if(document.body.contains(document.getElementById(selectlist[i]))){
-        if((document.getElementById(selectlist[i]).value) == 0 ){
-          var element = document.getElementById(selectlist[i]);
-          selecterr = selectlist[i].concat('_err');
-          element.classList.add("is-invalid");
-          document.getElementById(selecterr).innerHTML = 'Selecione uma opção.';
-          count++;                    
-        }
-      } 
-    i++;
-    }
-  }
-  
-  
-  
-
-
-  // DEFINI NÚMERO MÍNIMO DE CARACTERES
-  // minimo caracteres exemplo na vunção validation [minchar=[[6,'minnumero'],[7,'password']]]
-  //onde 6 é o numero mínimo de caracteres e minimo é o nome do campo
-  //[linha][coluna]
-    if(minchar != null){     
-      for(var i=0; i<minchar.length;){
-        if(document.body.contains(document.getElementById(minchar[i][1]))){  
-            qtdchar = document.getElementById(minchar[i][1]).value.length;
-            qtderr = minchar[i][1].concat('_err'); 
-            if(qtdchar<minchar[i][0]){
-              var element = document.getElementById(minchar[i][1]);
-              element.classList.add("is-invalid"); 
-              document.getElementById(qtderr).innerHTML = 'Número de caracteres inválido';
-              count++;        
-            } else {
-              document.getElementById(qtderr).innerHTML = '';
-            }
-        }
-        i++;
-      }
-    }
-    
-
-    // VERIFICAÇÃO DO CHECKBOX
-    if(is_checked != null){
-      //is_checked[i] vai trazer o id do checkbox exemplo interests
-      for(var i=0; i<is_checked.length;){
-        if(document.body.contains(document.getElementById(is_checked[i]))){
-          // elemento vai ficar com interests[]
-          elemento = is_checked[i].concat('[]');
-          elementoerr = is_checked[i].concat('_err');            
-          // através da função CheckForm vai verificar se existe o elemtnto interests[]
-          if(!CheckForm(elemento)){                 
-            element.classList.add("is-invalid");              
-            document.getElementById(elementoerr).innerHTML = 'Selecione ao menos uma opção.';
-            count++;   
-          } else {
-            document.getElementById(elementoerr).innerHTML = ''; 
-          }                 
-        }
-      i++;
-      }
-    }
+}, "Informe um CPF válido");
 
 
 
-
-    if(validaradio != null){
-      for(var i=0; i<validaradio.length;){
-        if(document.body.contains(document.getElementsByName(validaradio[i])[0])){
-          elemento = validaradio[i];
-          elementoerr = validaradio[i].concat('_err');
-          if(!checkedRadioBtn(elemento)){
-            element.classList.add("is-invalid");
-            document.getElementById(elementoerr).innerHTML = 'Selecione uma opção.';
-            count++;          
-          } else {
-            document.getElementById(elementoerr).innerHTML = '';
-          }
-        }
-      i++;
-      }
-    }
-
-
-
-
-
-
-    // VALIDA TEXTAREA
-    if(noemptytextarea != null){
-      for(var i=0; i<noemptytextarea.length;){
-        if(document.body.contains(document.getElementById(noemptytextarea[i]))){
-          textareavalue = document.getElementById(noemptytextarea[i]).value;
-          textareaerr = noemptytextarea[i].concat('_err');            
-            // verifico se o campo está em branco
-            if(textareavalue == ''){
-              // se sim 
-              // atribuo a classe is-invalid ao campo              
-              var textareaelement = document.getElementById(noemptytextarea[i]);
-              textareaelement.classList.add("is-invalid");
-              //imprimo o erro no id de erro neste caso nome_err
-              document.getElementById(textareaerr).innerHTML = 'Campo obrigatório';
-              count++;
-            } else {
-              // caso contrário limpo o id de erro nome_err
-              document.getElementById(textareaerr).innerHTML = '';
-            }
-        }
-        i++;
-      }
-    }
-    
-      
- 
-    // se count é maior que um tem valor em branco então atribuo a menságem Campo obrigatório em cada campo em branco e retorno falso para não submeter o formulário
-    if(count>0){        
-        return false;  
-      } else {
-      return true;
-    } 
-	
-
-
-    function newFunction() {
-      alert('oi');
-    }
-}  
 //** ***************************************FIM VALIDAÇÕES ******************************************************************** */
 
 function confirmasenha(senha,confirma){

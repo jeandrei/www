@@ -3,3 +3,13 @@
     font-size: 20px;
     vertical-align: middle;
   }
+
+/*Deixa o texto e a borda do erro jquery em vermelho*/
+.error{
+    color:red
+}
+
+input.error, input select.error {
+    border-color: red;
+}
+/****************************************************/

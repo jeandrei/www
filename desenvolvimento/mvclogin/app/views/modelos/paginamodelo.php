@@ -1,13 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php';?>
-<style>
-       .error{
-             color:red
-       }
-       input.error, input select.error {
-	           border-color: red;
-       }
-</style>
-
     
     <div class="row">
         <div class="col-md-6 mx-auto">
@@ -19,21 +10,21 @@
                     <?php
 
                     $checked = array(  
-                      'acrobatics' => 'Acrobatics',                          
-                      'antiques' => 'Antiques',
-                      'sports' => 'Sports',
+                      'volei' => 'Volei',                          
+                      'basquete' => 'Basquete',
+                      'natacao' => 'Natação',
                     );    
 
                       $options = array(
-                        'acrobatics' => 'Acrobatics',
-                        'acting' => 'Acting',
-                        'antiques' => 'Antiques',
-                        'sports' => 'Sports',
+                        'futebol' => 'Futebol',
+                        'volei' => 'Volei',
+                        'basquete' => 'Basquete',
+                        'natacao' => 'Natação',
                       );
 
                         customcheck($attributes = [
-                          'id' => 'name',
-                          'name' => 'name',    
+                          'id' => 'esportes',
+                          'name' => 'esportes',    
                           'options' => $options,  
                           'checked' => $checked,   
                           'error' => $data['custom_err'] = ""
@@ -253,7 +244,15 @@
 			confirm_password : {
 				required : true,
 				equalTo : '#senha'
-			}
+      },     
+      cpf : {
+        cpf: true,
+				required : true				
+      },
+      'esportes[]' : {
+        required : true,
+        minlength: 1				
+      }
 		},
 		messages : {
 			name : {
@@ -272,9 +271,22 @@
 			confirm_password : {
 				required : 'Confirme a sua senha.',
 				equalTo : 'As senhas não se correspondem.'
-			}
+      },
+      cpf : {
+				required : 'Informe um CPF válido.',
+				equalTo : 'CPF inválido.'
+      },
+      'esportes[]' : {
+        required : 'Selecione ao menos um valor.',  
+      }   
 		}
-	});
+  });
+
+  $("#teste").validate();
+
+
 });
-</script>
+
+/* Adiciona mascara no cpf */
+addclass('cpf','cpfmask');
 </script>

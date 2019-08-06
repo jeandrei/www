@@ -36,7 +36,8 @@ function customcheck($attributes){?>
             <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $id?>" <?php isset($attributes['checked']) ? checked($id, $checked_ids) : ''; ?>>
             <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>            
           </div> 
-      <?php endforeach; ?> 
+      <?php endforeach; ?>
+      <label for="<?php echo $attributes['name'];?>[]" class="error"></label>  
   </div>
 <?php
 }
