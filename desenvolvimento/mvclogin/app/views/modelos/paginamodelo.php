@@ -1,5 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php';?>
-    
+<style>
+       .error{
+             color:red
+       }
+       input.error, input select.error {
+	           border-color: red;
+       }
+</style>
+
     
     <div class="row">
         <div class="col-md-6 mx-auto">
