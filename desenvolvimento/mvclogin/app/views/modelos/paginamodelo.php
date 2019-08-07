@@ -10,9 +10,7 @@
                     <?php
 
                     $checked = array(  
-                      'volei' => 'Volei',                          
-                      'basquete' => 'Basquete',
-                      'natacao' => 'Natação',
+                      'volei' => 'Volei',
                     );    
 
                       $options = array(
@@ -95,9 +93,7 @@
                           );
 
                         $checked = array(  
-                            'acrobatics' => 'Acrobatics',                          
-                            'antiques' => 'Antiques',
-                            'sports' => 'Sports',
+                            'acrobatics' => 'Acrobatics',  
                           );    
 
                           checkbox($attributes = [
@@ -122,17 +118,16 @@
                           );
 
                         $checked = array(  
-                            'luz' => 'Luz',                          
-                            'telefone' => 'Telefone',                            
+                            'luz' => 'Luz',           
                           );
                           
                           checkbox($attributes = [
-                            'id' => 'teste',
-                            'name' => 'teste',                            
+                            'id' => 'documentos',
+                            'name' => 'documentos',                            
                             'label' => 'Comprovantes anexados', 
                             'options' => $options,
                             'checked' => $checked,                            
-                            'error' => $data['teste_err'] = ""
+                            'error' => $data['documentos_err'] = ""
                         ]);
                         
 
@@ -149,7 +144,7 @@
 
                                                   
                          
-                          radionovo($attributes = [
+                          radio($attributes = [
                             'name' => 'moradia',
                             'id' => 'moradia',                            
                             'label' => 'Tipo de moradia', 
@@ -252,6 +247,23 @@
       'esportes[]' : {
         required : true,
         minlength: 1				
+      },
+      'interests[]' : {
+        required : true,
+        minlength: 1				
+      },
+      'documentos[]' : {
+        required : true,
+        minlength: 1				
+      },
+      moradia : {
+        required : true								
+      },
+      funcao : {
+        required : true								
+      },
+      infadicional : {
+        required : true
       }
 		},
 		messages : {
@@ -278,7 +290,22 @@
       },
       'esportes[]' : {
         required : 'Selecione ao menos um valor.',  
-      }   
+      },
+      'interests[]' : {
+        required : 'Selecione ao menos um valor.',  
+      },
+      'documentos[]' : {
+        required : 'Selecione ao menos um valor.',  
+      },
+      moradia : {
+				required : 'Selecione uma opção.'				
+      },
+      funcao : {
+				required : 'Selecione uma opção.'				
+      },
+      infadicional : {
+        required : 'Campo obrigatório.'
+      }         
 		}
   });
 

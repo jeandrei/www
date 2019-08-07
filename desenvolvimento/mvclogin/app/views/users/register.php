@@ -137,7 +137,7 @@
 
                                                   
                          
-                          radionovo($attributes = [
+                          radio($attributes = [
                             'name' => 'moradia',
                             'id' => 'moradia',                            
                             'label' => 'Tipo de moradia', 
