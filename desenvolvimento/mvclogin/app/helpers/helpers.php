@@ -49,6 +49,8 @@ function customcheck($attributes){?>
 }
 
 
+
+
 // GERA CHEKBOX
   function checked($value, $array) {
     if ( in_array( $value, $array ) ) {
@@ -82,6 +84,7 @@ function checkbox($attributes) {?>
 
 
 
+
 //GERA RADIO
 function radio($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST[$attributes['id']];}?>
   <div class="form-group">
@@ -89,7 +92,7 @@ function radio($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST
     
         <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php isset($id) ? radiochecked($id, $value) : ''; ?>>
+            <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php if ((isset($_POST[$attributes['name']])) && ($_POST[$attributes['name']] == $value)) { echo 'checked';} ?>>
               <label class="form-check-label" for="<?php echo $value; ?>">
                 <?php echo $title;?>
               </label>
@@ -104,9 +107,17 @@ function radio($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST
 <?php }
 
 
+
+
+
   function submit($value = 'submit', $class = 'btn btn-success btn-block') {?>
     <button type="submit" class="<?php echo $class; ?>"><?php echo $value; ?></button>
   <?php }
+
+
+
+
+
 
   function linkbutton($link, $text, $class = 'btn btn-light btn-block') {?>
     <a href="<?php echo $link; ?>" class="btn btn-light btn-block"><?php echo $text; ?></a>  
