@@ -23,3 +23,9 @@ textarea.error{
     border-color: red;
 }
 /****************************************************/
+
+
+/*Muda o texto do botão file de browse para procurar*/
+.custom-file-input ~ .custom-file-label::after {
+    content: "Procurar";
+}

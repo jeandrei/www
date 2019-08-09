@@ -58,7 +58,7 @@ function customcheck($attributes){?>
 
        
        <?php foreach ( $attributes['options'] as $id => $value ) : ?> 
-           <div class="custom-control custom-checkbox custom-control-inline">                                                                              <!--Aqui uso a função checked se o id estiver dentro do array checked_ids escrevo checked-->                         
+           <div class="custom-control custom-checkbox  <?php if($attributes['inline'] == true){echo 'custom-control-inline';}?>">                                                                              <!--Aqui uso a função checked se o id estiver dentro do array checked_ids escrevo checked-->                         
              <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $id?>" value="<?php echo $id?>" <?php isset($attributes['checked']) ? checked($id, $checked_ids) : ''; ?>>
              <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>            
            </div> 
@@ -95,7 +95,7 @@ function checkbox($attributes) {?>
        ?>
         
         <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
-            <div class="form-check-inline">
+            <div class="form-check <?php if($attributes['inline'] == true){echo 'form-check-inline';}?>">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" name="<?php echo $attributes['name']; ?>[]" id=<?php echo $attributes['id']; ?> value="<?php echo $value; ?>" <?php isset($attributes['checked']) ? checked($value, $checked_ids) : ''; ?>><?php echo $title; ?>
                 </label>
@@ -119,14 +119,14 @@ function customradio($attributes) {?>
   <p><?php echo $attributes['label']; ?></p>
 
    <?php foreach ( $attributes['options'] as $id => $value ) : ?>
-      <div class="custom-control custom-radio">
+      <div class="custom-control custom-radio <?php if($attributes['inline'] == true){echo 'custom-control-inline';}?>">
           <input type="radio" id="<?php echo $id;?>" name="<?php echo $attributes['name'];?>[]" class="custom-control-input" value="<?php echo $id?>" <?php if ((isset($_POST[$attributes['name']])) && (($_POST[$attributes['name']][0]) == $id)) { echo 'checked';} ?>>
           <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>
       </div>    
    <?php endforeach; ?>
 
    <div class="form-group">
-      <label for="<?php echo $attributes['name'];?>" class="error"><?php echo $attributes['error'];?></label> 
+      <label for="<?php echo $attributes['name'];?>[]" class="error"><?php echo $attributes['error'];?></label> 
    </div>  
 
 </div> 
@@ -147,8 +147,8 @@ function radio($attributes) {// if (isset($_POST[$attributes['id']])){$id = $_PO
     <p><?php echo $attributes['label']; ?></p>      
     
         <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php if ((isset($_POST[$attributes['name']])) && ($_POST[$attributes['name']] == $value)) { echo 'checked';} ?>>
+            <div class="form-check <?php if($attributes['inline'] == true){echo 'form-check-inline';}?>">
+              <input class="form-check-input" type="radio" name="<?php echo $attributes['name']; ?>" id="<?php echo $value; ?>" value="<?php echo $value; ?>" <?php if ((isset($_POST[$attributes['name']])) && ($_POST[$attributes['name']] == $value)) { echo 'checked';} ?>>
               <label class="form-check-label" for="<?php echo $value; ?>">
                 <?php echo $title;?>
               </label>
@@ -227,9 +227,22 @@ function textarea($attributes){?>
       </div>  
   </div>
 <?php }
-?>
 
 
-<?
+
+//Botão arquivo
+function ffile($attributes){?>
+
+  <div class="form-group">
+      <div class="custom-file" id="<?php echo $attributes['id']; ?>" lang="">
+        <input type="file" class="custom-file-input" id="<?php echo $attributes['id'];?>">
+        <label class="custom-file-label" for="<?php echo $attributes['id'];?>"><?php echo $attributes['text'];?></label>
+      </div>
+        
+      <div class="form-group">
+          <label for="<?php echo $attributes['id'];?>" class="error"><?php echo $attributes['error'];?></label>
+      </div>  
+  </div>
+<?php }
 
 

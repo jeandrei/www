@@ -24,6 +24,7 @@
                       'name' => 'faixa',
                       'id' => 'faixa',                            
                       'label' => 'Faixa etária', 
+                      'inline' => true,
                       'options' => $options,                                                        
                       'error' => $data['faixa_err'] = ""
                     ]);
@@ -42,7 +43,8 @@
                         customcheck($attributes = [
                           'id' => 'esportes',
                           'name' => 'esportes',
-                          'label' => '<b class="obrigatorio">* </b>Esportes:',    
+                          'label' => '<b class="obrigatorio">* </b>Esportes:', 
+                          'inline' => true,   
                           'options' => $options,  
                           'checked' => $checked,   
                           'error' => $data['custom_err'] = ""
@@ -119,7 +121,8 @@
                           checkbox($attributes = [
                             'id' => 'interests',
                             'name' => 'interests',                            
-                            'label' => 'Select your interests', 
+                            'label' => 'Select your interests',
+                            'inline' => true,  
                             'options' => $options,
                             'checked' => $checked,                            
                             'error' => $data['interests_err'] = ""
@@ -144,7 +147,8 @@
                           checkbox($attributes = [
                             'id' => 'documentos',
                             'name' => 'documentos',                            
-                            'label' => 'Comprovantes anexados', 
+                            'label' => 'Comprovantes anexados',
+                            'inline' => true,  
                             'options' => $options,
                             'checked' => $checked,                            
                             'error' => $data['documentos_err'] = ""
@@ -160,14 +164,13 @@
                             '03' => 'Comércio',
                             '04' => 'Sítio',
                             '05' => 'Sobrado'                            
-                          );
-
-                                                  
+                          );                                                  
                          
                           radio($attributes = [
                             'name' => 'moradia',
                             'id' => 'moradia',                            
-                            'label' => 'Tipo de moradia', 
+                            'label' => 'Tipo de moradia',
+                            'inline' => false,   
                             'options' => $options,                                                        
                             'error' => $data['moradia_err'] = ""
                           ]);
@@ -202,6 +205,14 @@
                             'label' => 'Informação adicional',                             
                             'rows' => 03,                                                                                   
                             'error' => $data['infadicional_err'] = ""
+                          ]);
+
+                          ffile($attributes = [
+                            'name' => 'arquivo1',
+                            'id' => 'arquivo1',                            
+                            'label' => 'Informação adicional',                             
+                            'text' => 'Selecione um arquivo',                                                                                   
+                            'error' => $data['arquivo1_err'] = ""
                           ]);
                        
                         
@@ -279,6 +290,9 @@
       },
       infadicional : {
         required : true
+      },
+      'faixa[]' : {
+        required : true
       }
 		},
 		messages : {
@@ -320,6 +334,9 @@
       },
       infadicional : {
         required : 'Campo obrigatório.'
+      },
+      'faixa[]' : {
+        required : 'Selecione uma opção.',  
       }         
 		}
   });
