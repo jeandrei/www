@@ -207,12 +207,18 @@
                             'error' => $data['infadicional_err'] = ""
                           ]);
 
+                            
+
                           ffile($attributes = [
                             'name' => 'arquivo1',
                             'id' => 'arquivo1',                            
                             'label' => 'Informação adicional',                             
                             'text' => 'Selecione um arquivo',                                                                                   
                             'error' => $data['arquivo1_err'] = ""
+                          ]);
+
+                          intable($attributes = [
+                            'head' => 'tabteste'                            
                           ]);
                        
                         
