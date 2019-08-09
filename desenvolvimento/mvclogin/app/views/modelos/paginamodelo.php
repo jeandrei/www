@@ -1,3 +1,4 @@
+
 <?php require APPROOT . '/views/inc/header.php';?>
    
     <div class="row">
@@ -8,6 +9,24 @@
                 <form id="modelo" class="form" action="<?php echo URLROOT; ?>/modelos/paginamodelo" method="post" enctype="multipart/form-data" >   
                     
                     <?php
+                    //MORADIA
+                    $options = array(
+                      '10' => '10 - 20',
+                      '20' => '20 - 30',
+                      '30' => '30 - 40',
+                      '40' => '40 - 50',
+                      '50' => '50 - 60'                            
+                    );
+
+                                            
+                   
+                    customradio($attributes = [
+                      'name' => 'faixa',
+                      'id' => 'faixa',                            
+                      'label' => 'Faixa etária', 
+                      'options' => $options,                                                        
+                      'error' => $data['faixa_err'] = ""
+                    ]);
 
                     $checked = array(  
                       'volei' => 'Volei',
@@ -22,7 +41,8 @@
 
                         customcheck($attributes = [
                           'id' => 'esportes',
-                          'name' => 'esportes',    
+                          'name' => 'esportes',
+                          'label' => '<b class="obrigatorio">* </b>Esportes:',    
                           'options' => $options,  
                           'checked' => $checked,   
                           'error' => $data['custom_err'] = ""
@@ -188,8 +208,6 @@
                          
                           
                     ?>
-
-
                     
                     <!--BUTTONS-->
                     <div class="row">
@@ -213,9 +231,6 @@
 
     
 <?php require APPROOT . '/views/inc/footer.php'; ?>
-
-
-
 
 
 

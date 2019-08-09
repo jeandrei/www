@@ -29,34 +29,50 @@ function text($attributes) {?>
 
 
 
-
-//CHECKBOX CUSTOMIZADO
-function customcheck($attributes){?>
- <?php $checked_ids = array(); foreach($attributes['checked'] as $key=>$value){array_push($checked_ids,$key);}?>
-  <div class="form-group">
-      
-      <?php foreach ( $attributes['options'] as $id => $value ) : ?> 
-          <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $id?>" <?php isset($attributes['checked']) ? checked($id, $checked_ids) : ''; ?>>
-            <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>            
-          </div> 
-      <?php endforeach; ?>
-      
-      <label for="<?php echo $attributes['name'];?>[]" class="error"><?php echo $attributes['error'];?></label>  
-  
-  </div>
-<?php
+function checked($value, $array) {
+  if ( in_array( $value, $array ) ) {
+    echo 'checked="checked"';
+  }
 }
 
 
 
 
-// GERA CHEKBOX
-  function checked($value, $array) {
-    if ( in_array( $value, $array ) ) {
-      echo 'checked="checked"';
-    }
-  }
+//CHECKBOX CUSTOMIZADO
+function customcheck($attributes){?>
+  <?php $checked_ids = array(); foreach($attributes['checked'] as $key=>$value){array_push($checked_ids,$key);}?>
+   <div class="form-group">
+
+      <p><?php echo $attributes['label']; ?></p>
+   
+       <?php 
+       //pego os valores marcados antes de submeter o formulário e coloco na variável checked_ids
+        if(!empty($_POST[$attributes['name']])){
+          $i=0;
+          foreach($_POST[$attributes['name']] as $key){
+            array_push($checked_ids,($_POST[$attributes['name']][$i]));
+            $i++;
+          }
+        }
+       ?>
+
+       
+       <?php foreach ( $attributes['options'] as $id => $value ) : ?> 
+           <div class="custom-control custom-checkbox custom-control-inline">                                                                              <!--Aqui uso a função checked se o id estiver dentro do array checked_ids escrevo checked-->                         
+             <input type="checkbox" class="custom-control-input" name="<?php echo $attributes['name'];?>[]" id="<?php echo $id?>" value="<?php echo $id?>" <?php isset($attributes['checked']) ? checked($id, $checked_ids) : ''; ?>>
+             <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>            
+           </div> 
+       <?php endforeach; ?>
+       
+       <label for="<?php echo $attributes['name'];?>[]" class="error"><?php echo $attributes['error'];?></label>  
+   
+   </div>
+ <?php
+ }
+
+
+
+// CHEKBOX
 function checkbox($attributes) {?>
   <div class="form-group">
     
@@ -66,6 +82,17 @@ function checkbox($attributes) {?>
     <!--no foreach ( $attributes['options'] as $value => $title ) $value vai ter acrobatics logo para poder verificar no in_array tem que ter a mesma chave-->
     <!--dai fica assim in_array(acrobatics,acrobatics)-->
     <?php $checked_ids = array(); foreach($attributes['checked'] as $key=>$value){array_push($checked_ids,$key);}?>
+
+    <?php 
+       
+        if(!empty($_POST[$attributes['name']])){
+          $i=0;
+          foreach($_POST[$attributes['name']] as $key){
+            array_push($checked_ids,($_POST[$attributes['name']][$i]));
+            $i++;
+          }
+        }
+       ?>
         
         <?php foreach ( $attributes['options'] as $value => $title ) : ?> 
             <div class="form-check-inline">
@@ -85,8 +112,37 @@ function checkbox($attributes) {?>
 
 
 
+// GERA INPUT TEXT OU PASSWORD
+function customradio($attributes) {?>
+<div class="form-group">
+
+  <p><?php echo $attributes['label']; ?></p>
+
+   <?php foreach ( $attributes['options'] as $id => $value ) : ?>
+      <div class="custom-control custom-radio">
+          <input type="radio" id="<?php echo $id;?>" name="<?php echo $attributes['name'];?>[]" class="custom-control-input" value="<?php echo $id?>" <?php if ((isset($_POST[$attributes['name']])) && (($_POST[$attributes['name']][0]) == $id)) { echo 'checked';} ?>>
+          <label class="custom-control-label" for="<?php echo $id;?>"><?php echo $value;?></label>
+      </div>    
+   <?php endforeach; ?>
+
+   <div class="form-group">
+      <label for="<?php echo $attributes['name'];?>" class="error"><?php echo $attributes['error'];?></label> 
+   </div>  
+
+</div> 
+<?php                               
+}//fim função text
+
+
+
+
+
+
+
+
+
 //GERA RADIO
-function radio($attributes) { if (isset($_POST[$attributes['id']])){$id = $_POST[$attributes['id']];}?>
+function radio($attributes) {// if (isset($_POST[$attributes['id']])){$id = $_POST[$attributes['id']];}?>
   <div class="form-group">
     <p><?php echo $attributes['label']; ?></p>      
     
