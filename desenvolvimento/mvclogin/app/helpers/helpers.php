@@ -246,7 +246,7 @@ function ffile($attributes){?>
 <?php }
 
 //Botão arquivo
-function intable($attributes){?>
+function table($attributes){?>
 
   <div class="form-group">
       
@@ -254,35 +254,30 @@ function intable($attributes){?>
 
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <? foreach($attributes['columns'] as $col) : ?> 
+            <th scope="col"><?php echo $col; ?></th>          
+          <?php endforeach; ?>  
         </tr>
       </thead>
+      
+      <!--Aqui pego o número de colunas da primeira linha para depois saber quando ir para a próxima linha-->
+      <?php $array_length  = count($attributes['columns']);?>
 
 
+      
+      <tbody>        
+          <? foreach($attributes['values'] as $column) : ?>
+          <tr>
+            <?php $i=0;?>
+            <?php while($i < $array_length) {?>
+                <td><?php echo ($column[strtolower($attributes['columns'][$i])]);?></td>
+            <?$i++; }?>  
+          </tr> 
+          <?php endforeach; ?> 
+      </tbody>    
 
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>          
+
+                
   
   </table>
 

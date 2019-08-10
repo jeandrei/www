@@ -217,8 +217,42 @@
                             'error' => $data['arquivo1_err'] = ""
                           ]);
 
-                          intable($attributes = [
-                            'head' => 'tabteste'                            
+                          $columns = array(
+                            'Nome',
+                            'Sobrenome',
+                            'Sexo',
+                            'Cor',
+                            'Telefone'
+                          );
+
+                          $values[] = array(
+                            'nome' => 'Jeandrei',
+                            'sobrenome' => 'Walter',
+                            'sexo' => 'Masculino',
+                            'cor' => 'Branca',
+                            'telefone' => '99999999'
+                          );
+                          $values[] = array(
+                            'nome' => 'Mari',
+                            'sobrenome' => 'Walter',
+                            'sexo' => 'Feminina',
+                            'cor' => 'Branca',
+                            'telefone' => '99999999'
+                          );
+                          $values[] = array(
+                            'nome' => 'Dexter',
+                            'sobrenome' => 'Walter',
+                            'sexo' => 'Macho',
+                            'cor' => 'Preto',
+                            'telefone' => '000000'
+                          );
+                          
+
+
+                          table($attributes = [
+                            'label' => 'tabteste', 
+                            'columns' => $columns,
+                            'values' => $values                           
                           ]);
                        
                         
