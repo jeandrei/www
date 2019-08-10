@@ -217,6 +217,8 @@
                             'error' => $data['arquivo1_err'] = ""
                           ]);
 
+
+                        // Colunas da primeira linha da tabela
                           $columns = array(
                             'Nome',
                             'Sobrenome',
@@ -225,6 +227,8 @@
                             'Telefone'
                           );
 
+
+                          // Valores da tabela
                           $values[] = array(
                             'nome' => 'Jeandrei',
                             'sobrenome' => 'Walter',
@@ -248,7 +252,7 @@
                           );
                           
 
-
+                          //função que monta a tabela
                           table($attributes = [
                             'label' => 'tabteste', 
                             'columns' => $columns,
