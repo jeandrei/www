@@ -245,7 +245,7 @@ function ffile($attributes){?>
   </div>
 <?php }
 
-//Botão arquivo
+//tabela
 function table($attributes){?>
 
   <div class="form-group">
@@ -284,5 +284,51 @@ function table($attributes){?>
 
   </div>
 <?php }
+
+//tabela
+function table2($attributes){?>
+
+  <div class="form-group">
+      
+  <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <? foreach($attributes['columns'] as $col) : ?> 
+            <th scope="col"><?php echo $col; ?></th>          
+          <?php endforeach; ?>  
+        </tr>
+      </thead>   
+      
+      <tbody>        
+          <? foreach($attributes['values'] as $key => $column) : ?>
+          <tr>
+            <!--Aqui passo a linha do array se tenho 3 linhas de dados por exemplo aqui pego linha por linha-->
+            <!--e passo essa linha para outro array $attributes['values'][1];-->
+            <?php   $arr = $attributes['values'][$key];
+                    //aqui passo as chaves ou seja os campos nome, endereco, id etc.
+                    $keys = array_keys($arr);
+                    //aqui armazeno o tamanho do array o número de campos
+                    $size = sizeof($arr); 
+            ?>
+                  <!--Aqui imprimo o valor dentro da tabela-->
+                   <?php  for($x = 0; $x < $size; $x++ ) { ?>
+                    <td>  <?php echo $arr[$keys[$x]] ; ?></td>
+                  <?php } 
+            ?>
+            
+          </tr> 
+          <?php endforeach; ?> 
+      </tbody>    
+
+
+                
+  
+  </table>
+
+
+  </div>
+<?php }
+
 
 
