@@ -6,9 +6,17 @@
         }    
         
         public function paginamodelo(){
-            
-            
-                      $this->view('modelos/paginamodelo');
+
+                      //busca os dados no banco
+                      $array = $this->userModel->getPessoas();
+
+                      //converte objetos em array *********TENTAR JOGAR ESSA PARTE DO JSON DENTRO DA FUNÇÃO QUE CRIA A TABELA********
+                      $pessoas = json_decode(json_encode($array), True);
+                      $data = [
+                        'pessoas' => $pessoas
+                    ];                    
+                                       
+                      $this->view('modelos/paginamodelo', $data);
                     }               
 
             

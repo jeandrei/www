@@ -228,74 +228,21 @@
 
                     //TABELA
                       $columns = array(
+                        'ID',
                         'Nome',
                         'Sobrenome',
                         'Sexo',
                         'Cor',
                         'Telefone',                            
-                      );
-                      // Valores da tabela
-                      $values[] = array(
-                        'nome' => 'Jeandrei',
-                        'sobrenome' => 'Walter',
-                        'sexo' => 'Masculino',
-                        'cor' => 'Branca',
-                        'telefone' => '99999999'
-                      );
-                      $values[] = array(
-                        'nome' => 'Mari',
-                        'sobrenome' => 'Walter',
-                        'sexo' => 'Feminina',
-                        'cor' => 'Branca',
-                        'telefone' => '99999999'
-                      );
-                      $values[] = array(
-                        'nome' => 'Dexter',
-                        'sobrenome' => 'Walter',
-                        'sexo' => 'Macho',
-                        'cor' => 'Preto',
-                        'telefone' => '000000'
-                      );
-                      $values[] = array(
-                        'nome' => 'Biju',
-                        'sobrenome' => 'Walter',
-                        'sexo' => 'Femea',
-                        'cor' => 'Preta',
-                        'telefone' => '8888888'
-                      );
-                      
-                      
+                      ); 
+                      $values = $data['pessoas'];
                       table2($attributes = [
                         'label' => 'tabteste', 
                         'columns' => $columns,
                         'values' => $values                           
                       ]);
 
-                        /*  $arr = $values[1];
-
-                          $keys = array_keys($arr);
-                          echo "The keys array: "; 
-                         print_r($keys); 
-                         
-                         // Getting the size of the sample array 
-                          $size = sizeof($arr); 
-      
-                          //Accessing elements of $arr using 
-                          //integer index using $x 
-                          echo "The elements of the sample array: " . "\n"; 
-  
-                          for($x = 0; $x < $size; $x++ ) { 
-                              echo "key: ". $keys[$x] . ", value: " 
-                                      . $arr[$keys[$x]] . "\n"; 
-                          } 
-                          */
-
-                          //função que monta a tabela
-                          
-                       
-                        
-                         
-                          
+                      
                     ?>
                     
                     <!--BUTTONS-->
@@ -311,7 +258,8 @@
                 </form>
             </div>
         </div>
-    </div>   
+    </div>
+    
 
 
 

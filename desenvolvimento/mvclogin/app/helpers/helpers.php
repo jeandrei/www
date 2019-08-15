@@ -287,7 +287,7 @@ function table($attributes){?>
 
 //tabela
 function table2($attributes){?>
-
+<div class="container">
   <div class="form-group">
       
   <table class="table table-striped">
@@ -313,7 +313,7 @@ function table2($attributes){?>
             ?>
                   <!--Aqui imprimo o valor dentro da tabela-->
                    <?php  for($x = 0; $x < $size; $x++ ) { ?>
-                    <td>  <?php echo $arr[$keys[$x]] ; ?></td>
+                    <td style="word-break:break-all;">  <?php echo $arr[$keys[$x]] ; ?></td>
                   <?php } 
             ?>
             
