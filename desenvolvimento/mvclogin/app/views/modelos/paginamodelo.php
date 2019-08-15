@@ -262,7 +262,9 @@
                         'sexo' => 'Femea',
                         'cor' => 'Preta',
                         'telefone' => '8888888'
-                      );                                            
+                      );
+                      
+                      
                       table2($attributes = [
                         'label' => 'tabteste', 
                         'columns' => $columns,
