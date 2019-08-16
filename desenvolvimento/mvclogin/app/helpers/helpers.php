@@ -245,7 +245,9 @@ function ffile($attributes){?>
   </div>
 <?php }
 
-//tabela
+
+
+//tabela1
 function table($attributes){?>
 
   <div class="form-group">
@@ -285,7 +287,7 @@ function table($attributes){?>
   </div>
 <?php }
 
-//tabela
+//tabela2
 function table2($attributes){?>
 <div class="container">
   <div class="form-group">
@@ -329,6 +331,61 @@ function table2($attributes){?>
 
   </div>
 <?php }
+
+//tabela
+function table3($attributes){
+                    $camposmostrar = array();//declaro a variável como array os campos que quero mostrar na tabela 
+                    $array = json_decode(json_encode($attributes['values']), True);//transformo o resultado da consulda que vem do banco de objeto para array 
+                    $columns = $attributes['columns'];// passo as colunas da tabela informada nos atributos
+?>
+
+  <div class="container">
+    <div class="form-group">
+        
+    <table class="table table-striped">
+  
+        <thead>
+          <tr>
+            <? foreach($attributes['columns'] as $titulo => $campobd) : ?> 
+              <!--Aqui ele vai correr todos os campos informados no atributo columns-->
+              <!--Cada siclo eu adiciono o campo na variável campomostrar depois eu verifico no inarray se está aqui eu mostro se não não-->
+              <th scope="col"><?php $camposmostrar[] .= $campobd; echo $titulo; ?></th>          
+            <?php endforeach; ?>  
+          </tr>
+        </thead>   
+        
+        <tbody>        
+            <? foreach($array as $key => $column) : ?>
+            <tr>
+              <!--Aqui passo a linha do array se tenho 3 linhas de dados por exemplo aqui pego linha por linha-->
+              <!--e passo essa linha para outro array $array[1];-->
+              <?php   $arr = $array[$key];
+                      //aqui passo as chaves ou seja os campos nome, endereco, id etc.
+                      $keys = array_keys($arr);
+                      //aqui armazeno o tamanho do array o número de campos
+                      $size = sizeof($arr); 
+              ?>
+                    <!--Aqui imprimo o valor dentro da tabela-->
+                     <?php  for($x = 0; $x < $size; $x++ ) { ?>
+                        <!--Se o campo estiver dentro do array campomostrar eu mostro na tabela-->
+                        <?php if(in_array(($keys[$x]),$camposmostrar)) {?>
+                              <td style="word-break:break-all;">  <?php echo $arr[$keys[$x]] ; ?></td>
+                        <?php }?>
+                    <?php } 
+              ?>
+              
+            </tr> 
+            <?php endforeach; ?> 
+        </tbody>    
+  
+  
+                  
+    
+    </table>
+  
+  
+    </div>
+  <?php }
 
 
 

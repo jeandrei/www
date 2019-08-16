@@ -8,10 +8,8 @@
         public function paginamodelo(){
 
                       //busca os dados no banco
-                      $array = $this->userModel->getPessoas();
-
-                      //converte objetos em array *********TENTAR JOGAR ESSA PARTE DO JSON DENTRO DA FUNÇÃO QUE CRIA A TABELA********
-                      $pessoas = json_decode(json_encode($array), True);
+                      $pessoas = $this->userModel->getPessoas();
+                     
                       $data = [
                         'pessoas' => $pessoas
                     ];                    

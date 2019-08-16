@@ -227,16 +227,19 @@
 
 
                     //TABELA
-                      $columns = array(
-                        'ID',
-                        'Nome',
-                        'Sobrenome',
-                        'Sexo',
-                        'Cor',
-                        'Telefone',                            
-                      ); 
+                    // em columns coloca como quer que epareça no topo da tabela ex Nome
+                    // e o campo do banco de dados nome
+                      $columns = array(                        
+                        'Nome' => 'nome',
+                        'Sobrenome' => 'sobrenome',
+                        'Sexo' => 'sexo',
+                        'Cor' => 'cor',
+                        'Telefone' => 'telefone',                            
+                      );                      
+                      //array retornado na consulta do banco de dados 
                       $values = $data['pessoas'];
-                      table2($attributes = [
+                      // chama a função do helper que monta a tabela
+                      table3($attributes = [
                         'label' => 'tabteste', 
                         'columns' => $columns,
                         'values' => $values                           
