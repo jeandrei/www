@@ -5,10 +5,10 @@
             $this->userModel = $this->model('Modelo');
         }    
         
-        public function paginamodelo(){
+        public function paginamodelo($page=0){
 
-                      //busca os dados no banco
-                      $pessoas = $this->userModel->getPessoas();
+                      //busca os dados no banco id_pag a partir de onde inicia , 5 quntidade de resultados por pagina
+                      $pessoas = $this->userModel->getPessoas($page,5);
                      
                       $data = [
                         'pessoas' => $pessoas

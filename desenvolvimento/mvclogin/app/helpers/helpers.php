@@ -246,94 +246,8 @@ function ffile($attributes){?>
 <?php }
 
 
-
-//tabela1
-function table($attributes){?>
-
-  <div class="form-group">
-      
-  <table class="table table-striped">
-
-      <thead>
-        <tr>
-          <? foreach($attributes['columns'] as $col) : ?> 
-            <th scope="col"><?php echo $col; ?></th>          
-          <?php endforeach; ?>  
-        </tr>
-      </thead>
-      
-      <!--Aqui pego o número de colunas da primeira linha para depois saber quando ir para a próxima linha-->
-      <?php $array_length  = count($attributes['columns']);?>
-
-
-      
-      <tbody>        
-          <? foreach($attributes['values'] as $column) : ?>
-          <tr>
-            <?php $i=0;?>
-            <?php while($i < $array_length) {?>
-                <td><?php echo ($column[strtolower($attributes['columns'][$i])]);?></td>
-            <?$i++; }?>  
-          </tr> 
-          <?php endforeach; ?> 
-      </tbody>    
-
-
-                
-  
-  </table>
-
-
-  </div>
-<?php }
-
-//tabela2
-function table2($attributes){?>
-<div class="container">
-  <div class="form-group">
-      
-  <table class="table table-striped">
-
-      <thead>
-        <tr>
-          <? foreach($attributes['columns'] as $col) : ?> 
-            <th scope="col"><?php echo $col; ?></th>          
-          <?php endforeach; ?>  
-        </tr>
-      </thead>   
-      
-      <tbody>        
-          <? foreach($attributes['values'] as $key => $column) : ?>
-          <tr>
-            <!--Aqui passo a linha do array se tenho 3 linhas de dados por exemplo aqui pego linha por linha-->
-            <!--e passo essa linha para outro array $attributes['values'][1];-->
-            <?php   $arr = $attributes['values'][$key];
-                    //aqui passo as chaves ou seja os campos nome, endereco, id etc.
-                    $keys = array_keys($arr);
-                    //aqui armazeno o tamanho do array o número de campos
-                    $size = sizeof($arr); 
-            ?>
-                  <!--Aqui imprimo o valor dentro da tabela-->
-                   <?php  for($x = 0; $x < $size; $x++ ) { ?>
-                    <td style="word-break:break-all;">  <?php echo $arr[$keys[$x]] ; ?></td>
-                  <?php } 
-            ?>
-            
-          </tr> 
-          <?php endforeach; ?> 
-      </tbody>    
-
-
-                
-  
-  </table>
-
-
-  </div>
-<?php }
-
 //tabela
-function table3($attributes){
+function table($attributes){
                     $camposmostrar = array();//declaro a variável como array os campos que quero mostrar na tabela 
                     $array = json_decode(json_encode($attributes['values']), True);//transformo o resultado da consulda que vem do banco de objeto para array 
                     $columns = $attributes['columns'];// passo as colunas da tabela informada nos atributos
@@ -386,6 +300,82 @@ function table3($attributes){
   
     </div>
   <?php }
+
+
+//tabela
+function tablepag($attributes){
+  $camposmostrar = array();//declaro a variável como array os campos que quero mostrar na tabela 
+  $array = json_decode(json_encode($attributes['values']), True);//transformo o resultado da consulda que vem do banco de objeto para array 
+  $columns = $attributes['columns'];// passo as colunas da tabela informada nos atributos
+?>
+
+<div class="container">
+<div class="form-group">
+
+<table class="table table-striped">
+
+<thead>
+<tr>
+<? foreach($attributes['columns'] as $titulo => $campobd) : ?> 
+<!--Aqui ele vai correr todos os campos informados no atributo columns-->
+<!--Cada siclo eu adiciono o campo na variável campomostrar depois eu verifico no inarray se está aqui eu mostro se não não-->
+<th scope="col"><?php $camposmostrar[] .= $campobd; echo $titulo; ?></th>          
+<?php endforeach; ?>  
+</tr>
+</thead>   
+
+<tbody>        
+<? foreach($array as $key => $column) : ?>
+<tr>
+<!--Aqui passo a linha do array se tenho 3 linhas de dados por exemplo aqui pego linha por linha-->
+<!--e passo essa linha para outro array $array[1];-->
+<?php   $arr = $array[$key];
+    //aqui passo as chaves ou seja os campos nome, endereco, id etc.
+    $keys = array_keys($arr);
+    //aqui armazeno o tamanho do array o número de campos
+    $size = sizeof($arr); 
+?>
+  <!--Aqui imprimo o valor dentro da tabela-->
+   <?php  for($x = 0; $x < $size; $x++ ) { ?>
+      <!--Se o campo estiver dentro do array campomostrar eu mostro na tabela-->
+      <?php if(in_array(($keys[$x]),$camposmostrar)) {?>
+            <td style="word-break:break-all;">  <?php echo $arr[$keys[$x]] ; ?></td>
+      <?php }?>
+  <?php } 
+?>
+
+</tr> 
+<?php endforeach; ?> 
+</tbody>    
+
+
+
+
+</table>
+
+<!--PAGINAÇÃO-->
+<ul class="pagination list-inline justify-content-center">
+
+<?php $pagLink = ""; $page="";
+//count($count) retorna o número de registros trazido na consulta
+if(isset($x)){
+      $total_records = $x -1;                 
+      $total_pages = ceil($total_records / 5);          
+      for ($i=1; $i<=$total_pages; $i++) {
+                  // SE O CONTADOR FOR IGUAL AO NÚMERO DA PAGINA PASSADA PELO GET ATRIBUI O VALOR ACTIVE A VARIÁVEL ACTIVE
+                  // E COLOCA NA CLASSE class=page-item
+                  if((isset($_GET['page'])) && $i == $_GET['page']){$active = 'active';}else{ $active = "";}  
+                  $pagLink .= "<li class='page-item $active'><a class='page-link' href='index.php?page=".$i."'>".$i."</a></li>";  
+      };  
+      echo $pagLink . "</div>"; 
+} 
+?>  
+
+</ul>
+
+
+</div>
+<?php }
 
 
 

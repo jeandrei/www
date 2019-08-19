@@ -239,7 +239,7 @@
                       //array retornado na consulta do banco de dados 
                       $values = $data['pessoas'];
                       // chama a função do helper que monta a tabela
-                      table3($attributes = [
+                      tablepag($attributes = [
                         'label' => 'tabteste', 
                         'columns' => $columns,
                         'values' => $values                           
@@ -247,6 +247,56 @@
 
                       
                     ?>
+
+                    <!--PAGINAÇÃO-->
+                    <ul class="pagination list-inline justify-content-center">
+
+                    <?php                        
+                    //count($count) retorna o número de registros trazido na consulta
+                    if(isset($count)){
+                          $total_records = count($count);       
+                          $total_pages = ceil($total_records / $limit);          
+                          for ($i=1; $i<=$total_pages; $i++) {
+                                      // SE O CONTADOR FOR IGUAL AO NÚMERO DA PAGINA PASSADA PELO GET ATRIBUI O VALOR ACTIVE A VARIÁVEL ACTIVE
+                                      // E COLOCA NA CLASSE class=page-item
+                                      if($i == $_GET['page']){$active = 'active';}else{ $active = "";}  
+                                      $pagLink .= "<li class='page-item $active'><a class='page-link' href='index.php?page=".$i."&etapa=".$pag_etapa."&status=".$pag_status."'>".$i."</a></li>";  
+                          };  
+                          echo $pagLink . "</div>"; 
+                    } 
+                    ?>  
+
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     
                     <!--BUTTONS-->
                     <div class="row">

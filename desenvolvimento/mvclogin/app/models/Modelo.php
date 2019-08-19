@@ -8,8 +8,8 @@
             $this->db = new Database;
         }  
         
-        public function getPessoas(){
-            $this->db->query("SELECT * FROM pessoas");
+        public function getPessoas($page,$item_per_pag){
+            $this->db->query("SELECT * FROM pessoas LIMIT $page, $item_per_pag");
     
             return $this->db->resultSet();
         }        
