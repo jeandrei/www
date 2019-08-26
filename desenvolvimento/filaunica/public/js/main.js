@@ -189,5 +189,10 @@ function checkedRadioBtn(sGroupName)
                 return null;
             }
         }
-    }
+		}
+		
+	function focofield(field)
+	{
+		document.getElementById(field).focus();
+	}
 

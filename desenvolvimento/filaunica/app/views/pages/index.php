@@ -20,24 +20,10 @@
 <?php //require APPROOT . '/views/inc/navbar.php'; ?>
 <!-- a linha abaixo inicia um container do bootstrap ela vai fechr no arquivo footer.php-->
   <div class="container">  
-
-<script>
-      function validation(){
-          var protocolo = document.getElementById('protocolo').value;
-         
-          
-          
-          if(protocolo == ""){			
-            document.getElementById('protocolo_err').innerHTML = "Por favor informe o número do protocolo!";           
-            focofield('protocolo');
-            return false;
-          }
-      }
-  </script>
-
 <body>
 
 <img src="<?php echo URLROOT; ?>/img/LOGO.png" class="img-fluid" alt="Responsive image">
+
 
 
 <div class="container text-center">
@@ -51,40 +37,26 @@
             </div>
 
 
+            <!-- FILA ÚNICA DESCRIÇÃO-->
+            <div class="jumbotron jumbotron-fluid text-center">
+                <div class="container">
+                    <h1 class="display-3"><?php echo $data['title'];?></h1>
+                    <p class="lead"><?php echo $data['description']; ?></p>
+                </div>
+            </div>
+
+
 
     
           <div class="row justify-content-center align-items-center">         
               <div class="col-lg-4">
-                    <a href="?act=add" class="btn btn-primary btn-lg btn-block" role="button">Cadastrar</a>                         
-                    <a href="?act=list" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a>                
+                    <a href="<? echo URLROOT;?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Cadastrar</a>                         
+                    <a href="<? echo URLROOT;?>/filas/listachamada" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a> 
+                    <a href="<? echo URLROOT;?>/filas/consultar" class="btn btn-primary btn-lg btn-block" role="button">Consultar</a>                  
               </div>
-          </div>
-
-
-     <hr>
-     
-
-     
-          <div class="row justify-content-center align-items-center">                  
-              <div class="col-lg-6">
-                  <form action="?act=search" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
-                    <div class="form-group mx-sm-3 mb-2">
-                      <label for="protocolo" class="sr-only"></label>                                 
-                      <input type="text" class="form-control form-control-lg onlynumbers" id="protocolo" name="protocolo" placeholder="Protocolo">               
-                    </div>             
-                    <button type="submit" class="btn btn-primary btn-lg mb-2">Consultar</button>
-                  </form>     
-              </div>  
-          </div>
-     
-
-
-     
-     <span id="protocolo_err" class="text-danger"><?php isset($data['protocolo_err']) : echo $data['protocolo_err'];  ?></span>     
+          </div>            
 
 </div> 
-
-</body>
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
