@@ -1,3 +1,6 @@
+
+-- CRIAR O BANCO utf8_general_ci
+
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
@@ -31,7 +34,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `bairro` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `bairro`
@@ -59,7 +62,7 @@ CREATE TABLE `escola` (
   `bairro_id` int(11) NOT NULL,
   `logradouro` varchar(255) NOT NULL,
   `numero` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `escola`
@@ -87,7 +90,7 @@ CREATE TABLE `etapa` (
   `data_ini` date DEFAULT NULL,
   `data_fin` date DEFAULT NULL,
   `descricao` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `etapa`
@@ -137,7 +140,7 @@ CREATE TABLE `fila` (
   `turno3` varchar(20) DEFAULT NULL,
   `comprovante_res_nome` varchar(255) DEFAULT NULL,
   `comprovante_nasc_nome` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Índices de tabelas apagadas
@@ -207,7 +210,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `users`

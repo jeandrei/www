@@ -172,7 +172,46 @@
                                     <!--LINHA NOVA PARA OS CELULARES-->
                                 </div>
 
-                                <!--AQUI VAI O SELECT DE BAIRRO E RUA-->
+                                <!--NOVA LINHA PARA BAIRRO E RUA-->
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="bairro">
+                                                Bairro:
+                                            </label>
+                                            <select 
+                                                name="bairro" 
+                                                id="bairro" 
+                                                class="form-control"
+                                                >  
+                                                <option value="">Selecione o Bairro</option>
+                                                    <?php                                                    
+                                                    foreach($data['bairros'] as $bairro) : ?> 
+                                                        <option value="<?php echo $bairro->id; ?>"
+                                                                    <?php echo $data['bairroSelecionado'] == $bairro->id ? 'selected':'';?>                                                                                                                                   
+                                                        >
+                                                            <?php echo $bairro->nome;?>
+                                                        </option>
+                                                    <?php endforeach; ?>  
+                                            </select>
+                                            <span id="bairro_err" class="text-danger"><?php //echo $data['bairro_err']; ?></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="rua">
+                                                Rua:
+                                            </label>
+                                            <input 
+                                                type="text" 
+                                                name="rua" 
+                                                id="rua"
+                                                class="form-control"
+                                                value="<?php htmlout($data['rua']); ?>"
+                                                onkeydown="upperCaseF(this)" 
+                                                >
+                                        <span id="rua_err" class="text-danger"><?php //echo $data['rua_err']; ?></span>
+                                        </div>
+                                                                      
+                                    <!--NOVA LINHA PARA BAIRRO E RUA-->
+                                    </div>
 
 
                                 <!--NOVA LINHA PARA NÚMERO E COMPLEMENTO-->                            
@@ -316,6 +355,141 @@
                                 <!--INFORMATIVO DE OPÇÕES DE ESCOLHA-->
                                 </div>
 
+                                <!--ESCOLA E TURNO OPÇÃO 1-->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="opcao1" class="help-block">
+                                            *Escola:
+                                        </label>
+                                        <select 
+                                            name="opcao1" 
+                                            id="opcao1" 
+                                            class="form-control "                                        
+                                        >
+                                                <option value="">Selecione a Escola</option>
+                                                <?php                                                    
+                                                    foreach($data['escolas'] as $escola) : ?> 
+                                                        <option value="<?php echo $escola->id; ?>"
+                                                                    <?php echo $data['escola1Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                        >
+                                                            <?php echo $escola->nome;?>
+                                                        </option>
+                                                    <?php endforeach; ?>      
+                                                    
+                                        </select>                                           
+                                    <span id="opcao1_err" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="turno1" class="help-block">
+                                                *Turno
+                                            </label>
+                                            <select 
+                                                class="form-control "
+                                                id="turno1"
+                                                name="turno1"
+                                            >
+                                            <option value="">Selecione o turno</option>
+                                                <option value="1" >Matutino</option>
+                                                <option value="2" >Vespertino</option>
+                                                <option value="3" >Integral</option>
+                                            </select>
+                                            <span id="turno1_err" class="text-danger"></span>                                      
+                                        </div>
+                                    </div>
+                                <!--ESCOLA E TURNO OPÇÃO 1-->
+                                </div>
+
+                                <!--ESCOLA E TURNO OPÇÃO 2-->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="opcao2" class="help-block">
+                                            *Escola:
+                                        </label>
+                                        <select 
+                                            name="opcao2" 
+                                            id="opcao2" 
+                                            class="form-control "                                        
+                                        >
+                                                <option value="">Selecione a Escola</option>
+                                                <?php                                                    
+                                                    foreach($data['escolas'] as $escola) : ?> 
+                                                        <option value="<?php echo $escola->id; ?>"
+                                                                    <?php echo $data['escola2Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                        >
+                                                            <?php echo $escola->nome;?>
+                                                        </option>
+                                                    <?php endforeach; ?>      
+                                                    
+                                        </select>                                           
+                                    <span id="opcao2_err" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="turno2" class="help-block">
+                                                *Turno
+                                            </label>
+                                            <select 
+                                                class="form-control "
+                                                id="turno2"
+                                                name="turno2"
+                                            >
+                                            <option value="">Selecione o turno</option>
+                                                <option value="1" >Matutino</option>
+                                                <option value="2" >Vespertino</option>
+                                                <option value="3" >Integral</option>
+                                            </select>
+                                            <span id="turno2_err" class="text-danger"></span>                                      
+                                        </div>
+                                    </div>
+                                <!--ESCOLA E TURNO OPÇÃO 2-->
+                                </div>
+
+                                <!--ESCOLA E TURNO OPÇÃO 3-->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="opcao3" class="help-block">
+                                            *Escola:
+                                        </label>
+                                        <select 
+                                            name="opcao3" 
+                                            id="opcao3" 
+                                            class="form-control "                                        
+                                        >
+                                                <option value="">Selecione a Escola</option>
+                                                <?php                                                    
+                                                    foreach($data['escolas'] as $escola) : ?> 
+                                                        <option value="<?php echo $escola->id; ?>"
+                                                                    <?php echo $data['escola3Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                        >
+                                                            <?php echo $escola->nome;?>
+                                                        </option>
+                                                    <?php endforeach; ?>      
+                                                    
+                                        </select>                                           
+                                    <span id="opcao3_err" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="turno3" class="help-block">
+                                                *Turno
+                                            </label>
+                                            <select 
+                                                class="form-control "
+                                                id="turno3"
+                                                name="turno3"
+                                            >
+                                            <option value="">Selecione o turno</option>
+                                                <option value="1" >Matutino</option>
+                                                <option value="2" >Vespertino</option>
+                                                <option value="3" >Integral</option>
+                                            </select>
+                                            <span id="turno3_err" class="text-danger"></span>                                      
+                                        </div>
+                                    </div>
+                                <!--ESCOLA E TURNO OPÇÃO 3-->
+                                </div>
+
 
                             <!--FIM BLOCO AZUL DA DIREITA-->
                             </blockquote>
@@ -345,7 +519,79 @@
                 <!--DIV 5 2º ETAPA-->
                 <div role="tabpanel" class="tab-pane" id="etapaDois">
                     <!-- DIV 6 LINHA COMPROVANTES-->
-                    <div class="row">   
+                    <div class="row" style="margin:5px;">  
+
+                         <!--*************COMPROVANTE DE RESIDÊNCIA************-->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="alert alert-warning" role="alert">
+                                    Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
+                                    residência,
+                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                </div>
+                            </div>
+                            <div class="custom-file" id="comprovante ?>" lang="">
+                                <label for="comprovante_residencia">
+                                    Comprovante de residência
+                                    <div style="color:red; font-size:25px;">
+                                    <span id="res_erro"></span>
+                                    </div>
+                                    
+                                </label><br>
+                                <div class="form-group">
+                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                        <input 
+                                        type="file" 
+                                        class="custom-file-input" 
+                                        id="comprovante_residencia"
+                                        onchange="return fileValidation('comprovante_residencia','res_erro');"
+                                        >
+                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
+                                    </div>                                
+                                    <div class="form-group">
+                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
+                                    </div>  
+                                </div>                                
+                            </div> 
+                        <!--*************COMPROVANTE DE RESIDÊNCIA************-->
+                        </div>
+                        
+                                            
+
+                        <!--*************COMPROVANTE DE NASCIMENTO************-->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="alert alert-warning" role="alert">
+                                    Em um <strong>único</strong> arquivo deve ser enviado a certidão de
+                                    nascimento,
+                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="certidaonascimento">
+                                    Comprovante de nascimento da criança
+                                    <div style="color:red; font-size:25px;">
+                                    <span id="cert_error"></span>
+                                    </div>
+
+                                </label><br>
+                                <div class="form-group">
+                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                        <input type="file" class="custom-file-input" id="comprovante">
+                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
+                                    </div>
+                                        
+                                    <div class="form-group">
+                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
+                                    </div>  
+                                </div>
+                            </div>
+                        <!--*************COMPROVANTE DE NASCIMENTO************-->
+                        </div>             
+                            
+
+                        <!--FIM LINHA COMPROVANTES-->
+                        </div> 
                         
                     <!--FECHA DIV 6 LINHA COMPROVANTES-->
                     </div>
