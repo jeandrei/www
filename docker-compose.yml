@@ -49,6 +49,7 @@ services:
     networks:
       #nome da rede de comunicação entre containers
       - default
+    restart: always
 
   #container separado para o nosso banco de dados bd mysql
   db:
@@ -72,6 +73,7 @@ services:
     networks:
         #nome da rede de comunicação entre containers
         - default
+    restart: always
   
   #criamos mais um container para o phpmyadmin
   phpmyadmin:
@@ -88,6 +90,7 @@ services:
             MYSQL_USER: spuser
             MYSQL_PASSWORD: mypassword
             MYSQL_ROOT_PASSWORD: rootadm
+            restart: always
 volumes:
     dumps:
- 
+    

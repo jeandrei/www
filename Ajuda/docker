@@ -1,4 +1,10 @@
-
+Para colocar o docker para rodar automaticamente
+em todos os containers no arquivo docker-compose.yml colocar a seguinte linha
+restart: always
+executar o seguinte comando
+sudo systemctl enable docker
+e executar ao menos uma vez PELO MENOS UMA VEZ
+docker-compose up -d
 
 acessar o docker
 docker exec -it container bash
