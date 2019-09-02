@@ -520,16 +520,80 @@
 
                                             <!--DIV 5 2º ETAPA-->
                                             <div role="tabpanel" class="tab-pane" id="etapaDois">
-                                                    
+                                                        
+                                                        <!-- DIV 6 LINHA COMPROVANTES-->
+                                                        <div class="row" style="margin:5px;"> 
+                                                                
+                                                                        <!--*************COMPROVANTE DE RESIDÊNCIA************-->
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <div class="alert alert-warning" role="alert">
+                                                                                    Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
+                                                                                    residência,
+                                                                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="custom-file" id="comprovante ?>" lang="">
+                                                                                <label for="comprovante_residencia">
+                                                                                    Comprovante de residência
+                                                                                    <div style="color:red; font-size:25px;">
+                                                                                    <span id="res_erro"></span>
+                                                                                    </div>
+                                                                                    
+                                                                                </label><br>
+                                                                                <div class="form-group">
+                                                                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                                                                        <input 
+                                                                                        type="file" 
+                                                                                        class="custom-file-input" 
+                                                                                        id="comprovante_residencia"
+                                                                                        onchange="return fileValidation('comprovante_residencia','res_erro');"
+                                                                                        >
+                                                                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
+                                                                                    </div>                                
+                                                                                    <div class="form-group">
+                                                                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
+                                                                                    </div>  
+                                                                                </div>                                
+                                                                            </div> 
+                                                                        <!--*************COMPROVANTE DE RESIDÊNCIA************-->
+                                                                        </div>
 
 
+                                                                        <!--*************COMPROVANTE DE NASCIMENTO************-->
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <div class="alert alert-warning" role="alert">
+                                                                                    Em um <strong>único</strong> arquivo deve ser enviado a certidão de
+                                                                                    nascimento,
+                                                                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="certidaonascimento">
+                                                                                    Comprovante de nascimento da criança
+                                                                                    <div style="color:red; font-size:25px;">
+                                                                                    <span id="cert_error"></span>
+                                                                                    </div>
 
-                                                            
-
-
-
-
-
+                                                                                </label><br>
+                                                                                <div class="form-group">
+                                                                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                                                                        <input type="file" class="custom-file-input" id="comprovante">
+                                                                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
+                                                                                    </div>
+                                                                                        
+                                                                                    <div class="form-group">
+                                                                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            </div>
+                                                                        <!--*************COMPROVANTE DE NASCIMENTO************-->
+                                                                        </div> 
+                                                                            
+                                                        <!--FECHA DIV 6 LINHA COMPROVANTES-->
+                                                        </div>
 
                                                 
                                                         <!--BOTÃO ENVIAR DADOS-->
