@@ -36,9 +36,9 @@
 <!--************************DAQUI PARA BAIXO INICIA AS ABAS**********************************-->
 
 <!--DIV 1 PARA ACOMODAR AS ABAS-->
-<div class="row" style="background-color:#FFFAF0">
-        
-    <form action="?act=save" method="post" enctype="multipart/form-data" onsubmit="return validation()"> 
+<div class="row" style="background-color:#FFFAF0">        
+    
+    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post" enctype="multipart/form-data">  
 
                 <!--DIV 2 CONTEÚDO DENTRO DAS ABAS-->
                 <div class="col-lg-14" id="result"> 

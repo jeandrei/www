@@ -11,6 +11,8 @@
             //pega todas as escolas
             $escolas = $this->filaModel->getEscolas();
 
+            var_dump($_POST);
+
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Process form
