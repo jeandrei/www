@@ -4,6 +4,13 @@
 ?>
 
 
+<?php
+//função emite erro 
+if(!empty($data['flash_err'])){
+flash('alert-danger',$data['flash_err'],'alert alert-danger');
+echo flash('alert-danger');}
+?> 
+
 
 <!--PARTE ACIMA IMAGEM GRUPO E BARRA AZUL-->
 <div class="row">
@@ -90,7 +97,7 @@
                                                                                                                     type="text" 
                                                                                                                     name="responsavel" 
                                                                                                                     id="responsavel"
-                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['responsavel_err'])) ? 'is-invalid' : ''; ?>" 
+                                                                                                                    class="form-control <?php echo (!empty($data['responsavel_err'])) ? 'is-invalid' : ''; ?>" 
                                                                                                                     value="<?php htmlout($data['responsavel']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)"                                            
                                                                                                                 >
@@ -115,7 +122,7 @@
                                                                                                                 type="text" 
                                                                                                                 name="cpf" 
                                                                                                                 id="cpf" 
-                                                                                                                class="form-control form-control-lg <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
+                                                                                                                class="form-control <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
                                                                                                                 value="<?php htmlout($data['cpf']); ?>"
                                                                                                                 maxlength="14"
                                                                                                             >
@@ -133,7 +140,7 @@
                                                                                                                 type="text" 
                                                                                                                 name="email" 
                                                                                                                 id="email" 
-                                                                                                                class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                 value="<?php htmlout($data['email']); ?>"
                                                                                                             >
                                                                                                             <span class="invalid-feedback">
@@ -155,7 +162,7 @@
                                                                                                                 name="telefone1" 
                                                                                                                 id="telefone1" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control form-control-lg telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                class="form-control telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                 value="<?php htmlout($data['telefone1']); ?>"
                                                                                                                 >
                                                                                                                 <span class="invalid-feedback">
@@ -173,7 +180,7 @@
                                                                                                                 name="telefone2" 
                                                                                                                 id="telefone2" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control form-control-lg telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                class="form-control telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                 value="<?php htmlout($data['telefone2']); ?>"
                                                                                                             >
                                                                                                             <span class="invalid-feedback">
@@ -192,7 +199,7 @@
                                                                                                                 <select 
                                                                                                                     name="bairro" 
                                                                                                                     id="bairro" 
-                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['bairro_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    class="form-control <?php echo (!empty($data['bairro_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     >  
                                                                                                                     <option value="">Selecione o Bairro</option>
                                                                                                                         <?php                                                    
@@ -217,7 +224,7 @@
                                                                                                                     type="text" 
                                                                                                                     name="rua" 
                                                                                                                     id="rua"
-                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['rua_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    class="form-control <?php echo (!empty($data['rua_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     value="<?php htmlout($data['rua']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)" 
                                                                                                                     >
@@ -240,7 +247,7 @@
                                                                                                                 type="number" 
                                                                                                                 name="numero" 
                                                                                                                 id="numero" 
-                                                                                                                class="form-control form-control-lg onlynumbers <?php echo (!empty($data['number_err'])) ? 'is-invalid' : ''; ?>"                                                                                                                
+                                                                                                                class="form-control onlynumbers <?php echo (!empty($data['number_err'])) ? 'is-invalid' : ''; ?>"                                                                                                                
                                                                                                                 value="<?php htmlout($data['numero']); ?>"
                                                                                                                 >
                                                                                                                 <span class="invalid-feedback">
@@ -281,7 +288,7 @@
                                                                                                                     type="text" 
                                                                                                                     name="nome" 
                                                                                                                     id="nome" 
-                                                                                                                    class="form-control form-control-lg  <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    class="form-control <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     value="<?php htmlout($data['nome']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)" 
                                                                                                                     >
@@ -305,7 +312,7 @@
                                                                                                                     type="date" 
                                                                                                                     name="nascimento" 
                                                                                                                     id="nascimento"
-                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    class="form-control <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     value="<?php htmlout($data['nascimento']); ?>"
                                                                                                                     maxlength="10"
                                                                                                                     >
@@ -323,7 +330,7 @@
                                                                                                                     type="text" 
                                                                                                                     name="certidao" 
                                                                                                                     id="certidao" 
-                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['certidao_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    class="form-control <?php echo (!empty($data['certidao_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     value="<?php htmlout($data['certidao']); ?>"
                                                                                                                 >
                                                                                                                 <span class="invalid-feedback">
@@ -387,7 +394,7 @@
                                                                                                         <select 
                                                                                                             name="opcao1" 
                                                                                                             id="opcao1" 
-                                                                                                            class="form-control form-control-lg <?php echo (!empty($data['opcao1_err'])) ? 'is-invalid' : ''; ?>"                                       
+                                                                                                            class="form-control <?php echo (!empty($data['opcao1_err'])) ? 'is-invalid' : ''; ?>"                                       
                                                                                                         >
                                                                                                                 <option value="">Selecione a Escola</option>
                                                                                                                 <?php                                                    
@@ -435,7 +442,7 @@
                                                                                                         <select 
                                                                                                             name="opcao2" 
                                                                                                             id="opcao2" 
-                                                                                                            class="form-control "                                        
+                                                                                                            class="form-control"                                        
                                                                                                         >
                                                                                                                 <option value="">Selecione a Escola</option>
                                                                                                                 <?php                                                    
@@ -456,7 +463,7 @@
                                                                                                                 *Turno
                                                                                                             </label>
                                                                                                             <select 
-                                                                                                                class="form-control "
+                                                                                                                class="form-control"
                                                                                                                 id="turno2"
                                                                                                                 name="turno2"
                                                                                                             >
@@ -480,7 +487,7 @@
                                                                                                         <select 
                                                                                                             name="opcao3" 
                                                                                                             id="opcao3" 
-                                                                                                            class="form-control "                                        
+                                                                                                            class="form-control"                                        
                                                                                                         >
                                                                                                                 <option value="">Selecione a Escola</option>
                                                                                                                 <?php                                                    
@@ -501,7 +508,7 @@
                                                                                                                 *Turno
                                                                                                             </label>
                                                                                                             <select 
-                                                                                                                class="form-control "
+                                                                                                                class="form-control"
                                                                                                                 id="turno3"
                                                                                                                 name="turno3"
                                                                                                             >

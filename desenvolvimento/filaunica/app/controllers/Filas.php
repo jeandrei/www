@@ -108,11 +108,11 @@
                 }else
                 {
                     $data['nascimento_err'] = 'Data de nascimento inválida';
-                    $error = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';
+                    $data['flash_err'] = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';                    
                     //colocar essa menságem de erro NO FLASH $error
                 }
                
-                
+               
                 $this->view('filas/cadastrar', $data);
             }else{
                 $data = [
