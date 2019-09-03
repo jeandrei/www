@@ -90,11 +90,13 @@
                                                                                                                     type="text" 
                                                                                                                     name="responsavel" 
                                                                                                                     id="responsavel"
-                                                                                                                    class="form-control "
-                                                                                                                    value=""
+                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['responsavel_err'])) ? 'is-invalid' : ''; ?>" 
+                                                                                                                    value="<?php htmlout($data['responsavel']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)"                                            
-                                                                                                                    >
-                                                                                                                <span id="responsavel_err" class="text-danger"></span> 
+                                                                                                                >
+                                                                                                                    <span class="invalid-feedback">
+                                                                                                                        <?php echo $data['responsavel_err']; ?>
+                                                                                                                    </span>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     <!--NOME DO RESPONSÁVEL-->
@@ -113,11 +115,13 @@
                                                                                                                 type="text" 
                                                                                                                 name="cpf" 
                                                                                                                 id="cpf" 
-                                                                                                                class="form-control cpf "
-                                                                                                                value=""
+                                                                                                                class="form-control form-control-lg <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
+                                                                                                                value="<?php htmlout($data['cpf']); ?>"
                                                                                                                 maxlength="14"
                                                                                                             >
-                                                                                                            <span id="cpf_err" class="text-danger"></span>
+                                                                                                                <span class="invalid-feedback">
+                                                                                                                    <?php echo $data['cpf_err']; ?>
+                                                                                                                </span>
                                                                                                         </div>
 
                                                                                                         <!--EIMAIL-->
@@ -129,10 +133,12 @@
                                                                                                                 type="text" 
                                                                                                                 name="email" 
                                                                                                                 id="email" 
-                                                                                                                class="form-control "
-                                                                                                                value=""
+                                                                                                                class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                value="<?php htmlout($data['email']); ?>"
                                                                                                             >
-                                                                                                            <span id="email_err" class="text-danger"></span>
+                                                                                                            <span class="invalid-feedback">
+                                                                                                                <?php echo $data['email_err']; ?>
+                                                                                                            </span>
                                                                                                         </div>
                                                                                                     <!--CPF E EMAIL NA MESMA LINHA-->
                                                                                                     </div>
@@ -149,10 +155,12 @@
                                                                                                                 name="telefone1" 
                                                                                                                 id="telefone1" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control telefone "
-                                                                                                                value=""
+                                                                                                                class="form-control form-control-lg telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                value="<?php htmlout($data['telefone1']); ?>"
                                                                                                                 >
-                                                                                                                <span id="telefone1_err" class="text-danger"></span>
+                                                                                                                <span class="invalid-feedback">
+                                                                                                                    <?php echo $data['telefone1_err']; ?>
+                                                                                                                </span>
                                                                                                         </div>
 
                                                                                                         <!--CELULAR 2-->
@@ -165,10 +173,12 @@
                                                                                                                 name="telefone2" 
                                                                                                                 id="telefone2" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control telefone "
-                                                                                                                value=""
+                                                                                                                class="form-control form-control-lg telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                value="<?php htmlout($data['telefone2']); ?>"
                                                                                                             >
-                                                                                                            <span id="telefone2_err" class="text-danger"></span>
+                                                                                                            <span class="invalid-feedback">
+                                                                                                                <?php echo $data['telefone2_err']; ?>
+                                                                                                            </span>
                                                                                                         </div>
                                                                                                         <!--LINHA NOVA PARA OS CELULARES-->
                                                                                                     </div>
@@ -182,20 +192,23 @@
                                                                                                                 <select 
                                                                                                                     name="bairro" 
                                                                                                                     id="bairro" 
-                                                                                                                    class="form-control"
+                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['bairro_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     >  
                                                                                                                     <option value="">Selecione o Bairro</option>
                                                                                                                         <?php                                                    
                                                                                                                         foreach($data['bairros'] as $bairro) : ?> 
                                                                                                                             <option value="<?php echo $bairro->id; ?>"
-                                                                                                                                        <?php echo $data['bairroSelecionado'] == $bairro->id ? 'selected':'';?>                                                                                                                                   
+                                                                                                                                        <?php echo $data['bairro'] == $bairro->id ? 'selected':'';?>                                                                                                                                   
                                                                                                                             >
                                                                                                                                 <?php echo $bairro->nome;?>
                                                                                                                             </option>
                                                                                                                         <?php endforeach; ?>  
                                                                                                                 </select>
-                                                                                                                <span id="bairro_err" class="text-danger"><?php //echo $data['bairro_err']; ?></span>
+                                                                                                                <span class="invalid-feedback">
+                                                                                                                    <?php echo $data['bairro_err']; ?>
+                                                                                                                </span>
                                                                                                             </div>
+
                                                                                                             <div class="col-lg-6">
                                                                                                                 <label for="rua">
                                                                                                                     Rua:
@@ -204,11 +217,13 @@
                                                                                                                     type="text" 
                                                                                                                     name="rua" 
                                                                                                                     id="rua"
-                                                                                                                    class="form-control"
+                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['rua_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                     value="<?php htmlout($data['rua']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)" 
                                                                                                                     >
-                                                                                                            <span id="rua_err" class="text-danger"><?php //echo $data['rua_err']; ?></span>
+                                                                                                                    <span class="invalid-feedback">
+                                                                                                                        <?php echo $data['rua_err']; ?>
+                                                                                                                    </span>
                                                                                                             </div>
                                                                                                                                         
                                                                                                         <!--NOVA LINHA PARA BAIRRO E RUA-->
@@ -225,9 +240,12 @@
                                                                                                                 type="number" 
                                                                                                                 name="numero" 
                                                                                                                 id="numero" 
-                                                                                                                class="form-control onlynumbers"
-                                                                                                                value=""
+                                                                                                                class="form-control form-control-lg onlynumbers <?php echo (!empty($data['number_err'])) ? 'is-invalid' : ''; ?>"                                                                                                                
+                                                                                                                value="<?php htmlout($data['numero']); ?>"
                                                                                                                 >
+                                                                                                                <span class="invalid-feedback">
+                                                                                                                    <?php echo $data['rua_err']; ?>
+                                                                                                                </span>
                                                                                                         </div>
 
                                                                                                         <div class="col-lg-8">
@@ -239,7 +257,7 @@
                                                                                                                 name="complemento" 
                                                                                                                 id="complemento" 
                                                                                                                 class="form-control"
-                                                                                                                value=""
+                                                                                                                value="<?php htmlout($data['complemento']); ?>"
                                                                                                                 onkeydown="upperCaseF(this)" 
                                                                                                             >
                                                                                                         </div>
@@ -263,11 +281,13 @@
                                                                                                                     type="text" 
                                                                                                                     name="nome" 
                                                                                                                     id="nome" 
-                                                                                                                    class="form-control "
-                                                                                                                    value=""
+                                                                                                                    class="form-control form-control-lg  <?php echo (!empty($data['nome_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    value="<?php htmlout($data['nome']); ?>"
                                                                                                                     onkeydown="upperCaseF(this)" 
                                                                                                                     >
-                                                                                                            <span id="nome_err" class="text-danger"></span>
+                                                                                                                    <span class="invalid-feedback">
+                                                                                                                        <?php echo $data['nome_err']; ?>
+                                                                                                                    </span>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     <!--NOME DA CRIANÇA-->
@@ -285,11 +305,13 @@
                                                                                                                     type="date" 
                                                                                                                     name="nascimento" 
                                                                                                                     id="nascimento"
-                                                                                                                    class="form-control " 
-                                                                                                                    value=""
+                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    value="<?php htmlout($data['nascimento']); ?>"
                                                                                                                     maxlength="10"
                                                                                                                     >
-                                                                                                            <span id="nascimento_err" class="text-danger"></span>
+                                                                                                                    <span class="invalid-feedback">
+                                                                                                                        <?php echo $data['nascimento_err']; ?>
+                                                                                                                    </span>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-lg-7">
@@ -301,9 +323,12 @@
                                                                                                                     type="text" 
                                                                                                                     name="certidao" 
                                                                                                                     id="certidao" 
-                                                                                                                    class="form-control"
-                                                                                                                    value=""
+                                                                                                                    class="form-control form-control-lg <?php echo (!empty($data['certidao_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                    value="<?php htmlout($data['certidao']); ?>"
                                                                                                                 >
+                                                                                                                <span class="invalid-feedback">
+                                                                                                                    <?php echo $data['certidao_err']; ?>
+                                                                                                                </span>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     <!--NASCIMENTO E CERTIDÃO-->
@@ -362,21 +387,24 @@
                                                                                                         <select 
                                                                                                             name="opcao1" 
                                                                                                             id="opcao1" 
-                                                                                                            class="form-control "                                        
+                                                                                                            class="form-control form-control-lg <?php echo (!empty($data['opcao1_err'])) ? 'is-invalid' : ''; ?>"                                       
                                                                                                         >
                                                                                                                 <option value="">Selecione a Escola</option>
                                                                                                                 <?php                                                    
                                                                                                                     foreach($data['escolas'] as $escola) : ?> 
                                                                                                                         <option value="<?php echo $escola->id; ?>"
-                                                                                                                                    <?php echo $data['escola1Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                                                                                                    <?php echo $data['opcao1'] == $escola->id ? 'selected':'';?>                                                                                                                                   
                                                                                                                         >
                                                                                                                             <?php echo $escola->nome;?>
                                                                                                                         </option>
                                                                                                                     <?php endforeach; ?>      
                                                                                                                     
                                                                                                         </select>                                           
-                                                                                                    <span id="opcao1_err" class="text-danger"></span>
-                                                                                                    </div>
+                                                                                                        <span class="invalid-feedback">
+                                                                                                                <?php echo $data['opcao1_err']; ?>
+                                                                                                        </span>
+                                                                                                        </div>
+
                                                                                                     <div class="col-lg-6">
                                                                                                         <div class="form-group">
                                                                                                             <label for="turno1" class="help-block">
@@ -413,7 +441,7 @@
                                                                                                                 <?php                                                    
                                                                                                                     foreach($data['escolas'] as $escola) : ?> 
                                                                                                                         <option value="<?php echo $escola->id; ?>"
-                                                                                                                                    <?php echo $data['escola2Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                                                                                                    <?php echo $data['opcao2'] == $escola->id ? 'selected':'';?>                                                                                                                                   
                                                                                                                         >
                                                                                                                             <?php echo $escola->nome;?>
                                                                                                                         </option>
@@ -458,7 +486,7 @@
                                                                                                                 <?php                                                    
                                                                                                                     foreach($data['escolas'] as $escola) : ?> 
                                                                                                                         <option value="<?php echo $escola->id; ?>"
-                                                                                                                                    <?php echo $data['escola3Selecionada'] == $escola->id ? 'selected':'';?>                                                                                                                                   
+                                                                                                                                    <?php echo $data['opcao3'] == $escola->id ? 'selected':'';?>                                                                                                                                   
                                                                                                                         >
                                                                                                                             <?php echo $escola->nome;?>
                                                                                                                         </option>
@@ -486,6 +514,25 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--ESCOLA E TURNO OPÇÃO 3-->
+                                                                                                </div>
+
+                                                                                                 <!--OBSERVACAO-->
+                                                                                                <div class="row">
+                                                                                                    <div class="col-lg-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="obs">
+                                                                                                                Observação
+                                                                                                            </label>
+                                                                                                            <textarea 
+                                                                                                                class="form-control" 
+                                                                                                                id="obs"  
+                                                                                                                name="obs"                                                                          
+                                                                                                            ><?php if(!empty($_POST['obs'])){
+                                                                                                                    htmlout($data['obs']);
+                                                                                                                }?></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                <!--OBSERVACAO-->
                                                                                                 </div>
 
                                                                                     <!--FIM BLOCO AZUL DA DIREITA-->
