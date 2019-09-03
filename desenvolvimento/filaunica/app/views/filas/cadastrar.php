@@ -91,7 +91,7 @@ echo flash('alert-danger');}
                                                                                                         <div class="col-lg-12">
                                                                                                             <div class="form-group">
                                                                                                                 <label for="responsavel">
-                                                                                                                    *Nome completo do responsável:
+                                                                                                                    <span class="obrigatorio">*</span>Nome completo do responsável:
                                                                                                                 </label>
                                                                                                                 <input 
                                                                                                                     type="text" 
@@ -122,7 +122,7 @@ echo flash('alert-danger');}
                                                                                                                 type="text" 
                                                                                                                 name="cpf" 
                                                                                                                 id="cpf" 
-                                                                                                                class="form-control <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
+                                                                                                                class="form-control cpf <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
                                                                                                                 value="<?php htmlout($data['cpf']); ?>"
                                                                                                                 maxlength="14"
                                                                                                             >
@@ -155,7 +155,7 @@ echo flash('alert-danger');}
                                                                                                         <!--CELULAR 1-->
                                                                                                         <div class="col-lg-6">
                                                                                                             <label for="telefone1">
-                                                                                                                1 - *Celular para contato:
+                                                                                                                <span class="obrigatorio">*</span>Telefone para contato:
                                                                                                             </label>
                                                                                                             <input 
                                                                                                                 type="text" 
@@ -173,7 +173,7 @@ echo flash('alert-danger');}
                                                                                                         <!--CELULAR 2-->
                                                                                                         <div class="col-lg-6">
                                                                                                             <label for="telefone2">
-                                                                                                                2 - Celular para contato:
+                                                                                                                Celular para contato:
                                                                                                             </label>
                                                                                                             <input 
                                                                                                                 type="text" 
@@ -194,7 +194,7 @@ echo flash('alert-danger');}
                                                                                                     <div class="row">
                                                                                                             <div class="col-lg-6">
                                                                                                                 <label for="bairro">
-                                                                                                                    Bairro:
+                                                                                                                    <span class="obrigatorio">*</span>Bairro:
                                                                                                                 </label>
                                                                                                                 <select 
                                                                                                                     name="bairro" 
@@ -218,7 +218,7 @@ echo flash('alert-danger');}
 
                                                                                                             <div class="col-lg-6">
                                                                                                                 <label for="rua">
-                                                                                                                    Rua:
+                                                                                                                    <span class="obrigatorio">*</span>Rua:
                                                                                                                 </label>
                                                                                                                 <input 
                                                                                                                     type="text" 
@@ -282,7 +282,7 @@ echo flash('alert-danger');}
                                                                                                         <div class="col-lg-12">
                                                                                                             <div class="form-group">
                                                                                                                 <label for="nome">
-                                                                                                                    *Nome completo da criança :
+                                                                                                                    <span class="obrigatorio">*</span>Nome completo da criança :
                                                                                                                 </label>
                                                                                                                 <input 
                                                                                                                     type="text" 
@@ -306,7 +306,7 @@ echo flash('alert-danger');}
                                                                                                         <div class="col-lg-5">
                                                                                                             <div class="form-group">
                                                                                                                 <label for="nascimento">
-                                                                                                                    *Data de nascimento:
+                                                                                                                    <span class="obrigatorio">*</span>Data de nascimento:
                                                                                                                 </label>
                                                                                                                 <input 
                                                                                                                     type="date" 
@@ -389,7 +389,7 @@ echo flash('alert-danger');}
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-6">
                                                                                                         <label for="opcao1" class="help-block">
-                                                                                                            *Escola:
+                                                                                                            <span class="obrigatorio">*</span>Escola:
                                                                                                         </label>
                                                                                                         <select 
                                                                                                             name="opcao1" 
@@ -415,7 +415,7 @@ echo flash('alert-danger');}
                                                                                                     <div class="col-lg-6">
                                                                                                         <div class="form-group">
                                                                                                             <label for="turno1" class="help-block">
-                                                                                                                *Turno
+                                                                                                                <span class="obrigatorio">*</span>Turno
                                                                                                             </label>
                                                                                                             <select 
                                                                                                                 class="form-control "
@@ -427,7 +427,9 @@ echo flash('alert-danger');}
                                                                                                                 <option value="2" >Vespertino</option>
                                                                                                                 <option value="3" >Integral</option>
                                                                                                             </select>
-                                                                                                            <span id="turno1_err" class="text-danger"></span>                                      
+                                                                                                            <span class="invalid-feedback">
+                                                                                                                <?php echo $data['turno1_err']; ?>
+                                                                                                            </span>                                      
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--ESCOLA E TURNO OPÇÃO 1-->
@@ -437,7 +439,7 @@ echo flash('alert-danger');}
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-6">
                                                                                                         <label for="opcao2" class="help-block">
-                                                                                                            *Escola:
+                                                                                                            Escola:
                                                                                                         </label>
                                                                                                         <select 
                                                                                                             name="opcao2" 
@@ -460,7 +462,7 @@ echo flash('alert-danger');}
                                                                                                     <div class="col-lg-6">
                                                                                                         <div class="form-group">
                                                                                                             <label for="turno2" class="help-block">
-                                                                                                                *Turno
+                                                                                                                Turno
                                                                                                             </label>
                                                                                                             <select 
                                                                                                                 class="form-control"
@@ -471,8 +473,7 @@ echo flash('alert-danger');}
                                                                                                                 <option value="1" >Matutino</option>
                                                                                                                 <option value="2" >Vespertino</option>
                                                                                                                 <option value="3" >Integral</option>
-                                                                                                            </select>
-                                                                                                            <span id="turno2_err" class="text-danger"></span>                                      
+                                                                                                            </select>                                                                                                                                             
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--ESCOLA E TURNO OPÇÃO 2-->
@@ -482,7 +483,7 @@ echo flash('alert-danger');}
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-6">
                                                                                                         <label for="opcao3" class="help-block">
-                                                                                                            *Escola:
+                                                                                                            Escola:
                                                                                                         </label>
                                                                                                         <select 
                                                                                                             name="opcao3" 
@@ -505,7 +506,7 @@ echo flash('alert-danger');}
                                                                                                     <div class="col-lg-6">
                                                                                                         <div class="form-group">
                                                                                                             <label for="turno3" class="help-block">
-                                                                                                                *Turno
+                                                                                                                Turno
                                                                                                             </label>
                                                                                                             <select 
                                                                                                                 class="form-control"
@@ -516,8 +517,7 @@ echo flash('alert-danger');}
                                                                                                                 <option value="1" >Matutino</option>
                                                                                                                 <option value="2" >Vespertino</option>
                                                                                                                 <option value="3" >Integral</option>
-                                                                                                            </select>
-                                                                                                            <span id="turno3_err" class="text-danger"></span>                                      
+                                                                                                            </select>                                                                                                                                                
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--ESCOLA E TURNO OPÇÃO 3-->
@@ -602,13 +602,14 @@ echo flash('alert-danger');}
                                                                                         type="file" 
                                                                                         class="custom-file-input" 
                                                                                         id="comprovante_residencia"
+                                                                                        name="comprovante_residencia"
                                                                                         onchange="return fileValidation('comprovante_residencia','res_erro');"
                                                                                         >
                                                                                         <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
                                                                                     </div>                                
-                                                                                    <div class="form-group">
-                                                                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
-                                                                                    </div>  
+                                                                                    <span class="invalid-feedback">
+                                                                                        <?php echo $data['comprovante_residencia_err']; ?>
+                                                                                    </span> 
                                                                                 </div>                                
                                                                             </div> 
                                                                         <!--*************COMPROVANTE DE RESIDÊNCIA************-->
@@ -634,13 +635,17 @@ echo flash('alert-danger');}
                                                                                 </label><br>
                                                                                 <div class="form-group">
                                                                                     <div class="custom-file" id="comprovante ?>" lang="">
-                                                                                        <input type="file" class="custom-file-input" id="comprovante">
+                                                                                        <input 
+                                                                                            type="file" 
+                                                                                            class="custom-file-input" 
+                                                                                            id="certidaonascimento"
+                                                                                            name="certidaonascimento"
+                                                                                        >
                                                                                         <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
                                                                                     </div>
-                                                                                        
-                                                                                    <div class="form-group">
-                                                                                        <label for="comprovante" class="error"><?php //echo $attributes['error'];?></label>
-                                                                                    </div>  
+                                                                                    <span class="invalid-feedback">
+                                                                                        <?php echo $data['certidaonascimento_err']; ?>
+                                                                                    </span>   
                                                                                 </div>
                                                                             </div>
                                                                         <!--*************COMPROVANTE DE NASCIMENTO************-->

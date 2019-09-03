@@ -1,3 +1,8 @@
+se der problema de merge tentar
+git reset -- hard
+git commit
+git pull origin master
+
 *Ver o status, arquivos modificados que precisam ser atualizados
 git status
 *Adiciona arquivo

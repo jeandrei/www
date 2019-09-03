@@ -22,6 +22,12 @@ textarea.error{
     color:red;
     border-color: red;
 }
+
+.obrigatorio{
+    color:red;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
 /****************************************************/
 
 
@@ -29,3 +35,4 @@ textarea.error{
 .custom-file-input ~ .custom-file-label::after {
     content: "Procurar";
 }
+

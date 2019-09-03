@@ -63,6 +63,13 @@
                     $data['portador'] = $_POST['portador'];
                 }    
 
+                //valida responsável
+                if(empty($data['responsavel'])){
+                    $data['responsavel_err'] = 'Por favor informe o responsável';       
+                }else{
+                    $data['responsavel_err'] = '' ;       
+                }
+
                 //valida telefone 1
                 if(empty($data['telefone1'])){
                     $data['telefone1_err'] = 'Por favor informe o telefone'; 
@@ -103,15 +110,86 @@
                     $data['nascimento_err'] = '';
                 }    
 
-                //valida etapa  
-                if($this->filaModel->getEtapa($data['nascimento'])){
-                    $id_etapa = $this->filaModel->getEtapa($data['nascimento']);
-                }else
-                {
-                    $data['nascimento_err'] = 'Data de nascimento inválida';
-                    $data['flash_err'] = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';                    
-                    //colocar essa menságem de erro NO FLASH $error
+                //valida etapa
+                if(!empty($data['nascimento'])){
+                    if($this->filaModel->getEtapa($data['nascimento'])){
+                        $id_etapa = $this->filaModel->getEtapa($data['nascimento']);
+                    }else
+                    {
+                        $data['nascimento_err'] = 'Data de nascimento inválida';
+                        $data['flash_err'] = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';                    
+                        //colocar essa menságem de erro NO FLASH $error
+                    }
                 }
+
+                //valida email
+                if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
+                    $data['email_err'] = 'Email inválido';        
+                }else{
+                    $data['email_err'] = '';
+                }
+
+                //valida cpf
+                if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
+                    $data['cpf_err'] = 'CPF inválido';  
+                    
+                }else{
+                    $data['cpf_err'] = '';
+                }
+                
+                
+                if(empty($data['bairro'])){       
+                    $data['bairro_err'] = 'Por favor selecione um bairro';
+                }
+
+                if(empty($data['rua'])){       
+                    $data['rua_err'] = 'Por favor informe a rua';
+                }
+            
+                
+            
+                if(empty($data['opcao1'])){
+                    $data['opcao1_err'] = 'Por favor informe ao menos uma opção';
+                }
+                
+                if(empty($data['turno1'])){
+                    $data['turno1_err'] = 'Por favor informe o turno';        
+                } 
+                
+                //fazer esta verificação para validar
+                if($comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA')){
+                    echo "ok";
+                } else {
+                    echo "não";
+                }
+
+                $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
+                if(!empty($comp_res['nome'])){                       
+                    $comp_res_dados = $comp_res['data'];
+                    $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
+                    $comp_res_tipo = $comp_res['tipo']; 
+                }
+            
+                
+            
+            
+                $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
+                if(!empty($cert_nasc['nome'])){
+                    $cert_nasc_dados = $cert_nasc ['data'];
+                    $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
+                    $cert_nasc_tipo = $comp_res['tipo'];
+                }
+                
+                
+                
+                if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
+                {
+                    $data['comp_residencia_name_err'] = ($comp_res['error']);         
+                    $data['certidaonascimento_err'] = ($cert_nasc['error']); 
+                    $error = 'Ops! Você selecionou arquivos inválidos';
+                    
+                } 
+                
                
                
                 $this->view('filas/cadastrar', $data);
