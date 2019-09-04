@@ -423,9 +423,9 @@ echo flash('alert-danger');}
                                                                                                                 name="turno1"
                                                                                                             >
                                                                                                             <option value="">Selecione o turno</option>
-                                                                                                                <option value="1" >Matutino</option>
-                                                                                                                <option value="2" >Vespertino</option>
-                                                                                                                <option value="3" >Integral</option>
+                                                                                                                <option value="1" <?php echo $data['turno1'] == '1' ? 'selected':'';?>>Matutino</option>
+                                                                                                                <option value="2" <?php echo $data['turno1'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                                                                                                <option value="3" <?php echo $data['turno1'] == '3' ? 'selected':'';?>>Integral</option>
                                                                                                             </select>
                                                                                                             <span class="invalid-feedback">
                                                                                                                 <?php echo $data['turno1_err']; ?>
@@ -470,9 +470,9 @@ echo flash('alert-danger');}
                                                                                                                 name="turno2"
                                                                                                             >
                                                                                                             <option value="">Selecione o turno</option>
-                                                                                                                <option value="1" >Matutino</option>
-                                                                                                                <option value="2" >Vespertino</option>
-                                                                                                                <option value="3" >Integral</option>
+                                                                                                                <option value="1" <?php echo $data['turno2'] == '1' ? 'selected':'';?>>Matutino</option>
+                                                                                                                <option value="2" <?php echo $data['turno2'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                                                                                                <option value="3" <?php echo $data['turno2'] == '3' ? 'selected':'';?>>Integral</option>
                                                                                                             </select>                                                                                                                                             
                                                                                                         </div>
                                                                                                     </div>
@@ -514,9 +514,9 @@ echo flash('alert-danger');}
                                                                                                                 name="turno3"
                                                                                                             >
                                                                                                             <option value="">Selecione o turno</option>
-                                                                                                                <option value="1" >Matutino</option>
-                                                                                                                <option value="2" >Vespertino</option>
-                                                                                                                <option value="3" >Integral</option>
+                                                                                                                <option value="1" <?php echo $data['turno3'] == '1' ? 'selected':'';?>>Matutino</option>
+                                                                                                                <option value="2" <?php echo $data['turno3'] == '2' ? 'selected':'';?>>Vespertino</option>
+                                                                                                                <option value="3" <?php echo $data['turno3'] == '3' ? 'selected':'';?>>Integral</option>
                                                                                                             </select>                                                                                                                                                
                                                                                                         </div>
                                                                                                     </div>
@@ -598,10 +598,11 @@ echo flash('alert-danger');}
                                                                                         type="file" 
                                                                                         class="custom-file-input" 
                                                                                         id="comprovante_residencia"
-                                                                                        name="comprovante_residencia"
+                                                                                        name="comprovante_residencia"                                                                                        
                                                                                         onchange="return fileValidation('comprovante_residencia','res_erro');"
                                                                                         >
                                                                                         <label class="custom-file-label" for="comprovante_residencia">Selecione o arquivo</label>
+                                                                                        
                                                                                     </div> 
                                                                                 </div>                      
                                                                             </div>  
@@ -694,3 +695,4 @@ echo flash('alert-danger');}
 <?php 
     include 'footer.php';
 ?>
+

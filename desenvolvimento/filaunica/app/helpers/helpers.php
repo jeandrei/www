@@ -106,18 +106,10 @@ function upload_file($myfile,$newname,$description){
                 'tipo' => $fileType,
                 'data' => file_get_contents($file)
             ];        
-            return $file_uploaded;
-        } else {
-            $file_uploaded = [
-                'nome' => "",
-                'extensao' => "",
-                'tipo' => "",
-                'data' => ""
-            ];
-            return false;   
+            
         } 
         
-    
+return $file_uploaded;    
 }//fim função upload
 
 ?>

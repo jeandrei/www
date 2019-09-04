@@ -157,3 +157,9 @@ function prevTab(elem) {
 }
 
 
+//mostrar o nome do arquivo no file custom - no selecionar arquivo
+$('.custom-file input').change(function (e) {
+	$(this).next('.custom-file-label').html(e.target.files[0].name);
+});
+
+

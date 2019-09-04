@@ -156,41 +156,36 @@
                     $data['turno1_err'] = 'Por favor informe o turno';        
                 } 
                 
-                //fazer esta verificação para validar
-                if($comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA')){
-                    echo "ok";
-                } else {
-                    echo "não";
-                }
-
-                if($comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA')){
-                    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');                                           
-                    $comp_res_dados = $comp_res['data'];
-                    $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
-                    $comp_res_tipo = $comp_res['tipo'];
-                } else {
-                    $data['comprovante_residencia_err'] = "Erro ao anexar o comprovante de residência!";                    
-                }
+                
+                //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
+                    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
+                    if(empty($comp_res['error'])){                                          
+                        $comp_res_dados = $comp_res['data'];
+                        $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
+                        $comp_res_tipo = $comp_res['tipo'];
+                        $data['comprovante_residencia_err'] = '';                      
+                    } else {
+                        $data['comprovante_residencia_err'] =  $comp_res['error'];
+                    }
             
                 
             
-                if($cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO')){
-                    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');                   
-                    $cert_nasc_dados = $cert_nasc ['data'];
-                    $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
-                    $cert_nasc_tipo = $comp_res['tipo'];
-                   
-                }else {
-                    $data['certidaonascimento_err'] = "Erro ao anexar a certidão de nascimento!";
-                }
+                
+                    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO'); 
+                    if(empty($cert_nasc['error'])){                  
+                        $cert_nasc_dados = $cert_nasc ['data'];
+                        $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
+                        $cert_nasc_tipo = $cert_nasc['tipo'];
+                        $data['certidaonascimento_err'] = '';                                       
+                    } else {
+                        $data['certidaonascimento_err'] = $cert_nasc['error'];
+                    }
                 
                 
                 
                 if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
-                {
-                    $data['comp_residencia_name_err'] = ($comp_res['error']);         
-                    $data['certidaonascimento_err'] = ($cert_nasc['error']); 
-                    $error = 'Ops! Você selecionou arquivos inválidos';
+                {                   
+                    $data['flash_err'] = 'Ops! Arquivos inválidos.';
                     
                 } 
                 
