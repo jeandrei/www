@@ -163,21 +163,25 @@
                     echo "não";
                 }
 
-                $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
-                if(!empty($comp_res['nome'])){                       
+                if($comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA')){
+                    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA');                                           
                     $comp_res_dados = $comp_res['data'];
                     $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
-                    $comp_res_tipo = $comp_res['tipo']; 
+                    $comp_res_tipo = $comp_res['tipo'];
+                } else {
+                    $data['comprovante_residencia_err'] = "Erro ao anexar o comprovante de residência!";                    
                 }
             
                 
             
-            
-                $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');
-                if(!empty($cert_nasc['nome'])){
+                if($cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO')){
+                    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO');                   
                     $cert_nasc_dados = $cert_nasc ['data'];
                     $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
                     $cert_nasc_tipo = $comp_res['tipo'];
+                   
+                }else {
+                    $data['certidaonascimento_err'] = "Erro ao anexar a certidão de nascimento!";
                 }
                 
                 
@@ -227,7 +231,9 @@
                     'nome_err' => '',
                     'nascimento_err' => '',
                     'certidao_err' => '',
-                    'opcao1_err' => ''
+                    'opcao1_err' => '',
+                    'comprovante_residencia_err' => '',
+                    'certidaonascimento_err' => ''
                 ];
                 $this->view('filas/cadastrar', $data);
             }

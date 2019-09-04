@@ -588,16 +588,12 @@ echo flash('alert-danger');}
                                                                                 </div>
                                                                             </div>
                                                                             
-                                                                            <div class="custom-file" id="comprovante ?>" lang="">
+                                                                            <div class="custom-file">
                                                                                 <label for="comprovante_residencia">
-                                                                                    Comprovante de residência
-                                                                                    <div style="color:red; font-size:25px;">
-                                                                                    <span id="res_erro"></span>
-                                                                                    </div>
-                                                                                    
+                                                                                    Comprovante de residência  
                                                                                 </label><br>
                                                                                 <div class="form-group">
-                                                                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                                                                    <div class="custom-file">
                                                                                         <input 
                                                                                         type="file" 
                                                                                         class="custom-file-input" 
@@ -605,51 +601,61 @@ echo flash('alert-danger');}
                                                                                         name="comprovante_residencia"
                                                                                         onchange="return fileValidation('comprovante_residencia','res_erro');"
                                                                                         >
-                                                                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
-                                                                                    </div>                                
-                                                                                    <span class="invalid-feedback">
-                                                                                        <?php echo $data['comprovante_residencia_err']; ?>
-                                                                                    </span> 
-                                                                                </div>                                
-                                                                            </div> 
+                                                                                        <label class="custom-file-label" for="comprovante_residencia">Selecione o arquivo</label>
+                                                                                    </div> 
+                                                                                </div>                      
+                                                                            </div>  
+
+                                                                            <div class="form-group" style="margin-top: 40px;">
+                                                                                <div class="alert-danger" role="alert">
+                                                                                    <div style="margin: 20px;">
+                                                                                        <strong><?php echo $data['comprovante_residencia_err'];?></strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>                                                                           
                                                                         <!--*************COMPROVANTE DE RESIDÊNCIA************-->
                                                                         </div>
+                                                                        
+                                                                        
 
 
-                                                                        <!--*************COMPROVANTE DE NASCIMENTO************-->
+                                                                        <!--*************CERTIDAO DE NASCIMENTO************-->
                                                                         <div class="col-lg-6">
                                                                             <div class="form-group">
                                                                                 <div class="alert alert-warning" role="alert">
-                                                                                    Em um <strong>único</strong> arquivo deve ser enviado a certidão de
-                                                                                    nascimento,
+                                                                                    Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
+                                                                                    residência,
                                                                                     com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group">
+                                                                            
+                                                                            <div class="custom-file">
                                                                                 <label for="certidaonascimento">
-                                                                                    Comprovante de nascimento da criança
-                                                                                    <div style="color:red; font-size:25px;">
-                                                                                    <span id="cert_error"></span>
-                                                                                    </div>
-
+                                                                                    Certidão de Nascimento  
                                                                                 </label><br>
                                                                                 <div class="form-group">
-                                                                                    <div class="custom-file" id="comprovante ?>" lang="">
+                                                                                    <div class="custom-file">
                                                                                         <input 
-                                                                                            type="file" 
-                                                                                            class="custom-file-input" 
-                                                                                            id="certidaonascimento"
-                                                                                            name="certidaonascimento"
+                                                                                        type="file" 
+                                                                                        class="custom-file-input" 
+                                                                                        id="certidaonascimento"
+                                                                                        name="certidaonascimento"
+                                                                                        onchange="return fileValidation('certidaonascimento','nasc_erro');"
                                                                                         >
-                                                                                        <label class="custom-file-label" for="comprovante">Selecione o arquivo</label>
+                                                                                        <label class="custom-file-label" for="certidaonascimento">Selecione o arquivo</label>
+                                                                                    </div> 
+                                                                                </div>                      
+                                                                            </div>  
+
+                                                                            <div class="form-group" style="margin-top: 40px;">
+                                                                                <div class="alert-danger" role="alert">
+                                                                                    <div style="margin: 20px;">
+                                                                                        <strong><?php echo $data['certidaonascimento_err'];?></strong>
                                                                                     </div>
-                                                                                    <span class="invalid-feedback">
-                                                                                        <?php echo $data['certidaonascimento_err']; ?>
-                                                                                    </span>   
                                                                                 </div>
-                                                                            </div>
-                                                                        <!--*************COMPROVANTE DE NASCIMENTO************-->
-                                                                        </div> 
+                                                                            </div>                                                                           
+                                                                        <!--*************CERTIDÃO DE NASCIMENTO************-->
+                                                                        </div>
                                                                             
                                                         <!--FECHA DIV 6 LINHA COMPROVANTES-->
                                                         </div>
