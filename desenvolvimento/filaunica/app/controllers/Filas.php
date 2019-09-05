@@ -11,6 +11,7 @@
             //pega todas as escolas
             $escolas = $this->filaModel->getEscolas();
             
+                       
 
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -25,8 +26,8 @@
                     'responsavel' => html($_POST['responsavel']),
                     'cpf' => html($_POST['cpf']), 
                     'email' => html($_POST['email']), 
-                    'telefone1' => html($_POST['telefone1']),
-                    'telefone2' => html($_POST['telefone2']),
+                    'telefone' => html($_POST['telefone']),
+                    'celular' => html($_POST['celular']),
                     'bairro' => html($_POST['bairro']),
                     'rua' => html($_POST['rua']),
                     'numero' => html($_POST['numero']),
@@ -44,8 +45,8 @@
                     'responsavel_err' => '',
                     'cpf_err' => '',
                     'email_err' => '',
-                    'telefone1_err' => '',
-                    'telefone2_err' => '',
+                    'telefone_err' => '',
+                    'celular_err' => '',
                     'bairro_err' => '',
                     'rua_err' => '',
                     'rua_err' => '',
@@ -71,20 +72,20 @@
                 }
 
                 //valida telefone 1
-                if(empty($data['telefone1'])){
-                    $data['telefone1_err'] = 'Por favor informe o telefone'; 
+                if(empty($data['telefone'])){
+                    $data['telefone_err'] = 'Por favor informe o telefone'; 
                 }
-                elseif(!validacelular($data['telefone1'])){
-                    $data['telefone1_err'] = 'Telefone inválido';
+                elseif(!validacelular($data['telefone'])){
+                    $data['telefone_err'] = 'Telefone inválido';
                 }else{
-                    $data['telefone1_err'] = '';       
+                    $data['telefone_err'] = '';       
                 }
                 
                 //valida telefone 2
-                if((!empty($data['telefone2'])) && (!validacelular($data['telefone2']))){
-                    $data['telefone2_err'] = 'Telefone inválido';        
+                if((!empty($data['celular'])) && (!validacelular($data['celular']))){
+                    $data['celular_err'] = 'Telefone inválido';        
                 }else{
-                    $data['telefone2_err'] = '';
+                    $data['celular_err'] = '';
                 }
 
                 //valida nome
@@ -188,10 +189,40 @@
                     $data['flash_err'] = 'Ops! Arquivos inválidos.';
                     
                 } 
+
+                //verifica para submeter
+                // Make sure no errors
+                if(     
+                    empty($data['responsavel_err']) && 
+                    empty($data['telefone_err']) && 
+                    empty($data['celular']) && 
+                    empty($data['nome_err']) && 
+                    empty($data['nascimento_err']) && 
+                    empty($data['email_err']) && 
+                    empty($data['cpf_err']) && 
+                    empty($data['bairro_err']) && 
+                    empty($data['rua_err']) && 
+                    empty($data['opcao1_err']) && 
+                    empty($data['turno1_err']) && 
+                    empty($data['comprovante_residencia_err']) && 
+                    empty($data['certidaonascimento_err'])
+                   // empty($data['idade_maxima_err']) &&
+                   // empty($data['comp_residencia_name_err']) &&                   
+                ){
+                
+                $data['protocolo'] = $this->filaModel->generateProtocol();
+                $this->filaModel->register($data);
+                $this->view('filas/cadastrar', $data);
+                
+
+                } else {
+                    $this->view('filas/cadastrar', $data);
+                }// Make sure no errors
+
                 
                
                
-                $this->view('filas/cadastrar', $data);
+                
             }else{
                 $data = [
                     'bairros' => $bairros,
@@ -199,8 +230,8 @@
                     'responsavel' => '',
                     'cpf' => '', 
                     'email' => '', 
-                    'telefone1' => '',
-                    'telefone2' => '',
+                    'telefone' => '',
+                    'celular' => '',
                     'bairro' => '',
                     'rua' => '',
                     'numero' => '',
@@ -218,8 +249,8 @@
                     'responsavel_err' => '',
                     'cpf_err' => '',
                     'email_err' => '',
-                    'telefone1_err' => '',
-                    'telefone2_err' => '',
+                    'telefone_err' => '',
+                    'celular_err' => '',
                     'bairro_err' => '',
                     'rua_err' => '',
                     'rua_err' => '',

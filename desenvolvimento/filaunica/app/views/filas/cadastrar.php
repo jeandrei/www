@@ -154,37 +154,37 @@ echo flash('alert-danger');}
                                                                                                     <div class="row">
                                                                                                         <!--CELULAR 1-->
                                                                                                         <div class="col-lg-6">
-                                                                                                            <label for="telefone1">
+                                                                                                            <label for="telefone">
                                                                                                                 <span class="obrigatorio">*</span>Telefone para contato:
                                                                                                             </label>
                                                                                                             <input 
                                                                                                                 type="text" 
-                                                                                                                name="telefone1" 
-                                                                                                                id="telefone1" 
+                                                                                                                name="telefone" 
+                                                                                                                id="telefone" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control telefone <?php echo (!empty($data['telefone1_err'])) ? 'is-invalid' : ''; ?>"
-                                                                                                                value="<?php htmlout($data['telefone1']); ?>"
+                                                                                                                class="form-control telefone <?php echo (!empty($data['telefone_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                value="<?php htmlout($data['telefone']); ?>"
                                                                                                                 >
                                                                                                                 <span class="invalid-feedback">
-                                                                                                                    <?php echo $data['telefone1_err']; ?>
+                                                                                                                    <?php echo $data['telefone_err']; ?>
                                                                                                                 </span>
                                                                                                         </div>
 
                                                                                                         <!--CELULAR 2-->
                                                                                                         <div class="col-lg-6">
-                                                                                                            <label for="telefone2">
+                                                                                                            <label for="celular">
                                                                                                                 Celular para contato:
                                                                                                             </label>
                                                                                                             <input 
                                                                                                                 type="text" 
-                                                                                                                name="telefone2" 
-                                                                                                                id="telefone2" 
+                                                                                                                name="celular" 
+                                                                                                                id="celular" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control telefone <?php echo (!empty($data['telefone2_err'])) ? 'is-invalid' : ''; ?>"
-                                                                                                                value="<?php htmlout($data['telefone2']); ?>"
+                                                                                                                class="form-control telefone <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                value="<?php htmlout($data['celular']); ?>"
                                                                                                             >
                                                                                                             <span class="invalid-feedback">
-                                                                                                                <?php echo $data['telefone2_err']; ?>
+                                                                                                                <?php echo $data['celular_err']; ?>
                                                                                                             </span>
                                                                                                         </div>
                                                                                                         <!--LINHA NOVA PARA OS CELULARES-->
