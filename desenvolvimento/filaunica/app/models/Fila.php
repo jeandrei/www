@@ -91,7 +91,8 @@
         }
 
         // Grava na fila
-        public function register($data){
+        public function register($data){             
+                    
             $this->db->query('INSERT INTO fila SET                    
                                 responsavel = :responsavel,  
                                 email = :email, 
@@ -103,6 +104,7 @@
                                 complemento = :complemento, 
                                 nomecrianca = :nomecrianca,
                                 nascimento = :nascimento,
+                                etapa_id = :etapa_id,
                                 certidaonascimento = :certidaonascimento,
                                 opcao1_id = :opcao1_id,
                                 opcao2_id = :opcao2_id,
@@ -112,17 +114,16 @@
                                 turno3 = :turno3,      
                                 cpfresponsavel = :cpfresponsavel,
                                 protocolo = :protocolo,                                                   
-                                observacao = :observacao          
-                                ');
-                                /*
+                                observacao = :observacao,
                                 comprovanteres = :comprovanteres,
                                 comprovanteres_tipo = :comprovanteres_tipo,
                                 comprovante_res_nome = :comprovante_res_nome,
-                                certidaonascimento = :certidaonascimento,
                                 comprovantenasc = :comprovantenasc,
                                 comprovante_nasc_nome = :comprovante_nasc_nome,
                                 comprovantenasc_tipo = :comprovantenasc_tipo,
-                                */
+                                deficiencia = :deficiencia         
+                                ');
+                                
              // Bind values
              $this->db->bind(':responsavel', $data['responsavel']);
              $this->db->bind(':email', $data['email']);
@@ -144,6 +145,7 @@
             $this->db->bind(':complemento', $data['complemento']);
             $this->db->bind(':nomecrianca', $data['nome']);
             $this->db->bind(':nascimento', $data['nascimento']);
+            $this->db->bind(':etapa_id', $data['etapa_id']);
             $this->db->bind(':certidaonascimento', $data['certidao']);
             $this->db->bind(':opcao1_id', $data['opcao1']);
             $this->db->bind(':opcao2_id', $data['opcao2']);
@@ -154,13 +156,20 @@
             $this->db->bind(':cpfresponsavel', $data['cpf']);
             $this->db->bind(':protocolo', $data['protocolo']);        
             $this->db->bind(':observacao', $data['obs']);
-            /*$this->db->bind(':comprovanteres', $comp_res_dados);
-             $this->db->bind(':comprovante_res_nome', $nome_comp_res); 
-             $this->db->bind(':comprovanteres_tipo', $comp_res_tipo); 
-             $this->db->bind(':comprovantenasc', $cert_nasc_dados);
-             $this->db->bind(':comprovante_nasc_nome', $nome_comp_nasc);
-             $this->db->bind(':comprovantenasc_tipo', $cert_nasc_tipo);  
-             */     
+            $this->db->bind(':comprovanteres', $data['comp_res_dados']);
+            $this->db->bind(':comprovante_res_nome', $data['comp_res_nome']); 
+            $this->db->bind(':comprovanteres_tipo', $data['comp_res_tipo']); 
+            $this->db->bind(':comprovantenasc', $data['cert_nasc_dados']);
+            $this->db->bind(':comprovante_nasc_nome', $data['cert_nasc_nome']);
+            $this->db->bind(':comprovantenasc_tipo', $data['cert_nasc_tipo']); 
+            
+            if(isset($data['portador']) && ($data['portador'] == '1'))
+            {
+                $this->db->bind(':deficiencia', '1');
+            }else{
+                $this->db->bind(':deficiencia', '0');
+            }
+                 
              
             // Execute
             
@@ -170,6 +179,10 @@
                 return false;
             }
         }
+
+
+       
+        
         
     
     

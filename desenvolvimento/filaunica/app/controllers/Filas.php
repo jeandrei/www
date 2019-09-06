@@ -9,7 +9,7 @@
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
             //pega todas as escolas
-            $escolas = $this->filaModel->getEscolas();
+            $escolas = $this->filaModel->getEscolas();          
             
                        
 
@@ -55,6 +55,7 @@
                     'certidao_err' => '',
                     'opcao1_err' => ''
                     ];
+                    
                     
                 //checkbox não manda valor no post se não for marcado
                 //por isso tem que verificar se foi marcado
@@ -114,7 +115,7 @@
                 //valida etapa
                 if(!empty($data['nascimento'])){
                     if($this->filaModel->getEtapa($data['nascimento'])){
-                        $id_etapa = $this->filaModel->getEtapa($data['nascimento']);
+                        $data['etapa_id'] = $this->filaModel->getEtapa($data['nascimento']);
                     }else
                     {
                         $data['nascimento_err'] = 'Data de nascimento inválida';
@@ -161,9 +162,9 @@
                 //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
                     $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
                     if(empty($comp_res['error'])){                                          
-                        $comp_res_dados = $comp_res['data'];
-                        $nome_comp_res =  $comp_res['nome'] . "." . $comp_res['extensao'];
-                        $comp_res_tipo = $comp_res['tipo'];
+                        $data['comp_res_dados'] = $comp_res['data'];
+                        $data['comp_res_nome'] =  $comp_res['nome'] . "." . $comp_res['extensao'];
+                        $data['comp_res_tipo'] = $comp_res['tipo'];
                         $data['comprovante_residencia_err'] = '';                      
                     } else {
                         $data['comprovante_residencia_err'] =  $comp_res['error'];
@@ -174,9 +175,9 @@
                 
                     $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO'); 
                     if(empty($cert_nasc['error'])){                  
-                        $cert_nasc_dados = $cert_nasc ['data'];
-                        $nome_comp_nasc =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
-                        $cert_nasc_tipo = $cert_nasc['tipo'];
+                        $data['cert_nasc_dados'] = $cert_nasc ['data'];
+                        $data['cert_nasc_nome'] =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
+                        $data['cert_nasc_tipo'] = $cert_nasc['tipo'];
                         $data['certidaonascimento_err'] = '';                                       
                     } else {
                         $data['certidaonascimento_err'] = $cert_nasc['error'];
@@ -195,7 +196,7 @@
                 if(     
                     empty($data['responsavel_err']) && 
                     empty($data['telefone_err']) && 
-                    empty($data['celular']) && 
+                    empty($data['celular_err']) && 
                     empty($data['nome_err']) && 
                     empty($data['nascimento_err']) && 
                     empty($data['email_err']) && 
@@ -238,6 +239,7 @@
                     'complemento' => '',
                     'nome' => '',
                     'nascimento' => '',
+                    'etapa_id' => '',
                     'certidao' => '',
                     'opcao1' => '',
                     'turno1' => '',
