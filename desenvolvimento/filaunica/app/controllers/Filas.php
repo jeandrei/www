@@ -160,7 +160,7 @@
                 
                 
                 //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
-                    $comp_res = upload_file('comprovante_residencia',$_POST['responsavel'],'COMP_RESIDENCIA'); 
+                    $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA'); 
                     if(empty($comp_res['error'])){                                          
                         $data['comp_res_dados'] = $comp_res['data'];
                         $data['comp_res_nome'] =  $comp_res['nome'] . "." . $comp_res['extensao'];

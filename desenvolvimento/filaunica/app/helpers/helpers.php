@@ -79,6 +79,7 @@ function upload_file($myfile,$newname,$description){
     $fileSize = $_FILES[$myfile]['size'];
     $fileType = $_FILES[$myfile]['type'];
     $fileName = $_FILES[$myfile]['name']; 
+    die($fileSize);
   
     $strings =  explode('.',$fileName);
     $fileExtension = strtolower(end($strings));
