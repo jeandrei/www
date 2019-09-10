@@ -119,9 +119,16 @@ function upload_file2($myfile,$newname,$description){
     $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
 
     if(count($_FILES) > 0){
+        
+        $fileSize = getimageSize($_FILES[$myfile]['tmp_name']);
+        
+        if ($fileSize > 20971520) {
+            $file_uploaded['error'] = "Apenas arquivos até 20MB são permitidos"; 
+            die("arquivo muito grande");
+        }
+
         if(is_uploaded_file($_FILES[$myfile]['tmp_name'])){
-            $file     = $_FILES[$myfile]['tmp_name'];
-            $fileSize = $_FILES[$myfile]['size'];
+            $file     = $_FILES[$myfile]['tmp_name'];            
             $fileType = $_FILES[$myfile]['type'];
             $fileName = $_FILES[$myfile]['name'];
             $strings =  explode('.',$fileName);
@@ -129,11 +136,7 @@ function upload_file2($myfile,$newname,$description){
 
             if (! in_array($fileExtension,$fileExtensions)) {
                 $file_uploaded['error'] = "Por favor informe arquivos do tipo JPEG, PNG ou PDF.";            
-            }
-    
-            if ($fileSize > 20971520) {
-                $file_uploaded['error'] = "Apenas arquivos até 20MB são permitidos";            
-            }
+            }            
     
             if (empty($newname)){
                 $file_uploaded['error'] = "Você deve informar o nome do responsável!";            
