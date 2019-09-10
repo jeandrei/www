@@ -79,7 +79,7 @@ function upload_file($myfile,$newname,$description){
     $fileSize = $_FILES[$myfile]['size'];
     $fileType = $_FILES[$myfile]['type'];
     $fileName = $_FILES[$myfile]['name']; 
-    die($fileSize);
+    
   
     $strings =  explode('.',$fileName);
     $fileExtension = strtolower(end($strings));
@@ -111,6 +111,59 @@ function upload_file($myfile,$newname,$description){
         } 
         
 return $file_uploaded;    
+}//fim função upload
+
+
+function upload_file2($myfile,$newname,$description){ 
+    
+    $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
+
+    if(count($_FILES) > 0){
+        if(is_uploaded_file($_FILES[$myfile]['tmp_name'])){
+            $file     = $_FILES[$myfile]['tmp_name'];
+            $fileSize = $_FILES[$myfile]['size'];
+            $fileType = $_FILES[$myfile]['type'];
+            $fileName = $_FILES[$myfile]['name'];
+            $strings =  explode('.',$fileName);
+            $fileExtension = strtolower(end($strings));
+
+            if (! in_array($fileExtension,$fileExtensions)) {
+                $file_uploaded['error'] = "Por favor informe arquivos do tipo JPEG, PNG ou PDF.";            
+            }
+    
+            if ($fileSize > 20971520) {
+                $file_uploaded['error'] = "Apenas arquivos até 20MB são permitidos";            
+            }
+    
+            if (empty($newname)){
+                $file_uploaded['error'] = "Você deve informar o nome do responsável!";            
+            }
+
+            if (empty($file_uploaded['error'])){
+                $file_uploaded = [
+                    'nome' => $newname . "_" . $description,
+                    'extensao' => $fileExtension,
+                    'tipo' => $fileType,
+                    'data' => addslashes(file_get_contents($file))
+                ];        
+                
+            } 
+                             
+        } else {
+            $file_uploaded['error'] = "Erro ao realizar o upload do arquivo.";
+            // se der esse erro é provavel que o php está bloqueando o upload devido ao temanho do arquivo
+            // tem que mudar no php.ini o tamanho de upload post_max_size e upload_max_filesize coloca os dois 100M
+            // no container copie o arquivo /usr/local/etc/php/php.ini-production no mesmo local como php.ini
+            // faça as alterações de post_max_size e upload_max_filesize no php.ini 
+            // depois systemctl restart apache2.service ou /etc/init.d/apache2 restart
+        }
+    
+        
+    } else {
+        $file_uploaded['error'] = "Erro ao anexar o arquivo.";
+    }
+     
+return $file_uploaded;      
 }//fim função upload
 
 ?>

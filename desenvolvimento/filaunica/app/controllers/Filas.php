@@ -160,7 +160,8 @@
                 
                 
                 //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
-                    $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA'); 
+                    $comp_res = upload_file2('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
+                    
                     if(empty($comp_res['error'])){                                          
                         $data['comp_res_dados'] = $comp_res['data'];
                         $data['comp_res_nome'] =  $comp_res['nome'] . "." . $comp_res['extensao'];
@@ -173,7 +174,7 @@
                 
             
                 
-                    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO'); 
+                    $cert_nasc = upload_file2('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO'); 
                     if(empty($cert_nasc['error'])){                  
                         $data['cert_nasc_dados'] = $cert_nasc ['data'];
                         $data['cert_nasc_nome'] =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
