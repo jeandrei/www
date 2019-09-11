@@ -50,9 +50,9 @@
     
           <div class="row justify-content-center align-items-center">         
               <div class="col-lg-4">
-                    <a href="<? echo URLROOT;?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Cadastrar</a>                         
-                    <a href="<? echo URLROOT;?>/filas/listachamada" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a> 
-                    <a href="<? echo URLROOT;?>/filas/consultar" class="btn btn-primary btn-lg btn-block" role="button">Consultar</a>                  
+                    <a href="<?php echo URLROOT; ?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Cadastrar</a>                         
+                    <a href="<?php echo URLROOT; ?>/filas/listachamada" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a> 
+                    <a href="<?php echo URLROOT; ?>/filas/consultar" class="btn btn-primary btn-lg btn-block" role="button">Consultar</a>                  
               </div>
           </div>            
 
