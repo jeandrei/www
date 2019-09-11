@@ -118,7 +118,7 @@ function upload_file2($myfile,$newname,$description){
     
     $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
 
-    if(count($_FILES) > 0){             
+    if(isset($_FILES[$myfile])){             
 
         if(is_uploaded_file($_FILES[$myfile]['tmp_name'])){
             $file     = $_FILES[$myfile]['tmp_name'];
