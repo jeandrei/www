@@ -417,10 +417,10 @@ echo flash('alert-danger');}
                                                                                                             <label for="turno1" class="help-block">
                                                                                                                 <span class="obrigatorio">*</span>Turno
                                                                                                             </label>
-                                                                                                            <select 
-                                                                                                                class="form-control "
+                                                                                                            <select                                                                                                                
                                                                                                                 id="turno1"
                                                                                                                 name="turno1"
+                                                                                                                class="form-control <?php echo (!empty($data['turno1_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                             >
                                                                                                             <option value="">Selecione o turno</option>
                                                                                                                 <option value="1" <?php echo $data['turno1'] == '1' ? 'selected':'';?>>Matutino</option>
@@ -598,7 +598,8 @@ echo flash('alert-danger');}
                                                                                         type="file" 
                                                                                         class="custom-file-input" 
                                                                                         id="comprovante_residencia"
-                                                                                        name="comprovante_residencia"                                                                                        
+                                                                                        name="comprovante_residencia"
+                                                                                        lang="pt"                                                                                        
                                                                                         onchange="return fileValidation('comprovante_residencia','res_erro');"
                                                                                         >
                                                                                         <label class="custom-file-label" for="comprovante_residencia">Selecione o arquivo</label>
@@ -641,6 +642,7 @@ echo flash('alert-danger');}
                                                                                         class="custom-file-input" 
                                                                                         id="certidaonascimento"
                                                                                         name="certidaonascimento"
+                                                                                        lang="pt"
                                                                                         onchange="return fileValidation('certidaonascimento','nasc_erro');"
                                                                                         >
                                                                                         <label class="custom-file-label" for="certidaonascimento">Selecione o arquivo</label>

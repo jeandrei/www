@@ -118,7 +118,7 @@
                         $data['etapa_id'] = $this->filaModel->getEtapa($data['nascimento']);
                     }else
                     {
-                        $data['nascimento_err'] = 'Data de nascimento inválida';
+                        $data['nascimento_err'] = 'A data informada não corresponde a nenhuma etapa da fila.';
                         $data['flash_err'] = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';                    
                         //colocar essa menságem de erro NO FLASH $error
                     }
