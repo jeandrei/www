@@ -6,6 +6,11 @@
         }
 
         public function cadastrar(){
+            
+            //apagar as duas linhas abaixo coloquei aqui só para montar o formulário
+            $this->view('filas/sucessoCadastrar', $data = 0);
+            die();
+
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
             //pega todas as escolas
@@ -214,7 +219,7 @@
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
                 $this->filaModel->register($data);
-                $this->view('filas/cadastrar', $data);
+                $this->view('filas/sucessoCadastrar', $data);
                 
 
                 } else {
