@@ -1,6 +1,7 @@
 <?php
     // TEM QUE SER EM UM HEADER E FOOTER DIFERENTE POIS SE NÃO VAI TRAZER O NAVBAR JUNTO
     include 'header.php';
+    //var_dump($data);
 ?>
 <div class="principal">
     <!-- Primeira linha -->
@@ -17,7 +18,7 @@
 
         <!-- Primeira coluna da primeira linha -->
         <div class="col text-center">
-        <h4> Anote o número do seu protocolo:</h4><h1>Potocolo:<?php echo  $protocolo=123456; ?></h1>
+        <h4> Anote o número do seu protocolo:</h4><h1><?php echo $data['protocolo']; ?></h1>
           <p style="font-style:italic;">Quando da disponibilidade de uma vaga para a sua solicitação e respeitando a ordem de inscrição, a secretaria de educação entrará em contato
             para o processo de matrícula do aluno.
             Dúvidas podem ser sanadas nos telefones:<br>
@@ -31,25 +32,105 @@
     Informações do seu cadastro:
 
     <!-- BLOCO PARA INFORMAÇÕES -->
-    <div class="bloco" style="margin-top:70px;">
-        <!-- Segunda linha -->
+    <div class="bloco" style="margin-top:20px;">
+        
         <div class="row">
 
-            <!-- Primeira coluna da Segunda linha -->
-            <div class="col text-right">
-                TEXTO 1
+           
+            <div class="col text-center" style="color:green; font-size:25px">
+                Etapa: <?php echo $data['desc_etapa']->descricao; ?>
+            </div> 
+        </div>
+
+       
+        <div class="row">             
+
+           
+            <div class="col text-center" style="color:green; font-size:25px">
+                Posição na fila: <?php echo $data['posicao']->posicaonafila;?>
+            </div> 
+
+        </div>
+        <hr>     
+        <!-- linha para tabela com as escolas escolhidas -->
+        <div class="row">
+             <div class="col">
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>                        
+                        <th scope="col">Estabelecimento de Ensino</th>
+                        <th scope="col">Turno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <?php if(!empty($data['unidade1'])): ?> 
+                            <tr>                       
+                            <td><?php  if(!empty($data['unidade1'])){echo $data['unidade1']->nome;} ?></td>
+                                <td>    
+                                    <?php 
+                                        switch ($data['turno1']) {
+                                            case 1:
+                                                echo "Matutino";
+                                                break;
+                                            case 2:
+                                                echo "Vespertino";
+                                                break;
+                                            case 3:
+                                                echo "Integral";
+                                                break;
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        
+                        <?php if(!empty($data['unidade2'])): ?> 
+                            <tr>                       
+                            <td><?php  if(!empty($data['unidade2'])){echo $data['unidade2']->nome;} ?></td>
+                                <td>    
+                                    <?php 
+                                        switch ($data['turno2']) {
+                                            case 1:
+                                                echo "Matutino";
+                                                break;
+                                            case 2:
+                                                echo "Vespertino";
+                                                break;
+                                            case 3:
+                                                echo "Integral";
+                                                break;
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                      
+
+                        <?php if(!empty($data['unidade3'])): ?> 
+                            <tr>                       
+                            <td><?php  if(!empty($data['unidade3'])){echo $data['unidade3']->nome;} ?></td>
+                                <td>    
+                                    <?php 
+                                        switch ($data['turno3']) {
+                                            case 1:
+                                                echo "Matutino";
+                                                break;
+                                            case 2:
+                                                echo "Vespertino";
+                                                break;
+                                            case 3:
+                                                echo "Integral";
+                                                break;
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        </tr>
+                    </tbody>
+                </table>
             </div>   
-
-            <!-- Segunda coluna da Segunda linha -->
-            <div class="col text-left">
-                TEXTO 2
-            </div>    
-
-            <!-- Terceira coluna da Segunda linha -->
-            <div class="col text-center">
-                TEXTO 2
-            </div>       
-
         </div>
     </div>
 </div>

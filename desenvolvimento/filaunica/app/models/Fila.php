@@ -20,6 +20,32 @@
             return $this->db->resultSet();
         }
 
+        public function getEscolasById($id){
+            $this->db->query("SELECT nome FROM escola WHERE id = :id");
+            $this->db->bind(':id',$id);
+
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }           
+        }
+
+        public function getTurnoById($id){
+            $this->db->query("SELECT turno FROM escola WHERE id = :id");
+            $this->db->bind(':id',$id);
+
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }           
+        }
+
         //retorna se já existe um nome e data de nascimento cadastrado
         public function nomeCadastrado($nome,$nasc){
             $this->db->query("SELECT * FROM fila where nomecrianca = :nomecrianca AND nascimento = :nascimento");
@@ -180,6 +206,64 @@
             }
         }
 
+        public function buscaPosicaoFila($protocolo) {
+            $this->db->query("  
+                                    SELECT 
+                                            count(fila.id) as posicaonafila
+                                    FROM 
+                                            fila, etapa
+                                    WHERE 
+                                            fila.nascimento>=data_ini
+                                    AND 
+                                            fila.nascimento<=data_fin
+                                    AND 
+                                            etapa.id = (
+                                                        SELECT 
+                                                            etapa.id 
+                                                        FROM etapa,
+                                                            fila 
+                                                        WHERE 
+                                                            fila.nascimento>=data_ini
+                                                        AND 
+                                                            fila.nascimento<=data_fin
+                                                        AND 
+                                                            fila.protocolo = :protocolo
+                                                    )
+                                    AND 
+                                            fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                                    AND
+                                            fila.status = 'Aguardando'                            
+            
+                                ");
+            
+            
+            
+            $this->db->bind(':protocolo', $protocolo);
+            
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            } 
+           
+        }
+
+
+        public function getDescricaoEtapa($id) {
+            $this->db->query("SELECT descricao FROM etapa WHERE id = :id");
+            $this->db->bind(':id', $id);    
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            } 
+        }
+
+  
 
        
         

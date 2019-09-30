@@ -8,8 +8,8 @@
         public function cadastrar(){
             
             //apagar as duas linhas abaixo coloquei aqui só para montar o formulário
-            $this->view('filas/sucessoCadastrar', $data = 0);
-            die();
+           // $this->view('filas/sucessoCadastrar', $data = 0);
+            //die();
 
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
@@ -218,8 +218,39 @@
                 ){
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
+                
+                if($data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']))
+                {
+                    $data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']);    
+                } 
+
+                if($data['unidade2'] = $this->filaModel->getEscolasById($data['opcao2']))
+                {
+                    $data['unidade2'] = $this->filaModel->getEscolasById($data['opcao2']);    
+                } 
+
+                if($data['unidade3'] = $this->filaModel->getEscolasById($data['opcao3']))
+                {
+                    $data['unidade3'] = $this->filaModel->getEscolasById($data['opcao3']);    
+                } 
+
+                
+                //gravo no banco de dados para depois pegar os dados do protocolo 
                 $this->filaModel->register($data);
+
+                //busco a posição que ficou na fila
+                $data['posicao'] = $this->filaModel->buscaPosicaoFila($data['protocolo']);
+
+                //pego o id da etapa a partir da data de nascimento
+                $id_etapa = $this->filaModel->getEtapa($data['nascimento']);   
+                
+                //a partir do id da etapa pego a descrição
+                $data['desc_etapa'] = $this->filaModel->getDescricaoEtapa($id_etapa);
+
+                // chamo o formulário de sucesso
                 $this->view('filas/sucessoCadastrar', $data);
+
+                
                 
 
                 } else {
