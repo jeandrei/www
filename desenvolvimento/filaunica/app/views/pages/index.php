@@ -24,7 +24,7 @@
 
 <img src="<?php echo URLROOT; ?>/img/LOGO.png" class="img-fluid" alt="Responsive image">
 
-
+<!-- comentário automático no visual studio control + k + c -->
 
 <div class="container text-center">
 
@@ -51,10 +51,24 @@
           <div class="row justify-content-center align-items-center">         
               <div class="col-lg-4">
                     <a href="<?php echo URLROOT; ?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Cadastrar</a>                         
-                    <a href="<?php echo URLROOT; ?>/filas/listachamada" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a> 
-                    <a href="<?php echo URLROOT; ?>/filas/consultar" class="btn btn-primary btn-lg btn-block" role="button">Consultar</a>                  
+                    <a href="<?php echo URLROOT; ?>/filas/listachamada" class="btn btn-default btn-lg btn-block" role="button">Lista de Chamada</a>                                      
               </div>
-          </div>            
+          </div>
+
+        <hr>
+
+        <!--  -->
+        <div class="row justify-content-center align-items-center">                  
+            <div class="col-lg-6">
+                <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="protocolo" class="sr-only"></label>                                 
+                    <input type="text" class="form-control form-control-lg onlynumbers" id="protocolo" name="protocolo" placeholder="Protocolo">               
+                  </div>             
+                  <button type="submit" class="btn btn-primary btn-lg mb-2">Consultar</button>
+                </form>     
+            </div>
+        </div>
 
 </div> 
 

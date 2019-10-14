@@ -133,6 +133,11 @@
             </div>   
         </div>
     </div>
+        <div class="row p-4 justify-content-center align-items-center">         
+              <div class="col-lg-4">
+                    <a href="<?php echo URLROOT; ?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Novo Cadastro</a>                       
+              </div>
+        </div>  
 </div>
 <?php 
     include 'footer.php';

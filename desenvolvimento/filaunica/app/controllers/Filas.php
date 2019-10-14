@@ -307,7 +307,11 @@
         }
 
         public function consultar(){
-            echo "Consultar";
+            // aqui pego os dados do protocolo
+            // continuar daqui fazer a verificação se existe o protocolo se sim executar o view tentar com try catch
+            $data = $this->filaModel->buscaProtocolo($_POST['protocolo']);
+            //aqui eu chamo o model com a função da pesquisa
+            $this->view('filas/consultar', $data);           
         }
 
         public function listachamada(){

@@ -263,6 +263,36 @@
             } 
         }
 
+
+
+        public function buscaProtocolo($protocolo) {
+            $this->db->query("
+                                    SELECT      
+                                        fila.registro as registro, 
+                                        fila.responsavel as responsavel, 
+                                        fila.nomecrianca as nome, 
+                                        fila.nascimento as nascimento,
+                                        fila.protocolo as protocolo,
+                                        fila.status as status,
+                                        (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
+                                        
+                                    FROM                               
+                                        fila 
+                                    WHERE 
+                                        fila.protocolo=:protocolo
+                                ");
+            
+            
+            $this->db->bind(':protocolo', $protocolo);
+            $row = $this->db->single(); 
+            
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }  
+        }
+
   
 
        
