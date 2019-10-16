@@ -308,10 +308,20 @@
 
         public function consultar(){
             // aqui pego os dados do protocolo
-            // continuar daqui fazer a verificação se existe o protocolo se sim executar o view tentar com try catch
-            $data = $this->filaModel->buscaProtocolo($_POST['protocolo']);
-            //aqui eu chamo o model com a função da pesquisa
-            $this->view('filas/consultar', $data);           
+            // se existir o protocolo chamo o formulário de consulta se não chamo o cadastrar novamente
+            if($this->filaModel->buscaProtocolo($_POST['protocolo']))
+            {
+                //aqui eu chamo o model com a função da pesquisa
+                $data = $this->filaModel->buscaProtocolo($_POST['protocolo']);
+                $this->view('filas/consultar', $data);
+            }
+            else
+            {   
+                $data['protocolo_err'] = 'Ops! Protocolo não encontrado.';
+                $this->view('pages/index', $data);
+            }
+           
+                      
         }
 
         public function listachamada(){

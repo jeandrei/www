@@ -40,8 +40,8 @@
             <!-- FILA ÚNICA DESCRIÇÃO-->
             <div class="jumbotron jumbotron-fluid text-center">
                 <div class="container">
-                    <h1 class="display-3"><?php echo $data['title'];?></h1>
-                    <p class="lead"><?php echo $data['description']; ?></p>
+                    <h1 class="display-3"><?php echo SITENAME;?></h1>
+                    <p class="lead"><?php echo DESCRIPTION; ?></p>
                 </div>
             </div>
 
@@ -57,8 +57,21 @@
 
         <hr>
 
+        
+        <span class="invalid-feedback">
+            <?php echo "oieeeee"; ?>
+        </span>
+
+
+        <div class="row justify-content-center align-items-center">
+              <?php if(!empty($data['protocolo_err']))
+                {
+                  echo $data['protocolo_err'];
+                }
+              ?>
+        </div>
         <!--  -->
-        <div class="row justify-content-center align-items-center">                  
+        <div class="row justify-content-center align-items-center">            
             <div class="col-lg-6">
                 <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
                   <div class="form-group mx-sm-3 mb-2">

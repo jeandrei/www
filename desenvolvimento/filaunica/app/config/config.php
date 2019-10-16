@@ -25,6 +25,9 @@
 
     // Site Name
     define('SITENAME', 'Fila Única');
+    
+    // Site Description
+    define('DESCRIPTION' , 'Fila Única');
 
     // App Version
     define('APPVERSION', '1.0.0');
