@@ -55,34 +55,33 @@
               </div>
           </div>
 
-        <hr>
-
+        <hr>        
         
-        <span class="invalid-feedback">
-            <?php echo "oieeeee"; ?>
-        </span>
-
-
-        <div class="row justify-content-center align-items-center">
-              <?php if(!empty($data['protocolo_err']))
-                {
-                  echo $data['protocolo_err'];
-                }
-              ?>
-        </div>
         <!--  -->
         <div class="row justify-content-center align-items-center">            
             <div class="col-lg-6">
                 <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="protocolo" class="sr-only"></label>                                 
-                    <input type="text" class="form-control form-control-lg onlynumbers" id="protocolo" name="protocolo" placeholder="Protocolo">               
+                    <input 
+                        type="number" 
+                        class="form-control onlynumbers <?php echo (!empty($data['protocolo_err'])) ? 'is-invalid' : ''; ?>" 
+                        id="protocolo" 
+                        name="protocolo" 
+                        placeholder="Protocolo"
+                    >               
                   </div>             
                   <button type="submit" class="btn btn-primary btn-lg mb-2">Consultar</button>
                 </form>     
             </div>
         </div>
-
+        <span id="protocolo_err" class="text-danger"> 
+              <?php if(!empty($data['protocolo_err']))
+                {
+                  echo $data['protocolo_err'];
+                }
+              ?>
+        </span>
 </div> 
 
 
