@@ -16,8 +16,11 @@
    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">   
   
 </head>
+<body>
+  <div class="container">  
 
-<body style="background-color:#DCDCDC">
-    <div class="container" style="margin-top: 90px;">
+<img src="<?php echo URLROOT; ?>/img/LOGO.png" class="img-fluid" alt="Responsive image">
+
+<!-- comentário automático no visual studio control + k + c -->
    
 

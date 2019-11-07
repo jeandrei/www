@@ -313,6 +313,7 @@
             {
                 //aqui eu chamo o model com a função da pesquisa
                 $data = $this->filaModel->buscaProtocolo($_POST['protocolo']);
+                $data->posicao = $this->filaModel->buscaPosicaoFila($_POST['protocolo']);  
                 $this->view('filas/consultar', $data);
             }
             else

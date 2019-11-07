@@ -167,4 +167,14 @@ function upload_file2($myfile,$newname,$description){
 return $file_uploaded;      
 }//fim função upload
 
+
+//retorna as iniciais de um nome
+function iniciais($str){
+    
+    preg_match_all('/\b\w/u', $str, $m);
+    $iniciais = implode('',$m[0]);
+    return $iniciais;    
+}
+
+
 ?>
