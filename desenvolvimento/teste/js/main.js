@@ -148,6 +148,9 @@ $(document).ready(function () {
   });
 
 
+  function alerta(){
+	  alert('oi');
+  }
 
 
 //mascaras para os formulários todas se aplicam a classe

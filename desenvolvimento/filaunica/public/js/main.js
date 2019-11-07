@@ -30,8 +30,6 @@ jQuery.validator.addMethod("cpf", function(value, element) {
 
 
 
-
-
 // FUNÇÃO PARA ADICIONAR CLASSE
 // função para adicionar nova classe a objetos
 // exemplo para adicionar a classe cpf que tem a mascara do cpf
@@ -52,6 +50,9 @@ function upperCaseF(a){
   }, 1);
 }
 
+function alerta(){
+	alert('oi');
+}
 
 //FUNÇÃO PARA PERMITIR APENAS NÚMEROS
 //PARA USAR BASTA COLOCAR O CAMPO COMO CLASSE onlynumbers
