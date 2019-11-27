@@ -326,6 +326,26 @@
         }
 
         public function listachamada(){
-            echo "Lista de chamada";
+            $data['etapas'] = $this->filaModel->getEtapas();
+           // $valores = $this->filaModel->getFilaPorEtapaRelatorio(1,'Aguardando');
+            //var_dump($valores);
+          /*  
+            
+            foreach($data['etapas'] as $etapa){ 
+                if($data['registros'] = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando'))
+                {
+                    $data['registros'] = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando');                    
+                }
+                else
+                {
+                    $data['registros'] = NULL;
+                }
+
+            }    
+          
+           die(var_dump($data['registros']));*/
+            $this->view('filas/listachamada', $data);
+
         }
-}
+
+    }
