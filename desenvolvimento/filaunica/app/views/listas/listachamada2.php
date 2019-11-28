@@ -1,10 +1,43 @@
 <?php
 
 require APPROOT . '/views/inc/fpdf/fpdf.php'; 
+
+class PDF extends FPDF
+{            
             
-           
-                     
-            $pdf = new FPDF();
+            // Page header
+            function Header()
+            {
+                // Logo
+                $this->Image(APPROOT . '/views/inc/logo.png',10,6,110);
+                // Arial bold 15
+                $this->SetFont('Arial','B',15);    
+                // Title
+                $this->Ln(20);
+                // Move to the right
+                $this->Cell(120);
+                $this->Cell(30,10, utf8_decode("Lista de Classificação da Fila Única"),0,0,'C');
+                // Line break
+                $this->Ln(20);                
+            }
+
+            // Page footer
+            function Footer()
+            {
+                // Position at 1.5 cm from bottom
+                $this->SetY(-15);
+                // Arial italic 8
+                $this->SetFont('Arial','I',8);
+                // Page number
+                $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');
+            }
+}
+
+            // Instanciation of inherited class
+            $pdf = new PDF();
+            //$pdf->AliasNbPages();
+            $pdf->SetFont('Times','',12);
+            //$pdf = new FPDF();
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
@@ -16,17 +49,18 @@ require APPROOT . '/views/inc/fpdf/fpdf.php';
             
             
             
-            
+            //pega as etapas
             $etapas = $this->listaModel->getEtapas();
 
            
            
            
-            
+            //para cada etapa que retornar no banco de dados
             foreach($etapas as $etapa){ 
                 
+                //se existir registros na etapa com status aguardando
                 if($registros = $this->listaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando'))
-                {
+                {   //guarda os registros na variável registros
                     $registros = $this->listaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando');                                    
                 }
                 else
@@ -34,6 +68,7 @@ require APPROOT . '/views/inc/fpdf/fpdf.php';
                     $registros = NULL;
                 }
 
+                //se tiver valores em registro vai imprimir todas as linhas da etapa lá do foreach
                 if($registros <> NULL ){
                     //adiciona uma nova pagina
                     $pdf->AddPage('L');
@@ -84,12 +119,7 @@ require APPROOT . '/views/inc/fpdf/fpdf.php';
             else{
                 echo $data['erro'] = $error;
                 $this->view('listas/erroAoGerarRelatorio',$data);
+                
             }            
-            
-          
-
-
-         
-
-
 ?>
+

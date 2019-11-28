@@ -216,8 +216,13 @@
             {
                 foreach ($result as $row){
                     $aguardando[] = array(
+                        "posicao" => $row->posicao . "º",
+                        "registro" => date('d/m/Y h:i:s', strtotime($row->registro)),
+                        "responsavel" => $row->responsavel,
                         "nome" => $row->nome,
-                        fazer essa parte aqui ********************************************************************
+                        "nascimento" => date('d/m/Y', strtotime($row->nascimento)), 
+                        "etapa" => $row->etapa,
+                        "protocolo" => $row->protocolo                        
                     );
                 }
             
