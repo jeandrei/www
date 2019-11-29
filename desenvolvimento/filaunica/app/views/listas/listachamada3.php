@@ -2,6 +2,8 @@
 
 require APPROOT . '/views/inc/fpdf/fpdf.php'; 
 
+$currentdate = date("m-d-Y");
+
 class PDF extends FPDF
 {
         // Load data from txt file

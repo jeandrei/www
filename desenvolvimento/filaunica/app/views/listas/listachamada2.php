@@ -7,9 +7,13 @@ class PDF extends FPDF
             
             // Page header
             function Header()
-            {
+            {   $currentdate = date("d-m-Y");
                 // Logo
                 $this->Image(APPROOT . '/views/inc/logo.png',10,6,110);
+                // Date
+                $this->SetFont('Arial','B',10); 
+                $this->Cell(120);
+                $this->Cell(260,10, utf8_decode('Data de impressão: ' . $currentdate),0,0,'C');
                 // Arial bold 15
                 $this->SetFont('Arial','B',15);    
                 // Title
