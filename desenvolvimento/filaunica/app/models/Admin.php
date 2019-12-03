@@ -94,19 +94,20 @@
             
             
             
-            $this->db->bind(':protocolo',$data['protocolo']);
+            $this->db->bind(':protocolo',$protocolo);
            
            
-            $result = $this->db->resultSet();
-            $count = (is_array($result) ? count($result) : 0);
-            if($count > 0){
+            $row = $this->db->single();  
+           
+            if($this->db->rowCount() > 0){
                 $data = [
-                    'registro' => $result->registro,
-                    'nome' => $result->nome,
-                    'responsavel' => $result->responsavel,
-                    'nascimento' => $result->nascimento,
-                    'etapa' => $result->etapa,
-                    'status' => $result->status
+                    'registro' => $row->registro,
+                    'nome' => $row->nome,
+                    'responsavel' => $row->responsavel,
+                    'nascimento' => $row->nascimento,
+                    'etapa' => $row->etapa,
+                    'status' => $row->status,
+                    'protocolo' => $row->protocolo
                     
                 ];
                 return $data;
@@ -168,7 +169,76 @@
            
         }
 
+
+
+
+
+
+
+
+        public function getEtapa($nasc) {
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
+            $this->db->bind(':datanasc',$nasc); 
+            $num_meses = $this->db->single();            
+            
+            if($num_meses->meses<4){        
+                return false;
+            }
+        
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
+
     
+        public function downloadres($id){
+            
+                $this->db->query("SELECT id,comprovanteres as dados,comprovante_res_nome as nome,comprovanteres_tipo as tipo  FROM fila WHERE id = $_GET[id]");
+                $this->db->bind(':id',$id); 
+                $row = $this->db->single();
+                
+           
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }                   
+
+        }
+
+
+        public function downloadnasc($id){
+          
+                
+                $this->db->query("SELECT id,comprovantenasc as dados,comprovante_nasc_nome as nome,comprovantenasc_tipo as tipo  FROM fila WHERE id = $_GET[id]");
+                $this->db->bind(':id',$id); 
+                $row = $this->db->single(); 
+            
+            
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }                   
+
+        }
+
+        //Aqui já executo a sql com o id e status passado pelo método updateStatus
+        public function changeStatus($id,$status){
+            $this->db->query('UPDATE fila SET fila.status=:status WHERE id=:id');
+            $this->db->bind(':id',$id); 
+            $this->db->bind(':status',$status); 
+            $this->db->execute();
+        }
     
     
     
