@@ -23,7 +23,7 @@
         <tr>        
           <td><?php echo date('d/m/Y H:i:s', strtotime($data->registro));?></td>
           <td><?php echo $data->protocolo;?></td>
-          <td><?php echo $data->posicao->posicaonafila;?>º</td>
+          <td><?php echo $data->posicao;?></td>
           <td><?php echo $data->responsavel;?></td>
           <td><?php echo iniciais($data->nome);?></td>
           <td><?php echo date('d/m/Y', strtotime($data->nascimento));?></td>

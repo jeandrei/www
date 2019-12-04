@@ -78,7 +78,8 @@
         public function buscaPosicaoFila($protocolo) {
             $this->db->query("  
                                     SELECT 
-                                            count(fila.id) as posicaonafila
+                                            count(fila.id) as posicaonafila,
+                                            (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
                                     FROM 
                                             fila, etapa
                                     WHERE 
@@ -111,7 +112,7 @@
             
             $row = $this->db->single();           
 
-            if($this->db->rowCount() > 0){
+            if($row->statusprotocolo == "Aguardando"){
                 return $row;
             } else {
                 return false;

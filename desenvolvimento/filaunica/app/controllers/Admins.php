@@ -18,13 +18,13 @@
               // e aplico em um novo array utilizando de outras funções para obter os dados que preciso
               $data[] = array(
                 'fila_id' => $dado['fila_id'],
-                'posicao' => $this->adminModel->buscaPosicaoFila($dado['protocolo']),
+                'posicao' => $posicao = ($this->adminModel->buscaPosicaoFila($dado['protocolo'])) ? $this->adminModel->buscaPosicaoFila($dado['protocolo']) : "-",
                 'nome' => $dado['nome'],
-                'nascimento' => $dado['nascimento'],
+                'nascimento' => date('d/m/Y', strtotime($dado['nascimento'])),
                 'etapa' => $etapa['etapa'],
                 'responsavel' => $dado['responsavel'],
                 'protocolo' => $dado['protocolo'],
-                'registro' => $dado['registro'],
+                'registro' => date('d/m/Y h:i:s', strtotime($dado['registro'])),
                 'comprovante_res_nome' => $dado['comprovante_res_nome'],
                 'comprovante_nasc_nome' => $dado['comprovante_nasc_nome'],
                 'status' => $dado['status']

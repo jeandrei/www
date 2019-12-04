@@ -27,7 +27,9 @@
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                         
                     FROM                               
-                        fila"
+                        fila
+                    ORDER BY
+                        etapa"                    
             );
         
             
@@ -101,10 +103,10 @@
            
             if($this->db->rowCount() > 0){
                 $data = [
-                    'registro' => $row->registro,
+                    'registro' => date('d/m/Y h:i:s', strtotime($row->registro)),
                     'nome' => $row->nome,
                     'responsavel' => $row->responsavel,
-                    'nascimento' => $row->nascimento,
+                    'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
                     'etapa' => $row->etapa,
                     'status' => $row->status,
                     'protocolo' => $row->protocolo
@@ -127,7 +129,8 @@
         function buscaPosicaoFila($protocolo) {
                 $this->db->query(' 
                                     SELECT 
-                                            count(fila.id) as posicao
+                                            count(fila.id) as posicao,
+                                            (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
                                     FROM 
                                             fila, etapa
                                     WHERE 
@@ -149,6 +152,7 @@
                                                     )
                                     AND 
                                             fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                                    
                                     AND
                                             fila.status = "Aguardando"                            
             
@@ -156,11 +160,12 @@
             
             
             
-            $this->db->bind(':protocolo',$protocolo);
+            $this->db->bind(':protocolo',$protocolo);            
             
-            $row = $this->db->single();           
-            
-            if($this->db->rowCount() > 0){
+            $row = $this->db->single();  
+            //var_dump($row);
+                       
+            if($row->statusprotocolo == "Aguardando"){
                 return $row->posicao . 'º';
             } else {
                 return false;
@@ -168,6 +173,53 @@
             
            
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        function buscaPosicaoFilaTemp($protocolo) {
+            
+            $this->db->query('  SELECT
+                                    count(fila.id) as posicao,
+                                    (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
+                                FROM
+                                    fila
+                                WHERE
+                                    (fila.nascimento>=(SELECT etapa.data_ini FROM etapa WHERE data_ini<=(SELECT fila.nascimento FROM fila WHERE protocolo = :protocolo) AND data_fin>=(SELECT fila.nascimento FROM fila WHERE protocolo = :protocolo))) 
+                                AND 
+                                    (fila.nascimento<=(SELECT etapa.data_fin FROM etapa WHERE data_ini<=(SELECT fila.nascimento FROM fila WHERE protocolo = :protocolo) AND data_fin>=(SELECT fila.nascimento FROM fila WHERE protocolo = :protocolo)))
+                                AND
+                                    fila.registro < (SELECT fila.registro FROM fila WHERE protocolo = :protocolo) 
+                                
+                                AND fila.status = "Aguardando"                      
+                                
+                            ');
+        
+        
+        
+        $this->db->bind(':protocolo',$protocolo);            
+        
+        $row = $this->db->single();  
+        
+                   
+        if($row->statusprotocolo == "Aguardando"){
+            return $row->posicao . 'º';
+        } else {
+            return false;
+        }       
+        
+       
+    }
+
+        
 
 
 
