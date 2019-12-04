@@ -25,7 +25,7 @@
 
 <!--TABELA COM OS DADOS-->   
 <div class="text-center small">
-  <table class="table table-sm">
+  <table class="table table-sm" style="font-size: 11px;">
     <thead>
       <tr>  
         <th scope="col">Posição</th>        
@@ -62,7 +62,7 @@
                 <td><a download="<?php echo $registro['comprovante_res_nome'];?>"  target="_blank" href='<?php echo URLROOT; ?>/admins/download?tipo=res&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>
                 <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='<?php echo URLROOT; ?>/admins/download?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>
                 <td>
-                  <select class="form-control form-control-sm"
+                  <select style="font-size:11px;" class="form-control form-control-sm"
                         name="statuslista" 
                         id="<?php echo  $registro['fila_id'];?>" 
                         class="form-control" 
