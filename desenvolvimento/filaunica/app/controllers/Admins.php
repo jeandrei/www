@@ -7,6 +7,41 @@
 
         public function index(){           
 
+          if(($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['etapa']<>"Todos")){
+
+           
+            if($this->adminModel->getFilaBusca(NULL,$_POST['etapa'],NULL)){
+                $dados =  $this->adminModel->getFilaBusca(NULL,$_POST['etapa'],NULL);
+                  foreach($dados as $dado){
+
+                    //pego a etapa com a função busca protocolo
+                    $etapa = $this->adminModel->buscaProtocolo($dado['protocolo']);
+                  
+                    // e aplico em um novo array utilizando de outras funções para obter os dados que preciso
+                    $data[] = array(
+                      'fila_id' => $dado['fila_id'],
+                      'posicao' => $posicao = ($this->adminModel->buscaPosicaoFila($dado['protocolo'])) ? $this->adminModel->buscaPosicaoFila($dado['protocolo']) : "-",
+                      'nome' => $dado['nome'],
+                      'nascimento' => date('d/m/Y', strtotime($dado['nascimento'])),
+                      'etapa' => $etapa['etapa'],
+                      'responsavel' => $dado['responsavel'],
+                      'protocolo' => $dado['protocolo'],
+                      'registro' => date('d/m/Y h:i:s', strtotime($dado['registro'])),
+                      'comprovante_res_nome' => $dado['comprovante_res_nome'],
+                      'comprovante_nasc_nome' => $dado['comprovante_nasc_nome'],
+                      'status' => $dado['status']
+                      
+                    );              
+                  }
+              }
+              else
+              {
+              $data['err'] = "Sem dados para emitir";
+              }
+            
+          } 
+          else
+          {
             $dados =  $this->adminModel->getFila();
           
             
@@ -32,9 +67,16 @@
               );              
             }   
 
+          }
+
+
+            
+
             // 4 Chama o view passando os dados
             $this->view('admins/index', $data);
         }
+
+
 
         public function download(){ 
           

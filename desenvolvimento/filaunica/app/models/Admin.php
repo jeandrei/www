@@ -68,6 +68,75 @@
             
         }
 
+        public function getFilaBusca($nome=NULL,$etapa=NULL,$status=NULL) {
+            $this->db->query("
+                    SELECT 
+                        fila.id as fila_id,     
+                        fila.registro as registro, 
+                        fila.responsavel as responsavel, 
+                        fila.nomecrianca as nome, 
+                        fila.nascimento as nascimento,
+                        fila.protocolo as protocolo,
+                        fila.comprovanteres,
+                        fila.comprovante_res_nome,
+                        fila.comprovanteres_tipo,
+                        fila.comprovantenasc,
+                        fila.comprovantenasc_tipo,
+                        fila.comprovante_nasc_nome,
+                        fila.status as status,
+                        (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
+                    FROM                               
+                        fila
+                    WHERE
+                        (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id
+                    ORDER BY
+                        etapa"                    
+            );
+
+           
+            
+            if($nome <> NULL){
+               $this->db->query .= " WHERE fila.nomecrianca LIKE '%$nome%'";                 
+            }
+
+            if($status <> NULL){
+                $this->db->query .= " WHERE fila.status=:status";
+                $this->db->bind(':status',$status);   
+             }
+            
+            
+            $this->db->bind(':etapa_id',$etapa);
+            $result = $this->db->resultSet();
+            
+            //verifica se obteve algum resultado
+            if($this->db->rowCount() > 0)
+            {
+                foreach ($result as $row)
+                {
+                $data[] = array(  
+                        'fila_id' => $row->fila_id,
+                        'registro' => $row->registro,
+                        'nome' => $row->nome,
+                        'responsavel' => $row->responsavel,
+                        'nascimento' => $row->nascimento,
+                        'etapa' => $row->etapa,
+                        'protocolo' => $row->protocolo,
+                        'comprovante_res_nome' => $row->comprovante_res_nome,
+                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
+                        'status' => $row->status  
+                    );
+                }
+                return $data;
+            }
+            else
+            {
+                return false;
+            }   
+            
+            
+        }
+
+
 
 
 
@@ -219,6 +288,12 @@
        
     }
 
+
+
+
+
+    
+
         
 
 
@@ -249,6 +324,22 @@
                 return false;
             }
         
+        }
+
+        public function getEtapas() {
+            $this->db->query("SELECT * FROM etapa ORDER BY descricao");
+            $result = $this->db->resultSet();     
+            
+            foreach ($result as $row)
+            {
+            $etapas[] = array(
+                'id' => $row->id,
+                'data_ini' => $row->data_ini,
+                'data_fin' => $row->data_fin,
+                'descricao' => $row->descricao
+            );
+            }
+        return $etapas;
         }
 
     

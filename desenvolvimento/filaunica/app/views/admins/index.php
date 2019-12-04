@@ -10,11 +10,7 @@
                 var idRegistro=$("#id_reg_fila").val();
                 var statusRegistro=$("#status_reg_fila").val(); 
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
-                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro, function(data){                       
-                    //remove todos os valores do option primeiro para não acumular a cada mudança
-                    //$("#atendimento").find("option").remove();                         
-                    //adiciona o que veio do método /filas/getAtendimentos no objeto #atendimento
-                    //$("#atendimento").append(data);
+                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro, function(data){                                          
                 });
             });
         });
@@ -22,6 +18,42 @@
 
 </script>
 
+
+
+
+<div class="container">
+    <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <div class="form-group mx-sm-3 mb-2">              
+                    <select 
+                                    name="etapa" 
+                                    id="etapa" 
+                                    class="form-control"                                        
+                                >
+                                        <option value="Todos">Todos</option>
+                                        <?php 
+                                        $etapas = $this->adminModel->getEtapas();                     
+                                        foreach($etapas as $etapa) : ?> 
+                                            <option value="<?php echo $etapa['id']; ?>"
+                                                        <?php if(isset($_POST['etapa'])){
+                                                        echo $_POST['etapa'] == $etapa['id'] ? 'selected':'';
+                                                        }
+                                                        ?>
+                                            >
+                                                <?php echo $etapa['descricao'];?>
+                                            </option>
+                                        <?php endforeach; ?>  
+                        </select>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
+        <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
+    </form>
+</div>
+
+<?php if(isset($data['err'])){die($data['err']);}?>
 
 <!--TABELA COM OS DADOS-->   
 <div class="text-center small">
