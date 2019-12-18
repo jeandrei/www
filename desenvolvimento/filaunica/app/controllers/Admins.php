@@ -5,13 +5,22 @@
           $this->adminModel = $this->model('Admin');
         }
 
-        public function index(){           
+        public function index(){  
+          
+          if (isset($_POST['etapa'])){
+            $etapa = $_POST['etapa'];
+          }
+
+          if (isset($_POST['status'])){
+            $status = $_POST['status'];
+          }
+          
 
           if(($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['etapa']<>"Todos")){
 
            
-            if($this->adminModel->getFilaBusca(NULL,$_POST['etapa'],NULL)){
-                $dados =  $this->adminModel->getFilaBusca(NULL,$_POST['etapa'],NULL);
+            if($this->adminModel->getFilaBusca(NULL,$_POST['etapa'],$status)){
+                $dados =  $this->adminModel->getFilaBusca(NULL,$_POST['etapa'],$status);
                   foreach($dados as $dado){
 
                     //pego a etapa com a função busca protocolo

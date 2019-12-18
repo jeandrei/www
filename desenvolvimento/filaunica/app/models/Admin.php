@@ -69,44 +69,72 @@
         }
 
         public function getFilaBusca($nome=NULL,$etapa=NULL,$status=NULL) {
-            $this->db->query("
-                    SELECT 
-                        fila.id as fila_id,     
-                        fila.registro as registro, 
-                        fila.responsavel as responsavel, 
-                        fila.nomecrianca as nome, 
-                        fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,
-                        fila.comprovanteres,
-                        fila.comprovante_res_nome,
-                        fila.comprovanteres_tipo,
-                        fila.comprovantenasc,
-                        fila.comprovantenasc_tipo,
-                        fila.comprovante_nasc_nome,
-                        fila.status as status,
-                        (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
-                    FROM                               
-                        fila
-                    WHERE
-                        (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id
-                    ORDER BY
-                        etapa"                    
-            );
-
-           
             
+            $cond = array();
+            $params = array();
+
+            
+            $sql = ("
+                        SELECT 
+                            fila.id as fila_id,     
+                            fila.registro as registro, 
+                            fila.responsavel as responsavel, 
+                            fila.nomecrianca as nome, 
+                            fila.nascimento as nascimento,
+                            fila.protocolo as protocolo,
+                            fila.comprovanteres,
+                            fila.comprovante_res_nome,
+                            fila.comprovanteres_tipo,
+                            fila.comprovantenasc,
+                            fila.comprovantenasc_tipo,
+                            fila.comprovante_nasc_nome,
+                            fila.status as status,
+                            (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
+                        FROM                               
+                            fila
+                        WHERE
+                            (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id  
+                            "                    
+                            
+                );
+
+                if($status != NULL){
+                    $cond[] = "fila.status = :status";
+                    $params[] = $status;
+                }
+
+                if(count($cond)){
+                    $sql .= "AND " .implode("AND", $cond) or die(print_r($sql->errorInfo(), true));
+                }
+
+                //$sql.= "AND fila.status=:statusreg";                    
+                 // var_dump($sql);
+                
+                
+                //$sql .= "ORDER BY etapa";
+                $this->db->query($sql);
+                $this->db->bind(':status',$status);  
+                $this->db->bind(':etapa_id',$etapa);
+                $result = $this->db->resultSet();
+            
+/*
+               
+                                   
             if($nome <> NULL){
-               $this->db->query .= " WHERE fila.nomecrianca LIKE '%$nome%'";                 
+               $sql .= "AND fila.nomecrianca LIKE '%$nome%'";                 
             }
 
-            if($status <> NULL){
-                $this->db->query .= " WHERE fila.status=:status";
-                $this->db->bind(':status',$status);   
-             }
             
             
-            $this->db->bind(':etapa_id',$etapa);
-            $result = $this->db->resultSet();
+            
+
+           
+
+            
+            
+      */
+
+
             
             //verifica se obteve algum resultado
             if($this->db->rowCount() > 0)

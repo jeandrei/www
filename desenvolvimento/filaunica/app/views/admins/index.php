@@ -26,6 +26,9 @@
         <div class="row">
             <div class="col">
                 <div class="form-group mx-sm-3 mb-2">              
+                    
+                    Busca por Etapa
+                    <!--BOTÃO BUSCA POR ETAPA-->
                     <select 
                                     name="etapa" 
                                     id="etapa" 
@@ -45,6 +48,30 @@
                                             </option>
                                         <?php endforeach; ?>  
                         </select>
+
+                    Busca por Situação                                   
+                    <!--BOTÃO BUSCA SITUAÇÃO-->
+                    <select 
+                                    name="status" 
+                                    id="status" 
+                                    class="form-control"                                        
+                                >
+                                        <option value="Todos">Todos</option>
+                                        <?php 
+                                        $status = array('Aguardando','Matriculado','Cancelado');                    
+                                        foreach($status as $row => $value) : ?> 
+                                            <option value="<?php echo $value; ?>" 
+                                                            <?php if(isset($_POST['status'])){
+                                                                    echo $_POST['status'] == $value ? 'selected':'';
+                                                                }
+                                                            ?>
+                                            >
+                                                <?php echo $value;?>
+                                            </option>
+                                        <?php endforeach; ?>  
+                        </select>
+
+
                 </div>
             </div>
         </div>
