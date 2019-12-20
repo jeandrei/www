@@ -87,6 +87,10 @@
 
 
 
+
+
+
+        
         public function download(){ 
           
           if($_GET['tipo'] == 'res'){          

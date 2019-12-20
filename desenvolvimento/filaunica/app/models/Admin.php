@@ -69,11 +69,7 @@
         }
 
         public function getFilaBusca($nome=NULL,$etapa=NULL,$status=NULL) {
-            
-            $cond = array();
-            $params = array();
-
-            
+                
             $sql = ("
                         SELECT 
                             fila.id as fila_id,     
@@ -98,42 +94,33 @@
                             
                 );
 
-                if($status != NULL){
-                    $cond[] = "fila.status = :status";
-                    $params[] = $status;
-                }
-
-                if(count($cond)){
-                    $sql .= "AND " .implode("AND", $cond) or die(print_r($sql->errorInfo(), true));
-                }
-
-                //$sql.= "AND fila.status=:statusreg";                    
-                 // var_dump($sql);
                 
                 
-                //$sql .= "ORDER BY etapa";
+
+                if(($status != NULL) && ($status != "Todos")){
+                    $sql .= " AND fila.status=:status";
+                }
+
+
+                if($nome != NULL){
+                $sql .= " AND fila.nomecrianca LIKE '%$nome%'";                 
+                }
+                
+
+                $sql .= " ORDER BY etapa";
+                
+                var_dump($sql);
                 $this->db->query($sql);
-                $this->db->bind(':status',$status);  
+               
+                
+                if(($status != NULL) && ($status != "Todos")){
+                    $this->db->bind(':status',$status);
+                }
+
+
                 $this->db->bind(':etapa_id',$etapa);
                 $result = $this->db->resultSet();
-            
-/*
-               
-                                   
-            if($nome <> NULL){
-               $sql .= "AND fila.nomecrianca LIKE '%$nome%'";                 
-            }
-
-            
-            
-            
-
-           
-
-            
-            
-      */
-
+ 
 
             
             //verifica se obteve algum resultado
