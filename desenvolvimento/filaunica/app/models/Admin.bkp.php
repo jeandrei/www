@@ -68,9 +68,7 @@
             
         }
 
-
-        // CONSULTA MONTA SQL DINAMICAMENTE
-        public function getFilaBusca($nome="Todos",$etapa="Todos",$status="Todos") {
+        public function getFilaBusca($nome=NULL,$etapa=NULL,$status=NULL) {
                 
             $sql = ("
                         SELECT 
@@ -89,63 +87,43 @@
                             fila.status as status,
                             (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
                         FROM                               
-                            fila                                                      
+                            fila
+                        WHERE
+                            (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id  
                             "                    
                             
                 );
 
                 
-                // CRIO UM ARRAY PARA ARMAZENAR OS CAMPOS QUE VOU FAZER O BIND
-                $bindvalues = array();               
-             
+                
 
-                // SE A ETAPA É DIFERENTE DE TODAS EU ADICIONO A CLAUSULA WHERE E REGISTRO O CAMPO E O VALOR PARA FAZER O BIND
-                if($etapa != "Todos"){                    
-                    $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id";                    
-                    // CAMPO E O VALOR PARA FAZER O BIND
-                    $bindvalues[':etapa_id'] = $etapa;                                         
-                } else {
-                    // SE NÃO FOR DIFERENTE DE TODOS ADICIONO UMA CLAUSULA WHERE SEM NENHUM PARÂMETRO PARA MONTAR O SQL NESTE CASO WHERE fila.id VAI TRAZER TODOS OS REGISTROS MESMO ASSIM
-                    $sql .= " WHERE fila.id";            
-                   
-                }
-
-                // SE STATUS FOR DIFERENTE DE TODOS ADICIONO O SQL E REGISTRO CAMPO E O VALOR PARA FAZER O BIND
-                if($status != "Todos"){
+                if(($status != NULL) && ($status != "Todos")){
                     $sql .= " AND fila.status=:status";
-                    $bindvalues[':status'] = $status;                    
                 }
 
 
-                // SE NOME FOR DIFERENTE DE TODOS ADICIONO A SQL E REGISTRO CAMPO E O VALOR PARA FAZER O BIND
-                if($nome != "Todos"){
-                $sql .= " AND fila.nomecrianca LIKE '%$nome%'";
-                $bindvalues[':nome'] = $nome;                   
+                if($nome != NULL){
+                $sql .= " AND fila.nomecrianca LIKE '%$nome%'";                 
                 }
                 
-                // POR FIM ADICIONO COMO QUERO ORDENAR
+
                 $sql .= " ORDER BY etapa";
-               
-                //**********************************VARDUMP AQUI */
-
                 
-                // MONTO A SQL
+                var_dump($sql);
                 $this->db->query($sql);
                
                 
-                // ATRAVÉS DO FOREACH ADICIONO TODOS OS CAMPOS E VALORES PARA FAZER O BIND
-                foreach($bindvalues as $field => $value){
-                    // $this->db->bind(':status',$status);
-                    $this->db->bind($field ,$value);  
+                if(($status != NULL) && ($status != "Todos")){
+                    $this->db->bind(':status',$status);
                 }
-               
-                
-                
-                // JOGO TODOS OS VALORES DO RESULTADO DA CONSULTA NA VARIÁVEL result                
+
+
+                $this->db->bind(':etapa_id',$etapa);
                 $result = $this->db->resultSet();
-               
-                        
-            // VERIFICO SE OBTEVE AO MENOS UM REGISTRO
+ 
+
+            
+            //verifica se obteve algum resultado
             if($this->db->rowCount() > 0)
             {
                 foreach ($result as $row)
@@ -163,7 +141,6 @@
                         'status' => $row->status  
                     );
                 }
-                //RETORNO O RESULTADO
                 return $data;
             }
             else
