@@ -69,7 +69,7 @@
         }
 
 
-        // CONSULTA MONTA SQL DINAMICAMENTE
+        // 3 CONSULTA MONTA SQL DINAMICAMENTE E RETORNA OS VALORES
         public function getFilaBusca($nome="Todos",$etapa="Todos",$status="Todos") {
                 
             $sql = ("

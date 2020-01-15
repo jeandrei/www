@@ -28,7 +28,7 @@
                 <div class="form-group mx-sm-3 mb-2">              
                     
                     Busca por Etapa
-                    <!--BOTÃO BUSCA POR ETAPA-->
+                    <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
                     <select 
                                     name="etapa" 
                                     id="etapa" 
