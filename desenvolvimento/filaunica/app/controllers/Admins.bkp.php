@@ -7,66 +7,39 @@
 
         public function index(){             
 
-          //echo $_GET['testevar'] . "</br>";
 
-          // LIMITE DE DADOS POR PAGINA
-          $_GET['limitePag'] = 10;
-          $limit = $_GET['limitePag'];
-          
-
-          //echo $_GET["page"];
-
-          if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };  
-          $start_from = ($page-1) * $limit;
-
-
-
-           /*
-              AQUI POR CONTA DA PAGINAÇÃO E PARA MONTAR A CONSULTA EU TENHO 3 SITUAÇÕES
-              1 O CARREGAMENTO DIRETO DA PÁGINA QUE NÃO VAI TER NEM DADOS NO GET E NEM NO POST ENTÃO NA ÚLTIMA OPÇÃO DO IF
-              ATRIBUO TODOS A VARIÁVEL BUSCANOME
-              2 O USUÁRIO DEFINIU SUA BUSCA E CLICOU EM ATUALIZAR ENTÃO TENHO QUE PASAR OS DADOS PELO POST ATRIBUO NA PRIMEIRA
-              OPÇÃO DO IF BUSCANOME RECEBE O POST
-              3 O USUÁRIO CLICOU NO LINK DA PAGINAÇÃO ENTÃO PRECISO PASSAR OS DADOS PELO GET QUE VAI FAZER A PESQUISA NOVAMENTE
-              ATRAVÉS DA FUNÇÃO getFilaBusca MAS DESSA VEZ PASSANDO A PÁGINA INICIAL E FINAL PARA A PAGINAÇÃO
-              ISSO VALE PARA BUSCAETAPA E BUSCASTATUS SEQUENTES TAMBÉM
-              DEPOIS VOLTO PARA O INDEX E TENHO QUE VERIFICAR NOVAMENTE PARA PODER JOGAR NO LINK DA PAGINAÇÃO
-           */
+           // VERIFICO SE TEM ALGUM VALOR NO POST STATUS SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
            if (isset($_POST['buscanome'])){
-            $buscaNome = $_POST['buscanome'];            
-          }else if (isset($_GET['nome'])){
-            $buscaNome = $_GET['nome'];            
-          } else {
+            $buscaNome = $_POST['buscanome'];
+          }else {
             $buscaNome = "Todos";
           } 
 
           
+          // VERIFICO SE TEM ALGUM VALOR NO POST ETAPA SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
           if (isset($_POST['buscaetapa'])){
-            $buscaEtapa = $_POST['buscaetapa'];           
-          }else if (isset($_GET['etapa'])){
-            $buscaEtapa = $_GET['etapa'];            
+            $buscaEtapa = $_POST['buscaetapa'];
           } else {
             $buscaEtapa = "Todos";
-          } 
+          }
 
+          // VERIFICO SE TEM ALGUM VALOR NO POST STATUS SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
           if (isset($_POST['buscastatus'])){
-            $buscaStatus = $_POST['buscastatus'];            
-          }else if (isset($_GET['status'])){
-            $buscaStatus = $_GET['status'];            
-          } else {
+            $buscaStatus = $_POST['buscastatus'];
+          }else {
             $buscaStatus = "Todos";
           } 
+              
+           
             
             // A FUNÇÃO getFilaBusca POR PADRÃO OS PARÂMETROS JÁ ESTÁ DEFINIDO COMO TODOS
             // MESMO ASSIM SE NAS LINHAS ACIMA AS VARIÁVEIS FICAREM COM O VALOR TODOS ELE VAI MONTAR A SQL DE FORMA A TRAZER TODOS
             // CASO CONTRÁRIO ELE VAI MONTAR A SQL FILTRANDO COM OS PARÂMETROS PASSADOS $status, $etapa ...
-            if($dados = $this->adminModel->getFilaBuscaPag($buscaNome,$buscaEtapa,$buscaStatus,$start_from,$limit)){
+            if($dados = $this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus)){
                 
                 // 2 VAI CHAMAR A FUNÇÃO getFilaBusca EM models/Admin.php 
-                $dados = $this->adminModel->getFilaBuscaPag($buscaNome,$buscaEtapa,$buscaStatus,$start_from,$limit);
-                // PASSO A QUANTIDADE DE REGISTROS TOTAIS COM OUTRA FUNÇÃO GETFILABUSCA SEM A PAGINAÇÃO
-                // POIS PRECISO DA QUANTIDADE PARA MONTAR OS NÚMEROS DE PAGINAÇÃO ABAIXO
-                $_GET['count'] = count($this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus));
+                $dados = $this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus);
+                
                 
                 // 4 MONTA A VARIÁVEL DADOS COM OS DADOS QUE EU PRECISO INCLUSIVE UTILIZANDO FUNÇÕES
                 foreach($dados as $dado){
@@ -97,7 +70,9 @@
               {
                 $data['err'] = "Sem resultados para esta consulta";
               }
-                       
+            
+            
+          
 
             // 4 Chama o view passando os dados
             $this->view('admins/index', $data);

@@ -102,23 +102,12 @@
                                                     </option>
                                                 <?php endforeach; ?>  
                             </select>   
-                        </div>
+                        </div>     
                 
                 
-                
-                
-                
-                
-                </div><!--FIM DIV CAMPOS DE BUSCA-->
-
-
-
+                </div><!--FIM DIV CAMPOS DE BUSCA-->                    
                     
-                    
-
-                                                     
-                   
-
+                     
 
                 </div>
             </div>
@@ -128,7 +117,7 @@
     </form>
 </div>
 
-<?php if(isset($data['err'])){die($data['err']);}?>
+<?php  if(isset($data['err'])){die($data['err']);}?>
 
 <!--TABELA COM OS DADOS-->   
 <div class="text-center small">
@@ -196,6 +185,67 @@
             </tr>            
         <?php endforeach; ?>
     </tbody>
-  </table>                  
+  </table>  
+
+
+    <!--PAGINAÇÃO-->
+    <ul class="pagination list-inline justify-content-center">
+ 
+
+    <?php
+    // PASSO O LIMITE DE REGISTROS POR PÁGINAS DEFINIDO EM controlers/admins.php
+    $limit = $_GET['limitePag'];
+    
+    //VERIFICO NOVAMENTE SE OS DADOS ESTÃO PASSANDO PELO POST OU PELO GET
+    if (isset($_POST['buscanome'])){
+        $buscaNome = $_POST['buscanome'];
+    } else if (isset($_GET['buscanome'])){
+        $buscaNome = $_GET['nome'];
+    } else {
+        $buscaNome = "Todos";
+    }
+
+    if (isset($_POST['buscaetapa'])){
+        $buscaEtapa = $_POST['buscaetapa'];
+    } else if (isset($_GET['buscaetapa'])){
+        $buscaEtapa = $_GET['etapa'];
+    } else {
+        $buscaEtapa = "Todos";
+    }
+
+    if (isset($_POST['buscastatus'])){
+        $buscaStatus = $_POST['buscastatus'];
+    } else if (isset($_GET['buscastatus'])){
+        $buscaStatus = $_GET['status'];
+    } else {
+        $buscaStatus = "Todos";
+    }
+    
+  
+    //TIVE QUE DECLARAR A VARIÁVEL SE NÃO FICA DANDO VARIÁVEL INDEFINIDA
+    $pagLink = "";
+    
+   
+    
+    
+    if(isset($data)){
+            $total_records = $_GET['count'];       
+            $total_pages = ceil($total_records / $limit);              
+                 
+            for ($i=1; $i<=$total_pages; $i++) {
+                        // SE O CONTADOR FOR IGUAL AO NÚMERO DA PAGINA PASSADA PELO GET ATRIBUI O VALOR ACTIVE A VARIÁVEL ACTIVE
+                        // E COLOCA NA CLASSE class=page-item
+                        if(isset($_GET['page']) && $i == $_GET['page']){$active = 'active';}else{ $active = "";}                          
+                        // AQUI PARA CADA PÁGINA MONTA UM LINK PASSANDO OS VALORES PELO GET DAÍ ESSES VALORES SÃO PASSADOS PARA A FUNÇÃO
+                        // QUE FAZ A BUSCA NO BANCO DE DADOS COM O PARÂMETRO DE ONDE INÍCIAR COM OS REGISTROS E ONDE TERMINAR
+                        $pagLink .= "<li class='page-item $active'><a class='page-link' href=" . URLROOT . "/admins/index?page=".$i ."&nome=". $buscaNome . "&etapa=". $buscaEtapa ."&status=". $buscaStatus .">".$i."</a></li>";  
+
+            }      
+            echo $pagLink . "</div>"; 
+    } 
+    ?>  
+
+    </ul>                
+
 
 <?php require APPROOT . '/views/inc/nav_footer.php'; ?>
