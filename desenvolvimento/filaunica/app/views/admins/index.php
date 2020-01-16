@@ -25,51 +25,99 @@
     <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col">
-                <div class="form-group mx-sm-3 mb-2">              
-                    
-                    Busca por Etapa
-                    <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
-                    <select 
-                                    name="etapa" 
-                                    id="etapa" 
-                                    class="form-control"                                        
-                                >
-                                        <option value="Todos">Todos</option>
-                                        <?php 
-                                        $etapas = $this->adminModel->getEtapas();                     
-                                        foreach($etapas as $etapa) : ?> 
-                                            <option value="<?php echo $etapa['id']; ?>"
-                                                        <?php if(isset($_POST['etapa'])){
-                                                        echo $_POST['etapa'] == $etapa['id'] ? 'selected':'';
-                                                        }
-                                                        ?>
-                                            >
-                                                <?php echo $etapa['descricao'];?>
-                                            </option>
-                                        <?php endforeach; ?>  
-                        </select>
+                <div class="form-group mx-sm-3 mb-2">  
 
-                    Busca por Situação                                   
-                    <!--BOTÃO BUSCA SITUAÇÃO-->
-                    <select 
-                                    name="status" 
-                                    id="status" 
-                                    class="form-control"                                        
-                                >
-                                        <option value="Todos">Todos</option>
-                                        <?php 
-                                        $status = array('Aguardando','Matriculado','Cancelado');                    
-                                        foreach($status as $row => $value) : ?> 
-                                            <option value="<?php echo $value; ?>" 
-                                                            <?php if(isset($_POST['status'])){
-                                                                    echo $_POST['status'] == $value ? 'selected':'';
+
+               <!--LINHA PARA OS CAMPOS DE BUSCA-->
+               <div class="row">
+                        
+                        
+                        <!--NOME 1-->
+                        <div class="col-lg-4">
+                            <label for="buscanome">
+                                Buscar por Nome
+                            </label>
+                            <input 
+                                type="text" 
+                                name="buscanome" 
+                                id="buscanome" 
+                                maxlength="60"
+                                class="form-control"
+                                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                                ><span class="invalid-feedback">
+                                    <?php // echo $data['nome_err']; ?>
+                                </span>
+                        </div>
+
+
+                        <!--ETAPA-->
+                        <div class="col-lg-4">
+                            <label for="buscaetapa">
+                                Busca por Etapa
+                            </label>                               
+                            <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
+                            <select 
+                                            name="buscaetapa" 
+                                            id="buscaetapa" 
+                                            class="form-control"                                        
+                                        >
+                                                <option value="Todos">Todos</option>
+                                                <?php 
+                                                $etapas = $this->adminModel->getEtapas();                     
+                                                foreach($etapas as $etapa) : ?> 
+                                                    <option value="<?php echo $etapa['id']; ?>"
+                                                                <?php if(isset($_POST['buscaetapa'])){
+                                                                echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
                                                                 }
-                                                            ?>
-                                            >
-                                                <?php echo $value;?>
-                                            </option>
-                                        <?php endforeach; ?>  
-                        </select>
+                                                                ?>
+                                                    >
+                                                        <?php echo $etapa['descricao'];?>
+                                                    </option>
+                                                <?php endforeach; ?>  
+                            </select>
+                        </div>
+
+                        <!--Situação-->
+                        <div class="col-lg-4">
+                            <label for="buscastatus">
+                                Busca por Situação
+                            </label> 
+                             <!--BOTÃO BUSCA SITUAÇÃO-->
+                            <select 
+                                            name="buscastatus" 
+                                            id="buscastatus" 
+                                            class="form-control"                                        
+                                        >
+                                                <option value="Todos">Todos</option>
+                                                <?php 
+                                                $status = array('Aguardando','Matriculado','Cancelado');                    
+                                                foreach($status as $row => $value) : ?> 
+                                                    <option value="<?php echo $value; ?>" 
+                                                                    <?php if(isset($_POST['buscastatus'])){
+                                                                            echo $_POST['buscastatus'] == $value ? 'selected':'';
+                                                                        }
+                                                                    ?>
+                                                    >
+                                                        <?php echo $value;?>
+                                                    </option>
+                                                <?php endforeach; ?>  
+                            </select>   
+                        </div>
+                
+                
+                
+                
+                
+                
+                </div><!--FIM DIV CAMPOS DE BUSCA-->
+
+
+
+                    
+                    
+
+                                                     
+                   
 
 
                 </div>

@@ -117,17 +117,15 @@
                 }
 
 
-                // SE NOME FOR DIFERENTE DE TODOS ADICIONO A SQL E REGISTRO CAMPO E O VALOR PARA FAZER O BIND
-                if($nome != "Todos"){
-                $sql .= " AND fila.nomecrianca LIKE '%$nome%'";
-                $bindvalues[':nome'] = $nome;                   
+                // SE NOME FOR DIFERENTE DE TODOS E NÃO FOR VAZIO ADICIONO A SQL
+                // AQUI NÃO PRECISA FAZER O BIND POIS PASSO O VALOR DIRETO PELA VARIÁVEL
+                if(($nome != "Todos") && ($nome != "") ){
+                    $sql .= " AND fila.nomecrianca LIKE '%$nome%'";                                       
                 }
                 
                 // POR FIM ADICIONO COMO QUERO ORDENAR
                 $sql .= " ORDER BY etapa";
-               
-                //**********************************VARDUMP AQUI */
-
+                              
                 
                 // MONTO A SQL
                 $this->db->query($sql);
@@ -137,6 +135,7 @@
                 foreach($bindvalues as $field => $value){
                     // $this->db->bind(':status',$status);
                     $this->db->bind($field ,$value);  
+                    //echo "<br>" . $field ."->". $value;
                 }
                
                 

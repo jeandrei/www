@@ -5,30 +5,40 @@
           $this->adminModel = $this->model('Admin');
         }
 
-        public function index(){  
+        public function index(){             
+
+
+           // VERIFICO SE TEM ALGUM VALOR NO POST STATUS SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
+           if (isset($_POST['buscanome'])){
+            $buscaNome = $_POST['buscanome'];
+          }else {
+            $buscaNome = "Todos";
+          } 
+
           
           // VERIFICO SE TEM ALGUM VALOR NO POST ETAPA SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
-          if (isset($_POST['etapa'])){
-            $etapa = $_POST['etapa'];
+          if (isset($_POST['buscaetapa'])){
+            $buscaEtapa = $_POST['buscaetapa'];
           } else {
-            $etapa = "Todos";
+            $buscaEtapa = "Todos";
           }
 
           // VERIFICO SE TEM ALGUM VALOR NO POST STATUS SE NÃO ATRIBUO O VALOR Todos PARA NA CONSULTA TRAZER TODOS OS VALORES
-          if (isset($_POST['status'])){
-            $status = $_POST['status'];
+          if (isset($_POST['buscastatus'])){
+            $buscaStatus = $_POST['buscastatus'];
           }else {
-            $status = "Todos";
-          }     
+            $buscaStatus = "Todos";
+          } 
+              
            
             
             // A FUNÇÃO getFilaBusca POR PADRÃO OS PARÂMETROS JÁ ESTÁ DEFINIDO COMO TODOS
             // MESMO ASSIM SE NAS LINHAS ACIMA AS VARIÁVEIS FICAREM COM O VALOR TODOS ELE VAI MONTAR A SQL DE FORMA A TRAZER TODOS
             // CASO CONTRÁRIO ELE VAI MONTAR A SQL FILTRANDO COM OS PARÂMETROS PASSADOS $status, $etapa ...
-            if($dados = $this->adminModel->getFilaBusca("Todos",$etapa,$status)){
+            if($dados = $this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus)){
                 
                 // 2 VAI CHAMAR A FUNÇÃO getFilaBusca EM models/Admin.php 
-                $dados = $this->adminModel->getFilaBusca("Todos",$etapa,$status);
+                $dados = $this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus);
                 
                 
                 // 4 MONTA A VARIÁVEL DADOS COM OS DADOS QUE EU PRECISO INCLUSIVE UTILIZANDO FUNÇÕES
@@ -58,7 +68,7 @@
               }//if($dados)
               else
               {
-                $data['err'] = "Sem dados para emitir";
+                $data['err'] = "Sem resultados para esta consulta";
               }
             
             
