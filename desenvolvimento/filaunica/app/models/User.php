@@ -77,6 +77,24 @@
             }
         }
 
+         // Find user by email
+         public function delUserByid($id){
+            $this->db->query('DELETE FROM users WHERE id = :id');
+            // Bind value
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->execute();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        
+
         // Find user by email
         public function getUsers(){
             $this->db->query('SELECT * FROM users');            

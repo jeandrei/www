@@ -242,6 +242,24 @@
                 $this->view('users/newuser', $data);
             } 
         }
+
+
+        public function delete($id){  
+            
+            if ($this->userModel->getUserById($id)){
+                $this->userModel->delUserByid($id); 
+            } else {
+                $data['user_del_err'] = "Não foi possível excluir o usuário com este id";
+            }
+            
+            if($data = $this->userModel->getUsers()){
+                $data = $this->userModel->getUsers();
+            } else {
+                $data['getuser_err'] = "Falha ao carregar a lista de usuários";
+            }
+            
+            $this->view('users/userslist', $data);
+        }
             
 
         public function login(){          
