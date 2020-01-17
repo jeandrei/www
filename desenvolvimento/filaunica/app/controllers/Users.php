@@ -141,7 +141,7 @@
                     'email' => $data->email,                                      
                     'type' => $data->type                  
                 ];
-
+                             
 
             } else {
                 $data['user_edit_err'] = "Não foi possível recuperar o usuário com este id";
@@ -214,7 +214,7 @@
                       if($this->userModel->update($data)){
                         // Cria a menságem antes de chamar o view va para 
                         // views/users/login a segunda parte da menságem
-                        flash('register_success', 'Usuário atualizado com sucesso!');                        
+                        flash('register_success', 'Usuário atualizado com sucesso!');                         
                         redirect('users/userlist');
                       } else {
                           die('Ops! Algo deu errado.');

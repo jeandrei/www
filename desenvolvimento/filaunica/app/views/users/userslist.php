@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/nav_header.php'; ?>
-<?php flash('post_message');?>
- <div class="row align-items-center mb-3">
+
+ <div class="row align-items-center mb-3"> 
     <div class="col-md-6">
         <h1>Usuários do sistema</h1>
     </div>
@@ -11,7 +11,12 @@
     </div>
  </div> 
 
+
+
+ <?php flash('register_success');?>
+
  
+
 <table class="table table-striped">
     <thead>
         <tr>      
@@ -37,6 +42,5 @@
     </tbody>
 
 </table>
-
 
 <?php require APPROOT . '/views/inc/nav_footer.php'; ?>
