@@ -10,11 +10,29 @@
 
         // Register User
         public function register($data){
-            $this->db->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+            $this->db->query('INSERT INTO users (name, email, password, type) VALUES (:name, :email, :password, :type)');
             // Bind values
             $this->db->bind(':name',$data['name']);
             $this->db->bind(':email',$data['email']);
             $this->db->bind(':password',$data['password']);
+            $this->db->bind(':type',$data['type']);
+
+            // Execute
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+         // Register User
+         public function update($data){
+            $this->db->query('UPDATE users SET name = :name, password = :password, type =:type WHERE email = :email');
+            // Bind values
+            $this->db->bind(':email',$data['email']);
+            $this->db->bind(':name',$data['name']);            
+            $this->db->bind(':password',$data['password']);
+            $this->db->bind(':type',$data['type']);
 
             // Execute
             if($this->db->execute()){
@@ -50,6 +68,36 @@
             $this->db->bind(':email', $email);
 
             $row = $this->db->single();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Find user by email
+        public function getUsers(){
+            $this->db->query('SELECT * FROM users');            
+
+            return $this->db->resultSet();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+         // Find user by email
+         public function getUserById($id_user){
+            $this->db->query('SELECT * FROM users WHERE id = :id');      
+            
+            $this->db->bind(':id', $id_user);
+
+            return $this->db->single();
 
             // Check row
             if($this->db->rowCount() > 0){

@@ -5,21 +5,42 @@
             $this->userModel = $this->model('User');
         }
 
-        public function register(){
+        public function index() {
             
+            if($data = $this->userModel->getUsers()){
+                $data = $this->userModel->getUsers();
+            } else {
+                $data['getuser_err'] = "Falha ao carregar a lista de usuários";
+            }
+            
+            $this->view('users/userslist', $data);
+        }
+
+        public function new(){      
+           
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
+               
                 // Process form
 
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 
+                
+                if (isset($_POST['type']) && ($_POST['type'] == 1)){
+                    $type = "admin";
+                } else {
+                    $type = "user";
+                }
+
+
                 //init data
                 $data = [
                     'name' => trim($_POST['name']),
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
-                    'confirm_password' => trim($_POST['confirm_password']),
+                    'confirm_password' => trim($_POST['confirm_password']),                    
+                    'type' => $type,
                     'name_err' => '',
                     'email_err' => '',
                     'password_err' => '',
@@ -59,6 +80,8 @@
                     }
                 }
 
+                
+
                 // Make sure errors are empty
                 if(                    
                     empty($data['email_err']) &&
@@ -75,8 +98,8 @@
                       if($this->userModel->register($data)){
                         // Cria a menságem antes de chamar o view va para 
                         // views/users/login a segunda parte da menságem
-                        flash('register_success', 'Você está registrado e pode efetuar o login');                        
-                        redirect('users/login');
+                        flash('register_success', 'Usuário registrado com sucesso!');                        
+                        redirect('users/userlist');
                       } else {
                           die('Ops! Algo deu errado.');
                       }
@@ -85,7 +108,7 @@
                       
                     } else {
                       // Load the view with errors
-                      $this->view('users/register', $data);
+                      $this->view('users/newuser', $data);
                     }               
 
             
@@ -94,6 +117,7 @@
                 $data = [
                     'name' => '',
                     'email' => '',
+                    'type' => '',
                     'password' => '',
                     'confirm_password' => '',
                     'name_err' => '',
@@ -102,9 +126,123 @@
                     'confirm_password_err' => ''
                 ];
                 // Load view
-                $this->view('users/register', $data);
-            }
+                $this->view('users/newuser', $data);
+            } 
         }
+
+       
+        public function edit($id){  
+            if ($data = $this->userModel->getUserById($id)){
+                $data = $this->userModel->getUserByid($id);
+
+                $data = [
+                    'id' => $id,
+                    'name' => $data->name,
+                    'email' => $data->email,                                      
+                    'type' => $data->type                  
+                ];
+
+
+            } else {
+                $data['user_edit_err'] = "Não foi possível recuperar o usuário com este id";
+            }
+            $this->view('users/edituser', $data);
+        }
+
+        public function gravar(){      
+           
+            // Check for POST            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+               
+                // Process form
+
+                // Sanitize POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                
+                if (isset($_POST['type']) && ($_POST['type'] == 1)){
+                    $type = "admin";
+                } else {
+                    $type = "user";
+                }
+                
+                //init data
+                $data = [
+                    'name' => trim($_POST['name']),
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['password']),
+                    'confirm_password' => trim($_POST['confirm_password']),
+                    'type' => $type,
+                    'name_err' => '',                    
+                    'password_err' => '',
+                    'confirm_password_err' => ''
+                ];                
+
+               
+                // Validate Name
+                if(empty($data['name'])){
+                    $data['name_err'] = 'Por favor informe seu nome';
+                }
+
+                 // Validate Password
+                 if(empty($data['password'])){
+                    $data['password_err'] = 'Por favor informe a senha';
+                } elseif (strlen($data['password']) < 6){
+                    $data['password_err'] = 'Senha deve ter no mínimo 6 caracteres';
+                }
+
+                // Validate Confirm Password
+                if(empty($data['confirm_password'])){
+                    $data['confirm_password_err'] = 'Por favor confirme a senha';
+                } else {
+                    if($data['password'] != $data['confirm_password']){
+                    $data['confirm_password_err'] = 'Senha e confirmação de senha diferentes';    
+                    }
+                }
+
+                // Make sure errors are empty
+                if(   
+                    empty($data['name_err']) && 
+                    empty($data['password_err']) &&
+                    empty($data['confirm_password_err']) 
+                    ){
+                      //Validated
+                      
+                      // Hash Password criptografa o password
+                      $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                      // Register User
+                      if($this->userModel->update($data)){
+                        // Cria a menságem antes de chamar o view va para 
+                        // views/users/login a segunda parte da menságem
+                        flash('register_success', 'Usuário atualizado com sucesso!');                        
+                        redirect('users/userlist');
+                      } else {
+                          die('Ops! Algo deu errado.');
+                      }
+                      
+
+                      
+                    } else {
+                      // Load the view with errors
+                      $this->view('users/edituser', $data);
+                    }               
+
+            
+            } else {
+                // Init data
+                $data = [
+                    'name' => '',                    
+                    'password' => '',
+                    'confirm_password' => '',
+                    'name_err' => '',                    
+                    'password_err' => '',
+                    'confirm_password_err' => ''
+                ];
+                // Load view
+                $this->view('users/newuser', $data);
+            } 
+        }
+            
 
         public function login(){          
             // Check for POST            
@@ -191,6 +329,7 @@
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_type'] = $user->type;
         redirect('admins/index');
     }
 
