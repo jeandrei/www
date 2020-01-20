@@ -1,11 +1,11 @@
 <?php require APPROOT . '/views/inc/nav_header.php'; ?>
 <div class="row">
     <div class="col-md-6 mx-auto">
+    <a href="<?php echo URLROOT; ?>/users" class="btn btn-light mt-3"><i class="fa fa-backward"></i>Back</a>
         <div class="card card-body bg-ligth mt-5">
             <h2>Registrar um usuário</h2>
             <p>Por favor informe os dados do novo usuário</p>
-            <form action="<?php echo URLROOT; ?>/users/gravar" method="post">
-                
+            <form action="<?php echo URLROOT; ?>/users/edit/<?php echo $data['id']; ?>" method="post">                
                 <!--NOME-->
                 <div class="form-group">
                 <label for="name">Nome: <sup>*</sup></label>
@@ -35,14 +35,11 @@
                 ['confirm_password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo (!empty($data['confirm_password'])) ? $data['confirm_password'] : ''; ?>">
                 <span class="invalid-feedback"><?php echo $data['confirm_password_err']; ?></span>                
                 </div>
-
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="type" name="type" value="1" <?php echo ((isset($data['type'])) && ($data['type'] == "admin")) ? 'checked="checked"' : ''; ?>>
                     <label class="form-check-label" for="admin">Administrador</label>
-                </div>
-                
+                </div>                
                 <br>
-
                  <!--BOTÕES-->
                  <div class="row">
                     <div class="col">                    

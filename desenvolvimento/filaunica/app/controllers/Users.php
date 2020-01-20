@@ -1,4 +1,4 @@
-<?php 
+<?php
     class Users extends Controller{
         public function __construct(){
             //vai procurar na pasta model um arquivo chamado User.php e incluir
@@ -7,13 +7,14 @@
 
         public function index() {
             
-            if($data = $this->userModel->getUsers()){
-                $data = $this->userModel->getUsers();
-            } else {
-                $data['getuser_err'] = "Falha ao carregar a lista de usuários";
+            if($data = $this->userModel->getUsers()){                
+                $this->view('users/userslist', $data);
+            } else {                
+                flash('register_success', 'Falha ao carregar a lista de usuários!', 'alert alert-danger'); 
+                $this->view('users/userslist', $data=0);
             }
             
-            $this->view('users/userslist', $data);
+           
         }
 
         public function new(){      
@@ -131,28 +132,9 @@
         }
 
        
-        public function edit($id){  
-            if ($data = $this->userModel->getUserById($id)){
-                $data = $this->userModel->getUserByid($id);
-
-                $data = [
-                    'id' => $id,
-                    'name' => $data->name,
-                    'email' => $data->email,                                      
-                    'type' => $data->type                  
-                ];
-                             
-
-            } else {
-                $data['user_edit_err'] = "Não foi possível recuperar o usuário com este id";
-            }
-            $this->view('users/edituser', $data);
-        }
-
-        public function gravar(){      
-           
+        public function edit($id){ 
             // Check for POST            
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){                
                
                 // Process form
 
@@ -160,9 +142,9 @@
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 
                 if (isset($_POST['type']) && ($_POST['type'] == 1)){
-                    $type = "admin";
+                    $type = 'admin';
                 } else {
-                    $type = "user";
+                    $type = 'user';
                 }
                 
                 //init data
@@ -213,33 +195,35 @@
                       // Register User
                       if($this->userModel->update($data)){
                         // Cria a menságem antes de chamar o view va para 
-                        // views/users/login a segunda parte da menságem
-                        flash('register_success', 'Usuário atualizado com sucesso!');                         
+                        // views/users/login a segunda parte da menságem                        
+                        flash('register_success', 'Usuário atualizado com sucesso!');                                                                   ;
                         redirect('users/userlist');
                       } else {
                           die('Ops! Algo deu errado.');
-                      }
-                      
-
+                      }    
                       
                     } else {
                       // Load the view with errors
-                      $this->view('users/edituser', $data);
-                    }               
-
-            
+                      $this->view('users/userlist', $data);
+                    }              
+                          
             } else {
-                // Init data
+                // get exiting user from the model
+                $user = $this->userModel->getUserByid($id);
+
+                if($_SESSION['user_type'] != "admin"){
+                    redirect('userlist');
+                }
+               
+
                 $data = [
-                    'name' => '',                    
-                    'password' => '',
-                    'confirm_password' => '',
-                    'name_err' => '',                    
-                    'password_err' => '',
-                    'confirm_password_err' => ''
+                    'id' => $id,
+                    'name' => $user->name,
+                    'email' => $user->email,                                      
+                    'type' => $user->type                  
                 ];
                 // Load view
-                $this->view('users/newuser', $data);
+                $this->view('users/edituser', $data);
             } 
         }
 
@@ -257,7 +241,7 @@
             } else {
                 $data['getuser_err'] = "Falha ao carregar a lista de usuários";
             }
-            
+            flash('register_success', 'Usuário removido com sucesso!');  
             $this->view('users/userslist', $data);
         }
             
@@ -355,6 +339,7 @@
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
+        unset($_SESSION['user_type']);
         session_destroy();
         redirect('pages/login'); 
     }
