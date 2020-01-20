@@ -191,25 +191,30 @@
             } 
         }
 
-
-        public function delete($id){  
-            
-            if ($this->userModel->getUserById($id)){
-                $this->userModel->delUserByid($id); 
-            } else {
-                $data['user_del_err'] = "Não foi possível excluir o usuário com este id";
+*/
+        public function delete($id){ 
+                        
+            if($this->etapaModel->etapaRegFila($id)){
+                $erro = 'Existem registros na fila vinculados a esta etapa!';                   
             }
             
-            if($data = $this->userModel->getUsers()){
-                $data = $this->userModel->getUsers();
+           
+           
+           
+            if(empty($erro)){
+                $this->etapaModel->delEtapaByid($id); 
+                flash('register_success', 'Etapa removida com sucesso!');                
             } else {
-                $data['getuser_err'] = "Falha ao carregar a lista de usuários";
-            }
-            flash('register_success', 'Usuário removido com sucesso!');  
-            $this->view('users/userslist', $data);
+                flash('register_success', $erro, 'alert alert-danger');
+            }    
+            
+            
+            $data = $this->etapaModel->getEtapas();
+            $this->view('etapas/index', $data);     
+            
         }
             
-
+/*
         public function login(){          
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){

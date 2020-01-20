@@ -22,12 +22,12 @@
         <?php foreach($data as $etapa) : ?>
             <tr>
                 <td><?php echo $etapa->descricao;?></td>
-                <td><?php echo $etapa->data_ini;?></td>
-                <td><?php echo $etapa->data_fin;?></td>                  
-                <td><a href="<?php echo URLROOT; ?>/users/edit/<?php echo $etapa->id; ?>" class="fa fa-edit btn btn-success pull-right btn-sm">Editar</a></td>
+                <td><?php echo date('d/m/Y', strtotime($etapa->data_ini));?></td>
+                <td><?php echo date('d/m/Y', strtotime($etapa->data_fin));?></td>                  
+                <td><a href="<?php echo URLROOT; ?>/etapas/edit/<?php echo $etapa->id; ?>" class="fa fa-edit btn btn-success pull-right btn-sm">Editar</a></td>
                 
                 <td><a 
-                        href="<?php echo URLROOT; ?>/users/delete/<?php echo $etapa->id;?>" 
+                        href="<?php echo URLROOT; ?>/etapas/delete/<?php echo $etapa->id;?>" 
                         class="fa fa-remove btn btn-danger pull-left btn-sm"
                         onclick="if(question('Tem certeza que deseja remover o registro?') == true)
                                 {

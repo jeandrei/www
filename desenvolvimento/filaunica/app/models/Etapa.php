@@ -7,15 +7,14 @@
             //inicia a classe Database
             $this->db = new Database;
         }
-/*
-        // Register User
+
+        // Registra Etapa
         public function register($data){
-            $this->db->query('INSERT INTO users (name, email, password, type) VALUES (:name, :email, :password, :type)');
+            $this->db->query('INSERT INTO etapa (data_ini, data_fin, descricao) VALUES (:data_ini, :data_fin, :descricao)');
             // Bind values
-            $this->db->bind(':name',$data['name']);
-            $this->db->bind(':email',$data['email']);
-            $this->db->bind(':password',$data['password']);
-            $this->db->bind(':type',$data['type']);
+            $this->db->bind(':data_ini',$data['data_ini']);
+            $this->db->bind(':data_fin',$data['data_fin']);
+            $this->db->bind(':descricao',$data['descricao']);            
 
             // Execute
             if($this->db->execute()){
@@ -25,7 +24,8 @@
             }
         }
 
-         // Register User
+        /*
+         // Editar Etapa
          public function update($data){
             $this->db->query('UPDATE users SET name = :name, password = :password, type =:type WHERE email = :email');
             // Bind values
@@ -76,10 +76,29 @@
                 return false;
             }
         }
+*/
+         // Busca etapa por id
+         public function getEtapaByid($id){
+            $this->db->query('SELECT * FROM etapa WHERE id = :id');
+            // Bind value
+            $this->db->bind(':id', $id);
 
-         // Find user by email
-         public function delUserByid($id){
-            $this->db->query('DELETE FROM users WHERE id = :id');
+            $row = $this->db->single();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        
+
+
+         // Deleta etapa por id
+         public function delEtapaByid($id){
+            $this->db->query('DELETE FROM etapa WHERE id = :id');
             // Bind value
             $this->db->bind(':id', $id);
 
@@ -92,18 +111,13 @@
                 return false;
             }
         }
-
         
 
-        
+        // get etapas
+        public function getEtapas(){
+            $this->db->query('SELECT * FROM etapa');            
 
-         // Find user by email
-         public function getUserById($id_user){
-            $this->db->query('SELECT * FROM users WHERE id = :id');      
-            
-            $this->db->bind(':id', $id_user);
-
-            return $this->db->single();
+            return $this->db->resultSet();
 
             // Check row
             if($this->db->rowCount() > 0){
@@ -111,13 +125,14 @@
             } else {
                 return false;
             }
-        }*/
+        }
 
-
-        // get etapas
-        public function getEtapas(){
-            $this->db->query('SELECT * FROM etapa');            
-
+        // VERIFICA SE JÁ EXISTE ALGUM REGISTRO NA FILA COM ESTA ETAPA
+        // NÃO PODE REMOVER ETAPA COM REGISTROS NA FILA
+        public function etapaRegFila($id){
+            $this->db->query('SELECT * FROM fila WHERE nascimento BETWEEN (SELECT data_ini FROM etapa WHERE id = :id) AND (SELECT data_fin FROM etapa WHERE id = :id)');
+            $this->db->bind(':id', $id);
+           
             return $this->db->resultSet();
 
             // Check row
