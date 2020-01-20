@@ -23,60 +23,7 @@
                 return false;
             }
         }
-
-        /*
-         // Editar Etapa
-         public function update($data){
-            $this->db->query('UPDATE users SET name = :name, password = :password, type =:type WHERE email = :email');
-            // Bind values
-            $this->db->bind(':email',$data['email']);
-            $this->db->bind(':name',$data['name']);            
-            $this->db->bind(':password',$data['password']);
-            $this->db->bind(':type',$data['type']);
-
-            // Execute
-            if($this->db->execute()){
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        // 2 Login User                
-        public function login($email, $password){
-            $this->db->query('SELECT * FROM users WHERE email = :email');
-            $this->db->bind(':email', $email);
-
-            $row = $this->db->single();
-
-            $hashed_password = $row->password;
-            // password_verify — Verifica se um password corresponde com um hash criptografado
-            // Logo para verificar não precisa descriptografar 
-            // aqui $password vem do formulário ou seja digitado pelo usuário  
-            // e $hashed_password vem da consulta do banco e está criptografado
-            if(password_verify($password, $hashed_password)){
-                return $row;
-            } else {
-                return false;
-            }
-        }
-
-        // Find user by email
-        public function findUserByEmail($email){
-            $this->db->query('SELECT * FROM users WHERE email = :email');
-            // Bind value
-            $this->db->bind(':email', $email);
-
-            $row = $this->db->single();
-
-            // Check row
-            if($this->db->rowCount() > 0){
-                return true;
-            } else {
-                return false;
-            }
-        }
-*/
+     
          // Busca etapa por id
          public function getEtapaByid($id){
             $this->db->query('SELECT * FROM etapa WHERE id = :id');
@@ -142,5 +89,46 @@
                 return false;
             }
         }
-    }
+
+
+        public function fale(){
+            echo "oi";
+        }
+
+        // VERIFICA SE A DATA INICIAL PASSADA ESTÁ ENTRE ALGUMA DATA DE INICIO E FIM DE TODAS AS ETAPAS
+        public function etapaDataIni($dataini,$datafin){
+            // pego todas as etapas
+            $etapas = $this->getEtapas();           
+                $this->db->query('SELECT * FROM etapa WHERE data_ini BETWEEN :dataini AND :datafin');
+                $this->db->bind(':dataini', $dataini);
+                $this->db->bind(':datafin', $datafin);              
+                return $this->db->resultSet();
+            // Check row
+            if($this->db->rowCount() > 0){
+            return true;
+            } else {
+                return false;
+            }
+
+        }
+
+         // VERIFICA SE A DATA FINAL PASSADA ESTÁ ENTRE ALGUMA DATA DE INICIO E FIM DE TODAS AS ETAPAS
+         public function etapaDataFin($dataini,$datafin){
+            // pego todas as etapas
+            $etapas = $this->getEtapas();           
+                $this->db->query('SELECT * FROM etapa WHERE data_fin BETWEEN :dataini AND :datafin');
+                $this->db->bind(':dataini', $dataini);
+                $this->db->bind(':datafin', $datafin);              
+                return $this->db->resultSet();
+            // Check row
+            if($this->db->rowCount() > 0){
+            return true;
+            } else {
+                return false;
+            }
+
+        }
+
+    }//etapa
+    
 ?>

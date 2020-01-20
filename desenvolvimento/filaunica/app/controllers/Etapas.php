@@ -51,13 +51,21 @@
                 if(empty($data['descricao'])){
                     $data['descricao_err'] = 'Por favor informe a descrição da etapa';
                 } 
+               
+                if($this->etapaModel->etapaDataIni($data['data_ini'],$data['data_fin'])){
+                    $data['erro'] = 'Existem etapas cadastradas que conflitam com este período';                    
+                }
                  
+                if($this->etapaModel->etapaDataFin($data['data_ini'],$data['data_fin'])){
+                    $data['erro'] = 'Existem etapas cadastradas que conflitam com este período';                    
+                }
 
                 // Make sure errors are empty
                 if(                    
                     empty($data['data_ini_err']) &&
                     empty($data['data_fin_err']) && 
-                    empty($data['descricao_err']) 
+                    empty($data['descricao_err']) &&
+                    empty($data['erro']) 
                     ){
                       //Validated
                      
@@ -76,6 +84,9 @@
                       
                     } else {
                       // Load the view with errors
+                      if(!empty($data['erro'])){
+                      flash('register_success', $data['erro'], 'alert alert-danger');
+                      }
                       $this->view('etapas/newetapa', $data);
                     }               
 
@@ -88,6 +99,7 @@
                     'descricao' => '',
                     'data_ini_err' => '',
                     'data_fin_err' => '',
+                    'erro' => '',
                     'descricao_err' => ''                    
                 ];
                 // Load view
