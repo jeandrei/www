@@ -57,20 +57,21 @@
                     $data['descricao_err'] = 'Por favor informe a descrição da etapa';
                 } 
                
-                if($this->etapaModel->etapaDataIni($data['data_ini'],$data['data_fin'])){
+                if($this->etapaModel->verificaEtapaPeriodo($data['data_ini'],$data['data_fin'])){
                     $data['erro'] = 'Existem etapas cadastradas que conflitam com este período';                    
                 }
-                 
+               /*  
                 if($this->etapaModel->etapaDataFin($data['data_ini'],$data['data_fin'])){
                     $data['erro'] = 'Existem etapas cadastradas que conflitam com este período';                    
                 }
-
+*/
                 
                 // Make sure errors are empty
                 if(                    
                     empty($data['data_ini_err']) &&
                     empty($data['data_fin_err']) && 
-                    empty($data['descricao_err'])                      
+                    empty($data['descricao_err']) &&                     
+                    empty($data['erro'])
                     ){
                       //Validated
                      
@@ -117,10 +118,11 @@
             } 
         }
 
-       /*
+       
         public function edit($id){ 
             // Check for POST            
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){                
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){  
+                            
                
                 // Process form
 
@@ -135,67 +137,74 @@
                 
                 //init data
                 $data = [
-                    'name' => trim($_POST['name']),
-                    'email' => trim($_POST['email']),
-                    'password' => trim($_POST['password']),
-                    'confirm_password' => trim($_POST['confirm_password']),
-                    'type' => $type,
-                    'name_err' => '',                    
-                    'password_err' => '',
-                    'confirm_password_err' => ''
+                    'id' => $id,
+                    'data_ini' => trim($_POST['data_ini']),
+                    'data_fin' => trim($_POST['data_fin']),
+                    'descricao' => trim($_POST['descricao']),                    
+                    'data_ini_err' => '',
+                    'data_fin_err' => '',
+                    'descricao_err' => ''
                 ];                
 
+                
+
+                // Valida data Inicial
+                if(empty($data['data_ini'])){
+                    $data['data_ini_err'] = 'Por favor informe a data inicial';
+                } 
+
+                // Valida data Inicial
+                if(empty($data['data_fin'])){
+                    $data['data_fin_err'] = 'Por favor informe a data final';
+                } 
+
+                // Valida descrição
+                if(empty($data['descricao'])){
+                    $data['descricao_err'] = 'Por favor informe a descrição da etapa';
+                } 
                
-                // Validate Name
-                if(empty($data['name'])){
-                    $data['name_err'] = 'Por favor informe seu nome';
+                if($etapa_conflict = $this->etapaModel->verificaEtapaPeriodo($data['data_ini'],$data['data_fin'])){
+                    // se o período que estou editando está dentro do período atual de uma etapa
+                    // então tenho que permitir a atualização logo não atribuo valor a $data['erro']                    
+                    if($id != $etapa_conflict->id){
+                        $data['erro'] = 'Existem etapas cadastradas que conflitam com este período '; 
+                    }                 
                 }
-
-                 // Validate Password
-                 if(empty($data['password'])){
-                    $data['password_err'] = 'Por favor informe a senha';
-                } elseif (strlen($data['password']) < 6){
-                    $data['password_err'] = 'Senha deve ter no mínimo 6 caracteres';
-                }
-
-                // Validate Confirm Password
-                if(empty($data['confirm_password'])){
-                    $data['confirm_password_err'] = 'Por favor confirme a senha';
-                } else {
-                    if($data['password'] != $data['confirm_password']){
-                    $data['confirm_password_err'] = 'Senha e confirmação de senha diferentes';    
-                    }
-                }
-
+                 
+                
                 // Make sure errors are empty
-                if(   
-                    empty($data['name_err']) && 
-                    empty($data['password_err']) &&
-                    empty($data['confirm_password_err']) 
+                if(                    
+                    empty($data['data_ini_err']) &&
+                    empty($data['data_fin_err']) && 
+                    empty($data['descricao_err']) &&
+                    empty($data['erro']) 
                     ){
                       //Validated
-                      
-                      // Hash Password criptografa o password
-                      $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                     
 
-                      // Register User
-                      if($this->userModel->update($data)){
-                        // Cria a menságem antes de chamar o view va para 
-                        // views/users/login a segunda parte da menságem                        
-                        flash('register_success', 'Usuário atualizado com sucesso!');                                                                   ;
-                        redirect('users/userlist');
+                      // Update User
+                      if($this->etapaModel->update($data)){                         
+                        // views/users/login a segunda parte da menságem                       
+                        flash('register_success', 'Etapa atualizada com sucesso!');                        
+                        redirect('etapas/index');
                       } else {
                           die('Ops! Algo deu errado.');
-                      }    
+                      }
+                      
+
                       
                     } else {
                       // Load the view with errors
-                      $this->view('users/userlist', $data);
-                    }              
-                          
+                      if(!empty($data['erro'])){
+                      flash('register_success', $data['erro'], 'alert alert-danger');
+                      }
+                      $this->view('etapas/editetapa', $data);
+                    }               
+
+            
             } else {
                 // get exiting user from the model
-                $user = $this->userModel->getUserByid($id);
+                $etapa = $this->etapaModel->getEtapaByid($id);
 
                 if($_SESSION['user_type'] != "admin"){
                     redirect('userlist');
@@ -204,16 +213,16 @@
 
                 $data = [
                     'id' => $id,
-                    'name' => $user->name,
-                    'email' => $user->email,                                      
-                    'type' => $user->type                  
+                    'data_ini' => $etapa->data_ini,
+                    'data_fin' => $etapa->data_fin,                                      
+                    'descricao' => $etapa->descricao                  
                 ];
                 // Load view
-                $this->view('users/edituser', $data);
+                $this->view('etapas/editetapa', $data);
             } 
         }
 
-*/
+
         public function delete($id){ 
            
             if($_SESSION['user_type'] != "admin"){

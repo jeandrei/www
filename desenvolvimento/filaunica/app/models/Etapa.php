@@ -34,7 +34,7 @@
 
             // Check row
             if($this->db->rowCount() > 0){
-                return true;
+                return $row;
             } else {
                 return false;
             }
@@ -91,9 +91,31 @@
         }
 
 
-        public function fale(){
-            echo "oi";
+        
+
+        // VERIFICA SE JÁ NÃO EXISTE UMA ETAPA COM PERÍODO CADASTRADO
+        // VERIFICA SE EXISTE ELGUMA ETAPA A QUAL CONFLITA COM A NOVA ETAPA
+        // EXEMPLO SE TENHO UM PERÍODO DE 01/01/2020 ATÉ 03/03/2020 NÃO POSSO PERMITIR CADASTRAR UMA NOVA
+        // ETAPA COM DATA ENTRE ESSE PERÍODO EXEMPLO COM DATA INICIAL EM 02/02/2020 NÃO PODE DEIXAR
+        public function verificaEtapaPeriodo($dataini,$datafin){            
+                  
+                $this->db->query('SELECT * FROM etapa 
+                                        WHERE (:dataini BETWEEN etapa.data_ini AND etapa.data_fin) 
+                                        OR
+                                              (:datafin BETWEEN etapa.data_ini AND etapa.data_fin)');
+                $this->db->bind(':dataini', $dataini);
+                $this->db->bind(':datafin', $datafin); 
+                                   
+                $row = $this->db->single();
+            // Check row
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }
+
         }
+
 
         // VERIFICA SE A DATA INICIAL PASSADA ESTÁ ENTRE ALGUMA DATA DE INICIO E FIM DE TODAS AS ETAPAS
         public function etapaDataIni($dataini,$datafin){
@@ -127,6 +149,24 @@
                 return false;
             }
 
+        }
+
+
+         // Update User
+         public function update($data){
+            $this->db->query('UPDATE etapa SET data_ini = :data_ini, data_fin = :data_fin, descricao = :descricao WHERE id = :id');
+            // Bind values
+            $this->db->bind(':id',$data['id']);
+            $this->db->bind(':data_ini',$data['data_ini']);            
+            $this->db->bind(':data_fin',$data['data_fin']);
+            $this->db->bind(':descricao',$data['descricao']);
+
+            // Execute
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }//etapa

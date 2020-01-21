@@ -25,7 +25,7 @@
             }
         }
 
-         // Register User
+         // Update User
          public function update($data){
             $this->db->query('UPDATE users SET name = :name, password = :password, type =:type WHERE email = :email');
             // Bind values
