@@ -6,8 +6,10 @@
         }
 
         public function index() {
-            
-            if($data = $this->userModel->getUsers()){                
+
+            if($_SESSION['user_type'] != "admin"){
+                redirect('index');
+            } else if($data = $this->userModel->getUsers()){  
                 $this->view('users/userslist', $data);
             } else {                
                 flash('register_success', 'Falha ao carregar a lista de usuários!', 'alert alert-danger'); 
@@ -80,8 +82,7 @@
                     $data['confirm_password_err'] = 'Senha e confirmação de senha diferentes';    
                     }
                 }
-
-                
+               
 
                 // Make sure errors are empty
                 if(                    
@@ -89,6 +90,7 @@
                     empty($data['name_err']) && 
                     empty($data['password_err']) &&
                     empty($data['confirm_password_err']) 
+
                     ){
                       //Validated
                       
@@ -108,12 +110,12 @@
 
                       
                     } else {
-                      // Load the view with errors
+                      // Load the view with errors                     
                       $this->view('users/newuser', $data);
                     }               
 
             
-            } else {
+            } else {   
                 // Init data
                 $data = [
                     'name' => '',
@@ -124,10 +126,17 @@
                     'name_err' => '',
                     'email_err' => '',
                     'password_err' => '',
-                    'confirm_password_err' => ''
+                    'confirm_password_err' => '',
+                    'erro' => ''
                 ];
-                // Load view
-                $this->view('users/newuser', $data);
+                if($_SESSION['user_type'] != "admin"){
+                    redirect('index');
+                } else {
+                     // Load view
+                    $this->view('users/newuser', $data);
+                }
+               
+                
             } 
         }
 
@@ -185,7 +194,7 @@
                 if(   
                     empty($data['name_err']) && 
                     empty($data['password_err']) &&
-                    empty($data['confirm_password_err']) 
+                    empty($data['confirm_password_err'])                    
                     ){
                       //Validated
                       
@@ -212,7 +221,7 @@
                 $user = $this->userModel->getUserByid($id);
 
                 if($_SESSION['user_type'] != "admin"){
-                    redirect('userlist');
+                    redirect('index');
                 }
                
 
@@ -222,27 +231,43 @@
                     'email' => $user->email,                                      
                     'type' => $user->type                  
                 ];
+
+                if($_SESSION['user_type'] != "admin"){
+                    redirect('index');
+                } else {
                 // Load view
-                $this->view('users/edituser', $data);
+                    $this->view('users/edituser', $data);
+                }
             } 
         }
 
 
-        public function delete($id){  
+        public function delete($id){ 
             
-            if ($this->userModel->getUserById($id)){
+            if($_SESSION['user_type'] != "admin"){
+                redirect('index');
+            } else if ($this->userModel->getUserById($id)){
                 $this->userModel->delUserByid($id); 
             } else {
-                $data['user_del_err'] = "Não foi possível excluir o usuário com este id";
+                $data['erro'] = "Não foi possível excluir o usuário com este id";
             }
             
             if($data = $this->userModel->getUsers()){
                 $data = $this->userModel->getUsers();
             } else {
-                $data['getuser_err'] = "Falha ao carregar a lista de usuários";
+                $data['erro'] = "Falha ao carregar a lista de usuários";
             }
-            flash('register_success', 'Usuário removido com sucesso!');  
-            $this->view('users/userslist', $data);
+
+           
+
+            if(empty($data['erro'])){
+                    flash('register_success', 'Usuário removido com sucesso!');  
+                    $this->view('users/userslist', $data);
+                }
+                 else {
+                    flash('register_success', $data['erro'], 'alert alert-danger');
+                    $this->view('users/userslist', $data); 
+                 }
         }
             
 

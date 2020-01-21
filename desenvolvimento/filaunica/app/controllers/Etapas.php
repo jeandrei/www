@@ -5,7 +5,12 @@
             $this->etapaModel = $this->model('Etapa');
         }
 
-        public function index() {   
+        public function index() { 
+            
+            if($_SESSION['user_type'] != "admin"){
+                redirect('index');
+            } 
+            
             if($data = $this->etapaModel->getEtapas()){                
                 $this->view('etapas/index', $data);
             } else {                
@@ -60,12 +65,12 @@
                     $data['erro'] = 'Existem etapas cadastradas que conflitam com este período';                    
                 }
 
+                
                 // Make sure errors are empty
                 if(                    
                     empty($data['data_ini_err']) &&
                     empty($data['data_fin_err']) && 
-                    empty($data['descricao_err']) &&
-                    empty($data['erro']) 
+                    empty($data['descricao_err'])                      
                     ){
                       //Validated
                      
@@ -92,6 +97,11 @@
 
             
             } else {
+
+                if($_SESSION['user_type'] != "admin"){
+                    redirect('index');
+                } 
+
                 // Init data
                 $data = [
                     'data_ini' => '',
@@ -205,19 +215,20 @@
 
 */
         public function delete($id){ 
-                        
+           
+            if($_SESSION['user_type'] != "admin"){
+                redirect('index');
+            }  
+
             if($this->etapaModel->etapaRegFila($id)){
-                $erro = 'Existem registros na fila vinculados a esta etapa!';                   
+                $data['erro'] = 'Existem registros na fila vinculados a esta etapa!';                   
             }
-            
-           
-           
-           
-            if(empty($erro)){
+                     
+            if(empty($data['erro'])){
                 $this->etapaModel->delEtapaByid($id); 
                 flash('register_success', 'Etapa removida com sucesso!');                
             } else {
-                flash('register_success', $erro, 'alert alert-danger');
+                flash('register_success', $data['erro'], 'alert alert-danger');
             }    
             
             
