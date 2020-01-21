@@ -1,4 +1,7 @@
 
+
+<!-- comentário automático no visual studio control + k + c -->
+
 **********************************************************TEXTOS***********************************************************************
 Para escrever o conteúdo de uma variável dentro do echo sempre coloque entre chaves ex:
 echo "Texto desejado {$variavel}";

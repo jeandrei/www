@@ -112,7 +112,7 @@
         public function download(){ 
           
           if($_GET['tipo'] == 'res'){          
-            $data = $this->adminModel->downloadres($_GET['id']);
+            $data = $this->adminModel->downloadres($_GET['id']);            
           }
 
           if($_GET['tipo'] == 'nasc'){          

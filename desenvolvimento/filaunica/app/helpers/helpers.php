@@ -113,7 +113,7 @@ function upload_file($myfile,$newname,$description){
 return $file_uploaded;    
 }//fim função upload
 
-
+//FILEUPLOAD2 ESTÁ COM PROBLEMAS, NÃO FAZ O UPLOAD CORRETAMENTE - VERIFICAR
 function upload_file2($myfile,$newname,$description){ 
     
     $fileExtensions = ['jpeg','jpg','png','pdf']; // tipos de arquivos permitidos
