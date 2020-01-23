@@ -1,14 +1,22 @@
-FROM php:7-apache
-#FROM runwaytest_web
-RUN apt-get update || apt-get update
+FROM php:7.4.0-apache
+
+
+#ESSE DOCKER É COM PHP 7.4 PARA FUNCIONAR O GD
+
+# packages
+RUN apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  # needed for gd
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update -y && apt-get install -y libpng-dev curl libcurl4-openssl-dev
 RUN apt-get install -y vim
 RUN docker-php-ext-install pdo pdo_mysql gd curl
 RUN a2enmod rewrite
-#para fazer funcionar o GD do PHP
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install -j$(nproc) gd
-# para instalar o mysqli descomente a linha abaixo
-#RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
-RUN service apache2 restart
+# GD
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
