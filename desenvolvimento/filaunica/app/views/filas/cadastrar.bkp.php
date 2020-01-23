@@ -29,9 +29,7 @@
     
     <!--Javascript funções-->
     <script src="<?php echo URLROOT; ?>/js/main.js"></script>  
-
     
-   
   
 </head>
 
@@ -81,7 +79,7 @@ echo flash('alert-danger');}
 <!--DIV 1 PARA ACOMODAR AS ABAS-->
 <div class="row" style="background-color:#FFFAF0">        
     
-    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post" enctype="multipart/form-data">  
+    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post">  
 
                 <!--DIV 2 CONTEÚDO DENTRO DAS ABAS-->
                 <div class="col-lg-14" id="result"> 
@@ -733,3 +731,29 @@ echo flash('alert-danger');}
 </div><!--fecha div container lá do header-->
 </body>
 </html>
+
+<script>  
+ $(document).ready(function(){
+        $('#cadastrar').validate({
+            rules : {			
+                responsavel : {
+                    required : true,
+                    minlength : 6
+                },
+                telefone : {
+                    required : true                    
+                }
+            },
+
+            messages : {			
+                responsavel : {
+                    required : 'Por favor informe o responsável.',
+                    minlength : 'Nome inválido, mínimo 6 Caracteres'
+                },
+                telefone : {
+                    required : 'Por favor informe o telefone.'
+                }
+            }
+        });
+});
+</script>

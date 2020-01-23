@@ -1,7 +1,4 @@
 <?php
-    
-    // TESTE COM COMPRESS.JS
-
     // TEM QUE SER EM UM HEADER E FOOTER DIFERENTE POIS SE NÃO VAI TRAZER O NAVBAR JUNTO
     include 'header.php';
 ?>

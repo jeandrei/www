@@ -29,6 +29,9 @@
   
   <!--Javascript funções-->
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>  
+
+  <script src="<?php echo URLROOT; ?>/js/fileinput.js"></script> 
+  
   
 </head>
 <body>

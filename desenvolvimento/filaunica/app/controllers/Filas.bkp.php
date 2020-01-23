@@ -165,10 +165,7 @@
                 
                 
                 //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
-                  
-                   var_dump(gd_info()); 
-                   $img = recizeimage('comprovante_residencia');
-                   $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
+                    $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
                     
                     if(empty($comp_res['error'])){                                          
                         $data['comp_res_dados'] = $comp_res['data'];

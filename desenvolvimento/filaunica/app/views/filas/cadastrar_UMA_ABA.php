@@ -30,8 +30,8 @@
     <!--Javascript funções-->
     <script src="<?php echo URLROOT; ?>/js/main.js"></script>  
 
+    <script src="<?php echo URLROOT; ?>/js/fileinput.js"></script> 
     
-   
   
 </head>
 
@@ -81,7 +81,7 @@ echo flash('alert-danger');}
 <!--DIV 1 PARA ACOMODAR AS ABAS-->
 <div class="row" style="background-color:#FFFAF0">        
     
-    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post" enctype="multipart/form-data">  
+    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post">  
 
                 <!--DIV 2 CONTEÚDO DENTRO DAS ABAS-->
                 <div class="col-lg-14" id="result"> 
@@ -95,14 +95,7 @@ echo flash('alert-danger');}
                                         <i class="fa fa-list" aria-hidden="true"></i>
                                         1ª Etapa
                                     </a>
-                                </li>
-                                <!--REFERENTE A ABA 2ª ETAPA SÓ A PARTE SUPERIOR-->
-                                <li role="presentation" class="nav-item">
-                                    <a class="nav-link" href="#etapaDois" aria-controls="etapaDois" role="tab" data-toggle="tab">
-                                        <i class="fa fa-list" aria-hidden="true"></i>
-                                        2ª Etapa
-                                    </a>
-                                </li>
+                                </li>                                
                             
                             <!--FECHA UL DAS ABAS-->
                             </ul>
@@ -585,121 +578,12 @@ echo flash('alert-danger');}
                                                                         </div>
 
                                                         <!--FECHA DIV LINHA PARA OS BLOCOS-->
-                                                        </div>
-
-
-                                                        <!--BOTÃO PRÓXIMO-->
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <a class="next-step btn btn-primary btn-block" style="color:white;">
-                                                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                                                    Proximo
-                                                                </a>
-                                                            </div>
-                                                        <!--BOTÃO PRÓXIMO-->
-                                                        </div>
+                                                        </div>                                                       
 
 
                                             <!--FECHA DIV 4 1ª ETAPA tabpanel-->
                                             </div>
-
-
-
-
-
-
-                                            <!--DIV 5 2º ETAPA-->
-                                            <div role="tabpanel" class="tab-pane" id="etapaDois">
-                                                        
-                                                        <!-- DIV 6 LINHA COMPROVANTES-->
-                                                        <div class="row" style="margin:5px;"> 
-                                                                
-                                                                        <!--*************COMPROVANTE DE RESIDÊNCIA************-->
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <div class="alert alert-warning" role="alert">
-                                                                                    Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
-                                                                                    residência,
-                                                                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
-                                                                                </div>
-                                                                            </div>
-                                                                            
-                                                                            <div class="custom-file">
-                                                                                <label for="comprovante_residencia">
-                                                                                    Comprovante de residência  
-                                                                                </label><br>
-                                                                                <div class="form-group">
-                                                                                    <div class="custom-file">
-                                                                                        <input 
-                                                                                        type="file" 
-                                                                                        class="custom-file-input" 
-                                                                                        id="comprovante_residencia"
-                                                                                        name="comprovante_residencia"
-                                                                                        lang="pt"                                                                                        
-                                                                                        onchange="return fileValidation('comprovante_residencia','res_erro');"
-                                                                                        >
-                                                                                        <label class="custom-file-label" for="comprovante_residencia">Selecione o arquivo</label>
-                                                                                        
-                                                                                    </div> 
-                                                                                </div>                      
-                                                                            </div>  
-
-                                                                            <div class="form-group" style="margin-top: 40px;">
-                                                                                <div class="alert-danger" role="alert">
-                                                                                    <div style="margin: 20px;">
-                                                                                        <strong><?php echo $data['comprovante_residencia_err'];?></strong>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>                                                                           
-                                                                        <!--*************COMPROVANTE DE RESIDÊNCIA************-->
-                                                                        </div>
-                                                                        
-                                                                        
-
-
-                                                                        <!--*************CERTIDAO DE NASCIMENTO************-->
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <div class="alert alert-warning" role="alert">
-                                                                                    Em um <strong>único</strong> arquivo deve ser enviado o comprovante de
-                                                                                    residência,
-                                                                                    com o formato sendo aceito apenas <strong>jpg, png e pdf</strong>, e no máximo arquivo com <strong>20 MB</strong>.
-                                                                                </div>
-                                                                            </div>
-                                                                            
-                                                                            <div class="custom-file">
-                                                                                <label for="certidaonascimento">
-                                                                                    Certidão de Nascimento  
-                                                                                </label><br>
-                                                                                <div class="form-group">
-                                                                                    <div class="custom-file">
-                                                                                        <input 
-                                                                                        type="file" 
-                                                                                        class="custom-file-input" 
-                                                                                        id="certidaonascimento"
-                                                                                        name="certidaonascimento"
-                                                                                        lang="pt"
-                                                                                        onchange="return fileValidation('certidaonascimento','nasc_erro');"
-                                                                                        >
-                                                                                        <label class="custom-file-label" for="certidaonascimento">Selecione o arquivo</label>
-                                                                                    </div> 
-                                                                                </div>                      
-                                                                            </div>  
-
-                                                                            <div class="form-group" style="margin-top: 40px;">
-                                                                                <div class="alert-danger" role="alert">
-                                                                                    <div style="margin: 20px;">
-                                                                                        <strong><?php echo $data['certidaonascimento_err'];?></strong>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>                                                                           
-                                                                        <!--*************CERTIDÃO DE NASCIMENTO************-->
-                                                                        </div>
-                                                                            
-                                                        <!--FECHA DIV 6 LINHA COMPROVANTES-->
-                                                        </div>
-
-                                                
+                                          
                                                         <!--BOTÃO ENVIAR DADOS-->
                                                         <div class="row">
                                                             <div class="col-lg-12">
@@ -733,3 +617,29 @@ echo flash('alert-danger');}
 </div><!--fecha div container lá do header-->
 </body>
 </html>
+
+<script>  
+ $(document).ready(function(){
+        $('#cadastrar').validate({
+            rules : {			
+                responsavel : {
+                    required : true,
+                    minlength : 6
+                },
+                telefone : {
+                    required : true                    
+                }
+            },
+
+            messages : {			
+                responsavel : {
+                    required : 'Por favor informe o responsável.',
+                    minlength : 'Nome inválido, mínimo 6 Caracteres'
+                },
+                telefone : {
+                    required : 'Por favor informe o telefone.'
+                }
+            }
+        });
+});
+</script>
