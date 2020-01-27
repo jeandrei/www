@@ -29,9 +29,6 @@
     
     <!--Javascript funções-->
     <script src="<?php echo URLROOT; ?>/js/main.js"></script>  
-
-    
-   
   
 </head>
 
@@ -97,7 +94,7 @@ echo flash('alert-danger');}
                                     </a>
                                 </li>
                                 <!--REFERENTE A ABA 2ª ETAPA SÓ A PARTE SUPERIOR-->
-                                <li role="presentation" class="nav-item">
+                                <li id="aba2" role="presentation" class="nav-item">
                                     <a class="nav-link" href="#etapaDois" aria-controls="etapaDois" role="tab" data-toggle="tab">
                                         <i class="fa fa-list" aria-hidden="true"></i>
                                         2ª Etapa
@@ -595,6 +592,8 @@ echo flash('alert-danger');}
                                                                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                                                     Proximo
                                                                 </a>
+                                                                <input type="button" name="proximo" id="proximo" class="next-step btn btn-primary btn-block" style="color:white;" value="Proximo">
+                                                                
                                                             </div>
                                                         <!--BOTÃO PRÓXIMO-->
                                                         </div>
@@ -733,3 +732,36 @@ echo flash('alert-danger');}
 </div><!--fecha div container lá do header-->
 </body>
 </html>
+
+<script>
+$("#proximo").on("click",function(){
+  if(!$("#cadastrar").valid())
+ alert('clicou em próximo');
+});
+
+
+//TAMANHO É EM KBYTES LOGO PARA 2MB 2*1024 = 2048*1024 BYTES = 2097152 
+ $(document).ready(function(){
+        $('#cadastrar').validate({
+            rules : {			
+                responsavel : {
+                    required : true,
+                    minlength : 6
+                },
+                telefone : {
+                    required : true                    
+                }            
+            },
+
+            messages : {			
+                responsavel : {
+                    required : 'Por favor informe o responsável.',
+                    minlength : 'Nome inválido, mínimo 6 Caracteres'
+                },
+                telefone : {
+                    required : 'Por favor informe o telefone.'
+                }            
+            }
+        });
+});
+</script> 

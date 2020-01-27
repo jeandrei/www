@@ -164,19 +164,8 @@
                 } 
                 
                 
-                //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper                  
-                  
-                   // a ideia é fazer o upload do arquivo, redimencionar e depois colocar no banco de dados
-                   // aqui faz o upload e passa o caminho do arquivo para a variável $filePath ex: /var/www/html/filaunica/public/uploads/arquivo.jpg
-                   $filePath = uploadtodir('comprovante_residencia');
-                  
-                   // aqui faço a compreção da imagem
-                   $newimage = recizeimage($filePath);
-
-                   
-
-
-                   $comp_res = upload_file4('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
+                //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
+                    $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
                     
                     if(empty($comp_res['error'])){                                          
                         $data['comp_res_dados'] = $comp_res['data'];
