@@ -16,13 +16,7 @@
                         fila.responsavel as responsavel, 
                         fila.nomecrianca as nome, 
                         fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,
-                        fila.comprovanteres,
-                        fila.comprovante_res_nome,
-                        fila.comprovanteres_tipo,
-                        fila.comprovantenasc,
-                        fila.comprovantenasc_tipo,
-                        fila.comprovante_nasc_nome,
+                        fila.protocolo as protocolo,                        
                         fila.status as status,
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                         
@@ -52,9 +46,7 @@
                         'responsavel' => $row->responsavel,
                         'nascimento' => $row->nascimento,
                         'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,
-                        'comprovante_res_nome' => $row->comprovante_res_nome,
-                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
+                        'protocolo' => $row->protocolo,                        
                         'status' => $row->status  
                     );
                 }
@@ -81,13 +73,7 @@
                             fila.responsavel as responsavel, 
                             fila.nomecrianca as nome, 
                             fila.nascimento as nascimento,
-                            fila.protocolo as protocolo,
-                            fila.comprovanteres,
-                            fila.comprovante_res_nome,
-                            fila.comprovanteres_tipo,
-                            fila.comprovantenasc,
-                            fila.comprovantenasc_tipo,
-                            fila.comprovante_nasc_nome,
+                            fila.protocolo as protocolo,                            
                             fila.status as status,
                             (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
                         FROM                               
@@ -158,9 +144,7 @@
                         'responsavel' => $row->responsavel,
                         'nascimento' => $row->nascimento,
                         'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,
-                        'comprovante_res_nome' => $row->comprovante_res_nome,
-                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
+                        'protocolo' => $row->protocolo,                        
                         'status' => $row->status  
                     );
                 }
@@ -187,13 +171,7 @@
                             fila.responsavel as responsavel, 
                             fila.nomecrianca as nome, 
                             fila.nascimento as nascimento,
-                            fila.protocolo as protocolo,
-                            fila.comprovanteres,
-                            fila.comprovante_res_nome,
-                            fila.comprovanteres_tipo,
-                            fila.comprovantenasc,
-                            fila.comprovantenasc_tipo,
-                            fila.comprovante_nasc_nome,
+                            fila.protocolo as protocolo,                           
                             fila.status as status,
                             (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
                         FROM                               
@@ -264,9 +242,7 @@
                         'responsavel' => $row->responsavel,
                         'nascimento' => $row->nascimento,
                         'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,
-                        'comprovante_res_nome' => $row->comprovante_res_nome,
-                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
+                        'protocolo' => $row->protocolo,                       
                         'status' => $row->status  
                     );
                 }

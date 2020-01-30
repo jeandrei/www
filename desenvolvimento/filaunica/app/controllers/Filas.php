@@ -163,39 +163,7 @@
                     $data['turno1_err'] = 'Por favor informe o turno';        
                 } 
                 
-                
-                //UPLOAD DE ARQUIVOS CHAMA A FUNÇÃO upload_file que está no arquivo helper
-                    $comp_res = upload_file('comprovante_residencia',$data['responsavel'],'COMP_RESIDENCIA');  
-                    
-                    if(empty($comp_res['error'])){                                          
-                        $data['comp_res_dados'] = $comp_res['data'];
-                        $data['comp_res_nome'] =  $comp_res['nome'] . "." . $comp_res['extensao'];
-                        $data['comp_res_tipo'] = $comp_res['tipo'];
-                        $data['comprovante_residencia_err'] = '';                      
-                    } else {
-                        $data['comprovante_residencia_err'] =  $comp_res['error'];
-                    }
-            
-                
-            
-                
-                    $cert_nasc = upload_file('certidaonascimento',$_POST['responsavel'],'CERT_NASCIMENTO'); 
-                    if(empty($cert_nasc['error'])){                  
-                        $data['cert_nasc_dados'] = $cert_nasc ['data'];
-                        $data['cert_nasc_nome'] =  $cert_nasc['nome'] . "." . $cert_nasc['extensao'];
-                        $data['cert_nasc_tipo'] = $cert_nasc['tipo'];
-                        $data['certidaonascimento_err'] = '';                                       
-                    } else {
-                        $data['certidaonascimento_err'] = $cert_nasc['error'];
-                    }
-                
-                
-                
-                if ((isset($comp_res['error'])) || (isset($cert_nasc['error'])))
-                {                   
-                    $data['flash_err'] = 'Ops! Arquivos inválidos.';
-                    
-                } 
+                               
 
                 //verifica para submeter
                 // Make sure no errors
@@ -210,11 +178,7 @@
                     empty($data['bairro_err']) && 
                     empty($data['rua_err']) && 
                     empty($data['opcao1_err']) && 
-                    empty($data['turno1_err']) && 
-                    empty($data['comprovante_residencia_err']) && 
-                    empty($data['certidaonascimento_err'])
-                   // empty($data['idade_maxima_err']) &&
-                   // empty($data['comp_residencia_name_err']) &&                   
+                    empty($data['turno1_err'])                    
                 ){
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
@@ -296,9 +260,7 @@
                     'nome_err' => '',
                     'nascimento_err' => '',
                     'certidao_err' => '',
-                    'opcao1_err' => '',
-                    'comprovante_residencia_err' => '',
-                    'certidaonascimento_err' => ''
+                    'opcao1_err' => ''
                 ];
                 $this->view('filas/cadastrar', $data);
             }
@@ -338,24 +300,7 @@
         }
 
         public function listachamada(){
-            $data['etapas'] = $this->filaModel->getEtapas();
-           // $valores = $this->filaModel->getFilaPorEtapaRelatorio(1,'Aguardando');
-            //var_dump($valores);
-          /*  
-            
-            foreach($data['etapas'] as $etapa){ 
-                if($data['registros'] = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando'))
-                {
-                    $data['registros'] = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'],'Aguardando');                    
-                }
-                else
-                {
-                    $data['registros'] = NULL;
-                }
-
-            }    
-          
-           die(var_dump($data['registros']));*/
+            $data['etapas'] = $this->filaModel->getEtapas();           
             $this->view('filas/listachamada', $data);
 
         }

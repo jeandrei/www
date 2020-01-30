@@ -130,9 +130,7 @@
         <th scope="col">Etapa</th>          
         <th scope="col">Responsável</th> 
         <th scope="col">Protocolo</th>
-        <th scope="col">Registro</th>
-        <th scope="col">Comp Residência</th>
-        <th scope="col">Comp Nascimento</th>
+        <th scope="col">Registro</th>        
         <th scope="col">Status</th>
       </tr>
     </thead>
@@ -154,9 +152,7 @@
                 <td><?php echo $registro['etapa']; ?></td>
                 <td><?php echo $registro['responsavel']; ?></td>
                 <td><?php echo $registro['protocolo']; ?></td>
-                <td><?php echo $registro['registro']; ?></td>
-                <td><a download="<?php echo $registro['comprovante_res_nome'];?>"  target="_blank" href='<?php echo URLROOT; ?>/admins/download?tipo=res&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>
-                <td><a download="<?php echo $registro['comprovante_nasc_nome'];?>" target="_blank" href='<?php echo URLROOT; ?>/admins/download?tipo=nasc&id=<?php echo $registro['fila_id'];?>'>abrir</a></td>
+                <td><?php echo $registro['registro']; ?></td>                
                 <td>
                   <select style="font-size:11px;" class="form-control form-control-sm"
                         name="statuslista" 

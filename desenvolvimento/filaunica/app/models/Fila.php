@@ -158,13 +158,7 @@
                                 turno3 = :turno3,      
                                 cpfresponsavel = :cpfresponsavel,
                                 protocolo = :protocolo,                                                   
-                                observacao = :observacao,
-                                comprovanteres = :comprovanteres,
-                                comprovanteres_tipo = :comprovanteres_tipo,
-                                comprovante_res_nome = :comprovante_res_nome,
-                                comprovantenasc = :comprovantenasc,
-                                comprovante_nasc_nome = :comprovante_nasc_nome,
-                                comprovantenasc_tipo = :comprovantenasc_tipo,
+                                observacao = :observacao,                                
                                 deficiencia = :deficiencia         
                                 ');
                                 
@@ -199,13 +193,7 @@
             $this->db->bind(':turno3', $data['turno3']); 
             $this->db->bind(':cpfresponsavel', $data['cpf']);
             $this->db->bind(':protocolo', $data['protocolo']);        
-            $this->db->bind(':observacao', $data['obs']);
-            $this->db->bind(':comprovanteres', $data['comp_res_dados']);
-            $this->db->bind(':comprovante_res_nome', $data['comp_res_nome']); 
-            $this->db->bind(':comprovanteres_tipo', $data['comp_res_tipo']); 
-            $this->db->bind(':comprovantenasc', $data['cert_nasc_dados']);
-            $this->db->bind(':comprovante_nasc_nome', $data['cert_nasc_nome']);
-            $this->db->bind(':comprovantenasc_tipo', $data['cert_nasc_tipo']); 
+            $this->db->bind(':observacao', $data['obs']);             
             
             if(isset($data['portador']) && ($data['portador'] == '1'))
             {
