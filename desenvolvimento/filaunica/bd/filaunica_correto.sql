@@ -7,6 +7,8 @@
 -- Versão do servidor: 5.7.27
 -- Versão do PHP: 7.2.19
 
+-- CRIAR COMO utf8_general_ci
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -126,14 +128,22 @@ CREATE TABLE `fila` (
   `turno1` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
-  `protocolo` varchar(255) DEFAULT NULL,
-  `etapa_id` int(11) DEFAULT NULL,
+  `protocolo` varchar(255) DEFAULT NULL,  
   `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
   `turno2` varchar(20) DEFAULT NULL,
   `turno3` varchar(20) DEFAULT NULL,
   `comprovante_res_nome` varchar(255) DEFAULT NULL,
   `comprovante_nasc_nome` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `historico_id_fila` (
+  `id` int(11) NOT NULL,
+  `fila_id` int(11) NOT NULL,
+  `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario` varchar(255) DEFAULT NULL,
+  `historico` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 -- --------------------------------------------------------

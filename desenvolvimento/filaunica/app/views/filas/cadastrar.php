@@ -615,7 +615,25 @@ $("#proximo").on("click",function(){
                 },
                 telefone : {
                     required : true                    
-                }            
+                }, 
+                bairro : {
+                    required : true                    
+                },     
+                rua : {
+                    required : true                    
+                },
+                nome : {
+                    required : true                    
+                },         
+                nascimento : {
+                    required : true                    
+                },     
+                opcao1 : {
+                    required : true                    
+                },     
+                turno1 : {
+                    required : true                    
+                }                
             },
 
             messages : {			
@@ -625,7 +643,25 @@ $("#proximo").on("click",function(){
                 },
                 telefone : {
                     required : 'Por favor informe o telefone.'
-                }            
+                },
+                bairro : {
+                    required : 'Por favor informe o bairro.'                 
+                },     
+                rua : {
+                    required : 'Por favor informe a rua.'                    
+                },
+                nome : {
+                    required : 'Por favor informe o nome da criança.'                       
+                },       
+                nascimento : {
+                    required : 'Por favor informe o nascimento.'                  
+                },     
+                opcao1 : {
+                    required : 'Por favor informe ao menos uma opção de escola.'                    
+                },     
+                turno1 : {
+                    required : 'Por favor informe ao menos uma opção de turno.'                    
+                }                            
             }
         });
 });

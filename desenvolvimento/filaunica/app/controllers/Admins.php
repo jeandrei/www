@@ -5,7 +5,11 @@
           $this->adminModel = $this->model('Admin');
         }
 
-        public function index(){             
+        public function index(){  
+          
+          if(!isset($_SESSION['user_id'])){
+            redirect('index');
+          }
 
           //echo $_GET['testevar'] . "</br>";
 

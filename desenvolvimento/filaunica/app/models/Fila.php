@@ -147,8 +147,7 @@
                                 numero = :numero, 
                                 complemento = :complemento, 
                                 nomecrianca = :nomecrianca,
-                                nascimento = :nascimento,
-                                etapa_id = :etapa_id,
+                                nascimento = :nascimento,                                
                                 certidaonascimento = :certidaonascimento,
                                 opcao1_id = :opcao1_id,
                                 opcao2_id = :opcao2_id,
@@ -182,8 +181,7 @@
             
             $this->db->bind(':complemento', $data['complemento']);
             $this->db->bind(':nomecrianca', $data['nome']);
-            $this->db->bind(':nascimento', $data['nascimento']);
-            $this->db->bind(':etapa_id', $data['etapa_id']);
+            $this->db->bind(':nascimento', $data['nascimento']);            
             $this->db->bind(':certidaonascimento', $data['certidao']);
             $this->db->bind(':opcao1_id', $data['opcao1']);
             $this->db->bind(':opcao2_id', $data['opcao2']);
