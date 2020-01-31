@@ -8,7 +8,7 @@ require APPROOT . '/views/inc/fpdf/fpdf.php';
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Pos", "Registro", "Iniciais Nome", "Responsável", "Nascimento", "Etapa", "Protocolo");
+            $colunas =array("Pos", "Registro", "Responsável", "Iniciais Nome", "Nascimento", "Etapa", "Protocolo");
             //largura das colunas
             $larguracoll = array(1 => 10, 2 => 30, 3 => 30, 4 => 130, 5 => 20, 6 => 25, 7 => 35);
             $tam_fonte = 10;    

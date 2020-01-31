@@ -45,9 +45,9 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Pos", "Registro", "Iniciais Nome", "Responsável", "Nascimento", "Etapa", "Protocolo");
+            $colunas =array("Pos", "Registro", "Responsável", "Iniciais Nome", "Nascimento", "Etapa", "Protocolo");
             //largura das colunas
-            $larguracoll = array(1 => 10, 2 => 30, 3 => 30, 4 => 130, 5 => 20, 6 => 25, 7 => 35);
+            $larguracoll = array(1 => 10, 2 => 40, 3 => 120, 4 => 30, 5 => 20, 6 => 25, 7 => 35);
             $tam_fonte = 10;    
             
             
@@ -94,7 +94,7 @@ class PDF extends FPDF
                         foreach($row as $column){
                             $i++;   
                             //se a coluna for a de número 3 quer dizer que é o nome então executa a função iniciais
-                            if($i == 3){
+                            if($i == 4){
                                 $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode(iniciais($column)),1);
                             }
                             else
