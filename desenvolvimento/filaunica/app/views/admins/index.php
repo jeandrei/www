@@ -195,7 +195,7 @@
     //VERIFICO NOVAMENTE SE OS DADOS ESTÃO PASSANDO PELO POST OU PELO GET
     if (isset($_POST['buscanome'])){
         $buscaNome = $_POST['buscanome'];
-    } else if (isset($_GET['buscanome'])){
+    } else if (isset($_GET['nome'])){
         $buscaNome = $_GET['nome'];
     } else {
         $buscaNome = "Todos";
@@ -203,7 +203,7 @@
 
     if (isset($_POST['buscaetapa'])){
         $buscaEtapa = $_POST['buscaetapa'];
-    } else if (isset($_GET['buscaetapa'])){
+    } else if (isset($_GET['etapa'])){
         $buscaEtapa = $_GET['etapa'];
     } else {
         $buscaEtapa = "Todos";
@@ -211,7 +211,7 @@
 
     if (isset($_POST['buscastatus'])){
         $buscaStatus = $_POST['buscastatus'];
-    } else if (isset($_GET['buscastatus'])){
+    } else if (isset($_GET['status'])){
         $buscaStatus = $_GET['status'];
     } else {
         $buscaStatus = "Todos";
