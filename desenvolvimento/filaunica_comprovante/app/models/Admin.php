@@ -232,7 +232,7 @@
                 }
                 
                 // POR FIM ADICIONO COMO QUERO ORDENAR
-                $sql .= " ORDER BY etapa ASC LIMIT $inicio_pag, $fim_pag";
+                $sql .= " ORDER BY etapa, registro ASC LIMIT $inicio_pag, $fim_pag";
                               
                 
                 // MONTO A SQL

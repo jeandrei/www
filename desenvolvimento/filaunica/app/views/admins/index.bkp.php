@@ -5,16 +5,12 @@
       //espera a página carregar completamente
         $(document).ready(function(){  
            //seleciona o objeto select da página    
-           $('.gravar').click(function() {                
+            $(document).on('change','select', function(){ 
                 //atribui os valores do id e do status as variáveis
                 var idRegistro=$("#id_reg_fila").val();
-                var statusRegistro=$("#status_reg_fila").val();                
+                var statusRegistro=$("#status_reg_fila").val(); 
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
-                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro, function(data){ 
-                        $('#msg').show();
-                        //$('#msg').css('color', '#CC0000');
-                        $('#msg').html('Dados gravados com sucesso.');
-                        setTimeout("$('#msg').fadeOut(); ", 3000);                                 
+                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro, function(data){                                          
                 });
             });
         });
@@ -23,13 +19,15 @@
 </script>
 
 
+
+
 <div class="container">
     <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col">
-                <div class="form-group mx-sm-3 mb-2"> 
+                <div class="form-group mx-sm-3 mb-2">  
 
-            
+
                <!--LINHA PARA OS CAMPOS DE BUSCA-->
                <div class="row">
                         
@@ -121,11 +119,6 @@
 
 <?php  if(isset($data['err'])){die($data['err']);}?>
 
-<!-- SPAM PARA MOSTRAR A MENSAGEM DE DADOS GRAVADOS COM SUCESSO-->
-<div class="text-center small">
-    <span id="msg" name="msg" style="border:20px; font-weight:bold;"></span>
-</div>
-
 <!--TABELA COM OS DADOS-->   
 <div class="text-center small">
   <table class="table table-sm" style="font-size: 11px;">
@@ -152,8 +145,6 @@
                             if($registro['status'] == "Matriculado")
                             echo "table-success";                        
                         ?>"
-                id="<?php echo $registro['fila_id'];?>"
-                onClick="alert(this.id);";
               >
                 <td><?php echo $registro['posicao']; ?></td>
                 <td><?php echo $registro['nome']; ?></td>
@@ -180,26 +171,13 @@
                                 <?php echo $value;?>
                             </option>
                         <?php endforeach; ?>  
-                        </select>   
+                        </select>
                         <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
-                        <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['fila_id']; ?>">
+                        <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="">
                         <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
-                        <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
-                    </select>                     
+                        <input type="hidden" id="status_reg_fila" name="status_reg_fila" value=""> 
+                    </select> 
                 </td>
-                            
-                <td>
-                    <button 
-                        type="button" 
-                        class="btn btn-success btn-sm gravar"
-                        onClick="
-                                  document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>;   
-                                  "
-                    >                    
-                        Gravar
-                    </button>
-                </td>
-
             </tr>            
         <?php endforeach; ?>
     </tbody>

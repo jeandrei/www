@@ -16,7 +16,13 @@
                         fila.responsavel as responsavel, 
                         fila.nomecrianca as nome, 
                         fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,                        
+                        fila.protocolo as protocolo,
+                        fila.comprovanteres,
+                        fila.comprovante_res_nome,
+                        fila.comprovanteres_tipo,
+                        fila.comprovantenasc,
+                        fila.comprovantenasc_tipo,
+                        fila.comprovante_nasc_nome,
                         fila.status as status,
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                         
@@ -46,7 +52,9 @@
                         'responsavel' => $row->responsavel,
                         'nascimento' => $row->nascimento,
                         'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,                        
+                        'protocolo' => $row->protocolo,
+                        'comprovante_res_nome' => $row->comprovante_res_nome,
+                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
                         'status' => $row->status  
                     );
                 }
@@ -64,7 +72,7 @@
         // 3 CONSULTA MONTA SQL DINAMICAMENTE E RETORNA OS VALORES
         // PAGINAÇÃO $inicio_pag E $fim_pag definem em que registro começar a mostrar e em qual terminar
         // PASSO ESSES DOIS PARÂMETROS PARA FAZER A PAGINAÇÃO LÁ EM controlers/Admins.php
-        public function getFilaBusca($nome="Todos",$etapa="Todos",$status="Todos") {
+        public function getFilaBusca($nome="Todos",$etapa="Todos",$status="Todos",$inicio_pag=1, $fim_pag=2) {
                 
             $sql = ("
                         SELECT 
@@ -73,7 +81,13 @@
                             fila.responsavel as responsavel, 
                             fila.nomecrianca as nome, 
                             fila.nascimento as nascimento,
-                            fila.protocolo as protocolo,                            
+                            fila.protocolo as protocolo,
+                            fila.comprovanteres,
+                            fila.comprovante_res_nome,
+                            fila.comprovanteres_tipo,
+                            fila.comprovantenasc,
+                            fila.comprovantenasc_tipo,
+                            fila.comprovante_nasc_nome,
                             fila.status as status,
                             (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
                         FROM                               
@@ -112,7 +126,7 @@
                 }
                 
                 // POR FIM ADICIONO COMO QUERO ORDENAR
-                $sql .= " ORDER BY etapa";
+                $sql .= " ORDER BY etapa ASC LIMIT $inicio_pag, $fim_pag";
                               
                 
                 // MONTO A SQL
@@ -144,105 +158,9 @@
                         'responsavel' => $row->responsavel,
                         'nascimento' => $row->nascimento,
                         'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,                        
-                        'status' => $row->status  
-                    );
-                }
-                //RETORNO O RESULTADO
-                return $data;
-            }
-            else
-            {
-                return false;
-            }   
-            
-            
-        }
-
-        // 3 CONSULTA MONTA SQL DINAMICAMENTE E RETORNA OS VALORES
-        // PAGINAÇÃO $inicio_pag E $fim_pag definem em que registro começar a mostrar e em qual terminar
-        // PASSO ESSES DOIS PARÂMETROS PARA FAZER A PAGINAÇÃO LÁ EM controlers/Admins.php
-        public function getFilaBuscaPag($nome="Todos",$etapa="Todos",$status="Todos",$inicio_pag=1, $fim_pag=50) {
-                
-            $sql = ("
-                        SELECT 
-                            fila.id as fila_id,     
-                            fila.registro as registro, 
-                            fila.responsavel as responsavel, 
-                            fila.nomecrianca as nome, 
-                            fila.nascimento as nascimento,
-                            fila.protocolo as protocolo,                           
-                            fila.status as status,
-                            (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa                     
-                        FROM                               
-                            fila                                                      
-                            "                    
-                            
-                );
-
-                
-                // CRIO UM ARRAY PARA ARMAZENAR OS CAMPOS QUE VOU FAZER O BIND
-                $bindvalues = array();               
-             
-
-                // SE A ETAPA É DIFERENTE DE TODAS EU ADICIONO A CLAUSULA WHERE E REGISTRO O CAMPO E O VALOR PARA FAZER O BIND
-                if($etapa != "Todos"){                    
-                    $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id";                    
-                    // CAMPO E O VALOR PARA FAZER O BIND
-                    $bindvalues[':etapa_id'] = $etapa;                                         
-                } else {
-                    // SE NÃO FOR DIFERENTE DE TODOS ADICIONO UMA CLAUSULA WHERE SEM NENHUM PARÂMETRO PARA MONTAR O SQL NESTE CASO WHERE fila.id VAI TRAZER TODOS OS REGISTROS MESMO ASSIM
-                    $sql .= " WHERE fila.id";            
-                   
-                }
-
-                // SE STATUS FOR DIFERENTE DE TODOS ADICIONO O SQL E REGISTRO CAMPO E O VALOR PARA FAZER O BIND
-                if($status != "Todos"){
-                    $sql .= " AND fila.status=:status";
-                    $bindvalues[':status'] = $status;                    
-                }
-
-
-                // SE NOME FOR DIFERENTE DE TODOS E NÃO FOR VAZIO ADICIONO A SQL
-                // AQUI NÃO PRECISA FAZER O BIND POIS PASSO O VALOR DIRETO PELA VARIÁVEL
-                if(($nome != "Todos") && ($nome != "") ){
-                    $sql .= " AND fila.nomecrianca LIKE '%$nome%'";                                       
-                }
-                
-                // POR FIM ADICIONO COMO QUERO ORDENAR
-                $sql .= " ORDER BY etapa, registro ASC LIMIT $inicio_pag, $fim_pag";
-                              
-                
-                // MONTO A SQL
-                $this->db->query($sql);
-               
-                
-                // ATRAVÉS DO FOREACH ADICIONO TODOS OS CAMPOS E VALORES PARA FAZER O BIND
-                foreach($bindvalues as $field => $value){
-                    // $this->db->bind(':status',$status);
-                    $this->db->bind($field ,$value);  
-                    //echo "<br>" . $field ."->". $value;
-                }
-               
-                
-                
-                // JOGO TODOS OS VALORES DO RESULTADO DA CONSULTA NA VARIÁVEL result                
-                $result = $this->db->resultSet();
-               
-                        
-            // VERIFICO SE OBTEVE AO MENOS UM REGISTRO
-            if($this->db->rowCount() > 0)
-            {
-                foreach ($result as $row)
-                {
-                $data[] = array(  
-                        'fila_id' => $row->fila_id,
-                        'registro' => $row->registro,
-                        'nome' => $row->nome,
-                        'responsavel' => $row->responsavel,
-                        'nascimento' => $row->nascimento,
-                        'etapa' => $row->etapa,
-                        'protocolo' => $row->protocolo,                       
+                        'protocolo' => $row->protocolo,
+                        'comprovante_res_nome' => $row->comprovante_res_nome,
+                        'comprovante_nasc_nome' => $row->comprovante_nasc_nome,
                         'status' => $row->status  
                     );
                 }
