@@ -225,6 +225,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `users`
+--
+ALTER TABLE `historico_id_fila`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -257,6 +263,13 @@ COMMIT;
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+COMMIT;
+
+--
+-- AUTO_INCREMENT de tabela `historico`
+--
+ALTER TABLE `historico_id_fila`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
