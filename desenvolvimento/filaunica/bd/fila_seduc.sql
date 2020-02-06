@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 06/02/2020 às 13:18
+-- Tempo de geração: 06/02/2020 às 21:28
 -- Versão do servidor: 5.7.27
 -- Versão do PHP: 7.2.22
 
@@ -372,6 +372,12 @@ ALTER TABLE `fila`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `historico_id_fila`
+--
+ALTER TABLE `historico_id_fila`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
@@ -404,6 +410,12 @@ ALTER TABLE `etapa`
 --
 ALTER TABLE `fila`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+
+--
+-- AUTO_INCREMENT de tabela `historico_id_fila`
+--
+ALTER TABLE `historico_id_fila`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `users`
