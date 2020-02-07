@@ -127,9 +127,10 @@
       }
 
       //aqui é o método chamado pelo jquery lá no index, verifico se o id tem algum valor se sim eu chamo o método changeStatus no model
-      public function updateStatus(){
+      public function gravar(){
         if (isset($_GET['id'])){
           $this->adminModel->changeStatus($_GET['id'],$_GET['status']);
+          $this->adminModel->gravaHistorico($_GET['id'],$_GET['historico'],'admin_colocar_sessao');
         }
       }
         

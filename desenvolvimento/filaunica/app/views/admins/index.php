@@ -11,7 +11,7 @@
                 var statusRegistro=$("#status_reg_fila").val();  
                 var txthist=$("#txthist").val();                
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
-                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro + "&historico=" + txthist, function(data){ 
+                    $.get("<?php echo URLROOT; ?>/admins/gravar?id=" + idRegistro + "&status=" + statusRegistro + "&historico=" + txthist, function(data){ 
                         $('#msg').show();
                         //$('#msg').css('color', '#CC0000');
                         $('#msg').html('Dados gravados com sucesso.');

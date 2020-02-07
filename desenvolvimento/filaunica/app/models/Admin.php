@@ -505,6 +505,14 @@
         }
     
     
+        public function gravaHistorico($id,$historico,$usuario){
+            $this->db->query('INSERT INTO historico_id_fila(fila_id, historico, usuario) VALUES (:fila_id, :historico, :usuario)');
+            $this->db->bind(':fila_id',$id); 
+            $this->db->bind(':historico',$historico); 
+            $this->db->bind(':usuario',$usuario); 
+            $this->db->execute();
+        }
+    
     
     
     
