@@ -216,7 +216,8 @@
                         id="historico_<?php echo  $registro['fila_id'];?>" 
                         name="historico_<?php echo  $registro['fila_id'];?>">                               
                 </td>
-                            
+
+                <!--BOTÃO DE GRAVAR-->            
                 <td>
                     <button 
                         type="button" 
@@ -227,8 +228,16 @@
                                   document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['fila_id'];?>').value;
                                   "
                     >                    
-                        Gravar
+                     Gravar
                     </button>
+                </td>
+                
+                <!--BOTÃO VER HISTÓRICO-->                
+                <td>
+                    <a
+                        class="btn btn-secondary btn-sm ver"  
+                        href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['fila_id'];?>">Ver
+                    </a>
                 </td>
 
             </tr>            

@@ -512,6 +512,35 @@
             $this->db->bind(':usuario',$usuario); 
             $this->db->execute();
         }
+
+        public function getHistoricoById($id) {
+            $this->db->query("SELECT * FROM historico_id_fila WHERE fila_id = :fila_id ORDER BY registro");
+            $this->db->bind(':fila_id',$id);     
+        
+            $result = $this->db->resultSet();
+            
+            //verifica se obteve algum resultado
+            if($result >0)
+            {
+                foreach ($result as $row)
+                {
+                $data[] = array(  
+                        'fila_id' => $row->fila_id,
+                        'historico' => $row->historico,
+                        'id' => $row->id,
+                        'registro' => date('d/m/Y h:i:s', strtotime($row->registro)),
+                        'usuario' => $row->usuario
+                    );
+                }
+                return $data;
+            }
+            else
+            {
+                return false;
+            }   
+            
+            
+        }
     
     
     

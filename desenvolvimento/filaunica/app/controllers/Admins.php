@@ -133,7 +133,15 @@
           $this->adminModel->gravaHistorico($_GET['id'],$_GET['historico'],$_SESSION['user_name']);
         }
       }
-        
+       
+      public function historico($id){  
+        if($data = $this->adminModel->getHistoricoById($id)){     
+          $this->view('admins/historico', $data);
+        } else {
+          $data['erro'] = "Sem dados de histórico.";
+          $this->view('admins/historico', $data);
+        }
+      }
 
 
 }
