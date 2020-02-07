@@ -8,33 +8,25 @@
            $('.gravar').click(function() {                
                 //atribui os valores do id e do status as variáveis
                 var idRegistro=$("#id_reg_fila").val();
-                var statusRegistro=$("#status_reg_fila").val();  
-                var txthist=$("#txthist").val();                
+                var statusRegistro=$("#status_reg_fila").val(); 
+                alert(statusRegistro);
+                if(statusRegistro == "Aguardando"){
+                $("#linha_" + idRegistro).addClass("table-primary"); 
+                }  
+
+                if(statusRegistro == "Matriculado"){
+                $("#linha_" + idRegistro).addClass("table-success"); 
+                } 
+
+                if(statusRegistro == "Cancelado"){
+                $("#linha_" + idRegistro).addClass("table-danger"); 
+                }          
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
-                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro + "&historico=" + txthist, function(data){ 
+                    $.get("<?php echo URLROOT; ?>/admins/updateStatus?id=" + idRegistro + "&status=" + statusRegistro, function(data){ 
                         $('#msg').show();
                         //$('#msg').css('color', '#CC0000');
                         $('#msg').html('Dados gravados com sucesso.');
-                        setTimeout("$('#msg').fadeOut(); ", 3000); 
-
-                         //aqui eu altero a classe da linha da tabela
-                         // o id da linha é formado por linha_ e o id
-                         // então na linha 5 o nome é linha_5
-                         // lá no tr da tabela id="linha_
-                         if(statusRegistro == "Aguardando"){
-                            //$("#linha_" + idRegistro).addClass("table-primary");
-                            document.getElementById("linha_" + idRegistro).className = "table-primary"; 
-                        }  
-
-                        if(statusRegistro == "Matriculado"){
-                            //$("#linha_" + idRegistro).addClass("table-success"); 
-                            document.getElementById("linha_" + idRegistro).className = "table-success";
-                        } 
-
-                        if(statusRegistro == "Cancelado"){
-                            //$("#linha_" + idRegistro).addClass("table-danger"); 
-                            document.getElementById("linha_" + idRegistro).className = "table-danger";
-                        }                                       
+                        setTimeout("$('#msg').fadeOut(); ", 3000);                                 
                 });
             });
         });
@@ -159,7 +151,6 @@
         <th scope="col">Protocolo</th>
         <th scope="col">Registro</th>        
         <th scope="col">Status</th>
-        <th scope="col">Tramitação</th>
       </tr>
     </thead>
           
@@ -173,7 +164,7 @@
                             if($registro['status'] == "Matriculado")
                             echo "table-success";                        
                         ?>"
-                id="linha_<?php echo $registro['fila_id'];?>"               
+                id="linha_<?php echo $registro['fila_id'];?>"                
               >
                 <td><?php echo $registro['posicao']; ?></td>
                 <td><?php echo $registro['nome']; ?></td>
@@ -205,27 +196,14 @@
                         <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['fila_id']; ?>">
                         <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
                         <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
-                        <input type="hidden" id="txthist" name="txthist" value="">
                     </select>                     
-                </td>
-
-                <td>
-                    <input 
-                        class="form-control form-control-sm" 
-                        type="text" 
-                        id="historico_<?php echo  $registro['fila_id'];?>" 
-                        name="historico_<?php echo  $registro['fila_id'];?>">                               
                 </td>
                             
                 <td>
                     <button 
                         type="button" 
                         class="btn btn-success btn-sm gravar"
-                        onClick="
-                                  document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>,   
-                                  document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['fila_id'];?>').value,
-                                  document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['fila_id'];?>').value;
-                                  "
+                        onClick=""
                     >                    
                         Gravar
                     </button>
