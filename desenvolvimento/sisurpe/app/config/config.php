@@ -1,4 +1,16 @@
 <?php
+
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+//todos os erros deixar só a linha abaixo
+//error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+
+//habilita os erros
+//ini_set('display_errors', true);
+
 // DB Params
 // Quando estiver trabalhando com container do docker-compose
 // DB_HOST é o nome do container que está rodando o banco de dados

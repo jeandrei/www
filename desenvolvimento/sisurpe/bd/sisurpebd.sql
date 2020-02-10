@@ -26,6 +26,82 @@ CREATE DATABASE sisurpe CHARACTER SET utf8 COLLATE utf8_general_ci;
 use sisurpe;
 -- --------------------------------------------------------
 
+
+
+--
+-- Estrutura para tabela `escola`
+--
+
+CREATE TABLE `escola` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `bairro_id` int(11) NOT NULL,
+  `logradouro` varchar(255) NOT NULL,
+  `numero` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `escola`
+--
+
+INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
+(4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
+(5, 'CEI DONA BELINHA', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
+(8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
+(9, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 5, 'Rua Lauro Zimerman Filho', 200),
+(10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
+(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
+(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `etapa`
+--
+
+CREATE TABLE `etapa` (
+  `id` int(11) NOT NULL,
+  `data_ini` date DEFAULT NULL,
+  `data_fin` date DEFAULT NULL,
+  `descricao` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `etapa`
+--
+
+INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
+(1, '2019-04-01', '2020-12-31', 'BERÇÁRIO-I'),
+(2, '2018-04-01', '2019-03-31', 'BERÇÁRIO-II'),
+(3, '2017-04-01', '2018-03-31', 'MATERNAL'),
+(4, '2016-04-01', '2017-03-31', 'PRÉ-I');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `type` char(5) DEFAULT 'user',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
+(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin' '2018-11-23 10:19:18'),
+(2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36'),
+(3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', '2019-01-09 16:46:20');
+
 --
 -- Estrutura para tabela `aluno`
 --
@@ -130,6 +206,24 @@ CREATE TABLE `endereco` (
 --
 
 --
+-- Índices de tabela `escola`
+--
+ALTER TABLE `escola`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `etapa`
+--
+ALTER TABLE `etapa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
@@ -159,6 +253,25 @@ ALTER TABLE `endereco`
 --
 -- AUTO_INCREMENT de tabelas apagadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `escola`
+--
+ALTER TABLE `escola`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+-- AUTO_INCREMENT de tabela `etapa`
+--
+ALTER TABLE `etapa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+COMMIT;
 
 --
 -- AUTO_INCREMENT de tabela `aluno`

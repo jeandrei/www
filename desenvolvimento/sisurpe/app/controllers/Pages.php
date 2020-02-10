@@ -1,45 +1,39 @@
 <?php
-
-/**
- * CADA CONTROLLER TEM QUE TER SEU PRÓPRIO DIRETÓRIO DENTRO DE VIEWS
- * EX TEM CONTROLLER pages logo tem que ter um diretório pages
-*/
-class Pages extends Controller{
-    public function __construct(){
-               
-    }
-
-    // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
-    // então se não passar nada na url ele vai ler o método abaixo Index()
-    // Ao qual chama o view('index') que é o arquivo /views/index.php
-    // no arquivo Controller ele monta o  require_once '../app/views/' . $view . '.php';
-    // onde a variável $view vai ser index e concatenando fica index.php
-    //url /mvc/pages
-    public function index(){  
-        // Se o usuário estiver logado ao invés de quando ele clicar em home
-        // direcionar para o home ele vai direcionar para os posts
-        if(isLoggedIn()){
-            redirect('posts');
+    class Pages extends Controller{
+        public function __construct(){
+            // 1 Chama o model
+          //$this->postModel = $this->model('Post');
         }
 
-        $data = [
-           'title' => 'SharePosts', 
-           'description' => 'Simple social network build on the mvc template php framework'       
-       ];    
-       
-     
-       //método view está em /libraries/Controller
-       $this->view('pages/index' ,$data);
-    }
+        public function index(){
+            // Posso passar valores aqui pois no view está definido um array para isso
+            // public function view($view, $data = []){
+                // 2 Chama um método
+                //$posts = $this->postModel->getPosts();
+                
+                // 3 coloca os valores no array
+                $data = [
+                'title' => 'SISURPE Login',
+                'description'=> 'Sistema Unificado de Registros de Penha.'
+            ];
 
-    //url /mvc/pages/about
-    public function about(){
-        $data = [
-            'title' => 'About Us',
-            'description' => 'App to share posts with other users'
-        ];            
-        
-        $this->view('pages/about', $data);
-    } 
-    
+            // 4 Chama o view passando os dados
+            $this->view('pages/index', $data);
+        }
+
+        public function about(){
+            $data = [
+                'title' => 'Sobre Nós',
+                'description'=> 'Modelo MVC com login para novos projetos'
+            ];
+            $this->view('pages/about', $data);           
+        }
+
+        public function modelo_pagina(){
+            $data = [
+                'title' => 'Página de modelo',
+                'description'=> 'Modelo de página simples'
+            ];
+            $this->view('pages/modelo_pagina', $data);           
+        }
 }

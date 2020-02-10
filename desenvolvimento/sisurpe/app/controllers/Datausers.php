@@ -59,4 +59,15 @@
        $this->view('datausers/index', $data);
 
      }
+
+     public function show(){
+    
+     $this->view('datausers/show', $data=0);
+
+   }
+
+
+
+
+
     }//class
