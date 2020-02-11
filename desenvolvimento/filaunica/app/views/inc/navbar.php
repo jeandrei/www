@@ -34,7 +34,7 @@
               
               </ul>
 
-<?php var_dump($_SESSION);?>
+
               <ul class="navbar-nav ml-auto">
                   <?php if(isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">

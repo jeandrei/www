@@ -15,6 +15,9 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/datausers/add">Cadastrar_Temp</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/modelo_pagina">Modelo</a>
           </li>             
         
