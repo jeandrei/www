@@ -12,7 +12,7 @@
 
     
      public function index(){
-        $datauser = $this->postModel->getDatauserByid($_SESSION['id_aluno']);
+        $datauser = $this->dataModel->getDatauserByid($_SESSION['id_aluno']);
         //var_dump($datauser->nome_aluno);
         $data = [
             'id' => $datauser->id_aluno,
@@ -117,44 +117,46 @@
 
             
 
-            // Validate Email
+           
             if(empty($data['nome_aluno'])){
                 $data['nome_aluno_err'] = 'Por favor informe o nome do aluno';
             } 
 
-            // Validate Name
+           
             if(empty($data['nascimento'])){
                 $data['nascimento_err'] = 'Por favor informe a data de nascimento do aluno';
             }
 
-            // Validate Password
-            if(empty($data['telefone_aluno'])){
-                $data['telefone_aluno_err'] = 'Por favor informe o telefone do aluno';
+            
+            if(empty($data['certidao'])){
+                $data['certidao_err'] = 'Por favor informe o número da certidão de nascimento';
             } 
 
-            // Validate Confirm Password
-            if(empty($data['email_aluno'])){
-                $data['email_aluno_err'] = 'Por favor informe o e-mail do aluno';
+            
+            if(empty($data['uf_cert'])){
+                $data['uf_cert_err'] = 'Por favor informe a UF da certidão de nascimento';
             } 
+
+            if(empty($data['modelo'])){
+              $data['modelo_err'] = 'Por favor informe o modelo da certidão de nascimento';
+          } 
             
             // Make sure errors are empty
             if(                    
                 empty($data['nome_aluno_err']) &&
                 empty($data['nascimento_err']) && 
-                empty($data['telefone_aluno_err']) &&
-                empty($data['email_aluno_err']) 
+                empty($data['certidao_err']) &&
+                empty($data['uf_cert_err']) &&
+                empty($data['modelo_err']) 
                 ){
-                  //Validated
-                  
-                
-                  
+                  //Validated 
 
                   // Register User
-                  if($this->userModel->register($data)){
+                  if($this->dataModel->register($data)){
                     // Cria a menságem antes de chamar o view va para 
                     // views/users/login a segunda parte da menságem
                     flash('register_success', 'Você está registrado e pode efetuar o login');                        
-                    redirect('users/login');
+                    redirect('datausers/show');
                   } else {
                       die('Ops! Algo deu errado.');
                   }

@@ -14,7 +14,7 @@
         <!--NOME-->
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="nome_aluno">Nome do Aluno:</label>  
+                <label for="nome_aluno"><sup class="obrigatorio">*</sup> Nome do Aluno:</label>  
                 <input 
                     class="form-control <?php echo (!empty($data['nome_aluno_err'])) ? 'is-invalid' : ''; ?>"
                     type="text" 
@@ -35,7 +35,7 @@
         <!--NASCIMENTO NACIONALIDADE E NATURALIDADE TELEFONE-->
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="nascimento">Nascimento</label>
+                <label for="nascimento"><sup class="obrigatorio">*</sup>Nascimento</label>
                 <input 
                   class="form-control <?php echo (!empty($data['nascimento_err'])) ? 'is-invalid' : ''; ?>"
                   type="date"  
@@ -299,7 +299,7 @@
                 <label for="ufrg">Zona</label>
                 <input 
                   class="form-control <?php echo (!empty($data['zona_err'])) ? 'is-invalid' : ''; ?>"
-                  type="text"           
+                  type="number"           
                   name="zona" 
                   id="zona" 
                   value="<?php echo $data['zona']; ?>" 
@@ -328,7 +328,7 @@
         <!--DADOS DA CERTIDÃO-->  
         <div class="form-row">
             <div class="form-group col-md-5">
-                <label for="rg">Certidão de nascimento</label>
+                <label for="rg"><sup class="obrigatorio">*</sup>Certidão de nascimento</label>
                 <input 
                   class="form-control <?php echo (!empty($data['certidao_err'])) ? 'is-invalid' : ''; ?>"
                   type="text"           
@@ -342,12 +342,12 @@
                 </div>
             </div>
             <div class="form-group col-md-1">
-              <label for="uf_cert">UF</label>
+              <label for="uf_cert"><sup class="obrigatorio">*</sup>UF</label>
               <select
                 class="form-control <?php echo (!empty($data['uf_cert_err'])) ? 'is-invalid' : ''; ?>"        
                 name="uf_cert"
                 id="uf_cert">
-                <option value="">UF</option>
+                <option value="">Selecione</option>
                   <?php
                     echo(imprimeuf($data['uf_cert']));
                   ?>
@@ -357,13 +357,14 @@
                 </div>
             </div>
             <div class="form-group col-md-2">
-              <label for="modelo">Modelo</label>
+              <label for="modelo"><sup class="obrigatorio">*</sup>Modelo</label>
               <select
                 class="form-control <?php echo (!empty($data['modelo_err'])) ? 'is-invalid' : ''; ?>"        
                 name="modelo"
                 id="modelo">
-                  <option selected>Novo</option>
-                  <option>Antigo</option>
+                  <option value="">Selecione</option>
+                  <option <?php echo (($data['modelo'] == 'Novo')) ? 'selected' : ''; ?>>Novo</option>
+                  <option <?php echo (($data['modelo'] == 'Antigo')) ? 'selected' : ''; ?>>Antigo</option>
               </select>
                 <div class="invalid-feedback">
                     <?php echo $data['modelo_err']; ?>
@@ -433,7 +434,7 @@
                 <label for="ufrg">Data emissão</label>
                 <input 
                   class="form-control <?php echo (!empty($data['data_emissao_cert_err'])) ? 'is-invalid' : ''; ?>"
-                  type="text" 
+                  type="date" 
                   name="data_emissao_cert" 
                   id="data_emissao_cert" 
                   value="<?php echo $data['data_emissao_cert']; ?>"           
