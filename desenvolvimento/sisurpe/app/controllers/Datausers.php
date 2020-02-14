@@ -126,6 +126,41 @@
             if(empty($data['nascimento'])){
                 $data['nascimento_err'] = 'Por favor informe a data de nascimento do aluno';
             }
+            
+            if (!valida($data['nascimento'])){
+              $data['nascimento_err'] = 'Data inválida';
+            }
+
+            if(!empty($data['telefone_aluno'])){
+              if(!validacelular($data['telefone_aluno'])){
+                $data['telefone_aluno_err'] = 'Telefone inválido';
+              }
+            }
+
+            if(!empty($data['email_aluno'])){
+              if(!validaemail($data['email_aluno'])){
+                $data['email_aluno_err'] = 'E-mail inválido';
+              }
+            }            
+
+            if(!empty($data['telefone_pai'])){
+              if(!validacelular($data['telefone_pai'])){
+                $data['telefone_pai_err'] = 'Telefone inválido';
+              }
+            }
+
+            if(!empty($data['telefone_mae'])){
+              if(!validacelular($data['telefone_mae'])){
+                $data['telefone_mae_err'] = 'Telefone inválido';
+              }
+            }
+
+            if(!empty($data['telefone_resp'])){
+              if(!validacelular($data['telefone_resp'])){
+                $data['telefone_resp_err'] = 'Telefone inválido';
+              }
+            }
+
 
             
             if(empty($data['certidao'])){
@@ -140,6 +175,18 @@
             if(empty($data['modelo'])){
               $data['modelo_err'] = 'Por favor informe o modelo da certidão de nascimento';
           } 
+
+            if(!empty($data['cpf'])){
+              if(!validaCPF($data['cpf'])){
+                $data['cpf_err'] = 'CPF inválido';
+              }
+            }
+
+            if(!empty($data['data_emissao_cert'])){
+              if(!valida($data['data_emissao_cert'])){
+                $data['data_emissao_cert_err'] = 'Data inválida';
+              }
+            }
             
             // Make sure errors are empty
             if(                    

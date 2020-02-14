@@ -81,9 +81,9 @@
           <!--TELEFONE EMAIL E SEXO-->
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="telefone">Telefone</label>
+                <label for="telefone_aluno">Telefone</label>
                 <input 
-                  class="form-control <?php echo (!empty($data['telefone_aluno_err'])) ? 'is-invalid' : ''; ?>"
+                  class="form-control telefone <?php echo (!empty($data['telefone_aluno_err'])) ? 'is-invalid' : ''; ?>"
                   type="tel" 
                   name="telefone_aluno" 
                   id="telefone_aluno"          
@@ -99,7 +99,7 @@
                 <label for="email_aluno">Email</label>
                 <input 
                   class="form-control <?php echo (!empty($data['email_aluno_err'])) ? 'is-invalid' : ''; ?>"
-                  type="email"            
+                  type="text"            
                   name="email_aluno" 
                   id="email_aluno"
                   value="<?php echo $data['email_aluno']; ?>"  
@@ -150,7 +150,7 @@
             <div class="form-group col-md-2">
                 <label for="telefone_pai">Telefone do pai</label>
                 <input 
-                  class="form-control <?php echo (!empty($data['telefone_pai_err'])) ? 'is-invalid' : ''; ?>"
+                  class="form-control telefone <?php echo (!empty($data['telefone_pai_err'])) ? 'is-invalid' : ''; ?>"
                   type="tel" 
                   name="telefone_pai" 
                   id="telefone_pai"          
@@ -184,7 +184,7 @@
             <div class="form-group col-md-2">
                 <label for="telefone_mae">Telefone da mãe</label>
                 <input 
-                  class="form-control <?php echo (!empty($data['telefone_mae_err'])) ? 'is-invalid' : ''; ?>"
+                  class="form-control telefone <?php echo (!empty($data['telefone_mae_err'])) ? 'is-invalid' : ''; ?>"
                   type="tel" 
                   name="telefone_mae" 
                   id="telefone_mae"          
@@ -447,7 +447,7 @@
             <div class="form-group col-md-2">
                 <label for="cpf">CPF</label>
                 <input 
-                  class="form-control <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
+                  class="form-control cpfmask <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
                   type="text" 
                   name="cpf" 
                   id="cpf"  

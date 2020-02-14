@@ -1,5 +1,3 @@
-
-  
 jQuery.validator.addMethod("cpf", function(value, element) {
   value = jQuery.trim(value);
 

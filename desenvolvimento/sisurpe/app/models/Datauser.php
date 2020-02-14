@@ -110,6 +110,25 @@
             return false;
         }
     }
+
+      // Find user by email
+      public function encontraAlunoPorEmail($email){
+        $this->db->query('SELECT * FROM aluno WHERE email = :email');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     /*
     public function addPost($data){
         $this->db->query('INSERT INTO posts (title, user_id, body) VALUES (:title, :user_id, :body)');
