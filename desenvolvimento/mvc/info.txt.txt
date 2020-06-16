@@ -70,7 +70,7 @@ O sistema carrega o public/index.php
 que por sua vez carrega o bootstrap.php
 que por sua vez carrega o controller.php
 que por sua vez carrega o model ou view desejado
-Obs.: para poder acessar o controller a classe tem que extender o controller
+Obs.: para poder acessar o controller a classe tem que extender o controller principal
 ex: class Pages extends Controller
 $this->view('index');
 require_once('../app/models/' . $model . '.php');
