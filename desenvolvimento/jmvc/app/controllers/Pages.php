@@ -2,7 +2,7 @@
 
 class Pages extends Controller {
     public function __construct(){
-       
+          
     }
 
     // Como o currentController padrão é Pages e o currentMethod padrão é index, temos que ter o metodo Index
@@ -15,7 +15,10 @@ class Pages extends Controller {
     }
 
     public function about(){
-        $this->view('pages/about');  
+        $data = [
+            'title' => 'About Us'
+        ];
+        $this->view('pages/about', $data);  
     }
 }
 
