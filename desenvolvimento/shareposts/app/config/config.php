@@ -1,30 +1,21 @@
 <?php
-    // DB Params
-    define('DB_HOST', 'mysql');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'rootadm');
-    define('DB_NAME', 'shareposts');
+// DB Params
+// Quando estiver trabalhando com container do docker-compose
+// DB_HOST é o nome do container que está rodando o banco de dados
+define('DB_HOST', 'mysql');
+define('DB_USER', 'root');
+define('DB_PASS', 'rootadm');
+define('DB_NAME', 'shareposts');
 
-    /* App Root
-     Temos que pegar do root até a pasta app
-     só __FILE__ traz todo o caminho
-     /var/www/html/mvc/app/config/config.php
-     para tirar um nível no final usamos a função
-     dirname() que tira um nível, como temos que tirar o config.php
-     e config temos que usar duas vezes a função
-     resultado será /var/www/html/mvc/app
-     Sepre que quiser adicionar algo da pasta app use
-     APPROOT
-     */
-    define('APPROOT', dirname(dirname(__FILE__)));
+// App Root
+define('APPROOT', dirname(dirname(__FILE__)));
+// valor que está nesta constante /var/www/html/mvc/app
 
-    //URL Root usado para links
-    // sempre que quiser usar link do public ou frontend
-    // use URLROOT
-    define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/shareposts');    
+// URL ROOT PARA LINKS
+define('URLROOT', 'http://' . $_SERVER["SERVER_NAME"] . '/shareposts');
 
-    // Site Name
-    define('SITENAME', 'SharePosts');
+// Site Name
+define('SITENAME', 'SharePosts');
 
-    // App Version
-    define('APPVERSION', '1.0.0');
+//APP VERSION
+define('APPVERSION', '1.0.0');

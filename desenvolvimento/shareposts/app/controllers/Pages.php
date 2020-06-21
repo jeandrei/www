@@ -1,31 +1,39 @@
 <?php
-    class Pages extends Controller{
-        public function __construct(){
-            // 1 Chama o model
-          //$this->postModel = $this->model('Post');
-        }
 
-        public function index(){
-            // Posso passar valores aqui pois no view está definido um array para isso
-            // public function view($view, $data = []){
-                // 2 Chama um método
-                //$posts = $this->postModel->getPosts();
-                
-                // 3 coloca os valores no array
-                $data = [
-                'title' => 'SharePosts',
-                'description'=> 'Simple Social Network build on the MVC PHP framework'
-            ];
+/**
+ * CADA CONTROLLER TEM QUE TER SEU PRÓPRIO DIRETÓRIO DENTRO DE VIEWS
+ * EX TEM CONTROLLER pages logo tem que ter um diretório pages
+*/
+class Pages extends Controller{
+    public function __construct(){
+               
+    }
 
-            // 4 Chama o view passando os dados
-            $this->view('pages/index', $data);
-        }
+    // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
+    // então se não passar nada na url ele vai ler o método abaixo Index()
+    // Ao qual chama o view('index') que é o arquivo /views/index.php
+    // no arquivo Controller ele monta o  require_once '../app/views/' . $view . '.php';
+    // onde a variável $view vai ser index e concatenando fica index.php
+    //url /mvc/pages
+    public function index(){  
+        $data = [
+           'title' => 'SharePosts',
+           'description' => 'Simple Social Network Built on the MVC'
+       ];    
+       
+     
+       //método view está em /libraries/Controller
+       $this->view('pages/index' ,$data);
+    }
 
-        public function about(){
-            $data = [
-                'title' => 'About Us',
-                'description'=> 'App to share posts with other users'
-            ];
-            $this->view('pages/about', $data);           
-        }
+    //url /mvc/pages/about
+    public function about(){
+        $data = [
+            'title' => 'About Us',
+            'description' => 'App to share posts with other users'
+        ];            
+        
+        $this->view('pages/about', $data);
+    } 
+    
 }
