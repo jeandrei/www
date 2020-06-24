@@ -101,8 +101,7 @@ class Core{
         está executando a classe Pages método index do arquivo /app/controllers/Pages.php
         que foi requerido/adicionado onde eu coloquei referência 1
         */
-        call_user_func_array([$this->currentController, 
-        $this->currentMethod], $this->params);
+        call_user_func_array([$this->currentController,$this->currentMethod], $this->params);
         //**********************FIM CAPTURAR O PARÂMETRO DA URL**************************
 
 
