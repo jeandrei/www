@@ -21,3 +21,7 @@ define('DESCRIPTION', 'Fila Única de Penha Santa Catarina');
 
 //APP VERSION
 define('APPVERSION', '1.0.0');
+
+// CONTATOS DA EMPRESA
+define('TEL01', '(47) 3345-4025');
+define('TEL02', '(47) 3345-2388');

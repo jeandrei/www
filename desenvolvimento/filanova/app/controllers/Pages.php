@@ -16,10 +16,10 @@ class Pages extends Controller{
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
     public function index(){  
-        // SE O USUÁRIO ESTÁ LOGADO QUANDO CLICA NO INÍCIO VAI PARA POSTS E NÃO PARA A TELA DE BOAS VINDAS
-       // if(isLoggedIn()){
-          //  redirect('pages/sistem');
-      //  }
+        // SE O USUÁRIO ESTÁ LOGADO SE DIGITAR NA URL /pages/sistem ele vai abrir caso contrário ele vai para o index
+        if(isLoggedIn()){
+            redirect('pages/sistem');
+        }
 
         $data = [
            'title' => 'SharePosts',
@@ -32,14 +32,14 @@ class Pages extends Controller{
     }
 
     public function sistem(){  
-        // SE O USUÁRIO ESTÁ LOGADO QUANDO CLICA NO INÍCIO VAI PARA POSTS E NÃO PARA A TELA DE BOAS VINDAS
-        //if(isLoggedIn()){
-       //     redirect('pages/sistem');
-        //}
+         //SE O USUÁRIO NÃO ESTIVER LOGADO redireciona direto para users/login para efetuar o login
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
 
         $data = [
-           'title' => 'SharePosts',
-           'description' => 'Uma Simples Rede Social construida em MVC'
+           'title' => 'Sistema de Fila Única',
+           'description' => 'Sistema Web de Fila Única'
        ];    
        
      
@@ -52,7 +52,7 @@ class Pages extends Controller{
     public function about(){
         $data = [
             'title' => 'Sobre Nós',
-            'description' => 'App para compartilhar posts com outros usuários'
+            'description' => 'Sistema de gerenciamento de fíla única.'
         ];            
         
         $this->view('pages/about', $data);
