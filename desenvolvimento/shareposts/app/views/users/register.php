@@ -9,7 +9,7 @@
                     <!--NAME-->
                     <div class="form-group">   
                         <label 
-                            for="name">Name: <sup>*</sup>
+                            for="name">Nome: <sup>*</sup>
                         </label>                        
                         <input 
                             type="text" 
@@ -43,7 +43,7 @@
                      <!--PASSWORD-->
                      <div class="form-group">   
                         <label 
-                            for="password">Password: <sup>*</sup>
+                            for="password">Senha: <sup>*</sup>
                         </label>                        
                         <input 
                             type="password" 
@@ -59,7 +59,7 @@
                      <!--CONFIRM PASSWORD-->
                      <div class="form-group">   
                         <label 
-                            for="confirm_password">Confirm Password: <sup>*</sup>
+                            for="confirm_password">Confirma Senha: <sup>*</sup>
                         </label>                        
                         <input 
                             type="password" 
@@ -75,10 +75,10 @@
                     <!--BUTTONS-->
                     <div class="row">
                         <div class="col">
-                            <input type="submit" value="Register" class="btn btn-success btn-block">                           
+                            <input type="submit" value="Registrar-se" class="btn btn-success btn-block">                           
                         </div>
                         <div class="col">
-                            <a href="<?php echo URLROOT ;?>/users/login" class="btn btn-light btn-block">Have an account? Login</a>
+                            <a href="<?php echo URLROOT ;?>/users/login" class="btn btn-light btn-block">Já tem uma conta? Faça o Login</a>
                         </div>
                     </div>
 

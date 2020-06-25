@@ -30,32 +30,32 @@
 
                 // Validate Email
                 if(empty($data['email'])){
-                    $data['email_err'] = 'Please enter email';
+                    $data['email_err'] = 'Por favor informe o email';
                 } else {
                     // Check email userModel foi instansiado na construct
                     if($this->userModel->findUserByEmail($data['email'])){
-                        $data['email_err'] = 'Email is already taken'; 
+                        $data['email_err'] = 'Email já registrado'; 
                     }
                 }
 
                 // Validate Name
                 if(empty($data['name'])){
-                    $data['name_err'] = 'Please enter name';
+                    $data['name_err'] = 'Por favor informe o nome';
                 }
 
                  // Validate Password
                  if(empty($data['password'])){
-                    $data['password_err'] = 'Please enter password';
+                    $data['password_err'] = 'Por favor informe a senha';
                 } elseif (strlen($data['password']) < 6){
-                    $data['password_err'] = 'Password must be at least 6 characters';
+                    $data['password_err'] = 'A senha deve ter no mínimo 6 caracteres';
                 }
 
                 // Validate Confirm Password
                 if(empty($data['confirm_password'])){
-                    $data['confirm_password_err'] = 'Please confirm password';
+                    $data['confirm_password_err'] = 'Por favor confirme a senha';
                 } else {
                     if($data['password'] != $data['confirm_password']){
-                    $data['confirm_password_err'] = 'Passwords do not match';    
+                    $data['confirm_password_err'] = 'A senha e a confirmação da senha não são iguais';    
                     }
                 }
 
@@ -75,7 +75,7 @@
                       if($this->userModel->register($data)){
                         // Cria a menságem antes de chamar o view va para 
                         // views/users/login a segunda parte da menságem
-                        flash('register_success', 'You are registreded and can log in');                        
+                        flash('register_success', 'Você está registrado e pode realizar o login agora');                        
                         redirect('users/login');
                       } else {
                           die('Something went wrong');
@@ -126,20 +126,20 @@
 
                 // Validate Email
                 if(empty($data['email'])){
-                    $data['email_err'] = 'Please enter email';
+                    $data['email_err'] = 'Por favor informe o email';
                 } 
                
 
                  // Validate Password
                  if(empty($data['password'])){
-                    $data['password_err'] = 'Please enter password';
+                    $data['password_err'] = 'Por favor informe a senha';
                 } 
 
                 // Check for user/email
                 if($this->userModel->findUserByEmail($data['email'])){
                     // User found
                 } else {
-                  $data['email_err'] = 'No user found';
+                  $data['email_err'] = 'Usuário não encontrado';
                 }
                                
                 // Make sure errors are empty
@@ -152,12 +152,13 @@
                       // 2 models/User login();
                       $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                       
+                      
                       if($loggedInUser){
                         // Create Session 
                         // função no final desse arquivo
                         $this->createUserSession($loggedInUser);
                       } else {
-                          $data['password_err'] = 'Password incorrect';
+                          $data['password_err'] = 'Senha incorreta';
 
                           $this->view('users/login', $data);
                       }
@@ -186,10 +187,10 @@
 
     public function createUserSession($user){
         // $user->id vem do model na função login() retorna a row com todos os campos
-        // da consulta na tabela users
+        // da consulta na tabela users        
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_name'] = $user->name;      
         redirect('posts');
     }
 

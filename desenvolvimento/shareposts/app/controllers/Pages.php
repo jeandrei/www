@@ -23,7 +23,7 @@ class Pages extends Controller{
 
         $data = [
            'title' => 'SharePosts',
-           'description' => 'Simple Social Network Built on the MVC'
+           'description' => 'Uma Simples Rede Social construida em MVC'
        ];    
        
      
@@ -34,8 +34,8 @@ class Pages extends Controller{
     //url /mvc/pages/about
     public function about(){
         $data = [
-            'title' => 'About Us',
-            'description' => 'App to share posts with other users'
+            'title' => 'Sobre Nós',
+            'description' => 'App para compartilhar posts com outros usuários'
         ];            
         
         $this->view('pages/about', $data);
