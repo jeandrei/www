@@ -17,9 +17,9 @@ class Pages extends Controller{
     //url /mvc/pages
     public function index(){  
         // SE O USUÁRIO ESTÁ LOGADO QUANDO CLICA NO INÍCIO VAI PARA POSTS E NÃO PARA A TELA DE BOAS VINDAS
-        if(isLoggedIn()){
-            redirect('posts');
-        }
+       // if(isLoggedIn()){
+          //  redirect('pages/sistem');
+      //  }
 
         $data = [
            'title' => 'SharePosts',
@@ -30,6 +30,23 @@ class Pages extends Controller{
        //método view está em /libraries/Controller
        $this->view('pages/index' ,$data);
     }
+
+    public function sistem(){  
+        // SE O USUÁRIO ESTÁ LOGADO QUANDO CLICA NO INÍCIO VAI PARA POSTS E NÃO PARA A TELA DE BOAS VINDAS
+        //if(isLoggedIn()){
+       //     redirect('pages/sistem');
+        //}
+
+        $data = [
+           'title' => 'SharePosts',
+           'description' => 'Uma Simples Rede Social construida em MVC'
+       ];    
+       
+     
+       //método view está em /libraries/Controller
+       $this->view('pages/sistem' ,$data);
+    }
+    
 
     //url /mvc/pages/about
     public function about(){

@@ -155,8 +155,9 @@
                       
                       if($loggedInUser){
                         // Create Session 
-                        // função no final desse arquivo
+                        // função no final desse arquivo                       
                         $this->createUserSession($loggedInUser);
+                        die('tudo certo');
                       } else {
                           $data['password_err'] = 'Senha incorreta';
 
@@ -191,15 +192,15 @@
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;      
-        redirect('posts');
+        redirect('pages/sistem');
     }
 
-    public function logout(){
+    public function logout(){        
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
         session_destroy();
-        redirect('pages/login'); 
+        redirect('pages/index'); 
     }   
 }   
 ?>
