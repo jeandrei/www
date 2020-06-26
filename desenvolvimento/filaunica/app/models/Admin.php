@@ -505,11 +505,12 @@
         }
     
     
-        public function gravaHistorico($id,$historico,$usuario){
-            $this->db->query('INSERT INTO historico_id_fila(fila_id, historico, usuario) VALUES (:fila_id, :historico, :usuario)');
+        public function gravaHistorico($id,$historico,$usuario,$status){
+            $this->db->query('INSERT INTO historico_id_fila(fila_id, historico, usuario, status) VALUES (:fila_id, :historico, :usuario, :status)');
             $this->db->bind(':fila_id',$id); 
             $this->db->bind(':historico',$historico); 
             $this->db->bind(':usuario',$usuario); 
+            $this->db->bind(':status',$status); 
             $this->db->execute();
         }
 
@@ -526,6 +527,7 @@
                 {
                 $data[] = array(  
                         'fila_id' => $row->fila_id,
+                        'status' => $row->status,
                         'historico' => $row->historico,
                         'id' => $row->id,
                         'registro' => date('d/m/Y h:i:s', strtotime($row->registro)),

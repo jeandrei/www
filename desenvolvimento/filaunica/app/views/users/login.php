@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-<?php require APPROOT . '/views/inc/nav_footer.php'; ?>
+<?php require APPROOT . '/views/inc/footer.php'; ?>
 
 
 <script>  

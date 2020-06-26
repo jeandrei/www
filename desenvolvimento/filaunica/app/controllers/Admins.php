@@ -130,7 +130,7 @@
       public function gravar(){
         if (isset($_GET['id'])){
           $this->adminModel->changeStatus($_GET['id'],$_GET['status']);
-          $this->adminModel->gravaHistorico($_GET['id'],$_GET['historico'],$_SESSION['user_name']);
+          $this->adminModel->gravaHistorico($_GET['id'],$_GET['historico'],$_SESSION['user_name'],$_GET['status']);
         }
       }
        

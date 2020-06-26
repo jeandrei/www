@@ -357,7 +357,8 @@
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_type'] = $user->type;
-        redirect('admins/index');
+        redirect('pages/sistem');
+        //redirect('admins/index');
     }
 
     public function logout(){

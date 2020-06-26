@@ -1,6 +1,9 @@
-<?php ini_set('default_charset', 'utf-8');?>
+<?php 
+// impede problemas com caracteres com acento
+header('Content-type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="br">
 <head>
   <title><?php echo SITENAME; ?></title>
   <meta charset="utf-8">
@@ -398,7 +401,7 @@ echo flash('alert-danger');}
                                                                                                 <!--INFORMATIVO DE OPÇÕES DE ESCOLHA-->
                                                                                                 </div>
 
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 1-->
+                                                                                                <!--ESCOLA OPÇÃO 1-->
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-12">
                                                                                                         <label for="opcao1" class="help-block">
@@ -424,10 +427,10 @@ echo flash('alert-danger');}
                                                                                                                 <?php echo $data['opcao1_err']; ?>
                                                                                                         </span>
                                                                                                         </div>                                                                                                 
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 1-->
+                                                                                                <!--ESCOLA OPÇÃO 1-->
                                                                                                 </div>
 
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 2-->
+                                                                                                <!--ESCOLA OPÇÃO 2-->
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-12">
                                                                                                         <label for="opcao2" class="help-block">
@@ -451,10 +454,10 @@ echo flash('alert-danger');}
                                                                                                         </select>                                           
                                                                                                     <span id="opcao2_err" class="text-danger"></span>
                                                                                                     </div>                                                                                                    
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 2-->
+                                                                                                <!--ESCOLA OPÇÃO 2-->
                                                                                                 </div>
 
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 3-->
+                                                                                                <!--ESCOLA OPÇÃO 3-->
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-12">
                                                                                                         <label for="opcao3" class="help-block">
@@ -476,26 +479,34 @@ echo flash('alert-danger');}
                                                                                                                     <?php endforeach; ?>      
                                                                                                                     
                                                                                                         </select>                                           
-                                                                                                    <span id="opcao3_err" class="text-danger"></span>
-                                                                                                    </div>
-                                                                                                    <div class="col-lg-8">
-                                                                                                        <div class="form-group">
-                                                                                                            <label for="turno_desejado" class="help-block">
-                                                                                                                Turno
-                                                                                                            </label>
-                                                                                                            <select 
-                                                                                                                class="form-control"
-                                                                                                                id="turno_desejado"
-                                                                                                                name="turno_desejado"
-                                                                                                            >
-                                                                                                            <option value="">Selecione o turno</option>
+                                                                                                        <span id="opcao3_err" class="text-danger"></span>
+                                                                                                    </div>                                                                                                     
+                                                                                                <!--ESCOLA OPÇÃO 3-->
+                                                                                                </div>
+
+
+                                                                                                <!--TURNO DESEJADO-->
+                                                                                                <div class="row">
+                                                                                                    <div class="col-lg-12">
+                                                                                                        <label for="turno_desejado" class="help-block">
+                                                                                                            <span class="obrigatorio">*</span>Turno desejado:
+                                                                                                        </label>
+                                                                                                        <select 
+                                                                                                            name="turno_desejado" 
+                                                                                                            id="turno_desejado" 
+                                                                                                            class="form-control <?php echo (!empty($data['turno_desejado_err'])) ? 'is-invalid' : ''; ?>"                                       
+                                                                                                        >
+                                                                                                                <option value="">Selecione o turno desejado</option>
                                                                                                                 <option value="1" <?php echo $data['turno_desejado'] == '1' ? 'selected':'';?>>Matutino</option>
                                                                                                                 <option value="2" <?php echo $data['turno_desejado'] == '2' ? 'selected':'';?>>Vespertino</option>
-                                                                                                                <option value="3" <?php echo $data['turno_desejado'] == '3' ? 'selected':'';?>>Integral</option>
-                                                                                                            </select>                                                                                                                                                
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                <!--ESCOLA E TURNO OPÇÃO 3-->
+                                                                                                                <option value="3" <?php echo $data['turno_desejado'] == '3' ? 'selected':'';?>>Integral</option>     
+                                                                                                                    
+                                                                                                        </select>                                           
+                                                                                                        <span class="invalid-feedback">
+                                                                                                                <?php echo $data['turno_desejado_err']; ?>
+                                                                                                        </span>
+                                                                                                        </div>                                                                                                 
+                                                                                                <!--TURNO DESEJADO-->
                                                                                                 </div>
 
                                                                                                  <!--OBSERVACAO-->
@@ -561,10 +572,7 @@ echo flash('alert-danger');}
 </html>
 
 <script>
-$("#proximo").on("click",function(){
-  if(!$("#cadastrar").valid())
- $("#cadastrar#etapaUm").click();
-});
+
 
 
 //TAMANHO É EM KBYTES LOGO PARA 2MB 2*1024 = 2048*1024 BYTES = 2097152 

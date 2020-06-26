@@ -5,6 +5,11 @@
           //$this->postModel = $this->model('Post');
         }
 
+
+
+
+
+        // INDEX PÁGINA INICIAL LANDING PAGE
         public function index(){
             // Posso passar valores aqui pois no view está definido um array para isso
             // public function view($view, $data = []){
@@ -21,14 +26,46 @@
             $this->view('pages/index', $data);
         }
 
+
+
+
+
+
+        // PÁGINA INICIAL DO SISTEMA DEPOIS DE EFETUAR O LOGIN
+        public function sistem(){
+            // Posso passar valores aqui pois no view está definido um array para isso
+            // public function view($view, $data = []){
+                // 2 Chama um método
+                //$posts = $this->postModel->getPosts();
+                
+                // 3 coloca os valores no array
+                $data = [
+                'title' => 'Fila Única',
+                'description'=> 'Sistema de fila única de Penha/SC'
+            ];
+
+            // 4 Chama o view passando os dados
+            $this->view('pages/sistem', $data);
+        }
+
+
+
+
+
+
+        // PÁGINA ABOUT
         public function about(){
             $data = [
                 'title' => 'Sobre Nós',
-                'description'=> 'Modelo MVC com login para novos projetos'
+                'description'=> 'Sistema de gerenciamento de fila única'
             ];
             $this->view('pages/about', $data);           
         }
 
+
+
+
+        // PÁGINA DE TESTE PODE SER REMOVIDA
         public function modelo_pagina(){
             $data = [
                 'title' => 'Página de modelo',

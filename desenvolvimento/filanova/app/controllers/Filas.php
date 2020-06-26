@@ -6,17 +6,12 @@
         }
 
         public function cadastrar(){
-            
-            //apagar as duas linhas abaixo coloquei aqui só para montar o formulário
-           // $this->view('filas/sucessoCadastrar', $data = 0);
-            //die();
 
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
             //pega todas as escolas
             $escolas = $this->filaModel->getEscolas();          
-            
-                       
+                                   
 
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -56,7 +51,8 @@
                     'nome_err' => '',
                     'nascimento_err' => '',
                     'certidao_err' => '',
-                    'opcao1_err' => ''
+                    'opcao1_err' => '',
+                    'turno_desejado_err' => '',
                     ];
                     
                     

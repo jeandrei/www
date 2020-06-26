@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/nav_header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 <h1>Lista de Espera</h1>
 
 <script>
@@ -50,101 +50,118 @@
                 <div class="form-group mx-sm-3 mb-2"> 
 
             
-               <!--LINHA PARA OS CAMPOS DE BUSCA-->
-               <div class="row">
-                        
-                        
-                        <!--NOME 1-->
-                        <div class="col-lg-4">
-                            <label for="buscanome">
-                                Buscar por Nome
-                            </label>
-                            <input 
-                                type="text" 
-                                name="buscanome" 
-                                id="buscanome" 
-                                maxlength="60"
-                                class="form-control"
-                                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
-                                ><span class="invalid-feedback">
-                                    <?php // echo $data['nome_err']; ?>
-                                </span>
-                        </div>
+                    <!--LINHA PARA OS CAMPOS DE BUSCA-->
+                    <div class="row">
+                                
+                                
+                                <!--NOME 1-->
+                                <div class="col-lg-4">
+                                    <label for="buscanome">
+                                        Buscar por Nome
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="buscanome" 
+                                        id="buscanome" 
+                                        maxlength="60"
+                                        class="form-control"
+                                        value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                                        ><span class="invalid-feedback">
+                                            <?php // echo $data['nome_err']; ?>
+                                        </span>
+                                </div>
 
 
-                        <!--ETAPA-->
-                        <div class="col-lg-4">
-                            <label for="buscaetapa">
-                                Busca por Etapa
-                            </label>                               
-                            <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
-                            <select 
-                                            name="buscaetapa" 
-                                            id="buscaetapa" 
-                                            class="form-control"                                        
-                                        >
-                                                <option value="Todos">Todos</option>
-                                                <?php 
-                                                $etapas = $this->adminModel->getEtapas();                     
-                                                foreach($etapas as $etapa) : ?> 
-                                                    <option value="<?php echo $etapa['id']; ?>"
-                                                                <?php if(isset($_POST['buscaetapa'])){
-                                                                echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
-                                                                }
-                                                                ?>
-                                                    >
-                                                        <?php echo $etapa['descricao'];?>
-                                                    </option>
-                                                <?php endforeach; ?>  
-                            </select>
-                        </div>
 
-                        <!--Situação-->
-                        <div class="col-lg-4">
-                            <label for="buscastatus">
-                                Busca por Situação
-                            </label> 
-                             <!--BOTÃO BUSCA SITUAÇÃO-->
-                            <select 
-                                            name="buscastatus" 
-                                            id="buscastatus" 
-                                            class="form-control"                                        
-                                        >
-                                                <option value="Todos">Todos</option>
-                                                <?php 
-                                                $status = array('Aguardando','Matriculado','Cancelado');                    
-                                                foreach($status as $row => $value) : ?> 
-                                                    <option value="<?php echo $value; ?>" 
-                                                                    <?php if(isset($_POST['buscastatus'])){
-                                                                            echo $_POST['buscastatus'] == $value ? 'selected':'';
+                                <!--ETAPA-->
+                                <div class="col-lg-4">
+                                    <label for="buscaetapa">
+                                        Busca por Etapa
+                                    </label>                               
+                                    <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
+                                    <select 
+                                                    name="buscaetapa" 
+                                                    id="buscaetapa" 
+                                                    class="form-control"                                        
+                                                >
+                                                        <option value="Todos">Todos</option>
+                                                        <?php 
+                                                        $etapas = $this->adminModel->getEtapas();                     
+                                                        foreach($etapas as $etapa) : ?> 
+                                                            <option value="<?php echo $etapa['id']; ?>"
+                                                                        <?php if(isset($_POST['buscaetapa'])){
+                                                                        echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
                                                                         }
-                                                                    ?>
-                                                    >
-                                                        <?php echo $value;?>
-                                                    </option>
-                                                <?php endforeach; ?>  
-                            </select>   
-                        </div>     
-                
-                
-                </div><!--FIM DIV CAMPOS DE BUSCA-->                    
+                                                                        ?>
+                                                            >
+                                                                <?php echo $etapa['descricao'];?>
+                                                            </option>
+                                                        <?php endforeach; ?>  
+                                    </select>
+                                </div>
+
+
+
+
+                                <!--Situação-->
+                                <div class="col-lg-4">
+                                    <label for="buscastatus">
+                                        Busca por Situação
+                                    </label> 
+                                    <!--BOTÃO BUSCA SITUAÇÃO-->
+                                    <select 
+                                                    name="buscastatus" 
+                                                    id="buscastatus" 
+                                                    class="form-control"                                        
+                                                >
+                                                        <option value="Todos">Todos</option>
+                                                        <?php 
+                                                        $status = array('Aguardando','Matriculado','Cancelado');                    
+                                                        foreach($status as $row => $value) : ?> 
+                                                            <option value="<?php echo $value; ?>" 
+                                                                            <?php if(isset($_POST['buscastatus'])){
+                                                                                    echo $_POST['buscastatus'] == $value ? 'selected':'';
+                                                                                }
+                                                                            ?>
+                                                            >
+                                                                <?php echo $value;?>
+                                                            </option>
+                                                        <?php endforeach; ?>  
+                                    </select>   
+                                </div>   
+
+                    </div><!--FIM DIV CAMPOS DE BUSCA-->                    
                     
                      
 
                 </div>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
-        <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
+       
+        <!-- BOTÃO DE ATUALIZAR -->                                                                      
+        <div class="row">
+            <div class="col">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
+                    <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
+                </div>
+            </div>
+        </div>    
+                                                                          
+
     </form>
 </div>
 
 <?php  if(isset($data['err'])){die($data['err']);}?>
 
+
+
 <!-- SPAM PARA MOSTRAR A MENSAGEM DE DADOS GRAVADOS COM SUCESSO-->
 <div class="text-center small">
     <span id="msg" name="msg" style="border:20px; font-weight:bold;"></span>
 </div>
+
+
 
 <!--TABELA COM OS DADOS-->   
 <div class="text-center small">
@@ -200,13 +217,15 @@
                                 <?php echo $value;?>
                             </option>
                         <?php endforeach; ?>  
-                        </select>   
+                  </select>
+
+
                         <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
                         <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['fila_id']; ?>">
                         <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
                         <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
-                        <input type="hidden" id="txthist" name="txthist" value="">
-                    </select>                     
+                        <input type="hidden" id="txthist" name="txthist" value="">  
+
                 </td>
 
                 <td>
@@ -306,4 +325,4 @@
     </ul>                
 
 
-<?php require APPROOT . '/views/inc/nav_footer.php'; ?>
+<?php require APPROOT . '/views/inc/footer.php'; ?>
