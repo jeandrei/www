@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/filas/header.php'; ?>
+<?php require 'header.php'; ?>
 
 
 
@@ -45,4 +45,4 @@
 
 
 
-<?php require APPROOT . '/views/filas/footer.php'; ?>
+<?php require 'footer.php'; ?>

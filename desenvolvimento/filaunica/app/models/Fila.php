@@ -33,6 +33,8 @@
             }           
         }
 
+        /*
+        FUNÇÃO NÃO UTILIZADA AO FINAL APAGAR
         public function getTurnoById($id){
             $this->db->query("SELECT turno FROM escola WHERE id = :id");
             $this->db->bind(':id',$id);
@@ -45,6 +47,8 @@
                 return false;
             }           
         }
+        */
+
 
         //retorna se já existe um nome e data de nascimento cadastrado
         public function nomeCadastrado($nome,$nasc){
@@ -152,9 +156,7 @@
                                 opcao1_id = :opcao1_id,
                                 opcao2_id = :opcao2_id,
                                 opcao3_id = :opcao3_id,
-                                turno1 = :turno1,
-                                turno2 = :turno2,
-                                turno3 = :turno3,      
+                                opcao_turno = :opcao_turno,                                   
                                 cpfresponsavel = :cpfresponsavel,
                                 protocolo = :protocolo,                                                   
                                 observacao = :observacao,                                
@@ -186,9 +188,7 @@
             $this->db->bind(':opcao1_id', $data['opcao1']);
             $this->db->bind(':opcao2_id', $data['opcao2']);
             $this->db->bind(':opcao3_id', $data['opcao3']);
-            $this->db->bind(':turno1', $data['turno1']);
-            $this->db->bind(':turno2', $data['turno2']);
-            $this->db->bind(':turno3', $data['turno3']); 
+            $this->db->bind(':opcao_turno', $data['opcao_turno']);             
             $this->db->bind(':cpfresponsavel', $data['cpf']);
             $this->db->bind(':protocolo', $data['protocolo']);        
             $this->db->bind(':observacao', $data['obs']);             

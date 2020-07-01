@@ -3,6 +3,9 @@
     include 'header.php';
     //var_dump($data);
 ?>
+
+<div class="container" style="margin-top: 50px;"> 
+
 <div class="principal">
     <!-- Primeira linha -->
     <div class="row alert alert-success" role="alert">
@@ -138,6 +141,8 @@
                     <a href="<?php echo URLROOT; ?>/filas/cadastrar" class="btn btn-success btn-lg btn-block" role="button">Novo Cadastro</a>                       
               </div>
         </div>  
+</div>
+
 </div>
 <?php 
     include 'footer.php';

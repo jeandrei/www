@@ -1,4 +1,5 @@
 
+/* para usar a função de validação de cpf basta colocar na classe cpf */
 jQuery.validator.addMethod("cpf", function(value, element) {
   value = jQuery.trim(value);
 
@@ -25,7 +26,7 @@ jQuery.validator.addMethod("cpf", function(value, element) {
 
    return this.optional(element) || retorno;
 
-}, "Informe um CPF válido");
+}, "CPF inválido");
 
 
 

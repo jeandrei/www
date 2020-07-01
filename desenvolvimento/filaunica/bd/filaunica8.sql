@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 05/09/2019 às 12:30
--- Versão do servidor: 5.7.27
--- Versão do PHP: 7.2.19
+-- Tempo de geração: 01/07/2020 às 00:38
+-- Versão do servidor: 5.7.30
+-- Versão do PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -123,17 +122,27 @@ CREATE TABLE `fila` (
   `opcao1_id` varchar(11) DEFAULT NULL,
   `opcao2_id` varchar(11) DEFAULT NULL,
   `opcao3_id` varchar(11) DEFAULT NULL,
-  `turno1` varchar(20) DEFAULT NULL,
+  `opcao_turno` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
-  `protocolo` varchar(255) DEFAULT NULL,  
-  `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
-  `turno2` varchar(20) DEFAULT NULL,
-  `turno3` varchar(20) DEFAULT NULL,
-  `comprovante_res_nome` varchar(255) DEFAULT NULL,
-  `comprovante_nasc_nome` varchar(255) DEFAULT NULL
+  `protocolo` varchar(255) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Aguardando'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `historico_id_fila`
+--
+
+CREATE TABLE `historico_id_fila` (
+  `id` int(11) NOT NULL,
+  `fila_id` int(11) NOT NULL,
+  `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario` varchar(255) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `historico` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -209,6 +218,12 @@ ALTER TABLE `fila`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `historico_id_fila`
+--
+ALTER TABLE `historico_id_fila`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
@@ -222,25 +237,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `bairro`
 --
 ALTER TABLE `bairro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `escola`
 --
 ALTER TABLE `escola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `etapa`
 --
 ALTER TABLE `etapa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT de tabela `fila`
 --
 ALTER TABLE `fila`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `historico_id_fila`
+--
+ALTER TABLE `historico_id_fila`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

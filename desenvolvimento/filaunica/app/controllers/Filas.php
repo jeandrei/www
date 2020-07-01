@@ -40,12 +40,10 @@
                     'nome' => html($_POST['nome']),
                     'nascimento' => trim($_POST['nascimento']),
                     'certidao' => html($_POST['certidao']),
-                    'opcao1' => html($_POST['opcao1']),
-                    'turno1' => html($_POST['turno1']),
-                    'opcao2' => html($_POST['opcao2']),
-                    'turno2' => html($_POST['turno2']),
-                    'opcao3' => html($_POST['opcao3']),
-                    'turno3' => html($_POST['turno3']),        
+                    'opcao1' => html($_POST['opcao1']),                    
+                    'opcao2' => html($_POST['opcao2']), 
+                    'opcao3' => html($_POST['opcao3']),                    
+                    'opcao_turno' => html($_POST['opcao_turno']),                           
                     'obs'  => html($_POST['obs']),
                     'responsavel_err' => '',
                     'cpf_err' => '',
@@ -58,7 +56,7 @@
                     'nome_err' => '',
                     'nascimento_err' => '',
                     'certidao_err' => '',
-                    'opcao1_err' => ''
+                    'opcao_turno_err' => ''
                     ];
                     
                     
@@ -123,9 +121,8 @@
                         $data['etapa_id'] = $this->filaModel->getEtapa($data['nascimento']);
                     }else
                     {
-                        $data['nascimento_err'] = 'A data informada não corresponde a nenhuma etapa da fila.';
-                        $data['flash_err'] = 'Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única';                    
-                        //colocar essa menságem de erro NO FLASH $error
+                        $data['nascimento_err'] = 'A data informada não corresponde a nenhuma etapa da fila.';                                           
+                        flash('fila-erro','Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única','alert alert-danger');                        
                     }
                 }
 
@@ -159,8 +156,8 @@
                     $data['opcao1_err'] = 'Por favor informe ao menos uma opção';
                 }
                 
-                if(empty($data['turno1'])){
-                    $data['turno1_err'] = 'Por favor informe o turno';        
+                if(empty($data['opcao_turno'])){
+                    $data['opcao_turno_err'] = 'Por favor informe o turno desejado';        
                 } 
                 
                                
@@ -178,7 +175,7 @@
                     empty($data['bairro_err']) && 
                     empty($data['rua_err']) && 
                     empty($data['opcao1_err']) && 
-                    empty($data['turno1_err'])                    
+                    empty($data['opcao_turno_err'])                    
                 ){
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
@@ -242,12 +239,10 @@
                     'nascimento' => '',
                     'etapa_id' => '',
                     'certidao' => '',
-                    'opcao1' => '',
-                    'turno1' => '',
-                    'opcao2' => '',
-                    'turno2' => '',
+                    'opcao1' => '',                    
+                    'opcao2' => '',                    
                     'opcao3' => '',
-                    'turno3' => '',        
+                    'opcao_turno' => '',        
                     'obs'  => '',
                     'responsavel_err' => '',
                     'cpf_err' => '',

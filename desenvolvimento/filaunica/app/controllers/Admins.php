@@ -106,25 +106,8 @@
             // 4 Chama o view passando os dados
             $this->view('admins/index', $data);
         }
-
-
-
-
-
-
         
-        public function download(){ 
-          
-          if($_GET['tipo'] == 'res'){          
-            $data = $this->adminModel->downloadres($_GET['id']);            
-          }
-
-          if($_GET['tipo'] == 'nasc'){          
-            $data = $this->adminModel->downloadnasc($_GET['id']);
-          }
-          
-          $this->view('admins/download', $data);
-      }
+        
 
       //aqui é o método chamado pelo jquery lá no index, verifico se o id tem algum valor se sim eu chamo o método changeStatus no model
       public function gravar(){
