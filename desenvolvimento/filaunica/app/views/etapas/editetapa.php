@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/nav_header.php';?>
+<?php require APPROOT . '/views/inc/header.php';?>
 <div class="row">
     <div class="col-md-6 mx-auto">
     <?php flash('register_success');?>
@@ -40,4 +40,4 @@
         </div>
     </div>
 </div>
-<?php require APPROOT . '/views/inc/nav_footer.php';?>
+<?php require APPROOT . '/views/inc/footer.php';?>
