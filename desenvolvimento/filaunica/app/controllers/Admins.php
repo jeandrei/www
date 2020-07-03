@@ -2,7 +2,7 @@
     class Admins extends Controller{
         public function __construct(){
             // 1 Chama o model
-          $this->adminModel = $this->model('Admin');
+          $this->adminModel = $this->model('Admin');          
         }
 
         public function index(){  
@@ -68,6 +68,8 @@
                 
                 // 2 VAI CHAMAR A FUNÇÃO getFilaBusca EM models/Admin.php 
                 $dados = $this->adminModel->getFilaBuscaPag($buscaNome,$buscaEtapa,$buscaStatus,$start_from,$limit);
+
+                
                 // PASSO A QUANTIDADE DE REGISTROS TOTAIS COM OUTRA FUNÇÃO GETFILABUSCA SEM A PAGINAÇÃO
                 // POIS PRECISO DA QUANTIDADE PARA MONTAR OS NÚMEROS DE PAGINAÇÃO ABAIXO
                 $_GET['count'] = count($this->adminModel->getFilaBusca($buscaNome,$buscaEtapa,$buscaStatus));

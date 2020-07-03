@@ -42,115 +42,98 @@
 
 </script>
 
+<!-- NÃO COLOCO CONTAINER AQUI POIS JÁ TEM NO HEADER E DIV FINAL NO FOOTER -->
 
-<div class="container">
-    <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
+    <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">        
+        <!-- LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
         <div class="row">
-            <div class="col">
-                <div class="form-group mx-sm-3 mb-2"> 
-
-            
-                    <!--LINHA PARA OS CAMPOS DE BUSCA-->
-                    <div class="row">
-                                
-                                
-                                <!--NOME 1-->
-                                <div class="col-lg-4">
-                                    <label for="buscanome">
-                                        Buscar por Nome
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        name="buscanome" 
-                                        id="buscanome" 
-                                        maxlength="60"
-                                        class="form-control"
-                                        value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
-                                        ><span class="invalid-feedback">
-                                            <?php // echo $data['nome_err']; ?>
-                                        </span>
-                                </div>
-
-
-
-                                <!--ETAPA-->
-                                <div class="col-lg-4">
-                                    <label for="buscaetapa">
-                                        Busca por Etapa
-                                    </label>                               
-                                    <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
-                                    <select 
-                                                    name="buscaetapa" 
-                                                    id="buscaetapa" 
-                                                    class="form-control"                                        
-                                                >
-                                                        <option value="Todos">Todos</option>
-                                                        <?php 
-                                                        $etapas = $this->adminModel->getEtapas();                     
-                                                        foreach($etapas as $etapa) : ?> 
-                                                            <option value="<?php echo $etapa['id']; ?>"
-                                                                        <?php if(isset($_POST['buscaetapa'])){
-                                                                        echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
-                                                                        }
-                                                                        ?>
-                                                            >
-                                                                <?php echo $etapa['descricao'];?>
-                                                            </option>
-                                                        <?php endforeach; ?>  
-                                    </select>
-                                </div>
-
-
-
-
-                                <!--Situação-->
-                                <div class="col-lg-4">
-                                    <label for="buscastatus">
-                                        Busca por Situação
-                                    </label> 
-                                    <!--BOTÃO BUSCA SITUAÇÃO-->
-                                    <select 
-                                                    name="buscastatus" 
-                                                    id="buscastatus" 
-                                                    class="form-control"                                        
-                                                >
-                                                        <option value="Todos">Todos</option>
-                                                        <?php 
-                                                        $status = array('Aguardando','Matriculado','Cancelado');                    
-                                                        foreach($status as $row => $value) : ?> 
-                                                            <option value="<?php echo $value; ?>" 
-                                                                            <?php if(isset($_POST['buscastatus'])){
-                                                                                    echo $_POST['buscastatus'] == $value ? 'selected':'';
-                                                                                }
-                                                                            ?>
-                                                            >
-                                                                <?php echo $value;?>
-                                                            </option>
-                                                        <?php endforeach; ?>  
-                                    </select>   
-                                </div>   
-
-                    </div><!--FIM DIV CAMPOS DE BUSCA-->                    
-                    
-                     
-
-                </div>
+            <!-- COLUNA 1 NOME-->
+            <div class="col-lg-4">
+                <label for="buscanome">
+                    Buscar por Nome
+                </label>
+                <input 
+                    type="text" 
+                    name="buscanome" 
+                    id="buscanome" 
+                    maxlength="60"
+                    class="form-control"
+                    value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                    ><span class="invalid-feedback">
+                        <?php // echo $data['nome_err']; ?>
+                    </span>
             </div>
+            <!-- COLUNA 2 ETAPA -->
+            <div class="col-lg-4">
+                <label for="buscaetapa">
+                    Busca por Etapa
+                </label>                               
+                <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
+                <select 
+                    name="buscaetapa" 
+                    id="buscaetapa" 
+                    class="form-control"                                        
+                >
+                        <option value="Todos">Todos</option>
+                        <?php 
+                        $etapas = $this->adminModel->getEtapas();                     
+                        foreach($etapas as $etapa) : ?> 
+                            <option value="<?php echo $etapa['id']; ?>"
+                                        <?php if(isset($_POST['buscaetapa'])){
+                                        echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
+                                        }
+                                        ?>
+                            >
+                                <?php echo $etapa['descricao'];?>
+                            </option>
+                        <?php endforeach; ?>  
+                </select>
+            </div>
+            <!-- COLUNA 3 SITUAÇÃO-->
+            <div class="col-lg-4">
+                <label for="buscastatus">
+                    Busca por Situação
+                </label> 
+                <!--BOTÃO BUSCA SITUAÇÃO-->
+                <select 
+                    name="buscastatus" 
+                    id="buscastatus" 
+                    class="form-control"                                        
+                >
+                        <option value="Todos">Todos</option>
+                        <?php 
+                        $status = array('Aguardando','Matriculado','Cancelado');                    
+                        foreach($status as $row => $value) : ?> 
+                            <option value="<?php echo $value; ?>" 
+                                            <?php if(isset($_POST['buscastatus'])){
+                                                    echo $_POST['buscastatus'] == $value ? 'selected':'';
+                                                }
+                                            ?>
+                            >
+                                <?php echo $value;?>
+                            </option>
+                        <?php endforeach; ?>  
+                </select> 
+            </div>
+        <!-- FIM LINHA CAMPOS DE BUSCA -->
         </div>
-       
-        <!-- BOTÃO DE ATUALIZAR -->                                                                      
-        <div class="row">
-            <div class="col">
+        <!-- LINHA PARA O BOTÃO ATUALIZAR -->
+        <div class="row" style="margin-top:30px;">
+            <div class="col-lg-4" style="padding-left:0;">
                 <div class="form-group mx-sm-3 mb-2">
                     <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
                     <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
-                </div>
+                </div>                                                
             </div>
-        </div>    
-                                                                          
-
+        <!-- FIM LINHA BOTÃO ATUALIZAR -->
+        </div>
     </form>
-</div>
+
+</div><!--fecha div container lá do header-->
+
+
+
+
 
 <?php  if(isset($data['err'])){die($data['err']);}?>
 
@@ -163,106 +146,113 @@
 
 
 
-<!--TABELA COM OS DADOS-->   
-<div class="text-center small">
-  <table class="table table-sm" style="font-size: 11px;">
-    <thead>
-      <tr>  
-        <th scope="col">Posição</th>        
-        <th scope="col">Nome da Criança</th>
-        <th scope="col">Data de Nascimento</th>
-        <th scope="col">Etapa</th>          
-        <th scope="col">Responsável</th> 
-        <th scope="col">Protocolo</th>
-        <th scope="col">Registro</th>        
-        <th scope="col">Status</th>
-        <th scope="col">Tramitação</th>
-      </tr>
-    </thead>
-          
-    <tbody>        
-        <?php foreach ($data as $registro): ?>
-            <tr class="<?php 
-                            if($registro['status'] == "Aguardando")
-                            echo "table-primary";
-                            if($registro['status'] == "Cancelado")
-                            echo "table-danger";
-                            if($registro['status'] == "Matriculado")
-                            echo "table-success";                        
-                        ?>"
-                id="linha_<?php echo $registro['fila_id'];?>"               
-              >
-                <td><?php echo $registro['posicao']; ?></td>
-                <td><?php echo $registro['nome']; ?></td>
-                <td><?php echo $registro['nascimento']; ?></td>
-                <td><?php echo $registro['etapa']; ?></td>
-                <td><?php echo $registro['responsavel']; ?></td>
-                <td><?php echo $registro['protocolo']; ?></td>
-                <td><?php echo $registro['registro']; ?></td>                
-                <td>
-                  <select style="font-size:11px;" class="form-control form-control-sm"
-                        name="statuslista" 
-                        id="<?php echo  $registro['fila_id'];?>" 
-                        class="form-control" 
-                        onChange="
-                                  document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>;
-                                  document.getElementById('status_reg_fila').value = this.value;
-                                  ">                   
-                        <?php 
-                        $status = array('Aguardando','Matriculado','Cancelado');                    
-                        foreach($status as $row => $value) : ?> 
-                            <option value="<?php echo $value; ?>" 
-                                        <?php echo $value == $registro['status'] ? 'selected':'';?>
-                            >
-                                <?php echo $value;?>
-                            </option>
-                        <?php endforeach; ?>  
-                  </select>
 
 
-                        <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
-                        <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['fila_id']; ?>">
-                        <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
-                        <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
-                        <input type="hidden" id="txthist" name="txthist" value="">  
+<!-- MONTO A TABELA DENTRO DE UM CONTAINER FLUID PARA OCUPAR TODA A TELA -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center small">
+            <table class="table table-sm" style="font-size: 11px;">
+                <thead>
+                <tr>  
+                    <th scope="col">Posição</th>        
+                    <th scope="col">Nome da Criança</th>
+                    <th scope="col">Data de Nascimento</th>
+                    <th scope="col">Etapa</th>          
+                    <th scope="col">Responsável</th> 
+                    <th scope="col">Protocolo</th>
+                    <th scope="col">Registro</th>        
+                    <th scope="col">Status</th>
+                    <th scope="col">Tramitação</th>
+                </tr>
+                </thead>
+                    
+                <tbody>        
+                    <?php foreach ($data as $registro): ?>
+                        <tr class="<?php 
+                                        if($registro['status'] == "Aguardando")
+                                        echo "table-primary";
+                                        if($registro['status'] == "Cancelado")
+                                        echo "table-danger";
+                                        if($registro['status'] == "Matriculado")
+                                        echo "table-success";                        
+                                    ?>"
+                            id="linha_<?php echo $registro['fila_id'];?>"               
+                        >
+                            <td><?php echo $registro['posicao']; ?></td>
+                            <td><?php echo $registro['nome']; ?></td>
+                            <td><?php echo $registro['nascimento']; ?></td>
+                            <td><?php echo $registro['etapa']; ?></td>
+                            <td><?php echo $registro['responsavel']; ?></td>
+                            <td><?php echo $registro['protocolo']; ?></td>
+                            <td><?php echo $registro['registro']; ?></td>                
+                            <td>
+                            <select style="font-size:11px;" class="form-control form-control-sm"
+                                    name="statuslista" 
+                                    id="<?php echo  $registro['fila_id'];?>" 
+                                    class="form-control" 
+                                    onChange="
+                                            document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>;
+                                            document.getElementById('status_reg_fila').value = this.value;
+                                            ">                   
+                                    <?php 
+                                    $status = array('Aguardando','Matriculado','Cancelado');                    
+                                    foreach($status as $row => $value) : ?> 
+                                        <option value="<?php echo $value; ?>" 
+                                                    <?php echo $value == $registro['status'] ? 'selected':'';?>
+                                        >
+                                            <?php echo $value;?>
+                                        </option>
+                                    <?php endforeach; ?>  
+                            </select>
 
-                </td>
 
-                <td>
-                    <input 
-                        class="form-control form-control-sm" 
-                        type="text" 
-                        id="historico_<?php echo  $registro['fila_id'];?>" 
-                        name="historico_<?php echo  $registro['fila_id'];?>">                               
-                </td>
+                                    <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
+                                    <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['fila_id']; ?>">
+                                    <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
+                                    <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
+                                    <input type="hidden" id="txthist" name="txthist" value="">  
 
-                <!--BOTÃO DE GRAVAR-->            
-                <td>
-                    <button 
-                        type="button" 
-                        class="btn btn-success btn-sm gravar"
-                        onClick="
-                                  document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>,   
-                                  document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['fila_id'];?>').value,
-                                  document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['fila_id'];?>').value;
-                                  "
-                    >                    
-                     Gravar
-                    </button>
-                </td>
-                
-                <!--BOTÃO VER HISTÓRICO-->                
-                <td>
-                    <a
-                        class="btn btn-secondary btn-sm ver"  
-                        href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['fila_id'];?>">Ver
-                    </a>
-                </td>
+                            </td>
 
-            </tr>            
-        <?php endforeach; ?>
-    </tbody>
-  </table>  
+                            <td>
+                                <input 
+                                    class="form-control form-control-sm" 
+                                    type="text" 
+                                    id="historico_<?php echo  $registro['fila_id'];?>" 
+                                    name="historico_<?php echo  $registro['fila_id'];?>">                               
+                            </td>
+
+                            <!--BOTÃO DE GRAVAR-->            
+                            <td>
+                                <button 
+                                    type="button" 
+                                    class="btn btn-success btn-sm gravar"
+                                    onClick="
+                                            document.getElementById('id_reg_fila').value = <?php echo $registro['fila_id']; ?>,   
+                                            document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['fila_id'];?>').value,
+                                            document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['fila_id'];?>').value;
+                                            "
+                                >                    
+                                Gravar
+                                </button>
+                            </td>
+                            
+                            <!--BOTÃO VER HISTÓRICO-->                
+                            <td>
+                                <a
+                                    class="btn btn-secondary btn-sm ver"  
+                                    href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['fila_id'];?>">Ver
+                                </a>
+                            </td>
+
+                        </tr>            
+                    <?php endforeach; ?>
+                </tbody>
+            </table>  
+        </div>
+    </div>
+</div>
 
 
     <!--PAGINAÇÃO-->
@@ -325,4 +315,6 @@
     </ul>                
 
 
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+<!-- AQUI NÃO COLOCO O FOOTER DO INC POIS PRECISO FECHAR O div do container antes da tabela -->  
+</body>
+</html>

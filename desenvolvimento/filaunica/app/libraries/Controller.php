@@ -7,7 +7,7 @@
 * requerida no arquivo bootstrap.php que é requerido pelo index
  */
 
- class Controller{
+ class Controller {
      // Load model
      public function model($model){
         // Require model file
