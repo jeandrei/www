@@ -20,7 +20,7 @@ class Paginators extends Controller{
         $data = [
            'title' => 'Paginação',
            'description' => 'Exemplo de paginação',
-           'registros' => $this->pagModel->registros()
+           'registros' => $this->pagModel->registros()           
        ];    
        
      
