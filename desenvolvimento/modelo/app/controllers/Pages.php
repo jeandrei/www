@@ -35,5 +35,14 @@ class Pages extends Controller{
         
         $this->view('pages/about', $data);
     } 
+
+    public function bootstrapgrid(){
+        $data = [
+            'title' => 'Bootstrap Grid',
+            'description' => 'Exemplos de utilização do grid no bootstrap'
+        ];            
+        
+        $this->view('pages/bootstrapgrid', $data);
+    } 
     
 }
