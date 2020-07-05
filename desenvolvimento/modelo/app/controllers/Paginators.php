@@ -16,12 +16,25 @@ class Paginators extends Controller{
     // no arquivo Controller ele monta o  require_once '../app/views/' . $view . '.php';
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
-    public function index(){             
+    public function index(){ 
+        //$data = array();            
+        
+
         $data = [
+            'title' => 'Paginação',
+           'description' => 'Exemplo de paginação',
+           'registros' => $this->pagModel->registros() 
+        ];    
+
+       // $data['registros'] = array(
+       //     $this->pagModel->registros()    
+       // );
+        
+        /*[
            'title' => 'Paginação',
            'description' => 'Exemplo de paginação',
            'registros' => $this->pagModel->registros()           
-       ];    
+       ]; */   
        
      
        //método view está em /libraries/Controller

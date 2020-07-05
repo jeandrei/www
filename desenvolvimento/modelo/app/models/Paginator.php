@@ -12,13 +12,13 @@
             $this->db->query('SELECT id, nomecrianca, nascimento, protocolo, status FROM fila');
             //$this->db->bind(':email', $email);
 
-            $result = $this->db->resultSet();
-            $numrow = $this->db->rowCount(); 
+            $data['result'] = $this->db->resultSet();
 
-
+            $data['numrow'] = $this->db->rowCount();  
+            
 
             if($this->db->execute()){
-                return $result;
+                return $data;
             } else {
                 return false;
             }            

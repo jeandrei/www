@@ -1,8 +1,14 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<h1><?php echo $data['title']; ?></h1>
-<p><?php echo $data['description']; ?></p>
+<h1><?php echo $data['pagina']['title']; ?></h1>
+<p><?php echo $data['pagina']['description']; ?></p>
+<pre>
+<?php 
 
+//print_r($data['registros']);
 
+echo 'num row is ' . $data['registros']['numrow'];
+?>
+</pre>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -13,8 +19,8 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach($data['registros'] as $registro):?>
-        <tr>
+      <?php foreach($data['registros']['result'] as $registro):?>        
+        <tr>        
             <td><?php echo strtoupper($registro->nomecrianca); ?></td>
             <td><?php echo date('d/m/Y h:i:s', strtotime($registro->nascimento)); ?></td>
             <td><?php echo $registro->protocolo;?></td>
