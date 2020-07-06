@@ -19,24 +19,27 @@ class Paginators extends Controller{
     public function index(){ 
         //$data = array();            
         
-
+        //$sql = 'SELECT * FROM fila';
+        $limit = 10;
         $data = [
             'title' => 'Paginação',
            'description' => 'Exemplo de paginação',
-           'registros' => $this->pagModel->registros() 
-        ];    
+           //'numrows' => $this->pagModel->numrows($sql),
+           //'registros2' => $this->pagModel->registros($sql,$limit),
+           'registros' =>  $this->pagModel->buscar('fila', $where = [
+                                                                        ["campo" => "id",
+                                                                        "operador" => ">=",
+                                                                        "valor" => "1"],
 
-       // $data['registros'] = array(
-       //     $this->pagModel->registros()    
-       // );
-        
-        /*[
-           'title' => 'Paginação',
-           'description' => 'Exemplo de paginação',
-           'registros' => $this->pagModel->registros()           
-       ]; */   
-       
-     
+                                                                        ["campo" => "nomecrianca",
+                                                                        "operador" => "LIKE",
+                                                                        "valor" => "'%a%'"]                                                                    
+                                                                    ]
+                                                                    
+                                                                    
+                                                                    ,$limit)
+        ];
+  
        //método view está em /libraries/Controller
        $this->view('paginators/index' ,$data);
     }  
