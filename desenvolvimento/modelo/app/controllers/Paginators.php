@@ -5,7 +5,6 @@
  * EX TEM CONTROLLER pages logo tem que ter um diretório pages
 */
 
-require_once '../public/paginator/Zebra_Pagination.php';
 
 class Paginators extends Controller{
     public function __construct(){
@@ -26,8 +25,8 @@ class Paginators extends Controller{
         $limit = 10;
         $data = [
             'title' => 'Paginação',
-           'description' => 'Exemplo de paginação'
-        ];
+            'description' => 'Exemplo de paginação'          
+        ]; 
   
        //método view está em /libraries/Controller
        $this->view('paginators/index' ,$data);

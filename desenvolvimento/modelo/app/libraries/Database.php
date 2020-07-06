@@ -74,6 +74,13 @@
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    
+    public function resultSetArray(){
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
     //Get a single record as object $dados->nome
     public function single(){
         $this->execute();
