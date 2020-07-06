@@ -1,6 +1,33 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
-<?php
-// let's paginate data from an array...
+<!doctype html>
+<html>
+<head>
+    <title>Zebra_Pagination, array example</title>
+    <meta charset="utf-8">
+    <?php if (isset($_GET['bootstrap']) && $_GET['bootstrap'] == 3): ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <?php elseif (isset($_GET['bootstrap']) && $_GET['bootstrap'] == 4): ?>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <?php else: ?>
+    <link rel="stylesheet" href="../public/css/zebra_pagination.css" type="text/css">
+    <?php endif; ?>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+
+    <h2>Zebra_Pagination, array example</h2>
+
+    <p>Show next/previous page links on the <a href="example1.php?navigation_position=left<?php echo isset($_GET['bootstrap']) ? '&bootstrap=' . $_GET['bootstrap'] : ''; ?>">left</a> or on the
+    <a href="example1.php?navigation_position=right<?php echo isset($_GET['bootstrap']) ? '&bootstrap=' . $_GET['bootstrap'] : ''; ?>">right</a>. Or revert to the <a href="example1.php<?php echo isset($_GET['bootstrap']) ? '?bootstrap=' . $_GET['bootstrap'] : ''; ?>">default style</a>.<br>
+    Pagination links can be shown in <a href="example1.php<?php echo isset($_GET['bootstrap']) ? '?bootstrap=' . $_GET['bootstrap'] : ''; ?>">natural</a> or <a href="example1.php?reversed=1<?php echo isset($_GET['bootstrap']) ? '&bootstrap=' . $_GET['bootstrap'] : ''; ?>">reversed</a> order.<br>
+    See the <a href="example1.php">default</a> looks, the <a href="example1.php?bootstrap=3">Bootstrap 3</a> looks or the <a href="example1.php?bootstrap=4">Bootstrap 4</a> looks<br>
+    <em>(when using Bootstrap you don't need to include the zebra_pagination.css file anymore)</em>
+    <?php if (isset($_GET['bootstrap']) && $_GET['bootstrap'] == 4): ?>
+    <br><em>For Bootstrap 4, for centering the pagination links you will have to set <code>justify-content: center;</code> for the <code>.pagination</code> class</em>
+    <?php endif; ?></p>
+
+    <?php
+
+    // let's paginate data from an array...
     $countries = array(
 
         'Afghanistan', 'Aland Islands', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica',
@@ -42,7 +69,7 @@
     $records_per_page = 10;
 
     // include the pagination class
-    
+    require '../Zebra_Pagination.php';
 
     // instantiate the pagination object
     $pagination = new Zebra_Pagination();
@@ -94,7 +121,5 @@
 
     </div>
 
-
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
-
+</body>
+</html>

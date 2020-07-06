@@ -4,6 +4,9 @@
  * CADA CONTROLLER TEM QUE TER SEU PRÓPRIO DIRETÓRIO DENTRO DE VIEWS
  * EX TEM CONTROLLER pages logo tem que ter um diretório pages
 */
+
+require_once '../public/paginator/Zebra_Pagination.php';
+
 class Paginators extends Controller{
     public function __construct(){
     //vai procurar na pasta model um arquivo chamado User.php e incluir
@@ -23,21 +26,7 @@ class Paginators extends Controller{
         $limit = 10;
         $data = [
             'title' => 'Paginação',
-           'description' => 'Exemplo de paginação',
-           //'numrows' => $this->pagModel->numrows($sql),
-           //'registros2' => $this->pagModel->registros($sql,$limit),
-           'registros' =>  $this->pagModel->buscar('fila', $where = [
-                                                                        ["campo" => "id",
-                                                                        "operador" => ">=",
-                                                                        "valor" => "1"],
-
-                                                                        ["campo" => "nomecrianca",
-                                                                        "operador" => "LIKE",
-                                                                        "valor" => "'%a%'"]                                                                    
-                                                                    ]
-                                                                    
-                                                                    
-                                                                    ,$limit)
+           'description' => 'Exemplo de paginação'
         ];
   
        //método view está em /libraries/Controller

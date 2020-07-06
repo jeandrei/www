@@ -6,72 +6,7 @@
         public function __construct(){
             //inicia a classe Database
             $this->db = new Database;
-        }
-
-
-        public function numrows($sql){
-            $this->db->query($sql);
-            $this->db->resultSet();
-            $data = $this->db->rowCount();  
-            if($this->db->execute()){
-                return $data;
-            } else {
-                return false;
-            }            
-        }
-
-        public function registros($sql,$limit){
-            $sql .= ' LIMIT ' . $limit;
-           // var_dump($sql);
-            $this->db->query($sql);
-            //$this->db->bind(':email', $email);
-            
-            $data = $this->db->resultSet();           
-
-            if($this->db->execute()){
-                return $data;
-            } else {
-                return false;
-            }            
-        }
-        
-        public function buscar($tabela, $where=[], $rowsperpage){
-            $i=0;
-            $count = count($where);
-            $sql = ("SELECT * FROM $tabela");
-           //echo "<pre>"  .  print_r($where) . "</pre>";
-                if(!empty($where)){ 
-                    $sql .= ' WHERE ';
-                    foreach($where as $w){
-                        $i++;
-                       
-                            if($w['operador'] == 'LIKE'){
-                            $sql .= $w['campo'] . ' LIKE '.  $w['valor'];     
-                        }else{
-                            $sql .= $w['campo'] . $w['operador'] . $w['valor'];
-                        }
-                        if($i < $count){
-                            $sql .= ' AND ';   
-                        }
-                    }
-                //primeiro executo a query se o limit para passar o número de rows                    
-                $this->db->query($sql);
-                $this->db->resultSet();
-                $data['numrows'] = $this->db->rowCount(); 
-                //depois acrescento o limit se não fica toda vida o número de rows do limit
-                if(!empty($limit)){
-                    $sql .= ' LIMIT ' . $limit;
-                }
-            }           
-           $this->db->query($sql); 
-           $data['result'] = $this->db->resultSet();            
-
-            if($this->db->execute()){
-                return $data;
-            } else {
-                return false;
-            }        
-        }
+        }     
         
 
 
