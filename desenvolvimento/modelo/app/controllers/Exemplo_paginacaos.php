@@ -6,10 +6,10 @@
 */
 
 
-class Paginators extends Controller{
+class Exemplo_paginacaos extends Controller{
     public function __construct(){
     //vai procurar na pasta model um arquivo chamado User.php e incluir
-    $this->pagModel = $this->model('Paginator');               
+    $this->pagModel = $this->model('Exemplo_paginacao');               
     }
 
     // Lá no arquivo libraries/Core.php definimos que o metodo padrão é index
@@ -26,10 +26,12 @@ class Paginators extends Controller{
         $data = [
             'title' => 'Paginação',
             'description' => 'Exemplo de paginação'          
-        ]; 
+        ];        
+        
+        
   
        //método view está em /libraries/Controller
-       $this->view('paginators/index' ,$data);
+       $this->view('exemplo_paginacao/index' ,$data);
     }  
     
 }
