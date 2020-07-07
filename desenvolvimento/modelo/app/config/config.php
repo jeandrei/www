@@ -5,7 +5,7 @@
 define('DB_HOST', 'mysql');
 define('DB_USER', 'root');
 define('DB_PASS', 'rootadm');
-define('DB_NAME', 'pagination');
+define('DB_NAME', 'filaunica');
 
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));

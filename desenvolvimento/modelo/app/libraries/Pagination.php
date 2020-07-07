@@ -16,9 +16,10 @@
  *
  * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-class Pagination
+class Pagination extends Database
 {
-
+    protected $dbh;
+   
 
     /**
      * Array of options for the class
@@ -39,7 +40,7 @@ class Pagination
         'class_ellipses'                => 'ellipses',
         'class_dead_links'              => 'page-item',
         'class_live_links'              => 'page-item',
-        'class_current_page'            => 'current-link',
+        'class_current_page'            => 'page-item active',
         'class_ul'                      => 'pagination',
         'current_page_is_link'          => true,
         'show_links_first_last'         => true,
@@ -158,7 +159,22 @@ class Pagination
     * @return  void
     */
     public function __construct($current_page = 1, $query = '', $options = null)
-    {
+    {       
+        // AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE  
+        try
+        {
+            $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;  
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $this->options); 
+            $this->dbh->exec('SET NAMES "utf8"');           
+            //$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        catch(PDOException $e)
+        {
+            print "Error!: " . $e->getMessage() . "<br/>";
+        }
+        
+
+
         $this->run($current_page, $query, $options);
     }
 
@@ -241,7 +257,7 @@ class Pagination
      * @return  void
      */
     protected function set_options($options = null)
-    {
+    {  
         if(!empty($options))
         {
             foreach($options as $key => $value)
@@ -269,7 +285,7 @@ class Pagination
         /*
          * Check to make sure we've been given a db handle
          */
-        if(is_int($this->options['db_handle']) && $this->options['db_handle'] == 0)
+        if(is_int($this->dbh) && $this->$this->dbh == 0)
         {
             throw new paginationException('You have not provided a DB Handle (Object) - please pass one with the option \'db_handle\'');
             return false;
@@ -359,12 +375,12 @@ class Pagination
             /*
              * Execute using MySQLi
              */
-            $this->resultset = $this->options['db_handle']->query($this->query);
+            $this->resultset = $this->dbh->query($this->query);
 
             /*
              * Get the total results with FOUND_ROWS()
              */
-            $count_rows = $this->options['db_handle']->query('SELECT FOUND_ROWS();');
+            $count_rows = $this->dbh->query('SELECT FOUND_ROWS();');
             $found_rows = $count_rows->fetch_assoc();
             $this->total_results = $found_rows['FOUND_ROWS()'];
         }
@@ -375,7 +391,7 @@ class Pagination
                 /*
                  * Execute using PDO - not using bindParams
                  */
-                $pdos = $this->options['db_handle']->prepare($this->query);
+                $pdos = $this->dbh->prepare($this->query);
 
                 /*
                  * Use plain method or bind some named params
@@ -396,7 +412,7 @@ class Pagination
                 /*
                  * Get the total results with FOUND_ROWS()
                  */
-                $pdos_fr = $this->options['db_handle']->prepare("SELECT FOUND_ROWS();");
+                $pdos_fr = $this->dbh->prepare("SELECT FOUND_ROWS();");
                 $pdos_fr->execute();
                 $pdos_fr_result = $pdos_fr->fetch(PDO::FETCH_ASSOC);
                 $this->total_results = $pdos_fr_result['FOUND_ROWS()'];
@@ -406,7 +422,7 @@ class Pagination
                 /*
                  * Excecute using PDO, but pause for binding params
                  */
-                $this->pdos = $this->options['db_handle']->prepare($this->query);
+                $this->pdos = $this->dbh->prepare($this->query);
             }
         }
         else
@@ -466,7 +482,7 @@ class Pagination
         /*
          * Get the total results with FOUND_ROWS()
          */
-        $pdos_fr = $this->options['db_handle']->prepare("SELECT FOUND_ROWS();");
+        $pdos_fr = $this->dbh->prepare("SELECT FOUND_ROWS();");
         $pdos_fr->execute();
         $pdos_fr_result = $pdos_fr->fetch(PDO::FETCH_ASSOC);
         $this->total_results = $pdos_fr_result['FOUND_ROWS()'];

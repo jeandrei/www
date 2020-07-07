@@ -8,19 +8,21 @@
  */
 
  class Database { 
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $dbname = DB_NAME;
+    protected $host = DB_HOST;
+    protected $user = DB_USER;
+    protected $pass = DB_PASS;
+    protected $dbname = DB_NAME;
+    protected $options;
 
     //toda vez que preparamos um a sql vamos usar o dbh
-    private $dbh;
-    private $stmt;
-    private $error;
+    protected $dbh;
+    protected $stmt;
+    protected $error;   
 
     public function __construct() {
-        // Set DSN DATABASE SERVER NAME
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;       
+        
+        // Set DSN DATABASE SERVER NAME       
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;             
         $options = array(
             // persistent connections increase performance checking the connection to the database
             PDO::ATTR_PERSISTENT => true,

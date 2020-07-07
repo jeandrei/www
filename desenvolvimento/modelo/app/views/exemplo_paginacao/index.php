@@ -5,71 +5,25 @@
 
 <?php 
 
-require APPROOT . '/helpers/paginacao/src/Pagination.php';
+$status = "Aguardando";
 
-
-
-
-/*
- * Connect to the database (Replacing the XXXXXX's with the correct details)
- */
-try
-{
-     $dbh = new PDO('mysql:host=mysql;dbname=filaunica', 'root', 'rootadm');
-     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(PDOException $e)
-{
-    print "Error!: " . $e->getMessage() . "<br/>";
-}
-
-
+// A CONEXÃO COM O BANCO DE DADOS É FEITO NA CONSTRUCT DO LIBRARIES/PAGINATOR
+// PROCURE POR "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE" 
 
 /*
- * Get and/or set the page number we are on
- */
-if(isset($_GET['page']))
-{
-$page = $_GET['page'];
-}
-else
-{
-$page = 1;
-}
+1 A BIBLIOTÉCA PAGINATION QUE ESTÁ EM libraries/Pagination E É CARREGADA AUTOMATICAMENTE PELO sql_autoload_register assim como as outras libraries Core, Database etc
+2 Eu extendi a classe Pagination da biblioteca libraries/Pagination para a database Pagination extends Database assim eu consigo utilizar os mesmos parâmetros de conexão da classe database
+- dúvida procure em libraries/Pagination "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE"
+3 Cria o controller com o código em comentário vai lá no controller Exemplo_paginacao.php index() que vc vai ver
+4 Cria o model com um metodo para buscar os dados no banco de dados getfila($page, $options)
+5 Atribua o resultado desse método a variável $paginate $paginate = $data['paginate'];
+- a variável $data['paginate'] vem do resultado do método getfila
+
+*/
 
 
-/*
- * Set a few of the basic options for the class, replacing the URL with your own of course
- */
-$options = array(
-    'results_per_page' => 16,
-    'url' => 'http://localhost/modelo/exemplo_paginacaos/index.php?page=*VAR*&nome=' . $status,
-    'db_handle' => $dbh,
-);
+$paginate = $data['paginate'];
 
-
-/*
- * Create the pagination object
- */
-try
-{   
-    if(isset($status)){
-        $paginate = new pagination($page, "SELECT * FROM fila WHERE status = '$status' ORDER BY id", $options);    
-    }
-    else {
-    $paginate = new pagination($page, 'SELECT * FROM fila ORDER BY id', $options);
-    }
-}
-catch(paginationException $e)
-{
-    echo $e;
-    exit();
-}
-
-
-/*
- * If we get a success, carry on
- */
 if($paginate->success == true)
 {
 
@@ -77,6 +31,16 @@ if($paginate->success == true)
      * Fetch our results
      */
     $result = $paginate->resultset->fetchAll();
+
+
+     /*
+     * Work with our data rows
+     */
+    foreach($result as $row)
+    {
+        echo '<p>'.$row['id'].', '.$row['nomecrianca'].'</p>';
+    }
+
 
     /*
      * Echo out the UL with the page links
@@ -95,13 +59,7 @@ if($paginate->success == true)
 
     echo '<p style="clear: left; padding-top: 10px; padding-bottom: 10px;">-----------------------------------</p>';
 
-    /*
-     * Work with our data rows
-     */
-    foreach($result as $row)
-    {
-        echo '<p>'.$row['id'].', '.$row['nomecrianca'].'</p>';
-    }
+   
 
 }
 

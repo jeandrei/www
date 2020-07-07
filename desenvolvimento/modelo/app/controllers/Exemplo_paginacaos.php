@@ -23,12 +23,30 @@ class Exemplo_paginacaos extends Controller{
         
         //$sql = 'SELECT * FROM fila';
         $limit = 10;
-        $data = [
+       /* $data = [
             'title' => 'Paginação',
             'description' => 'Exemplo de paginação'          
-        ];        
+        ];*/
+
+
+        // INÍCIO PARTE PAGINAÇÃO SÓ COPIAR ESSA PARTE E MUDAR A URL
+        if(isset($_GET['page']))
+        {
+        $page = $_GET['page'];
+        }
+        else
+        {
+        $page = 1;
+        }
         
-        
+        $options = array(
+            'results_per_page' => 16,
+            'url' => URLROOT . '/exemplo_paginacaos/index.php?page=*VAR*&status=' . $status,    
+        );
+
+        $paginate = $this->pagModel->getfila($page, $options);
+        $data['paginate'] =  $paginate;        
+        //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX
   
        //método view está em /libraries/Controller
        $this->view('exemplo_paginacao/index' ,$data);
