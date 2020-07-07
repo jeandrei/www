@@ -44,7 +44,7 @@
 
 <!-- NÃO COLOCO CONTAINER AQUI POIS JÁ TEM NO HEADER E DIV FINAL NO FOOTER -->
 
-    <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">        
+    <form id="filtrar" action="<?php echo URLROOT; ?>/modelo_paginacao/index" method="post" enctype="multipart/form-data">        
         <!-- LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
         <div class="row">
             <!-- COLUNA 1 NOME-->

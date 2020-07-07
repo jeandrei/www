@@ -10,16 +10,11 @@
            
         } 
         
-
-        public function getfila($page, $options){            
-            $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
+        //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+        public function getfila($page, $options){              
+            $paginate = new pagination($page, "SELECT * FROM fila WHERE status = :status ORDER BY id", $options);
             return  $paginate;
-
-        }
-
-        public function teste(){
-            echo "isso é um teste";
-        }
+        }      
     
          
         

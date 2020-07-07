@@ -19,29 +19,46 @@ class Exemplo_paginacaos extends Controller{
     // onde a variável $view vai ser index e concatenando fica index.php
     //url /mvc/pages
     public function index(){ 
-        //$data = array();            
         
-        //$sql = 'SELECT * FROM fila';
         $limit = 10;
-       /* $data = [
+        $data = [
             'title' => 'Paginação',
             'description' => 'Exemplo de paginação'          
-        ];*/
+        ];
 
+        
 
-        // INÍCIO PARTE PAGINAÇÃO SÓ COPIAR ESSA PARTE E MUDAR A URL
+        // INÍCIO PARTE PAGINAÇÃO SÓ COPIAR ESSA PARTE MUDAR A URL E COLOCAR OS PARAMETROS EM named_params
         if(isset($_GET['page']))
         {
+        // AQUI TENHO QUE FAZER COM SESSION SE NÃO TODA VEZ QUE O USUÁRIO CLICA NA PAGINAÇÃO ELE VOLTA PARA O VALOR PADRÃO
+        // E NO INPUT DO INDEX TBEM TIVE QUE COLOCAR COM SESSION
+        $status = $_SESSION['buscastatus'];
         $page = $_GET['page'];
         }
         else
         {
+            if (isset($_POST['buscastatus'])){
+                $_SESSION['buscastatus'] = $_POST['buscastatus'];
+                $status = $_POST['buscastatus'];
+            } else {
+                $_SESSION['buscastatus'] = 'Aguardando';
+                $status = $_SESSION['buscastatus'];
+            }       
+           
         $page = 1;
         }
+
+        
+
+            
+                        
+       
         
         $options = array(
-            'results_per_page' => 16,
-            'url' => URLROOT . '/exemplo_paginacaos/index.php?page=*VAR*&status=' . $status,    
+            'results_per_page' => 10,
+            'url' => URLROOT . '/exemplo_paginacaos/index.php?page=*VAR*',
+            'named_params' => array(':status' => $status)     
         );
 
         $paginate = $this->pagModel->getfila($page, $options);
