@@ -11,10 +11,16 @@
         } 
         
         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-        public function getfila($page, $options){              
+        public function getFilaBusca($page, $options){              
             $paginate = new pagination($page, "SELECT * FROM fila WHERE status = :status ORDER BY id", $options);
             return  $paginate;
-        }      
+        }  
+        
+        //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+        public function getFilaTodos($page, $options){              
+            $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
+            return  $paginate;
+        }  
     
          
         

@@ -38,14 +38,15 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
             name="buscastatus" 
             id="buscastatus" 
             class="form-control"                                        
-        >                
+        >   
+                <option value="Todos">Todos</option>
                 <?php 
                 $status = array('Aguardando','Matriculado','Cancelado');                    
                 foreach($status as $row => $value) : ?> 
                     <option value="<?php echo $value; ?>" 
                                     <?php // AQUI TIVE QUE COLOCAR COM SESSION POR CONTA DA PAGINAÇÃO
-                                      if(isset($_SESSION['buscastatus'])){
-                                            echo $_SESSION['buscastatus'] == $value ? 'selected':'';
+                                      if(isset($_POST['buscastatus'])){
+                                            echo $_POST['buscastatus'] == $value ? 'selected':'';
                                         }
                                     ?>
                     >
