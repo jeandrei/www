@@ -22,7 +22,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                 <a class="dropdown-item" href="<?php echo URLROOT; ?>/pages/bootstrapgrid">Bootstrapgrid</a>
-                <a class="dropdown-item" href="#">Cadastro</a>
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/cadastros">Cadastro</a>
                 <a class="dropdown-item" href="#">Consulta</a> 
                 <a class="dropdown-item" href="<?php echo URLROOT; ?>/exemplo_paginacaos">Paginação</a>               
               </div>

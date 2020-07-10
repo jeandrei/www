@@ -17,12 +17,13 @@
     //toda vez que preparamos um a sql vamos usar o dbh
     protected $dbh;
     protected $stmt;
-    protected $error;   
+    protected $error; 
+    protected $dsn;  
 
     public function __construct() {
         
         // Set DSN DATABASE SERVER NAME       
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;             
+        $this->$dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;             
         $options = array(
             // persistent connections increase performance checking the connection to the database
             PDO::ATTR_PERSISTENT => true,
@@ -31,7 +32,7 @@
     
         // Ceate PDO instance
         try{
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->dbh = new PDO($this->$dsn, $this->user, $this->pass, $options);
             $this->dbh->exec('SET NAMES "utf8"'); 
         } catch(PDOException $e){
             $this->error = $e->getMessage();

@@ -160,11 +160,13 @@ class Pagination extends Database
     */
     public function __construct($current_page = 1, $query = '', $options = null)
     {       
+        // EXECUTO A CONSTRUCT DO PARENT NESSE CASO DATABASE PARA ACESSAR AS VARIÁVEIS DO BANCO DE DADOS
+        // dsn, user, pass e options
+        parent::__construct();
         // AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE  
         try
-        {
-            $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;  
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $this->options); 
+        {             
+            $this->dbh = new PDO($this->$dsn, $this->user, $this->pass, $this->options); 
             $this->dbh->exec('SET NAMES "utf8"');           
             //$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
