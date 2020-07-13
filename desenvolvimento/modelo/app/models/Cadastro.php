@@ -33,22 +33,7 @@
             }           
         }
 
-        /*
-        FUNÇÃO NÃO UTILIZADA AO FINAL APAGAR
-        public function getTurnoById($id){
-            $this->db->query("SELECT turno FROM escola WHERE id = :id");
-            $this->db->bind(':id',$id);
-
-            $row = $this->db->single();           
-
-            if($this->db->rowCount() > 0){
-                return $row;
-            } else {
-                return false;
-            }           
-        }
-        */
-
+     
 
         //retorna se já existe um nome e data de nascimento cadastrado
         public function nomeCadastrado($nome,$nasc){
@@ -130,6 +115,7 @@
             return $lastId->id;            
         }
 
+        
         public function generateProtocol(){
             $lastid = $this->getLastid();
             $id = $lastid + 1;
@@ -137,6 +123,8 @@
             $protocol = $id . $year; 
             return $protocol;
         }
+
+
 
         // Grava na fila
         public function register($data){             
@@ -151,12 +139,7 @@
                                 numero = :numero, 
                                 complemento = :complemento, 
                                 nomecrianca = :nomecrianca,
-                                nascimento = :nascimento,                                
-                                certidaonascimento = :certidaonascimento,
-                                opcao1_id = :opcao1_id,
-                                opcao2_id = :opcao2_id,
-                                opcao3_id = :opcao3_id,
-                                opcao_turno = :opcao_turno,                                   
+                                nascimento = :nascimento,   
                                 cpfresponsavel = :cpfresponsavel,
                                 protocolo = :protocolo,                                                   
                                 observacao = :observacao,                                
@@ -183,12 +166,7 @@
             
             $this->db->bind(':complemento', $data['complemento']);
             $this->db->bind(':nomecrianca', $data['nome']);
-            $this->db->bind(':nascimento', $data['nascimento']);            
-            $this->db->bind(':certidaonascimento', $data['certidao']);
-            $this->db->bind(':opcao1_id', $data['opcao1']);
-            $this->db->bind(':opcao2_id', $data['opcao2']);
-            $this->db->bind(':opcao3_id', $data['opcao3']);
-            $this->db->bind(':opcao_turno', $data['opcao_turno']);             
+            $this->db->bind(':nascimento', $data['nascimento']);  
             $this->db->bind(':cpfresponsavel', $data['cpf']);
             $this->db->bind(':protocolo', $data['protocolo']);        
             $this->db->bind(':observacao', $data['obs']);             
@@ -210,50 +188,8 @@
             }
         }
 
-        public function buscaPosicaoFila($protocolo) {
-            $this->db->query("  
-                                    SELECT 
-                                            count(fila.id) as posicaonafila,
-                                            (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
-                                    FROM 
-                                            fila, etapa
-                                    WHERE 
-                                            fila.nascimento>=data_ini
-                                    AND 
-                                            fila.nascimento<=data_fin
-                                    AND 
-                                            etapa.id = (
-                                                        SELECT 
-                                                            etapa.id 
-                                                        FROM etapa,
-                                                            fila 
-                                                        WHERE 
-                                                            fila.nascimento>=data_ini
-                                                        AND 
-                                                            fila.nascimento<=data_fin
-                                                        AND 
-                                                            fila.protocolo = :protocolo
-                                                    )
-                                    AND 
-                                            fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
-                                    AND
-                                            fila.status = 'Aguardando'                            
-            
-                                ");
-            
-            
-            
-            $this->db->bind(':protocolo', $protocolo);
-            
-            $row = $this->db->single();           
-            //esse statusprotocolo eu pego lá na consulta sql para mostrar a posição apenas para protocolos aguardando
-            if($row->statusprotocolo == "Aguardando"){
-                return $row;
-            } else {
-                return false;
-            } 
-           
-        }
+       
+
 
 
         public function getDescricaoEtapa($id) {
@@ -269,82 +205,23 @@
         }
 
 
+        
+        public function getCPF($cpf){
+            $this->db->query("SELECT CPF FROM fila WHERE cpf = :cpf");
+            $this->db->bind(':cpf',$cpf);
 
-        public function buscaProtocolo($protocolo) {
-            $this->db->query("
-                                    SELECT      
-                                        fila.registro as registro, 
-                                        fila.responsavel as responsavel, 
-                                        fila.nomecrianca as nome, 
-                                        fila.nascimento as nascimento,
-                                        fila.protocolo as protocolo,
-                                        fila.status as status,
-                                        (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
-                                        
-                                    FROM                               
-                                        fila 
-                                    WHERE 
-                                        fila.protocolo=:protocolo
-                                ");
-            
-            
-            $this->db->bind(':protocolo', $protocolo);
-            $row = $this->db->single(); 
-            
+            $row = $this->db->single();           
+
             if($this->db->rowCount() > 0){
-                return $row;
+                return true;
             } else {
                 return false;
-            }  
+            }           
         }
 
-       public function getFilaPorEtapaRelatorio($etapa_id,$status) {   
-            $this->db->query("SET @contador = 0");
-           // $stmt = $pdo->prepare($sql);
-            $this->db->execute();
-            
-            $this->db->query("
-                    SELECT 
-                        (SELECT @contador := @contador +1) as posicao,                    
-                        fila.registro as registro, 
-                        fila.responsavel as responsavel, 
-                        fila.nomecrianca as nome, 
-                        fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,                 
-                        (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
-                    FROM 
-                        fila 
-                    WHERE
-                        (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
-                    AND
-                        fila.status = :reg_status
-                    ORDER BY
-                        fila.registro        
-                    ");
-            
-            $this->db->bind(':reg_status', $status);
-            $this->db->bind(':etapa_id', $etapa_id);        
-            
-            
-            $result = $this->db->resultSet();   
-            
-        
-            //verifica se obteve algum resultado
-            if($this->db->rowCount() > 0)
-            {
-                foreach ($result as $row){
-                    $aguardando[] = array(
-                        "nome" => $row->nome
-                    );
-                }
-            
-            return $aguardando;
-            }
-            else
-            {
-                return false;
-            } 
-        }      
+
+       
+       
         
         
     

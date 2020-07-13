@@ -14,7 +14,7 @@
 
       
     
-    <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post" enctype="multipart/form-data">  
+    <form id="cadastrar" action="<?php echo URLROOT; ?>/cadastros/index" method="post" enctype="multipart/form-data">  
                                                                                     
         <!--NOME DO RESPONSÁVEL-->
         <div class="row">
@@ -311,7 +311,7 @@
 
 
 
-<script>
+<scripts>
 $("#proximo").on("click",function(){
   if(!$("#cadastrar").valid())
  $("#cadastrar#etapaUm").click();
@@ -378,4 +378,4 @@ $("#proximo").on("click",function(){
             }
         });
 });
-</script> 
+</scripts> 

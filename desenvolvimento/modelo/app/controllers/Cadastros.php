@@ -12,7 +12,7 @@
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
             //pega todas as escolas
-            $escolas = $this->filaModel->getEscolas();          
+           // $escolas = $this->filaModel->getEscolas();          
             
                        
 
@@ -24,8 +24,7 @@
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 
                 $data = [
-                    'bairros' => $bairros,
-                    'escolas' => $escolas,
+                    'bairros' => $bairros,                   
                     'responsavel' => html($_POST['responsavel']),
                     'cpf' => html($_POST['cpf']), 
                     'email' => html($_POST['email']), 
@@ -33,15 +32,9 @@
                     'celular' => html($_POST['celular']),
                     'bairro' => html($_POST['bairro']),
                     'rua' => html($_POST['rua']),
-                    'numero' => html($_POST['numero']),
-                    'complemento' => html($_POST['complemento']),
+                    'numero' => html($_POST['numero']),                    
                     'nome' => html($_POST['nome']),
-                    'nascimento' => trim($_POST['nascimento']),
-                    'certidao' => html($_POST['certidao']),
-                    'opcao1' => html($_POST['opcao1']),                    
-                    'opcao2' => html($_POST['opcao2']), 
-                    'opcao3' => html($_POST['opcao3']),                    
-                    'opcao_turno' => html($_POST['opcao_turno']),                           
+                    'nascimento' => trim($_POST['nascimento']),                                               
                     'obs'  => html($_POST['obs']),
                     'responsavel_err' => '',
                     'cpf_err' => '',
@@ -52,8 +45,7 @@
                     'rua_err' => '',
                     'rua_err' => '',
                     'nome_err' => '',
-                    'nascimento_err' => '',
-                    'certidao_err' => '',
+                    'nascimento_err' => '',                    
                     'opcao_turno_err' => ''
                     ];
                     
@@ -131,12 +123,17 @@
                     $data['email_err'] = '';
                 }
 
-                //valida cpf
+                //valida cpf 
+                //se o cpf não estiver vazio e não passar pela validação da função digo que o cpf é inválido
                 if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
                     $data['cpf_err'] = 'CPF inválido';  
                     
-                }else{
-                    $data['cpf_err'] = '';
+                }else{ // se passar pela validação verifico se já não tem esse cpf cadastrado
+                    if($this->filaModel->getCPF($data['cpf'])){
+                        $data['cpf_err'] = 'CPF já cadastrado';
+                    } else {
+                        $data['cpf_err'] = '';   
+                    }                   
                 }
                 
                 
@@ -146,18 +143,7 @@
 
                 if(empty($data['rua'])){       
                     $data['rua_err'] = 'Por favor informe a rua';
-                }
-            
-                
-            
-                if(empty($data['opcao1'])){
-                    $data['opcao1_err'] = 'Por favor informe ao menos uma opção';
-                }
-                
-                if(empty($data['opcao_turno'])){
-                    $data['opcao_turno_err'] = 'Por favor informe o turno desejado';        
-                } 
-                
+                }    
                                
 
                 //verifica para submeter
@@ -171,42 +157,16 @@
                     empty($data['email_err']) && 
                     empty($data['cpf_err']) && 
                     empty($data['bairro_err']) && 
-                    empty($data['rua_err']) && 
-                    empty($data['opcao1_err']) && 
-                    empty($data['opcao_turno_err'])                    
+                    empty($data['rua_err'])                                     
                 ){
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
                 
-                if($data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']))
-                {
-                    $data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']);    
-                } 
-
-                if($data['unidade2'] = $this->filaModel->getEscolasById($data['opcao2']))
-                {
-                    $data['unidade2'] = $this->filaModel->getEscolasById($data['opcao2']);    
-                } 
-
-                if($data['unidade3'] = $this->filaModel->getEscolasById($data['opcao3']))
-                {
-                    $data['unidade3'] = $this->filaModel->getEscolasById($data['opcao3']);    
-                } 
-
+               
                 
-                //gravo no banco de dados para depois pegar os dados do protocolo 
-                $this->filaModel->register($data);               
+                //gravo no banco de dados
+                $this->filaModel->register($data);       
 
-                //busco a posição que ficou na fila
-                $data['posicao'] = $this->filaModel->buscaPosicaoFila($data['protocolo']);
-
-                //pego o id da etapa a partir da data de nascimento
-                $id_etapa = $this->filaModel->getEtapa($data['nascimento']);   
-                
-                //a partir do id da etapa pego a descrição
-                $data['desc_etapa'] = $this->filaModel->getDescricaoEtapa($id_etapa);
-
-                // chamo o formulário de sucesso
                 $this->view('cadastros/index', $data);
 
                 
@@ -222,8 +182,7 @@
                 
             }else{
                 $data = [
-                    'bairros' => $bairros,
-                    'escolas' => $escolas,
+                    'bairros' => $bairros,                    
                     'responsavel' => '',
                     'cpf' => '', 
                     'email' => '', 
@@ -231,16 +190,9 @@
                     'celular' => '',
                     'bairro' => '',
                     'rua' => '',
-                    'numero' => '',
-                    'complemento' => '',
+                    'numero' => '',                    
                     'nome' => '',
-                    'nascimento' => '',
-                    'etapa_id' => '',
-                    'certidao' => '',
-                    'opcao1' => '',                    
-                    'opcao2' => '',                    
-                    'opcao3' => '',
-                    'opcao_turno' => '',        
+                    'nascimento' => '', 
                     'obs'  => '',
                     'responsavel_err' => '',
                     'cpf_err' => '',
@@ -248,11 +200,9 @@
                     'telefone_err' => '',
                     'celular_err' => '',
                     'bairro_err' => '',
-                    'rua_err' => '',
-                    'rua_err' => '',
+                    'rua_err' => '',                    
                     'nome_err' => '',
-                    'nascimento_err' => '',
-                    'certidao_err' => '',
+                    'nascimento_err' => '',                    
                     'opcao1_err' => ''
                 ];
                 $this->view('cadastros/index', $data);
