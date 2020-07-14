@@ -14,24 +14,7 @@
             return $this->db->resultSet();
         }
 
-        public function getEscolas(){
-            $this->db->query("SELECT id, nome FROM escola");
-
-            return $this->db->resultSet();
-        }
-
-        public function getEscolasById($id){
-            $this->db->query("SELECT nome FROM escola WHERE id = :id");
-            $this->db->bind(':id',$id);
-
-            $row = $this->db->single();           
-
-            if($this->db->rowCount() > 0){
-                return $row;
-            } else {
-                return false;
-            }           
-        }
+      
 
      
 
@@ -54,11 +37,9 @@
             $formatado = date('Y-m-d',strtotime($data));
             $ano = date('Y', strtotime($formatado));
             $mes = date('m', strtotime($formatado));
-            $dia = date('d', strtotime($formatado));
-            $anominimo = date('Y', strtotime('-5 year'));
+            $dia = date('d', strtotime($formatado));           
             
-                if ( !checkdate( $mes , $dia , $ano )                   // se a data for inválida
-                     || $ano < $anominimo                                // ou o ano menor que a data mínima
+                if ( !checkdate( $mes , $dia , $ano )                 // se a data for inválida                                                                        
                      || mktime( 0, 0, 0, $mes, $dia, $ano ) > time() )  // ou a data passar de hoje
                     {
                         return false;
@@ -68,46 +49,7 @@
             }
 
         
-        public function getEtapa($nasc) {
-            //verifica se tem mínimo de 4 meses
-            $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
-            $this->db->bind(':datanasc',$nasc); 
-            $num_meses = $this->db->single();            
-            
-            if($num_meses->meses<4){        
-                return false;
-            }
-        
-            //pega o id da etapa
-            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
-            $this->db->bind(':nasc',$nasc);                  
-            $etapa =$this->db->single();  
-            if(!empty($etapa->id)){
-                return $etapa->id;
-            }
-            else{
-                return false;
-            }
-        
-        }
-
-        public function getEtapas() {
-            $this->db->query("SELECT * FROM etapa ORDER BY descricao");
-            $result = $this->db->resultSet();
-            
-                
-            
-            foreach ($result as $row)
-            {
-            $etapas[] = array(
-                'id' => $row->id,
-                'data_ini' => $row->data_ini,
-                'data_fin' => $row->data_fin,
-                'descricao' => $row->descricao
-            );
-            }
-        return $etapas;
-        }
+       
 
         public function getLastid(){
             $this->db->query("SELECT max(id) as id FROM fila");             
@@ -188,26 +130,10 @@
             }
         }
 
-       
-
-
-
-        public function getDescricaoEtapa($id) {
-            $this->db->query("SELECT descricao FROM etapa WHERE id = :id");
-            $this->db->bind(':id', $id);    
-            $row = $this->db->single();           
-
-            if($this->db->rowCount() > 0){
-                return $row;
-            } else {
-                return false;
-            } 
-        }
-
-
+             
         
         public function getCPF($cpf){
-            $this->db->query("SELECT CPF FROM fila WHERE cpf = :cpf");
+            $this->db->query("SELECT * FROM fila WHERE cpfresponsavel = :cpf");
             $this->db->bind(':cpf',$cpf);
 
             $row = $this->db->single();           
@@ -220,9 +146,8 @@
         }
 
 
-       
-       
-        
+
+               
         
     
     

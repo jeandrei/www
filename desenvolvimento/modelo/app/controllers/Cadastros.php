@@ -6,6 +6,12 @@
         }
 
         public function index(){
+            
+            $this->view('cadastros/index', $data);
+
+        }
+
+        public function register(){
            
                        
                        
@@ -105,17 +111,7 @@
                     $data['nascimento_err'] = '';
                 }    
 
-                //valida etapa
-                if(!empty($data['nascimento'])){
-                    if($this->filaModel->getEtapa($data['nascimento'])){
-                        $data['etapa_id'] = $this->filaModel->getEtapa($data['nascimento']);
-                    }else
-                    {
-                        $data['nascimento_err'] = 'A data informada não corresponde a nenhuma etapa da fila.';                                           
-                        flash('fila-erro','Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única','alert alert-danger');                        
-                    }
-                }
-
+               
                 //valida email
                 if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
                     $data['email_err'] = 'Email inválido';        
@@ -125,15 +121,18 @@
 
                 //valida cpf 
                 //se o cpf não estiver vazio e não passar pela validação da função digo que o cpf é inválido
-                if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
-                    $data['cpf_err'] = 'CPF inválido';  
-                    
+                if(!empty($data['cpf'])){
+                   if (!validaCPF($data['cpf'])){
+                    $data['cpf_err'] = 'CPF inválido'; 
+                   } else {
+                        if($this->filaModel->getCPF($data['cpf'])){
+                            $data['cpf_err'] = 'CPF já cadastrado';
+                        }
+                   }
                 }else{ // se passar pela validação verifico se já não tem esse cpf cadastrado
-                    if($this->filaModel->getCPF($data['cpf'])){
-                        $data['cpf_err'] = 'CPF já cadastrado';
-                    } else {
-                        $data['cpf_err'] = '';   
-                    }                   
+                  
+                    $data['cpf_err'] = '';   
+                                       
                 }
                 
                 
@@ -173,7 +172,8 @@
                 
 
                 } else {
-                    $this->view('cadastros/index', $data);
+                    flash('cadastro-error', 'Algo deu errado', 'alert alert-danger');
+                    $this->view('cadastros/register', $data);
                 }// Make sure no errors
 
                 
@@ -205,7 +205,7 @@
                     'nascimento_err' => '',                    
                     'opcao1_err' => ''
                 ];
-                $this->view('cadastros/index', $data);
+                $this->view('cadastros/register', $data);
             }
                        
             
