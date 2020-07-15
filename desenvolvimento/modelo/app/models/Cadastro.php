@@ -147,13 +147,105 @@
 
 
         public function getRegistros(){
-            $this->db->query("SELECT * FROM fila"); 
+            $this->db->query("SELECT * FROM fila ORDER BY registro DESC"); 
             $result = $this->db->resultSet(); 
             if($this->db->rowCount() > 0){
                 return $result;
             } else {
                 return 'Sem dados para emitir';
             }           
+        }
+
+        public function getRegistrosByid($id){
+            $this->db->query("SELECT * FROM fila WHERE id = :id"); 
+            $this->db->bind(':id',$id);
+
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }           
+        }
+
+        // Deleta etapa por id
+        public function delRegByid($id){
+            $this->db->query('DELETE FROM fila WHERE id = :id');
+            // Bind value
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->execute();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+
+         // Update User
+         public function update($data){ die(var_dump($data));
+            $this->db->query('UPDATE fila SET 
+                                responsavel = :responsavel,  
+                                email = :email, 
+                                telefone = :telefone, 
+                                celular = :celular, 
+                                bairro_id = :bairro_id, 
+                                logradouro = :logradouro,
+                                numero = :numero, 
+                                complemento = :complemento, 
+                                nomecrianca = :nomecrianca,
+                                nascimento = :nascimento,   
+                                cpfresponsavel = :cpfresponsavel,
+                                protocolo = :protocolo,                                                   
+                                observacao = :observacao,                                
+                                deficiencia = :deficiencia
+                            WHERE id = :id');
+            // Bind values
+             // Bind values
+             $this->db->bind(':id', $data['id']);
+             $this->db->bind(':responsavel', $data['responsavel']);
+             $this->db->bind(':email', $data['email']);
+             $this->db->bind(':telefone', $data['telefone']);
+             $this->db->bind(':celular', $data['celular']);
+             $this->db->bind(':bairro_id', $data['bairro']);
+             $this->db->bind(':logradouro', $data['rua']);
+            
+
+            if(empty($data['numero'])){
+                 $this->db->bind(':numero', 0);
+            }
+            else
+            {
+                 $this->db->bind(':numero', $data['numero']);   
+            }
+
+            
+            $this->db->bind(':complemento', $data['complemento']);
+            $this->db->bind(':nomecrianca', $data['nome']);
+            $this->db->bind(':nascimento', $data['nascimento']);  
+            $this->db->bind(':cpfresponsavel', $data['cpf']);
+            $this->db->bind(':protocolo', $data['protocolo']);        
+            $this->db->bind(':observacao', $data['obs']);             
+            
+            if(isset($data['portador']) && ($data['portador'] == '1'))
+            {
+                $this->db->bind(':deficiencia', '1');
+            }else{
+                $this->db->bind(':deficiencia', '0');
+            }
+            
+                      
+            // Execute
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
         }
 
 

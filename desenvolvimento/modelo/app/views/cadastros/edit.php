@@ -2,19 +2,15 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 
- 
-
 
 <?php
     // FUNÇÃO DO HELPERS PARA EMITIR MENSÁGENS
-    echo flash('mensagem');
+    echo flash('cadastro-error');
 ?> 
 
+    <a href="<?php echo URLROOT; ?>/cadastros/index" class="btn btn-light mt-3"><i class="fa fa-backward"></i>Back</a>  
 
-
-      
-    
-    <form id="cadastrar" action="<?php echo URLROOT; ?>/cadastros/new" method="post" enctype="multipart/form-data">  
+    <form id="cadastrar" action="<?php echo URLROOT; ?>/cadastros/edit/<?php echo $data['id'];?>" method="post" enctype="multipart/form-data">  
                                                                                     
         <!--NOME DO RESPONSÁVEL-->
         <div class="row">
@@ -235,14 +231,14 @@
 
 
         
-
+        <?php echo 'portador' . $data['portador']; ?>
         <!--TEM DEFICIÊNCIA-->
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
                     <div class="alert alert-warning" role="alert">
                     <div class="checkbox checkbox-primary checkbox-inline">
-                        <input id="portador" type="checkbox" name="portador" value="1" <?php echo ($data['portador'] == 1) ? 'checked' : ''; ?> >
+                        <input id="portador" type="checkbox" name="portador" value="1" >
                         <label for="portador">
                             <strong>Criança com deficiência ?</strong>
                         </label>
@@ -311,7 +307,7 @@
 
 
 
-<scripts>
+<script>
 $("#proximo").on("click",function(){
   if(!$("#cadastrar").valid())
  $("#cadastrar#etapaUm").click();
@@ -366,4 +362,4 @@ $("#proximo").on("click",function(){
             }
         });
 });
-</scripts> 
+</script> 

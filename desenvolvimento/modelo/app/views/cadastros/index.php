@@ -1,13 +1,8 @@
 <!-- HEADER DA PAGINA -->
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<h1><?php echo $data['title']; ?></h1>
-<p><?php echo $data['description']; ?></p>
 
-
-<?php flash('cadastros');?>
-
-
+<?php flash('mensagem');?>
 
 <div class="row align-items-center mb-3"> 
     <div class="col-md-6">
@@ -39,7 +34,7 @@
                 </thead>
                     
                 <tbody>        
-                    <?php foreach ($data['registros'] as $registro): ?>
+                    <?php foreach ($data as $registro): ?>
                         <tr>
                             <td><?php echo $registro->nomecrianca;;?></td>
                             <td><?php echo date('d/m/Y h:i:s', strtotime($registro->nascimento)); ?></td>
@@ -49,7 +44,7 @@
                             <td><?php echo $registro->status; ?></td> 
                             <td><a href="<?php echo URLROOT; ?>/cadastros/edit/<?php echo $registro->id; ?>" class="fa fa-edit btn btn-success pull-right btn-sm">Editar</a></td>                
                             <td><a 
-                                    href="<?php echo URLROOT; ?>/etapas/delete/<?php echo $registro->id;?>" 
+                                    href="<?php echo URLROOT; ?>/cadastros/delete/<?php echo $registro->id;?>" 
                                     class="fa fa-remove btn btn-danger pull-left btn-sm"
                                     onclick="if(question('Tem certeza que deseja remover o registro?') == true)
                                             {

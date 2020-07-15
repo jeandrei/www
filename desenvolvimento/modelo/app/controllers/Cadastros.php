@@ -1,33 +1,31 @@
 <?php 
     class Cadastros extends Controller{
+        
+
+
+        
         public function __construct(){
             //vai procurar na pasta model um arquivo chamado Fila.php e incluir
             $this->filaModel = $this->model('Cadastro');
         }
 
-        public function index(){           
-           
-            
-            $data = [
-                'title' => 'Registros',
-                'description' => 'Registros do banco de dados',
-                'registros' => $this->filaModel->getRegistros()
-            ];    
-            
+        
+        
+        
+        public function index(){       
+            $data = $this->filaModel->getRegistros();
             $this->view('cadastros/index', $data);
-
         }
 
-        public function new(){
-           
-                       
-                       
+
+
+
+
+        public function new(){  
+
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
-            //pega todas as escolas
-           // $escolas = $this->filaModel->getEscolas();          
-            
-                       
+                                   
 
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -45,9 +43,10 @@
                     'celular' => html($_POST['celular']),
                     'bairro' => html($_POST['bairro']),
                     'rua' => html($_POST['rua']),
-                    'numero' => html($_POST['numero']),                    
+                    'numero' => html($_POST['numero']),
+                    'complemento' => html($_POST['complemento']),
                     'nome' => html($_POST['nome']),
-                    'nascimento' => trim($_POST['nascimento']),                                               
+                    'nascimento' => trim($_POST['nascimento']),                                             
                     'obs'  => html($_POST['obs']),
                     'responsavel_err' => '',
                     'cpf_err' => '',
@@ -55,10 +54,9 @@
                     'telefone_err' => '',
                     'celular_err' => '',
                     'bairro_err' => '',
-                    'rua_err' => '',
-                    'rua_err' => '',
+                    'rua_err' => '',                   
                     'nome_err' => '',
-                    'nascimento_err' => '',                    
+                    'nascimento_err' => '',                   
                     'opcao_turno_err' => ''
                     ];
                     
@@ -117,8 +115,8 @@
                 }else{
                     $data['nascimento_err'] = '';
                 }    
+                
 
-               
                 //valida email
                 if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
                     $data['email_err'] = 'Email inválido';        
@@ -126,22 +124,18 @@
                     $data['email_err'] = '';
                 }
 
-                //valida cpf 
-                //se o cpf não estiver vazio e não passar pela validação da função digo que o cpf é inválido
+                //valida cpf
                 if(!empty($data['cpf'])){
-                   if (!validaCPF($data['cpf'])){
-                    $data['cpf_err'] = 'CPF inválido'; 
-                   } else {
-                        if($this->filaModel->getCPF($data['cpf'])){
-                            $data['cpf_err'] = 'CPF já cadastrado';
-                        }
-                   }
-                }else{ // se passar pela validação verifico se já não tem esse cpf cadastrado
-                  
-                    $data['cpf_err'] = '';   
-                                       
-                }
-                
+                    if(!validaCPF($data['cpf'])){
+                        $data['cpf_err'] = 'CPF inválido';    
+                    } 
+                    if($this->filaModel->getCPF($data['cpf'])){
+                        $data['cpf_err'] = 'CPF já cadastrado';       
+                    }
+                } else {
+                    $data['cpf_err'] = '';
+                } 
+               
                 
                 if(empty($data['bairro'])){       
                     $data['bairro_err'] = 'Por favor selecione um bairro';
@@ -166,20 +160,19 @@
                     empty($data['rua_err'])                                     
                 ){
                 
-                $data['protocolo'] = $this->filaModel->generateProtocol();
-                
+                         
                
                 
-                //gravo no banco de dados
-                $this->filaModel->register($data);       
-
-                $this->view('cadastros/index', $data);
-
+                //gravo no banco de dados para depois pegar os dados do protocolo 
+                $this->filaModel->register($data);  
                 
+                // chamo o formulário de sucesso
+                $data = $this->filaModel->getRegistros();
+                flash('mensagem', 'Registro realizado com sucesso', 'alert alert-success');
+                $this->view('cadastros/index', $data);
                 
 
                 } else {
-                    flash('cadastros', 'Algo deu errado', 'alert alert-danger');
                     $this->view('cadastros/new', $data);
                 }// Make sure no errors
 
@@ -197,9 +190,11 @@
                     'celular' => '',
                     'bairro' => '',
                     'rua' => '',
-                    'numero' => '',                    
+                    'numero' => '',
+                    'complemento' => '',
                     'nome' => '',
-                    'nascimento' => '', 
+                    'nascimento' => '',                    
+                    'certidao' => '',                          
                     'obs'  => '',
                     'responsavel_err' => '',
                     'cpf_err' => '',
@@ -207,10 +202,10 @@
                     'telefone_err' => '',
                     'celular_err' => '',
                     'bairro_err' => '',
-                    'rua_err' => '',                    
+                    'rua_err' => '',
+                    'rua_err' => '',
                     'nome_err' => '',
-                    'nascimento_err' => '',                    
-                    'opcao1_err' => ''
+                    'nascimento_err' => ''                   
                 ];
                 $this->view('cadastros/new', $data);
             }
@@ -220,26 +215,28 @@
 
 
 
-        public function delete($id){ 
-           
+        public function delete($id){    
             //PERMITE APENAS O ADMINISTRADOR REALIZAR A EXCLUSÃO
             if($_SESSION['user_type'] != "admin"){
-                flash('cadastros', 'Apenas administradores podem excluir registros', 'alert alert-danger');
-                redirect('index');
-            }  
-
-           
-                     
-            if($this->filaModel->delEtapaByid($id)){                
-                flash('cadastros', 'Registro removido com sucesso!');                
+                flash('mensagem', 'Apenas administradores podem excluir registros', 'alert alert-danger');
+                redirect('cadastros/index');                 
+            }                       
+            if($this->filaModel->delRegByid($id)){                
+                flash('mensagem', 'Registro removido com sucesso!');                
             } else {
-                flash('cadastros', 'Falha ao tentar remover o registro', 'alert alert-danger');
-            }               
-            
-            
-            $this->view('cadastros/index', $data);     
+                flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
+            }   
+            $data = $this->filaModel->getRegistros();
+            $this->view('cadastros/index', $data);  
+        }
+
+
+        public function edit($id){    
+                       
+            die('edit');
             
         }
+
 
     
 
