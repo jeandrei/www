@@ -5,13 +5,20 @@
             $this->filaModel = $this->model('Cadastro');
         }
 
-        public function index(){
+        public function index(){           
+           
+            
+            $data = [
+                'title' => 'Registros',
+                'description' => 'Registros do banco de dados',
+                'registros' => $this->filaModel->getRegistros()
+            ];    
             
             $this->view('cadastros/index', $data);
 
         }
 
-        public function register(){
+        public function new(){
            
                        
                        
@@ -172,8 +179,8 @@
                 
 
                 } else {
-                    flash('cadastro-error', 'Algo deu errado', 'alert alert-danger');
-                    $this->view('cadastros/register', $data);
+                    flash('cadastros', 'Algo deu errado', 'alert alert-danger');
+                    $this->view('cadastros/new', $data);
                 }// Make sure no errors
 
                 
@@ -205,9 +212,32 @@
                     'nascimento_err' => '',                    
                     'opcao1_err' => ''
                 ];
-                $this->view('cadastros/register', $data);
+                $this->view('cadastros/new', $data);
             }
                        
+            
+        }
+
+
+
+        public function delete($id){ 
+           
+            //PERMITE APENAS O ADMINISTRADOR REALIZAR A EXCLUSÃO
+            if($_SESSION['user_type'] != "admin"){
+                flash('cadastros', 'Apenas administradores podem excluir registros', 'alert alert-danger');
+                redirect('index');
+            }  
+
+           
+                     
+            if($this->filaModel->delEtapaByid($id)){                
+                flash('cadastros', 'Registro removido com sucesso!');                
+            } else {
+                flash('cadastros', 'Falha ao tentar remover o registro', 'alert alert-danger');
+            }               
+            
+            
+            $this->view('cadastros/index', $data);     
             
         }
 

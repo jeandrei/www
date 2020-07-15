@@ -146,6 +146,17 @@
         }
 
 
+        public function getRegistros(){
+            $this->db->query("SELECT * FROM fila"); 
+            $result = $this->db->resultSet(); 
+            if($this->db->rowCount() > 0){
+                return $result;
+            } else {
+                return 'Sem dados para emitir';
+            }           
+        }
+
+
 
                
         
