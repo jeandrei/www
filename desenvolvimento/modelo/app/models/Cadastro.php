@@ -156,7 +156,7 @@
             }           
         }
 
-        public function getRegistrosByid($id){
+        public function getRegistroByid($id){
             $this->db->query("SELECT * FROM fila WHERE id = :id"); 
             $this->db->bind(':id',$id);
 
@@ -187,8 +187,8 @@
 
 
 
-         // Update User
-         public function update($data){ die(var_dump($data));
+         // Update 
+         public function update($data){
             $this->db->query('UPDATE fila SET 
                                 responsavel = :responsavel,  
                                 email = :email, 
