@@ -1,7 +1,9 @@
 <!-- HEADER DA PAGINA -->
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-
+<script>
+window.onload = function(){focofield("responsavel");}
+</script>
  
 
 

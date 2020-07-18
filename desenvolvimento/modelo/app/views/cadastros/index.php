@@ -4,6 +4,10 @@
         document.getElementById('buscanascimento').value = "";
         document.getElementById('buscastatus').value = "Todos";
     }
+
+    
+    window.onload = function(){focofield("buscanome");}
+
 </script>
 
 <!-- HEADER DA PAGINA -->

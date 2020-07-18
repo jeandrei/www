@@ -5,7 +5,19 @@
 
         
         public function __construct(){
-            //vai procurar na pasta model um arquivo chamado Fila.php e incluir
+                        
+            // se o usuário digitar o endereço http://servidor/modelo/cadastros/new sem estar logado
+            //redireciono para o login
+            if((!isLoggedIn())){
+            
+                redirect('users/login');
+              } 
+              elseif(($_SESSION['user_type']) <> "admin")
+              {
+                  die("Você deve ser um administrador para acessar esta página!");
+              }
+                  
+            //vai procurar na pasta model um arquivo chamado Cadastro.php e incluir
             $this->filaModel = $this->model('Cadastro');
         }
 

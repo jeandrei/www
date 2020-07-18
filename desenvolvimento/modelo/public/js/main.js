@@ -185,3 +185,11 @@ function fileValidation(myfiel,span)
         return true;
     }
 }
+
+//função seta o foco para o campo passado na funçao
+//um exemplo para dar o foco no campo name ao carregar a página
+//window.onload = function(){focofield("name");}
+function focofield(field)
+{
+	document.getElementById(field).focus();
+}
