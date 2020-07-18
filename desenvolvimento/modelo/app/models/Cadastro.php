@@ -145,6 +145,21 @@
             }           
         }
 
+        /* MÉTODO PARA VERIFICAR SE UM REGISTRO TEM O CPF INFORMADO OU NÃO */
+        public function isthereCPFbyId($id){
+            $this->db->query("SELECT cpfresponsavel FROM fila WHERE id = :id AND (cpfresponsavel IS NULL OR
+            cpfresponsavel = ' ')");
+            $this->db->bind(':id',$id);
+
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return false;
+            } else {
+                return true;
+            }           
+        }
+
 
         public function getRegistros(){
             $this->db->query("SELECT * FROM fila ORDER BY registro DESC"); 
@@ -155,6 +170,36 @@
                 return 'Sem dados para emitir';
             }           
         }
+
+
+        public function BuscaRegistros($nome,$nascimento,$status){
+            
+            $sql = "SELECT * FROM fila WHERE 1";
+            
+            if(!empty($nome)){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $nome . "%'";
+            }
+
+            if(!empty($nascimento)){
+                $sql .= " AND nascimento = " . "'" . $nascimento ."'";
+            }
+
+            if((!empty($status)) && ($status <> "Todos")){
+                $sql .= " AND status = " . "'" . $status ."'";
+            }
+
+            $sql .= " ORDER BY registro DESC";            
+            
+            $this->db->query($sql); 
+            $result = $this->db->resultSet(); 
+            if($this->db->rowCount() > 0){
+                return $result;
+            } else {
+                return false;
+            }           
+        }
+
+
 
         public function getRegistroByid($id){
             $this->db->query("SELECT * FROM fila WHERE id = :id"); 

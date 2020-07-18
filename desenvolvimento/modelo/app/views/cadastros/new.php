@@ -12,10 +12,15 @@
 
 
 
-      
+   <!-- BOTÃO PARA VOLTAR -->
+   <a href="<?php echo URLROOT; ?>/cadastros/index" class="btn btn-light mt-3"><i class="fa fa-backward"></i>Voltar</a>  
+   
     
     <form id="cadastrar" action="<?php echo URLROOT; ?>/cadastros/new" method="post" enctype="multipart/form-data">  
-                                                                                    
+
+        <!-- COMO O GRID DO BOOTSTRAP SÃO 12 COLUNAS O TOTAL DA CLASSE COL TEM QUE DAR 12 PARA CADA LINHA --> 
+        <!-- EXEMPLO UMA LINHA COM DUAS col-6 OU 4 COM col-3 OU MESMO UMA COM col-12  -->      
+
         <!--NOME DO RESPONSÁVEL-->
         <div class="row">
             <div class="col-lg-12">
@@ -311,7 +316,7 @@
 
 
 
-<scripts>
+<script>
 $("#proximo").on("click",function(){
   if(!$("#cadastrar").valid())
  $("#cadastrar#etapaUm").click();
@@ -366,4 +371,4 @@ $("#proximo").on("click",function(){
             }
         });
 });
-</scripts> 
+</script> 

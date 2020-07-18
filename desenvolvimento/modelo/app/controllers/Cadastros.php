@@ -12,8 +12,15 @@
         
         
         
-        public function index(){       
-            $data = $this->filaModel->getRegistros();
+        public function index(){
+          
+                $nome = $_POST['buscanome'];
+                $nascimento = $_POST['buscanascimento'];
+                $status = $_POST['buscastatus'];
+            //busco os registros passando os parâmetros para a função buscaregistros e passo os valores pelo array data
+            $data = $this->filaModel->BuscaRegistros($nome,$nascimento,$status);           
+           
+           
             $this->view('cadastros/index', $data);
         }
 
@@ -219,7 +226,8 @@
             //PERMITE APENAS O ADMINISTRADOR REALIZAR A EXCLUSÃO
             if($_SESSION['user_type'] != "admin"){
                 flash('mensagem', 'Apenas administradores podem excluir registros', 'alert alert-danger');
-                redirect('cadastros/index');                 
+                redirect('cadastros/index');  
+                die();
             }                       
             if($this->filaModel->delRegByid($id)){                
                 flash('mensagem', 'Registro removido com sucesso!');                
@@ -345,16 +353,21 @@
                 }
 
                 //valida cpf
-                if(!empty($data['cpf'])){
-                    if(!validaCPF($data['cpf'])){
-                        $data['cpf_err'] = 'CPF inválido';    
+                // só verifico se não tiver cpf no banco de dados pois se tem cpf no banco de dados
+                // eu não permito a alteração e se não tem aí sim eu faço a validação
+                if(empty($registro->cpfresponsavel)){
+                
+                    if(!empty($data['cpf'])){
+                        if(!validaCPF($data['cpf'])){
+                            $data['cpf_err'] = 'CPF inválido';    
+                        } 
+                        if($this->filaModel->getCPF($data['cpf'])){
+                            $data['cpf_err'] = 'CPF já cadastrado';       
+                        }
+                    } else {
+                        $data['cpf_err'] = '';
                     } 
-                    if($this->filaModel->getCPF($data['cpf'])){
-                        $data['cpf_err'] = 'CPF já cadastrado';       
-                    }
-                } else {
-                    $data['cpf_err'] = '';
-                } 
+                }
                
                 
                 if(empty($data['bairro'])){       

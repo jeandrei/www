@@ -7,7 +7,8 @@
     
 ?> 
 
-    <a href="<?php echo URLROOT; ?>/cadastros/index" class="btn btn-light mt-3"><i class="fa fa-backward"></i>Back</a>  
+    <!-- BOTÃO PARA VOLTAR -->
+    <a href="<?php echo URLROOT; ?>/cadastros/index" class="btn btn-light mt-3"><i class="fa fa-backward"></i>Voltar</a>  
 
   
     <form id="cadastrar" action="<?php echo URLROOT; ?>/cadastros/edit/<?php echo $data['id'];?>" method="post" enctype="multipart/form-data">  
@@ -36,7 +37,7 @@
         </div>
                                                                                                     
 
-
+      
         <!--CPF E EMAIL NA MESMA LINHA A VALIDAÇÃO DO CPF PELO JQUERY FUNCIONA POIS FOI APLICADO A CLASSE CPF A FUNÇÃO ESTÁ NO MAIN.JS-->
         <div class="row">
             <!--CPF-->
@@ -48,9 +49,12 @@
                     type="text" 
                     name="cpf" 
                     id="cpf" 
-                    class="form-control cpf <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>" 
+                    class="form-control cpf <?php echo (!empty($data['cpf_err'])) ? 'is-invalid' : ''; ?>"                    
                     value="<?php htmlout($data['cpf']); ?>"
                     maxlength="14"
+                    <?php // aqui utilizo o método isthereCPFbyId($id) para verificar se o registro já tem CPF se sim
+                    // eu imprimo o readonly que vai desabilitar a edição do CPF e se não tiver CPF registrado eu deixo habilitado para inserir 
+                    echo ($this->filaModel->isthereCPFbyId($data['id'])) ? ' readonly' : ''; ?>
                 >
                     <span class="invalid-feedback">
                         <?php echo $data['cpf_err']; ?>
