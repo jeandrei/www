@@ -7,8 +7,8 @@
     }
 
     public function getFilas(){
-        $this->db->query('SELECT
-                                fila.id as id,
+        $this->db->query('SELECT 
+                                estabelecimento.nome as estabelecimento, 
                                 atendimento.descricao as atendimento, 
                                 atendimento.idade_minima,
                                 atendimento.idade_maxima,
@@ -17,11 +17,15 @@
                                 fila.status
 
                             FROM 
-                                atendimento, fila
-                            WHERE 
-                                fila.atendimento_id = atendimento.id
+                                estabelecimento, atendimento, fila
+                            WHERE
+                                atendimento.estabelecimento_id = estabelecimento.id  
+                            AND
+                                fila.estabelecimento_id = estabelecimento.id
+                            AND
+                                fila.atedimento_id = atendimento.id
 
-                            ORDER BY atendimento.descricao DESC
+                            ORDER BY estabelecimento.nome DESC
                           ');
 
         $results = $this->db->resultSet();
@@ -32,11 +36,12 @@
     public function addFila($data){
         $this->db->query('INSERT INTO 
                             fila 
-                            (atendimento_id, dataini, datafim) 
+                            (estabelecimento_id, atedimento_id, dataini, datafim) 
                             VALUES 
-                            (:atendimento_id, :dataini, :datafim)');
+                            (:estabelecimento_id, :atedimento_id, :dataini, :datafim)');
         // Bind values
-        $this->db->bind(':atendimento_id', $data['atendimento_id']);
+        $this->db->bind(':estabelecimento_id', $data['estabelecimento_id']);
+        $this->db->bind(':atedimento_id', $data['atedimento_id']);
         $this->db->bind(':dataini', $data['dataini']);         
         $this->db->bind(':datafim', $data['datafim']);
                
@@ -49,14 +54,12 @@
 
     }
 
-    public function updateFila($data){       
-        $this->db->query('UPDATE fila SET atendimento_id = :atendimento_id, dataini = :dataini, datafim = :datafim , status = :status WHERE id = :id');
+    public function updateFila($data){        
+        $this->db->query('UPDATE estabelecimento SET nome = :nome, endereco = :endereco WHERE id = :id');
         // Bind values
         $this->db->bind(':id', $data['id']);
-        $this->db->bind(':atendimento_id', $data['atendimento_id']);        
-        $this->db->bind(':dataini', $data['dataini']);    
-        $this->db->bind(':datafim', $data['datafim']);  
-        $this->db->bind(':status', $data['status']);  
+        $this->db->bind(':nome', $data['nome']);        
+        $this->db->bind(':endereco', $data['endereco']);    
         
         //Execute
         if($this->db->execute()){
@@ -89,9 +92,22 @@
         }
 
     }
-    
+    // PARA MONTAR O LISTBOX NOS FORMULÁRIOS
+    public function getEstabelecimentos(){
+        $this->db->query('SELECT id, nome
+                          FROM estabelecimento                          
+                          ORDER BY nome DESC
+                          ');
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+
     public function getAtendimentos(){
-        $this->db->query('SELECT id as atendimento_id, descricao
+        $this->db->query('SELECT id, descricao
                           FROM atendimento                                                
                           ORDER BY descricao DESC
                           ');
@@ -100,6 +116,22 @@
 
         return $results;
     }
+
+    //3 combobox
+    //faz a pesquisa no banco com base no id passado pela função
+    public function getAtendimentosByIdEstabelecimento($id){
+        $this->db->query('SELECT id, descricao
+        FROM atendimento      
+        WHERE estabelecimento_id = :id                                         
+        ORDER BY descricao DESC
+        ');
+    $this->db->bind(':id', $id);
+
+    $results = $this->db->resultSet();
+
+    return $results;
+}
+
 
   }
 

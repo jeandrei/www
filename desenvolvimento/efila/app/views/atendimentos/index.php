@@ -22,7 +22,8 @@
     <div id="table" class="">
       
       <table class="table table-bordered table-responsive-md table-striped text-center">
-        <tr>          
+        <tr>
+          <th style="width:60%" class="text-left">ESTABELECIMENTO DE ENSINO</th>
           <th style="width:20%" class="text-center">DESCRIÇÃO</th>            
           <th style="width:5%" class="text-center">IDADE MÍNIMA </th>           
           <th style="width:5%" class="text-center">IDADE MÁXIMA </th>  
@@ -32,7 +33,8 @@
         
         <?php foreach($data['atendimentos'] as $registro) : ?> 
 
-        <tr>        
+        <tr>
+        <td class="pt-2-half text-left"><?php echo $registro->nome_estabelecimento;?></td>
         <td class="pt-3-half text-center"><?php echo $registro->descricao;?></td>
         <td class="pt-3-half text-center"><?php echo $registro->idade_minima;?></td>        
         <td class="pt-3-half text-center"><?php echo $registro->idade_maxima;?></td> 

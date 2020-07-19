@@ -22,7 +22,31 @@ window.onload = function(){focofield("estabelecimento");}
         <legend>Dados do Atendimento</legend>
         <fieldset>
 
-       
+        <!--LISTBOX $estabelecimento->id VEM DE CONTROLER FUNÇÃO ADD QUE PEGA OS DADOS
+        DA FUNÇÃO getEstabelecimentos DO MODEL ATENDIMENTO
+        -->
+     
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="estabelecimento">Estabelecimento:</label>                             
+                <select 
+                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                    name="estabelecimento" 
+                    id="estabelecimento"
+                >
+
+                    <option value="NULL">Selecione o estabelecimento</option>
+                    <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
+                        <option value="<?php echo $estabelecimento->id;?>" <?php if($estabelecimento->id == $data['estabelecimento_id']){echo " selected";};?>>
+                            <?php echo $estabelecimento->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+                
+                </select>   
+                <span class="invalid-feedback"><?php echo $data['estabelecimento_err']; ?></span>
+            </div>
+        </div>
+        
 
         <!--DESCRIÇÃO-->
         <div class="form-row">

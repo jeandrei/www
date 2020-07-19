@@ -32,20 +32,26 @@
           
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  
-                    
+            $estabelecimentos = $this->postModel->getEstabelecimentos();         
             
 
             $data = [
-                'descricao' => trim($_POST['descricao']),                
+                'descricao' => trim($_POST['descricao']),
+                'estabelecimentos' => $estabelecimentos,
+                'estabelecimento_id' => $_POST['estabelecimento'],
                 'idade_minima' => $_POST['idade_minima'],               
                 'idade_maxima' => $_POST['idade_maxima'], 
-                'descricao_err' => '',                              
+                'descricao_err' => '',
+                'estabelecimento_id_err' => '',                
                 'idade_maxima_err' => ''                
             ];
 
             // Validate title
             if(empty($data['descricao'])){
                 $data['descricao_err'] = 'Por favor informe a descrição';
+            }
+            if(($data['estabelecimento_id']) == 'NULL'){
+                $data['estabelecimento_err'] = 'Por favor selecione o estabelecimento';                
             }           
             if(empty($data['idade_minima'])){
                 $data['idade_minima_err'] = 'Por favor informe a idade mínima';
@@ -55,7 +61,8 @@
             }
             
             // Make sure no errors
-            if( empty($data['descricao_err']) &&                                
+            if( empty($data['descricao_err']) && 
+                empty($data['estabelecimento_id_err']) &&                
                 empty($data['idade_minima_err']) && 
                 empty($data['idade_maxima_err']) 
                 
@@ -73,9 +80,15 @@
             }
 
          } else {
-                     
-            $data = [   
-                'descricao' => '',                                              
+            //BUSCA A LISTA DE ESTABELECIMENTOS NO BANCO DE DADOS
+            //MODELS ATENDIMENTO
+            $estabelecimentos = $this->postModel->getEstabelecimentos();
+         
+            $data = [
+                //PASSA A LISTA DE ESTABELECIMENTOS PARA MONTAR O LISTBOX
+                'estabelecimentos' => $estabelecimentos,
+                'descricao' => '',
+                'estabelecimento_id' => '',                              
                 'idade_minima' => '',
                 'idade_maxima' => ''
         ];
@@ -87,26 +100,32 @@
 
      
      public function edit($id){ 
+            
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
                      
            // Sanitize POST array
            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  
-                 
+           $estabelecimentos = $this->postModel->getEstabelecimentos();        
            
 
            $data = [
-               'id' => $id,
-               'descricao' => trim($_POST['descricao']),               
+               'descricao' => trim($_POST['descricao']),
+               'estabelecimentos' => $estabelecimentos,
+               'estabelecimento_id' => $_POST['estabelecimento'],
                'idade_minima' => $_POST['idade_minima'],               
                'idade_maxima' => $_POST['idade_maxima'], 
-               'descricao_err' => '',                              
+               'descricao_err' => '',
+               'estabelecimento_id_err' => '',                
                'idade_maxima_err' => ''                
            ];
-           //die(var_dump($data));
+
            // Validate title
            if(empty($data['descricao'])){
                $data['descricao_err'] = 'Por favor informe a descrição';
-           }                
+           }
+           if(($data['estabelecimento']) == NULL){
+               $data['estabelecimento_err'] = 'Por favor selecione o estabelecimento';                
+           }           
            if(empty($data['idade_minima'])){
                $data['idade_minima_err'] = 'Por favor informe a idade mínima';
            }
@@ -115,13 +134,14 @@
            }
            
            // Make sure no errors
-           if( empty($data['descricao_err']) &&                               
+           if( empty($data['descricao_err']) && 
+               empty($data['estabelecimento_id_err']) &&                
                empty($data['idade_minima_err']) && 
                empty($data['idade_maxima_err']) 
                
                ){
              // Validated
-             if($this->postModel->updateAtendimento($data)){
+             if($this->postModel->addAtendimento($data)){
                flash('post_message', 'Registro atualizado com sucesso!');
                redirect('atendimentos');
              } else {
@@ -134,14 +154,18 @@
         
         } else {
             // Get existing pst for model
-            $post = $this->postModel->getAtendimentoById($id);                     
+            $post = $this->postModel->getAtendimentoById($id);
+            $estabelecimentos = $this->postModel->getEstabelecimentos();            
                     
            $data = [
                'id' => $id, 
-               'descricao' => $post->descricao,               
+               'descricao' => $post->descricao,
+               'estabelecimentos' => $estabelecimentos,
+               'estabelecimento_id' => $post->estabelecimento_id,
                'idade_minima' => $post->idade_minima,           
                'idade_maxima' => $post->idade_maxima,
-               'descricao_err' => '',                              
+               'descricao_err' => '',
+               'estabelecimento_id_err' => '',                
                'idade_maxima_err' => ''                
        ];
        

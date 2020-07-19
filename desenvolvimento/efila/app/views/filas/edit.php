@@ -1,5 +1,5 @@
-<?php require_once APPROOT . '/views/inc/header.php';
-      require_once APPROOT . '/helpers/functions.php';
+<?php require APPROOT . '/views/inc/header.php';
+      require APPROOT . '/helpers/functions.php';
      
 ?>
 
@@ -11,106 +11,93 @@ window.onload = function(){focofield("estabelecimento");}
 <!--MENSÁGEM NO TOPO DO FORMULÁRIO-->
 <?php flash('post_message');?>
 
+
 <hr>
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">EDITANDO FILAS</h3>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">ALTERANDO filas</h3>
     <div class="card-body">
-
-         <form action="<?php echo URLROOT; ?>/filas/edit/<?php echo $data['id']; ?>" method="post">    
+        
+        <form action="<?php echo URLROOT; ?>/filas/edit/<?php echo $data['id']; ?>" method="post">    
 
         <legend>Dados do fila</legend>
         <fieldset>
-       
-        
+
+        <!--LISTBOX $estabelecimento->id VEM DE CONTROLER FUNÇÃO ADD QUE PEGA OS DADOS
+        DA FUNÇÃO getEstabelecimentos DO MODEL fila
+        -->
+     
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="atendimento">Atendimento:</label>                             
+                <label for="estabelecimento">Estabelecimento:</label>                             
                 <select 
-                    class="form-control <?php echo (!empty($data['atendimento_id_err'])) ? 'is-invalid' : ''; ?>"
-                    name="atendimento_id" 
-                    id="atendimento_id"
+                    class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                    name="estabelecimento" 
+                    id="estabelecimento"
                 >
 
                     <option value="NULL">Selecione o estabelecimento</option>
-                    
-                    <?php foreach($data['atendimentos'] as $atendimento) : ?> 
-                        <option value="<?php echo $atendimento->atendimento_id;?>"<?php if($atendimento->atendimento_id == $data['atendimento_id']){echo " selected";};?>>
-                            <?php echo $atendimento->descricao;?>
+                    <?php foreach($data['estabelecimentos'] as $estabelecimento) : ?> 
+                        <option value="<?php echo $estabelecimento->id;?>" <?php if($estabelecimento->id == $data['estebelecimento_id']){echo " selected";};?>>
+                            <?php echo $estabelecimento->nome;?>
                         </option>
                     <?php endforeach; ?>  
                 
                 </select>   
-                <span class="invalid-feedback"><?php echo $data['atendimento_id_err']; ?></span>
-            </div>
-        </div>            
-        
-        <?php //não está trazendo o id do atendimento_id  die(var_dump($data));?>
-        
-
-        <!--DATA INICIAL-->
-        <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="dataini">Data início: <sup>*</sup></label>
-                <input 
-                  class="form-control <?php echo (!empty($data['dataini_err'])) ? 'is-invalid' : ''; ?>"
-                  type="date"  
-                  name="dataini"
-                  id="dataini";                 
-                  value="<?php echo $data['dataini']; ?>"                  
-                  > 
-                  <span class="invalid-feedback"><?php echo $data['dataini_err']; ?></span>
+                <span class="invalid-feedback"><?php echo $data['estebelecimento_err']; ?></span>
             </div>
         </div>
+        
 
-         <!--DATA FINAL-->
-         <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="datafim">Data termino: <sup>*</sup></label>
-                <input 
-                  class="form-control <?php echo (!empty($data['dataini_err'])) ? 'is-invalid' : ''; ?>"
-                  type="date"  
-                  name="datafim"
-                  id="datafim";                 
-                  value="<?php echo $data['datafim']; ?>"                  
-                  > 
-                  <span class="invalid-feedback"><?php echo $data['datafim_err']; ?></span>
-            </div>
-        </div>  
-
-
-        <span>Status da fila</span>
+        <!--DESCRIÇÃO-->
         <div class="form-row">
-            <div class="form-check col-md-8">
-                <div class="form-check">
-                    <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        name="status" 
-                        id="status_ativo" 
-                        value="ativo"  <?php echo ($data['status'] == "ativo") ? "checked" : null; ?>
-                    >
-                    <label class="form-check-label" for="status_ativo">
-                        Ativo
-                    </label>
-                    </div>
-                    <div class="form-check">
-                    <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        name="status" 
-                        id="status_inativo" 
-                        value="inativo" <?php echo ($data['status']  == "inativo") ? "checked" : null; ?>
-                    >
-                    <label class="form-check-label" for="status_inativo">
-                        Inativo
-                    </label>
-                </div>                            
+            <div class="form-group col-md-8">
+                <label for="descricao">Descrição: <sup>*</sup></label>
+                <input 
+                  class="form-control <?php echo (!empty($data['descricao_err'])) ? 'is-invalid' : ''; ?>"
+                  type="text"  
+                  name="descricao"
+                  id="descricao";
+                  placeholder="Descrição do fila"
+                  value="<?php echo $data['descricao']; ?>"
+                  onkeydown="upperCaseF(this)"
+                  > 
+                  <span class="invalid-feedback"><?php echo $data['descricao_err']; ?></span>
             </div>
         </div>
+                 
 
 
+        <!--IDADE MÍNIMA EM MESES-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="idade_minima">Idade Mínima em Meses: <sup>*</sup></label>
+                <input style="width:70px;"
+                  class="form-control onlynumbers <?php echo (!empty($data['idade_minima_err'])) ? 'is-invalid' : ''; ?>" 
+                  type="number" 
+                  name="idade_minima" 
+                  id="idade_minima"
+                  value="<?php echo $data['idade_minima']; ?>"                           
+                  >
+                  <span class="invalid-feedback"><?php echo $data['idade_minima_err']; ?></span>        
+            </div>
+        </div> 
+        
+        <!--IDADE MÁXIMA-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="idade_maxima">Idade Máxima em Meses: <sup>*</sup></label>
+                <input style="width:70px;" 
+                  class="form-control onlynumbers <?php echo (!empty($data['idade_maxima_err'])) ? 'is-invalid' : ''; ?>" 
+                  type="number" 
+                  name="idade_maxima" 
+                  id="idade_maxima"
+                  value="<?php echo $data['idade_maxima']; ?>"          
+                  >
+                  <span class="invalid-feedback"><?php echo $data['idade_maxima_err']; ?></span>                        
+            </div> 
+        </div>    
 
-
+       
        
         </fieldset>
 

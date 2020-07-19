@@ -23,9 +23,8 @@ class Pages extends Controller{
         }
 
         $data = [
-           'title' => 'e-fila', 
-           'description' => 'Bem vindo ao e-fila, sistema de filas Online.<br> 
-           Não possui cadastro? Clique em Se registrar.'       
+           'title' => 'SharePosts', 
+           'description' => 'Simple social network build on the mvc template php framework'       
        ];    
        
      
@@ -36,8 +35,8 @@ class Pages extends Controller{
     //url /mvc/pages/about
     public function about(){
         $data = [
-            'title' => 'Sobre o sistema',
-            'description' => 'Sistema de filas Online'
+            'title' => 'About Us',
+            'description' => 'App to share posts with other users'
         ];            
         
         $this->view('pages/about', $data);

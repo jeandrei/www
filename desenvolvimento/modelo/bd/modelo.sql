@@ -98,6 +98,8 @@ INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
 (3, '2017-04-01', '2018-03-31', 'MATERNAL'),
 (4, '2016-04-01', '2017-03-31', 'PRÉ-I');
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -332,6 +334,21 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `created_at`) VA
 (2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', 'user', '2018-11-27 15:29:36'),
 (3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', 'user', '2019-01-09 16:46:20');
 
+
+CREATE TABLE `estados` (
+  `id` int(11) NOT NULL,  
+  `estado` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `municipios` (
+  `id` int(11) NOT NULL,
+  `estado_id` int(11) NOT NULL,
+  `municipio` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 --
 -- Índices de tabelas apagadas
 --
@@ -370,6 +387,12 @@ ALTER TABLE `historico_id_fila`
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `estados`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `municipios`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -411,6 +434,20 @@ ALTER TABLE `historico_id_fila`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `estados`
+--
+ALTER TABLE `estados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
