@@ -76,10 +76,9 @@
 
 <div class="messagebox" role="alert" id="messageBox" style="display:none"></div>
 
-
-
-
-
+    
+    
+    
     <!-- LINHA E COLUNAS PARA INSERIR ESTADO -->
     <div class="estado" style="margin-bottom:20px;">
         <div class="row">
@@ -110,6 +109,7 @@
     <!--FIM  LINHA E COLUNAS PARA INSERIR ESTADO -->
     </div>
 
+   
 
 
 
@@ -118,8 +118,36 @@
      <!-- LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
      <div class="municipio" style="margin-bottom:20px;">
         <div class="row">
+          
+             <!-- COLUNA 1 ESTADOS DO BANCO DE DADOS -->
+             <div class="col-lg-4">
+                <label for="estadosCadastrados">
+                    Estados cadastrados
+                </label>                             
+                
+                <select 
+                    name="estadosCadastrados" 
+                    id="estadosCadastrados" 
+                    class="form-control"                                        
+                >
+                        <option value="NULL">Selecione o Estado</option>
+                        <?php 
+                        $estados = $this->jqueryModel->getEstados();                  
+                        foreach($estados as $estado) : ?> 
+                            <option value="<?php echo $estado->id; ?>"
+                                        <?php if(isset($_POST['estadosCadastrados'])){
+                                        echo $_POST['estadosCadastrados'] == $estado->id ? 'selected':'';
+                                        }
+                                        ?>
+                            >
+                                <?php echo $estado->estado;?>
+                            </option>
+                        <?php endforeach; ?>  
+                </select>
+            </div>
+
             
-            <!-- COLUNA 1 MUNICIPIO-->
+            <!-- COLUNA 2 MUNICIPIO-->
             <div class="col-lg-4">
                 <label for="municipio">
                     Municipio
@@ -133,6 +161,8 @@
                     value="<?php if(isset($_POST['municipio'])){htmlout($_POST['municipio']);} ?>"
                     >
             </div>
+
+            
 
             <div class="col-lg-4" style="margin-top:30px;">
                 <div class="form-group mx-sm-3 mb-2">

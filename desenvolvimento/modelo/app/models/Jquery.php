@@ -44,6 +44,18 @@
          }
 
 
+
+         public function getEstados(){
+            $this->db->query("SELECT * FROM estados ORDER BY estado DESC"); 
+            $result = $this->db->resultSet(); 
+            if($this->db->rowCount() > 0){
+                return $result;
+            } else {
+                return false;
+            }           
+        }
+
+
        
 
 
