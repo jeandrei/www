@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS modelo;
+CREATE DATABASE modelo CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE modelo;
+
 -- phpMyAdmin SQL Dump
 -- version 5.0.2
 -- https://www.phpmyadmin.net/

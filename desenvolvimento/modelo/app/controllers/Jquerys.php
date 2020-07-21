@@ -65,7 +65,7 @@
                 
                 // DEPOIS TEM QUE TIRAR ESSE 1 AÍ DA FRENTE E COLOCAR A VARIÁVEL POST COM O ID DO MUNICIPIO
                 
-                if($this->jqueryModel->addMunicipio(1, $_POST['municipio'])){
+                if($this->jqueryModel->addMunicipio($_POST['estado_id'], $_POST['municipio'])){
                     
                     /* aqui passo a classe da mensagem e a mensagem de sucesso */
                     $json_ret = array('classe'=>'alert alert-success', 'mensagem'=>'Os dados foram gravados com sucesso');                     
@@ -83,6 +83,26 @@
                          
             
         }
+
+
+
+        //2 combo box 
+     // recebe o id da linha $.get?.../filas/getAtendimento?search=" + idEstab, function(data){
+     // lá do arquivo filas/add da junção jquery
+     //2 passa o id pelo search
+     public function getMunicipios(){
+        echo "<option>Selecione um município</option>";
+        if (isset($_GET['estado_id'])){
+            //faz a pesquisa chamando o método do aqruivo /model/fila/getAtendimentosByIdEstabelecimento($_GET['search']);
+            //passando o id
+            $municipios = $this->jqueryModel->getMunicipiosEstadoId($_GET['estado_id']);                       
+            //monta os options com base no resultado da pesquisa
+            foreach($municipios as $municipio){
+            echo "<option value=".$municipio->id . ">" .$municipio->municipio."</option>";
+            }
+            
+        }
+     }
 
 
 

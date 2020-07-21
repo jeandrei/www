@@ -55,6 +55,17 @@
             }           
         }
 
+        public function getMunicipiosEstadoId($estado_id){             
+            $this->db->query("SELECT * FROM municipios WHERE estado_id = :estado_id ORDER BY municipio DESC"); 
+            $this->db->bind(':estado_id',$estado_id); 
+            $result = $this->db->resultSet(); 
+            if($this->db->rowCount() > 0){
+                return $result;
+            } else {
+                return false;
+            }           
+        }
+
 
        
 
