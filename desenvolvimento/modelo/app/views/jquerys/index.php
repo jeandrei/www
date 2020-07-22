@@ -3,6 +3,22 @@
 <!-- HEADER DA PAGINA -->
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+<style>       
+      .my-container{
+        border: 1px solid green;
+        margin-top: 25px;
+        margin-bottom: 25px;
+     }
+
+     .my-row{
+         border: 3px solid red;
+     }
+
+     .my-col{
+         border: 3px dotted blue;
+     }
+</style>
+
 
 <script>
       /* só insere a função quando a página for totalmente carregada $(document).ready(function()*/
@@ -74,8 +90,9 @@
             $("#estadoid").on("change",function(){
                 //atribui o valor do objeto #estadoid a variável estado_id
                 var estado_id = $("#estadoid").val();                
-                //passa o valor da variável pelo GET para o método getMunicipios lá do CONTROLLER
-                $.get("<?php echo URLROOT; ?>/jquerys/getMunicipios?estado_id=" + estado_id, function(data){ 
+                //passa o valor da forma do nosso mvc /controller/metodo/id nesse caso /jquerys/getMunicipios/id
+                // siga para controllers/jquerys/getMunicipios e veja o resto
+                $.get("<?php echo URLROOT; ?>/jquerys/getMunicipios/" + estado_id, function(data){ 
                     //remove todos os valores do option primeiro para não acumular a cada mudança
                     $("#municipioid").find("option").remove();                         
                     //adiciona o que veio do método /jquerys/getMunicipios no objeto #atendimento
@@ -100,41 +117,48 @@
 
 <h1>Exemplos com jquery</h1>
 
-<div class="messagebox" role="alert" id="messageBox" style="display:none"></div>
-
-    
-    
-    
-    <!-- LINHA E COLUNAS PARA INSERIR ESTADO -->
-    <div class="estado" style="margin-bottom:20px;">
-        <div class="row">
-            
-            <!-- COLUNA 1 ESTADO-->
-            <div class="col-lg-4">
-                <label for="estado">
-                    Estado
-                </label>
-                <input 
-                    type="text" 
-                    name="estado" 
-                    id="estado" 
-                    maxlength="60"
-                    class="form-control"
-                    value="<?php if(isset($_POST['estado'])){htmlout($_POST['estado']);} ?>"
-                    onkeydown="upperCaseF(this)"  
-                    >
-            </div>
-
-            <div class="col-lg-4" style="margin-top:30px;">
-                <div class="form-group mx-sm-3 mb-2">
-                    <!-- BOTÃO ATUALIZAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
-                    <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarestado" value="Gravar">   
-                </div>                                                
-            </div>
-
-        </div>    
-    <!--FIM  LINHA E COLUNAS PARA INSERIR ESTADO -->
+<!-- LINHA PARA A MENSÁGEM DO JQUERY -->
+<div class="container">
+    <div class="row" style="height: 50px;  margin-bottom: 25px;">
+        <div class="col-12">
+            <div role="alert" id="messageBox" style="display:none"></div>
+        </div>
     </div>
+</div>
+
+    
+    
+    
+<!-- LINHA E COLUNAS PARA INSERIR ESTADO -->
+<div class="estado" style="margin-bottom:20px;">
+    <div class="row">
+        
+        <!-- COLUNA 1 ESTADO-->
+        <div class="col-lg-4">
+            <label for="estado">
+                Estado
+            </label>
+            <input 
+                type="text" 
+                name="estado" 
+                id="estado" 
+                maxlength="60"
+                class="form-control"
+                value="<?php if(isset($_POST['estado'])){htmlout($_POST['estado']);} ?>"
+                onkeydown="upperCaseF(this)"  
+                >
+        </div>
+
+        <div class="col-lg-4" style="margin-top:30px;">
+            <div class="form-group mx-sm-3 mb-2">
+                <!-- BOTÃO GRAVAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
+                <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarestado" value="Gravar">   
+            </div>                                                
+        </div>
+
+    </div>    
+<!--FIM  LINHA E COLUNAS PARA INSERIR ESTADO -->
+</div>
 
    
 
@@ -142,142 +166,138 @@
 
 
 
-     <!-- LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
-     <div class="municipio" style="margin-bottom:20px;">
-        <div class="row">
-          
-             <!-- COLUNA 1 ESTADOS DO BANCO DE DADOS -->
-             <div class="col-lg-4">
-                <label for="estadosCadastrados">
-                    Estados cadastrados
-                </label>                             
-                
-                <select 
-                    name="estadosCadastrados" 
-                    id="estadosCadastrados" 
-                    class="form-control"                                        
+<!-- LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
+<div class="municipio" style="margin-bottom:20px;">
+    <div class="row">
+        
+        <!-- COLUNA 1 ESTADOS DO BANCO DE DADOS -->
+        <div class="col-lg-4">
+            <label for="estadosCadastrados">
+                Estados cadastrados
+            </label>                             
+            
+            <select 
+                name="estadosCadastrados" 
+                id="estadosCadastrados" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Selecione o Estado</option>
+                    <?php 
+                    $estados = $this->jqueryModel->getEstados();                  
+                    foreach($estados as $estado) : ?> 
+                        <option value="<?php echo $estado->id; ?>"
+                                    <?php if(isset($_POST['estadosCadastrados'])){
+                                    echo $_POST['estadosCadastrados'] == $estado->id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $estado->estado;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        </div>
+        
+        <!-- COLUNA 2 MUNICIPIO-->
+        <div class="col-lg-4">
+            <label for="municipio">
+                Municipio
+            </label>
+            <input 
+                type="text" 
+                name="municipio" 
+                id="municipio" 
+                maxlength="60"
+                class="form-control"
+                value="<?php if(isset($_POST['municipio'])){htmlout($_POST['municipio']);} ?>"
+                onkeydown="upperCaseF(this)"  
                 >
-                        <option value="NULL">Selecione o Estado</option>
-                        <?php 
-                        $estados = $this->jqueryModel->getEstados();                  
-                        foreach($estados as $estado) : ?> 
-                            <option value="<?php echo $estado->id; ?>"
-                                        <?php if(isset($_POST['estadosCadastrados'])){
-                                        echo $_POST['estadosCadastrados'] == $estado->id ? 'selected':'';
-                                        }
-                                        ?>
-                            >
-                                <?php echo $estado->estado;?>
-                            </option>
-                        <?php endforeach; ?>  
-                </select>
-            </div>
+        </div>        
 
-            
-            <!-- COLUNA 2 MUNICIPIO-->
-            <div class="col-lg-4">
-                <label for="municipio">
-                    Municipio
-                </label>
-                <input 
-                    type="text" 
-                    name="municipio" 
-                    id="municipio" 
-                    maxlength="60"
-                    class="form-control"
-                    value="<?php if(isset($_POST['municipio'])){htmlout($_POST['municipio']);} ?>"
-                    onkeydown="upperCaseF(this)"  
-                    >
-            </div>
+        <!--BOTÃO GRAVAR-->
+        <div class="col-lg-4" style="margin-top:30px;">
+            <div class="form-group mx-sm-3 mb-2">
+                <!-- BOTÃO GRAVAR o id gravarmunicipio tem que ser o mesmo lá em cima no jquery -->                            
+                <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarmunicipio" value="Gravar">   
+            </div>                                                
+        </div>
 
-            
-
-            <div class="col-lg-4" style="margin-top:30px;">
-                <div class="form-group mx-sm-3 mb-2">
-                    <!-- BOTÃO ATUALIZAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
-                    <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarmunicipio" value="Gravar">   
-                </div>                                                
-            </div>
-
-        </div>    
-    <!--FIM  LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
-    </div>
+    </div>    
+<!--FIM  LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
+</div>
 
 
 <h3>Combo estados e municipios</h3>
 
 
-      <!-- LINHA E COLUNAS PARA COMBO ESTADO MUNICÍPIO -->
-      <div class="municipio" style="margin-bottom:20px;">
-        <div class="row">
-          
-             <!-- COLUNA 1 ESTADOS DO BANCO DE DADOS -->
-             <div class="col-lg-4">
-                <label for="estadoid">
-                    Estados cadastrados
-                </label>                             
-                
-                <select 
-                    name="estadoid" 
-                    id="estadoid" 
-                    class="form-control"                                        
-                >
-                        <option value="NULL">Selecione o Estado</option>
-                        <?php 
-                        $estados = $this->jqueryModel->getEstados();                  
-                        foreach($estados as $estado) : ?> 
-                            <option value="<?php echo $estado->id; ?>"
-                                        <?php if(isset($_POST['estadoid'])){
-                                        echo $_POST['estadoid'] == $estado->id ? 'selected':'';
-                                        }
-                                        ?>
-                            >
-                                <?php echo $estado->estado;?>
-                            </option>
-                        <?php endforeach; ?>  
-                </select>
-            </div>
-
+<!-- LINHA E COLUNAS PARA COMBO ESTADO MUNICÍPIO -->
+<div class="municipio" style="margin-bottom:20px;">
+    <div class="row">
+        
+        <!-- COLUNA 1 ESTADOS DO BANCO DE DADOS -->
+        <div class="col-lg-4">
+            <label for="estadoid">
+                Estados cadastrados
+            </label>                             
+        
+            <select 
+                name="estadoid" 
+                id="estadoid" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Selecione o Estado</option>
+                    <?php 
+                    $estados = $this->jqueryModel->getEstados();                  
+                    foreach($estados as $estado) : ?> 
+                        <option value="<?php echo $estado->id; ?>"
+                                    <?php if(isset($_POST['estadoid'])){
+                                    echo $_POST['estadoid'] == $estado->id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $estado->estado;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        </div>
+        
+        <!-- COLUNA 2 MUNICIPIOS DO BANCO DE DADOS -->
+        <div class="col-lg-4">
+            <label for="municipioid">
+                Municípios por estado
+            </label>                             
             
-            <!-- COLUNA 2 MUNICIPIOS DO BANCO DE DADOS -->
-            <div class="col-lg-4">
-                <label for="municipioid">
-                    Municípios por estado
-                </label>                             
-                
-                <select 
-                    name="municipioid" 
-                    id="municipioid" 
-                    class="form-control"                                        
-                >
-                        <option value="NULL">Primeiro selecione um estado</option>
-                        <?php 
-                        $municipios = $this->jqueryModel->getMunicipios();                  
-                        foreach($municipios as $municipio) : ?> 
-                            <option value="<?php echo $municipio->id; ?>"
-                                        <?php if(isset($_POST['municipioid'])){
-                                        echo $_POST['municipioid'] == $municipio->id ? 'selected':'';
-                                        }
-                                        ?>
-                            >
-                                <?php echo $municipio->municipio;?>
-                            </option>
-                        <?php endforeach; ?>  
-                </select>
-            </div>
+            <select 
+                name="municipioid" 
+                id="municipioid" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Primeiro selecione um estado</option>
+                    <?php 
+                    $municipios = $this->jqueryModel->getMunicipios();                  
+                    foreach($municipios as $municipio) : ?> 
+                        <option value="<?php echo $municipio->id; ?>"
+                                    <?php if(isset($_POST['municipioid'])){
+                                    echo $_POST['municipioid'] == $municipio->id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $municipio->municipio;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        </div>
+        
+        <!--BOTÃO GRAVAR-->                            
+        <div class="col-lg-4" style="margin-top:30px;">
+            <div class="form-group mx-sm-3 mb-2">
+                <!-- BOTÃO ATUALIZAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
+                <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarestadomunicipio" value="Gravar">   
+            </div>                                                
+        </div>
 
-            
-
-            <div class="col-lg-4" style="margin-top:30px;">
-                <div class="form-group mx-sm-3 mb-2">
-                    <!-- BOTÃO ATUALIZAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
-                    <input type="submit" class="btn btn-primary mb-2 gravar" id="gravarestadomunicipio" value="Gravar">   
-                </div>                                                
-            </div>
-
-        </div>    
-    <!--FIM  LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
-    </div>
+    </div>    
+<!--FIM  LINHA E COLUNAS PARA INSERIR MUNICIPIO -->
+</div>
 
 
                                                          

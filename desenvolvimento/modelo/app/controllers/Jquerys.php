@@ -86,16 +86,16 @@
 
 
 
-        //2 combo box 
-     // recebe o id da linha $.get?.../filas/getAtendimento?search=" + idEstab, function(data){
-     // lá do arquivo filas/add da junção jquery
-     //2 passa o id pelo search
-     public function getMunicipios(){
+     // combo box 
+     // recebe o id da linha $.get( echo URLROOT; /jquerys/getMunicipios/ + estado_id
+     // lá do arquivo views/jquerys/index da junção jquery
+     // passa o id para o método getMunicipios($estado_id)
+     public function getMunicipios($estado_id){
         echo "<option>Selecione um município</option>";
-        if (isset($_GET['estado_id'])){
-            //faz a pesquisa chamando o método do aqruivo /model/fila/getAtendimentosByIdEstabelecimento($_GET['search']);
+        if (isset($estado_id)){
+            //faz a pesquisa chamando o método do aqruivo /jquery/getMunicipiosEstadoId($estado_id){  
             //passando o id
-            $municipios = $this->jqueryModel->getMunicipiosEstadoId($_GET['estado_id']);                       
+            $municipios = $this->jqueryModel->getMunicipiosEstadoId($estado_id);                       
             //monta os options com base no resultado da pesquisa
             foreach($municipios as $municipio){
             echo "<option value=".$municipio->id . ">" .$municipio->municipio."</option>";
