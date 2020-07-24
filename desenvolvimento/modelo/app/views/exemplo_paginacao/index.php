@@ -15,7 +15,7 @@
 2 Eu extendi a classe Pagination da biblioteca libraries/Pagination para a database Pagination extends Database assim eu consigo utilizar os mesmos parâmetros de conexão da classe database
 - dúvida procure em libraries/Pagination "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE"
 3 Cria o controller com o código em comentário vai lá no controller Exemplo_paginacao.php index() que vc vai ver
-4 Cria o model com um metodo para buscar os dados no banco de dados getfila($page, $options)
+4 Cria o model com um metodo para buscar os dados no banco de dados getfila($page, $options) E PRINCIPALMENTE ***EXTENDS PARA PAGINATION***
 5 Atribua o resultado desse método a variável $paginate $paginate = $data['paginate'];
 - a variável $data['paginate'] vem do resultado do método getfila
 6 Para passar parâmetros na consulta sql tipo status = Aguardando

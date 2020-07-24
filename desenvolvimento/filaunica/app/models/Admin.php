@@ -1,5 +1,5 @@
 <?php
-    class Admin{
+    class Admin extends Pagination{
         private $db;
 
         public function __construct(){
@@ -64,7 +64,7 @@
         // 3 CONSULTA MONTA SQL DINAMICAMENTE E RETORNA OS VALORES
         // PAGINAÇÃO $inicio_pag E $fim_pag definem em que registro começar a mostrar e em qual terminar
         // PASSO ESSES DOIS PARÂMETROS PARA FAZER A PAGINAÇÃO LÁ EM controlers/Admins.php
-        public function getFilaBusca($nome="Todos",$etapa="Todos",$status="Todos") {
+        public function getFilaBusca2($nome="Todos",$etapa="Todos",$status="Todos") {
                 
             $sql = ("
                         SELECT 
@@ -259,14 +259,6 @@
 
 
 
-
-
-
-
-
-
-
-
         public function buscaProtocolo($protocolo) {
                 $this->db->query("
                                     SELECT      
@@ -446,6 +438,19 @@
             }
         
         }
+        public function getEtapaDescricao($nasc) {
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT descricao from etapa WHERE id = :id");
+            $this->db->bind(':id', $this->getEtapa($nasc)); 
+            $result = $this->db->single();             
+            if(!empty($result->descricao)){
+                return $result->descricao;
+            }
+            else{
+                return false;
+            }
+        
+        }
 
         public function getEtapas() {
             $this->db->query("SELECT * FROM etapa ORDER BY descricao");
@@ -543,5 +548,46 @@
             
             
         }
+
+
+
+
+          //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+          public function getFilaBusca($page, $options){           
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";
+
+           
+            
+            // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
+            if(($options['named_params'][':etapa_id']) == "Todos"){                    
+                $sql .= " WHERE fila.id";
+            } else {
+                // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
+                $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = " . $options['named_params'][':etapa_id'];          
+               
+            }
+
+            if(!empty($options['named_params'][':nome'])){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+            }
+          
+
+            if(($options['named_params'][':status']) <> "Todos"){
+                $sql .= " AND status = " . "'" . $options['named_params'][':status'] ."'";
+            }
+            
+             
+
+            $sql .= " ORDER BY registro DESC";     
+               
+            $paginate = new pagination($page, $sql, $options);
+            return  $paginate;
+        }  
+        
+        //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+        public function getFilaTodos($page, $options){              
+            $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
+            return  $paginate;
+        }  
     
 }
