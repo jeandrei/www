@@ -578,7 +578,7 @@
             
              
 
-            $sql .= " ORDER BY registro DESC";     
+            $sql .= " ORDER BY registro ASC";     
                
             $paginate = new pagination($page, $sql, $options);
             return  $paginate;

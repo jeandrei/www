@@ -44,6 +44,9 @@
               }
 
               $etapa_id = $_POST['buscaetapa'];
+              if(!isset($etapa_id)){                
+                $etapa_id = 'Todos';
+            }             
 
               $nome = $_POST['buscanome'];
 

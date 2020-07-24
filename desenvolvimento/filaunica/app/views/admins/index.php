@@ -1,4 +1,61 @@
+
+
 <?php require APPROOT . '/views/inc/header.php'; ?>
+
+<script>
+    
+    function limpar(){
+        document.getElementById('buscanome').value = "";
+        document.getElementById('buscaetapa').value = "Todos";
+        document.getElementById('buscastatus').value = "Todos";
+        focofield("buscanome");
+    }    
+    
+    window.onload = function(){focofield("buscanome");}
+
+      //espera a página carregar completamente
+      $(document).ready(function(){  
+           //seleciona o objeto select da página    
+           $('.gravar').click(function() {                
+                //atribui os valores do id e do status as variáveis
+                var idRegistro=$("#id_reg_fila").val();
+                var statusRegistro=$("#status_reg_fila").val();  
+                var txthist=$("#txthist").val();                
+                    //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
+                    $.get("<?php echo URLROOT; ?>/admins/gravar?id=" + idRegistro + "&status=" + statusRegistro + "&historico=" + txthist, function(data){ 
+                        $('#msg').show();
+                        //$('#msg').css('color', '#CC0000');
+                        $('#msg').html('Dados gravados com sucesso.');
+                        setTimeout("$('#msg').fadeOut(); ", 3000); 
+
+                         //aqui eu altero a classe da linha da tabela
+                         // o id da linha é formado por linha_ e o id
+                         // então na linha 5 o nome é linha_5
+                         // lá no tr da tabela id="linha_
+                         if(statusRegistro == "Aguardando"){
+                            //$("#linha_" + idRegistro).addClass("table-primary");
+                            document.getElementById("linha_" + idRegistro).className = "table-primary"; 
+                        }  
+
+                        if(statusRegistro == "Matriculado"){
+                            //$("#linha_" + idRegistro).addClass("table-success"); 
+                            document.getElementById("linha_" + idRegistro).className = "table-success";
+                        } 
+
+                        if(statusRegistro == "Cancelado"){
+                            //$("#linha_" + idRegistro).addClass("table-danger"); 
+                            document.getElementById("linha_" + idRegistro).className = "table-danger";
+                        }                                       
+                });
+            });
+        });
+
+
+     
+
+
+
+</script>
 
 
 <?php 
@@ -40,6 +97,7 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
                 maxlength="60"
                 class="form-control"
                 value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                onkeydown="upperCaseF(this)"   
                 ><span class="invalid-feedback">
                     <?php // echo $data['nome_err']; ?>
                 </span>
@@ -107,18 +165,18 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
         
         <!-- LINHA PARA O BOTÃO ATUALIZAR -->
         <div class="row" style="margin-top:30px;">
-            <div class="col-lg-4" style="padding-left:0;">
+            <div class="col" style="padding-left:0;">
                 <div class="form-group mx-sm-3 mb-2">
-                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">
-                    <span class="badge align-middle text-danger" name="busca_err" id="busca_err"></span> 
+                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
+                    <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
                 </div>                                                
             </div>
+            
         <!-- FIM LINHA BOTÃO ATUALIZAR -->
-        </div>
+        </div>      
 
 
-
-   <!-- DIV LINA PARA OS INPUTS E BOTÃO ATUALIZAR -->
+    <!-- DIV LINHA PARA OS INPUTS E BOTÃO ATUALIZAR -->
     </div>
 
                                         
@@ -126,10 +184,10 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
 
 </form>
 
-
-
-
+</div><!--fecha div container lá do header-->
 <?
+
+
 // aqui eu passo o resultado da paginação esse $data['paginate'] vem lá do controller
 $paginate = $data['paginate'];
 
@@ -144,12 +202,12 @@ if($paginate->success == true)
 ?>
 <br>
 <!-- MONTAR A TABELA -->
-<table class="table table-striped">
+<table class="container-fluid table table-striped table-sm" style="font-size: 12px;">
   <thead>
     <tr>
       <th scope="col">Posição</th> 
       <th scope="col">Nome da Criança</th>
-      <th scope="col">Data de Nascimento</th>
+      <th scope="col">Nascimento</th>
       <th scope="col">Etapa</th>
       <th scope="col">Responsável</th>
       <th scope="col">Protocolo</th>  
@@ -158,25 +216,87 @@ if($paginate->success == true)
     </tr>
   </thead>
   <tbody>
-    <?php foreach($result as $row) : ?> 
+    <?php foreach($result as $registro) : ?> 
     <tr class="<?php 
-                if($row['status'] == "Aguardando")
+                if($registro['status'] == "Aguardando")
                 echo "table-primary";
-                if($row['status'] == "Cancelado")
+                if($registro['status'] == "Cancelado")
                 echo "table-danger";
-                if($row['status'] == "Matriculado")
+                if($registro['status'] == "Matriculado")
                 echo "table-success";                        
                 ?>"
-        id="linha_<?php echo $row['fila_id'];?>"               
+        id="linha_<?php echo $registro['id'];?>"               
     >  
-      <td><?php echo  $this->adminModel->buscaPosicaoFila($row['protocolo']);?></td> 
-      <td><?php echo $row['nomecrianca']; ?></td> 
-      <td><?php echo $row['nascimento']; ?></td>  
-      <td><?php echo  $this->adminModel->getEtapaDescricao($row['nascimento']);?></td>
-      <td><?php echo $row['responsavel']; ?></td>
-      <td><?php echo $row['protocolo']; ?></td>  
-      <td><?php echo date('d/m/Y h:i:s', strtotime($row['registro'])); ?></td>     
-      <td><?php echo $row['status']; ?></td>
+        <td style="text-align:center; width:20px;"><?php echo ($this->adminModel->buscaPosicaoFila($registro['protocolo'])) ? $this->adminModel->buscaPosicaoFila($registro['protocolo']) : "-";?></td> 
+        <td style="width:300px;"><?php echo $registro['nomecrianca']; ?></td> 
+        <td style="width:50px;"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>  
+        <td style="width:80px;"><?php echo $this->adminModel->getEtapaDescricao($registro['nascimento']);?></td> 
+        <td style="width:300px;"><?php echo $registro['responsavel']; ?></td>
+        <td style="width:100px;"><?php echo $registro['protocolo']; ?></td>  
+        <td style="width:120px;"><?php echo date('d/m/Y h:i:s', strtotime($registro['registro'])); ?></td>     
+        <td>
+            <select style="font-size:11px;" class="form-control form-control-sm"
+                    name="statuslista" 
+                    id="<?php echo  $registro['id'];?>" 
+                    class="form-control" 
+                    onChange="
+                            document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>;
+                            document.getElementById('status_reg_fila').value = this.value;
+                            ">                   
+                    <?php 
+                    $status = array('Aguardando','Matriculado','Cancelado');                    
+                    foreach($status as $row => $value) : ?> 
+                        <option value="<?php echo $value; ?>" 
+                                    <?php echo $value == $registro['status'] ? 'selected':'';?>
+                        >
+                            <?php echo $value;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+
+
+            <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
+            <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['id']; ?>">
+            <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
+            <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
+            <input type="hidden" id="txthist" name="txthist" value="">  
+
+        </td>
+    
+        <td style="width:250px;">
+            <input 
+                class="form-control form-control-sm" 
+                type="text" 
+                id="historico_<?php echo  $registro['id'];?>" 
+                name="historico_<?php echo  $registro['id'];?>">                               
+        </td>
+
+        
+        <!--BOTÃO DE GRAVAR-->            
+        <td style="text-align:right;">
+            <button 
+                type="button" 
+                class="btn btn-success btn-sm gravar"
+                onClick="
+                        document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>,   
+                        document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['id'];?>').value,
+                        document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['id'];?>').value;
+                        "
+            >                    
+            Gravar
+            </button>
+        </td>
+        
+        <!--BOTÃO VER HISTÓRICO-->                
+        <td style="text-align:left;">
+            <a
+                class="btn btn-secondary btn-sm ver"  
+                href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>">Ver
+            </a>
+        </td>
+
+
+
     </tr>
     <?php endforeach; ?>    
   </tbody>
@@ -209,20 +329,9 @@ if($paginate->success == true)
 
 
 
-
-
-
-
-
-
-
 ?>
 
-
-
-
-
-
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+<!-- AQUI NÃO COLOCO O FOOTER DO INC POIS PRECISO FECHAR O div do container antes da tabela -->  
+</body>
+</html>
 
