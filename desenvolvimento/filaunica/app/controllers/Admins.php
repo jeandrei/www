@@ -69,12 +69,32 @@
 
           $paginate = $this->adminModel->getFilaBusca($page, $options);
 
+          if($paginate->success == true)
+          {             
+              // $data['paginate'] é só a parte da paginação tem que passar os dois arraya paginate e result
+              $data['paginate'] = $paginate;
+              // $result são os dados propriamente dito depois eu fasso um foreach para passar
+              // os valores como posição que utilizo um métido para pegar
+              $results = $paginate->resultset->fetchAll();
+              
+              
+              //faço o foreach para poder utilizar os métodos
+              foreach($results as $result){
+                $data['results'][] = [
+                  'id' => $result['id'],
+                  'posicao' =>  ($this->adminModel->buscaPosicaoFila($result['protocolo'])) ? $this->adminModel->buscaPosicaoFila($result['protocolo']) : "-",
+                  'etapa' => $this->adminModel->getEtapaDescricao($result['nascimento']),
+                  'nomecrianca' => $result['nomecrianca'],
+                  'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
+                  'responsavel' => $result['responsavel'],
+                  'protocolo' => $result['protocolo'],
+                  'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
+                  'status' => $result['status']
+                ];
+              }
+          }       
           
-          
-          
-          $data['paginate'] =  $paginate;        
-          //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX          
-                       
+         
 
             // 4 Chama o view passando os dados
             $this->view('admins/index', $data);

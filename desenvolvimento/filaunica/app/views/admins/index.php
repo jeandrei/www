@@ -2,6 +2,7 @@
 
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+
 <script>
     
     function limpar(){
@@ -188,16 +189,13 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
 <?
 
 
-// aqui eu passo o resultado da paginação esse $data['paginate'] vem lá do controller
+// aqui eu passo o resultado da paginação vem lá do controller
+
 $paginate = $data['paginate'];
+$result = $data['results'];
+//var_dump($result);
 
-if($paginate->success == true)
-{
-
-    /*
-     * Fetch our results
-     */
-    $result = $paginate->resultset->fetchAll();
+//die();
 
 ?>
 <br>
@@ -227,13 +225,13 @@ if($paginate->success == true)
                 ?>"
         id="linha_<?php echo $registro['id'];?>"               
     >  
-        <td style="text-align:center; width:20px;"><?php echo ($this->adminModel->buscaPosicaoFila($registro['protocolo'])) ? $this->adminModel->buscaPosicaoFila($registro['protocolo']) : "-";?></td> 
+        <td style="text-align:center; width:20px;"><?php echo $registro['posicao']; ?></td> 
         <td style="width:300px;"><?php echo $registro['nomecrianca']; ?></td> 
-        <td style="width:50px;"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>  
-        <td style="width:80px;"><?php echo $this->adminModel->getEtapaDescricao($registro['nascimento']);?></td> 
+        <td style="width:50px;"><?php echo $registro['nascimento']; ?></td>  
+        <td style="width:80px;"><?php echo $registro['etapa']; ?></td> 
         <td style="width:300px;"><?php echo $registro['responsavel']; ?></td>
         <td style="width:100px;"><?php echo $registro['protocolo']; ?></td>  
-        <td style="width:120px;"><?php echo date('d/m/Y h:i:s', strtotime($registro['registro'])); ?></td>     
+        <td style="width:120px;"><?php echo $registro['registro']; ?></td>     
         <td>
             <select style="font-size:11px;" class="form-control form-control-sm"
                     name="statuslista" 
@@ -301,11 +299,9 @@ if($paginate->success == true)
     <?php endforeach; ?>    
   </tbody>
 </table>
-<?    
-    
-  
 
 
+<?php  
     /*
      * Echo out the UL with the page links
      */
@@ -322,12 +318,6 @@ if($paginate->success == true)
     echo '<p>Total de Paginas: '.$paginate->total_pages.'</p>';
 
     echo '<p style="clear: left; padding-top: 10px; padding-bottom: 10px;">-----------------------------------</p>';
-
-   
-
-}
-
-
 
 ?>
 
