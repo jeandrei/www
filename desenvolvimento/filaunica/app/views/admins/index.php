@@ -49,6 +49,25 @@
                         /* aqui a mensagem que vem la do php responseObj.mensagem */                       
                         .html(responseObj.mensagem) 
                         .fadeIn(2000).fadeOut(2000);
+
+                        //aqui eu altero a classe da linha da tabela
+                        // o id da linha é formado por linha_ e o id
+                        // então na linha 5 o nome é linha_5
+                        // lá no tr da tabela id="linha_                       
+                        if(status == "Aguardando"){
+                            //$("#linha_" + idRegistro).addClass("table-primary");
+                            document.getElementById("linha_" + id).className = "table-primary"; 
+                        } 
+
+                        if(status == "Matriculado"){
+                            //$("#linha_" + idRegistro).addClass("table-success"); 
+                            document.getElementById("linha_" + id).className = "table-success";
+                        } 
+
+                        if(status == "Cancelado"){
+                            //$("#linha_" + idRegistro).addClass("table-danger"); 
+                            document.getElementById("linha_" + id).className = "table-danger";
+                        }   
                     }                    
                 });
             });
