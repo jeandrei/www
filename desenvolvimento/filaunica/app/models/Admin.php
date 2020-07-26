@@ -506,17 +506,22 @@
             $this->db->query('UPDATE fila SET fila.status=:status WHERE id=:id');
             $this->db->bind(':id',$id); 
             $this->db->bind(':status',$status); 
-            $this->db->execute();
+            $this->db->execute();            
         }
     
     
-        public function gravaHistorico($id,$historico,$usuario,$status){
+        public function gravaHistorico($id,$status,$historico,$usuario="jean"){
+            $this->changeStatus($id,$status);
             $this->db->query('INSERT INTO historico_id_fila(fila_id, historico, usuario, status) VALUES (:fila_id, :historico, :usuario, :status)');
             $this->db->bind(':fila_id',$id); 
             $this->db->bind(':historico',$historico); 
             $this->db->bind(':usuario',$usuario); 
-            $this->db->bind(':status',$status); 
-            $this->db->execute();
+            $this->db->bind(':status',$status);             
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public function getHistoricoById($id) {

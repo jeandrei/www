@@ -19,37 +19,34 @@
            //seleciona o objeto select da página    
            $('.gravar').click(function() {                
                 //atribui os valores do id e do status as variáveis
-                var id=$("#id_reg_fila").val();
-                var status=$("#status_reg_fila").val();  
-                var txthist=$("#txthist").val();                           
+                var idRegistro=$("#id_reg_fila").val();
+                var statusRegistro=$("#status_reg_fila").val();  
+                var txthist=$("#txthist").val();                
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
-                    $.ajax({
-                    /* aqui em url passamos a url do controler e o método que iremos utilizar nesse caso controller jquerys método newEstado */
-                    /* a newEstado vai receber pelo POST o valor do input estado e por sua vez vai chamar no model addEstado($_POST['estado'])   */
-                    url: '<?php echo URLROOT; ?>/admins/gravar',
-                    /* aqui o método que utilizamos nesse caso POST */
-                    method:'POST',
-                    /* aqui as variáveis que queremos passar para o arquivo php neste caso controller/método */
-                    data:{
-                        id:id,
-                        status: status,
-                        txthist: txthist                     
-                    },                                       
-                    /* aqui se obtiver sucesso imprimimos que os dados foram armazenados com sucesso */                   
-                    success: function(retorno_php){ 
-                    /* para poder retornar um array tranformo os dados que retornam do php em um objeto json agora para chamar a variável que vem do php */
-                    /* faz assim responseObj.variavel ex console.log(responseObj.mensagem); */
-                    /* retorno_php vem de controllers/jquerys/newEstado() */
-                    var responseObj = JSON.parse(retorno_php);                    
-                    $("#messageBox")
-                        .removeClass()
-                        /* aqui em addClass adiciono a classe que vem do php se sucesso ou danger */
-                        /* pode adicionar mais classes se precisar ficaria assim .addClass("confirmbox "+responseObj.classe) */
-                        .addClass(responseObj.classe) 
-                        /* aqui a mensagem que vem la do php responseObj.mensagem */                       
-                        .html(responseObj.mensagem) 
-                        .fadeIn(2000).fadeOut(2000);
-                    }                    
+                    $.get("<?php echo URLROOT; ?>/admins/gravar?id=" + idRegistro + "&status=" + statusRegistro + "&historico=" + txthist, function(data){ 
+                        $('#msg').show();
+                        //$('#msg').css('color', '#CC0000');
+                        $('#msg').html('Dados gravados com sucesso.');
+                        setTimeout("$('#msg').fadeOut(); ", 3000); 
+
+                         //aqui eu altero a classe da linha da tabela
+                         // o id da linha é formado por linha_ e o id
+                         // então na linha 5 o nome é linha_5
+                         // lá no tr da tabela id="linha_
+                         if(statusRegistro == "Aguardando"){
+                            //$("#linha_" + idRegistro).addClass("table-primary");
+                            document.getElementById("linha_" + idRegistro).className = "table-primary"; 
+                        }  
+
+                        if(statusRegistro == "Matriculado"){
+                            //$("#linha_" + idRegistro).addClass("table-success"); 
+                            document.getElementById("linha_" + idRegistro).className = "table-success";
+                        } 
+
+                        if(statusRegistro == "Cancelado"){
+                            //$("#linha_" + idRegistro).addClass("table-danger"); 
+                            document.getElementById("linha_" + idRegistro).className = "table-danger";
+                        }                                       
                 });
             });
         });
@@ -83,21 +80,7 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
 
 */
 
-
 ?>
-
-
-<!-- LINHA PARA A MENSÁGEM DO JQUERY -->
-<div class="container">
-    <div class="row" style="height: 50px;  margin-bottom: 25px;">
-        <div class="col-12">
-            <div role="alert" id="messageBox" style="display:none"></div>
-        </div>
-    </div>
-</div>
-
-
-
 <!-- FORMULÁRIO COM OS CAMPOS DE PESQUISA -->
 <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
     <!-- LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
