@@ -254,6 +254,8 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
       <th scope="col">Responsável</th>
       <th scope="col">Protocolo</th>  
       <th scope="col">Registro</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Celular</th>
       <th scope="col">Status</th> 
       <th scope="col">Hisóticos</th>
       <th scope="col"></th> 
@@ -278,7 +280,9 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
         <td><?php echo $registro['etapa']; ?></td> 
         <td><?php echo $registro['responsavel']; ?></td>
         <td><?php echo $registro['protocolo']; ?></td>  
-        <td><?php echo $registro['registro']; ?></td>     
+        <td><?php echo $registro['registro']; ?></td>   
+        <td><?php echo $registro['telefone']; ?></td> 
+        <td><?php echo $registro['celular']; ?></td>   
         <td>
             <select style="font-size:11px;" class="form-control form-control-sm"
                     name="statuslista" 

@@ -87,6 +87,8 @@
                     'responsavel' => $result['responsavel'],
                     'protocolo' => $result['protocolo'],
                     'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
+                    'telefone' => $result['telefone'],
+                    'celular' => $result['celular'],
                     'status' => $result['status']
                   ];
                 }
