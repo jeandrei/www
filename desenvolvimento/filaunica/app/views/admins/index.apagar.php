@@ -242,9 +242,73 @@ $result = $data['results'];
 if($data['results'] == false){ die('<div class="container alert alert-warning">Sem dados para emitir</div>');} 
 
 ?>
+
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+    <th scope="col">Posição</th> 
+      <th scope="col">Nome da Criança</th>
+      <th scope="col">Nascimento</th>
+      <th scope="col">Etapa</th>
+      <th scope="col">Responsável</th>
+      <th scope="col">Protocolo</th>  
+      <th scope="col">Registro</th>
+      <th scope="col">Status</th> 
+      <th scope="col">Hisóticos</th>
+      <th scope="col"></th> 
+      <th scope="col"></th> 
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($result as $registro) : ?> 
+    <tr class="<?php 
+                if($registro['status'] == "Aguardando")
+                echo "table-primary";
+                if($registro['status'] == "Cancelado")
+                echo "table-danger";
+                if($registro['status'] == "Matriculado")
+                echo "table-success";                        
+                ?>"        
+        id="linha_<?php echo $registro['id'];?>"               
+    > 
+        <td ><?php echo $registro['posicao']; ?></td> 
+        <td ><?php echo $registro['nomecrianca']; ?></td> 
+        <td><?php echo $registro['nascimento']; ?></td>  
+        <td ><?php echo $registro['etapa']; ?></td> 
+        <td ><?php echo $registro['responsavel']; ?></td>
+        <td ><?php echo $registro['protocolo']; ?></td>  
+        <td ><?php echo $registro['registro']; ?></td>     
+        <td >
+    </tr>
+  <?php endforeach; ?>  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <br>
 <!-- MONTAR A TABELA -->
-<table class="container-fluid table table-sm" style="font-size: 12px;">
+<table class="container-fluid table" style="font-size: 12px;">
   <thead>
     <tr>
       <th scope="col">Posição</th> 
@@ -269,17 +333,17 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 echo "table-danger";
                 if($registro['status'] == "Matriculado")
                 echo "table-success";                        
-                ?>"
+                ?>"        
         id="linha_<?php echo $registro['id'];?>"               
     >  
-        <td><?php echo $registro['posicao']; ?></td> 
-        <td><?php echo $registro['nomecrianca']; ?></td> 
-        <td><?php echo $registro['nascimento']; ?></td>  
-        <td><?php echo $registro['etapa']; ?></td> 
-        <td><?php echo $registro['responsavel']; ?></td>
-        <td><?php echo $registro['protocolo']; ?></td>  
-        <td><?php echo $registro['registro']; ?></td>     
-        <td>
+        <td class="col-1"><?php echo $registro['posicao']; ?></td> 
+        <td class="col-sm-2"><?php echo $registro['nomecrianca']; ?></td> 
+        <td class="col-sm-1"><?php echo $registro['nascimento']; ?></td>  
+        <td class="col-sm-1"><?php echo $registro['etapa']; ?></td> 
+        <td class="col-sm-2"><?php echo $registro['responsavel']; ?></td>
+        <td class="col-sm-1"><?php echo $registro['protocolo']; ?></td>  
+        <td class="col-sm-1"><?php echo $registro['registro']; ?></td>     
+        <td class="col-sm-1">
             <select style="font-size:11px;" class="form-control form-control-sm"
                     name="statuslista" 
                     id="<?php echo  $registro['id'];?>" 
@@ -307,6 +371,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
             <input type="hidden" id="txthist" name="txthist" value="">  
 
         </td>
+        
     
         <td style="width:250px;">
             <input 
