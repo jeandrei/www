@@ -74,7 +74,22 @@
             });
         });
 
+        function ShowContact(responsavel,telefone, celular) {   
+                msg = "";                
+                
+                if(typeof responsavel != 'undefined') {
+                msg = msg + "Responsável: "+responsavel +"\r\n";
+                }
 
+                if(typeof telefone != 'undefined') {
+                msg = msg + "Telefone: "+telefone +"\r\n";
+                }
+
+                if(typeof celular != 'undefined') {
+                msg = msg + "Celular: "+celular;
+                }
+               alert (msg);              
+            }
      
 
 
@@ -250,12 +265,10 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
       <th scope="col">Posição</th> 
       <th scope="col">Nome da Criança</th>
       <th scope="col">Nascimento</th>
-      <th scope="col">Etapa</th>
-      <th scope="col">Responsável</th>
+      <th scope="col">Etapa</th>     
       <th scope="col">Protocolo</th>  
-      <th scope="col">Registro</th>
-      <th scope="col">Telefone</th>
-      <th scope="col">Celular</th>
+      <th scope="col">Registro</th>   
+      <th scope="col">Contato</th> 
       <th scope="col">Status</th> 
       <th scope="col">Hisóticos</th>
       <th scope="col"></th> 
@@ -277,14 +290,18 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
         <td><?php echo $registro['posicao']; ?></td> 
         <td><?php echo $registro['nomecrianca']; ?></td> 
         <td><?php echo $registro['nascimento']; ?></td>  
-        <td><?php echo $registro['etapa']; ?></td> 
-        <td><?php echo $registro['responsavel']; ?></td>
+        <td><?php echo $registro['etapa']; ?></td>
         <td><?php echo $registro['protocolo']; ?></td>  
         <td><?php echo $registro['registro']; ?></td>   
-        <td><?php echo $registro['telefone']; ?></td> 
-        <td><?php echo $registro['celular']; ?></td>   
+        <td><button type = "button" class="btn btn-secondary btn-lg fa fa-eye ver" value = "Contato" onclick = "ShowContact(
+                                                                                                                '<?php echo $registro['responsavel']; ?>',
+                                                                                                                '<?php echo $registro['telefone']; ?>',
+                                                                                                                '<?php echo $registro['celular']; ?>'
+                                                                                                            );"
+            />
+        </td>          
         <td>
-            <select style="font-size:11px;" class="form-control form-control-sm"
+            <select class="form-control form-control-sm"
                     name="statuslista" 
                     id="<?php echo  $registro['id'];?>" 
                     class="form-control" 
@@ -325,22 +342,22 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
         <td style="text-align:right;">
             <button 
                 type="button" 
-                class="btn btn-success btn-sm gravar"
+                class="btn btn-success btn-lg fa fa-floppy-o gravar"
                 onClick="
                         document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>,   
                         document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['id'];?>').value,
                         document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['id'];?>').value;
                         "
             >                    
-            Gravar
+            
             </button>
         </td>
         
         <!--BOTÃO VER HISTÓRICO-->                
         <td style="text-align:left;">
             <a
-                class="btn btn-secondary btn-sm ver"  
-                href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>">Ver
+                class="btn btn-secondary btn-lg fa fa-eye ver"  
+                href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>">
             </a>
         </td>
 
@@ -352,6 +369,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 </table>
 
 
+
 <?php
     // no index a parte da paginação é só essa    
     echo '<p>'.$paginate->links_html.'</p>';   
@@ -359,6 +377,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
     echo '<p>Total de Paginas: '.$paginate->total_pages.'</p>';
     echo '<p style="clear: left; padding-top: 10px; padding-bottom: 10px;">-----------------------------------</p>';
 ?>
+
 
 <!-- AQUI NÃO COLOCO O FOOTER DO INC POIS PRECISO FECHAR O div do container antes da tabela -->  
 </body>
