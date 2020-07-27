@@ -88,7 +88,7 @@
                 if(typeof celular != 'undefined') {
                 msg = msg + "Celular: "+celular;
                 }
-               alert (msg);              
+               alert (msg.toUpperCase());              
             }
      
 
