@@ -81,7 +81,7 @@
                   $data['results'][] = [
                     'id' => $result['id'],
                     'posicao' =>  ($this->adminModel->buscaPosicaoFila($result['protocolo'])) ? $this->adminModel->buscaPosicaoFila($result['protocolo']) : "-",
-                    'etapa' => $this->adminModel->getEtapaDescricao($result['nascimento']),
+                    'etapa' => ($this->adminModel->getEtapaDescricao($result['nascimento'])) ? $this->adminModel->getEtapaDescricao($result['nascimento']) : "FORA DE TODAS AS ETAPAS",
                     'nomecrianca' => $result['nomecrianca'],
                     'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
                     'responsavel' => $result['responsavel'],

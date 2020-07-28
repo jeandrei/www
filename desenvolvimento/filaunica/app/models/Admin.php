@@ -347,7 +347,7 @@
             $row = $this->db->single();  
             //var_dump($row);
                        
-            if($row->statusprotocolo == "Aguardando"){
+            if(($row->statusprotocolo == "Aguardando") && ($row->posicao <> 0)){
                 return $row->posicao . 'º';
             } else {
                 return false;
@@ -438,10 +438,33 @@
             }
         
         }
+
+
+        public function getEtapaId($nasc) {  
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
+
+
+
         public function getEtapaDescricao($nasc) {
+            if(!$this->getEtapaId($nasc)){
+                return false;
+            } else {
+                $etapa_id = $this->getEtapaId($nasc);
+            }
             //verifica se tem mínimo de 4 meses
             $this->db->query("SELECT descricao from etapa WHERE id = :id");
-            $this->db->bind(':id', $this->getEtapa($nasc)); 
+            $this->db->bind(':id', $etapa_id); 
             $result = $this->db->single();             
             if(!empty($result->descricao)){
                 return $result->descricao;
