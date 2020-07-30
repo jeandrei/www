@@ -23,25 +23,23 @@
                 return false;
             }
         }
-     
-         // Busca etapa por id
-         public function getEtapaByid($id){
-            $this->db->query('SELECT * FROM etapa WHERE id = :id');
-            // Bind value
-            $this->db->bind(':id', $id);
 
-            $row = $this->db->single();
+        // Update Etapa
+        public function update($data){
+            $this->db->query('UPDATE etapa SET data_ini = :data_ini, data_fin = :data_fin, descricao = :descricao WHERE id = :id');
+            // Bind values
+            $this->db->bind(':id',$data['id']);
+            $this->db->bind(':data_ini',$data['data_ini']);            
+            $this->db->bind(':data_fin',$data['data_fin']);
+            $this->db->bind(':descricao',$data['descricao']);
 
-            // Check row
-            if($this->db->rowCount() > 0){
-                return $row;
+            // Execute
+            if($this->db->execute()){
+                return true;
             } else {
                 return false;
             }
         }
-
-        
-
 
          // Deleta etapa por id
          public function delEtapaByid($id){
@@ -58,10 +56,74 @@
                 return false;
             }
         }
-        
 
-        // get etapas
-        public function getEtapas(){
+         // RETORNA A DESCRIÇÃO DE UMA ETAPA A PARTIR DE UM ID
+         public function getDescricaoEtapa($id) {
+            $this->db->query("SELECT descricao FROM etapa WHERE id = :id");
+            $this->db->bind(':id', $id);    
+            $row = $this->db->single();           
+
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            } 
+        }
+
+        // RETORNA O ID DE UMA ETAPA A PARTIR DA DATA DE NASCIMENTO
+        public function getEtapaId($nasc) {  
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
+
+        // RETORNA A DESCRIÇÃO DE UMA ETAPA A PARTIRA DE UMA DATA
+        public function getEtapaDescricao($nasc) {
+            if(!$this->getEtapaId($nasc)){
+                return false;
+            } else {
+                $etapa_id = $this->getEtapaId($nasc);
+            }
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT descricao from etapa WHERE id = :id");
+            $this->db->bind(':id', $etapa_id); 
+            $result = $this->db->single();             
+            if(!empty($result->descricao)){
+                return $result->descricao;
+            }
+            else{
+                return false;
+            }
+        
+        }
+
+        // RETORNA TODAS AS ETAPAS
+        public function getEtapas() {
+            $this->db->query("SELECT * FROM etapa ORDER BY descricao");
+            $result = $this->db->resultSet();     
+            
+            foreach ($result as $row)
+            {
+            $etapas[] = array(
+                'id' => $row->id,
+                'data_ini' => $row->data_ini,
+                'data_fin' => $row->data_fin,
+                'descricao' => $row->descricao
+            );
+            }
+        return $etapas;
+        } 
+        
+        // get all etapas
+        public function getAllEtapas(){
             $this->db->query('SELECT * FROM etapa');            
 
             return $this->db->resultSet();
@@ -74,6 +136,46 @@
             }
         }
 
+        // RETORNA A ETAPA A PARTIR DE UMA DATA DE NASCIMENTO
+        public function getEtapa($nasc) {
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
+            $this->db->bind(':datanasc',$nasc); 
+            $num_meses = $this->db->single();            
+            
+            if($num_meses->meses<4){        
+                return false;
+            }
+        
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
+     
+         // Busca etapa por id
+         public function getEtapaByid($id){
+            $this->db->query('SELECT * FROM etapa WHERE id = :id');
+            // Bind value
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->single();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }
+        }  
+        
         // VERIFICA SE JÁ EXISTE ALGUM REGISTRO NA FILA COM ESTA ETAPA
         // NÃO PODE REMOVER ETAPA COM REGISTROS NA FILA
         public function etapaRegFila($id){
@@ -89,9 +191,6 @@
                 return false;
             }
         }
-
-
-        
 
         // VERIFICA SE JÁ NÃO EXISTE UMA ETAPA COM PERÍODO CADASTRADO
         // VERIFICA SE EXISTE ELGUMA ETAPA A QUAL CONFLITA COM A NOVA ETAPA
@@ -115,7 +214,6 @@
             }
 
         }
-
 
         // VERIFICA SE A DATA INICIAL PASSADA ESTÁ ENTRE ALGUMA DATA DE INICIO E FIM DE TODAS AS ETAPAS
         public function etapaDataIni($dataini,$datafin){
@@ -152,22 +250,7 @@
         }
 
 
-         // Update User
-         public function update($data){
-            $this->db->query('UPDATE etapa SET data_ini = :data_ini, data_fin = :data_fin, descricao = :descricao WHERE id = :id');
-            // Bind values
-            $this->db->bind(':id',$data['id']);
-            $this->db->bind(':data_ini',$data['data_ini']);            
-            $this->db->bind(':data_fin',$data['data_fin']);
-            $this->db->bind(':descricao',$data['descricao']);
-
-            // Execute
-            if($this->db->execute()){
-                return true;
-            } else {
-                return false;
-            }
-        }
+         
 
     }//etapa
     

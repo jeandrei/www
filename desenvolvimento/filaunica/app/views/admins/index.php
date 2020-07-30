@@ -170,7 +170,7 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
             >
                     <option value="Todos">Todos</option>
                     <?php 
-                    $etapas = $this->adminModel->getEtapas();                     
+                    $etapas = $this->filaModel->getEtapas();                     
                     foreach($etapas as $etapa) : ?> 
                         <option value="<?php echo $etapa['id']; ?>"
                                     <?php if(isset($_POST['buscaetapa'])){

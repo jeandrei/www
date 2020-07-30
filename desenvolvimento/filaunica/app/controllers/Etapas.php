@@ -11,7 +11,7 @@
                 redirect('index');
             } 
             
-            if($data = $this->etapaModel->getEtapas()){                
+            if($data = $this->etapaModel->getAllEtapas()){                
                 $this->view('etapas/index', $data);
             } else {                
                 flash('register_success', 'Falha ao carregar a lista de etapas!', 'alert alert-danger'); 
@@ -241,7 +241,7 @@
             }    
             
             
-            $data = $this->etapaModel->getEtapas();
+            $data = $this->etapaModel->getAllEtapas();
             $this->view('etapas/index', $data);     
             
         }

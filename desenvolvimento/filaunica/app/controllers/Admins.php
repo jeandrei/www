@@ -2,7 +2,9 @@
     class Admins extends Controller{
         public function __construct(){
             // 1 Chama o model
-          $this->adminModel = $this->model('Admin');          
+          $this->adminModel = $this->model('Admin'); 
+          $this->filaModel = $this->model('Fila'); 
+          $this->etapaModel = $this->model('Etapa');           
         }
 
         public function index(){  
@@ -80,8 +82,8 @@
                 foreach($results as $result){
                   $data['results'][] = [
                     'id' => $result['id'],
-                    'posicao' =>  ($this->adminModel->buscaPosicaoFila($result['protocolo'])) ? $this->adminModel->buscaPosicaoFila($result['protocolo']) : "-",
-                    'etapa' => ($this->adminModel->getEtapaDescricao($result['nascimento'])) ? $this->adminModel->getEtapaDescricao($result['nascimento']) : "FORA DE TODAS AS ETAPAS",
+                    'posicao' =>  ($this->filaModel->buscaPosicaoFila($result['protocolo'])) ? $this->filaModel->buscaPosicaoFila($result['protocolo']) : "-",
+                    'etapa' => ($this->etapaModel->getEtapaDescricao($result['nascimento'])) ? $this->etapaModel->getEtapaDescricao($result['nascimento']) : "FORA DE TODAS AS ETAPAS",
                     'nomecrianca' => $result['nomecrianca'],
                     'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
                     'responsavel' => $result['responsavel'],
@@ -108,34 +110,27 @@
       //aqui é o método chamado pelo jquery lá no index, verifico se o id tem algum valor se sim eu chamo o método changeStatus no model
       public function gravar(){
 
-
-        try{
-                
-          // DEPOIS TEM QUE TIRAR ESSE 1 AÍ DA FRENTE E COLOCAR A VARIÁVEL POST COM O ID DO MUNICIPIO
-          // IMPORTANTE lá na função changeStatus se executar tem que retornar true para funcionar aqui
-          
-          if($this->adminModel->gravaHistorico($_POST['id'],$_POST['status'],$_POST['txthist'])){
+            try{
+                    
+              // DEPOIS TEM QUE TIRAR ESSE 1 AÍ DA FRENTE E COLOCAR A VARIÁVEL POST COM O ID DO MUNICIPIO
+              // IMPORTANTE lá na função changeStatus se executar tem que retornar true para funcionar aqui
               
-              /* aqui passo a classe da mensagem e a mensagem de sucesso */
-              $json_ret = array('classe'=>'alert alert-success', 'mensagem'=>'Dados gravados com sucesso');                     
-              echo json_encode($json_ret);                     
-          } else {
-              $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao tentar gravar os dados');                     
-              echo json_encode($json_ret);                     
-          }                
+              if($this->adminModel->gravaHistorico($_POST['id'],$_POST['status'],$_POST['txthist'])){
+                  
+                  /* aqui passo a classe da mensagem e a mensagem de sucesso */
+                  $json_ret = array('classe'=>'alert alert-success', 'mensagem'=>'Dados gravados com sucesso');                     
+                  echo json_encode($json_ret);                     
+              } else {
+                  $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao tentar gravar os dados');                     
+                  echo json_encode($json_ret);                     
+              }                
 
-      } catch (Exception $e) 
-      {
-          $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao gravar os dados');                     
-          echo json_encode($json_ret);
-      }        
-        
-
-        /*
-        if (isset($_GET['id'])){
-          $this->adminModel->changeStatus($_GET['id'],$_GET['status']);
-          $this->adminModel->gravaHistorico($_GET['id'],$_GET['historico'],$_SESSION['user_name'],$_GET['status']);
-        }*/
+          } catch (Exception $e) 
+          {
+              $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao gravar os dados');                     
+              echo json_encode($json_ret);
+          } 
+       
       }
        
       public function historico($id){  

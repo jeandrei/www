@@ -8,6 +8,8 @@
             $this->db = new Database;
         }
 
+/********************************************************************MÉTODOS QUE RETORNAM DADOS DIVERSOS******************************************************/
+
         public function getBairros(){
             $this->db->query("SELECT * FROM bairro");
 
@@ -32,24 +34,9 @@
                 return false;
             }           
         }
-
-        /*
-        FUNÇÃO NÃO UTILIZADA AO FINAL APAGAR
-        public function getTurnoById($id){
-            $this->db->query("SELECT turno FROM escola WHERE id = :id");
-            $this->db->bind(':id',$id);
-
-            $row = $this->db->single();           
-
-            if($this->db->rowCount() > 0){
-                return $row;
-            } else {
-                return false;
-            }           
-        }
-        */
-
-
+     
+/***************************************************************************MÉTODOS DE VALIDAÇÃO**********************************************************/
+            
         //retorna se já existe um nome e data de nascimento cadastrado
         public function nomeCadastrado($nome,$nasc){
             $this->db->query("SELECT * FROM fila where nomecrianca = :nomecrianca AND nascimento = :nascimento");
@@ -62,9 +49,8 @@
             } else {
                 return false;
             }           
-        }  
-        
-        
+        }
+                
         public function validaNascimento($data){
             $formatado = date('Y-m-d',strtotime($data));
             $ano = date('Y', strtotime($formatado));
@@ -80,65 +66,10 @@
                     }else{
                         return true;
                     }
-            }
-
-        
-        public function getEtapa($nasc) {
-            //verifica se tem mínimo de 4 meses
-            $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
-            $this->db->bind(':datanasc',$nasc); 
-            $num_meses = $this->db->single();            
-            
-            if($num_meses->meses<4){        
-                return false;
-            }
-        
-            //pega o id da etapa
-            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
-            $this->db->bind(':nasc',$nasc);                  
-            $etapa =$this->db->single();  
-            if(!empty($etapa->id)){
-                return $etapa->id;
-            }
-            else{
-                return false;
-            }
-        
-        }
-
-        public function getEtapas() {
-            $this->db->query("SELECT * FROM etapa ORDER BY descricao");
-            $result = $this->db->resultSet();
-            
-                
-            
-            foreach ($result as $row)
-            {
-            $etapas[] = array(
-                'id' => $row->id,
-                'data_ini' => $row->data_ini,
-                'data_fin' => $row->data_fin,
-                'descricao' => $row->descricao
-            );
-            }
-        return $etapas;
-        }
-
-        public function getLastid(){
-            $this->db->query("SELECT max(id) as id FROM fila");             
-            $lastId = $this->db->single();
-            return $lastId->id;            
-        }
-
-        public function generateProtocol(){
-            $lastid = $this->getLastid();
-            $id = $lastid + 1;
-            $year = date('Y');           
-            $protocol = $id . $year; 
-            return $protocol;
-        }
-
-        // Grava na fila
+            } 
+       
+/***********************************************************************METODO PARA GRAVAR NA FILA**********************************************************/
+       
         public function register($data){             
                     
             $this->db->query('INSERT INTO fila SET                    
@@ -210,52 +141,9 @@
             }
         }
 
-        public function buscaPosicaoFila($protocolo) {
-            $this->db->query("  
-                                    SELECT 
-                                            count(fila.id) as posicaonafila,
-                                            (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
-                                    FROM 
-                                            fila, etapa
-                                    WHERE 
-                                            fila.nascimento>=data_ini
-                                    AND 
-                                            fila.nascimento<=data_fin
-                                    AND 
-                                            etapa.id = (
-                                                        SELECT 
-                                                            etapa.id 
-                                                        FROM etapa,
-                                                            fila 
-                                                        WHERE 
-                                                            fila.nascimento>=data_ini
-                                                        AND 
-                                                            fila.nascimento<=data_fin
-                                                        AND 
-                                                            fila.protocolo = :protocolo
-                                                    )
-                                    AND 
-                                            fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
-                                    AND
-                                            fila.status = 'Aguardando'                            
-            
-                                ");
-            
-            
-            
-            $this->db->bind(':protocolo', $protocolo);
-            
-            $row = $this->db->single();           
-            //esse statusprotocolo eu pego lá na consulta sql para mostrar a posição apenas para protocolos aguardando
-            if($row->statusprotocolo == "Aguardando"){
-                return $row;
-            } else {
-                return false;
-            } 
-           
-        }
-
-
+/***********************************************************************MÉTODOS QUE RETORNAM DADOS DE ETAPAS******************************************************/
+   
+        // RETORNA A DESCRIÇÃO DE UMA ETAPA A PARTIR DE UM ID
         public function getDescricaoEtapa($id) {
             $this->db->query("SELECT descricao FROM etapa WHERE id = :id");
             $this->db->bind(':id', $id);    
@@ -268,8 +156,94 @@
             } 
         }
 
+        // RETORNA O ID DE UMA ETAPA A PARTIR DA DATA DE NASCIMENTO
+        public function getEtapaId($nasc) {  
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
 
+        // RETORNA A DESCRIÇÃO DE UMA ETAPA A PARTIRA DE UMA DATA
+        public function getEtapaDescricao($nasc) {
+            if(!$this->getEtapaId($nasc)){
+                return false;
+            } else {
+                $etapa_id = $this->getEtapaId($nasc);
+            }
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT descricao from etapa WHERE id = :id");
+            $this->db->bind(':id', $etapa_id); 
+            $result = $this->db->single();             
+            if(!empty($result->descricao)){
+                return $result->descricao;
+            }
+            else{
+                return false;
+            }
+        
+        }
 
+        // RETORNA TODAS AS ETAPAS
+        public function getEtapas() {
+            $this->db->query("SELECT * FROM etapa ORDER BY descricao");
+            $result = $this->db->resultSet();     
+            
+            foreach ($result as $row)
+            {
+            $etapas[] = array(
+                'id' => $row->id,
+                'data_ini' => $row->data_ini,
+                'data_fin' => $row->data_fin,
+                'descricao' => $row->descricao
+            );
+            }
+        return $etapas;
+        }  
+
+        // RETORNA A ETAPA A PARTIR DE UMA DATA DE NASCIMENTO
+        public function getEtapa($nasc) {
+            //verifica se tem mínimo de 4 meses
+            $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
+            $this->db->bind(':datanasc',$nasc); 
+            $num_meses = $this->db->single();            
+            
+            if($num_meses->meses<4){        
+                return false;
+            }
+        
+            //pega o id da etapa
+            $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
+            $this->db->bind(':nasc',$nasc);                  
+            $etapa =$this->db->single();  
+            if(!empty($etapa->id)){
+                return $etapa->id;
+            }
+            else{
+                return false;
+            }
+        
+        }
+
+/********************************************************************MÉTODOS QUE RETORNAM DADOS DE PROTOCOLO******************************************************/
+   
+        //FUNÇÃO QUE GERA O PROTOCOLO
+        public function generateProtocol(){
+            $lastid = $this->getLastid();
+            $id = $lastid + 1;
+            $year = date('Y');           
+            $protocol = $id . $year; 
+            return $protocol;
+        }
+
+        //FUNÇÃO QUE BUSCA OS DADOS DE UM PROTOCOLO
         public function buscaProtocolo($protocolo) {
             $this->db->query("
                                     SELECT      
@@ -297,6 +271,17 @@
                 return false;
             }  
         }
+
+
+/*********************************************************************MÉTODOS QUE RETORNAM DADOS DA FILA******************************************************/
+
+        // RETORNA O ÚLTIMO ID REGISTRADO NA FILA
+        public function getLastid(){
+            $this->db->query("SELECT max(id) as id FROM fila");             
+            $lastId = $this->db->single();
+            return $lastId->id;            
+        }
+
 
        public function getFilaPorEtapaRelatorio($etapa_id,$status) {   
             $this->db->query("SET @contador = 0");
@@ -344,7 +329,72 @@
             {
                 return false;
             } 
-        }      
+        } 
+
+        function buscaPosicaoFila($protocolo) {
+            $this->db->query(' 
+                                SELECT 
+                                        count(fila.id) as posicao,
+                                        (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
+                                FROM 
+                                        fila, etapa
+                                WHERE 
+                                        fila.nascimento>=data_ini
+                                AND 
+                                        fila.nascimento<=data_fin
+                                AND 
+                                        etapa.id = (
+                                                    SELECT 
+                                                        etapa.id 
+                                                    FROM etapa,
+                                                        fila 
+                                                    WHERE 
+                                                        fila.nascimento>=data_ini
+                                                    AND 
+                                                        fila.nascimento<=data_fin
+                                                    AND 
+                                                        fila.protocolo = :protocolo
+                                                )
+                                AND 
+                                        fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                                
+                                AND
+                                        fila.status = "Aguardando"                            
+        
+                            ');
+        
+        
+        
+            $this->db->bind(':protocolo',$protocolo);            
+            
+            $row = $this->db->single();  
+            //var_dump($row);
+                    
+            if(($row->statusprotocolo == "Aguardando") && ($row->posicao <> 0)){
+                return $row->posicao . 'º';
+            } else {
+                return false;
+            }       
+            
+        
+        }
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         
     
