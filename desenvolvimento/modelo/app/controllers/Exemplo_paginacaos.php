@@ -72,9 +72,45 @@ class Exemplo_paginacaos extends Controller{
             $paginate = $this->pagModel->getFilaBusca($page, $options);
         }
         
+
+
+        if($paginate->success == true)
+        {             
+            // $data['paginate'] é só a parte da paginação tem que passar os dois arraya paginate e result
+            $data['paginate'] = $paginate;
+            // $result são os dados propriamente dito depois eu fasso um foreach para passar
+            // os valores como posição que utilizo um métido para pegar
+            $results = $paginate->resultset->fetchAll();
+            
+            /* SE PRECISAR PASSAR VALORES ESPECÍFICOS QUE VEM DE METODOS DAÍ TEM QUE FAZER COMO ESTÁ ABAIXO E DAÍ RETORNA $data['results'] DIRETO
+            SEM ESSA LINHA   $data['results'] =  $results;
+            if(!empty($results)){
+              //faço o foreach para poder utilizar os métodos
+              foreach($results as $result){
+                $data['results'][] = [
+                  'id' => $result['id'],
+                  'posicao' =>  ($this->adminModel->buscaPosicaoFila($result['protocolo'])) ? $this->adminModel->buscaPosicaoFila($result['protocolo']) : "-",
+                  'etapa' => ($this->adminModel->getEtapaDescricao($result['nascimento'])) ? $this->adminModel->getEtapaDescricao($result['nascimento']) : "FORA DE TODAS AS ETAPAS",
+                  'nomecrianca' => $result['nomecrianca'],
+                  'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
+                  'responsavel' => $result['responsavel'],
+                  'protocolo' => $result['protocolo'],
+                  'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
+                  'telefone' => $result['telefone'],
+                  'celular' => $result['celular'],
+                  'status' => $result['status']
+                ];
+              }
+            } else {
+              $data['results'] = false;
+            }*/
+        }       
+
+
+
         
         
-        $data['paginate'] =  $paginate;        
+        $data['results'] =  $results;        
         //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX
   
        //método view está em /libraries/Controller

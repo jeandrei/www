@@ -4,8 +4,13 @@
 <p><?php echo $data['description']; ?></p>
 
 
+
+
 <?php 
 
+// aqui eu passo os dois arrays para a paginação eles vem lá do controller paginate é só a parte da paginação e result são os dados
+$paginate = $data['paginate'];
+$result = $data['results'];
 
 // A CONEXÃO COM O BANCO DE DADOS É FEITO NA CONSTRUCT DO LIBRARIES/PAGINATOR
 // PROCURE POR "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE" 
@@ -70,19 +75,7 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
 
 
 
-<?
-// aqui eu passo o resultado da paginação esse $data['paginate'] vem lá do controller
-$paginate = $data['paginate'];
 
-if($paginate->success == true)
-{
-
-    /*
-     * Fetch our results
-     */
-    $result = $paginate->resultset->fetchAll();
-
-?>
 <br>
 <!-- MONTAR A TABELA -->
 <table class="table table-striped">
@@ -107,7 +100,7 @@ if($paginate->success == true)
     <?php endforeach; ?>    
   </tbody>
 </table>
-<?    
+<?php  
     
   
 
@@ -131,7 +124,7 @@ if($paginate->success == true)
 
    
 
-}
+
 
 
 
