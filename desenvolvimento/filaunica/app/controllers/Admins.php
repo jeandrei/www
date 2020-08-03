@@ -10,7 +10,7 @@
         public function index(){  
           
           //se o usuário não tiver feito login redirecionamos para o index
-          if(!isset($_SESSION['user_id'])){
+          if(!isset($_SESSION[DB_NAME . '_user_id'])){
             redirect('index');
           }
 

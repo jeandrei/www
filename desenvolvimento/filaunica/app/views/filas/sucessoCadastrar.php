@@ -50,10 +50,31 @@
 
            
             <div class="col text-center" style="color:green; font-size:25px">
-                Posição na fila: <?php echo $data['posicao']->posicaonafila;?>
+               Turno escolhido: <?php  switch ($data['opcao_turno']) {
+                                            case 1:
+                                                echo "Matutino";
+                                                break;
+                                            case 2:
+                                                echo "Vespertino";
+                                                break;
+                                            case 3:
+                                                echo "Integral";
+                                                break;
+                                        }?>
             </div> 
 
         </div>
+
+        <div class="row">             
+
+           
+            <div class="col text-center" style="color:green; font-size:25px">
+                Posição na fila: <?php echo $data['posicao'];?>
+            </div> 
+
+        </div>
+
+
         <hr>     
         <!-- linha para tabela com as escolas escolhidas -->
         <div class="row">
@@ -61,73 +82,27 @@
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>                        
-                        <th scope="col">Estabelecimento de Ensino</th>
-                        <th scope="col">Turno</th>
+                        <th scope="col">Estabelecimentos de Ensino</th>                        
                         </tr>
                     </thead>
                     <tbody>
                         
                         <?php if(!empty($data['unidade1'])): ?> 
                             <tr>                       
-                            <td><?php  if(!empty($data['unidade1'])){echo $data['unidade1']->nome;} ?></td>
-                                <td>    
-                                    <?php 
-                                        switch ($data['turno1']) {
-                                            case 1:
-                                                echo "Matutino";
-                                                break;
-                                            case 2:
-                                                echo "Vespertino";
-                                                break;
-                                            case 3:
-                                                echo "Integral";
-                                                break;
-                                        }
-                                    ?>
-                                </td>
+                                <td><?php  if(!empty($data['unidade1'])){echo $data['unidade1']->nome;} ?></td>                                
                             </tr>
                         <?php endif; ?>
                         
                         <?php if(!empty($data['unidade2'])): ?> 
                             <tr>                       
-                            <td><?php  if(!empty($data['unidade2'])){echo $data['unidade2']->nome;} ?></td>
-                                <td>    
-                                    <?php 
-                                        switch ($data['turno2']) {
-                                            case 1:
-                                                echo "Matutino";
-                                                break;
-                                            case 2:
-                                                echo "Vespertino";
-                                                break;
-                                            case 3:
-                                                echo "Integral";
-                                                break;
-                                        }
-                                    ?>
-                                </td>
+                                <td><?php  if(!empty($data['unidade2'])){echo $data['unidade2']->nome;} ?></td>                                
                             </tr>
                         <?php endif; ?>
                       
 
                         <?php if(!empty($data['unidade3'])): ?> 
                             <tr>                       
-                            <td><?php  if(!empty($data['unidade3'])){echo $data['unidade3']->nome;} ?></td>
-                                <td>    
-                                    <?php 
-                                        switch ($data['turno3']) {
-                                            case 1:
-                                                echo "Matutino";
-                                                break;
-                                            case 2:
-                                                echo "Vespertino";
-                                                break;
-                                            case 3:
-                                                echo "Integral";
-                                                break;
-                                        }
-                                    ?>
-                                </td>
+                                <td><?php  if(!empty($data['unidade3'])){echo $data['unidade3']->nome;} ?></td>                                
                             </tr>
                         <?php endif; ?>
                         </tr>

@@ -22,7 +22,7 @@
                             
 
                 <!--FAZ A VERIFICAÇÃO SE O USUÁRIO É ADMINISTRADOR, SE SIM CARREGA OS MENUS DE CADASTRO-->
-                  <?php if(isset($_SESSION['user_type']) && ($_SESSION['user_type']) == "admin") : ?>           
+                  <?php if(isset($_SESSION[DB_NAME . '_user_type']) && ($_SESSION[DB_NAME . '_user_type']) == "admin") : ?>           
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Cadastros
@@ -39,9 +39,9 @@
 
 
               <ul class="navbar-nav ml-auto">
-                  <?php if(isset($_SESSION['user_id'])) : ?>
+                  <?php if(isset($_SESSION[DB_NAME . '_user_id'])) : ?>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Bem vindo <?php echo $_SESSION['user_name']; ?></a>
+                      <a class="nav-link" href="#">Bem vindo <?php echo $_SESSION[DB_NAME . '_user_name']; ?></a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Sair</a>

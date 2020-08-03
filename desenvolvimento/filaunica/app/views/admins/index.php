@@ -75,18 +75,18 @@
         });
 
         function ShowContact(responsavel,telefone, celular) {   
-                msg = "";                
+                msg = '';                
                 
                 if(typeof responsavel != 'undefined') {
-                msg = msg + "Responsável: "+responsavel +"\r\n";
+                msg = msg + 'Responsável: '+responsavel +'\r\n';
                 }
 
                 if(typeof telefone != 'undefined') {
-                msg = msg + "Telefone: "+telefone +"\r\n";
+                msg = msg + 'Telefone: '+telefone +'\r\n';
                 }
 
                 if(typeof celular != 'undefined') {
-                msg = msg + "Celular: "+celular;
+                msg = msg + 'Celular: '+celular;
                 }
                alert (msg.toUpperCase());              
             }

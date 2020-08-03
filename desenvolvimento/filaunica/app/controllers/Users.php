@@ -7,7 +7,7 @@
 
         public function index() {
 
-            if($_SESSION['user_type'] != "admin"){
+            if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');
             } else if($data = $this->userModel->getUsers()){  
                 $this->view('users/userslist', $data);
@@ -19,7 +19,7 @@
            
         }
 
-        public function new(){      
+        public function new(){    
            
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -29,12 +29,13 @@
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 
-                
+                /*
                 if (isset($_POST['type']) && ($_POST['type'] == 1)){
                     $type = "admin";
                 } else {
                     $type = "user";
                 }
+                */
 
 
                 //init data
@@ -129,7 +130,7 @@
                     'confirm_password_err' => '',
                     'erro' => ''
                 ];
-                if($_SESSION['user_type'] != "admin"){
+                if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                     redirect('index');
                 } else {
                      // Load view
@@ -149,13 +150,13 @@
 
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                
+                /*
                 if (isset($_POST['type']) && ($_POST['type'] == 1)){
                     $type = 'admin';
                 } else {
                     $type = 'user';
                 }
-                
+                */
                 //init data
                 $data = [
                     'name' => trim($_POST['name']),
@@ -220,7 +221,7 @@
                 // get exiting user from the model
                 $user = $this->userModel->getUserByid($id);
 
-                if($_SESSION['user_type'] != "admin"){
+                if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                     redirect('index');
                 }
                
@@ -232,7 +233,7 @@
                     'type' => $user->type                  
                 ];
 
-                if($_SESSION['user_type'] != "admin"){
+                if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                     redirect('index');
                 } else {
                 // Load view
@@ -244,7 +245,7 @@
 
         public function delete($id){ 
             
-            if($_SESSION['user_type'] != "admin"){
+            if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');
             } else if ($this->userModel->getUserById($id)){
                 $this->userModel->delUserByid($id); 
@@ -353,25 +354,25 @@
     public function createUserSession($user){
         // $user->id vem do model na função login() retorna a row com todos os campos
         // da consulta na tabela users
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
-        $_SESSION['user_type'] = $user->type;
+        $_SESSION[DB_NAME . '_user_id'] = $user->id;
+        $_SESSION[DB_NAME . '_user_email'] = $user->email;
+        $_SESSION[DB_NAME . '_user_name'] = $user->name;
+        $_SESSION[DB_NAME . '_user_type'] = $user->type;        
         redirect('pages/sistem');
         //redirect('admins/index');
     }
 
     public function logout(){
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_email']);
-        unset($_SESSION['user_name']);
-        unset($_SESSION['user_type']);
+        unset($_SESSION[DB_NAME . '_user_id']);
+        unset($_SESSION[DB_NAME . '_user_email']);
+        unset($_SESSION[DB_NAME . '_user_name']);
+        unset($_SESSION[DB_NAME . '_user_type']);
         session_destroy();
         redirect('pages/login'); 
     }
 
     public function isLoggedIn(){
-        if(isset($_SESSION['user_id'])){
+        if(isset($_SESSION[DB_NAME . '_user_id'])){
             return true;
         } else {
             return false;

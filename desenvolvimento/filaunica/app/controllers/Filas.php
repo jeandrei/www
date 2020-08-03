@@ -3,6 +3,7 @@
         public function __construct(){
             //vai procurar na pasta model um arquivo chamado Fila.php e incluir
             $this->filaModel = $this->model('Fila');
+            $this->etapaModel = $this->model('Etapa');
         }
 
         public function cadastrar(){
@@ -117,8 +118,8 @@
 
                 //valida etapa
                 if(!empty($data['nascimento'])){
-                    if($this->filaModel->getEtapa($data['nascimento'])){
-                        $data['etapa_id'] = $this->filaModel->getEtapa($data['nascimento']);
+                    if($this->etapaModel->getEtapa($data['nascimento'])){
+                        $data['etapa_id'] = $this->etapaModel->getEtapa($data['nascimento']);
                     }else
                     {
                         $data['nascimento_err'] = 'A data informada não corresponde a nenhuma etapa da fila.';                                           
@@ -201,12 +202,13 @@
 
                 //busco a posição que ficou na fila
                 $data['posicao'] = $this->filaModel->buscaPosicaoFila($data['protocolo']);
+               
 
                 //pego o id da etapa a partir da data de nascimento
-                $id_etapa = $this->filaModel->getEtapa($data['nascimento']);   
+                $id_etapa = $this->etapaModel->getEtapa($data['nascimento']);   
                 
                 //a partir do id da etapa pego a descrição
-                $data['desc_etapa'] = $this->filaModel->getDescricaoEtapa($id_etapa);
+                $data['desc_etapa'] = $this->etapaModel->getDescricaoEtapa($id_etapa);
 
                 // chamo o formulário de sucesso
                 $this->view('filas/sucessoCadastrar', $data);

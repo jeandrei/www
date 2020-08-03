@@ -7,7 +7,7 @@
 
         public function index() { 
             
-            if($_SESSION['user_type'] != "admin"){
+            if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');
             } 
             
@@ -99,7 +99,7 @@
             
             } else {
 
-                if($_SESSION['user_type'] != "admin"){
+                if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                     redirect('index');
                 } 
 
@@ -206,7 +206,7 @@
                 // get exiting user from the model
                 $etapa = $this->etapaModel->getEtapaByid($id);
 
-                if($_SESSION['user_type'] != "admin"){
+                if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                     redirect('userlist');
                 }
                
@@ -225,7 +225,7 @@
 
         public function delete($id){ 
            
-            if($_SESSION['user_type'] != "admin"){
+            if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');
             }  
 
@@ -245,112 +245,5 @@
             $this->view('etapas/index', $data);     
             
         }
-            
-/*
-        public function login(){          
-            // Check for POST            
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                // Process form
-
-                // Sanitize POST data
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-                //init data
-                $data = [                    
-                    'email' => trim($_POST['email']),
-                    'password' => trim($_POST['password']),  
-                    'email_err' => '',
-                    'password_err' => ''
-                    
-                ];      
-
-                // Validate Email
-                if(empty($data['email'])){
-                    $data['email_err'] = 'Por favor informe seu email';
-                } else {
-                    // Check for user/email
-                    if($this->userModel->findUserByEmail($data['email'])){
-                        // User found
-                    } else {
-                    $data['email_err'] = 'Usuário não encontrado';
-                    }
-                }
-               
-
-                 // Validate Password
-                 if(empty($data['password'])){
-                    $data['password_err'] = 'Por favor informe sua senha';
-                } 
-
-                
-                               
-                // Make sure errors are empty
-                if(                    
-                    empty($data['email_err']) &&                     
-                    empty($data['password_err'])                     
-                    ){
-                      //Validate
-                      // 1 Check and set loged in user
-                      // 2 models/User login();
-                      $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-                      
-                      if($loggedInUser){
-                        // Create Session 
-                        // função no final desse arquivo
-                        $this->createUserSession($loggedInUser);
-                      } else {
-                          $data['password_err'] = 'Senha incorreta';
-
-                          $this->view('users/login', $data);
-                      }
-                    } else {
-                      // Load the view with errors
-                      $this->view('users/login', $data);
-                    }               
-
-            
-            } else {
-                // Init data
-                $data = [
-                    'name' => '',
-                    'email' => '',
-                    'password' => '',
-                    'confirm_password' => '',
-                    'name_err' => '',
-                    'email_err' => '',
-                    'password_err' => '',
-                    'confirm_password_err' => ''
-                ];
-                // Load view
-                $this->view('users/login', $data);
-            }
-    }
-
-    public function createUserSession($user){
-        // $user->id vem do model na função login() retorna a row com todos os campos
-        // da consulta na tabela users
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
-        $_SESSION['user_type'] = $user->type;
-        redirect('admins/index');
-    }
-
-    public function logout(){
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_email']);
-        unset($_SESSION['user_name']);
-        unset($_SESSION['user_type']);
-        session_destroy();
-        redirect('pages/login'); 
-    }
-
-    public function isLoggedIn(){
-        if(isset($_SESSION['user_id'])){
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 }   
 ?>
