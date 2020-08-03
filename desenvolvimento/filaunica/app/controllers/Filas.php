@@ -274,9 +274,7 @@
                 
                 if($this->filaModel->buscaPosicaoFila($_POST['protocolo']))
                 {
-                    $data->posicao = $this->filaModel->buscaPosicaoFila($_POST['protocolo']); 
-                    $posicao = $data->posicao->posicaonafila . "º";
-                    $data->posicao = $posicao;
+                    $data->posicao = $this->filaModel->buscaPosicaoFila($_POST['protocolo']);                    
                 }else
                 {
                     $data->posicao = "-";

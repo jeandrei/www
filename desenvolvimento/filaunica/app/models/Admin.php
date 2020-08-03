@@ -63,15 +63,11 @@
             
             
         }
+        
 
-
-
-
-          //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-          public function getFilaBusca($page, $options){           
-            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";
-
-           
+        //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+        public function getFilaBusca($page, $options){           
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
             
             // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
             if(($options['named_params'][':etapa_id']) == "Todos"){                    

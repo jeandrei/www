@@ -61,16 +61,5 @@
             ];
             $this->view('pages/about', $data);           
         }
-
-
-
-
-        // PÁGINA DE TESTE PODE SER REMOVIDA
-        public function modelo_pagina(){
-            $data = [
-                'title' => 'Página de modelo',
-                'description'=> 'Modelo de página simples'
-            ];
-            $this->view('pages/modelo_pagina', $data);           
-        }
+        
 }

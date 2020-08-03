@@ -2,9 +2,9 @@
 <h1>Histórico</h1>
 <a href="<?php echo URLROOT; ?>/admins" class="btn btn-light mt-3" style="margin:2em 0;"><i class="fa fa-backward"></i>Back</a>
 
+<br>
 
-
-<?php if($data['erro']!=null){die('Sem dados para emitir');}?>
+<?php if($data['erro']!=null){die($data['erro']);}?>
 
 <table class="table table-striped">
   <thead>
