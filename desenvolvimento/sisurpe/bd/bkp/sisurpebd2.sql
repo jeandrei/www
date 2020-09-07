@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sisurpe`
 --
-DROP DATABASE IF EXISTS sisurpe;
-
 CREATE DATABASE sisurpe CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 use sisurpe;
@@ -86,7 +84,7 @@ INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,

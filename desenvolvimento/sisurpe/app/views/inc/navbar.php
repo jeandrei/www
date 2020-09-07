@@ -12,6 +12,9 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>">Início</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/datausers/show">Alunos</a>
+          </li>          
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
           </li>
           <li class="nav-item">

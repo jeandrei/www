@@ -13,7 +13,7 @@
                 
                 // 3 coloca os valores no array
                 $data = [
-                'title' => 'SISURPE Login',
+                'title' => 'SISURPE',
                 'description'=> 'Sistema Unificado de Registros de Penha.'
             ];
 
@@ -28,6 +28,7 @@
             ];
             $this->view('pages/about', $data);           
         }
+        
 
         public function modelo_pagina(){
             $data = [

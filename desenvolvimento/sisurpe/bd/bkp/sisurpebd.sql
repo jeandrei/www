@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sisurpe`
 --
+DROP DATABASE IF EXISTS sisurpe;
+
 CREATE DATABASE sisurpe CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 use sisurpe;
@@ -63,7 +65,8 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 
 CREATE TABLE `etapa` (
   `id` int(11) NOT NULL,
-  `idade` int(2) NOT NULL,
+  `data_ini` date DEFAULT NULL,
+  `data_fin` date DEFAULT NULL,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,11 +74,11 @@ CREATE TABLE `etapa` (
 -- Despejando dados para a tabela `etapa`
 --
 
-INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
-(1, 1, 'BERÇÁRIO-I'),
-(2, 2, 'BERÇÁRIO-II'),
-(3, 3, 'MATERNAL'),
-(4, 4, 'PRÉ-I');
+INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
+(1, '2019-04-01', '2020-12-31', 'BERÇÁRIO-I'),
+(2, '2018-04-01', '2019-03-31', 'BERÇÁRIO-II'),
+(3, '2017-04-01', '2018-03-31', 'MATERNAL'),
+(4, '2016-04-01', '2017-03-31', 'PRÉ-I');
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,7 @@ INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -96,7 +99,7 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
+INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUES
 (1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin' '2018-11-23 10:19:18'),
 (2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36'),
 (3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', '2019-01-09 16:46:20');
@@ -107,8 +110,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
 
 CREATE TABLE `aluno` (
   `id_aluno` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `nome_aluno` varchar(255) NOT NULL,
+  `chave` char(13) NOT NULL,
   `nascimento` datetime DEFAULT NULL,
   `sexo` char(1) NOT NULL,
   `telefone_aluno` char(20) DEFAULT NULL,
@@ -125,14 +128,14 @@ CREATE TABLE `aluno` (
   `uf_rg` char(2) DEFAULT NULL,
   `orgao_emissor` char(5) DEFAULT NULL,
   `titulo_eleitor` varchar(20) DEFAULT NULL,
-  `zona` char(11) DEFAULT NULL,
-  `secao` char(11) DEFAULT NULL,
+  `zona` int(11) DEFAULT NULL,
+  `secao` int(11) DEFAULT NULL,
   `certidao` varchar(255) DEFAULT NULL,
   `uf_cert` char(2) DEFAULT NULL,
   `cartorio_cert` varchar(255) DEFAULT NULL,
   `modelo` varchar(255) DEFAULT NULL,
-  `numero` char(11) DEFAULT NULL,
-  `folha` char(11) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `folha` int(11) DEFAULT NULL,
   `livro` varchar(255) DEFAULT NULL,
   `data_emissao_cert` datetime DEFAULT NULL,
   `municipio_cert` varchar(255) DEFAULT NULL,
@@ -145,7 +148,14 @@ CREATE TABLE `aluno` (
   `restric_alimentos` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Fazendo dump de dados para tabela `aluno`
+--
 
+INSERT INTO `aluno` (`id_aluno`, `nome_aluno`, `chave`, `nascimento`, `sexo`, `telefone_aluno`, `email_aluno`, `nome_pai`, `telefone_pai`, `nome_mae`, `telefone_mae`, `nome_responsavel`, `telefone_resp`, `naturalidade`, `nacionalidade`, `rg`, `uf_rg`, `orgao_emissor`, `titulo_eleitor`, `zona`, `secao`, `certidao`, `uf_cert`, `cartorio_cert`, `modelo`, `numero`, `folha`, `livro`, `data_emissao_cert`, `municipio_cert`, `cpf`, `tipo_sanguineo`, `faz_uso_medicacao`, `medicamentos`, `alergias`, `deficiencias`, `restric_alimentos`) VALUES
+(1, 'ABRAÃO ANGELO CORRÊA DE SOUZA', 'uKzDHYY4A2jH', '1980-02-10 00:00:00', 'M', '(47) 99116-9854', 'abraaoangelo@gmail.com', 'CARLOS SOUZA', '(47) 99116-9965', 'MARIA SOUZA', '(47) 99116-0076', 'O PAI', '(47) 99116-9965', 'PENHA', 'BRASILEIRA', '3498.678', 'PR', 'SSP', '9987665', 201, 9, '88476464', 'SC', 'CARTORIO DE PENHA', 'NOVO', 987, 90, '67', '1980-03-10 00:00:00', 'PENHA', '0987.367.87-25', 'O+', 'SIM', 'TESTE DE MEDICAMENTO', 'TESTE DE ALERGIA', 'TESTE DE DEFICIENCIA', 'TESTE RESTRIÇÃO');
+
+-- --------------------------------------------------------
 
 --
 -- Estrutura para tabela `ano`
@@ -213,14 +223,13 @@ ALTER TABLE `etapa`
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`id_aluno`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id_aluno`);
 
 --
 -- Índices de tabela `ano`
@@ -263,7 +272,7 @@ ALTER TABLE `etapa`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 --

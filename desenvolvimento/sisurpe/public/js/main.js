@@ -187,5 +187,10 @@ function checkedRadioBtn(sGroupName)
                 return null;
             }
         }
-    }
+	}
+	
+	function question(ask)
+	{
+		return confirm (ask);
+	}
 
