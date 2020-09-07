@@ -47,6 +47,66 @@ return $html;
 }
 
 
+function imptamanhounif($tamanhosec){
+  $arrayTamanhos = array(
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      'P',
+      'M',
+      'G',
+      'GG',
+      'EG',      
+    );  
+    foreach($arrayTamanhos as $tamanho){ 
+      //idtamanho tem que ser passada pelo post
+      if($tamanho == $tamanhosec){
+        $html .= '<option selected value="'.$tamanho.'" '.'>'.$tamanho.'</option>';
+      }
+      else{
+      $html .='<option value="'.$tamanho.'" '.'>'.$tamanho.'</option>';           
+  
+    }
+  
+  }
+  return $html;
+  }
+
+
+  function imptlinhastransporte($linhasec){
+    $arrayLinhas = array(
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        'ARMAÇÃO',
+        'SANTA LIDIA',
+        'TESTE',              
+      );  
+      foreach($arrayLinhas as $linha){ 
+        //idtamanho tem que ser passada pelo post
+        if($linha == $linhasec){
+          $html .= '<option selected value="'.$linha.'" '.'>'.$linha.'</option>';
+        }
+        else{
+        $html .='<option value="'.$linha.'" '.'>'.$linha.'</option>';           
+    
+      }
+    
+    }
+    return $html;
+    }
+
+
 function validaCPF($cpf) {
  
   // Extrai somente os números

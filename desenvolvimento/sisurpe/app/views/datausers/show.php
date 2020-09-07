@@ -31,36 +31,41 @@ if(isset($data['error'])){
 
 <!-- MONTO A TABELA DENTRO DE UM CONTAINER FLUID PARA OCUPAR TODA A TELA -->
 <div class="row">
-    <div class="col text-center small">
-        <table class="table table-striped table-sm" style="font-size: 15px;">
+    <div class="col text-center">
+        <table class="table table-striped">
             <thead>
             <tr>                             
-                <th scope="col">Nome da Criança</th>
-                <th scope="col">Data de Nascimento</th>   
-                <th scope="col"></th> 
-                <th scope="col"></th>   
+                <th class="col-1">Nome da Criança</th>
+                <th class="col-2">Nascimento</th>
+                <th class="col-2">Última Atualização</th>     
+                <th class="col-3">Ações</th>                  
             </tr>
             </thead>   
             <tbody>             
                 <?php foreach ($data as $registro): ?>
                     <tr>
-                        <td><?php echo $registro->nome_aluno;?></td>
-                        <td><?php echo date('d/m/Y', strtotime($registro->nascimento)); ?></td>   
-                        <td><a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro->id_aluno; ?>" class="fa fa-edit btn btn-success pull-right btn-sm">Editar</a></td>                
-                        <td><a 
-                                href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro->id_aluno;?>" 
-                                class="fa fa-remove btn btn-danger pull-left btn-sm"
-                                onclick="if(question('Tem certeza que deseja remover o registro?') == true)
-                                        {
-                                            document.forms[0].submit();
-                                        }
-                                        else
-                                        {										
-                                            return false;
-                                        }"                       
-                            >                        
-                                Remover
-                            </a></td>                           
+                    <td class="col-1"><?php echo $registro['nome_aluno'];?></td>
+                    <td class="col-2"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>
+                    <td class="col-2"><b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Sem Informação'; ?></b></td>
+                    <td class="col-3">
+                        <div class="btn-group">                        
+                            <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="fa fa-bus btn btn-primary btn-lg">Dados Escolares</a>                            
+                            <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>               
+                            <a 
+                                    href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['id_aluno'];?>" 
+                                    class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? 'disabled' : ''; ?>"
+                                    onclick="if(question('Tem certeza que deseja remover o registro?') == true)
+                                            {
+                                                document.forms[0].submit();
+                                            }
+                                            else
+                                            {										
+                                                return false;
+                                            }"                       
+                                >                        
+                                    Remover
+                                </a>                        
+                        </div>                                                   
                     </tr>   
                 <?php endforeach; ?>
             </tbody>

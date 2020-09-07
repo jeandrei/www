@@ -7,13 +7,14 @@
         }
        
      $this->dataModel = $this->model('Datauser');
-    // $this->userModel = $this->model('User');
+     $this->dadosModel = $this->model('Anual');
+
+    
     }
 
     
      public function index(){
-        $datauser = $this->dataModel->getDatauserByid($_SESSION['id_aluno']);
-        //var_dump($datauser->nome_aluno);
+        $datauser = $this->dataModel->getDatauserByid($_SESSION['id_aluno']); 
         $data = [
             'id' => $datauser->id_aluno,
             'nome_aluno' => $datauser->nome_aluno,
@@ -50,8 +51,7 @@
             'medicamentos' => $datauser->medicamentos,
             'alergias' => $datauser->alergias,
             'deficiencias' => $datauser->deficiencias,
-            'restric_alimentos' => $datauser->restric_alimentos
-
+            'restric_alimentos' => $datauser->restric_alimentos     
         ];
         
         //var_dump($data);
@@ -62,7 +62,19 @@
      }
 
      public function show(){
-       if ($data = $this->dataModel->getAlunosUsuario($_SESSION['user_id'])){
+       if ($dados = $this->dataModel->getAlunosUsuario($_SESSION['user_id'])){
+
+
+
+        foreach($dados as $dado){
+          $data[] = [
+            'id_aluno' => $dado->id_aluno,
+            'nome_aluno' => $dado->nome_aluno,
+            'nascimento' => $dado->nascimento,
+            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->id_aluno)
+          ];
+        }
+
           $this->view('datausers/show', $data);
        } else {
           $this->view('datausers/show', $data = ['error' => "Ainda não existem alunos cadastrados"]);
@@ -207,7 +219,7 @@
                   if($this->dataModel->register($data)){
                     // Cria a menságem antes de chamar o view va para 
                     // views/users/login a segunda parte da menságem
-                    flash('register_success', 'Dados registrados com sucesso');                        
+                    flash('mensagem', 'Dados registrados com sucesso');                        
                     redirect('datausers/show');
                   } else {
                       die('Ops! Algo deu errado.');
@@ -501,8 +513,25 @@
           flash('mensagem', 'Registro removido com sucesso!');                
       } else {
           flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
-      }        
-        $this->view('datausers/show', $data);  
+      }
+
+
+      if ($dados = $this->dataModel->getAlunosUsuario($_SESSION['user_id'])){
+
+        foreach($dados as $dado){
+          $data[] = [
+            'id_aluno' => $dado->id_aluno,
+            'nome_aluno' => $dado->nome_aluno,
+            'nascimento' => $dado->nascimento,
+            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->id_aluno)
+          ];
+        }
+
+          $this->view('datausers/show', $data);
+       } else {
+          $this->view('datausers/show', $data = ['error' => "Ainda não existem alunos cadastrados"]);
+       }
+       
     }
 
 

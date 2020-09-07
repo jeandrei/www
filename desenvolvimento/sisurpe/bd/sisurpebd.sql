@@ -111,7 +111,7 @@ CREATE TABLE `aluno` (
   `id_aluno` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `nome_aluno` varchar(255) NOT NULL,
-  `nascimento` datetime DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
   `sexo` char(1) NOT NULL,
   `telefone_aluno` char(20) DEFAULT NULL,
   `email_aluno` varchar(255) DEFAULT NULL,
@@ -149,15 +149,6 @@ CREATE TABLE `aluno` (
 
 
 
---
--- Estrutura para tabela `ano`
---
-
-CREATE TABLE `ano` (
-  `id_ano` int(11) NOT NULL,
-  `ano` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
 
 --
@@ -166,8 +157,7 @@ CREATE TABLE `ano` (
 
 CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
-  `aluno_id` int(11) NOT NULL,
-  `ano_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,  
   `usa_transporte` char(3) DEFAULT NULL,
   `linha` varchar(255) DEFAULT NULL,
   `tam_moletom` varchar(50) DEFAULT NULL,
@@ -177,8 +167,9 @@ CREATE TABLE `dados_anuais` (
   `tam_calcado` varchar(50) DEFAULT NULL,
   `tam_meia` varchar(50) DEFAULT NULL,
   `escola` varchar(255) DEFAULT NULL,
-  `turma` char(50) DEFAULT NULL,
-  `turno` char(1) DEFAULT NULL
+  `etapa` char(50) DEFAULT NULL,
+  `turno` char(1) DEFAULT NULL,
+  `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -224,19 +215,14 @@ ALTER TABLE `aluno`
   ADD PRIMARY KEY (`id_aluno`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Índices de tabela `ano`
---
-ALTER TABLE `ano`
-  ADD PRIMARY KEY (`id_ano`);
 
 --
 -- Índices de tabela `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
   ADD PRIMARY KEY (`id_da`),
-  ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `ano_id` (`ano_id`);
+  ADD KEY `aluno_id` (`aluno_id`);
+  
 
 --
 -- Índices de tabela `endereco`
@@ -272,13 +258,8 @@ COMMIT;
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
---
--- AUTO_INCREMENT de tabela `ano`
---
-ALTER TABLE `ano`
-  MODIFY `id_ano` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `dados_anuais`
@@ -300,8 +281,8 @@ ALTER TABLE `endereco`
 -- Restrições para tabelas `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
-  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`),
-  ADD CONSTRAINT `dados_anuais_ibfk_2` FOREIGN KEY (`ano_id`) REFERENCES `ano` (`id_ano`);
+  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`);
+  
 
 --
 -- Restrições para tabelas `endereco`
