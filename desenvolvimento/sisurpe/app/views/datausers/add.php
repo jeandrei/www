@@ -118,7 +118,7 @@
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexof" value="option2">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexof" value="F">
                         <label class="form-check-label" for="sexof">
                           Feminino
                         </label>
@@ -482,14 +482,14 @@
                 </div>
             </div>
             <div class="form-group col-md-3">
-              <label for="uso_med">Faz uso de medicamento</label>
+              <label for="fazUsoMed">Faz uso de medicamento</label>
               <select
                 class="form-control <?php echo (!empty($data['uso_med_err'])) ? 'is-invalid' : ''; ?>"      
-                name="uso_med"
-                id="uso_med">
-                  <option selected>Selecione</option>
-                  <option>Sim</option>
-                  <option>Não</option>
+                name="fazUsoMed"
+                id="fazUsoMed">
+                  <option value="NI" selected>Selecione</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
               </select>
               <div class="invalid-feedback">
                     <?php echo $data['uso_med_err']; ?>

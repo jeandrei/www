@@ -46,7 +46,7 @@
             'municipio_cert' => $datauser->municipio_cert,
             'cpf' => $datauser->cpf,
             'tipo_sanguineo' => $datauser->tipo_sanguineo,
-            'faz_uso_medicacao' => $datauser->faz_uso_medicacao,
+            'fazUsoMed' => $datauser->fazUsoMed,
             'medicamentos' => $datauser->medicamentos,
             'alergias' => $datauser->alergias,
             'deficiencias' => $datauser->deficiencias,
@@ -113,7 +113,7 @@
               'municipio_cert' => trim($_POST['municipio_cert']),
               'cpf' => $_POST['cpf'],
               'tipo_sanguineo' => trim($_POST['tipo_sanguineo']),
-              'faz_uso_medicacao' => trim($_POST['faz_uso_medicacao']),
+              'fazUsoMed' => trim($_POST['fazUsoMed']),
               'medicamentos' => trim($_POST['medicamentos']),
               'alergias' => trim($_POST['alergias']),
               'deficiencias' => trim($_POST['deficiencias']),
@@ -203,7 +203,7 @@
                 ){
                   //Validated 
 
-                  // Register User
+                  // Register User                 
                   if($this->dataModel->register($data)){
                     // Cria a menságem antes de chamar o view va para 
                     // views/users/login a segunda parte da menságem
@@ -254,7 +254,7 @@
               'municipio_cert' => '',
               'cpf' => '',
               'tipo_sanguineo' => '',
-              'faz_uso_medicacao' => '',
+              'fazUsoMed' => '',
               'medicamentos' => '',
               'alergias' => '',
               'deficiencias' => '',
@@ -319,7 +319,7 @@
           'municipio_cert' => trim($_POST['municipio_cert']),
           'cpf' => $_POST['cpf'],
           'tipo_sanguineo' => trim($_POST['tipo_sanguineo']),
-          'faz_uso_medicacao' => trim($_POST['faz_uso_medicacao']),
+          'fazUsoMed' => trim($_POST['fazUsoMed']),
           'medicamentos' => trim($_POST['medicamentos']),
           'alergias' => trim($_POST['alergias']),
           'deficiencias' => trim($_POST['deficiencias']),
@@ -429,44 +429,44 @@
     
     } else {
         // Init data
-        $data = $this->dataModel->getAlunoById($id);
+        $data = $this->dataModel->getAlunoById($id);        
         $data = [ 
           'id_aluno' => $data->id_aluno,
           'nome_aluno' => $data->nome_aluno,
           'nascimento' => date('Y-d-m', strtotime($data->nascimento)),          
-          'sexo' =>  $data->sexo,
-          'telefone_aluno' =>  $data->telefone_aluno,
+          'sexo' => $data->sexo,
+          'telefone_aluno' => $data->telefone_aluno,
           'email_aluno' =>  $data->email_aluno,
-          'nome_pai' =>  $data->nome_pai,
-          'telefone_pai' =>  $data->telefone_pai,
-          'nome_mae' =>  $data->nome_mae,
-          'telefone_mae' =>  $data->telefone_mae,
-          'nome_responsavel' =>  $data->nome_responsavel,
-          'telefone_resp' =>  $data->telefone_resp,
-          'naturalidade' =>  $data->naturalidade,
-          'nacionalidade' =>  $data->nacionalidade,
-          'rg' =>  $data->rg,
-          'uf_rg' =>  $data->uf_rg,
-          'orgao_emissor' =>  $data->orgao_emissor,
-          'titulo_eleitor' =>  $data->titulo_eleitor,
-          'zona' =>  $data->zona,
-          'secao' =>  $data->secao,
-          'certidao' =>  $data->certidao,
-          'uf_cert' =>  $data->uf_cert,
-          'cartorio_cert' =>  $data->cartorio_cert,
-          'modelo' =>  $data->modelo,
-          'numero' =>  $data->numero,
-          'folha' =>  $data->folha,
-          'livro' =>  $data->livro,
-          'data_emissao_cert' =>  $data->data_emissao_cert,
-          'municipio_cert' =>  $data->municipio_cert,
-          'cpf' =>  $data->cpf,
-          'tipo_sanguineo' =>  $data->tipo_sanguineo,
-          'faz_uso_medicacao' =>  $data->faz_uso_medicacao,
-          'medicamentos' =>  $data->medicamentos,
+          'nome_pai' => $data->nome_pai,
+          'telefone_pai' => $data->telefone_pai,
+          'nome_mae' => $data->nome_mae,
+          'telefone_mae' => $data->telefone_mae,
+          'nome_responsavel' => $data->nome_responsavel,
+          'telefone_resp' => $data->telefone_resp,
+          'naturalidade' => $data->naturalidade,
+          'nacionalidade' => $data->nacionalidade,
+          'rg' => $data->rg,
+          'uf_rg' => $data->uf_rg,
+          'orgao_emissor' => $data->orgao_emissor,
+          'titulo_eleitor' => $data->titulo_eleitor,
+          'zona' => $data->zona,
+          'secao' => $data->secao,
+          'certidao' => $data->certidao,
+          'uf_cert' => $data->uf_cert,
+          'cartorio_cert' => $data->cartorio_cert,
+          'modelo' => $data->modelo,
+          'numero' => $data->numero,
+          'folha' => $data->folha,
+          'livro' => $data->livro,
+          'data_emissao_cert' =>  date('Y-d-m', strtotime($data->data_emissao_cert)),
+          'municipio_cert' => $data->municipio_cert,
+          'cpf' => $data->cpf,
+          'tipo_sanguineo' => $data->tipo_sanguineo,
+          'fazUsoMed' => $data->fazUsoMed,
+          'medicamentos' => $data->medicamentos,
           'alergias' =>  $data->alergias,
-          'deficiencias' =>  $data->deficiencias,
-          'restric_alimentos' =>  $data->restric_alimentos
+          'deficiencias' => $data->deficiencias,
+          'restric_alimentos' => $data->restric_alimentos
       ];
         // Load view
         $this->view('datausers/edit', $data);

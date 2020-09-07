@@ -109,13 +109,13 @@
                 <div class="form-group col-md-4">  <legend class="col-form-label col-sm-2 pt-0">Sexo</legend>
                     <div class="col-sm-10">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexom" value="M" checked>
+                        <input class="form-check-input" type="radio" name="sexo" id="sexom" value="M" <?php echo (($data['sexo'])=="M") ? 'checked' : ''; ?>>
                         <label class="form-check-label" for="sexom">
                           Masculino
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexof" value="option2">
+                        <input class="form-check-input" type="radio" name="sexo" id="sexof" value="F" <?php echo (($data['sexo'])=="F") ? 'checked' : ''; ?>>
                         <label class="form-check-label" for="sexof">
                           Feminino
                         </label>
@@ -479,14 +479,14 @@
                 </div>
             </div>
             <div class="form-group col-md-3">
-              <label for="uso_med">Faz uso de medicamento</label>
+              <label for="fazUsoMed">Faz uso de medicamento</label>
               <select
                 class="form-control <?php echo (!empty($data['uso_med_err'])) ? 'is-invalid' : ''; ?>"      
-                name="uso_med"
-                id="uso_med">
-                  <option selected>Selecione</option>
-                  <option>Sim</option>
-                  <option>Não</option>
+                name="fazUsoMed"
+                id="fazUsoMed">
+                  <option value="NI" <?php echo (($data['fazUsoMed'])=="NI") ? 'selected' : ''; ?> >Selecione</option>
+                  <option value="Sim" <?php echo (($data['fazUsoMed'])=="Sim") ? 'selected' : ''; ?> >Sim</option>
+                  <option value="Não" <?php echo (($data['fazUsoMed'])=="Não") ? 'selected' : ''; ?> >Não</option>
               </select>
               <div class="invalid-feedback">
                     <?php echo $data['uso_med_err']; ?>

@@ -51,7 +51,7 @@
                                             municipio_cert = :municipio_cert, 
                                             cpf = :cpf, 
                                             tipo_sanguineo = :tipo_sanguineo, 
-                                            faz_uso_medicacao = :faz_uso_medicacao, 
+                                            fazUsoMed = :fazUsoMed, 
                                             medicamentos = :medicamentos, 
                                             alergias = :alergias, 
                                             deficiencias = :deficiencias, 
@@ -96,7 +96,7 @@
         $this->db->bind(':municipio_cert',$data['municipio_cert']);
         $this->db->bind(':cpf',$data['cpf']);
         $this->db->bind(':tipo_sanguineo',$data['tipo_sanguineo']);
-        $this->db->bind(':faz_uso_medicacao',$data['faz_uso_medicacao']);
+        $this->db->bind(':fazUsoMed',$data['fazUsoMed']);
         $this->db->bind(':medicamentos',$data['medicamentos']);
         $this->db->bind(':alergias',$data['alergias']);
         $this->db->bind(':deficiencias',$data['deficiencias']);
@@ -154,7 +154,7 @@
                                             municipio_cert = :municipio_cert, 
                                             cpf = :cpf, 
                                             tipo_sanguineo = :tipo_sanguineo, 
-                                            faz_uso_medicacao = :faz_uso_medicacao, 
+                                            fazUsoMed = :fazUsoMed, 
                                             medicamentos = :medicamentos, 
                                             alergias = :alergias, 
                                             deficiencias = :deficiencias, 
@@ -198,7 +198,7 @@
         $this->db->bind(':municipio_cert',$data['municipio_cert']);
         $this->db->bind(':cpf',$data['cpf']);
         $this->db->bind(':tipo_sanguineo',$data['tipo_sanguineo']);
-        $this->db->bind(':faz_uso_medicacao',$data['faz_uso_medicacao']);
+        $this->db->bind(':fazUsoMed',$data['fazUsoMed']);
         $this->db->bind(':medicamentos',$data['medicamentos']);
         $this->db->bind(':alergias',$data['alergias']);
         $this->db->bind(':deficiencias',$data['deficiencias']);
