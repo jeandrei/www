@@ -40,6 +40,10 @@
           $data['linha_err'] = 'Por favor informe a linha';
       } 
 
+      if($this->transporteModel->checkAlunoLinha($data['aluno_id'], $data['linha'])){
+        $data['linha_err'] = 'Linha já adicionada';
+      }
+
        // Make sure errors are empty
        if(                    
         empty($data['linha_err']) 

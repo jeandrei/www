@@ -82,6 +82,20 @@
             return false;
         }           
     }  
+
+
+    public function checkAlunoLinha($aluno_id,$linha_id){
+        $this->db->query("SELECT * FROM aluno_linhas WHERE aluno_id = :aluno_id AND linha_id = :linha_id");
+        $this->db->bind(':aluno_id',$aluno_id);
+        $this->db->bind(':linha_id',$linha_id);  
+        $result = $this->db->single(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+
+    }
     
     
 
