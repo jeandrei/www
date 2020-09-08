@@ -74,10 +74,13 @@ if(isset($data['error'])){
                         Linhas que o aluno utiliza: 
                             <b>
                                 <?php 
-                                    $linhas = $this->transporteModel->getLinhasAlunoById($registro['id_aluno']); 
-                                    echo "|";                                
-                                    foreach($linhas as $linha){
-                                        echo $linha->linha . "|";
+                                    if($linhas = $this->transporteModel->getLinhasAlunoById($registro['id_aluno'])){ 
+                                        echo "|";                                
+                                        foreach($linhas as $linha){
+                                            echo $linha->linha . "|";
+                                        }
+                                    } else {
+                                        echo "Aluno sem informação de Dados de Transporte Escolar";
                                     }
                                 ?>
                             </b>
