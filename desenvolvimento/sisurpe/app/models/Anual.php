@@ -87,8 +87,7 @@
     public function register($data){
         $this->db->query('INSERT INTO dados_anuais SET
                                             aluno_id  = :aluno_id ,
-                                            usa_transporte = :usa_transporte,
-                                            linha = :linha, 
+                                            usa_transporte = :usa_transporte,                                            
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
                                             tam_calca = :tam_calca, 
@@ -103,8 +102,7 @@
                   
         // Bind values
         $this->db->bind(':aluno_id',$data['aluno_id']);
-        $this->db->bind(':usa_transporte',$data['usa_transporte']);
-        $this->db->bind(':linha',$data['linha']);
+        $this->db->bind(':usa_transporte',$data['usa_transporte']);        
         $this->db->bind(':tam_moletom',$data['tam_moletom']);
         $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
         $this->db->bind(':tam_calca',$data['tam_calca']);
