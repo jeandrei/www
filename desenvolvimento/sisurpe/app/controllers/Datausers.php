@@ -425,8 +425,8 @@
               if($this->dataModel->update($data)){
                 // Cria a menságem antes de chamar o view va para 
                 // views/users/login a segunda parte da menságem
-                flash('edit_success', 'Dados atualizados com sucesso');                        
-                redirect('datausers/edit/' . $id);
+                flash('mensagem', 'Dados atualizados com sucesso');                        
+                redirect('datausers/show/' . $id);
               } else {
                   die('Ops! Algo deu errado.');
               }

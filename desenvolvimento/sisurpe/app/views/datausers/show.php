@@ -29,29 +29,20 @@ if(isset($data['error'])){
 ?>    
 
 
-<!-- MONTO A TABELA DENTRO DE UM CONTAINER FLUID PARA OCUPAR TODA A TELA -->
-<div class="row">
-    <div class="col text-center">
-        <table class="table table-striped">
-            <thead>
-                <tr class="d-flex">                             
-                    <th class="col-4">Nome da Criança</th>
-                    <th class="col-1">Nascimento</th>
-                    <th class="col-3">Última Atualização dos Dados Escolares</th>     
-                    <th class="col-4">Ações</th>                  
-                </tr>
-            </thead>   
-            <tbody>             
+
+   
+               
                 <?php foreach ($data as $registro): ?>
-                    <tr class="d-flex">
-                        <td class="col-4"><?php echo $registro['nome_aluno'];?></td>
-                        <td class="col-1"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>
-                        <td class="col-3"><b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Sem Informação'; ?></b></td>
-                        <td class="col-4">
-                            <div class="btn-group">                        
-                                <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="fa fa-bus btn btn-primary btn-lg">Dados Escolares</a>                            
-                                <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>               
-                                <a 
+                    <div class="card card-body mb-3">
+                        
+                        <!--text-right para alinhar os botões no lado direito-->
+                        <div class="text-right" style="margin-bottom:2rem;">
+                            <!--btn-group para agrupar os botões--> 
+                            <div class="btn-group"> 
+
+                                    <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>
+
+                                    <a 
                                         href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['id_aluno'];?>" 
                                         class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? 'disabled' : ''; ?>"
                                         onclick="if(question('Tem certeza que deseja remover o registro?') == true)
@@ -64,15 +55,30 @@ if(isset($data['error'])){
                                                 }"                       
                                     >                        
                                         Remover
-                                    </a>                        
+                                    </a>    
+
                             </div>
-                        </td>                                                   
-                    </tr>   
+                        </div> 
+                        
+                        <h4 class="card-title"><?php echo strtoupper($registro['nome_aluno']); ?></h4>
+                        
+                        <div class="bg-light p-2 mb-3">
+                        Nascimento: <?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?> 
+                        </div>
+                        
+                        <div class="bg-light p-2 mb-3">
+                        Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares'; ?></b>
+                        </div>     
+                        
+                        <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-dark">
+                        Dados Escolares</a>
+
+                          
+                    </div>
                 <?php endforeach; ?>
-            </tbody>
-        </table>  
-    </div>
-</div>
+             
+    
+
 
 
 
