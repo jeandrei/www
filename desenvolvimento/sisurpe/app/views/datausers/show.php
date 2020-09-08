@@ -34,38 +34,39 @@ if(isset($data['error'])){
     <div class="col text-center">
         <table class="table table-striped">
             <thead>
-            <tr>                             
-                <th class="col-1">Nome da Criança</th>
-                <th class="col-2">Nascimento</th>
-                <th class="col-2">Última Atualização</th>     
-                <th class="col-3">Ações</th>                  
-            </tr>
+                <tr class="d-flex">                             
+                    <th class="col-4">Nome da Criança</th>
+                    <th class="col-1">Nascimento</th>
+                    <th class="col-3">Última Atualização dos Dados Escolares</th>     
+                    <th class="col-4">Ações</th>                  
+                </tr>
             </thead>   
             <tbody>             
                 <?php foreach ($data as $registro): ?>
-                    <tr>
-                    <td class="col-1"><?php echo $registro['nome_aluno'];?></td>
-                    <td class="col-2"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>
-                    <td class="col-2"><b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Sem Informação'; ?></b></td>
-                    <td class="col-3">
-                        <div class="btn-group">                        
-                            <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="fa fa-bus btn btn-primary btn-lg">Dados Escolares</a>                            
-                            <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>               
-                            <a 
-                                    href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['id_aluno'];?>" 
-                                    class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? 'disabled' : ''; ?>"
-                                    onclick="if(question('Tem certeza que deseja remover o registro?') == true)
-                                            {
-                                                document.forms[0].submit();
-                                            }
-                                            else
-                                            {										
-                                                return false;
-                                            }"                       
-                                >                        
-                                    Remover
-                                </a>                        
-                        </div>                                                   
+                    <tr class="d-flex">
+                        <td class="col-4"><?php echo $registro['nome_aluno'];?></td>
+                        <td class="col-1"><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></td>
+                        <td class="col-3"><b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Sem Informação'; ?></b></td>
+                        <td class="col-4">
+                            <div class="btn-group">                        
+                                <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="fa fa-bus btn btn-primary btn-lg">Dados Escolares</a>                            
+                                <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>               
+                                <a 
+                                        href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['id_aluno'];?>" 
+                                        class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? 'disabled' : ''; ?>"
+                                        onclick="if(question('Tem certeza que deseja remover o registro?') == true)
+                                                {
+                                                    document.forms[0].submit();
+                                                }
+                                                else
+                                                {										
+                                                    return false;
+                                                }"                       
+                                    >                        
+                                        Remover
+                                    </a>                        
+                            </div>
+                        </td>                                                   
                     </tr>   
                 <?php endforeach; ?>
             </tbody>
