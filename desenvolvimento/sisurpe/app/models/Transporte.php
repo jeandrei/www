@@ -1,0 +1,88 @@
+<?php
+  class Transporte {
+    private $db;
+
+    public function __construct(){
+        $this->db = new Database;        
+    }
+
+   
+
+    public function getLinhas(){
+        $this->db->query("SELECT * FROM linhas ORDER BY linha ASC"); 
+        $result = $this->db->resultSet(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+    } 
+    
+    public function getLinhasAlunoById($id){
+        $this->db->query("SELECT linhas.linha , aluno_linhas.aluno_id,aluno_linhas.id FROM aluno_linhas, linhas WHERE aluno_id = :aluno_id AND aluno_linhas.linha_id = linhas.id  ORDER BY linha_id ASC");
+        $this->db->bind(':aluno_id',$id); 
+        $result = $this->db->resultSet(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+    }  
+
+
+    public function register($data){
+      // die(var_dump($data));
+        $this->db->query('INSERT INTO aluno_linhas SET
+                                            linha_id  = :linha_id,
+                                            aluno_id = :aluno_id
+                                                          
+                                        '
+                        );
+                  
+        // Bind values
+        $this->db->bind(':linha_id',$data['linha']);
+        $this->db->bind(':aluno_id',$data['aluno_id']);  
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+    public function deleteAlunoLinhas($id){
+        $this->db->query('DELETE FROM aluno_linhas WHERE id = :id');
+        // Bind value
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->execute();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+    public function getUserAlunoLinha($id){        
+        $this->db->query("SELECT aluno.user_id as user_id FROM aluno_linhas, aluno WHERE aluno_linhas.aluno_id = aluno.id_aluno AND aluno_linhas.id = :id");
+        $this->db->bind(':id',$id); 
+        $result = $this->db->single(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+    }  
+    
+    
+
+  }

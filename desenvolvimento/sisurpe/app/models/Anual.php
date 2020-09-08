@@ -46,6 +46,16 @@
         }           
     }
 
+    public function getLinhas(){
+        $this->db->query("SELECT * FROM linhas ORDER BY linha ASC"); 
+        $result = $this->db->resultSet(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+    }
+
     public function getEtapas(){
         $this->db->query("SELECT * FROM etapa ORDER BY descricao DESC"); 
         $result = $this->db->resultSet(); 
@@ -155,6 +165,26 @@
         }
     }
 
+
+
+    public function addLinhaAluno($linha,$aluno_id){
+        // se o estado vim vazio já retorno falso e trato a menságem no controller
+         if(empty($linha)){
+             return false;
+         }
+
+         $this->db->query('INSERT INTO aluno_linhas (linha_id, aluno_id) VALUES (:linha, :aluno_id)');
+         // Bind values
+         $this->db->bind(':linha',$linha); 
+         $this->db->bind(':aluno_id',$aluno_id);   
+         // Execute
+         if($this->db->execute()){
+             return true;
+         } else {
+             return false;
+         }
+
+     }
 
 
 

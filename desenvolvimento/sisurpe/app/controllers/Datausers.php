@@ -8,7 +8,7 @@
        
      $this->dataModel = $this->model('Datauser');
      $this->dadosModel = $this->model('Anual');
-
+     $this->transporteModel = $this->model('Transporte');   
     
     }
 

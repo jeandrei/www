@@ -60,18 +60,40 @@ if(isset($data['error'])){
                             </div>
                         </div> 
                         
-                        <h4 class="card-title"><?php echo strtoupper($registro['nome_aluno']); ?></h4>
+                        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']); ?></h4>
                         
                         <div class="bg-light p-2 mb-3">
-                        Nascimento: <?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?> 
+                        Nascimento: <b><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></b>
                         </div>
                         
                         <div class="bg-light p-2 mb-3">
                         Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares'; ?></b>
                         </div>     
+
+                        <div class="bg-light p-2 mb-3">
+                        Linhas que o aluno utiliza: 
+                            <b>
+                                <?php 
+                                    $linhas = $this->transporteModel->getLinhasAlunoById($registro['id_aluno']); 
+                                    echo "|";                                
+                                    foreach($linhas as $linha){
+                                        echo $linha->linha . "|";
+                                    }
+                                ?>
+                            </b>
+                        </div>
                         
-                        <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-dark">
-                        Dados Escolares</a>
+                        <div class="row">
+                          
+                                <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-dark btn-block">
+                                Dados Escolares</a>
+                        
+                           
+                                <a href="<?php echo URLROOT; ?>/transportes/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-secondary btn-block">
+                                Dados de Transporte Escolar</a>
+                          
+                        </div>
+                        
 
                           
                     </div>

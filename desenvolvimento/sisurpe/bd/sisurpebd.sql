@@ -48,7 +48,7 @@ CREATE TABLE `escola` (
 
 INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 (4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
-(5, 'CEI DONA BELINHA', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(5, 'CEI DONA BElinhas', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
 (6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
 (7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
 (8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
@@ -78,6 +78,28 @@ INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
 (2, 2, 'BERÇÁRIO-II'),
 (3, 3, 'MATERNAL'),
 (4, 4, 'PRÉ-I');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `linhas`
+--
+
+CREATE TABLE `linhas` (
+  `id` int(11) NOT NULL,
+  `linha` varchar(55) NOT NULL,
+  `rota` varchar(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `linhas`
+--
+
+INSERT INTO `linhas` (`id`, `linha`) VALUES
+(1, '01'),
+(2, '02'),
+(3, '03'),
+(4, '04');
 
 -- --------------------------------------------------------
 
@@ -147,6 +169,16 @@ CREATE TABLE `aluno` (
   `restric_alimentos` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Estrutura para tabela `aluno_linha`
+--
+
+CREATE TABLE `aluno_linhas` (
+  `id` int(11) NOT NULL,
+  `linha_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 -- --------------------------------------------------------
@@ -159,7 +191,7 @@ CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,  
   `usa_transporte` char(3) DEFAULT NULL,
-  `linha` varchar(255) DEFAULT NULL,
+  `linhas` varchar(255) DEFAULT NULL,
   `tam_moletom` varchar(50) DEFAULT NULL,
   `tam_camiseta` varchar(50) DEFAULT NULL,
   `tam_calca` varchar(50) DEFAULT NULL,
@@ -169,7 +201,7 @@ CREATE TABLE `dados_anuais` (
   `escola` varchar(255) DEFAULT NULL,
   `etapa` char(50) DEFAULT NULL,
   `turno` char(1) DEFAULT NULL,
-  `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP'
+  `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -200,6 +232,18 @@ ALTER TABLE `escola`
 -- Índices de tabela `etapa`
 --
 ALTER TABLE `etapa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `linhas`
+--
+ALTER TABLE `linhas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `linhas`
+--
+ALTER TABLE `aluno_linhas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -245,6 +289,18 @@ ALTER TABLE `escola`
 -- AUTO_INCREMENT de tabela `etapa`
 --
 ALTER TABLE `etapa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+-- AUTO_INCREMENT de tabela `linhas`
+--
+ALTER TABLE `linhas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+-- AUTO_INCREMENT de tabela `linhas`
+--
+ALTER TABLE `aluno_linhas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
