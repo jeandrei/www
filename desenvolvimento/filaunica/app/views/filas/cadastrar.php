@@ -356,11 +356,9 @@
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-12">
                                                                                                         <div class="alert alert-info" role="alert">
-                                                                                                            Você pode escolher até três escolas
-                                                                                                            de preferência sendo obrigatório <strong>escolher pelo menos
-                                                                                                                uma.</strong>
-                                                                                                            Será chamados de acordo com a disponibilidade das escolas abaixo e sua
-                                                                                                            posição na fila.
+                                                                                                            Manteinha os dados <strong>atualizados</strong>, as informações registradas aqui 
+                                                                                                            servirão de base para a <strong>distribuição dos uniformes escolares</strong>, bem como ajudarão 
+                                                                                                            no <strong>planejamento e melhoria do Trensporte Escolar</strong>.
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--INFORMATIVO DE OPÇÕES DE ESCOLHA-->
