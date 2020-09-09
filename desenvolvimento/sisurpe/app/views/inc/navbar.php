@@ -18,8 +18,14 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
           </li>          
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/modelo_pagina"></a>
-          </li>             
+            <a class="nav-link" href="<?php echo URLROOT; ?>/buscaalunos">Busca Alunos</a>
+          </li>   
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadosescolars">Busca Dados Escolares</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Escolares</a>
+          </li>            
         
 
 

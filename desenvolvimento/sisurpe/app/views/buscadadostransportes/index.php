@@ -147,13 +147,13 @@
                 <div class="form-row">       
                     <!-- ESCOLAS -->
                     <div class="col-lg-4">
-                        <label for="escola_id">
+                        <label for="estadoid">
                             Escola
                         </label>                             
                     
                         <select 
-                            name="escola_id" 
-                            id="escola_id" 
+                            name="escola" 
+                            id="escola" 
                             class="form-control"                                        
                         >
                                 <option value="NULL">Selecione a Escola</option>
@@ -162,10 +162,10 @@
                                 foreach($escolas as $escola) : ?> 
                                     <option value="<?php echo $escola->id; ?>"
                                                 <?php 
-                                                if(isset($_POST['escola_id'])){
-                                                  echo $_POST['escola_id'] == $escola->id ? 'selected':'';
+                                                if(isset($_POST['escola'])){
+                                                  echo $_POST['escola'] == $escola->id ? 'selected':'';
                                                 } else {
-                                                  echo $data['escola_id'] == $escola->id ? 'selected':'';
+                                                  echo $data['escola'] == $escola->id ? 'selected':'';
                                                 }
                                                 ?>
                                     >
@@ -173,7 +173,7 @@
                                     </option>
                                 <?php endforeach; ?>  
                         </select>
-                        <span id="escola_id_err" class="text-danger"><?php echo  $data['escola_id_err']; ?></span>
+                        <span id="escola_err" class="text-danger"><?php echo  $data['escola_err']; ?></span>
                     </div>
 
                     <!-- ETAPAS -->

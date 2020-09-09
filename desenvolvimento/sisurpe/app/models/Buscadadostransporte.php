@@ -1,5 +1,5 @@
 <?php
-  class Anual {
+  class Buscadadostransporte {
     private $db;
 
     public function __construct(){
@@ -91,28 +91,28 @@
 
     public function register($data){
         $this->db->query('INSERT INTO dados_anuais SET
-                                            aluno_id  = :aluno_id ,
-                                            escola_id = :escola_id,                                                                                        
+                                            aluno_id  = :aluno_id ,                                                                                        
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
                                             tam_calca = :tam_calca, 
                                             tam_bermuda = :tam_bermuda, 
                                             tam_calcado = :tam_calcado, 
-                                            tam_meia = :tam_meia,                                             
+                                            tam_meia = :tam_meia, 
+                                            escola = :escola, 
                                             etapa = :etapa, 
                                             turno = :turno                   
                                         '
                         );
                   
         // Bind values
-        $this->db->bind(':aluno_id',$data['aluno_id']);  
-        $this->db->bind(':escola_id',$data['escola_id']);              
+        $this->db->bind(':aluno_id',$data['aluno_id']);                
         $this->db->bind(':tam_moletom',$data['tam_moletom']);
         $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
         $this->db->bind(':tam_calca',$data['tam_calca']);
         $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
         $this->db->bind(':tam_calcado',$data['tam_calcado']);
-        $this->db->bind(':tam_meia',$data['tam_meia']);        
+        $this->db->bind(':tam_meia',$data['tam_meia']);
+        $this->db->bind(':escola',$data['escola']);
         $this->db->bind(':etapa',$data['etapa']);
         $this->db->bind(':turno',$data['turno']);       
 
@@ -129,27 +129,29 @@
 
 
     public function update($data){
-        $this->db->query('UPDATE dados_anuais SET 
-                                            escola_id = :escola_id,    
+        $this->db->query('UPDATE dados_anuais SET  
+                                            linha = :linha, 
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
                                             tam_calca = :tam_calca, 
                                             tam_bermuda = :tam_bermuda, 
                                             tam_calcado = :tam_calcado, 
-                                            tam_meia = :tam_meia,                                            
+                                            tam_meia = :tam_meia, 
+                                            escola = :escola, 
                                             etapa = :etapa, 
                                             turno = :turno
                                             WHERE aluno_id = :aluno_id');
                   
         // Bind values
-        $this->db->bind(':aluno_id',$data['aluno_id']); 
-        $this->db->bind(':escola_id',$data['escola_id']);   
+        $this->db->bind(':aluno_id',$data['aluno_id']);       
+        $this->db->bind(':linha',$data['linha']);
         $this->db->bind(':tam_moletom',$data['tam_moletom']);
         $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
         $this->db->bind(':tam_calca',$data['tam_calca']);
         $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
         $this->db->bind(':tam_calcado',$data['tam_calcado']);
-        $this->db->bind(':tam_meia',$data['tam_meia']);        
+        $this->db->bind(':tam_meia',$data['tam_meia']);
+        $this->db->bind(':escola',$data['escola']);
         $this->db->bind(':etapa',$data['etapa']);
         $this->db->bind(':turno',$data['turno']);       
 

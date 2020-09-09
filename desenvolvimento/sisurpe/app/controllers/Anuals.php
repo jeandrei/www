@@ -28,6 +28,7 @@
             'nome_aluno' => $aluno->nome_aluno,
             'nascimento' => date('Y-d-m', strtotime($aluno->nascimento)),            
             'aluno_id' => $id,
+            'escola_id' => $_POST['escola_id'],
             'usa_transporte' => trim($_POST['usa_transporte']),
             'linha' => trim($_POST['linha']),
             'tam_moletom' => trim($_POST['tam_moletom']),
@@ -65,8 +66,8 @@
             $data['tam_meia_err'] = 'Informe o tamanho da meia';
           } 
 
-          if(($data['escola'])=="NULL"){
-            $data['escola_err'] = 'Informe a escola';
+          if(($data['escola_id'])=="NULL"){
+            $data['escola_id_err'] = 'Informe a escola';
           } 
 
           if(($data['etapa'])=="NULL"){
@@ -95,7 +96,7 @@
             empty($data['tam_bermuda_err']) &&
             empty($data['tam_calcado_err']) &&
             empty($data['tam_meia_err']) &&
-            empty($data['escola_err']) &&
+            empty($data['escola_id_err']) &&
             empty($data['etapa_err']) &&
             empty($data['turno_err']) &&
             empty($data['usa_transporte_err']) &&
@@ -115,7 +116,7 @@
                       die('Ops! Algo deu errado.');
                   }
               } else {
-                // INSERT                
+                // INSERT                                  
                   if($this->anualModel->register($data)){
                     // Cria a menságem antes de chamar o view va para 
                     // views/users/login a segunda parte da menságem
@@ -142,6 +143,7 @@
             'nome_aluno' => $aluno->nome_aluno, 
             'nascimento' => date('Y-d-m', strtotime($aluno->nascimento)),       
             'aluno_id' => $id,
+            'escola_id' => '',
             'usa_transporte' => '',
             'linha' => '',
             'tam_moletom' => '',
@@ -165,6 +167,7 @@
             'nome_aluno' => $aluno->nome_aluno,
             'nascimento' => date('Y-d-m', strtotime($dados->nascimento)),            
             'aluno_id' => $id,
+            'escola_id' => $dados->escola_id,
             'usa_transporte' => $dados->usa_transporte,
             'linha' => $dados->linha,
             'tam_moletom' => $dados->tam_moletom,
