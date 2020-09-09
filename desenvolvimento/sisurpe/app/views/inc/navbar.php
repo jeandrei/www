@@ -24,7 +24,7 @@
             <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadosescolars">Busca Dados Escolares</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Escolares</a>
+            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Transporte</a>
           </li>            
         
 

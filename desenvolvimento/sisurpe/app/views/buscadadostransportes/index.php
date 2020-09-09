@@ -9,7 +9,7 @@
 ?>
 
 
-<form id="filtrar" action="<?php echo URLROOT; ?>/buscaalunos/index" method="post" enctype="multipart/form-data">
+<form id="filtrar" action="<?php echo URLROOT; ?>/buscadadostransportes/index" method="post" enctype="multipart/form-data">
   <div class="row">
     <!-- COLUNA 1 NOME-->
     <div class="col-lg-4">

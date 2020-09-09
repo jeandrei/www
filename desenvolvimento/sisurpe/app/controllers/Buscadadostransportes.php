@@ -100,7 +100,7 @@
       //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX
 
      //método view está em /libraries/Controller
-     $this->view('buscaalunos/index' ,$data);
+     $this->view('buscadadostransportes/index' ,$data);
   }
 
 

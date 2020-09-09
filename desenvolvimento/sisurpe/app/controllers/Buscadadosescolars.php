@@ -6,7 +6,7 @@
           redirect('users/login');
         }
        
-     $this->buscadadosescolarsModel = $this->model('Buscadadosescolar');
+     $this->buscadadosescolarsModel = $this->model('Buscaaluno');
      $this->anualModel = $this->model('Anual');
      $this->dataModel = $this->model('Datauser');
     }
@@ -100,7 +100,7 @@
       //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX
 
      //método view está em /libraries/Controller
-     $this->view('buscaalunos/index' ,$data);
+     $this->view('buscadadosescolars/index' ,$data);
   }
 
 
