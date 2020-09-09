@@ -19,7 +19,7 @@
     } 
     
     public function getLinhasAlunoById($id){
-        $this->db->query("SELECT linhas.linha , aluno_linhas.aluno_id,aluno_linhas.id FROM aluno_linhas, linhas WHERE aluno_id = :aluno_id AND aluno_linhas.linha_id = linhas.id  ORDER BY linha_id ASC");
+        $this->db->query("SELECT linhas.linha , aluno_linhas.aluno_id,aluno_linhas.id FROM aluno_linhas, linhas WHERE aluno_id = :aluno_id AND aluno_linhas.linha_id = linhas.id AND ano = YEAR(NOW()) ORDER BY linha_id ASC");
         $this->db->bind(':aluno_id',$id); 
         $result = $this->db->resultSet(); 
         if($this->db->rowCount() > 0){

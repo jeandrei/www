@@ -176,6 +176,7 @@ CREATE TABLE `aluno` (
 CREATE TABLE `aluno_linhas` (
   `id` int(11) NOT NULL,
   `linha_id` int(11) NOT NULL,
+  `ano` char(4),
   `aluno_id` int(11) NOT NULL  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -190,7 +191,7 @@ CREATE TABLE `aluno_linhas` (
 CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,  
-  `usa_transporte` char(3) DEFAULT NULL,
+  `ano` char(4),
   `linhas` varchar(255) DEFAULT NULL,
   `tam_moletom` varchar(50) DEFAULT NULL,
   `tam_camiseta` varchar(50) DEFAULT NULL,
@@ -350,3 +351,38 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
+-- TRIGGERS
+DELIMITER $
+
+CREATE TRIGGER currentyear_dados_anuais BEFORE INSERT
+ON dados_anuais
+FOR EACH ROW
+BEGIN
+    SET new.ano = YEAR(NOW());
+END$
+
+
+DELIMITER ;
+
+
+
+DELIMITER $
+
+CREATE TRIGGER currentyear_aluno_linha BEFORE INSERT
+ON aluno_linhas
+FOR EACH ROW
+BEGIN
+    SET new.ano = YEAR(NOW());
+END$
+
+
+
+
+
+
+

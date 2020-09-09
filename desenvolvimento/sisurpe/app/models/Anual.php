@@ -7,7 +7,7 @@
     }
 
     public function getDadosAnuaisByid($id){
-        $this->db->query('SELECT * FROM dados_anuais WHERE aluno_id = :aluno_id');
+        $this->db->query('SELECT * FROM dados_anuais WHERE aluno_id = :aluno_id AND ano = YEAR(NOW())');
         // Bind value
         $this->db->bind(':aluno_id', $id);
 
@@ -20,6 +20,9 @@
             return false;
         }
     }
+
+
+    
 
     public function getUltimaAtualizacaoById($id){
         $this->db->query('SELECT ultima_atual FROM dados_anuais WHERE aluno_id = :aluno_id');
@@ -82,12 +85,13 @@
         }
     }
 
+    
+
 
 
     public function register($data){
         $this->db->query('INSERT INTO dados_anuais SET
-                                            aluno_id  = :aluno_id ,
-                                            usa_transporte = :usa_transporte,                                            
+                                            aluno_id  = :aluno_id ,                                                                                        
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
                                             tam_calca = :tam_calca, 
@@ -101,8 +105,7 @@
                         );
                   
         // Bind values
-        $this->db->bind(':aluno_id',$data['aluno_id']);
-        $this->db->bind(':usa_transporte',$data['usa_transporte']);        
+        $this->db->bind(':aluno_id',$data['aluno_id']);                
         $this->db->bind(':tam_moletom',$data['tam_moletom']);
         $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
         $this->db->bind(':tam_calca',$data['tam_calca']);
@@ -126,8 +129,7 @@
 
 
     public function update($data){
-        $this->db->query('UPDATE dados_anuais SET                                            
-                                            usa_transporte = :usa_transporte,
+        $this->db->query('UPDATE dados_anuais SET  
                                             linha = :linha, 
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
@@ -141,8 +143,7 @@
                                             WHERE aluno_id = :aluno_id');
                   
         // Bind values
-        $this->db->bind(':aluno_id',$data['aluno_id']);
-        $this->db->bind(':usa_transporte',$data['usa_transporte']);
+        $this->db->bind(':aluno_id',$data['aluno_id']);       
         $this->db->bind(':linha',$data['linha']);
         $this->db->bind(':tam_moletom',$data['tam_moletom']);
         $this->db->bind(':tam_camiseta',$data['tam_camiseta']);

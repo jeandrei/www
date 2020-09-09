@@ -84,11 +84,11 @@ if(isset($data['error'])){
                         </div>
                         
                         <div class="bg-light p-2 mb-3">
-                        Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares'; ?></b>
+                        Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares para o ano de ' . date("Y"); ?></b>
                         </div>     
 
                         <div class="bg-light p-2 mb-3">
-                        Linhas que o aluno utiliza: 
+                        Linhas que o aluno utiliza em: 
                             <b>
                                 <?php 
                                     if($linhas = $this->transporteModel->getLinhasAlunoById($registro['id_aluno'])){ 
@@ -97,7 +97,7 @@ if(isset($data['error'])){
                                             echo $linha->linha . "|";
                                         }
                                     } else {
-                                        echo "Aluno sem informação de Dados de Transporte Escolar";
+                                        echo "Aluno sem informação de Dados de Transporte Escolar para o ano de " . date("Y");;
                                     }
                                 ?>
                             </b>
