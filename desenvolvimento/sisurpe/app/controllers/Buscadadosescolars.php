@@ -6,7 +6,7 @@
           redirect('users/login');
         }
        
-     $this->buscadadosescolarsModel = $this->model('Buscaaluno');
+     $this->buscadadosescolarsModel = $this->model('Buscadadosescolar');
      $this->anualModel = $this->model('Anual');
      $this->dataModel = $this->model('Datauser');
     }
@@ -102,59 +102,6 @@
      //método view está em /libraries/Controller
      $this->view('buscadadosescolars/index' ,$data);
   }
-
-
-
-  public function ver($id){ 
-     $data = $this->dataModel->getAlunoById($id);        
-     $data = [ 
-       'id_aluno' => $data->id_aluno,
-       'nome_aluno' => $data->nome_aluno,
-       'nascimento' => date('Y-d-m', strtotime($data->nascimento)),          
-       'sexo' => $data->sexo,
-       'telefone_aluno' => $data->telefone_aluno,
-       'email_aluno' =>  $data->email_aluno,
-       'nome_pai' => $data->nome_pai,
-       'telefone_pai' => $data->telefone_pai,
-       'nome_mae' => $data->nome_mae,
-       'telefone_mae' => $data->telefone_mae,
-       'nome_responsavel' => $data->nome_responsavel,
-       'telefone_resp' => $data->telefone_resp,
-       'naturalidade' => $data->naturalidade,
-       'nacionalidade' => $data->nacionalidade,
-       'rg' => $data->rg,
-       'uf_rg' => $data->uf_rg,
-       'orgao_emissor' => $data->orgao_emissor,
-       'titulo_eleitor' => $data->titulo_eleitor,
-       'zona' => $data->zona,
-       'secao' => $data->secao,
-       'certidao' => $data->certidao,
-       'uf_cert' => $data->uf_cert,
-       'cartorio_cert' => $data->cartorio_cert,
-       'modelo' => $data->modelo,
-       'numero' => $data->numero,
-       'folha' => $data->folha,
-       'livro' => $data->livro,
-       'data_emissao_cert' =>  date('Y-d-m', strtotime($data->data_emissao_cert)),
-       'municipio_cert' => $data->municipio_cert,
-       'cpf' => $data->cpf,
-       'tipo_sanguineo' => $data->tipo_sanguineo,
-       'fazUsoMed' => $data->fazUsoMed,
-       'medicamentos' => $data->medicamentos,
-       'alergias' =>  $data->alergias,
-       'deficiencias' => $data->deficiencias,
-       'restric_alimentos' => $data->restric_alimentos
-   ];
-     // Load view
-     $this->view('buscaalunos/ver', $data);
- }     
-
-
-
-  
-  
-
-
 
   
 }//class

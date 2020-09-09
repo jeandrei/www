@@ -10,27 +10,7 @@
 
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
-  <div class="row">
-    <!-- COLUNA 1 NOME-->
-    <div class="col-lg-4">
-            <label for="buscanome">
-                Buscar por Nome
-            </label>
-            <input 
-                type="text" 
-                name="buscanome" 
-                id="buscanome" 
-                maxlength="60"
-                class="form-control"
-                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
-                onkeydown="upperCaseF(this)"   
-                ><span class="invalid-feedback">
-                    <?php // echo $data['nome_err']; ?>
-                </span>
-      <!--<div class="col-lg-4">-->
-      </div>
-
-
+  <div class="row"> 
 
       <!-- COLUNA 1 NOME-->
     <div class="col-lg-2">
@@ -78,22 +58,120 @@
         <!--div class="col-lg-3-->
         </div>
 
+
+        <div class="col-md-3">
+          <label for="tam_moletom">Moletom</label>
+            <select
+              class="form-control"
+              name="tam_moletom"
+              id="tam_moletom"          
+              placeholder="Tamanho do Moletom">
+              <option value="NULL">Selecione o Tamanho</option>
+              <?php                            
+                echo(imptamanhounif($data['tam_moletom']));
+              ?>
+            </select>
+        </div>
+        
+
+        <div class="col-md-3">                            
+            <label for="tam_calca">Calça</label>
+              <select
+                class="form-control"
+                name="tam_calca"
+                id="tam_calca"          
+                placeholder="Tamanho da Calça">
+                <option value="NULL">Selecione o Tamanho</option>
+                <?php
+                  echo(imptamanhounif($data['tam_calca']));
+                ?>
+              </select>
+        </div>
+  <!--div class="row"-->      
+  </div>
+
+  <div class="row">
+      
+      <div class="col-md-3">                               
+        <label for="tam_camiseta">Camiseta</label>
+          <select
+            class="form-control"
+            name="tam_camiseta"
+            id="tam_camiseta"          
+            placeholder="Tamanho da Camiseta">
+            <option value="NULL">Selecione o Tamanho</option>
+            <?php
+              echo(imptamanhounif($data['tam_camiseta']));
+            ?>
+          </select>
+      </div>
+
+      <div class="col-md-3">      
+        <label for="tam_bermuda">Bermuda</label>
+        <select
+          class="form-control"
+          name="tam_bermuda"
+          id="tam_bermuda"          
+          placeholder="Tamanho da Bermuda">
+          <option value="NULL">Selecione o Tamanho</option>
+          <?php
+            echo(imptamanhounif($data['tam_bermuda']));
+          ?>
+        </select>
+      </div>
+
+
+      <div class="col-md-3"> 
+        <label for="tam_calcado">Calçado</label>
+          <select
+            class="form-control"
+            name="tam_calcado"
+            id="tam_calcado"          
+            placeholder="Tamanho do Calçado">
+            <option value="NULL">Selecione o Tamanho</option>
+            <?php
+              echo(imptamanhounif($data['tam_calcado']));
+            ?>
+          </select>
+      </div>
+                     
+                    
+
+      <div class="col-md-3">             
+        <label for="tam_meia">Meia</label>
+        <select
+          class="form-control"
+          name="tam_meia"
+          id="tam_meia"          
+          placeholder="Tamanho da Meia">
+          <option value="NULL">Selecione o Tamanho</option>
+          <?php
+            echo(imptamanhounif($data['tam_meia']));
+          ?>
+        </select>
+      </div>
+  <!--div class="row"-->
+  </div> 
+
+  <div class="row">       
+       
+       
         <!-- LINHA PARA O BOTÃO ATUALIZAR -->
-        <div class="row" style="margin-top:30px;">
-            <div class="col" style="padding-left:0;">
+        
+            <div class="col" style="padding-left:0; margin-top:15px;">
                 <div class="form-group mx-sm-3 mb-2">
                     <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
                     <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
                 </div>                                                
-            </div>
+          </div>
             
-        <!-- FIM LINHA BOTÃO ATUALIZAR -->
-        </div> 
+       
 
   <!--div class="row"-->
   </div>
-</form>
 
+
+</form>
 
 
 <br>
@@ -102,9 +180,15 @@
   <thead>
     <tr>
       <th scope="col">Nome</th>      
-      <th scope="col">Nascimento</th>           
-      <th scope="col">Nome Mãe</th> 
-      <th scope="col">Nome do Pai</th>
+      <th scope="col">Nascimento</th> 
+      <th scope="col">Etapa</th>  
+      <th scope="col">Turno</th>       
+      <th scope="col">Moletom</th> 
+      <th scope="col">Camiseta</th>
+      <th scope="col">Calça</th>
+      <th scope="col">Bermuda</th>
+      <th scope="col">Calçado</th>
+      <th scope="col">Meia</th>
       <th scope="col"></th> 
     </tr>
   </thead>
@@ -113,9 +197,15 @@
     <tr>  
       <td><?php echo $row['nome_aluno']; ?></td>
       <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
-      <td><?php echo $row['nome_mae']; ?></td> 
-      <td><?php echo $row['telefone_pai']; ?></td>
-      <td> <a href="<?php echo URLROOT; ?>/buscaalunos/ver/<?php echo $row['id_aluno']; ?>" class="fa fa-eye btn btn-success btn-lg"></a></td>
+      <td><?php echo $row['etapa']; ?></td> 
+      <td><?php echo $row['turno']; ?></td>
+      <td><?php echo $row['moletom']; ?></td>
+      <td><?php echo $row['camiseta']; ?></td>
+      <td><?php echo $row['calca']; ?></td>
+      <td><?php echo $row['bermuda']; ?></td>
+      <td><?php echo $row['calcado']; ?></td>
+      <td><?php echo $row['meia']; ?></td>
+      <td> </td>
     </tr>
     <?php endforeach; ?>    
   </tbody>
