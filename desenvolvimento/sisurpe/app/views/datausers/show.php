@@ -22,7 +22,7 @@
  <div class="row">
     <div class="col-lg-12">
         <div class="alert alert-info" role="alert">
-            <p>Os dados devem ser inseridos <strong>anualmente.</strong></p>
+            <p>Os Dados Escolares e Dados de Transporte Escolar devem ser inseridos <strong>anualmente.</strong></p>
             <p>Manteinha os dados <strong>atualizados</strong>, as informações registradas aqui 
             servirão de base para a <strong>distribuição dos uniformes escolares</strong>, bem como ajudarão 
             no <strong>planejamento e melhoria do Trensporte Escolar.</strong></p>
