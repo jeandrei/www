@@ -1,235 +1,173 @@
-
-
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+<h1><?php echo $data['title']; ?></h1>
+<p><?php echo $data['description']; ?></p>
 
-<?php flash('post_message');?>
+<?php
+  $paginate = $data['paginate'];
+  $result = $data['results'];
+?>
 
 
- <div class="row align-items-center mb-3">
-    <div class="col-md-12">
-        <h1>Dados Anuais do Aluno</h1>    
-              
-           
-        <form action="<?php echo URLROOT; ?>/anuals/index/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
-            <fieldset>
-                <!--NOME-->
-                <div class="form-group ">
-                    <label for="nome_aluno">Nome do Aluno:</label>  
-                    <input 
-                      class="form-control form-control-lg" 
-                      type="text" 
-                      placeholder="<?php echo $data['nome_aluno']; ?>" readonly>         
-                </div>  
-                
-                <!--NASCIMENTO NACIONALIDADE E NATURALIDADE TELEFONE-->
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="nascimento">Nascimento</label>
-                        <input 
-                          class="form-control"
-                          type="date"  
-                          name="nascimento"
-                          value="<?php echo $data['nascimento']; ?>" readonly>
-                    </div>            
-                </div>  
-            </fieldset>
-            
-            <hr>
-            
-            <fieldset>  
-                <legend>Tamanho do Uniforme</legend>                                    
-                <!--UNIFORME-->  
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                          <label for="tam_moletom">Moletom</label>
-                          <select
-                            class="form-control"
-                            name="tam_moletom"
-                            id="tam_moletom"          
-                            placeholder="Tamanho do Moletom">
-                            <option value="NULL">Selecione o Tamanho</option>
-                            <?php                            
-                              echo(imptamanhounif($data['tam_moletom']));
-                            ?>
-                          </select>
-                          <span id="tam_moletom_err" class="text-danger"><?php echo  $data['tam_moletom_err']; ?></span>                              
-                    </div>
+<form id="filtrar" action="<?php echo URLROOT; ?>/buscaalunos/index" method="post" enctype="multipart/form-data">
+  <div class="row">
+    <!-- COLUNA 1 NOME-->
+    <div class="col-lg-4">
+            <label for="buscanome">
+                Buscar por Nome
+            </label>
+            <input 
+                type="text" 
+                name="buscanome" 
+                id="buscanome" 
+                maxlength="60"
+                class="form-control"
+                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                onkeydown="upperCaseF(this)"   
+                ><span class="invalid-feedback">
+                    <?php // echo $data['nome_err']; ?>
+                </span>
+      <!--<div class="col-lg-4">-->
+      </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_calca">Calça</label>
-                        <select
-                          class="form-control"
-                          name="tam_calca"
-                          id="tam_calca"          
-                          placeholder="Tamanho da Calça">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_calca']));
-                          ?>
-                        </select>
-                        <span id="tam_calca_err" class="text-danger"><?php echo  $data['tam_calca_err']; ?></span>              
-                    </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_camiseta">Camiseta</label>
-                        <select
-                          class="form-control"
-                          name="tam_camiseta"
-                          id="tam_camiseta"          
-                          placeholder="Tamanho da Camiseta">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_camiseta']));
-                          ?>
-                        </select>
-                        <span id="tam_camiseta_err" class="text-danger"><?php echo  $data['tam_camiseta_err']; ?></span>              
-                    </div>
-                <!--PRIMEIRA LINHA DO UNIFORME--> 
-                </div>
-              
-              <!--SEGUNDA LINHA UNIFORME-->  
-              <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="tam_bermuda">Bermuda</label>
-                        <select
-                          class="form-control"
-                          name="tam_bermuda"
-                          id="tam_bermuda"          
-                          placeholder="Tamanho da Bermuda">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_bermuda']));
-                          ?>
-                        </select>
-                        <span id="tam_bermuda_err" class="text-danger"><?php echo  $data['tam_bermuda_err']; ?></span>              
-                    </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_calcado">Calçado</label>
-                        <select
-                          class="form-control"
-                          name="tam_calcado"
-                          id="tam_calcado"          
-                          placeholder="Tamanho do Calçado">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_calcado']));
-                          ?>
-                        </select>
-                        <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              
-                    </div>
+      <!-- COLUNA 1 NOME-->
+    <div class="col-lg-2">
+            <label for="ano">
+                Buscar por ANO
+            </label>
+            <input 
+                type="text" 
+                name="ano" 
+                id="ano" 
+                maxlength="60"
+                class="form-control"
+                value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
+                ><span class="invalid-feedback">
+                    <?php // echo $data['nome_err']; ?>
+                </span>
+      <!--<div class="col-lg-4">-->
+      </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_meia">Meia</label>
-                        <select
-                          class="form-control"
-                          name="tam_meia"
-                          id="tam_meia"          
-                          placeholder="Tamanho da Meia">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_meia']));
-                          ?>
-                        </select>
-                        <span id="tam_meia_err" class="text-danger"><?php echo  $data['tam_meia_err']; ?></span>              
-                    </div>
-              <!--SEGUNDA LINHA DO UNIFORME--> 
-              </div>
-            </fieldset>
 
-            <hr>
-
-            <fieldset>
-                                    
-                <legend>Dados de Matrícula</legend>                                    
-                <!--LINHA DADOS DE MATRÍCULA-->  
-                <div class="form-row">       
-                    <!-- ESCOLAS -->
-                    <div class="col-lg-4">
-                        <label for="estadoid">
-                            Escola
-                        </label>                             
-                    
-                        <select 
-                            name="escola" 
-                            id="escola" 
-                            class="form-control"                                        
+      <!-- COLUNA ESCOLA -->
+      <div class="col-lg-4">
+            <label for="escola_id">
+                Busca Escola
+            </label>  
+            <select 
+                name="escola_id" 
+                id="escola_id" 
+                class="form-control"                                        
+            >
+                    <option value="Todos">Todos</option>
+                    <?php                     
+                    $escolas = $this->anualModel->getEscolas();                                     
+                    foreach($escolas as $escola) : ?> 
+                        <option value="<?php echo $escola->id; ?>"
+                                    <?php if(isset($_POST['escola_id'])){
+                                    echo $_POST['escola_id'] == $escola->id ? 'selected':'';
+                                    }
+                                    ?>
                         >
-                                <option value="NULL">Selecione a Escola</option>
-                                <?php 
-                                $escolas =  $this->anualModel->getEscolas();                  
-                                foreach($escolas as $escola) : ?> 
-                                    <option value="<?php echo $escola->id; ?>"
-                                                <?php 
-                                                if(isset($_POST['escola'])){
-                                                  echo $_POST['escola'] == $escola->id ? 'selected':'';
-                                                } else {
-                                                  echo $data['escola'] == $escola->id ? 'selected':'';
-                                                }
-                                                ?>
-                                    >
-                                        <?php echo $escola->nome;?>
-                                    </option>
-                                <?php endforeach; ?>  
-                        </select>
-                        <span id="escola_err" class="text-danger"><?php echo  $data['escola_err']; ?></span>
-                    </div>
+                            <?php echo $escola->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        <!--div class="col-lg-3-->
+        </div>
 
-                    <!-- ETAPAS -->
-                    <div class="col-lg-4">
-                        <label for="etapa">
-                            Turma
-                        </label>   
-                    <select 
-                            name="etapa" 
-                            id="etapa" 
-                            class="form-control"                                        
-                        >
-                                <option value="NULL">Selecione a Etapa</option>
-                                <?php 
-                                $etapas =  $this->anualModel->getEtapas();                   
-                                foreach($etapas as $etapa) : ?> 
-                                    <option value="<?php echo $etapa->id; ?>"
-                                                <?php 
-                                                if(isset($_POST['etapa'])){
-                                                  echo $_POST['etapa'] == $etapa->id ? 'selected':'';
-                                                } else {
-                                                  echo $data['etapa'] == $etapa->id ? 'selected':'';
-                                                }
-                                                ?>
-                                    >
-                                        <?php echo $etapa->descricao;?>
-                                    </option>
-                                <?php endforeach; ?>  
-                        </select>
-                        <span id="etapa_err" class="text-danger"><?php echo  $data['etapa_err']; ?></span>
-                    </div>
-
-                    <!-- TURNO -->                              
-                    <div class="form-group col-md-3">
-                      <label for="turno">Turno</label>
-                      <select
-                        class="form-control <?php echo (!empty($data['uso_med_err'])) ? 'is-invalid' : ''; ?>"      
-                        name="turno"
-                        id="turno">
-                          <option value="NULL" <?php echo (($data['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-                          <option value="M" <?php echo (($data['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
-                          <option value="V" <?php echo (($data['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
-                          <option value="N" <?php echo (($data['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
-                      </select>
-                      <span id="turno_err" class="text-danger"><?php echo  $data['turno_err']; ?></span>
-                    </div>  
-
-                <!-- DADOS DE MATRÍCULA-->                                 
-                </div>                                      
-            </fieldset>
+        <!-- LINHA PARA O BOTÃO ATUALIZAR -->
+        <div class="row" style="margin-top:30px;">
+            <div class="col" style="padding-left:0;">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
+                    <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
+                </div>                                                
+            </div>
             
-            <button type="submit" class="btn btn-primary">Salvar</button>
+        <!-- FIM LINHA BOTÃO ATUALIZAR -->
+        </div> 
 
-        </form>
+  <!--div class="row"-->
+  </div>
+</form>
 
-    </div><!--col-md-12-->
-</div><!--div class="row align-items-center mb-3-->    
+
+
+<br>
+<!-- MONTAR A TABELA -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>      
+      <th scope="col">Nascimento</th>           
+      <th scope="col">Nome Mãe</th> 
+      <th scope="col">Nome do Pai</th>
+      <th scope="col"></th> 
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($result as $row) : ?> 
+    <tr>  
+      <td><?php echo $row['nome_aluno']; ?></td>
+      <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
+      <td><?php echo $row['nome_mae']; ?></td> 
+      <td><?php echo $row['telefone_pai']; ?></td>
+      <td> <a href="<?php echo URLROOT; ?>/buscaalunos/ver/<?php echo $row['id_aluno']; ?>" class="fa fa-eye btn btn-success btn-lg"></a></td>
+    </tr>
+    <?php endforeach; ?>    
+  </tbody>
+</table>
+<?php  
+    
+  
+
+
+    /*
+     * Echo out the UL with the page links
+     */
+    echo '<p>'.$paginate->links_html.'</p>';
+
+    /*
+     * Echo out the total number of results
+     */
+    echo '<p style="clear: left; padding-top: 10px;">Total de Registros: '.$paginate->total_results.'</p>';
+
+    /*
+     * Echo out the total number of pages
+     */
+    echo '<p>Total de Paginas: '.$paginate->total_pages.'</p>';
+
+    echo '<p style="clear: left; padding-top: 10px; padding-bottom: 10px;">-----------------------------------</p>';
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
-

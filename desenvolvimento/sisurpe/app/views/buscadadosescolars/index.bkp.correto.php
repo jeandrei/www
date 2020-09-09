@@ -1,11 +1,14 @@
-<?php require APPROOT . '/views/inc/header.php'; 
 
-?>
+
+<?php require APPROOT . '/views/inc/header.php'; ?>
+
+
 <?php flash('post_message');?>
+
+
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Dados Anuais do Aluno</h1>
-       
+        <h1>Dados Anuais do Aluno</h1>    
               
            
         <form action="<?php echo URLROOT; ?>/anuals/index/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
@@ -139,57 +142,9 @@
 
             <fieldset>
                                     
-                <legend>Dados do Transporte Escolar</legend>                                    
-                <!--LINHA TRANSPORTE ESCOLAR-->  
-                <div class="form-row">
-
-                    <div class="form-group col-md-3">
-                      <label for="usa_transporte">Utiliza o Transporte Escolar</label>
-                      <select
-                        class="form-control <?php echo (!empty($data['uso_med_err'])) ? 'is-invalid' : ''; ?>"      
-                        name="usa_transporte"
-                        id="usa_transporte">
-                          <option value="NULL" <?php echo (($data['usa_transporte'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-                          <option value="Sim" <?php echo (($data['usa_transporte'])=="Sim") ? 'selected' : ''; ?> >Sim</option>
-                          <option value="Não" <?php echo (($data['usa_transporte'])=="Não") ? 'selected' : ''; ?> >Não</option>
-                      </select>
-                      <span id="usa_transporte_err" class="text-danger"><?php echo  $data['usa_transporte_err']; ?></span>
-                    </div>   
-
-                    <!-- LINHAS -->
-                    <div class="col-lg-4">
-                        <label for="linha">
-                            Linha
-                        </label>                             
-                    
-                        <select 
-                            name="linha" 
-                            id="linha" 
-                            class="form-control"                                        
-                        >
-                                <option value="NULL">Selecione a Linha</option>
-                                <?php 
-                                $linhas =  $this->anualModel->getLinhas();                  
-                                foreach($linhas as $linha) : ?> 
-                                    <option value="<?php echo $linha->id; ?>"
-                                                <?php 
-                                                if(isset($_POST['linha'])){
-                                                  echo $_POST['linha'] == $linha->id ? 'selected':'';
-                                                } else {
-                                                  echo $data['linha'] == $linha->id ? 'selected':'';
-                                                }
-                                                ?>
-                                    >
-                                        <?php echo $linha->linha;?>
-                                    </option>
-                                <?php endforeach; ?>  
-                        </select>
-                        <span id="linha_err" class="text-danger"><?php echo  $data['linha_err']; ?></span>
-                    </div>
-
-
-
-
+                <legend>Dados de Matrícula</legend>                                    
+                <!--LINHA DADOS DE MATRÍCULA-->  
+                <div class="form-row">       
                     <!-- ESCOLAS -->
                     <div class="col-lg-4">
                         <label for="estadoid">
@@ -264,13 +219,12 @@
                           <option value="N" <?php echo (($data['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
                       </select>
                       <span id="turno_err" class="text-danger"><?php echo  $data['turno_err']; ?></span>
-                    </div>                                    
+                    </div>  
 
-
-                <!-- LINHA TRANSPORTE ESCOLAR-->                                 
+                <!-- DADOS DE MATRÍCULA-->                                 
                 </div>                                      
             </fieldset>
-
+            
             <button type="submit" class="btn btn-primary">Salvar</button>
 
         </form>
