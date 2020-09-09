@@ -95,9 +95,16 @@
                                     </a>    
 
                             </div>
-                        </div> 
+                        </div>                       
                         
                         <h4 class="card-title"><?php echo "Linha: " . $registro->linha; ?></h4>
+                        
+                        <div class="bg-light p-2 mb-3">
+                        <b>ROTA: <?php echo (!empty($registro->rota)) ? $registro->rota : 'Linha sem informações de rota'; ?></b>
+                        </div> 
+
+
+
                     </div>
                 </div>
             </div>
