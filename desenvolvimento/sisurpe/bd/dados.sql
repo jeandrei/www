@@ -75,125 +75,151 @@ INSERT INTO `aluno`(`id_aluno`, `user_id`, `nome_aluno`, `nascimento`, `sexo`, `
 
 
 
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (01,01,04,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (02,02,05,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (03,03,06,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (04,04,07,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (05,05,08,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (06,06,09,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (07,07,10,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (08,08,11,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (09,09,12,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (10,10,04,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (11,11,05,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (12,12,06,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (13,13,07,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (14,14,08,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (15,15,09,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (16,16,10,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (17,17,11,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (18,18,12,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (19,19,04,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (20,20,05,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (21,21,06,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (22,22,07,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (23,23,08,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (24,24,09,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (25,25,10,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (26,26,11,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (27,27,12,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (28,28,04,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (29,29,05,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (30,30,06,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (31,31,07,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (32,32,08,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (33,33,09,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (34,34,10,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (35,35,11,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (36,36,12,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (37,37,04,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (38,38,05,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (39,39,06,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (40,40,07,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (41,41,08,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (42,42,09,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (43,43,10,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (44,44,11,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (45,45,12,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (46,46,04,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (47,47,05,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (48,48,06,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (49,49,07,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (50,50,08,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (51,51,09,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (52,52,10,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (53,53,11,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (54,54,12,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (55,55,04,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (56,56,05,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (57,57,06,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (58,58,07,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (59,59,08,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (60,60,09,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (61,61,10,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (62,62,11,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (63,63,12,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (64,64,04,2020,08,08,08,08,08,08,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (65,65,05,2020,01,01,01,01,01,01,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (66,66,06,2020,02,02,02,02,02,02,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (67,67,07,2020,03,03,03,03,03,03,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (68,68,08,2020,04,04,04,04,04,04,04,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (69,69,09,2020,05,05,05,05,05,05,01,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (70,70,10,2020,06,06,06,06,06,06,02,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (71,71,11,2020,07,07,07,07,07,07,03,"M");
-INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa`, `turno`) VALUES (72,72,12,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (01,01,04,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (02,02,05,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (03,03,06,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (04,04,07,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (05,05,08,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (06,06,09,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (07,07,10,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (08,08,11,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (09,09,12,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (10,10,04,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (11,11,05,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (12,12,06,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (13,13,07,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (14,14,08,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (15,15,09,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (16,16,10,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (17,17,11,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (18,18,12,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (19,19,04,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (20,20,05,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (21,21,06,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (22,22,07,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (23,23,08,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (24,24,09,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (25,25,10,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (26,26,11,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (27,27,12,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (28,28,04,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (29,29,05,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (30,30,06,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (31,31,07,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (32,32,08,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (33,33,09,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (34,34,10,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (35,35,11,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (36,36,12,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (37,37,04,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (38,38,05,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (39,39,06,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (40,40,07,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (41,41,08,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (42,42,09,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (43,43,10,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (44,44,11,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (45,45,12,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (46,46,04,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (47,47,05,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (48,48,06,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (49,49,07,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (50,50,08,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (51,51,09,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (52,52,10,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (53,53,11,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (54,54,12,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (55,55,04,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (56,56,05,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (57,57,06,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (58,58,07,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (59,59,08,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (60,60,09,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (61,61,10,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (62,62,11,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (63,63,12,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (64,64,04,2020,08,08,08,08,08,08,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (65,65,05,2020,01,01,01,01,01,01,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (66,66,06,2020,02,02,02,02,02,02,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (67,67,07,2020,03,03,03,03,03,03,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (68,68,08,2020,04,04,04,04,04,04,04,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (69,69,09,2020,05,05,05,05,05,05,01,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (70,70,10,2020,06,06,06,06,06,06,02,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (71,71,11,2020,07,07,07,07,07,07,03,"M");
+INSERT INTO `dados_anuais`(`id_da`, `aluno_id`, `escola_id`, `ano`, `tam_moletom`, `tam_camiseta`, `tam_calca`, `tam_bermuda`, `tam_calcado`, `tam_meia`, `etapa_id`, `turno`) VALUES (72,72,12,2020,08,08,08,08,08,08,04,"M");
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
-																																																																			
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (01,01,"2020",01);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (02,02,"2020",02);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (03,03,"2020",03);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (04,04,"2020",04);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (05,01,"2020",05);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (06,02,"2020",06);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (07,03,"2020",07);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (08,04,"2020",08);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (09,01,"2020",09);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (10,02,"2020",10);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (11,03,"2020",11);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (12,04,"2020",12);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (13,01,"2020",13);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (14,02,"2020",14);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (15,03,"2020",15);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (16,04,"2020",16);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (17,01,"2020",17);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (18,02,"2020",18);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (19,03,"2020",19);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (20,04,"2020",20);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (21,01,"2020",21);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (22,02,"2020",22);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (23,03,"2020",23);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (24,04,"2020",24);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (25,01,"2020",25);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (26,02,"2020",26);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (27,03,"2020",27);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (28,04,"2020",28);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (29,01,"2020",29);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (30,02,"2020",30);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (31,03,"2020",31);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (32,04,"2020",32);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (33,01,"2020",33);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (34,02,"2020",34);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (35,03,"2020",35);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (36,04,"2020",36);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (37,01,"2020",37);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (38,02,"2020",38);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (39,03,"2020",39);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (40,04,"2020",40);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (41,01,"2020",41);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (42,02,"2020",42);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (43,03,"2020",43);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (44,04,"2020",44);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (45,01,"2020",45);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (46,02,"2020",46);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (47,03,"2020",47);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (48,04,"2020",48);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (49,01,"2020",49);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (50,02,"2020",50);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (51,03,"2020",51);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (52,04,"2020",52);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (53,01,"2020",53);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (54,02,"2020",54);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (55,03,"2020",55);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (56,04,"2020",56);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (57,01,"2020",57);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (58,02,"2020",58);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (59,03,"2020",59);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (60,04,"2020",60);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (61,01,"2020",61);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (62,02,"2020",62);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (63,03,"2020",63);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (64,04,"2020",64);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (65,01,"2020",65);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (66,02,"2020",66);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (67,03,"2020",67);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (68,04,"2020",68);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (69,01,"2020",69);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (70,02,"2020",70);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (71,03,"2020",71);
+INSERT INTO `aluno_linhas`(`id`, `linha_id`, `ano`, `aluno_id`) VALUES (72,04,"2020",72);

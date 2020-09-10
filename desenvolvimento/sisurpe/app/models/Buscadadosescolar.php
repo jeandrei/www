@@ -22,7 +22,7 @@
                     dados_anuais.tam_bermuda as bermuda, 
                     dados_anuais.tam_calcado as calcado, 
                     dados_anuais.tam_meia as meia, 
-                    dados_anuais.etapa_id as etapa, 
+                    etapa.descricao as etapa, 
                     dados_anuais.turno as turno 
                 FROM 
                   aluno,dados_anuais, 
