@@ -46,8 +46,14 @@
           $page = $_GET['page']; 
          
           
-          $nome =$_GET['nome'];
+          $nome =$_GET['buscanome'];
           $_POST['buscanome'] =  $nome;
+
+          $nome =$_GET['escola_id'];
+          $_POST['escola_id'] =  $nome;
+
+          $nome =$_GET['ano'];
+          $_POST['ano'] =  $nome;
           
       }
       else
@@ -67,7 +73,7 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id,
+          'url' => URLROOT . '/buscaalunos/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id,
           'named_params' => array(
                                     ':nome' => $nome,
                                     ':escola_id' => $escola_id,
