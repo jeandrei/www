@@ -29,8 +29,8 @@
       
       $limit = 10;
       $data = [
-          'title' => 'Busca por alunos',
-          'description' => 'Busca por registros de alunos'          
+          'title' => 'Busca por daos de Transporte',
+          'description' => 'Busca por registros anuais do Transporte Escolar'          
       ];
 
       
@@ -48,6 +48,18 @@
           
           $nome =$_GET['nome'];
           $_POST['buscanome'] =  $nome;
+
+          $escola_id =$_GET['escola_id'];
+          $_POST['escola_id'] =  $escola_id;
+
+          $etapa_id =$_GET['etapa_id'];
+          $_POST['etapa_id'] =  $etapa_id;
+
+          $turno =$_GET['turno'];
+          $_POST['turno'] =  $turno;
+
+          $ano =$_GET['ano'];
+          $_POST['ano'] =  $ano;
           
       }
       else
@@ -56,9 +68,17 @@
           // LOGO SE TENHO ALGUM VALOR NO POST DE BUSCA PASSO PARA A VARIÁVEL STATUS E POR FIM SE AINDA ASSIM 
           //A VARIÁVEL ESTIVER VAZIA PASSO O VALOR PADRÃO 'Todos'
           $nome = $_POST['buscanome'];
+          $linha_id = $_POST['linha_id'];
           $escola_id = $_POST['escola_id'];
+          $etapa_id = $_POST['etapa_id'];
+          $turno = $_POST['turno'];
           $ano = $_POST['ano'];
           
+          
+          
+          
+          
+
 
           $page = 1;
       }      
@@ -67,10 +87,13 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id,
+          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&linha_id=' . $linha_id . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno,
           'named_params' => array(
                                     ':nome' => $nome,
+                                    ':linha_id' => $linha_id,                                    
                                     ':escola_id' => $escola_id,
+                                    ':etapa_id' => $etapa_id,
+                                    ':turno' => $turno,
                                     ':ano' => $ano
                                 )     
       );

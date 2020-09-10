@@ -178,12 +178,12 @@
 
                     <!-- ETAPAS -->
                     <div class="col-lg-4">
-                        <label for="etapa">
+                        <label for="etapa_id">
                             Turma
                         </label>   
                     <select 
-                            name="etapa" 
-                            id="etapa" 
+                            name="etapa_id" 
+                            id="etapa_id" 
                             class="form-control"                                        
                         >
                                 <option value="NULL">Selecione a Etapa</option>
@@ -192,10 +192,10 @@
                                 foreach($etapas as $etapa) : ?> 
                                     <option value="<?php echo $etapa->id; ?>"
                                                 <?php 
-                                                if(isset($_POST['etapa'])){
-                                                  echo $_POST['etapa'] == $etapa->id ? 'selected':'';
+                                                if(isset($_POST['etapa_id'])){
+                                                  echo $_POST['etapa_id'] == $etapa->id ? 'selected':'';
                                                 } else {
-                                                  echo $data['etapa'] == $etapa->id ? 'selected':'';
+                                                  echo $data['etapa_id'] == $etapa->id ? 'selected':'';
                                                 }
                                                 ?>
                                     >
@@ -203,7 +203,7 @@
                                     </option>
                                 <?php endforeach; ?>  
                         </select>
-                        <span id="etapa_err" class="text-danger"><?php echo  $data['etapa_err']; ?></span>
+                        <span id="etapa_id_err" class="text-danger"><?php echo  $data['etapa_id_err']; ?></span>
                     </div>
 
                     <!-- TURNO -->                              

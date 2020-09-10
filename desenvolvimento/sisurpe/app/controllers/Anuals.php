@@ -38,7 +38,7 @@
             'tam_calcado' => trim($_POST['tam_calcado']),
             'tam_meia' => trim($_POST['tam_meia']),
             'escola' => trim($_POST['escola']),
-            'etapa' => trim($_POST['etapa']),
+            'etapa_id' => trim($_POST['etapa_id']),
             'turno' => trim($_POST['turno'])
           ];
 
@@ -70,8 +70,8 @@
             $data['escola_id_err'] = 'Informe a escola';
           } 
 
-          if(($data['etapa'])=="NULL"){
-            $data['etapa_err'] = 'Informe a etapa';
+          if(($data['etapa_id'])=="NULL"){
+            $data['etapa_id_err'] = 'Informe a etapa';
           } 
 
           if(($data['turno'])=="NULL"){
@@ -97,7 +97,7 @@
             empty($data['tam_calcado_err']) &&
             empty($data['tam_meia_err']) &&
             empty($data['escola_id_err']) &&
-            empty($data['etapa_err']) &&
+            empty($data['etapa_id_err']) &&
             empty($data['turno_err']) &&
             empty($data['usa_transporte_err']) &&
             empty($data['linha_err'])
@@ -153,7 +153,7 @@
             'tam_calcado' => '',
             'tam_meia' => '',
             'escola' => '',
-            'etapa' => '',
+            'etapa_id' => '',
             'turno' => ''
           ];
         }
@@ -177,7 +177,7 @@
             'tam_calcado' => $dados->tam_calcado,
             'tam_meia' => $dados->tam_meia,
             'escola' => $dados->escola,
-            'etapa' => $dados->etapa,
+            'etapa_id' => $dados->etapa_id,
             'turno' => $dados->turno
           ];
       

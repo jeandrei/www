@@ -191,7 +191,8 @@ CREATE TABLE `aluno_linhas` (
 CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
-  `escola_id` int(11) NOT NULL,  
+  `escola_id` int(11) NOT NULL, 
+  `etapa_id` int(11) NOT NULL, 
   `ano` char(4), 
   `tam_moletom` varchar(50) DEFAULT NULL,
   `tam_camiseta` varchar(50) DEFAULT NULL,
@@ -199,7 +200,6 @@ CREATE TABLE `dados_anuais` (
   `tam_bermuda` varchar(50) DEFAULT NULL,
   `tam_calcado` varchar(50) DEFAULT NULL,
   `tam_meia` varchar(50) DEFAULT NULL,  
-  `etapa` char(50) DEFAULT NULL,
   `turno` char(1) DEFAULT NULL,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

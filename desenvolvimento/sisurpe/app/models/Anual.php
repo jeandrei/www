@@ -92,14 +92,14 @@
     public function register($data){
         $this->db->query('INSERT INTO dados_anuais SET
                                             aluno_id  = :aluno_id ,
-                                            escola_id = :escola_id,                                                                                        
+                                            escola_id = :escola_id, 
+                                            etapa_id = :etapa_id,                                                                                       
                                             tam_moletom = :tam_moletom, 
                                             tam_camiseta = :tam_camiseta, 
                                             tam_calca = :tam_calca, 
                                             tam_bermuda = :tam_bermuda, 
                                             tam_calcado = :tam_calcado, 
-                                            tam_meia = :tam_meia,                                             
-                                            etapa = :etapa, 
+                                            tam_meia = :tam_meia,
                                             turno = :turno                   
                                         '
                         );
@@ -113,7 +113,7 @@
         $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
         $this->db->bind(':tam_calcado',$data['tam_calcado']);
         $this->db->bind(':tam_meia',$data['tam_meia']);        
-        $this->db->bind(':etapa',$data['etapa']);
+        $this->db->bind(':etapa_id',$data['etapa_id']);
         $this->db->bind(':turno',$data['turno']);       
 
 
@@ -137,7 +137,7 @@
                                             tam_bermuda = :tam_bermuda, 
                                             tam_calcado = :tam_calcado, 
                                             tam_meia = :tam_meia,                                            
-                                            etapa = :etapa, 
+                                            etapa_id = :etapa_id, 
                                             turno = :turno
                                             WHERE aluno_id = :aluno_id');
                   
@@ -150,7 +150,7 @@
         $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
         $this->db->bind(':tam_calcado',$data['tam_calcado']);
         $this->db->bind(':tam_meia',$data['tam_meia']);        
-        $this->db->bind(':etapa',$data['etapa']);
+        $this->db->bind(':etapa_id',$data['etapa_id']);
         $this->db->bind(':turno',$data['turno']);       
 
 
