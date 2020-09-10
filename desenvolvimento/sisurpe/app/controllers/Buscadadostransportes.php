@@ -49,6 +49,10 @@
           $nome =$_GET['nome'];
           $_POST['buscanome'] =  $nome;
 
+          $linha_id =$_GET['linha_id'];
+          $_POST['linha_id'] =  $linha_id;
+
+
           $escola_id =$_GET['escola_id'];
           $_POST['escola_id'] =  $escola_id;
 
@@ -87,7 +91,7 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&linha_id=' . $linha_id . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno,
+          'url' => URLROOT . '/buscadadostransportes/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&linha_id=' . $linha_id . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno,
           'named_params' => array(
                                     ':nome' => $nome,
                                     ':linha_id' => $linha_id,                                    

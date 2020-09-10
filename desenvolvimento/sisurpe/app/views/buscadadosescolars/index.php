@@ -13,10 +13,10 @@
         document.getElementById('etapa_id').value = "NULL";
         document.getElementById('turno').value = "NULL";
         
-        focofield("ano");
+        document.getElementById('ano').focus(); 
     }    
     
-    
+    document.getElementById('ano').focus(); 
 
 </script>
 

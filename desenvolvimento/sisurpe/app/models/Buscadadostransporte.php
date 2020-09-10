@@ -8,7 +8,7 @@
 
     //FUNÇÃO QUE EXECUTA A SQL PAGINATE
     public function getDados($page, $options){ 
-        var_dump($options);
+        //var_dump($options);
         
     
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
@@ -41,6 +41,18 @@
 
         if((($options['named_params'][':linha_id']) != "NULL") && (($options['named_params'][':linha_id']) != "")  ){                  
           $sql .= " AND aluno_linhas.linha_id = " . $options['named_params'][':linha_id'];
+        }
+
+        if((($options['named_params'][':escola_id']) != "NULL") && (($options['named_params'][':escola_id']) != "")  ){                  
+          $sql .= " AND dados_anuais.escola_id = " . $options['named_params'][':escola_id'];
+        }
+
+        if((($options['named_params'][':etapa_id']) != "NULL") && (($options['named_params'][':etapa_id']) != "")  ){                  
+          $sql .= " AND dados_anuais.etapa_id = " . $options['named_params'][':etapa_id'];
+        }
+
+        if((($options['named_params'][':turno']) != "NULL") && (($options['named_params'][':turno']) != "")  ){                  
+          $sql .= " AND dados_anuais.turno = " . "'" . $options['named_params'][':turno'] . "'";
         }
 
 

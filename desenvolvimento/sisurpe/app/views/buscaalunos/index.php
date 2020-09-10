@@ -1,5 +1,19 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+
+<script>
+function limpar(){
+        document.getElementById('nome_aluno').value = "";
+        document.getElementById('ano').value = "";
+        document.getElementById('escola_id').value = "NULL";        
+        
+        document.getElementById('nome_aluno').focus(); 
+    }    
+    
+    document.getElementById('nome_aluno').focus(); 
+
+</script>
+
 <h1><?php echo $data['title']; ?></h1>
 <p><?php echo $data['description']; ?></p>
 
