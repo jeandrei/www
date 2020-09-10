@@ -62,7 +62,7 @@
      }
 
      public function show(){
-       if ($dados = $this->dataModel->getAlunosUsuario($_SESSION['user_id'])){
+       if ($dados = $this->dataModel->getAlunosUsuario($_SESSION[DB_NAME . '_user_id'])){
 
 
 
@@ -505,7 +505,7 @@
       public function delete($id){
         
         $aluno = $this->dataModel->getAlunoById($id);
-        if($aluno->user_id != $_SESSION['user_id']){
+        if($aluno->user_id != $_SESSION[DB_NAME . '_user_id']){
           die("Você não tem permissão para excluir este aluno");
         }
        
@@ -516,7 +516,7 @@
       }
 
 
-      if ($dados = $this->dataModel->getAlunosUsuario($_SESSION['user_id'])){
+      if ($dados = $this->dataModel->getAlunosUsuario($_SESSION[DB_NAME . '_user_id'])){
 
         foreach($dados as $dado){
           $data[] = [

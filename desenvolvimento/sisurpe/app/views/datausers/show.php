@@ -6,7 +6,7 @@
 
 <div class="row align-items-center mb-3"> 
     <div class="col-md-10">
-        <h4>Alunos cadastrados por <?php echo $_SESSION['user_name'];?></h4>
+        <h4>Alunos cadastrados por <?php echo $_SESSION[DB_NAME . '_user_name'];?></h4>
     </div>
     <div class="col-md-2">
         <a href="<?php echo URLROOT; ?>/datausers/add" class="btn btn-primary pull-right">

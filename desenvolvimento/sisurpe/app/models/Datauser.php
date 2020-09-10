@@ -60,7 +60,7 @@
                         );
                   
         // Bind values
-        $this->db->bind(':user_id',$_SESSION['user_id']);
+        $this->db->bind(':user_id',$_SESSION[DB_NAME . '_user_id']);
         $this->db->bind(':nome_aluno',$data['nome_aluno']);
         $this->db->bind(':nascimento',$data['nascimento']);
         $this->db->bind(':sexo',$data['sexo']);

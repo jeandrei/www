@@ -75,14 +75,14 @@
           //pego o id do usuário que registrou esse aluno
           $user = $this->transporteModel->getUserAlunoLinha($id);
           // se for o mesmo id do usuário logado eu permito a exclusão caso contrário bloqueio
-          if($user->user_id != $_SESSION['user_id']){
+          if($user->user_id != $_SESSION[DB_NAME . '_user_id']){
          
             die("Você não tem permissão para excluir este aluno");
           }
         
           if($this->transporteModel->deleteAlunoLinhas($id)){                
             flash('mensagem', 'Registro removido com sucesso!');
-            redirect('transportes/index/'. $_SESSION['user_id']);          
+            redirect('transportes/index/'. $_SESSION[DB_NAME . '_user_id']);          
         } else {
             flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
         }

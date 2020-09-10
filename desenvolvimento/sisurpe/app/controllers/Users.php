@@ -188,22 +188,22 @@
     public function createUserSession($user){
         // $user->id vem do model na função login() retorna a row com todos os campos
         // da consulta na tabela users
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
+        $_SESSION[DB_NAME . '_user_id'] = $user->id;
+        $_SESSION[DB_NAME . '_user_email'] = $user->email;
+        $_SESSION[DB_NAME . '_user_name'] = $user->name;
         redirect('datausers/show');
     }
 
     public function logout(){
-        unset($_SESSION['user_id']);
-        unset($_SESSION['user_email']);
-        unset($_SESSION['user_name']);
+        unset($_SESSION[DB_NAME . '_user_id']);
+        unset($_SESSION[DB_NAME . '_user_email']);
+        unset($_SESSION[DB_NAME . '_user_name']);
         session_destroy();
         redirect('pages/login'); 
     }
 
     public function isLoggedIn(){
-        if(isset($_SESSION['user_id'])){
+        if(isset($_SESSION[DB_NAME . '_user_id'])){
             return true;
         } else {
             return false;
