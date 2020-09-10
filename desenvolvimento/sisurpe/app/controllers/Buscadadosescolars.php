@@ -29,8 +29,8 @@
       
       $limit = 10;
       $data = [
-          'title' => 'Busca por alunos',
-          'description' => 'Busca por registros de alunos'          
+          'title' => 'Busca por Dados Anuais',
+          'description' => 'Busca por dados inseridos anualmente'          
       ];
 
       
@@ -46,8 +46,38 @@
           $page = $_GET['page']; 
          
           
-          $nome =$_GET['nome'];
+          $nome =$_GET['buscanome'];
           $_POST['buscanome'] =  $nome;
+
+          $escola_id =$_GET['escola_id'];
+          $_POST['escola_id'] =  $escola_id;
+
+          $ano =$_GET['ano'];
+          $_POST['ano'] =  $ano;
+
+          $tam_moletom =$_GET['tam_moletom'];
+          $_POST['tam_moletom'] =  $tam_moletom;
+
+          $tam_calca =$_GET['tam_calca'];
+          $_POST['tam_calca'] =  $tam_calca;
+
+          $tam_camiseta =$_GET['tam_camiseta'];
+          $_POST['tam_camiseta'] =  $tam_camiseta;
+
+          $tam_bermuda =$_GET['tam_bermuda'];
+          $_POST['tam_bermuda'] =  $tam_bermuda;
+
+          $tam_calcado =$_GET['tam_calcado'];
+          $_POST['tam_calcado'] =  $tam_calcado;
+
+          $tam_meia =$_GET['tam_meia'];
+          $_POST['tam_meia'] =  $tam_meia;
+
+          $etapa_id =$_GET['etapa_id'];
+          $_POST['etapa_id'] =  $etapa_id;
+
+          $turno =$_GET['turno'];
+          $_POST['turno'] =  $turno;
           
       }
       else
@@ -77,7 +107,7 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_bermuda . '&tam_bermuda=' . $tam_camiseta . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
+          'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_camiseta . '&tam_bermuda=' . $tam_bermuda . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
           'named_params' => array(
                                     ':nome' => $nome,
                                     ':escola_id' => $escola_id,
