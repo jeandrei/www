@@ -63,9 +63,11 @@
           $tam_camiseta = $_POST['tam_camiseta'];
           $tam_bermuda = $_POST['tam_bermuda'];
           $tam_calcado = $_POST['tam_calcado'];
-          $tam_calcado = $_POST['tam_meia'];
+          $tam_meia = $_POST['tam_meia'];
+          $etapa_id = $_POST['etapa_id'];
+          $turno = $_POST['turno'];
           
-
+          
           
           
           $page = 1;
@@ -75,7 +77,7 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_bermuda . '&tam_bermuda=' . $tam_camiseta . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
+          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_bermuda . '&tam_bermuda=' . $tam_camiseta . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
           'named_params' => array(
                                     ':nome' => $nome,
                                     ':escola_id' => $escola_id,
@@ -85,7 +87,9 @@
                                     ':tam_camiseta' => $tam_camiseta,
                                     ':tam_bermuda' => $tam_bermuda,
                                     ':tam_calcado' => $tam_calcado,
-                                    ':tam_meia' => $tam_meia
+                                    ':tam_meia' => $tam_meia,
+                                    ':etapa_id' => $etapa_id,
+                                    ':turno' => $turno
                                 )     
       );
 

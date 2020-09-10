@@ -14,7 +14,7 @@
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
         $sql = ("SELECT 
                     aluno.nome_aluno as nome_aluno, 
-                    aluno.nascimento as nascimento_aluno, 
+                    aluno.nascimento as nascimento, 
                     dados_anuais.ano as ano, 
                     dados_anuais.tam_moletom as moletom, 
                     dados_anuais.tam_camiseta as camiseta, 
@@ -26,11 +26,13 @@
                     dados_anuais.turno as turno 
                 FROM 
                   aluno,dados_anuais, 
-                  escola 
+                  escola, etapa 
                 WHERE 
                   aluno.id_aluno = dados_anuais.aluno_id 
                 AND 
-                  dados_anuais.escola_id = escola.id"
+                  dados_anuais.escola_id = escola.id
+                  AND 
+                  dados_anuais.etapa = etapa.id"
               );
 
         
@@ -39,6 +41,18 @@
           $sql .= " AND escola.id = " . $options['named_params'][':escola_id'];
         }
 
+
+        if((($options['named_params'][':etapa_id']) != "NULL") && (($options['named_params'][':etapa_id']) != "")  ){                  
+          $sql .= " AND etapa.id = " . $options['named_params'][':etapa_id'];
+        }
+
+        if((($options['named_params'][':turno']) != "NULL") && (($options['named_params'][':turno']) != "")  ){                  
+          $sql .= " AND dados_anuais.turno = " . "'" .  $options['named_params'][':turno'] . "'";
+        }
+
+
+        
+        
 
         if(!empty($options['named_params'][':nome'])){
           $sql .= " AND nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'";

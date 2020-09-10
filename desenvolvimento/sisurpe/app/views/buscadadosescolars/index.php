@@ -10,7 +10,7 @@
         document.getElementById('tam_bermuda').value = "NULL";
         document.getElementById('tam_calcado').value = "NULL";
         document.getElementById('tam_meia').value = "NULL";
-        document.getElementById('etapa').value = "NULL";
+        document.getElementById('etapa_id').value = "NULL";
         document.getElementById('turno').value = "NULL";
         
         focofield("ano");
@@ -31,30 +31,31 @@
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
   <div class="row"> 
+      <!-- COLUNA 1 ANO-->
+      <div class="col-lg-2">
+              <label for="ano">
+                 ANO
+              </label>
+              <input 
+                  type="text" 
+                  name="ano" 
+                  id="ano" 
+                  maxlength="60"
+                  class="form-control"
+                  value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
+                  >
+        <!--<div class="col-lg-4">-->
+        </div>
+    <!--<div class="row"> -->  
+    </div>
 
-      <!-- COLUNA 1 NOME-->
-    <div class="col-lg-2">
-            <label for="ano">
-                Buscar por ANO
-            </label>
-            <input 
-                type="text" 
-                name="ano" 
-                id="ano" 
-                maxlength="60"
-                class="form-control"
-                value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
-                ><span class="invalid-feedback">
-                    <?php // echo $data['nome_err']; ?>
-                </span>
-      <!--<div class="col-lg-4">-->
-      </div>
+<hr>
 
-
+  <div class="row"> 
       <!-- COLUNA ESCOLA -->
       <div class="col-lg-4">
             <label for="escola_id">
-                Busca Escola
+                Escola
             </label>  
             <select 
                 name="escola_id" 
@@ -78,7 +79,52 @@
         <!--div class="col-lg-3-->
         </div>
 
+        <!-- COLUNA ETAPA -->
+      <div class="col-lg-4">
+            <label for="etapa_id">
+                Etapa
+            </label>  
+            <select 
+                name="etapa_id" 
+                id="etapa_id" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Todos</option>
+                    <?php                     
+                    $etapas = $this->anualModel->getEtapas();                                     
+                    foreach($etapas as $etapa) : ?> 
+                        <option value="<?php echo $etapa->id; ?>"
+                                    <?php if(isset($_POST['etapa_id'])){
+                                    echo $_POST['etapa_id'] == $etapa->id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $etapa->descricao;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        <!--div class="col-lg-3-->
+        </div>
 
+        <!-- TURNO -->                              
+        <div class="form-group col-md-3">
+          <label for="turno">Turno</label>
+          <select
+            class="form-control"      
+            name="turno"
+            id="turno">
+              <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+              <option value="M" <?php echo (($_POST['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
+              <option value="V" <?php echo (($_POST['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
+              <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
+          </select>         
+        </div>  
+  <!--<div class="row"> -->  
+  </div>
+
+  <hr>
+
+  <div class="row">
         <div class="col-md-3">
           <label for="tam_moletom">Moletom</label>
             <select
@@ -106,11 +152,9 @@
                   echo(imptamanhounif($_POST['tam_calca']));
                 ?>
               </select>
-        </div>
-  <!--div class="row"-->      
-  </div>
+        </div> 
 
-  <div class="row">
+ 
       
       <div class="col-md-3">                               
         <label for="tam_camiseta">Camiseta</label>
@@ -125,7 +169,10 @@
             ?>
           </select>
       </div>
+   <!--div class="row"-->      
+   </div>
 
+   <div class="row">
       <div class="col-md-3">      
         <label for="tam_bermuda">Bermuda</label>
         <select
@@ -172,6 +219,8 @@
       </div>
   <!--div class="row"-->
   </div> 
+
+<hr>
 
   <div class="row">       
        
