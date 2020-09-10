@@ -13,20 +13,18 @@
   <div class="row">
     <!-- COLUNA 1 NOME-->
     <div class="col-lg-4">
-            <label for="buscanome">
+            <label for="nome_aluno">
                 Buscar por Nome
             </label>
             <input 
                 type="text" 
-                name="buscanome" 
-                id="buscanome" 
+                name="nome_aluno" 
+                id="nome_aluno" 
                 maxlength="60"
                 class="form-control"
-                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                value="<?php if(isset($_POST['nome_aluno'])){htmlout($_POST['nome_aluno']);} ?>"
                 onkeydown="upperCaseF(this)"   
-                ><span class="invalid-feedback">
-                    <?php // echo $data['nome_err']; ?>
-                </span>
+                >
       <!--<div class="col-lg-4">-->
       </div>
 
@@ -61,7 +59,7 @@
                 id="escola_id" 
                 class="form-control"                                        
             >
-                    <option value="Todos">Todos</option>
+                    <option value="NULL">Todos</option>
                     <?php                     
                     $escolas = $this->anualModel->getEscolas();                                     
                     foreach($escolas as $escola) : ?> 
@@ -147,27 +145,7 @@
 
 
 
-
-
-
-
-
-
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

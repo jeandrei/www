@@ -16,7 +16,7 @@
 
         
 
-        if(($options['named_params'][':escola_id']) != "Todos"){  
+       if((($options['named_params'][':escola_id']) != "NULL") && (($options['named_params'][':escola_id']) != "")  ){ 
           $sql = ("SELECT * FROM aluno,dados_anuais, escola WHERE aluno.id_aluno = dados_anuais.aluno_id AND dados_anuais.escola_id = escola.id");                
           $sql .= " AND escola.id = " . $options['named_params'][':escola_id'];
         } else 
@@ -25,8 +25,8 @@
         }
 
 
-        if(!empty($options['named_params'][':nome'])){
-          $sql .= " AND nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+        if(!empty($options['named_params'][':nome_aluno'])){
+          $sql .= " AND nome_aluno LIKE " . "'%" . $options['named_params'][':nome_aluno'] . "%'";
         }
 
         if(!empty($options['named_params'][':ano'])){                  
@@ -34,6 +34,7 @@
         }
 
         $sql .= " ORDER BY nome_aluno ASC"; 
+        //echo $sql;
 
         $paginate = new pagination($page, $sql, $options);
         return  $paginate;
