@@ -1,4 +1,24 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+<script>
+  function limpar(){
+        document.getElementById('ano').value = "";
+        document.getElementById('escola_id').value = "NULL";
+        document.getElementById('tam_moletom').value = "NULL";
+        document.getElementById('tam_moletom').value = "NULL";
+        document.getElementById('tam_camiseta').value = "NULL";
+        document.getElementById('tam_calca').value = "NULL";
+        document.getElementById('tam_bermuda').value = "NULL";
+        document.getElementById('tam_calcado').value = "NULL";
+        document.getElementById('tam_meia').value = "NULL";
+        document.getElementById('etapa').value = "NULL";
+        document.getElementById('turno').value = "NULL";
+        
+        focofield("ano");
+    }    
+    
+    
+
+</script>
 
 <h1><?php echo $data['title']; ?></h1>
 <p><?php echo $data['description']; ?></p>
@@ -41,7 +61,7 @@
                 id="escola_id" 
                 class="form-control"                                        
             >
-                    <option value="Todos">Todos</option>
+                    <option value="NULL">Todos</option>
                     <?php                     
                     $escolas = $this->anualModel->getEscolas();                                     
                     foreach($escolas as $escola) : ?> 
@@ -68,7 +88,7 @@
               placeholder="Tamanho do Moletom">
               <option value="NULL">Selecione o Tamanho</option>
               <?php                            
-                echo(imptamanhounif($data['tam_moletom']));
+                echo(imptamanhounif($_POST['tam_moletom']));
               ?>
             </select>
         </div>
@@ -83,7 +103,7 @@
                 placeholder="Tamanho da Calça">
                 <option value="NULL">Selecione o Tamanho</option>
                 <?php
-                  echo(imptamanhounif($data['tam_calca']));
+                  echo(imptamanhounif($_POST['tam_calca']));
                 ?>
               </select>
         </div>
@@ -101,7 +121,7 @@
             placeholder="Tamanho da Camiseta">
             <option value="NULL">Selecione o Tamanho</option>
             <?php
-              echo(imptamanhounif($data['tam_camiseta']));
+              echo(imptamanhounif($_POST['tam_camiseta']));
             ?>
           </select>
       </div>
@@ -115,7 +135,7 @@
           placeholder="Tamanho da Bermuda">
           <option value="NULL">Selecione o Tamanho</option>
           <?php
-            echo(imptamanhounif($data['tam_bermuda']));
+            echo(imptamanhounif($_POST['tam_bermuda']));
           ?>
         </select>
       </div>
@@ -130,7 +150,7 @@
             placeholder="Tamanho do Calçado">
             <option value="NULL">Selecione o Tamanho</option>
             <?php
-              echo(imptamanhounif($data['tam_calcado']));
+              echo(imptamanhounif($_POST['tam_calcado']));
             ?>
           </select>
       </div>
@@ -146,7 +166,7 @@
           placeholder="Tamanho da Meia">
           <option value="NULL">Selecione o Tamanho</option>
           <?php
-            echo(imptamanhounif($data['tam_meia']));
+            echo(imptamanhounif($_POST['tam_meia']));
           ?>
         </select>
       </div>

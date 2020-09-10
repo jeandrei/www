@@ -58,8 +58,16 @@
           $nome = $_POST['buscanome'];
           $escola_id = $_POST['escola_id'];
           $ano = $_POST['ano'];
+          $tam_moletom = $_POST['tam_moletom'];
+          $tam_calca = $_POST['tam_calca'];
+          $tam_camiseta = $_POST['tam_camiseta'];
+          $tam_bermuda = $_POST['tam_bermuda'];
+          $tam_calcado = $_POST['tam_calcado'];
+          $tam_calcado = $_POST['tam_meia'];
           
 
+          
+          
           $page = 1;
       }      
                       
@@ -67,11 +75,17 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id,
+          'url' => URLROOT . '/buscadatausers/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_bermuda . '&tam_bermuda=' . $tam_camiseta . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
           'named_params' => array(
                                     ':nome' => $nome,
                                     ':escola_id' => $escola_id,
-                                    ':ano' => $ano
+                                    ':ano' => $ano,
+                                    ':tam_moletom' => $tam_moletom,
+                                    ':tam_calca' => $tam_calca,
+                                    ':tam_camiseta' => $tam_camiseta,
+                                    ':tam_bermuda' => $tam_bermuda,
+                                    ':tam_calcado' => $tam_calcado,
+                                    ':tam_meia' => $tam_meia
                                 )     
       );
 
