@@ -58,9 +58,9 @@
             </div> 
             
         </form>
-
-
+                                                 
         <?php $linhas = $this->transporteModel->getLinhasAlunoById($data['aluno_id']);
+
         
         if(empty($linhas)){die("Sem Linhas para este aluno! Selecione a linha e clique em Adicionar Linha");}
         

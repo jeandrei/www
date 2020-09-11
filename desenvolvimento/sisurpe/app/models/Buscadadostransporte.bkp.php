@@ -71,9 +71,9 @@
 
 
     public function getAlunoById($id){
-        $this->db->query("SELECT * FROM aluno WHERE id_aluno = :id_aluno"); 
+        $this->db->query("SELECT * FROM aluno WHERE aluno_id = :aluno_id"); 
         // Bind value
-        $this->db->bind(':id_aluno', $id);
+        $this->db->bind(':aluno_id', $id);
 
         $row = $this->db->single();
 

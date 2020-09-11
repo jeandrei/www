@@ -130,7 +130,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
 --
 
 CREATE TABLE `aluno` (
-  `id_aluno` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `nome_aluno` varchar(255) NOT NULL,
   `nascimento` date DEFAULT NULL,
@@ -256,7 +256,7 @@ ALTER TABLE `users`
 -- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`id_aluno`),
+  ADD PRIMARY KEY (`aluno_id`),
   ADD KEY `user_id` (`user_id`);
 
 
@@ -314,7 +314,7 @@ COMMIT;
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `aluno_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 
 --
@@ -337,14 +337,14 @@ ALTER TABLE `endereco`
 -- Restrições para tabelas `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
-  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`);
+  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
   
 
 --
 -- Restrições para tabelas `endereco`
 --
 ALTER TABLE `endereco`
-  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`);
+  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

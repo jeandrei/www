@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <h1>Ver Aluno</h1>        
            
-        <form action="<?php echo URLROOT; ?>/datausers/edit/<?php echo $data['id_aluno'];?>" method="post" enctype="multipart/form-data">        
+        <form action="<?php echo URLROOT; ?>/datausers/edit/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">        
 
         <!--NOME-->
         <div class="form-row">

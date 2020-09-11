@@ -22,7 +22,7 @@
 
 
 
-     public function gravar($id){
+     public function gravar($id){      
       // Check for POST            
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -73,16 +73,19 @@
       public function delete($id){
          
           //pego o id do usuário que registrou esse aluno
-          $user = $this->transporteModel->getUserAlunoLinha($id);
+          $dados = $this->transporteModel->getDadosAlunoLinha($id);         
+                 
           // se for o mesmo id do usuário logado eu permito a exclusão caso contrário bloqueio
-          if($user->user_id != $_SESSION[DB_NAME . '_user_id']){
-         
+          //echo $dados->$aluno_id;
+          if($dados->user_id != $_SESSION[DB_NAME . '_user_id']){
+            
             die("Você não tem permissão para excluir este aluno");
           }
         
           if($this->transporteModel->deleteAlunoLinhas($id)){                
             flash('mensagem', 'Registro removido com sucesso!');
-            redirect('transportes/index/'. $_SESSION[DB_NAME . '_user_id']);          
+            //redirect('transportes/index/'. $_SESSION[DB_NAME . '_user_id']);
+            redirect("transportes/index/". $dados->aluno_id);
         } else {
             flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
         }

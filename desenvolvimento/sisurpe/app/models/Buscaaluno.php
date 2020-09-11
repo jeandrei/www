@@ -12,12 +12,12 @@
         
     
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
-       // $sql = ("SELECT * FROM aluno,dados_anuais, escola WHERE aluno.id_aluno = dados_anuais.aluno_id AND dados_anuais.escola_id = escola.id");
+       // $sql = ("SELECT * FROM aluno,dados_anuais, escola WHERE aluno.aluno_id = dados_anuais.aluno_id AND dados_anuais.escola_id = escola.id");
 
         
 
        if((($options['named_params'][':escola_id']) != "NULL") && (($options['named_params'][':escola_id']) != "")  ){ 
-          $sql = ("SELECT * FROM aluno,dados_anuais, escola WHERE aluno.id_aluno = dados_anuais.aluno_id AND dados_anuais.escola_id = escola.id");                
+          $sql = ("SELECT * FROM aluno,dados_anuais, escola WHERE aluno.aluno_id = dados_anuais.aluno_id AND dados_anuais.escola_id = escola.id");                
           $sql .= " AND escola.id = " . $options['named_params'][':escola_id'];
         } else 
         {

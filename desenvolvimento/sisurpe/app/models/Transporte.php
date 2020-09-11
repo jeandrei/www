@@ -30,8 +30,7 @@
     }  
 
 
-    public function register($data){
-      // die(var_dump($data));
+    public function register($data){       
         $this->db->query('INSERT INTO aluno_linhas SET
                                             linha_id  = :linha_id,
                                             aluno_id = :aluno_id
@@ -55,6 +54,7 @@
 
 
     public function deleteAlunoLinhas($id){
+        //die($id);
         $this->db->query('DELETE FROM aluno_linhas WHERE id = :id');
         // Bind value
         $this->db->bind(':id', $id);
@@ -72,8 +72,8 @@
 
 
 
-    public function getUserAlunoLinha($id){        
-        $this->db->query("SELECT aluno.user_id as user_id FROM aluno_linhas, aluno WHERE aluno_linhas.aluno_id = aluno.id_aluno AND aluno_linhas.id = :id");
+    public function getDadosAlunoLinha($id){         
+        $this->db->query("SELECT aluno.user_id as user_id, aluno_linhas.aluno_id as aluno_id FROM aluno_linhas, aluno WHERE aluno_linhas.aluno_id = aluno.aluno_id AND aluno_linhas.id = :id");
         $this->db->bind(':id',$id); 
         $result = $this->db->single(); 
         if($this->db->rowCount() > 0){

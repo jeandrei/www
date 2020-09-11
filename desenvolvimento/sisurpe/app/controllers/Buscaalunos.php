@@ -114,7 +114,7 @@
   public function ver($id){ 
      $data = $this->dataModel->getAlunoById($id);        
      $data = [ 
-       'id_aluno' => $data->id_aluno,
+       'aluno_id' => $data->aluno_id,
        'nome_aluno' => $data->nome_aluno,
        'nascimento' => date('Y-d-m', strtotime($data->nascimento)),          
        'sexo' => $data->sexo,

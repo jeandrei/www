@@ -59,11 +59,11 @@ if(isset($data['error'])){
                             <!--btn-group para agrupar os botões--> 
                             <div class="btn-group"> 
 
-                                    <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['id_aluno']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>
+                                    <a href="<?php echo URLROOT; ?>/datausers/edit/<?php echo $registro['aluno_id']; ?>" class="fa fa-edit btn btn-success btn-lg">Editar</a>
 
                                     <a 
-                                        href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['id_aluno'];?>" 
-                                        class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? 'disabled' : ''; ?>"
+                                        href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['aluno_id'];?>" 
+                                        class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['aluno_id'])) ? 'disabled' : ''; ?>"
                                         onclick="if(question('Tem certeza que deseja remover o registro?') == true)
                                                 {
                                                     document.forms[0].submit();
@@ -86,14 +86,14 @@ if(isset($data['error'])){
                         </div>
                         
                         <div class="bg-light p-2 mb-3">
-                        Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['id_aluno'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares para o ano de ' . date("Y"); ?></b>
+                        Ultima atualização dos Dados Escolares em: <b><?php echo ($this->dadosModel->getDadosAnuaisByid($registro['aluno_id'])) ? date('d/m/Y', strtotime($registro['ultima_atualizacao']->ultima_atual)) : 'Aluno sem informação de Dados Escolares para o ano de ' . date("Y"); ?></b>
                         </div>     
 
                         <div class="bg-light p-2 mb-3">
                         Linhas que o aluno utiliza em: 
                             <b>
                                 <?php 
-                                    if($linhas = $this->transporteModel->getLinhasAlunoById($registro['id_aluno'])){ 
+                                    if($linhas = $this->transporteModel->getLinhasAlunoById($registro['aluno_id'])){ 
                                         echo "|";                                
                                         foreach($linhas as $linha){
                                             echo $linha->linha . "|";
@@ -107,11 +107,11 @@ if(isset($data['error'])){
                         
                         <div class="row">
                           
-                                <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-dark btn-block">
+                                <a href="<?php echo URLROOT; ?>/anuals/index/<?php echo $registro['aluno_id']; ?>" class="btn btn-dark btn-block">
                                 Dados Escolares</a>
                         
                            
-                                <a href="<?php echo URLROOT; ?>/transportes/index/<?php echo $registro['id_aluno']; ?>" class="btn btn-secondary btn-block">
+                                <a href="<?php echo URLROOT; ?>/transportes/index/<?php echo $registro['aluno_id']; ?>" class="btn btn-secondary btn-block">
                                 Dados de Transporte Escolar</a>
                           
                         </div>

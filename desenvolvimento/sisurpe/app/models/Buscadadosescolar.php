@@ -28,7 +28,7 @@
                   aluno,dados_anuais, 
                   escola, etapa 
                 WHERE 
-                  aluno.id_aluno = dados_anuais.aluno_id 
+                  aluno.aluno_id = dados_anuais.aluno_id 
                 AND 
                   dados_anuais.escola_id = escola.id
                   AND 

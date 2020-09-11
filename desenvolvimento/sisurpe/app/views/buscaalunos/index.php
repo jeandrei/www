@@ -127,7 +127,7 @@ function limpar(){
       <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
       <td><?php echo $row['nome_mae']; ?></td> 
       <td><?php echo $row['telefone_pai']; ?></td>
-      <td> <a href="<?php echo URLROOT; ?>/buscaalunos/ver/<?php echo $row['id_aluno']; ?>" class="fa fa-eye btn btn-success btn-lg"></a></td>
+      <td> <a href="<?php echo URLROOT; ?>/buscaalunos/ver/<?php echo $row['aluno_id']; ?>" class="fa fa-eye btn btn-success btn-lg"></a></td>
     </tr>
     <?php endforeach; ?>    
   </tbody>

@@ -10,7 +10,7 @@
     public function getDatauserByid($id){
         $this->db->query('SELECT *
                           FROM aluno 
-                          WHERE id_aluno = :id                       
+                          WHERE aluno_id = :id                       
                           ');
 
         $this->db->bind(':id', $id);        
@@ -159,10 +159,10 @@
                                             alergias = :alergias, 
                                             deficiencias = :deficiencias, 
                                             restric_alimentos = :restric_alimentos 
-                                            WHERE id_aluno = :id_aluno');
+                                            WHERE aluno_id = :aluno_id');
                   
         // Bind values 
-        $this->db->bind(':id_aluno',$data['id_aluno']);            
+        $this->db->bind(':aluno_id',$data['aluno_id']);            
         $this->db->bind(':nome_aluno',$data['nome_aluno']);
         $this->db->bind(':nascimento',$data['nascimento']);
         $this->db->bind(':sexo',$data['sexo']);
@@ -264,9 +264,9 @@
 
        
         public function deleteAluno($id){
-            $this->db->query('DELETE FROM aluno WHERE id_aluno = :id_aluno');
+            $this->db->query('DELETE FROM aluno WHERE aluno_id = :aluno_id');
             // Bind value
-            $this->db->bind(':id_aluno', $id);
+            $this->db->bind(':aluno_id', $id);
 
             $row = $this->db->execute();
 
@@ -281,9 +281,9 @@
 
          // pega o aluno por id
       public function getAlunoById($id){
-        $this->db->query('SELECT * FROM aluno WHERE id_aluno = :id_aluno');
+        $this->db->query('SELECT * FROM aluno WHERE aluno_id = :aluno_id');
         // Bind value
-        $this->db->bind(':id_aluno', $id);
+        $this->db->bind(':aluno_id', $id);
 
         $data = $this->db->single();
 

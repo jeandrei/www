@@ -14,9 +14,9 @@
 
     
      public function index(){
-        $datauser = $this->dataModel->getDatauserByid($_SESSION['id_aluno']); 
+        $datauser = $this->dataModel->getDatauserByid($_SESSION['aluno_id']); 
         $data = [
-            'id' => $datauser->id_aluno,
+            'aluno_id' => $datauser->aluno_id,
             'nome_aluno' => strtoupper($datauser->nome_aluno),
             'nascimento' => $datauser->nascimento,
             'sexo' => $datauser->sexo,
@@ -56,22 +56,21 @@
         
         //var_dump($data);
        // $this->view('posts/index', $data);      
-       //var_dump(isset($_SESSION['id_aluno']));*/
+       //var_dump(isset($_SESSION['aluno_id']));*/
        $this->view('datausers/index', $data);
 
      }
 
      public function show(){
-       if ($dados = $this->dataModel->getAlunosUsuario($_SESSION[DB_NAME . '_user_id'])){
-
+       if ($dados = $this->dataModel->getAlunosUsuario($_SESSION[DB_NAME . '_user_id'])){        
 
 
         foreach($dados as $dado){
           $data[] = [
-            'id_aluno' => $dado->id_aluno,
+            'aluno_id' => $dado->aluno_id,
             'nome_aluno' => $dado->nome_aluno,
             'nascimento' => $dado->nascimento,
-            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->id_aluno)
+            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->aluno_id)
           ];
         }
 
@@ -300,7 +299,7 @@
         
         //init data
         $data = [ 
-          'id_aluno' => $id,
+          'aluno_id' => $id,
           'nome_aluno' => strtoupper(trim($_POST['nome_aluno'])),
           'nascimento' => date('Y-d-m', strtotime( $_POST['nascimento'])),
           'sexo' => $_POST['sexo'],
@@ -443,7 +442,7 @@
         // Init data
         $data = $this->dataModel->getAlunoById($id);        
         $data = [ 
-          'id_aluno' => $data->id_aluno,
+          'aluno_id' => $data->aluno_id,
           'nome_aluno' => $data->nome_aluno,
           'nascimento' => date('Y-d-m', strtotime($data->nascimento)),          
           'sexo' => $data->sexo,
@@ -520,10 +519,10 @@
 
         foreach($dados as $dado){
           $data[] = [
-            'id_aluno' => $dado->id_aluno,
+            'aluno_id' => $dado->aluno_id,
             'nome_aluno' => $dado->nome_aluno,
             'nascimento' => $dado->nascimento,
-            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->id_aluno)
+            'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->aluno_id)
           ];
         }
 
