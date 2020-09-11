@@ -102,34 +102,33 @@
             empty($data['usa_transporte_err']) &&
             empty($data['linha_err'])
             ){
-              //Validated 
-
-              // Register Data
-              if(isset($dados->aluno_id)){
-                // EDIT   
-                 if($this->anualModel->update($data)){                   
-                    // Cria a menságem antes de chamar o view va para 
-                    // views/users/login a segunda parte da menságem
-                    flash('mensagem', 'Dados atualizados com sucesso');                        
-                    redirect('datausers/show');
+                // SE TEM O ID DO ALUNO É QUE ESTÁ SENDO EDITADO CASO CONTRÁRIO ESTÁ SENDO INSERIDO
+                if(isset($dados->aluno_id)){
+                  
+                      // EDIT   
+                      try {
+                        if($this->anualModel->update($data)){ 
+                            flash('mensagem', 'Dados atualizados com sucesso');                        
+                            redirect('datausers/show');
+                          }
+                      } catch (Exception $e) {
+                        die('Ops! Algo deu errado.');  
+                      }   
+               
                   } else {
-                      die('Ops! Algo deu errado.');
-                  }
-              } else {
-                // INSERT                                  
-                  if($this->anualModel->register($data)){
-                    // Cria a menságem antes de chamar o view va para 
-                    // views/users/login a segunda parte da menságem
-                    flash('mensagem', 'Dados registrados com sucesso');                        
-                    redirect('datausers/show');
-                  } else {
-                      die('Ops! Algo deu errado.');
-                  }
-              }            
-              
-              
-
-              
+                  
+                      // INSERT  
+                      try {
+                        if($this->anualModel->register($data)){                          
+                          flash('mensagem', 'Dados registrados com sucesso');                        
+                          redirect('datausers/show');
+                        }                 
+                      } catch (Exception $e) {
+                        die('Ops! Algo deu errado.');  
+                      }  
+                                        
+                }   
+            // SE HOUVE ALGUM ERRO DE VALIDAÇÃO 
             } else {
               // Load the view with errors
               $this->view('anuals/index', $data);
@@ -183,7 +182,6 @@
       
        
       $this->view('anuals/index', $data);
-
      } 
 
 

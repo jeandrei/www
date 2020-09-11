@@ -3,10 +3,7 @@
 
 <script>
 function limpar(){
-        document.getElementById('nome_aluno').value = "";
-        document.getElementById('ano').value = "";
-        document.getElementById('escola_id').value = "NULL";        
-        
+        document.getElementById('nome_aluno').value = "";   
         document.getElementById('nome_aluno').focus(); 
     }    
     
@@ -41,54 +38,7 @@ function limpar(){
                 >
       <!--<div class="col-lg-4">-->
       </div>
-
-
-
-      <!-- COLUNA 1 NOME-->
-    <div class="col-lg-2">
-            <label for="ano">
-                Buscar por ANO
-            </label>
-            <input 
-                type="text" 
-                name="ano" 
-                id="ano" 
-                maxlength="60"
-                class="form-control"
-                value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
-                ><span class="invalid-feedback">
-                    <?php // echo $data['nome_err']; ?>
-                </span>
-      <!--<div class="col-lg-4">-->
-      </div>
-
-
-      <!-- COLUNA ESCOLA -->
-      <div class="col-lg-4">
-            <label for="escola_id">
-                Busca Escola
-            </label>  
-            <select 
-                name="escola_id" 
-                id="escola_id" 
-                class="form-control"                                        
-            >
-                    <option value="NULL">Todos</option>
-                    <?php                     
-                    $escolas = $this->anualModel->getEscolas();                                     
-                    foreach($escolas as $escola) : ?> 
-                        <option value="<?php echo $escola->id; ?>"
-                                    <?php if(isset($_POST['escola_id'])){
-                                    echo $_POST['escola_id'] == $escola->id ? 'selected':'';
-                                    }
-                                    ?>
-                        >
-                            <?php echo $escola->nome;?>
-                        </option>
-                    <?php endforeach; ?>  
-            </select>
-        <!--div class="col-lg-3-->
-        </div>
+      
 
         <!-- LINHA PARA O BOTÃO ATUALIZAR -->
         <div class="row" style="margin-top:30px;">

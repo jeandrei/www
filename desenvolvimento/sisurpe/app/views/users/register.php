@@ -6,15 +6,7 @@
                 <p>Por favor preencha os dados abaixo para se registrar</p> 
                 <form action="<?php echo URLROOT; ?>/users/register" method="post" enctype="multipart/form-data" onsubmit="return validation(
                                                                                                                                                [noempty=['name']],
-                                                                                                                                               [validemail=['email']],
-                                                                                                                                               [validphone=['telefone']],
-                                                                                                                                               [selectlist=['bairro','funcao']],
-                                                                                                                                               [is_checked=['interests','teste']],
-                                                                                                                                               [validacpf=['cpf']],
-                                                                                                                                               [noemptytextarea=['conceito','infadicional']],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                               [minchar=[[6,'password']]],
-                                                                                                                                               [confirmasenha=['password','confirm_password']],   
-                                                                                                                                               [validaradio=['moradia']]                                                                                                                                               
+                                                                                                                                           [validaradio=['moradia']]                                                                                                                                               
                                                                                                                                                )">   
                     
                     <?php
@@ -59,125 +51,6 @@
                           'placeholder' => 'Informe uma senha de 6 caracteres',                          
                           'error' => $data['confirm_password_err'] = ""
                       ]);
-
-
-                        //CPF                       
-                        text($attributes = [
-                          'id' => 'cpf',
-                          'name' => 'cpf',
-                          'type' => 'text',
-                          'label' => '<b class="obrigatorio">* </b>CPF',
-                          'placeholder' => 'Informe um CPF',                          
-                          'error' => $data['cpf_err'] = ""
-                      ]);
-                                         
-                        
-
-                        
-                      //INTERESTS
-                        $options = array(
-                            'acrobatics' => 'Acrobatics',
-                            'acting' => 'Acting',
-                            'antiques' => 'Antiques',
-                            'sports' => 'Sports',
-                          );
-
-                        $checked = array(  
-                            'acrobatics' => 'Acrobatics',                          
-                            'antiques' => 'Antiques',
-                            'sports' => 'Sports',
-                          );    
-
-                          checkbox($attributes = [
-                            'id' => 'interests',
-                            'name' => 'interests',                            
-                            'label' => 'Select your interests', 
-                            'options' => $options,
-                            'checked' => $checked,                            
-                            'error' => $data['interests_err'] = ""
-                        ]);
-                        
-                        
-                        
-                        
-                        
-                        // COMPROVANTE
-                        $options = array(
-                            'agua' => 'Água',
-                            'luz' => 'Luz',
-                            'telefone' => 'Telefone',
-                            'aluguel' => 'Aluguel',
-                          );
-
-                        $checked = array(  
-                            'luz' => 'Luz',                          
-                            'telefone' => 'Telefone',                            
-                          );
-                          
-                          checkbox($attributes = [
-                            'id' => 'teste',
-                            'name' => 'teste',                            
-                            'label' => 'Comprovantes anexados', 
-                            'options' => $options,
-                            'checked' => $checked,                            
-                            'error' => $data['teste_err'] = ""
-                        ]);
-                        
-
-
-                              
-                          //MORADIA
-                          $options = array(
-                            '01' => 'Casa',
-                            '02' => 'Apartamento',
-                            '03' => 'Comércio',
-                            '04' => 'Sítio',
-                            '05' => 'Sobrado'                            
-                          );
-
-                                                  
-                         
-                          radio($attributes = [
-                            'name' => 'moradia',
-                            'id' => 'moradia',                            
-                            'label' => 'Tipo de moradia', 
-                            'options' => $options,                                                        
-                            'error' => $data['moradia_err'] = ""
-                          ]);
-
-
-
-
-                          //FUNÇÃO
-                          $options = array(
-                            '01' => 'Aluno',
-                            '02' => 'Professor',
-                            '03' => 'Especialista',
-                            '04' => 'Secretária',
-                          );
-                          
-                                                
-                          selectlist($attributes = [
-                            'name' => 'funcao',
-                            'id' => 'funcao',                            
-                            'label' => 'Função', 
-                            'placeholder' => 'Selecione uma função',
-                            'options' => $options,                                                       
-                            'error' => $data['funcao_err'] = ""
-                          ]);
-                          
-                          
-
-                          
-                          textarea($attributes = [
-                            'name' => 'infadicional',
-                            'id' => 'infadicional',                            
-                            'label' => 'Informação adicional',                             
-                            'rows' => 03,                                                                                   
-                            'error' => $data['infadicional_err'] = ""
-                          ]);
-                       
-                        
                          
                           
                     ?>

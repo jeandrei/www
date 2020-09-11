@@ -48,12 +48,7 @@
           
           $nome_aluno =$_GET['nome_aluno'];        
           $_POST['nome_aluno'] =  $nome_aluno;
-
-          $escola_id =$_GET['escola_id'];
-          $_POST['escola_id'] =  $escola_id;
-
-          $ano =$_GET['ano'];
-          $_POST['ano'] =  $ano;
+         
           
       }
       else
@@ -61,9 +56,7 @@
           // SE ENTROU AQUI É QUE FOI CARREGADO A PÁGINA PELA PRIMEIRA VEZ OU FOI CLICADO EM ATUALIZAR
           // LOGO SE TENHO ALGUM VALOR NO POST DE BUSCA PASSO PARA A VARIÁVEL STATUS E POR FIM SE AINDA ASSIM 
           //A VARIÁVEL ESTIVER VAZIA PASSO O VALOR PADRÃO 'Todos'
-          $nome_aluno = $_POST['nome_aluno'];
-          $escola_id = $_POST['escola_id'];
-          $ano = $_POST['ano'];
+          $nome_aluno = $_POST['nome_aluno'];         
           
 
           $page = 1;
@@ -73,11 +66,9 @@
       
       $options = array(
           'results_per_page' => 10,
-          'url' => URLROOT . '/buscaalunos/index.php?page=*VAR*&nome_aluno=' . $nome_aluno . '&ano=' . $ano . '&escola_id=' . $escola_id,
+          'url' => URLROOT . '/buscaalunos/index.php?page=*VAR*&nome_aluno=' . $nome_aluno,
           'named_params' => array(
-                                    ':nome_aluno' => $nome_aluno,
-                                    ':escola_id' => $escola_id,
-                                    ':ano' => $ano
+                                    ':nome_aluno' => $nome_aluno
                                 )     
       );
 

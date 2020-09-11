@@ -151,7 +151,8 @@
         $this->db->bind(':tam_calcado',$data['tam_calcado']);
         $this->db->bind(':tam_meia',$data['tam_meia']);        
         $this->db->bind(':etapa_id',$data['etapa_id']);
-        $this->db->bind(':turno',$data['turno']);       
+        $this->db->bind(':turno',$data['turno']); 
+              
 
 
         // Execute

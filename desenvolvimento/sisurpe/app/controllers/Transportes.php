@@ -48,18 +48,20 @@
        if(                    
         empty($data['linha_err']) 
         ){
-            if($this->transporteModel->register($data)){              
-              // Cria a menságem antes de chamar o view va para 
-              // views/users/login a segunda parte da menságem
-              flash('mensagem', 'Dados registrados com sucesso');                     
-              redirect('transportes/index/'.$id);
-            } else {
-                die('Ops! Algo deu errado.');
-            }
-          } else {
-            // Load the view with errors
-            $this->view('transportes/index', $data);
-          }
+
+            try {
+              if($this->transporteModel->register($data)){                         
+                flash('mensagem', 'Dados registrados com sucesso');                     
+                redirect('transportes/index/'.$id);
+              }                 
+            } catch (Exception $e) {
+              die('Ops! Algo deu errado.');  
+            } 
+        
+        } else {
+          // Load the view with errors
+          $this->view('transportes/index', $data);
+        }
      
 
       } else {
@@ -73,22 +75,26 @@
       public function delete($id){
          
           //pego o id do usuário que registrou esse aluno
-          $dados = $this->transporteModel->getDadosAlunoLinha($id);         
-                 
+          $dados = $this->transporteModel->getDadosAlunoLinha($id);   
           // se for o mesmo id do usuário logado eu permito a exclusão caso contrário bloqueio
           //echo $dados->$aluno_id;
-          if($dados->user_id != $_SESSION[DB_NAME . '_user_id']){
-            
+          if($dados->user_id != $_SESSION[DB_NAME . '_user_id']){            
             die("Você não tem permissão para excluir este aluno");
           }
-        
-          if($this->transporteModel->deleteAlunoLinhas($id)){                
-            flash('mensagem', 'Registro removido com sucesso!');
-            //redirect('transportes/index/'. $_SESSION[DB_NAME . '_user_id']);
-            redirect("transportes/index/". $dados->aluno_id);
-        } else {
-            flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
-        }
+
+
+          try {
+            if($this->transporteModel->deleteAlunoLinhas($id)){                       
+              flash('mensagem', 'Registro removido com sucesso!');                
+              redirect("transportes/index/". $dados->aluno_id);
+            } else {
+              flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
+              redirect("transportes/index/". $dados->aluno_id);
+            }                
+          } catch (Exception $e) {
+            die('Ops! Algo deu errado.');  
+          } 
+          
       }
 
      

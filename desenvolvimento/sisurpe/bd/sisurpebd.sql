@@ -333,6 +333,15 @@ ALTER TABLE `endereco`
 -- Restrições para dumps de tabelas
 --
 
+
+ALTER TABLE `aluno_linhas`
+  ADD CONSTRAINT `aluno_id` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
+
+
+ALTER TABLE `aluno_linhas` 
+  ADD CONSTRAINT `linha_id` FOREIGN KEY (`linha_id`) REFERENCES `linhas`(`id`);
+
+
 --
 -- Restrições para tabelas `dados_anuais`
 --
@@ -346,6 +355,9 @@ ALTER TABLE `dados_anuais`
 ALTER TABLE `endereco`
   ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
 COMMIT;
+
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

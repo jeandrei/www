@@ -211,21 +211,17 @@
                 empty($data['certidao_err']) &&
                 empty($data['uf_cert_err']) &&
                 empty($data['modelo_err']) 
-                ){
-                  //Validated 
-
-                  // Register User                 
-                  if($this->dataModel->register($data)){
-                    // Cria a menságem antes de chamar o view va para 
-                    // views/users/login a segunda parte da menságem
-                    flash('mensagem', 'Dados registrados com sucesso');                        
-                    redirect('datausers/show');
-                  } else {
-                      die('Ops! Algo deu errado.');
-                  }
+                ){ 
                   
+                    try {
+                      if($this->dataModel->register($data)){                         
+                        flash('mensagem', 'Dados registrados com sucesso');                        
+                        redirect('datausers/show');
+                      }                 
+                    } catch (Exception $e) {
+                      die('Ops! Algo deu errado.');  
+                    }  
 
-                  
                 } else {
                   // Load the view with errors
                   $this->view('datausers/add', $data);
@@ -277,13 +273,6 @@
    
 
     }
-
-
-
-
-
-
-
 
 
 
@@ -418,19 +407,15 @@
             empty($data['uf_cert_err']) &&
             empty($data['modelo_err']) 
             ){
-              //Validated 
-
-              // Register User
-              if($this->dataModel->update($data)){
-                // Cria a menságem antes de chamar o view va para 
-                // views/users/login a segunda parte da menságem
-                flash('mensagem', 'Dados atualizados com sucesso');                        
-                redirect('datausers/show/' . $id);
-              } else {
-                  die('Ops! Algo deu errado.');
-              }
               
-
+                try {
+                  if($this->dataModel->update($data)){                      
+                    flash('mensagem', 'Dados atualizados com sucesso');                        
+                  redirect('datausers/show/' . $id);
+                  }                 
+                } catch (Exception $e) {
+                  die('Ops! Algo deu errado.');  
+                } 
               
             } else {
               // Load the view with errors

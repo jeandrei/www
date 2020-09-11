@@ -32,11 +32,19 @@
                 if(empty($data['email'])){
                     $data['email_err'] = 'Por favor informe seu email';
                 } else {
-                    // Check email userModel foi instansiado na construct
-                    if($this->userModel->findUserByEmail($data['email'])){
-                        $data['email_err'] = 'Email já existente'; 
-                    }
+                    if(!validaemail($data['email'])){
+                        $data['email_err'] = 'Email inválido';  
+                    }else{
+                        
+                        if($this->userModel->findUserByEmail($data['email'])){
+                            $data['email_err'] = 'Email já existente'; 
+                        }
+                    }                    
                 }
+
+
+
+
 
                 // Validate Name
                 if(empty($data['name'])){
@@ -191,6 +199,7 @@
         $_SESSION[DB_NAME . '_user_id'] = $user->id;
         $_SESSION[DB_NAME . '_user_email'] = $user->email;
         $_SESSION[DB_NAME . '_user_name'] = $user->name;
+        $_SESSION[DB_NAME . '_user_type'] = $user->type;
         redirect('datausers/show');
     }
 
@@ -209,5 +218,77 @@
             return false;
         }
     }
+
+
+    public function enviasenha(){
+
+        // Check for POST            
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            // Process form
+
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+            //init data
+            $data = [                
+                'email' => trim($_POST['email'])               
+            ];                
+
+            
+
+            // Validate Email
+            if(empty($data['email'])){
+                $data['email_err'] = 'Por favor informe seu email';
+            } else {
+                if(!validaemail($data['email'])){
+                    $data['email_err'] = 'Email inválido';  
+                }else{
+                    
+                    if(!$this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email ainda não cadastrado'; 
+                    }
+                }                    
+            }
+
+            // Make sure errors are empty
+            if(                    
+                empty($data['email_err'])                  
+                ){
+                  //ENVIA O EMAIL
+                  //$newpassword = RandomPassword();
+                  //var_dump($newpassword);
+                  //sendPasswordByEmail($data['email'],$newpassword);
+                  $msg = "First line of text\nSecond line of text";
+
+                    // use wordwrap() if lines are longer than 70 characters
+                    $msg = wordwrap($msg,70);
+
+                    // send email
+                    mail("jeandreiwalter@gmail.com","My subject",$msg);
+                  
+                 
+                  
+
+                  
+                } else {
+                  // Load the view with errors
+                  $this->view('users/enviasenha', $data);
+                }               
+
+        
+        } else {
+            // Init data
+            $data = [               
+                'email' => ''                
+            ];
+            // Load view            
+            $this->view('users/enviasenha', $data);
+        }       
+        
+
+    } 
+
+
 }   
 ?>

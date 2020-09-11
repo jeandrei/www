@@ -7,7 +7,17 @@
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Dados de Transporte Escolar</h1>    
+        <h1>Dados de Transporte Escolar</h1>
+
+        <!--BOTÃO VOLTAR-->
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-lg-2">
+        <a href="<?php echo URLROOT; ?>/datausers/show" id="voltar" class="btn btn-default btn-block" style="background-color:#FFFAF0">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar
+        </a>
+        
+    </div>
+</div>    
               
            
         <form action="<?php echo URLROOT; ?>/transportes/gravar/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       

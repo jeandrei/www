@@ -48,7 +48,7 @@ CREATE TABLE `escola` (
 
 INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 (4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
-(5, 'CEI DONA BELINHA', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(5, 'CEI DONA BElinhas', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
 (6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
 (7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
 (8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
@@ -65,8 +65,7 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 
 CREATE TABLE `etapa` (
   `id` int(11) NOT NULL,
-  `data_ini` date DEFAULT NULL,
-  `data_fin` date DEFAULT NULL,
+  `idade` int(2) NOT NULL,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -74,11 +73,33 @@ CREATE TABLE `etapa` (
 -- Despejando dados para a tabela `etapa`
 --
 
-INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
-(1, '2019-04-01', '2020-12-31', 'BERÇÁRIO-I'),
-(2, '2018-04-01', '2019-03-31', 'BERÇÁRIO-II'),
-(3, '2017-04-01', '2018-03-31', 'MATERNAL'),
-(4, '2016-04-01', '2017-03-31', 'PRÉ-I');
+INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
+(1, 1, 'BERÇÁRIO-I'),
+(2, 2, 'BERÇÁRIO-II'),
+(3, 3, 'MATERNAL'),
+(4, 4, 'PRÉ-I');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `linhas`
+--
+
+CREATE TABLE `linhas` (
+  `id` int(11) NOT NULL,
+  `linha` varchar(55) NOT NULL,
+  `rota` varchar(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `linhas`
+--
+
+INSERT INTO `linhas` (`id`, `linha`) VALUES
+(1, '01'),
+(2, '02'),
+(3, '03'),
+(4, '04');
 
 -- --------------------------------------------------------
 
@@ -87,7 +108,7 @@ INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -99,7 +120,7 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUES
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
 (1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin' '2018-11-23 10:19:18'),
 (2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36'),
 (3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', '2019-01-09 16:46:20');
@@ -109,10 +130,10 @@ INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `created_at`) VALUE
 --
 
 CREATE TABLE `aluno` (
-  `id_aluno` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nome_aluno` varchar(255) NOT NULL,
-  `chave` char(13) NOT NULL,
-  `nascimento` datetime DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
   `sexo` char(1) NOT NULL,
   `telefone_aluno` char(20) DEFAULT NULL,
   `email_aluno` varchar(255) DEFAULT NULL,
@@ -128,20 +149,20 @@ CREATE TABLE `aluno` (
   `uf_rg` char(2) DEFAULT NULL,
   `orgao_emissor` char(5) DEFAULT NULL,
   `titulo_eleitor` varchar(20) DEFAULT NULL,
-  `zona` int(11) DEFAULT NULL,
-  `secao` int(11) DEFAULT NULL,
+  `zona` char(11) DEFAULT NULL,
+  `secao` char(11) DEFAULT NULL,
   `certidao` varchar(255) DEFAULT NULL,
   `uf_cert` char(2) DEFAULT NULL,
   `cartorio_cert` varchar(255) DEFAULT NULL,
   `modelo` varchar(255) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `folha` int(11) DEFAULT NULL,
+  `numero` char(11) DEFAULT NULL,
+  `folha` char(11) DEFAULT NULL,
   `livro` varchar(255) DEFAULT NULL,
-  `data_emissao_cert` datetime DEFAULT NULL,
+  `data_emissao_cert` date DEFAULT NULL,
   `municipio_cert` varchar(255) DEFAULT NULL,
   `cpf` char(15) DEFAULT NULL,
   `tipo_sanguineo` char(3) DEFAULT NULL,
-  `faz_uso_medicacao` char(3) DEFAULT NULL,
+  `fazUsoMed` char(3) DEFAULT NULL,
   `medicamentos` varchar(255) DEFAULT NULL,
   `alergias` varchar(255) DEFAULT NULL,
   `deficiencias` varchar(255) DEFAULT NULL,
@@ -149,22 +170,17 @@ CREATE TABLE `aluno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Fazendo dump de dados para tabela `aluno`
+-- Estrutura para tabela `aluno_linha`
 --
 
-INSERT INTO `aluno` (`id_aluno`, `nome_aluno`, `chave`, `nascimento`, `sexo`, `telefone_aluno`, `email_aluno`, `nome_pai`, `telefone_pai`, `nome_mae`, `telefone_mae`, `nome_responsavel`, `telefone_resp`, `naturalidade`, `nacionalidade`, `rg`, `uf_rg`, `orgao_emissor`, `titulo_eleitor`, `zona`, `secao`, `certidao`, `uf_cert`, `cartorio_cert`, `modelo`, `numero`, `folha`, `livro`, `data_emissao_cert`, `municipio_cert`, `cpf`, `tipo_sanguineo`, `faz_uso_medicacao`, `medicamentos`, `alergias`, `deficiencias`, `restric_alimentos`) VALUES
-(1, 'ABRAÃO ANGELO CORRÊA DE SOUZA', 'uKzDHYY4A2jH', '1980-02-10 00:00:00', 'M', '(47) 99116-9854', 'abraaoangelo@gmail.com', 'CARLOS SOUZA', '(47) 99116-9965', 'MARIA SOUZA', '(47) 99116-0076', 'O PAI', '(47) 99116-9965', 'PENHA', 'BRASILEIRA', '3498.678', 'PR', 'SSP', '9987665', 201, 9, '88476464', 'SC', 'CARTORIO DE PENHA', 'NOVO', 987, 90, '67', '1980-03-10 00:00:00', 'PENHA', '0987.367.87-25', 'O+', 'SIM', 'TESTE DE MEDICAMENTO', 'TESTE DE ALERGIA', 'TESTE DE DEFICIENCIA', 'TESTE RESTRIÇÃO');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `ano`
---
-
-CREATE TABLE `ano` (
-  `id_ano` int(11) NOT NULL,
-  `ano` int(11) NOT NULL
+CREATE TABLE `aluno_linhas` (
+  `id` int(11) NOT NULL,
+  `linha_id` int(11) NOT NULL,
+  `ano` char(4),
+  `aluno_id` int(11) NOT NULL  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 -- --------------------------------------------------------
 
@@ -175,18 +191,17 @@ CREATE TABLE `ano` (
 CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
-  `ano_id` int(11) NOT NULL,
-  `usa_transporte` char(3) DEFAULT NULL,
-  `linha` varchar(255) DEFAULT NULL,
+  `escola_id` int(11) NOT NULL, 
+  `etapa_id` int(11) NOT NULL, 
+  `ano` char(4), 
   `tam_moletom` varchar(50) DEFAULT NULL,
   `tam_camiseta` varchar(50) DEFAULT NULL,
   `tam_calca` varchar(50) DEFAULT NULL,
   `tam_bermuda` varchar(50) DEFAULT NULL,
   `tam_calcado` varchar(50) DEFAULT NULL,
-  `tam_meia` varchar(50) DEFAULT NULL,
-  `escola` varchar(255) DEFAULT NULL,
-  `turma` char(50) DEFAULT NULL,
-  `turno` char(1) DEFAULT NULL
+  `tam_meia` varchar(50) DEFAULT NULL,  
+  `turno` char(1) DEFAULT NULL,
+  `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -220,30 +235,38 @@ ALTER TABLE `etapa`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `linhas`
+--
+ALTER TABLE `linhas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `linhas`
+--
+ALTER TABLE `aluno_linhas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`id_aluno`);
+  ADD PRIMARY KEY (`aluno_id`),
+  ADD KEY `user_id` (`user_id`);
 
---
--- Índices de tabela `ano`
---
-ALTER TABLE `ano`
-  ADD PRIMARY KEY (`id_ano`);
 
 --
 -- Índices de tabela `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
   ADD PRIMARY KEY (`id_da`),
-  ADD KEY `aluno_id` (`aluno_id`),
-  ADD KEY `ano_id` (`ano_id`);
+  ADD KEY `aluno_id` (`aluno_id`);
+  
 
 --
 -- Índices de tabela `endereco`
@@ -269,23 +292,30 @@ ALTER TABLE `etapa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
+-- AUTO_INCREMENT de tabela `linhas`
+--
+ALTER TABLE `linhas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
+-- AUTO_INCREMENT de tabela `linhas`
+--
+ALTER TABLE `aluno_linhas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+--
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 --
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `aluno_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
---
--- AUTO_INCREMENT de tabela `ano`
---
-ALTER TABLE `ano`
-  MODIFY `id_ano` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `dados_anuais`
@@ -307,16 +337,51 @@ ALTER TABLE `endereco`
 -- Restrições para tabelas `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
-  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`),
-  ADD CONSTRAINT `dados_anuais_ibfk_2` FOREIGN KEY (`ano_id`) REFERENCES `ano` (`id_ano`);
+  ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
+  
 
 --
 -- Restrições para tabelas `endereco`
 --
 ALTER TABLE `endereco`
-  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id_aluno`);
+  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
+-- TRIGGERS
+DELIMITER $
+
+CREATE TRIGGER currentyear_dados_anuais BEFORE INSERT
+ON dados_anuais
+FOR EACH ROW
+BEGIN
+    SET new.ano = YEAR(NOW());
+END$
+
+
+DELIMITER ;
+
+
+
+DELIMITER $
+
+CREATE TRIGGER currentyear_aluno_linha BEFORE INSERT
+ON aluno_linhas
+FOR EACH ROW
+BEGIN
+    SET new.ano = YEAR(NOW());
+END$
+
+
+
+
+
+
+

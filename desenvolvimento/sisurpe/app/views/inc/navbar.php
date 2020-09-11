@@ -14,40 +14,32 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/datausers/show">Alunos</a>
           </li>          
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
-          </li>          
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/buscaalunos">Busca Alunos</a>
-          </li>   
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadosescolars">Busca Dados Escolares</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Transporte</a>
-          </li>            
-        
+                   
+                 
 
 
-
-       <!--FAZ A VERIFICAÇÃO SE O USUÁRIO É ADMINISTRADOR, SE SIM CARREGA OS MENUS DE CADASTRO-->
+       <!--FAZ A VERIFICAÇÃO SE O USUÁRIO É ADMINISTRADOR, OU SECRETÁRIO SE SIM CARREGA OS MENUS DE CADASTRO-->
          <?php if(isset($_SESSION[DB_NAME . '_user_type']) && ($_SESSION[DB_NAME . '_user_type']) == "admin") : ?>           
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Cadastros
+                Consulta
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="<?php echo URLROOT; ?>/estabelecimentos">Estabelecimento</a>
-                <a class="dropdown-item" href="<?php echo URLROOT; ?>/atendimentos">Atendimento</a>
-                <a class="dropdown-item" href="<?php echo URLROOT; ?>/filas">Filas</a>               
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/buscaalunos">Busca Alunos</a>
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/buscadadosescolars">Busca Dados Escolares</a>
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Transporte</a>           
               </div>
             </li>
+        <?php endif; ?> 
 
 
 
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
+          </li> 
 
 
-        <?php endif; ?>         
+
         </ul>
 
 
@@ -65,10 +57,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Entrar</a>
-          </li> 
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT; ?>/modelos/paginamodelo">Página Modelo</a>
-          </li>
+          </li>           
         <?php endif; ?>         
         </ul>
 
