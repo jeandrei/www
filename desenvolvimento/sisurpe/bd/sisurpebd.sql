@@ -47,15 +47,33 @@ CREATE TABLE `escola` (
 --
 
 INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
-(4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
-(5, 'CEI DONA BElinhas', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
-(6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
-(7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
-(8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
-(9, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 5, 'Rua Lauro Zimerman Filho', 200),
-(10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
-(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
-(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
+(01, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
+(02, 'CEI DONA BELINHA', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(03, 'CEI JULIO CORREA DE MELLO', 1, 'Rua Sebastião Schmitz', 0),
+(04, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'RUA PEDRO JOSÉ GOMES', 0),
+(05, 'CEI MARIA DE LOURDES FRANCISCO GONÇALVES', 1, 'RUA PEDRO JOSÉ GOMES', 0),
+(06, 'CEI MARIA LÚCIA FLORIANO', 1, 'Rua André Serafim Francisco', 108),
+(07, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
+(08, 'CEI PROFª ORLANDINA BENTO MENDES', 1, 'Rua Antônio João Caldeira', 0),
+(09, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 1, 'Rua Lauro Zimerman Filho', 200),
+(10, 'CRECHE CASA DA AMIZADE', 1, 'Rua Artur Silvino dos Reis', 63),
+(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 1, 'Rua João Carlos Alves', 40),
+(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 1, 'Rua Maria Joaquina Bento', 85),
+(13, 'EI ANTONIO JOAQUIM TAVARES', 1, 'Rua Vereador João Manoel Bento', 0),
+(14, 'EI CIPRIANO SILVINO CUSTODIO', 1, 'Avenida Geral da Santa Lidia', 0),
+(15, 'EI MUN HORACINA SOARES FRANCISCO', 1, 'Rua Tiradentes', 0),
+(16, 'EI SÃO NICOLAU', 1, 'Rua Ernesto dos Santos', 0),
+(17, 'ESCOLA BÁSICA MUNICIPAL JOAO ANTONIO PINTO', 1, 'Rua Tijucas', 126),
+(18, 'ESCOLA BÁSICA MUNICIPAL JOÃO BATISTA DA CRUZ', 1, 'Rua Margarida Vieira', 885),
+(19, 'ESCOLA BÁSICA MUNICIPAL RUBENS JOÃO DE SOUZA', 1, 'Rua Calixto Luiz Honório', 325),
+(20, 'ESCOLA MUNICIPAL MARIA EMILIA DA COSTA', 1, 'Rua Arnô Becker', 0),
+(21, 'ESCOLA MUNICIPAL PROFESSORA IVONE NYMPHA MAIA ADRIANO', 1, 'Rua Paraná', 39),
+(22, 'ESCOLA MUNICIPAL ROSALIA VALENTINA DALLAGO', 1, 'Rua Júlia da Costa Flores', 1922),
+(23, 'GRUPO ESCOLAR MUNICIPAL ANTÔNIO JOSÉ TIAGO', 1, 'Rua Felipe João Anacleto', 1058),
+(24, 'GRUPO ESCOLAR MUNICIPAL LACI SIMÃO CORREA', 1, 'Avenida São João', 0),
+(25, 'GRUPO ESCOLAR MUNICIPAL RAQUEL FIGUEREDO DE ASSIS', 1, 'RUA JOÃO MARIANO FURTADO', 274);
+
+
 
 -- --------------------------------------------------------
 
@@ -77,7 +95,18 @@ INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
 (1, 1, 'BERÇÁRIO-I'),
 (2, 2, 'BERÇÁRIO-II'),
 (3, 3, 'MATERNAL'),
-(4, 4, 'PRÉ-I');
+(4, 3, 'PRÉ-I'),
+(5, 3, 'PRÉ-II'),
+(6, 3, 'PRÉ-III'),
+(7, 3, '1º ANO'),
+(8, 3, '2º ANO'),
+(9, 3, '3º ANO'),
+(10, 3, '4º ANO'),
+(11, 3, '5º ANO'),
+(12, 3, '6º ANO'),
+(13, 3, '7º ANO'),
+(14, 4, '8º ANO'),
+(15, 4, '9º ANO');
 
 -- --------------------------------------------------------
 
@@ -99,7 +128,10 @@ INSERT INTO `linhas` (`id`, `linha`) VALUES
 (1, '01'),
 (2, '02'),
 (3, '03'),
-(4, '04');
+(4, '04'),
+(5, '05'),
+(6, '06'),
+(7, '07');
 
 -- --------------------------------------------------------
 

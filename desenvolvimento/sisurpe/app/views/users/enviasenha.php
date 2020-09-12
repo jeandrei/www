@@ -1,9 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-6 mx-auto">        
             <div class="card card-body bg-light mt-5">
                 <?php // Segunda parte da menságem        
-                flash('register_success');
+                flash('mensagem_erro');
                 ?>
                 <h2>Recuperação de senha</h2>
                 <p>Por favor informe seu email</p>                               
@@ -13,20 +13,23 @@
                                                                                                                                             )">
                 
                 
-                <?php 
-                   //EMAIL                       
-                   text($attributes = [
-                    'id' => 'email',
-                    'name' => 'email',
-                    'type' => 'text',
-                    'label' => '<b class="obrigatorio">* </b>Email',
-                    'placeholder' => 'Informe um email válido',                          
-                    'error' => $data['email_err']
-                ]);                  
-                  
-                  
-                              
-                    ?>       
+                 <!--EMAIL-->
+                 <div class="form-group">   
+                        <label 
+                            for="email">Email: <sup>*</sup>
+                        </label>                        
+                        <input 
+                            type="text" 
+                            name="email" 
+                            class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"                             
+                            placeholder="Informe seu email",
+                            value="<?php echo $data['email'];?>"
+                        >
+                        <span class="invalid-feedback">
+                            <?php echo $data['email_err']; ?>
+                        </span>
+                    </div>
+
 
                     <!--BUTTONS-->
                     <div class="row">
@@ -34,8 +37,8 @@
                             <?php  submit('Eviar a senha para meu e-mail'); ?>                            
                         </div>                         
                     </div>                      
-                </form>
+                </form>                
             </div>
         </div>
-    </div>
+        
 <?php require APPROOT . '/views/inc/footer.php'; ?>

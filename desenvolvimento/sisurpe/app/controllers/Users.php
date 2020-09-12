@@ -271,7 +271,10 @@
                             if($this->userModel->sendemail($data['email'], $password)){
                                 flash('register_success', 'Email enviado com sucesso!');                     
                                 redirect('users/login');
-                            }                    
+                            } else {
+                                flash('mensagem_erro', 'Erro no envio do email! Tente novamente mais tarde.','alert-danger');                     
+                                redirect('users/enviasenha');
+                            }                   
                         }
 
                   } catch (Exception $e) {
