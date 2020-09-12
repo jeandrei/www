@@ -256,16 +256,12 @@
                 empty($data['email_err'])                  
                 ){
                   //ENVIA O EMAIL
-                  //$newpassword = RandomPassword();
-                  //var_dump($newpassword);
-                  //sendPasswordByEmail($data['email'],$newpassword);
-                  $msg = "First line of text\nSecond line of text";
-
-                    // use wordwrap() if lines are longer than 70 characters
-                    $msg = wordwrap($msg,70);
-
-                    // send email
-                    mail("jeandreiwalter@gmail.com","My subject",$msg);
+                  $password = RandomPassword();
+                 
+                  if($this->userModel->sendemail($data['email'], $password)){
+                    flash('register_success', 'Email enviado com sucesso!');                     
+                    redirect('users/login');
+                  }
                   
                  
                   

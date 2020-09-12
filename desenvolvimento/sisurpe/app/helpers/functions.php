@@ -217,14 +217,6 @@ function RandomPassword($length = 5){
 }
 
 
-function sendPasswordByEmail($email,$password){
-  $to = $email;
-  $subject = "Senha SISURPE";
-  $txt = "Olá! Aqui está sua nova senha";
-  $headers = "From: jeandreiwalter@gmail.com";
-  mail($to,$subject,$txt,$headers);
-  die("email enviado");
-}
 
 
 
