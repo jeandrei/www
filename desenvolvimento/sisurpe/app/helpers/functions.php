@@ -211,7 +211,7 @@ function validaemail($email){
 }
 
 
-function RandomPassword($length = 5){
+function RandomPassword($length = 6){
   $chars = "0123456789bcdfghjkmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
   return substr(str_shuffle($chars),0,$length);
 }

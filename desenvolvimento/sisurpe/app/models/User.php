@@ -29,6 +29,22 @@ use PHPMailer\PHPMailer\Exception;
             }
         }
 
+
+         // Register User
+         public function updatepassword($data){
+            $this->db->query('UPDATE users SET password =:password WHERE email=:email');
+            // Bind values           
+            $this->db->bind(':email',$data['email']);
+            $this->db->bind(':password',$data['password']);
+
+            // Execute
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         // 2 Login User                
         public function login($email, $password){
             $this->db->query('SELECT * FROM users WHERE email = :email');
@@ -95,6 +111,8 @@ use PHPMailer\PHPMailer\Exception;
                         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
                         //Recipients
+                        $mail->CharSet = 'UTF-8';
+                        $mail->setLanguage('pt_br', APPROOT . '/inc/PHPMailer-master/language');
                         $mail->setFrom('jeandreiwalter@gmail.com', 'Mailer');
                         $mail->addAddress($email, 'Joe User');     // Add a recipient
                         $mail->addAddress('ellen@example.com');               // Name is optional
@@ -106,7 +124,7 @@ use PHPMailer\PHPMailer\Exception;
                         //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
                         //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
-                        $texto = "Sua senha é :" . $senha;
+                        $texto = 'Sua nova senha é :' . $senha;
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Você solicitou uma nova senha de acesso ao SISURPE';

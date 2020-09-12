@@ -5,7 +5,7 @@
                 <?php // Segunda parte da menságem        
                 flash('register_success');
                 ?>
-                <h2>Login</h2>
+                <h2>Recuperação de senha</h2>
                 <p>Por favor informe seu email</p>                               
                 <form action="<?php echo URLROOT; ?>/users/enviasenha" method="post" enctype="multipart/form-data" onsubmit="return validation(
                                                                                                                                             [noempty=['password']],

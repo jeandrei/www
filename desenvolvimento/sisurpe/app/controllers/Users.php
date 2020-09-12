@@ -256,12 +256,39 @@
                 empty($data['email_err'])                  
                 ){
                   //ENVIA O EMAIL
+                  
+                  // CRIA UMA NOVA SENHA RANDOMICAMENTE
                   $password = RandomPassword();
+
+                  // Hash Password CRIPTOGRAFA O PASSWORD
+                  $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+
+                  try {
+                        // ATUALIZA O PASSWORD NO BANCO DE DADOS
+                        if($this->userModel->updatepassword($data)){
+                            
+                            //MANDE O EMAIL COM A SENHE
+                            if($this->userModel->sendemail($data['email'], $password)){
+                                flash('register_success', 'Email enviado com sucesso!');                     
+                                redirect('users/login');
+                            }                    
+                        }
+
+                  } catch (Exception $e) {
+                    die('Ops! Algo deu errado.');  
+                  }   
+
+
+
+
+
+
+                  
+
+
+
                  
-                  if($this->userModel->sendemail($data['email'], $password)){
-                    flash('register_success', 'Email enviado com sucesso!');                     
-                    redirect('users/login');
-                  }
+                  
                   
                  
                   

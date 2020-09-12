@@ -12,30 +12,41 @@
                                                                                                                                             [validemail=['email']]
                                                                                                                                             )">
                 
-                
-                <?php 
-                   //EMAIL                       
-                   text($attributes = [
-                    'id' => 'email',
-                    'name' => 'email',
-                    'type' => 'text',
-                    'label' => '<b class="obrigatorio">* </b>Email',
-                    'placeholder' => 'Informe um email válido',                          
-                    'error' => $data['email_err']
-                ]);
-                  
-                  
-                  //PASSWORD                        
-                  text($attributes = [
-                    'id' => 'password',
-                    'name' => 'password',
-                    'type' => 'password',
-                    'label' => '<b class="obrigatorio">* </b>Senha',
-                    'placeholder' => 'Informe uma senha de 6 caracteres',                          
-                    'error' => $data['password_err']
-                ]);    
-                              
-                    ?>       
+
+                    <!--EMAIL-->
+                    <div class="form-group">   
+                        <label 
+                            for="email">Email: <sup>*</sup>
+                        </label>                        
+                        <input 
+                            type="text" 
+                            name="email" 
+                            class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"                             
+                            placeholder="Informe seu email",
+                            value="<?php echo $data['email'];?>"
+                        >
+                        <span class="invalid-feedback">
+                            <?php echo $data['email_err']; ?>
+                        </span>
+                    </div>
+
+                     <!--PASSWORD-->
+                     <div class="form-group">   
+                        <label 
+                            for="password">Senha: <sup>*</sup>
+                        </label>                        
+                        <input 
+                            type="password" 
+                            name="password" 
+                            placeholder="Informe sua senha",
+                            class="form-control form-control-lg <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>"                             
+                            value="<?php echo $data['password'];?>"
+                        >
+                        <span class="invalid-feedback">
+                            <?php echo $data['password_err']; ?>
+                        </span>
+                    </div>
+
 
                     <!--BUTTONS-->
                     <div class="row">
