@@ -107,7 +107,7 @@
      $data = [ 
        'aluno_id' => $data->aluno_id,
        'nome_aluno' => $data->nome_aluno,
-       'nascimento' => date('Y-d-m', strtotime($data->nascimento)),          
+       'nascimento' => $data->nascimento,          
        'sexo' => $data->sexo,
        'telefone_aluno' => $data->telefone_aluno,
        'email_aluno' =>  $data->email_aluno,
@@ -132,7 +132,7 @@
        'numero' => $data->numero,
        'folha' => $data->folha,
        'livro' => $data->livro,
-       'data_emissao_cert' =>  date('Y-d-m', strtotime($data->data_emissao_cert)),
+       'data_emissao_cert' => $data->data_emissao_cert,
        'municipio_cert' => $data->municipio_cert,
        'cpf' => $data->cpf,
        'tipo_sanguineo' => $data->tipo_sanguineo,

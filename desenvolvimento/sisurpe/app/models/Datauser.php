@@ -285,7 +285,7 @@
         // Bind value
         $this->db->bind(':aluno_id', $id);
 
-        $data = $this->db->single();
+        $data = $this->db->single();        
 
         // Check row
         if($this->db->rowCount() > 0){
