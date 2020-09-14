@@ -1,20 +1,20 @@
 <?php
  class Anuals extends Controller {
+    
     public function __construct(){                
         //isLoggedIn do arquivo session_helper.php
         if(!isLoggedIn()){
           redirect('users/login');
-        }
-       
-     $this->anualModel = $this->model('Anual');
-    // $this->userModel = $this->model('User');
+        }       
+    $this->anualModel = $this->model('Anual');   
     }
 
     
-     public function index($id){ 
-       //Pego o nome e a data de nascimento do aluno para mostrar no formulário 
-       $aluno = $this->anualModel->getAlunoById($id);  
-       $dados = $this->anualModel->getDadosAnuaisById($id);   
+    public function index($id){ 
+        
+      //Pego o nome e a data de nascimento do aluno para mostrar no formulário 
+        $aluno = $this->anualModel->getAlunoById($id);  
+        $dados = $this->anualModel->getDadosAnuaisById($id);   
         
         // NÃO TEM CADASTRO PROCEDEMOS O NOVO CADASTRO
         // Check for POST OU SEJA SE O USUÁRIO JÁ CLICOU EM SALVAR           
@@ -26,7 +26,7 @@
           //init data
           $data = [  
             'nome_aluno' => $aluno->nome_aluno,
-            'nascimento' => date('Y-d-m', strtotime($aluno->nascimento)),            
+            'nascimento' => $aluno->nascimento,            
             'aluno_id' => $id,
             'escola_id' => $_POST['escola_id'],
             'usa_transporte' => trim($_POST['usa_transporte']),
@@ -86,8 +86,6 @@
             } 
           }
 
-
-
           // Make sure errors are empty
           if(                    
             empty($data['tam_moletom_err']) &&
@@ -114,7 +112,7 @@
                       } catch (Exception $e) {
                         die('Ops! Algo deu errado.');  
                       }   
-               
+                
                   } else {
                   
                       // INSERT  
@@ -132,15 +130,13 @@
             } else {
               // Load the view with errors
               $this->view('anuals/index', $data);
-            }             
-
-
+            }  
 
         } else {
           // SE O USUÁRIO AINDA NÃO CLICOU EM SALVAR
           $data = [   
             'nome_aluno' => $aluno->nome_aluno, 
-            'nascimento' => date('Y-d-m', strtotime($aluno->nascimento)),       
+            'nascimento' => $aluno->nascimento,       
             'aluno_id' => $id,
             'escola_id' => '',
             'usa_transporte' => '',
@@ -155,16 +151,11 @@
             'etapa_id' => '',
             'turno' => ''
           ];
-        }
-
-      
-        // JÁ TEM CADASTRO, JOGO OS VALORES NO ARRAY DATA OS VALORES VEM LÁ DE CIMA DA LINHA
-        // $dados = $this->anualModel->getDadosAnuaisById($id);  
-        
-        
-         $data = [  
+        }      
+            // JÁ TEM CADASTRO, JOGO OS VALORES NO ARRAY DATA OS VALORES VEM LÁ DE CIMA DA LINHA         
+            $data = [  
             'nome_aluno' => $aluno->nome_aluno,
-            'nascimento' => date('Y-d-m', strtotime($dados->nascimento)),            
+            'nascimento' => $aluno->nascimento,            
             'aluno_id' => $id,
             'escola_id' => $dados->escola_id,
             'usa_transporte' => $dados->usa_transporte,
@@ -178,20 +169,8 @@
             'escola' => $dados->escola,
             'etapa_id' => $dados->etapa_id,
             'turno' => $dados->turno
-          ];
-      
-       
+          ];   
       $this->view('anuals/index', $data);
-     } 
+    }
 
-
-
-
-
-
-    
-
-
-
-
-    }//class
+}//class
