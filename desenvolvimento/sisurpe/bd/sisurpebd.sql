@@ -226,12 +226,9 @@ CREATE TABLE `dados_anuais` (
   `escola_id` int(11) NOT NULL, 
   `etapa_id` int(11) NOT NULL, 
   `ano` char(4), 
-  `tam_moletom` varchar(50) DEFAULT NULL,
-  `tam_camiseta` varchar(50) DEFAULT NULL,
-  `tam_calca` varchar(50) DEFAULT NULL,
-  `tam_bermuda` varchar(50) DEFAULT NULL,
-  `tam_calcado` varchar(50) DEFAULT NULL,
-  `tam_meia` varchar(50) DEFAULT NULL,  
+  `kit_inverno` varchar(50) DEFAULT NULL,
+  `kit_verao` varchar(50) DEFAULT NULL,  
+  `tam_calcado` varchar(50) DEFAULT NULL,  
   `turno` char(1) DEFAULT NULL,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

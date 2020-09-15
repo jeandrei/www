@@ -34,24 +34,18 @@
             $ano =$_GET['ano'];
             $_POST['ano'] =  $ano;
 
-            $tam_moletom =$_GET['tam_moletom'];
-            $_POST['tam_moletom'] =  $tam_moletom;
+            $sexo =$_GET['sexo'];
+            $_POST['sexo'] =  $sexo;
 
-            $tam_calca =$_GET['tam_calca'];
-            $_POST['tam_calca'] =  $tam_calca;
+            $kit_inverno =$_GET['kit_inverno'];
+            $_POST['kit_inverno'] =  $kit_inverno;
 
-            $tam_camiseta =$_GET['tam_camiseta'];
-            $_POST['tam_camiseta'] =  $tam_camiseta;
-
-            $tam_bermuda =$_GET['tam_bermuda'];
-            $_POST['tam_bermuda'] =  $tam_bermuda;
-
+            $kit_verao =$_GET['kit_verao'];
+            $_POST['kit_verao'] =  $kit_verao;
+            
             $tam_calcado =$_GET['tam_calcado'];
             $_POST['tam_calcado'] =  $tam_calcado;
-
-            $tam_meia =$_GET['tam_meia'];
-            $_POST['tam_meia'] =  $tam_meia;
-
+           
             $etapa_id =$_GET['etapa_id'];
             $_POST['etapa_id'] =  $etapa_id;
 
@@ -67,12 +61,10 @@
             $nome = $_POST['buscanome'];
             $escola_id = $_POST['escola_id'];
             $ano = $_POST['ano'];
-            $tam_moletom = $_POST['tam_moletom'];
-            $tam_calca = $_POST['tam_calca'];
-            $tam_camiseta = $_POST['tam_camiseta'];
-            $tam_bermuda = $_POST['tam_bermuda'];
-            $tam_calcado = $_POST['tam_calcado'];
-            $tam_meia = $_POST['tam_meia'];
+            $sexo = $_POST['sexo'];
+            $kit_inverno = $_POST['kit_inverno'];            
+            $kit_verao = $_POST['kit_verao'];            
+            $tam_calcado = $_POST['tam_calcado'];            
             $etapa_id = $_POST['etapa_id'];
             $turno = $_POST['turno']; 
 
@@ -81,17 +73,15 @@
       
         $options = array(
             'results_per_page' => 10,
-            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&tam_moletom=' . $tam_moletom . '&tam_calca=' . $tam_calca  . '&tam_camiseta=' . $tam_camiseta . '&tam_bermuda=' . $tam_bermuda . '&tam_calcado=' . $tam_calcado . '&tam_meia=' . $tam_meia,
+            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&sexo=' . $sexo . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&kit_inverno=' . $kit_inverno  . '&kit_verao=' . $kit_verao . '&tam_calcado=' . $tam_calcado,
             'named_params' => array(
                                         ':nome' => $nome,
                                         ':escola_id' => $escola_id,
                                         ':ano' => $ano,
-                                        ':tam_moletom' => $tam_moletom,
-                                        ':tam_calca' => $tam_calca,
-                                        ':tam_camiseta' => $tam_camiseta,
-                                        ':tam_bermuda' => $tam_bermuda,
-                                        ':tam_calcado' => $tam_calcado,
-                                        ':tam_meia' => $tam_meia,
+                                        ':sexo' => $sexo,
+                                        ':kit_inverno' => $kit_inverno,                                        
+                                        ':kit_verao' => $kit_verao,                                        
+                                        ':tam_calcado' => $tam_calcado,                                        
                                         ':etapa_id' => $etapa_id,
                                         ':turno' => $turno
                                     )     

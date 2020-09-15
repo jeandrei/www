@@ -14,14 +14,12 @@
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
         $sql = ("SELECT 
                     aluno.nome_aluno as nome_aluno, 
-                    aluno.nascimento as nascimento, 
+                    aluno.nascimento as nascimento,
+                    aluno.sexo as sexo, 
                     dados_anuais.ano as ano, 
-                    dados_anuais.tam_moletom as moletom, 
-                    dados_anuais.tam_camiseta as camiseta, 
-                    dados_anuais.tam_calca as calca, 
-                    dados_anuais.tam_bermuda as bermuda, 
-                    dados_anuais.tam_calcado as calcado, 
-                    dados_anuais.tam_meia as meia, 
+                    dados_anuais.kit_inverno as kit_inverno, 
+                    dados_anuais.kit_verao as kit_verao, 
+                    dados_anuais.tam_calcado as calcado,                     
                     etapa.descricao as etapa, 
                     dados_anuais.turno as turno 
                 FROM 
@@ -48,11 +46,7 @@
 
         if((($options['named_params'][':turno']) != "NULL") && (($options['named_params'][':turno']) != "")  ){                  
           $sql .= " AND dados_anuais.turno = " . "'" .  $options['named_params'][':turno'] . "'";
-        }
-
-
-        
-        
+        }    
 
         if(!empty($options['named_params'][':nome'])){
           $sql .= " AND nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
@@ -64,36 +58,22 @@
           $sql .= " AND dados_anuais.ano = " . date("Y"); 
         }
 
-        if((($options['named_params'][':tam_moletom']) != "NULL") && (($options['named_params'][':tam_moletom']) != "")  ){                  
-          $sql .= " AND dados_anuais.tam_moletom = " . $options['named_params'][':tam_moletom'];
+        if((($options['named_params'][':sexo']) != "NULL") && (($options['named_params'][':sexo']) != "")  ){                  
+          $sql .= " AND aluno.sexo = " . "'" .  $options['named_params'][':sexo'] . "'";
+        } 
+
+        if((($options['named_params'][':kit_inverno']) != "NULL") && (($options['named_params'][':kit_inverno']) != "")  ){                  
+          $sql .= " AND dados_anuais.kit_inverno = " . $options['named_params'][':kit_inverno'];
         }
 
-        if((($options['named_params'][':tam_calca']) != "NULL") && (($options['named_params'][':tam_calca']) != "")  ){                  
-          $sql .= " AND dados_anuais.tam_calca = " . $options['named_params'][':tam_calca'];
+        if((($options['named_params'][':kit_verao']) != "NULL") && (($options['named_params'][':kit_verao']) != "")  ){                  
+          $sql .= " AND dados_anuais.kit_verao = " . $options['named_params'][':kit_verao'];
         }
-
-        if((($options['named_params'][':tam_camiseta']) != "NULL") && (($options['named_params'][':tam_camiseta']) != "")  ){                  
-          $sql .= " AND dados_anuais.tam_camiseta = " . $options['named_params'][':tam_camiseta'];
-        }
-
-        if((($options['named_params'][':tam_bermuda']) != "NULL") && (($options['named_params'][':tam_bermuda']) != "")  ){                  
-          $sql .= " AND dados_anuais.tam_bermuda = " . $options['named_params'][':tam_bermuda'];
-        }
+        
 
         if((($options['named_params'][':tam_calcado']) != "NULL") && (($options['named_params'][':tam_calcado']) != "")  ){                  
           $sql .= " AND dados_anuais.tam_calcado = " . $options['named_params'][':tam_calcado'];
-        }
-
-        if((($options['named_params'][':tam_meia']) != "NULL") && (($options['named_params'][':tam_meia']) != "")  ){                  
-          $sql .= " AND dados_anuais.tam_meia = " . $options['named_params'][':tam_meia'];
-        }
-
-        
-        
-
-        
-
-        
+        }        
 
         $sql .= " ORDER BY nome_aluno ASC"; 
         //var_dump($sql);

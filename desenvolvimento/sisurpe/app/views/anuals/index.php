@@ -3,12 +3,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 
-<?php flash('post_message');?>
+
 
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Dados Anuais do Aluno</h1>    
+        <h1>Dados Anuais do Aluno</h1>  
+        <p id="teste" name="teste" text="teste"></p>
               
            
         <form action="<?php echo URLROOT; ?>/anuals/index/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
@@ -42,68 +43,36 @@
                 <!--UNIFORME-->  
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                          <label for="tam_moletom">Moletom</label>
+                          <label for="kit_inverno">Kit Inverno</label>
                           <select
                             class="form-control"
-                            name="tam_moletom"
-                            id="tam_moletom"          
-                            placeholder="Tamanho do Moletom">
+                            name="kit_inverno"
+                            id="kit_inverno"          
+                            placeholder="Tamanho do Kit de Inverno">
                             <option value="NULL">Selecione o Tamanho</option>
                             <?php                            
-                              echo(imptamanhounif($data['tam_moletom']));
+                              echo(imptamanhounif($data['kit_inverno']));
                             ?>
                           </select>
-                          <span id="tam_moletom_err" class="text-danger"><?php echo  $data['tam_moletom_err']; ?></span>                              
+                          <span id="kit_inverno_err" class="text-danger"><?php echo  $data['kit_inverno_err']; ?></span>                              
                     </div>
+                   
 
                     <div class="form-group col-md-3">
-                        <label for="tam_calca">Calça</label>
+                        <label for="kit_verao">Kit Verão</label>
                         <select
                           class="form-control"
-                          name="tam_calca"
-                          id="tam_calca"          
-                          placeholder="Tamanho da Calça">
+                          name="kit_verao"
+                          id="kit_verao"          
+                          placeholder="Tamanho do Kit de Verão">
                           <option value="NULL">Selecione o Tamanho</option>
                           <?php
-                            echo(imptamanhounif($data['tam_calca']));
+                            echo(imptamanhounif($data['kit_verao']));
                           ?>
                         </select>
-                        <span id="tam_calca_err" class="text-danger"><?php echo  $data['tam_calca_err']; ?></span>              
+                        <span id="kit_verao_err" class="text-danger"><?php echo  $data['kit_verao_err']; ?></span>              
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_camiseta">Camiseta</label>
-                        <select
-                          class="form-control"
-                          name="tam_camiseta"
-                          id="tam_camiseta"          
-                          placeholder="Tamanho da Camiseta">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_camiseta']));
-                          ?>
-                        </select>
-                        <span id="tam_camiseta_err" class="text-danger"><?php echo  $data['tam_camiseta_err']; ?></span>              
-                    </div>
-                <!--PRIMEIRA LINHA DO UNIFORME--> 
-                </div>
-              
-              <!--SEGUNDA LINHA UNIFORME-->  
-              <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="tam_bermuda">Bermuda</label>
-                        <select
-                          class="form-control"
-                          name="tam_bermuda"
-                          id="tam_bermuda"          
-                          placeholder="Tamanho da Bermuda">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_bermuda']));
-                          ?>
-                        </select>
-                        <span id="tam_bermuda_err" class="text-danger"><?php echo  $data['tam_bermuda_err']; ?></span>              
-                    </div>
 
                     <div class="form-group col-md-3">
                         <label for="tam_calcado">Calçado</label>
@@ -120,22 +89,12 @@
                         <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="tam_meia">Meia</label>
-                        <select
-                          class="form-control"
-                          name="tam_meia"
-                          id="tam_meia"          
-                          placeholder="Tamanho da Meia">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['tam_meia']));
-                          ?>
-                        </select>
-                        <span id="tam_meia_err" class="text-danger"><?php echo  $data['tam_meia_err']; ?></span>              
-                    </div>
-              <!--SEGUNDA LINHA DO UNIFORME--> 
-              </div>
+                    
+
+
+                <!--PRIMEIRA LINHA DO UNIFORME--> 
+                </div>                
+            
             </fieldset>
 
             <hr>

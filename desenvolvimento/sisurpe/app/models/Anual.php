@@ -94,26 +94,20 @@
                                             aluno_id  = :aluno_id ,
                                             escola_id = :escola_id, 
                                             etapa_id = :etapa_id,                                                                                       
-                                            tam_moletom = :tam_moletom, 
-                                            tam_camiseta = :tam_camiseta, 
-                                            tam_calca = :tam_calca, 
-                                            tam_bermuda = :tam_bermuda, 
+                                            kit_inverno = :kit_inverno, 
+                                            kit_verao = :kit_verao,                                            
                                             tam_calcado = :tam_calcado, 
-                                            tam_meia = :tam_meia,
                                             turno = :turno                   
                                         '
                         );
                   
         // Bind values
         $this->db->bind(':aluno_id',$data['aluno_id']);  
-        $this->db->bind(':escola_id',$data['escola_id']);              
-        $this->db->bind(':tam_moletom',$data['tam_moletom']);
-        $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
-        $this->db->bind(':tam_calca',$data['tam_calca']);
-        $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
-        $this->db->bind(':tam_calcado',$data['tam_calcado']);
-        $this->db->bind(':tam_meia',$data['tam_meia']);        
-        $this->db->bind(':etapa_id',$data['etapa_id']);
+        $this->db->bind(':escola_id',$data['escola_id']); 
+        $this->db->bind(':etapa_id',$data['etapa_id']);             
+        $this->db->bind(':kit_inverno',$data['kit_inverno']);
+        $this->db->bind(':kit_verao',$data['kit_verao']);       
+        $this->db->bind(':tam_calcado',$data['tam_calcado']);       
         $this->db->bind(':turno',$data['turno']);       
 
 
@@ -130,28 +124,23 @@
 
     public function update($data){
         $this->db->query('UPDATE dados_anuais SET 
-                                            escola_id = :escola_id,    
-                                            tam_moletom = :tam_moletom, 
-                                            tam_camiseta = :tam_camiseta, 
-                                            tam_calca = :tam_calca, 
-                                            tam_bermuda = :tam_bermuda, 
+                                            aluno_id  = :aluno_id ,
+                                            escola_id = :escola_id, 
+                                            etapa_id = :etapa_id,                                                                                       
+                                            kit_inverno = :kit_inverno, 
+                                            kit_verao = :kit_verao,                                          
                                             tam_calcado = :tam_calcado, 
-                                            tam_meia = :tam_meia,                                            
-                                            etapa_id = :etapa_id, 
-                                            turno = :turno
+                                            turno = :turno  
                                             WHERE aluno_id = :aluno_id');
                   
         // Bind values
-        $this->db->bind(':aluno_id',$data['aluno_id']); 
-        $this->db->bind(':escola_id',$data['escola_id']);   
-        $this->db->bind(':tam_moletom',$data['tam_moletom']);
-        $this->db->bind(':tam_camiseta',$data['tam_camiseta']);
-        $this->db->bind(':tam_calca',$data['tam_calca']);
-        $this->db->bind(':tam_bermuda',$data['tam_bermuda']);
-        $this->db->bind(':tam_calcado',$data['tam_calcado']);
-        $this->db->bind(':tam_meia',$data['tam_meia']);        
-        $this->db->bind(':etapa_id',$data['etapa_id']);
-        $this->db->bind(':turno',$data['turno']); 
+        $this->db->bind(':aluno_id',$data['aluno_id']);  
+        $this->db->bind(':escola_id',$data['escola_id']); 
+        $this->db->bind(':etapa_id',$data['etapa_id']);             
+        $this->db->bind(':kit_inverno',$data['kit_inverno']);
+        $this->db->bind(':kit_verao',$data['kit_verao']);       
+        $this->db->bind(':tam_calcado',$data['tam_calcado']);       
+        $this->db->bind(':turno',$data['turno']);       
               
 
 
@@ -164,7 +153,7 @@
     }
 
 
-
+   
     public function addLinhaAluno($linha,$aluno_id){
         // se o estado vim vazio já retorno falso e trato a menságem no controller
          if(empty($linha)){

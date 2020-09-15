@@ -31,40 +31,26 @@
             'escola_id' => $_POST['escola_id'],
             'usa_transporte' => trim($_POST['usa_transporte']),
             'linha' => trim($_POST['linha']),
-            'tam_moletom' => trim($_POST['tam_moletom']),
-            'tam_camiseta' => trim($_POST['tam_camiseta']),
-            'tam_calca' => trim($_POST['tam_calca']),
-            'tam_bermuda' => trim($_POST['tam_bermuda']),
-            'tam_calcado' => trim($_POST['tam_calcado']),
-            'tam_meia' => trim($_POST['tam_meia']),
+            'kit_inverno' => trim($_POST['kit_inverno']),
+            'kit_verao' => trim($_POST['kit_verao']),            
+            'tam_calcado' => trim($_POST['tam_calcado']),            
             'escola' => trim($_POST['escola']),
             'etapa_id' => trim($_POST['etapa_id']),
             'turno' => trim($_POST['turno'])
           ];
 
-          if(($data['tam_moletom'])=="NULL"){
-            $data['tam_moletom_err'] = 'Informe o tamanho do moletom';
+          if(($data['kit_inverno'])=="NULL"){
+            $data['kit_inverno_err'] = 'Informe o tamanho do kit de inverno';
           }
           
-          if(($data['tam_camiseta'])=="NULL"){
-            $data['tam_camiseta_err'] = 'Informe o tamanho da camiseta';
+          if(($data['kit_verao'])=="NULL"){
+            $data['kit_verao_err'] = 'Informe o tamanho do kit de verão';
           } 
-
-          if(($data['tam_calca'])=="NULL"){
-            $data['tam_calca_err'] = 'Informe o tamanho da calça';
-          } 
-
-          if(($data['tam_bermuda'])=="NULL"){
-            $data['tam_bermuda_err'] = 'Informe o tamanho da bermuda';
-          } 
+         
 
           if(($data['tam_calcado'])=="NULL"){
             $data['tam_calcado_err'] = 'Informe o tamanho do calçado';
-          } 
-
-          if(($data['tam_meia'])=="NULL"){
-            $data['tam_meia_err'] = 'Informe o tamanho da meia';
-          } 
+          }          
 
           if(($data['escola_id'])=="NULL"){
             $data['escola_id_err'] = 'Informe a escola';
@@ -88,12 +74,9 @@
 
           // Make sure errors are empty
           if(                    
-            empty($data['tam_moletom_err']) &&
-            empty($data['tam_camiseta_err']) && 
-            empty($data['tam_calca_err']) &&
-            empty($data['tam_bermuda_err']) &&
-            empty($data['tam_calcado_err']) &&
-            empty($data['tam_meia_err']) &&
+            empty($data['kit_inverno_err']) &&
+            empty($data['kit_verao_err']) &&             
+            empty($data['tam_calcado_err']) &&            
             empty($data['escola_id_err']) &&
             empty($data['etapa_id_err']) &&
             empty($data['turno_err']) &&
@@ -141,12 +124,9 @@
             'escola_id' => '',
             'usa_transporte' => '',
             'linha' => '',
-            'tam_moletom' => '',
-            'tam_camiseta' => '',
-            'tam_calca' => '',
-            'tam_bermuda' => '',
-            'tam_calcado' => '',
-            'tam_meia' => '',
+            'kit_inverno' => '',
+            'kit_verao' => '',            
+            'tam_calcado' => '',           
             'escola' => '',
             'etapa_id' => '',
             'turno' => ''
@@ -160,12 +140,9 @@
             'escola_id' => $dados->escola_id,
             'usa_transporte' => $dados->usa_transporte,
             'linha' => $dados->linha,
-            'tam_moletom' => $dados->tam_moletom,
-            'tam_camiseta' => $dados->tam_camiseta,
-            'tam_calca' => $dados->tam_calca,
-            'tam_bermuda' => $dados->tam_bermuda,
-            'tam_calcado' => $dados->tam_calcado,
-            'tam_meia' => $dados->tam_meia,
+            'kit_inverno' => $dados->kit_inverno,
+            'kit_verao' => $dados->kit_verao, 
+            'tam_calcado' => $dados->tam_calcado,           
             'escola' => $dados->escola,
             'etapa_id' => $dados->etapa_id,
             'turno' => $dados->turno

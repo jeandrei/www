@@ -126,67 +126,34 @@
 
   <div class="row">
         <div class="col-md-3">
-          <label for="tam_moletom">Moletom</label>
+          <label for="kit_inverno">Kit de Inverno</label>
             <select
               class="form-control"
-              name="tam_moletom"
-              id="tam_moletom"          
-              placeholder="Tamanho do Moletom">
+              name="kit_inverno"
+              id="kit_inverno"          
+              placeholder="Tamanho do Kit de Inverno">
               <option value="NULL">Selecione o Tamanho</option>
               <?php                            
-                echo(imptamanhounif($_POST['tam_moletom']));
+                echo(imptamanhounif($_POST['kit_inverno']));
               ?>
             </select>
         </div>
         
 
         <div class="col-md-3">                            
-            <label for="tam_calca">Calça</label>
+            <label for="kit_verao">Kit de Verão</label>
               <select
                 class="form-control"
-                name="tam_calca"
-                id="tam_calca"          
-                placeholder="Tamanho da Calça">
+                name="kit_verao"
+                id="kit_verao"          
+                placeholder="Tamanho do Kit de Verão">
                 <option value="NULL">Selecione o Tamanho</option>
                 <?php
-                  echo(imptamanhounif($_POST['tam_calca']));
+                  echo(imptamanhounif($_POST['kit_verao']));
                 ?>
               </select>
         </div> 
-
- 
       
-      <div class="col-md-3">                               
-        <label for="tam_camiseta">Camiseta</label>
-          <select
-            class="form-control"
-            name="tam_camiseta"
-            id="tam_camiseta"          
-            placeholder="Tamanho da Camiseta">
-            <option value="NULL">Selecione o Tamanho</option>
-            <?php
-              echo(imptamanhounif($_POST['tam_camiseta']));
-            ?>
-          </select>
-      </div>
-   <!--div class="row"-->      
-   </div>
-
-   <div class="row">
-      <div class="col-md-3">      
-        <label for="tam_bermuda">Bermuda</label>
-        <select
-          class="form-control"
-          name="tam_bermuda"
-          id="tam_bermuda"          
-          placeholder="Tamanho da Bermuda">
-          <option value="NULL">Selecione o Tamanho</option>
-          <?php
-            echo(imptamanhounif($_POST['tam_bermuda']));
-          ?>
-        </select>
-      </div>
-
 
       <div class="col-md-3"> 
         <label for="tam_calcado">Calçado</label>
@@ -200,23 +167,23 @@
               echo(imptamanhounif($_POST['tam_calcado']));
             ?>
           </select>
-      </div>
-                     
+      </div>  
+
+        <!-- TURNO -->                              
+        <div class="form-group col-md-3">
+          <label for="turno">Sexo</label>
+          <select
+            class="form-control"      
+            name="sexo"
+            id="sexo">
+              <option value="NULL" <?php echo (($_POST['sexo'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+              <option value="M" <?php echo (($_POST['sexo'])=="M") ? 'selected' : ''; ?> >Masculino</option>
+              <option value="F" <?php echo (($_POST['sexo'])=="F") ? 'selected' : ''; ?> >Feminino</option>              
+          </select>         
+        </div>                  
                     
 
-      <div class="col-md-3">             
-        <label for="tam_meia">Meia</label>
-        <select
-          class="form-control"
-          name="tam_meia"
-          id="tam_meia"          
-          placeholder="Tamanho da Meia">
-          <option value="NULL">Selecione o Tamanho</option>
-          <?php
-            echo(imptamanhounif($_POST['tam_meia']));
-          ?>
-        </select>
-      </div>
+     
   <!--div class="row"-->
   </div> 
 
@@ -250,14 +217,12 @@
     <tr>
       <th scope="col">Nome</th>      
       <th scope="col">Nascimento</th> 
+      <th scope="col">Sexo</th> 
       <th scope="col">Etapa</th>  
       <th scope="col">Turno</th>       
-      <th scope="col">Moletom</th> 
-      <th scope="col">Camiseta</th>
-      <th scope="col">Calça</th>
-      <th scope="col">Bermuda</th>
-      <th scope="col">Calçado</th>
-      <th scope="col">Meia</th>
+      <th scope="col">Kit de Inverno</th> 
+      <th scope="col">Kit de Verão</th>      
+      <th scope="col">Calçado</th>      
       <th scope="col"></th> 
     </tr>
   </thead>
@@ -266,12 +231,11 @@
     <tr>  
       <td><?php echo $row['nome_aluno']; ?></td>
       <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
+      <td><?php echo $row['sexo']; ?></td> 
       <td><?php echo $row['etapa']; ?></td> 
       <td><?php echo $row['turno']; ?></td>
-      <td><?php echo $row['moletom']; ?></td>
-      <td><?php echo $row['camiseta']; ?></td>
-      <td><?php echo $row['calca']; ?></td>
-      <td><?php echo $row['bermuda']; ?></td>
+      <td><?php echo $row['kit_inverno']; ?></td>
+      <td><?php echo $row['kit_verao']; ?></td>    
       <td><?php echo $row['calcado']; ?></td>
       <td><?php echo $row['meia']; ?></td>
       <td> </td>
