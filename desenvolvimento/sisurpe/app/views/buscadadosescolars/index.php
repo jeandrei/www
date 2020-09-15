@@ -3,15 +3,12 @@
   function limpar(){
         document.getElementById('ano').value = "";
         document.getElementById('escola_id').value = "NULL";
-        document.getElementById('tam_moletom').value = "NULL";
-        document.getElementById('tam_moletom').value = "NULL";
-        document.getElementById('tam_camiseta').value = "NULL";
-        document.getElementById('tam_calca').value = "NULL";
-        document.getElementById('tam_bermuda').value = "NULL";
-        document.getElementById('tam_calcado').value = "NULL";
-        document.getElementById('tam_meia').value = "NULL";
         document.getElementById('etapa_id').value = "NULL";
         document.getElementById('turno').value = "NULL";
+        document.getElementById('kit_inverno').value = "NULL";
+        document.getElementById('kit_verao').value = "NULL";        
+        document.getElementById('tam_calcado').value = "NULL";
+        document.getElementById('sexo').value = "NULL";
         
         document.getElementById('ano').focus(); 
     }    
