@@ -7,21 +7,23 @@
     }
 
     //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-    public function getDados($page, $options){ 
-        //var_dump($options);
+    public function getDados($page, $options, $imprimir=0){ 
+        //var_dump($imprimir);
         
     
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
         $sql = ("SELECT 
                     aluno.nome_aluno as nome_aluno, 
                     aluno.nascimento as nascimento,
+                    escola.nome as escola,
                     aluno.sexo as sexo, 
                     dados_anuais.ano as ano, 
                     dados_anuais.kit_inverno as kit_inverno, 
                     dados_anuais.kit_verao as kit_verao, 
                     dados_anuais.tam_calcado as calcado,                     
                     etapa.descricao as etapa, 
-                    dados_anuais.turno as turno 
+                    dados_anuais.turno as turno,
+                    dados_anuais.ultima_atual as ultima_atual
                 FROM 
                   aluno,dados_anuais, 
                   escola, etapa 
@@ -75,18 +77,26 @@
           $sql .= " AND dados_anuais.tam_calcado = " . $options['named_params'][':tam_calcado'];
         }        
 
-        $sql .= " ORDER BY nome_aluno ASC"; 
+        $sql .= " ORDER BY escola, nome_aluno ASC"; 
         //var_dump($sql);
 
-        $paginate = new pagination($page, $sql, $options);
-        return  $paginate;
+        //SE NÃO FOR PARA IMPRIMIR FORMULÁRIO ELE CHAMA A PAGINAÇÃO
+        if($imprimir==0){
+          $paginate = new pagination($page, $sql, $options);
+          return  $paginate;
+        } else {
+            $this->db->query($sql);     
+            $data = $this->db->resultSet();            
+            // Check row
+            if($this->db->rowCount() > 0){
+                return $data;
+            } else {
+                return false;
+            }
+        }
     }  
     
-    //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-    public function getFilaTodos($page, $options){              
-        $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
-        return  $paginate;
-    }   
+    
     
 
   } 

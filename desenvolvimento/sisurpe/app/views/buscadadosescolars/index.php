@@ -1,4 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+<?php flash('mensagem');?>
 <script>
   function limpar(){
         document.getElementById('ano').value = "";
@@ -24,6 +25,8 @@
   $paginate = $data['paginate'];
   $result = $data['results'];
 ?>
+
+<a href="<?php echo URLROOT; ?>/buscadadosescolars/?imprimir=sim">Relatorio</a>
 
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
@@ -193,7 +196,8 @@
         
             <div class="col" style="padding-left:0; margin-top:15px;">
                 <div class="form-group mx-sm-3 mb-2">
-                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
+                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar"> 
+                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir">                   
                     <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
                 </div>                                                
           </div>

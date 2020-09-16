@@ -101,8 +101,16 @@
         $data['results'] =  $results;        
         //FIM PARTE PAGINAÇÃO RETORNANDO O ARRAY $data['paginate']  QUE VAI PARA A VARIÁVEL $paginate DO VIEW NESSE CASO O INDEX
 
-        //método view está em /libraries/Controller
-        $this->view('buscadadosescolars/index' ,$data);
+        //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO getDados($page, $options,1) ONDE 1 É QUE É PARA IMPRIMIR E 0 É PARA LISTAR NA PAGINAÇÃO
+        if($_POST['botao'] == "Imprimir"){  
+            $data = $this->buscadadosescolarsModel->getDados($page, $options,1);  
+            // E AQUI CHAMO O RELATÓRIO          
+            $this->view('relatorios/reUniforme' ,$data);
+        } else {
+            // SE NÃO FOR IMPRIMIR CHAMO O INDEX COM OS DADOS NOVAMENTE
+            $this->view('buscadadosescolars/index' ,$data);
+        }
     }
+    
   
 }//class
