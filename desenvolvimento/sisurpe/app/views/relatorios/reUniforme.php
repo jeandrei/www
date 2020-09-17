@@ -35,7 +35,7 @@ class PDF extends FPDF
                 // Arial italic 8
                 $this->SetFont('Arial','I',8);
                 // Page number
-                $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');
+                $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');                
             }
 }
 
@@ -48,7 +48,7 @@ class PDF extends FPDF
             //largura das colunas
             $larguracoll = array(1 => 5, 2 => 110, 3 => 40, 4 => 10, 5 => 10, 6 => 12, 7 => 10, 8 => 10, 9 => 50);
             //tamanho da fonte
-            $tam_fonte = 5; 
+            $left = 5; 
            
             
            //defino a variável escola como em branco pois depois faço a verificação se for diferente da escola do array crio uma nova página
@@ -82,21 +82,21 @@ class PDF extends FPDF
                             foreach($colunas as $coluna){
                                 $i++;
                                 $pdf->SetFont('Arial','B',8);                   
-                                $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode($coluna),1);
+                                $pdf->Cell($larguracoll[$i],$left,utf8_decode($coluna),1);
                                 
                             }
                                 $pdf->Ln();                                
                                 
                         } 
-                        $pdf->Cell($larguracoll[1],$tam_fonte,utf8_decode($countescola),1);                     
-                        $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row->nome_aluno),1); 
-                        $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row->etapa),1);
-                        $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row->turno),1);
-                        $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row->kit_inverno),1);
-                        $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row->kit_verao),1);
-                        $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row->calcado),1);
-                        $pdf->Cell($larguracoll[8],$tam_fonte,utf8_decode($row->sexo),1);
-                        $pdf->Cell($larguracoll[9],$tam_fonte,utf8_decode($row->ultima_atual),1);                    
+                        $pdf->Cell($larguracoll[1],$left,utf8_decode($countescola),1);                     
+                        $pdf->Cell($larguracoll[2],$left,utf8_decode($row->nome_aluno),1); 
+                        $pdf->Cell($larguracoll[3],$left,utf8_decode($row->etapa),1);
+                        $pdf->Cell($larguracoll[4],$left,utf8_decode($row->turno),1);
+                        $pdf->Cell($larguracoll[5],$left,utf8_decode($row->kit_inverno),1);
+                        $pdf->Cell($larguracoll[6],$left,utf8_decode($row->kit_verao),1);
+                        $pdf->Cell($larguracoll[7],$left,utf8_decode($row->calcado),1);
+                        $pdf->Cell($larguracoll[8],$left,utf8_decode($row->sexo),1);
+                        $pdf->Cell($larguracoll[9],$left,utf8_decode($row->ultima_atual),1);                    
                         
                         //linha nova
                         $pdf->Ln();
@@ -104,7 +104,9 @@ class PDF extends FPDF
                         
 
                     }//END FOREACH 
-                    $pdf->Cell($larguracoll[9],$tam_fonte,utf8_decode($countgeral),1);
+                    $pdf->Ln();
+                    $pdf->SetFont('Arial','B',16);
+                    $pdf->Cell(40,10,"Total: ".utf8_decode($countgeral),0,0,'C');
 
                     if($pdf->Output())
                     {
