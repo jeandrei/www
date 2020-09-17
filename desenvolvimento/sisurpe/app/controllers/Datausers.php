@@ -261,7 +261,7 @@
         $data = [ 
           'aluno_id' => $id,
           'nome_aluno' => strtoupper(trim($_POST['nome_aluno'])),
-          'nascimento' => date('Y-d-m', strtotime( $_POST['nascimento'])),
+          'nascimento' => $_POST['nascimento'],
           'sexo' => $_POST['sexo'],
           'telefone_aluno' => $_POST['telefone_aluno'],
           'email_aluno' => trim($_POST['email_aluno']),

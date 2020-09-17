@@ -74,7 +74,6 @@
             </div>    
         </div>
 
-
           <!--TELEFONE EMAIL E SEXO-->
         <div class="form-row">
             <div class="form-group col-md-2">
