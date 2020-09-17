@@ -1,16 +1,9 @@
-
-
 <?php require APPROOT . '/views/inc/header.php'; ?>
-
-
-
-
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
         <h1>Dados Anuais do Aluno</h1>  
-        <p id="teste" name="teste" text="teste"></p>
-              
+        <p id="teste" name="teste" text="teste"></p>              
            
         <form action="<?php echo URLROOT; ?>/anuals/index/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
             <fieldset>
@@ -88,9 +81,6 @@
                         </select>
                         <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              
                     </div>
-
-                    
-
 
                 <!--PRIMEIRA LINHA DO UNIFORME--> 
                 </div>                
@@ -189,6 +179,6 @@
         </form>
 
     </div><!--col-md-12-->
-</div><!--div class="row align-items-center mb-3-->    
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+</div><!--div class="row align-items-center mb-3--> 
 
+<?php require APPROOT . '/views/inc/footer.php'; ?>

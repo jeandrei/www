@@ -1,14 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-
-<script>
-function limpar(){
-        document.getElementById('nome_aluno').value = "";   
-        document.getElementById('nome_aluno').focus(); 
-    }    
-    
+<script>  
+  function limpar(){
+          document.getElementById('nome_aluno').value = "";   
+          document.getElementById('nome_aluno').focus(); 
+      }  
     document.getElementById('nome_aluno').focus(); 
-
 </script>
 
 <h1><?php echo $data['title']; ?></h1>
@@ -18,7 +15,6 @@ function limpar(){
   $paginate = $data['paginate'];
   $result = $data['results'];
 ?>
-
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscaalunos/index" method="post" enctype="multipart/form-data">
   <div class="row">
@@ -39,7 +35,6 @@ function limpar(){
       <!--<div class="col-lg-4">-->
       </div>
       
-
         <!-- LINHA PARA O BOTÃO ATUALIZAR -->
         <div class="row" style="margin-top:30px;">
             <div class="col" style="padding-left:0;">
@@ -54,11 +49,11 @@ function limpar(){
 
   <!--div class="row"-->
   </div>
+
 </form>
 
-
-
 <br>
+
 <!-- MONTAR A TABELA -->
 <table class="table table-striped">
   <thead>
@@ -83,9 +78,6 @@ function limpar(){
   </tbody>
 </table>
 <?php  
-    
-  
-
 
     /*
      * Echo out the UL with the page links
@@ -103,13 +95,6 @@ function limpar(){
     echo '<p>Total de Paginas: '.$paginate->total_pages.'</p>';
 
     echo '<p style="clear: left; padding-top: 10px; padding-bottom: 10px;">-----------------------------------</p>';
-
-   
-
-
-
-
+  
 ?>
-
-
 <?php require APPROOT . '/views/inc/footer.php'; ?>

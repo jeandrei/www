@@ -5,9 +5,7 @@
     public function __construct(){
         $this->db = new Database;        
     }
-
-   
-
+ 
     public function getLinhas(){
         $this->db->query("SELECT * FROM linhas ORDER BY linha ASC"); 
         $result = $this->db->resultSet(); 
@@ -29,7 +27,6 @@
         }           
     }  
 
-
     public function register($data){       
         $this->db->query('INSERT INTO aluno_linhas SET
                                             linha_id  = :linha_id,
@@ -49,10 +46,6 @@
         }
     }
 
-
-
-
-
     public function deleteAlunoLinhas($id){
         //die($id);
         $this->db->query('DELETE FROM aluno_linhas WHERE id = :id');
@@ -69,9 +62,6 @@
         }
     }
 
-
-
-
     public function getDadosAlunoLinha($id){         
         $this->db->query("SELECT aluno.user_id as user_id, aluno_linhas.aluno_id as aluno_id FROM aluno_linhas, aluno WHERE aluno_linhas.aluno_id = aluno.aluno_id AND aluno_linhas.id = :id");
         $this->db->bind(':id',$id); 
@@ -82,7 +72,6 @@
             return false;
         }           
     }  
-
 
     public function checkAlunoLinha($aluno_id,$linha_id){
         $this->db->query("SELECT * FROM aluno_linhas WHERE aluno_id = :aluno_id AND linha_id = :linha_id AND ano = YEAR(NOW())");
@@ -99,4 +88,4 @@
     
     
 
-  }
+}

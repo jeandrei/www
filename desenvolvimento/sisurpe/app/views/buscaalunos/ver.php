@@ -1,6 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php';
-?>
-
+<?php require APPROOT . '/views/inc/header.php';?>
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
@@ -74,7 +72,7 @@
                     <?php echo $data['naturalidade_err']; ?>
                 </div>
             </div>    
-          </div>
+        </div>
 
 
           <!--TELEFONE EMAIL E SEXO-->
@@ -126,7 +124,7 @@
                       </div>        
                     </div>
                 </div>
-          </div>
+        </div>
         </fieldset>
 
 

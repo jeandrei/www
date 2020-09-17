@@ -24,7 +24,6 @@
     function notab(){
       document.getElementById('filtrar').setAttribute('target', '');
     }
-
 </script>
 
 <h1><?php echo $data['title']; ?></h1>
@@ -52,8 +51,8 @@
                   >
         <!--<div class="col-lg-4">-->
         </div>
-    <!--<div class="row"> -->  
-    </div>
+  <!--<div class="row"> -->  
+  </div>
 
 <hr>
 
@@ -82,8 +81,8 @@
                         </option>
                     <?php endforeach; ?>  
             </select>
-        <!--div class="col-lg-3-->
-        </div>
+      <!--div class="col-lg-4-->
+      </div>
 
         <!-- COLUNA ETAPA -->
       <div class="col-lg-4">
@@ -109,58 +108,57 @@
                         </option>
                     <?php endforeach; ?>  
             </select>
-        <!--div class="col-lg-3-->
-        </div>
+      <!--div class="col-lg-3-->
+      </div>
 
-        <!-- TURNO -->                              
-        <div class="form-group col-md-3">
-          <label for="turno">Turno</label>
-          <select
-            class="form-control"      
-            name="turno"
-            id="turno">
-              <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-              <option value="M" <?php echo (($_POST['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
-              <option value="V" <?php echo (($_POST['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
-              <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
-          </select>         
-        </div>  
+      <!-- TURNO -->                              
+      <div class="form-group col-md-3">
+        <label for="turno">Turno</label>
+        <select
+          class="form-control"      
+          name="turno"
+          id="turno">
+            <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+            <option value="M" <?php echo (($_POST['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
+            <option value="V" <?php echo (($_POST['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
+            <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
+        </select>         
+      </div>  
+  
   <!--<div class="row"> -->  
   </div>
 
   <hr>
 
   <div class="row">
-        <div class="col-md-3">
-          <label for="kit_inverno">Kit de Inverno</label>
+      <div class="col-md-3">
+        <label for="kit_inverno">Kit de Inverno</label>
+          <select
+            class="form-control"
+            name="kit_inverno"
+            id="kit_inverno"          
+            placeholder="Tamanho do Kit de Inverno">
+            <option value="NULL">Selecione o Tamanho</option>
+            <?php                            
+              echo(imptamanhounif($_POST['kit_inverno']));
+            ?>
+          </select>
+      </div>
+      
+      <div class="col-md-3">                            
+          <label for="kit_verao">Kit de Verão</label>
             <select
               class="form-control"
-              name="kit_inverno"
-              id="kit_inverno"          
-              placeholder="Tamanho do Kit de Inverno">
+              name="kit_verao"
+              id="kit_verao"          
+              placeholder="Tamanho do Kit de Verão">
               <option value="NULL">Selecione o Tamanho</option>
-              <?php                            
-                echo(imptamanhounif($_POST['kit_inverno']));
+              <?php
+                echo(imptamanhounif($_POST['kit_verao']));
               ?>
             </select>
-        </div>
-        
-
-        <div class="col-md-3">                            
-            <label for="kit_verao">Kit de Verão</label>
-              <select
-                class="form-control"
-                name="kit_verao"
-                id="kit_verao"          
-                placeholder="Tamanho do Kit de Verão">
-                <option value="NULL">Selecione o Tamanho</option>
-                <?php
-                  echo(imptamanhounif($_POST['kit_verao']));
-                ?>
-              </select>
-        </div> 
-      
-
+      </div> 
+    
       <div class="col-md-3"> 
         <label for="tam_calcado">Calçado</label>
           <select
@@ -175,20 +173,18 @@
           </select>
       </div>  
 
-        <!-- TURNO -->                              
-        <div class="form-group col-md-3">
-          <label for="turno">Sexo</label>
-          <select
-            class="form-control"      
-            name="sexo"
-            id="sexo">
-              <option value="NULL" <?php echo (($_POST['sexo'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-              <option value="M" <?php echo (($_POST['sexo'])=="M") ? 'selected' : ''; ?> >Masculino</option>
-              <option value="F" <?php echo (($_POST['sexo'])=="F") ? 'selected' : ''; ?> >Feminino</option>              
-          </select>         
-        </div>                  
-                    
-
+      <!-- TURNO -->                              
+      <div class="form-group col-md-3">
+        <label for="turno">Sexo</label>
+        <select
+          class="form-control"      
+          name="sexo"
+          id="sexo">
+            <option value="NULL" <?php echo (($_POST['sexo'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+            <option value="M" <?php echo (($_POST['sexo'])=="M") ? 'selected' : ''; ?> >Masculino</option>
+            <option value="F" <?php echo (($_POST['sexo'])=="F") ? 'selected' : ''; ?> >Feminino</option>              
+        </select>         
+      </div>   
      
   <!--div class="row"-->
   </div> 
@@ -196,26 +192,18 @@
 <hr>
 
   <div class="row">       
-       
-       
-        <!-- LINHA PARA O BOTÃO ATUALIZAR -->
-        
-            <div class="col" style="padding-left:0; margin-top:15px;">
-                <div class="form-group mx-sm-3 mb-2">
-                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar" onClick="notab()">
-                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()">                   
-                    <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
-                </div>                                                
-          </div>
-            
-       
-
+      <!-- LINHA PARA O BOTÃO ATUALIZAR -->    
+      <div class="col" style="padding-left:0; margin-top:15px;">
+          <div class="form-group mx-sm-3 mb-2">
+              <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar" onClick="notab()">
+              <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()">                   
+              <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
+          </div>                                                
+      </div>
   <!--div class="row"-->
   </div>
 
-
 </form>
-
 
 <br>
 <!-- MONTAR A TABELA -->
@@ -252,8 +240,6 @@
 </table>
 <?php  
     
-  
-
 
     /*
      * Echo out the UL with the page links

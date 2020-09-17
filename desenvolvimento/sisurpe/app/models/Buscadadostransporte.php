@@ -118,8 +118,8 @@
                                       escola,
                                       etapa,
                                       nome_aluno                                    
-                          "
-                        );
+                                    "
+                                  );
 
         //$this->db->bind(':fila_id',$id);
         $this->db->query($sql);     

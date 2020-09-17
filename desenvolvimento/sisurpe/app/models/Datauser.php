@@ -112,17 +112,6 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     public function update($data){
         $this->db->query('UPDATE aluno SET                                           
                                             nome_aluno = :nome_aluno,
@@ -213,26 +202,8 @@
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // Find user by email
-      public function encontraAlunoPorEmail($email){
+    // Find user by email
+    public function encontraAlunoPorEmail($email){
         $this->db->query('SELECT * FROM aluno WHERE email = :email');
         // Bind value
         $this->db->bind(':email', $email);
@@ -247,40 +218,39 @@
         }
     }
 
-        public function getAlunosUsuario($id){
-            $this->db->query('SELECT * FROM aluno WHERE user_id = :user_id');
-            // Bind value
-            $this->db->bind(':user_id', $id);
+    public function getAlunosUsuario($id){
+        $this->db->query('SELECT * FROM aluno WHERE user_id = :user_id');
+        // Bind value
+        $this->db->bind(':user_id', $id);
 
-            $data = $this->db->resultSet();
+        $data = $this->db->resultSet();
 
-            // Check row
-            if($this->db->rowCount() > 0){
-                return $data;
-            } else {
-                return false;
-            }
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $data;
+        } else {
+            return false;
         }
-
+    }
        
-        public function deleteAluno($id){
-            $this->db->query('DELETE FROM aluno WHERE aluno_id = :aluno_id');
-            // Bind value
-            $this->db->bind(':aluno_id', $id);
+    public function deleteAluno($id){
+        $this->db->query('DELETE FROM aluno WHERE aluno_id = :aluno_id');
+        // Bind value
+        $this->db->bind(':aluno_id', $id);
 
-            $row = $this->db->execute();
+        $row = $this->db->execute();
 
-            // Check row
-            if($this->db->rowCount() > 0){
-                return true;
-            } else {
-                return false;
-            }
+        // Check row
+        if($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
         }
+    }
 
 
-         // pega o aluno por id
-      public function getAlunoById($id){
+    // pega o aluno por id
+    public function getAlunoById($id){
         $this->db->query('SELECT * FROM aluno WHERE aluno_id = :aluno_id');
         // Bind value
         $this->db->bind(':aluno_id', $id);
@@ -296,63 +266,4 @@
     }
 
 
-
-    /*
-    public function addPost($data){
-        $this->db->query('INSERT INTO posts (title, user_id, body) VALUES (:title, :user_id, :body)');
-        // Bind values
-        $this->db->bind(':title', $data['title']);
-        $this->db->bind(':user_id', $data['user_id']);
-        $this->db->bind(':body', $data['body']);    
-        
-        //Execute
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-
-
-    public function updatePost($data){
-        $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
-        // Bind values
-        $this->db->bind(':id', $data['id']);
-        $this->db->bind(':title', $data['title']);        
-        $this->db->bind(':body', $data['body']);    
-        
-        //Execute
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public function getPostById($id){
-        $this->db->query('SELECT * FROM posts WHERE id = :id');
-        $this->db->bind(':id', $id);
-
-        $row = $this->db->single();
-
-        return $row;
-    }
-
-    public function deletePost($id){
-        $this->db->query('DELETE FROM posts WHERE id = :id');
-        // Bind values
-        $this->db->bind(':id', $id);          
-        
-        //Execute
-        if($this->db->execute()){
-            return true;
-        } else {
-            return false;
-        }
-
-    }*/
-
-  }
+}
