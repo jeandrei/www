@@ -13,7 +13,16 @@
         document.getElementById('buscanome').focus();
     }    
     
-    document.getElementById('buscanome').focus();   
+    document.getElementById('buscanome').focus();
+
+     //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
+    function newtab(){
+      document.getElementById('filtrar').setAttribute('target', '_blank');
+    }
+
+    function notab(){
+      document.getElementById('filtrar').setAttribute('target', '');
+    }   
 
 </script>
 
@@ -180,8 +189,10 @@
     <div class="row" style="margin-top:30px;">
           <div class="col" style="padding-left:0;">
               <div class="form-group mx-sm-3 mb-2">
-                  <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
-                  <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
+                <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar" onClick="notab()">
+                <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()"> 
+                <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir Totais" onClick="newtab()">                
+                <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
               </div>                                                
           </div>
                   
