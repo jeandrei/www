@@ -64,7 +64,7 @@
           $sql .= " AND dados_anuais.ano = " . $options['named_params'][':ano'];
         }
 
-        $sql .= " ORDER BY linha,nome_aluno ASC"; 
+        $sql .= " ORDER BY linha,escola,etapa,nome_aluno ASC"; 
 
         //SE NÃO FOR PARA IMPRIMIR FORMULÁRIO ELE CHAMA A PAGINAÇÃO
         if($imprimir==0){
