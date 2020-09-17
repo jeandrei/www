@@ -16,6 +16,15 @@
     
     document.getElementById('ano').focus(); 
 
+    //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
+    function newtab(){
+      document.getElementById('filtrar').setAttribute('target', '_blank');
+    }
+
+    function notab(){
+      document.getElementById('filtrar').setAttribute('target', '');
+    }
+
 </script>
 
 <h1><?php echo $data['title']; ?></h1>
@@ -25,9 +34,6 @@
   $paginate = $data['paginate'];
   $result = $data['results'];
 ?>
-
-<a href="<?php echo URLROOT; ?>/buscadadosescolars/?imprimir=sim">Relatorio</a>
-
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
   <div class="row"> 
@@ -196,8 +202,8 @@
         
             <div class="col" style="padding-left:0; margin-top:15px;">
                 <div class="form-group mx-sm-3 mb-2">
-                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar"> 
-                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir">                   
+                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Atualizar" onClick="notab()">
+                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()">                   
                     <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
                 </div>                                                
           </div>
