@@ -5,14 +5,18 @@
           document.getElementById('name').value = "";   
           document.getElementById('name').focus(); 
       }  
-    document.getElementById('name').focus(); 
-
-
-
+   
 
 //espera a página carregar completamente
 $(document).ready(function(){  
-  console.log("teste");
+    $('.gravar').click(function() {
+      var id=$("#id").val();
+      var type=$("#type").val();
+      console.log(id);
+      console.log(type);
+      
+                
+    }); 
 });
 
 
@@ -60,7 +64,8 @@ $(document).ready(function(){
             </div>
             
         <!-- FIM LINHA BOTÃO ATUALIZAR -->
-        </div> 
+        </div>      
+            
 
   <!--div class="row"-->
   </div>
@@ -82,34 +87,49 @@ $(document).ready(function(){
   </thead>
   <tbody>
     <?php foreach($result as $row) : ?> 
-    <tr>  
-      <td><?php echo $row['name']; ?></td>
-      <td><?php echo $row['email']; ?></td>
-      <td><?php echo date('d-m-Y', strtotime($row['created_at'])); ?></td>
-      <td><?php echo $row['type']; ?></td>
-      <td>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="type1" value="user" checked>
-            <label class="form-check-label" for="type1">
-              Usuário
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="type2" value="sec" checked>
-            <label class="form-check-label" for="type2">
-              Secretária
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="type3" value="admin">
-            <label class="form-check-label" for="type3">
-              Administrador
-            </label>
-          </div>
-      </td>
+            <tr>   
+                      <td><?php echo $row['name']; ?></td>
+                      <td><?php echo $row['email']; ?></td>
+                      <td><?php echo date('d-m-Y', strtotime($row['created_at'])); ?></td>
+                      <td><?php echo $row['type']; ?></td>
+                      <td>
+                        <select class="form-control form-control-sm"
+                                    name="usertype" 
+                                    id="<?php echo  $row['id'];?>" 
+                                    class="form-control" 
+                                    onChange="
+                                            document.getElementById('id').value = <?php echo $row['id']; ?>;
+                                            document.getElementById('type').value = this.value;
+                                            ">                   
+                                    <?php 
+                                    $tipos = array('admin','sec','user');                    
+                                    foreach($tipos as $tipo => $value) : ?> 
+                                        <option value="<?php echo $value; ?>" 
+                                                    <?php echo $value == $row['type'] ? 'selected':'';?>
+                                        >
+                                            <?php echo $value;?>
+                                        </option>
+                                    <?php endforeach; ?>  
+                            </select>
+                            
 
-      <td> <a href="<?php echo URLROOT; ?>/buscaalunos/ver/<?php echo $row['id']; ?>" class="fa btn btn-success btn-lg">Salvar</a></td>
-    </tr>
+                          <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id PARA DEPOIS CHAMAR NO AJAX-->
+                          <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
+                          <!--JOGO O VALOR DO type DO SELECT ATRAVÉS DO EVENTO onChange para type PARA DEPOIS CHAMAR NO AJAX--> 
+                          <input type="hidden" id="type" name="type" value="<?php echo $row['type']; ?>">
+                      </td>
+                      
+                     
+                      <!--BOTÃO DE GRAVAR-->            
+                      <td style="text-align:right;">
+                          <button 
+                              type="button" 
+                              class="btn btn-success btn-lg fa fa-floppy-o gravar"
+                              onClick="document.getElementById('id').value = <?php echo $row['id']; ?>,
+                                       document.getElementById('type').value = '<?php echo $row['type']; ?>';"> 
+                          </button>
+                      </td>
+            </tr>
     <?php endforeach; ?>    
   </tbody>
 </table>
@@ -123,7 +143,7 @@ $(document).ready(function(){
     /*
      * Echo out the total number of results
      */
-    echo '<p style="clear: left; padding-top: 10px;">Total de Registros: '.$paginate->total_results.'</p>';
+    echo '<p style="clear: left; padding-top: 10px;">Total de rows: '.$paginate->total_results.'</p>';
 
     /*
      * Echo out the total number of pages
