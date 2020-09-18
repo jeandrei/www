@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-class User {
+class User extends Pagination{
     private $db;
 
     public function __construct(){
@@ -150,6 +150,7 @@ class User {
         }
 
     }
+
 
 //class
 }

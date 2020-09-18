@@ -30,13 +30,19 @@
                 <a class="dropdown-item" href="<?php echo URLROOT; ?>/buscadadostransportes">Busca Dados Transporte</a>           
               </div>
             </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT; ?>/adminusers/index">Administração de Usuários</a>
+          </li> 
         <?php endif; ?> 
+
+        
 
 
 
         <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">Sobre</a>
-          </li> 
+        </li> 
 
 
 
