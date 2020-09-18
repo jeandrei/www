@@ -2,7 +2,17 @@
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Ver Aluno</h1>        
+        <h1>Ver Aluno</h1>
+
+        <!--BOTÃO VOLTAR-->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-lg-2">
+                <a href="<?php echo URLROOT; ?>/buscaalunos/index" id="voltar" class="btn btn-default btn-block" style="background-color:#FFFAF0">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar
+                </a>
+                
+            </div>
+        </div>            
            
         <form action="<?php echo URLROOT; ?>/datausers/edit/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">        
 

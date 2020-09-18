@@ -3,7 +3,17 @@
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
         <h1>Dados Anuais do Aluno</h1>  
-        <p id="teste" name="teste" text="teste"></p>              
+
+        <!--BOTÃO VOLTAR-->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-lg-2">
+                <a href="<?php echo URLROOT; ?>/datausers/show" id="voltar" class="btn btn-default btn-block" style="background-color:#FFFAF0">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar
+                </a>
+                
+            </div>
+        </div>  
+                       
            
         <form action="<?php echo URLROOT; ?>/anuals/index/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
             <fieldset>
@@ -173,10 +183,16 @@
                 <!-- DADOS DE MATRÍCULA-->                                 
                 </div>                                      
             </fieldset>
-            
-            <button type="submit" class="btn btn-primary">Salvar</button>
+
+        <!--BOTÃO SALVAR-->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-lg-2">                
+                <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+            </div>
+        </div>  
 
         </form>
+        
 
     </div><!--col-md-12-->
 </div><!--div class="row align-items-center mb-3--> 

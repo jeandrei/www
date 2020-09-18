@@ -45,9 +45,16 @@
 
         <ul class="navbar-nav ml-auto">
          <?php if(isset($_SESSION[DB_NAME . '_user_id'])) : ?>
-         <li class="nav-item">
-            <a class="nav-link" href="#">Bem vindo <?php echo $_SESSION[DB_NAME . '_user_name']; ?></a>
-          </li>
+
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bem vindo <?php echo $_SESSION[DB_NAME . '_user_name']; ?>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="<?php echo URLROOT; ?>/users/alterasenha">Alterar a Senha</a>                          
+              </div>
+            </li>  
+          
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Sair</a>
           </li>

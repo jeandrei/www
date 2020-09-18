@@ -47,8 +47,8 @@
                           'id' => 'confirm_password',
                           'name' => 'confirm_password',
                           'type' => 'password',
-                          'label' => '<b class="obrigatorio">* </b>Senha',
-                          'placeholder' => 'Informe uma senha de 6 caracteres',                          
+                          'label' => '<b class="obrigatorio">* </b>Confirme a Senha',
+                          'placeholder' => 'Confirme a senha',                          
                           'error' => $data['confirm_password_err'] = ""
                       ]);
                          

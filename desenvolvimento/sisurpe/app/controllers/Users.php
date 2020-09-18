@@ -217,9 +217,7 @@
     public function enviasenha(){
 
         // Check for POST            
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-            // Process form
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){           
 
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -227,9 +225,7 @@
             //init data
             $data = [                
                 'email' => trim($_POST['email'])               
-            ];                
-
-            
+            ];  
 
             // Validate Email
             if(empty($data['email'])){
@@ -273,30 +269,13 @@
 
                   } catch (Exception $e) {
                     die('Ops! Algo deu errado.');  
-                  }   
-
-
-
-
-
-
-                  
-
-
-
-                 
-                  
-                  
-                 
-                  
-
+                  }  
                   
                 } else {
                   // Load the view with errors
                   $this->view('users/enviasenha', $data);
-                }               
+                } 
 
-        
         } else {
             // Init data
             $data = [               
@@ -306,8 +285,61 @@
             $this->view('users/enviasenha', $data);
         }       
         
-
+    //enviasenha()
     } 
+
+    public function alterasenha(){
+        // Check for POST            
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            //init data
+            $data = [                
+                'password' => trim($_POST['password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'password_err' => '',
+                'confirm_password_err' => ''               
+            ]; 
+
+            // Validate Password
+            if(empty($data['password'])){
+                $data['password_err'] = 'Por favor informe a senha';
+            } elseif (strlen($data['password']) < 6){
+                $data['password_err'] = 'Senha deve ter no mínimo 6 caracteres';
+            }
+
+            // Validate Confirm Password
+            if(empty($data['confirm_password'])){
+                $data['confirm_password_err'] = 'Por favor confirme a senha';
+            } else {
+                if($data['password'] != $data['confirm_password']){
+                $data['confirm_password_err'] = 'Senha e confirmação de senha diferentes';    
+                }
+            }            
+            // Make sure errors are empty
+            if(  
+                empty($data['password_err']) &&
+                empty($data['confirm_password_err']) 
+                ){
+                     // Hash Password criptografa o password
+                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);                     
+                     $data['email'] = $_SESSION[DB_NAME . '_user_email'];                     
+                     // Register User
+                     if($this->userModel->updatePassword($data)){
+                       // Cria a menságem antes de chamar o view va para 
+                       // views/users/login a segunda parte da menságem
+                       flash('mensagem', 'Senha atualizada com Sucesso');                        
+                       redirect('datausers/show');
+                     } else {
+                         die('Ops! Algo deu errado.');
+                     }
+                   
+                } else {
+                    $this->view('users/alterasenha', $data);   
+                }
+            
+        }       
+        $this->view('users/alterasenha', $data);
+    }
 
 
 }   
