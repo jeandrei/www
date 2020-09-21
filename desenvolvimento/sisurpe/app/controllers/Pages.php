@@ -24,7 +24,7 @@
         public function about(){
             $data = [
                 'title' => 'Sobre Nós',
-                'description'=> 'Modelo MVC com login para novos projetos'
+                'description'=> 'Sistema Unificado de Registros de Penha - SISURPE'
             ];
             $this->view('pages/about', $data);           
         }
