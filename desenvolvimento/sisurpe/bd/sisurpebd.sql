@@ -142,9 +142,10 @@ INSERT INTO `linhas` (`id`, `linha`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `cpf` varchar(15),
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `type` char(5) DEFAULT 'user',
+  `type` varchar(10) DEFAULT 'user',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

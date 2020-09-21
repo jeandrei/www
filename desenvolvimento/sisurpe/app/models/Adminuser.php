@@ -22,7 +22,21 @@ class Adminuser extends Pagination{
 
         $paginate = new pagination($page, $sql, $options);
         return  $paginate;
-    }  
+    }
+    
+    
+    public function update($id, $type){       
+        $this->db->query('UPDATE users SET users.type=:type WHERE id=:id');              
+        $this->db->bind(':id',$id); 
+        $this->db->bind(':type',$type); 
+       // Execute
+       if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }       
+
+    }
 
 
 

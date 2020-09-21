@@ -63,5 +63,33 @@
     }
 
 
+    //aqui é o método chamado pelo jquery lá no index, verifico se o id tem algum valor se sim eu chamo o método changeStatus no model
+    public function atualizatype(){
+
+        try{ 
+                
+          // DEPOIS TEM QUE TIRAR ESSE 1 AÍ DA FRENTE E COLOCAR A VARIÁVEL POST COM O ID DO MUNICIPIO
+          // IMPORTANTE lá na função changeStatus se executar tem que retornar true para funcionar aqui
+          
+          if($this->adminuserModel->update($_POST['id'],$_POST['type'])){
+              
+              
+              /* aqui passo a classe da mensagem e a mensagem de sucesso */
+              $json_ret = array('classe'=>'alert alert-success', 'mensagem'=>'Dados gravados com sucesso');                     
+              echo json_encode($json_ret);                     
+          } else {
+              $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao tentar gravar os dados');                     
+              echo json_encode($json_ret);                     
+          }                
+
+      } catch (Exception $e) 
+      {
+          $json_ret = array('classe'=>'alert alert-danger', 'mensagem'=>'Erro ao gravar os dados');                     
+          echo json_encode($json_ret);
+      } 
+   
+  }
+
+
 }   
 ?>
