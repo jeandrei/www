@@ -116,7 +116,7 @@ class PDF extends FPDF
                     }   
            } else{                
             $data['erro'] = "Sem dados para emitir";
-            $data['link'] = "/buscadadoslinhars";
+            $data['link'] = "/buscadadostransportes";
             $this->view('relatorios/erroAoGerarRelatorio', $data); 
            }       
 ?>
