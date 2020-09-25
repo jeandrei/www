@@ -71,7 +71,66 @@
                         <?php echo $data['naturalidade_err']; ?>
                     </div>
                 </div>    
-              </div>
+            <!--row-->
+            </div>
+
+            <!--ENDEREÇO-->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="end_rua"><sup class="obrigatorio"></sup>Rua</label>
+                    <input 
+                      class="form-control <?php echo (!empty($data['end_rua_err'])) ? 'is-invalid' : ''; ?>"
+                      type="text"  
+                      id="end_rua"
+                      name="end_rua"
+                      value="<?php echo $data['end_rua']; ?>"
+                      placeholder="Rua onde o aluno mora"
+                    > 
+                    <div class="invalid-feedback">
+                        <?php echo $data['end_rua_err']; ?>
+                    </div>  
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="end_numero">Número</label>
+                    <input 
+                      class="form-control <?php echo (!empty($data['end_numero_err'])) ? 'is-invalid' : ''; ?>"
+                      type="number" 
+                      name="end_numero" 
+                      id="end_numero"
+                      value="<?php echo $data['end_numero']; ?>"          
+                      placeholder="Número"
+                    >
+                    <div class="invalid-feedback">
+                        <?php echo $data['end_numero_err']; ?>
+                    </div>         
+                </div>                          
+                <div class="col-lg-4">
+                      <label for="end_bairro_id">
+                          Bairro
+                      </label>  
+                      <select 
+                          name="end_bairro_id" 
+                          id="end_bairro_id" 
+                          class="form-control"                                        
+                      >
+                              <option value="NULL">Todos</option>
+                              <?php                     
+                              $bairros = $this->dataModel->getBairros();                                     
+                              foreach($bairros as $bairro) : ?> 
+                                  <option value="<?php echo $bairro->id; ?>"
+                                              <?php if(isset($_POST['end_bairro_id'])){
+                                              echo $_POST['end_bairro_id'] == $bairro->id ? 'selected':'';
+                                              }
+                                              ?>
+                                  >
+                                      <?php echo $bairro->bairro;?>
+                                  </option>
+                              <?php endforeach; ?>  
+                      </select>
+                <!--div class="col-lg-4-->
+                </div>
+            <!--row-->
+            </div>
 
 
             <!--TELEFONE EMAIL E SEXO-->

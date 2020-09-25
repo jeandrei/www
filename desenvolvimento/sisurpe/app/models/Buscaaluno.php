@@ -29,7 +29,10 @@
     public function getFilaTodos($page, $options){              
         $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
         return  $paginate;
-    }   
+    }
+    
+   
+
     
 
   } 

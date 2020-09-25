@@ -18,6 +18,7 @@
 
         return $row;
     }
+    
 
     public function register($data){
         $this->db->query('INSERT INTO aluno SET
@@ -34,7 +35,10 @@
                                             nome_responsavel = :nome_responsavel, 
                                             telefone_resp = :telefone_resp, 
                                             naturalidade = :naturalidade, 
-                                            nacionalidade = :nacionalidade, 
+                                            nacionalidade = :nacionalidade,
+                                            end_rua = :end_rua,
+                                            end_numero = :end_numero,
+                                            end_bairro_id =:end_bairro_id,
                                             rg = :rg, 
                                             uf_rg = :uf_rg, 
                                             orgao_emissor = :orgao_emissor, 
@@ -74,6 +78,9 @@
         $this->db->bind(':telefone_resp',$data['telefone_resp']);
         $this->db->bind(':naturalidade',$data['naturalidade']);
         $this->db->bind(':nacionalidade',$data['nacionalidade']);
+        $this->db->bind(':end_rua',$data['end_rua']);
+        $this->db->bind(':end_numero',$data['end_numero']);
+        $this->db->bind(':end_bairro_id',$data['end_bairro_id']);
         $this->db->bind(':rg',$data['rg']);
         $this->db->bind(':uf_rg',$data['uf_rg']);
         $this->db->bind(':orgao_emissor',$data['orgao_emissor']);
@@ -126,7 +133,10 @@
                                             nome_responsavel = :nome_responsavel, 
                                             telefone_resp = :telefone_resp, 
                                             naturalidade = :naturalidade, 
-                                            nacionalidade = :nacionalidade, 
+                                            nacionalidade = :nacionalidade,                                            
+                                            end_rua = :end_rua, 
+                                            end_numero = :end_numero,
+                                            end_bairro_id = :end_bairro_id,
                                             rg = :rg, 
                                             uf_rg = :uf_rg, 
                                             orgao_emissor = :orgao_emissor, 
@@ -165,6 +175,9 @@
         $this->db->bind(':telefone_resp',$data['telefone_resp']);
         $this->db->bind(':naturalidade',$data['naturalidade']);
         $this->db->bind(':nacionalidade',$data['nacionalidade']);
+        $this->db->bind(':end_rua',$data['end_rua']);
+        $this->db->bind(':end_numero',$data['end_numero']);
+        $this->db->bind(':end_bairro_id',$data['end_bairro_id']);
         $this->db->bind(':rg',$data['rg']);
         $this->db->bind(':uf_rg',$data['uf_rg']);
         $this->db->bind(':orgao_emissor',$data['orgao_emissor']);
@@ -232,6 +245,24 @@
             return false;
         }
     }
+
+    public function getBairros(){
+        $this->db->query('SELECT * FROM bairros ORDER BY bairro ASC');
+        // Bind value       
+
+        $data = $this->db->resultSet();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    
        
     public function deleteAluno($id){
         $this->db->query('DELETE FROM aluno WHERE aluno_id = :aluno_id');
@@ -264,6 +295,23 @@
             return false;
         }
     }
+
+
+
+    public function getBairroById($id){
+        $this->db->query('SELECT bairro FROM bairros WHERE id = :id');
+          // Bind value
+          $this->db->bind(':id', $id);
+  
+          $data = $this->db->single();        
+  
+          // Check row
+          if($this->db->rowCount() > 0){
+              return $data;
+          } else {
+              return false;
+          }
+      }
 
 
 }

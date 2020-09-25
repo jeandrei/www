@@ -30,6 +30,9 @@
           'telefone_resp' => $datauser->telefone_resp,
           'naturalidade' => mb_strtoupper($datauser->naturalidade), 
           'nacionalidade' => mb_strtoupper($datauser->nacionalidade), 
+          'end_rua' => mb_strtoupper($datauser->end_rua), 
+          'end_numero' => $datauser->end_numero, 
+          'end_bairro_id' => $datauser->end_bairro_id,
           'rg' => $datauser->rg, 
           'uf_rg' => $datauser->uf_rg,
           'orgao_emissor' => mb_strtoupper($datauser->orgao_emissor),
@@ -94,6 +97,9 @@
           'telefone_resp' => $_POST['telefone_resp'],
           'naturalidade' => mb_strtoupper(trim($_POST['naturalidade'])),
           'nacionalidade' => mb_strtoupper(trim($_POST['nacionalidade'])),
+          'end_rua' => mb_strtoupper($_POST['end_rua']), 
+          'end_numero' => $_POST['end_numero'], 
+          'end_bairro_id' => $_POST['end_bairro_id'],
           'rg' => trim($_POST['rg']),
           'uf_rg' => $_POST['uf_rg'],
           'orgao_emissor' => mb_strtoupper(trim($_POST['orgao_emissor'])),
@@ -223,6 +229,9 @@
           'telefone_resp' => '',
           'naturalidade' => '',
           'nacionalidade' => '',
+          'end_rua' => '',
+          'end_numero' => '',
+          'end_bairro_id' => '',
           'rg' => '',
           'uf_rg' => '',
           'orgao_emissor' => '',
@@ -273,6 +282,9 @@
           'telefone_resp' => $_POST['telefone_resp'],
           'naturalidade' => mb_strtoupper(trim($_POST['naturalidade'])),
           'nacionalidade' => mb_strtoupper(trim($_POST['nacionalidade'])),
+          'end_rua' => mb_strtoupper($_POST['end_rua']), 
+          'end_numero' => $_POST['end_numero'], 
+          'end_bairro_id' => $_POST['end_bairro_id'],
           'rg' => trim($_POST['rg']),
           'uf_rg' => $_POST['uf_rg'],
           'orgao_emissor' => mb_strtoupper(trim($_POST['orgao_emissor'])),
@@ -391,7 +403,7 @@
       } else {       
 
         $data = $this->dataModel->getAlunoById($id);  
-              
+                      
         $data = [ 
           'aluno_id' => $data->aluno_id,
           'nome_aluno' => $data->nome_aluno,
@@ -407,6 +419,9 @@
           'telefone_resp' => $data->telefone_resp,
           'naturalidade' => $data->naturalidade,
           'nacionalidade' => $data->nacionalidade,
+          'end_rua' => $data->end_rua,
+          'end_numero' => $data->end_numero,
+          'end_bairro_id' => $data->end_bairro_id,
           'rg' => $data->rg,
           'uf_rg' => $data->uf_rg,
           'orgao_emissor' => $data->orgao_emissor,
@@ -467,5 +482,7 @@
         $this->view('datausers/show', $data = ['error' => "Ainda não existem alunos cadastrados"]);
       }       
     }
+
+    
 
 }//class

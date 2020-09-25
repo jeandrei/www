@@ -84,6 +84,59 @@
             </div>    
         </div>
 
+        <!--ENDEREÇO-->
+        <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="end_rua"><sup class="obrigatorio"></sup>Rua</label>
+                    <input 
+                      class="form-control <?php echo (!empty($data['end_rua_err'])) ? 'is-invalid' : ''; ?>"
+                      type="text"  
+                      id="end_rua"
+                      name="end_rua"
+                      value="<?php echo $data['end_rua']; ?>"
+                      readonly
+                    > 
+                    <div class="invalid-feedback">
+                        <?php echo $data['end_rua_err']; ?>
+                    </div>  
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="end_numero">Número</label>
+                    <input 
+                      class="form-control <?php echo (!empty($data['end_numero_err'])) ? 'is-invalid' : ''; ?>"
+                      type="number" 
+                      name="end_numero" 
+                      id="end_numero"
+                      value="<?php echo $data['end_numero']; ?>"          
+                      placeholder="Número"
+                      readonly
+                    >
+                    <div class="invalid-feedback">
+                        <?php echo $data['end_numero_err']; ?>
+                    </div>         
+                </div>  
+
+                <div class="form-group col-md-4">
+                <label for="end_bairro">Bairro</label>
+                <input 
+                  class="form-control"
+                  type="text" 
+                  name="end_bairro" 
+                  id="end_bairro"
+                  value="<?php echo $data['end_bairro']->bairro; ?>"  
+                  readonly
+                >                        
+            </div>                        
+                
+
+
+
+
+
+
+            <!--row-->
+            </div>
+
           <!--TELEFONE EMAIL E SEXO-->
         <div class="form-row">
             <div class="form-group col-md-2">
