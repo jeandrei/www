@@ -178,6 +178,9 @@ CREATE TABLE `aluno` (
   `telefone_resp` char(20) DEFAULT NULL,
   `naturalidade` varchar(255) DEFAULT NULL,
   `nacionalidade` varchar(255) DEFAULT NULL,
+  `end_rua` varchar(255),
+  `end_numero` int(11),
+  `end_bairro_id` varchar(255),
   `rg` char(15) DEFAULT NULL,
   `uf_rg` char(2) DEFAULT NULL,
   `orgao_emissor` char(5) DEFAULT NULL,
@@ -237,16 +240,24 @@ CREATE TABLE `dados_anuais` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `endereco`
+-- Estrutura para tabela `bairros`
 --
 
-CREATE TABLE `endereco` (
-  `id_endereco` int(11) NOT NULL,
-  `aluno_id` int(11) NOT NULL,
-  `rua` varchar(255) NOT NULL,
-  `numero` int(11) NOT NULL,
+CREATE TABLE `bairros` (
+  `id` int(11) NOT NULL, 
   `bairro` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `bairros`
+--
+
+
+INSERT INTO `bairros` (`id`, `bairro`) VALUES
+(1, 'CENTRO'),
+(2, 'SANTA LIDIA'),
+(3, 'SÃO NICOLAU'),
+(4, 'MARISCAL');
 
 --
 -- Índices de tabelas apagadas
@@ -299,11 +310,11 @@ ALTER TABLE `dados_anuais`
   
 
 --
--- Índices de tabela `endereco`
+-- Índices de tabela `bairros`
 --
-ALTER TABLE `endereco`
-  ADD PRIMARY KEY (`id_endereco`),
-  ADD KEY `aluno_id` (`aluno_id`);
+ALTER TABLE `bairros`
+  ADD PRIMARY KEY (`id`);
+ 
 
 --
 -- AUTO_INCREMENT de tabelas apagadas
@@ -354,10 +365,10 @@ ALTER TABLE `dados_anuais`
   MODIFY `id_da` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `endereco`
+-- AUTO_INCREMENT de tabela `bairros`
 --
-ALTER TABLE `endereco`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `bairros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para dumps de tabelas
@@ -377,13 +388,6 @@ ALTER TABLE `aluno_linhas`
 --
 ALTER TABLE `dados_anuais`
   ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
-  
-
---
--- Restrições para tabelas `endereco`
---
-ALTER TABLE `endereco`
-  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
 COMMIT;
 
 
