@@ -20,7 +20,7 @@
     }
     
 
-    public function register($data){
+    public function register($data){ //var_dump($data);
         $this->db->query('INSERT INTO aluno SET
                                             user_id = :user_id,
                                             nome_aluno = :nome_aluno,
@@ -79,8 +79,13 @@
         $this->db->bind(':naturalidade',$data['naturalidade']);
         $this->db->bind(':nacionalidade',$data['nacionalidade']);
         $this->db->bind(':end_rua',$data['end_rua']);
-        $this->db->bind(':end_numero',$data['end_numero']);
-        $this->db->bind(':end_bairro_id',$data['end_bairro_id']);
+       
+        (($data['end_numero']) <> "") ? $this->db->bind(':end_numero',$data['end_numero']) : $this->db->bind(':end_numero', NULL);
+       
+        (($data['end_bairro_id'])<> "NULL") ? $this->db->bind(':end_bairro_id',$data['end_bairro_id']) : $this->db->bind(':end_bairro_id', NULL);
+               
+        
+        //$this->db->bind(':end_bairro_id',$data['end_bairro_id']);
         $this->db->bind(':rg',$data['rg']);
         $this->db->bind(':uf_rg',$data['uf_rg']);
         $this->db->bind(':orgao_emissor',$data['orgao_emissor']);
@@ -176,8 +181,11 @@
         $this->db->bind(':naturalidade',$data['naturalidade']);
         $this->db->bind(':nacionalidade',$data['nacionalidade']);
         $this->db->bind(':end_rua',$data['end_rua']);
-        $this->db->bind(':end_numero',$data['end_numero']);
-        $this->db->bind(':end_bairro_id',$data['end_bairro_id']);
+        
+        (($data['end_numero']) <> "") ? $this->db->bind(':end_numero',$data['end_numero']) : $this->db->bind(':end_numero', NULL);
+       
+        (($data['end_bairro_id'])<> "NULL") ? $this->db->bind(':end_bairro_id',$data['end_bairro_id']) : $this->db->bind(':end_bairro_id', NULL);
+               
         $this->db->bind(':rg',$data['rg']);
         $this->db->bind(':uf_rg',$data['uf_rg']);
         $this->db->bind(':orgao_emissor',$data['orgao_emissor']);

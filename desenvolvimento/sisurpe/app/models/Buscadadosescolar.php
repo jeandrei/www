@@ -65,11 +65,11 @@
         } 
 
         if((($options['named_params'][':kit_inverno']) != "NULL") && (($options['named_params'][':kit_inverno']) != "")  ){                  
-          $sql .= " AND dados_anuais.kit_inverno = " . $options['named_params'][':kit_inverno'];
+          $sql .= " AND dados_anuais.kit_inverno = " . "'" . $options['named_params'][':kit_inverno'] . "'";
         }
 
         if((($options['named_params'][':kit_verao']) != "NULL") && (($options['named_params'][':kit_verao']) != "")  ){                  
-          $sql .= " AND dados_anuais.kit_verao = " . $options['named_params'][':kit_verao'];
+          $sql .= " AND dados_anuais.kit_verao = " . "'" . $options['named_params'][':kit_verao'] ."'";
         }
         
 
