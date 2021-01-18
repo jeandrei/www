@@ -86,7 +86,7 @@
                           placeholder="Tamanho do Calçado">
                           <option value="NULL">Selecione o Tamanho</option>
                           <?php
-                            echo(imptamanhounif($data['tam_calcado']));
+                            echo(imptamanhocalcado($data['tam_calcado']));
                           ?>
                         </select>
                         <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              

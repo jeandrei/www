@@ -77,7 +77,59 @@ function imptamanhounif($tamanhosec){
   return $html;
   }
 
+  function imptamanhocalcado($tamanhosec){
+    $arrayTamanhos = array(
+        '10',
+        '11',
+        '12',        
+        '13',        
+        '14',
+        '15',             
+        '16',  
+        '17', 
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
+        '24',
+        '25',
+        '26',
+        '27',
+        '28',
+        '29',
+        '30',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        '38',
+        '39',
+        '40',
+        '41',
+        '42',
+        '43',
+        '44',
+      );  
+      foreach($arrayTamanhos as $tamanho){ 
+        //idtamanho tem que ser passada pelo post
+        if($tamanho == $tamanhosec){
+          $html .= '<option selected value="'.$tamanho.'" '.'>'.$tamanho.'</option>';
+        }
+        else{
+        $html .='<option value="'.$tamanho.'" '.'>'.$tamanho.'</option>';           
+    
+      }
+    
+    }
+    return $html;
+    }
 
+  /* LINHAS PEGA DO BANCO DE DADOS
   function imptlinhastransporte($linhasec){
     $arrayLinhas = array(
         '1',
@@ -104,7 +156,7 @@ function imptamanhounif($tamanhosec){
     
     }
     return $html;
-    }
+    }*/
 
 
 function validaCPF($cpf) {
