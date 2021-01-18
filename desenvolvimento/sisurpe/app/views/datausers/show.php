@@ -52,7 +52,7 @@ if(isset($data['error'])){
 
                     <a 
                         href="<?php echo URLROOT; ?>/datausers/delete/<?php echo $registro['aluno_id'];?>" 
-                        class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->getDadosAnuaisByid($registro['aluno_id'])) ? 'disabled' : ''; ?>"
+                        class="fa fa-remove btn btn-danger btn-lg <?php echo ($this->dadosModel->ExistemDadosAnuaisRelacionados($registro['aluno_id'])) ? 'disabled' : ''; ?>"
                         onclick="if(question('Tem certeza que deseja remover o registro?') == true)
                                 {
                                     document.forms[0].submit();

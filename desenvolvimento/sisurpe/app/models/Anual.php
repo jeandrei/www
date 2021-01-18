@@ -21,6 +21,21 @@
         }
     }
 
+    public function ExistemDadosAnuaisRelacionados($id){
+        $this->db->query('SELECT * FROM aluno a, dados_anuais da, aluno_linhas al WHERE a.aluno_id = da.aluno_id AND a.aluno_id = al.aluno_id AND a.aluno_id = :aluno_id');
+        // Bind value
+        $this->db->bind(':aluno_id', $id);
+
+        $data = $this->db->single();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
 
     
 
