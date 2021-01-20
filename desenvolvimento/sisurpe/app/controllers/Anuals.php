@@ -48,7 +48,16 @@
           }   
           if(($data['opcao_atendimento'])==NULL){
             $data['opcao_atendimento_err'] = 'Informe a Opção de Atendimento';
-          }   
+          } 
+          //mesma coisa com o checkbox aceite
+          if(isset($_POST['aceite'])){
+            $data['aceite'] = $_POST['aceite'];
+          }  
+          if(($data['aceite'])==NULL){
+            $data['aceite_err'] = 'Você deve aceitar o termo';
+          }  
+
+          //if(isset($_POST['aceite'])){
 
           if(($data['kit_inverno'])=="NULL"){
             $data['kit_inverno_err'] = 'Informe o tamanho do kit de inverno';

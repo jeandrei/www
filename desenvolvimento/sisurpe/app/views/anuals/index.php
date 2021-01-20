@@ -1,45 +1,55 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+
+
 <script>
 $(document).ready(function(){
     
 var presencial = $("#presencial").is(':checked');
 var remoto = $("#remoto").is(':checked');
+var termo_presencial = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <strong>RETORNARÁ ás aulas presenciais</strong>, estou ciente dos itens abaixo:<p><p><strong>1.</strong>  Caso haja contágio com Covid-19, me responsabilizo, pois, o vírus circula em todo o mundo e não somente na escola;<p><strong>2.</strong> Cumprirei todas as exigências de segurança estabelecidas pela escola;<p><strong>3.</strong> O(a) aluno(a) participará de um revezamento, portanto não frequentará a escola todos os dias;<p><strong>4.</strong> A escola funcionará em horários diferenciados;<p><strong>5.</strong>  O(a) aluno(a) deverá comparecer às aulas usando os EPIs (equipamentos de proteção individual) solicitados;<p><strong>6.</strong> O(a) aluno(a) deverá fazer as atividades para casa e entregar na data estabelecida pelos professores.";
+var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <strong>NÃO RETORNARÁ ás aulas presenciais</strong>, estou ciente das obrigações do cumprimento das atividades, nas plataformas digitais e me comprometo com a realização das mesmas para que o rendimento dele(a) seja avaliado adequadamente.";
 
-if(presencial == true){
-    $("#termo_presencial" ).removeClass("invisible");
-    $("#termo_presencial" ).addClass("visible");
-    $("#termo_remoto" ).removeClass("visible");
-    $("#termo_remoto" ).addClass("invisible");    
-}
+    if(presencial == true){
+        $("#termo" ).removeClass( "invisible");
+        $("#termo" ).addClass( "visible");        
+        $('#termo').html(termo_presencial);
+        $("#div_aceite").show(); 
+        $("#aceite_err").show();
+    }
 
-if(remoto == true){
-    $("#termo_remoto" ).removeClass("invisible");
-    $("#termo_remoto" ).addClass("visible");
-    $("#termo_presencial" ).removeClass("visible");
-    $("#termo_presencial" ).addClass("invisible");   
-}
-    
+    if(remoto == true){
+        $("#termo" ).removeClass( "invisible");
+        $("#termo" ).addClass( "visible");
+        $('#termo').html(termo_remoto); 
+        $("#div_aceite").show();
+        $("#aceite_err").show();        
+    }
 
-  $("#presencial").change(function(){
-    opcao = $("#presencial").val();
-    if(opcao == "presencial"){
-      $("#termo_presencial" ).removeClass("invisible");
-      $("#termo_presencial" ).addClass("visible");
-      $("#termo_remoto" ).removeClass("visible");
-      $("#termo_remoto" ).addClass("invisible");
-    } 
-  });
+    $("#presencial").change(function(){
+        opcao = $("#presencial").val();
+        if(opcao == "presencial"){
+            $("#termo" ).removeClass("invisible");
+            $("#termo" ).addClass("visible");
+            $('#termo').html(termo_presencial);
+            $("#div_aceite").show();  
+            $("#aceite_err").show();
+            $("#aceite_err").html("");
+        } 
+    });
 
 
-  $("#remoto").change(function(){
-    opcao = $("#remoto").val();
-    if(opcao == "remoto"){
-      $("#termo_remoto" ).removeClass("invisible");
-      $("#termo_remoto" ).addClass("visible");
-      $("#termo_presencial" ).removeClass("visible");
-      $("#termo_presencial" ).addClass("invisible");
-    }       
-  });
+    $("#remoto").change(function(){
+        opcao = $("#remoto").val();
+        if(opcao == "remoto"){
+            $("#termo" ).removeClass("invisible");
+            $("#termo" ).addClass("visible");
+            $('#termo').html(termo_remoto); 
+            $("#div_aceite").show();   
+            $("#aceite_err").show();
+            $("#aceite_err").html("");
+        }  
+    });
+
 
 
 
@@ -124,32 +134,35 @@ if(remoto == true){
 
                 <!--OPCAO ATENDIMENTO-->
                 </div>
-                <div><span id="opcao_atendimento_err" class="text-danger"><?php echo  $data['opcao_atendimento_err']; ?></span> </div> 
+                
+                
+                <!--TERMO-->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
-                            <div id="termo_presencial" name="termo_presencial" class="alert alert-secondary invisible" role="alert">
-                            Teste presencial
+                            <div id="termo" name="termo" class="alert alert-secondary invisible" role="alert">
+                            
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <div id="termo_remoto" name="termo_remoto" class="alert alert-secondary invisible" role="alert">
-                            Teste remoto
-                            </div>
-                        </div>
-                    </div>                
+                    </div>                                 
                 </div>
+
+                <!--SPAN DE ERRO DO TERMO-->
+                <div><span id="opcao_atendimento_err" class="text-danger"><?php echo  $data['opcao_atendimento_err']; ?></span> </div>
+
+                <div id="div_aceite" name="div_aceite" style="display:none">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Aceito" id="aceite" name="aceite" <?php echo ($data['aceite'] == 'Aceito') ? 'checked' : ''; ?>>
+                        <label class="form-check-label" for="aceite">
+                        Aceito o termo
+                        </label>
+                    </div>
+                </div>
+
+                <!--SPAN DE ERRO ACEITE-->
+                <div id="aceite_err" name="aceite_err" style="display:none"><span class="text-danger"><?php echo  $data['aceite_err']; ?></span> </div>
+
             </fieldset>
-
-           
-
-
-
-
-
-
 
 
 
