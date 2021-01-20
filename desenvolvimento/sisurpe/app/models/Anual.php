@@ -111,8 +111,10 @@
                                             etapa_id = :etapa_id,                                                                                       
                                             kit_inverno = :kit_inverno, 
                                             kit_verao = :kit_verao,                                            
-                                            tam_calcado = :tam_calcado, 
-                                            turno = :turno                   
+                                            tam_calcado = :tam_calcado,                                                                                      
+                                            turno = :turno,
+                                            opcao_atendimento = :opcao_atendimento, 
+                                            aceite_termo = :aceite_termo                 
                                         '
                         );
                   
@@ -123,8 +125,10 @@
         $this->db->bind(':kit_inverno',$data['kit_inverno']);
         $this->db->bind(':kit_verao',$data['kit_verao']);       
         $this->db->bind(':tam_calcado',$data['tam_calcado']);       
-        $this->db->bind(':turno',$data['turno']);       
-
+        $this->db->bind(':turno',$data['turno']);  
+        $this->db->bind(':opcao_atendimento',$data['opcao_atendimento']);       
+        $this->db->bind(':aceite_termo',$data['aceite_termo']);      
+        
 
         // Execute
         if($this->db->execute()){
@@ -144,8 +148,10 @@
                                             etapa_id = :etapa_id,                                                                                       
                                             kit_inverno = :kit_inverno, 
                                             kit_verao = :kit_verao,                                          
-                                            tam_calcado = :tam_calcado, 
-                                            turno = :turno  
+                                            tam_calcado = :tam_calcado,                                             
+                                            turno = :turno,
+                                            opcao_atendimento = :opcao_atendimento,
+                                            aceite_termo = :aceite_termo                                              
                                             WHERE aluno_id = :aluno_id');
                   
         // Bind values
@@ -155,8 +161,10 @@
         $this->db->bind(':kit_inverno',$data['kit_inverno']);
         $this->db->bind(':kit_verao',$data['kit_verao']);       
         $this->db->bind(':tam_calcado',$data['tam_calcado']);       
-        $this->db->bind(':turno',$data['turno']);       
-              
+        $this->db->bind(':turno',$data['turno']);  
+        $this->db->bind(':opcao_atendimento',$data['opcao_atendimento']);      
+        $this->db->bind(':aceite_termo',$data['aceite_termo']); 
+               
 
 
         // Execute

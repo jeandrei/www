@@ -1,4 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+
+
 <?php flash('mensagem');?>
 <script>
   function limpar(){
@@ -85,7 +87,7 @@
       </div>
 
         <!-- COLUNA ETAPA -->
-      <div class="col-lg-4">
+      <div class="col-lg-3">
             <label for="etapa_id">
                 Etapa
             </label>  
@@ -112,16 +114,29 @@
       </div>
 
       <!-- TURNO -->                              
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-2">
         <label for="turno">Turno</label>
         <select
           class="form-control"      
           name="turno"
           id="turno">
-            <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+            <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Todos</option>
             <option value="M" <?php echo (($_POST['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
             <option value="V" <?php echo (($_POST['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
             <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
+        </select>         
+      </div>  
+
+      <!-- TIPO DE ATENDIMENTO -->                              
+      <div class="form-group col-md-3">
+        <label for="turno">Tipo de atendimento optado</label>
+        <select
+          class="form-control"      
+          name="opcao_atendimento"
+          id="opcao_atendimento">
+            <option value="NULL" <?php echo (($_POST['opcao_atendimento'])=="NULL") ? 'selected' : ''; ?> >Todos</option>
+            <option value="presencial" <?php echo (($_POST['opcao_atendimento'])=="presencial") ? 'selected' : ''; ?> >Presencial</option>
+            <option value="remoto" <?php echo (($_POST['opcao_atendimento'])=="remoto") ? 'selected' : ''; ?> >Remoto</option>            
         </select>         
       </div>  
   
@@ -217,7 +232,8 @@
       <th scope="col">Turno</th>       
       <th scope="col">Kit de Inverno</th> 
       <th scope="col">Kit de Verão</th>      
-      <th scope="col">Calçado</th>      
+      <th scope="col">Calçado</th> 
+      <th scope="col">Atendimento</th>      
       <th scope="col"></th> 
     </tr>
   </thead>
@@ -231,8 +247,8 @@
       <td><?php echo $row['turno']; ?></td>
       <td><?php echo $row['kit_inverno']; ?></td>
       <td><?php echo $row['kit_verao']; ?></td>    
-      <td><?php echo $row['calcado']; ?></td>
-      <td><?php echo $row['meia']; ?></td>
+      <td><?php echo $row['calcado']; ?></td>      
+      <td><?php echo $row['opcao_atendimento']; ?></td>
       <td> </td>
     </tr>
     <?php endforeach; ?>    

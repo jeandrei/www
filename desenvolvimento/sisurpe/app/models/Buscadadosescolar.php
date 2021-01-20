@@ -23,7 +23,8 @@
                     dados_anuais.tam_calcado as calcado,                     
                     etapa.descricao as etapa, 
                     dados_anuais.turno as turno,
-                    dados_anuais.ultima_atual as ultima_atual
+                    dados_anuais.ultima_atual as ultima_atual,
+                    dados_anuais.opcao_atendimento as opcao_atendimento
                 FROM 
                   aluno,dados_anuais, 
                   escola, etapa 
@@ -75,7 +76,11 @@
 
         if((($options['named_params'][':tam_calcado']) != "NULL") && (($options['named_params'][':tam_calcado']) != "")  ){                  
           $sql .= " AND dados_anuais.tam_calcado = " . $options['named_params'][':tam_calcado'];
-        }        
+        } 
+        
+        if((($options['named_params'][':opcao_atendimento']) != "NULL") && (($options['named_params'][':opcao_atendimento']) != "")  ){                  
+          $sql .= " AND dados_anuais.opcao_atendimento = " . "'" . $options['named_params'][':opcao_atendimento'] . "'";         
+        }  
 
         $sql .= " ORDER BY escola, nome_aluno ASC"; 
         //var_dump($sql);

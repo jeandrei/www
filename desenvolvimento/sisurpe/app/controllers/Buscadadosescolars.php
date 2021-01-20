@@ -52,6 +52,9 @@
             $turno =$_GET['turno'];
             $_POST['turno'] =  $turno;
             
+            $opcao_atendimento =$_GET['opcao_atendimento'];
+            $_POST['opcao_atendimento'] =  $opcao_atendimento;
+            
         }
         else
         {           
@@ -67,13 +70,14 @@
             $tam_calcado = $_POST['tam_calcado'];            
             $etapa_id = $_POST['etapa_id'];
             $turno = $_POST['turno']; 
+            $opcao_atendimento = $_POST['opcao_atendimento']; 
 
             $page = 1;
         }     
       
         $options = array(
             'results_per_page' => 10,
-            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&sexo=' . $sexo . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&kit_inverno=' . $kit_inverno  . '&kit_verao=' . $kit_verao . '&tam_calcado=' . $tam_calcado,
+            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&sexo=' . $sexo . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&opcao_atendimento=' . $opcao_atendimento . '&kit_inverno=' . $kit_inverno  . '&kit_verao=' . $kit_verao . '&tam_calcado=' . $tam_calcado,
             'named_params' => array(
                                         ':nome' => $nome,
                                         ':escola_id' => $escola_id,
@@ -83,7 +87,8 @@
                                         ':kit_verao' => $kit_verao,                                        
                                         ':tam_calcado' => $tam_calcado,                                        
                                         ':etapa_id' => $etapa_id,
-                                        ':turno' => $turno
+                                        ':turno' => $turno,
+                                        ':opcao_atendimento' => $opcao_atendimento
                                     )     
         );
       

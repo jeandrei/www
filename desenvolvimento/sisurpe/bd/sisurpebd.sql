@@ -235,7 +235,22 @@ CREATE TABLE `dados_anuais` (
   `turno` char(1) DEFAULT NULL,
   `opcao_atendimento` varchar(50) DEFAULT NULL,
   `grupo_atendimento` varchar(50) DEFAULT NULL,
+  `aceite_termo` boolean DEFAULT false,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `grupos`
+--
+
+CREATE TABLE `grupos` (
+  `id_grupo` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cor` varchar(50) DEFAULT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -308,6 +323,13 @@ ALTER TABLE `aluno`
 ALTER TABLE `dados_anuais`
   ADD PRIMARY KEY (`id_da`),
   ADD KEY `aluno_id` (`aluno_id`);
+
+  --
+-- Índices de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  ADD PRIMARY KEY (`id_grupo`);
+  
   
 
 --
@@ -364,6 +386,12 @@ ALTER TABLE `aluno`
 --
 ALTER TABLE `dados_anuais`
   MODIFY `id_da` int(11) NOT NULL AUTO_INCREMENT;
+
+  --
+-- AUTO_INCREMENT de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `bairros`

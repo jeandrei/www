@@ -35,7 +35,10 @@
             'kit_verao' => trim($_POST['kit_verao']),            
             'tam_calcado' => trim($_POST['tam_calcado']),            
             'escola' => trim($_POST['escola']),
-            'etapa_id' => trim($_POST['etapa_id']),
+            'etapa_id' => trim($_POST['etapa_id']),            
+            'opcao_atendimento' => trim($_POST['opcao_atendimento']),
+            'grupo_atendimento' => trim($_POST['grupo_atendimento']),
+            'aceite_termo' => trim($_POST['aceite_termo']),
             'turno' => trim($_POST['turno'])
           ];
 
@@ -50,11 +53,11 @@
             $data['opcao_atendimento_err'] = 'Informe a Opção de Atendimento';
           } 
           //mesma coisa com o checkbox aceite
-          if(isset($_POST['aceite'])){
-            $data['aceite'] = $_POST['aceite'];
+          if(isset($_POST['aceite_termo'])){
+            $data['aceite_termo'] = $_POST['aceite_termo'];
           }  
-          if(($data['aceite'])==NULL){
-            $data['aceite_err'] = 'Você deve aceitar o termo';
+          if(($data['aceite_termo'])==NULL){
+            $data['aceite_termo_err'] = 'Você deve aceitar o termo';
           }  
 
           //if(isset($_POST['aceite'])){
@@ -102,6 +105,7 @@
             empty($data['turno_err']) &&
             empty($data['usa_transporte_err']) &&
             empty($data['opcao_atendimento_err']) &&
+            empty($data['aceite_termo_err']) &&
             empty($data['linha_err'])
             ){
                 // SE TEM O ID DO ALUNO É QUE ESTÁ SENDO EDITADO CASO CONTRÁRIO ESTÁ SENDO INSERIDO
@@ -126,7 +130,7 @@
                           redirect('datausers/show');
                         }                 
                       } catch (Exception $e) {
-                        die('Ops! Algo deu errado.');  
+                        die('Ops! Algo deu errado ao tentar gravar os dados.');  
                       }  
                                         
                 }   
@@ -150,7 +154,10 @@
             'tam_calcado' => '',           
             'escola' => '',
             'etapa_id' => '',
-            'turno' => ''
+            'turno' => '',
+            'opcao_atendimento' => '',
+            'grupo_atendimento' => '',
+            'aceite_termo_err' => ''
           ];
         }      
             // JÁ TEM CADASTRO, JOGO OS VALORES NO ARRAY DATA OS VALORES VEM LÁ DE CIMA DA LINHA         
@@ -166,7 +173,10 @@
             'tam_calcado' => $dados->tam_calcado,           
             'escola' => $dados->escola,
             'etapa_id' => $dados->etapa_id,
-            'turno' => $dados->turno
+            'turno' => $dados->turno,
+            'opcao_atendimento' => $dados->opcao_atendimento,
+            'opcao_atendimento' => $dados->opcao_atendimento,
+            'aceite_termo' => $dados->aceite_termo
           ];   
       $this->view('anuals/index', $data);
     }

@@ -1,6 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-
 <script>
 $(document).ready(function(){
     
@@ -14,7 +13,7 @@ var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <
         $("#termo" ).addClass( "visible");        
         $('#termo').html(termo_presencial);
         $("#div_aceite").show(); 
-        $("#aceite_err").show();
+        $("#aceite_termo_err").show();
     }
 
     if(remoto == true){
@@ -22,18 +21,19 @@ var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <
         $("#termo" ).addClass( "visible");
         $('#termo').html(termo_remoto); 
         $("#div_aceite").show();
-        $("#aceite_err").show();        
+        $("#aceite_termo_err").show();        
     }
 
     $("#presencial").change(function(){
         opcao = $("#presencial").val();
-        if(opcao == "presencial"){
+        if(opcao == "presencial"){           
             $("#termo" ).removeClass("invisible");
             $("#termo" ).addClass("visible");
             $('#termo').html(termo_presencial);
             $("#div_aceite").show();  
-            $("#aceite_err").show();
-            $("#aceite_err").html("");
+            $("#aceite_termo_err").show();
+            $("#aceite_termo_err").html("");
+            $('#aceite_termo').prop('checked', false);
         } 
     });
 
@@ -45,8 +45,9 @@ var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <
             $("#termo" ).addClass("visible");
             $('#termo').html(termo_remoto); 
             $("#div_aceite").show();   
-            $("#aceite_err").show();
-            $("#aceite_err").html("");
+            $("#aceite_termo_err").show();
+            $("#aceite_termo_err").html("");
+            $('#aceite_termo').prop('checked', false);
         }  
     });
 
@@ -100,140 +101,11 @@ var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <
             
             <hr>
 
-
-            <fieldset>
-                <legend>Opção de Atendimento</legend> 
-                <!--OPCAO ATENDIMENTO-->                
-                <div class="row">
-                    <!--ENSINO PRESENCIAL-->
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <div class="alert alert-warning" role="alert">
-                            <div class="checkbox checkbox-primary checkbox-inline">
-                                <input id="presencial" type="radio" name="opcao_atendimento" value="presencial" <?php echo ($data['opcao_atendimento'] == 'presencial') ? 'checked' : ''; ?> >
-                                <label for="presencial">
-                                    <strong>Ensino Presencial</strong>
-                                </label>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--ENSINO REMOTO-->
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <div class="alert alert-warning" role="alert">
-                            <div class="checkbox checkbox-primary checkbox-inline">
-                                <input id="remoto" type="radio" name="opcao_atendimento" value="remoto" <?php echo ($data['opcao_atendimento'] == 'remoto') ? 'checked' : ''; ?> >
-                                <label for="remoto">
-                                    <strong>Ensino Remoto</strong>
-                                </label>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <!--OPCAO ATENDIMENTO-->
-                </div>
-                
-                
-                <!--TERMO-->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <div id="termo" name="termo" class="alert alert-secondary invisible" role="alert">
-                            
-                            </div>
-                        </div>
-                    </div>                                 
-                </div>
-
-                <!--SPAN DE ERRO DO TERMO-->
-                <div><span id="opcao_atendimento_err" class="text-danger"><?php echo  $data['opcao_atendimento_err']; ?></span> </div>
-
-                <div id="div_aceite" name="div_aceite" style="display:none">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Aceito" id="aceite" name="aceite" <?php echo ($data['aceite'] == 'Aceito') ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="aceite">
-                        Aceito o termo
-                        </label>
-                    </div>
-                </div>
-
-                <!--SPAN DE ERRO ACEITE-->
-                <div id="aceite_err" name="aceite_err" style="display:none"><span class="text-danger"><?php echo  $data['aceite_err']; ?></span> </div>
-
-            </fieldset>
-
-
-
-
-
-
-            
-            <hr>
-            
-            <fieldset>  
-                <legend>Tamanho do Uniforme</legend>                                    
-                <!--UNIFORME-->  
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                          <label for="kit_inverno">Kit Inverno</label>
-                          <select
-                            class="form-control"
-                            name="kit_inverno"
-                            id="kit_inverno"          
-                            placeholder="Tamanho do Kit de Inverno">
-                            <option value="NULL">Selecione o Tamanho</option>
-                            <?php                            
-                              echo(imptamanhounif($data['kit_inverno']));
-                            ?>
-                          </select>
-                          <span id="kit_inverno_err" class="text-danger"><?php echo  $data['kit_inverno_err']; ?></span>                              
-                    </div>
-                   
-
-                    <div class="form-group col-md-3">
-                        <label for="kit_verao">Kit Verão</label>
-                        <select
-                          class="form-control"
-                          name="kit_verao"
-                          id="kit_verao"          
-                          placeholder="Tamanho do Kit de Verão">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhounif($data['kit_verao']));
-                          ?>
-                        </select>
-                        <span id="kit_verao_err" class="text-danger"><?php echo  $data['kit_verao_err']; ?></span>              
-                    </div>
-
-
-                    <div class="form-group col-md-3">
-                        <label for="tam_calcado">Calçado</label>
-                        <select
-                          class="form-control"
-                          name="tam_calcado"
-                          id="tam_calcado"          
-                          placeholder="Tamanho do Calçado">
-                          <option value="NULL">Selecione o Tamanho</option>
-                          <?php
-                            echo(imptamanhocalcado($data['tam_calcado']));
-                          ?>
-                        </select>
-                        <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              
-                    </div>
-
-                <!--PRIMEIRA LINHA DO UNIFORME--> 
-                </div>                
-            
-            </fieldset>
-
-            <hr>
-
+            <!--DADOS DA MATRÍCULA-->
             <fieldset>
                                     
                 <legend>Dados de Matrícula</legend>                                    
-                <!--LINHA DADOS DE MATRÍCULA-->  
+                <!--DIV MATRÍCULA-->  
                 <div class="form-row">       
                     <!-- ESCOLAS -->
                     <div class="col-lg-4">
@@ -311,9 +183,144 @@ var termo_remoto = "<strong>DECLARO</strong>, que o(a) aluno(a) supracitado(a) <
                       <span id="turno_err" class="text-danger"><?php echo  $data['turno_err']; ?></span>
                     </div>  
 
-                <!-- DADOS DE MATRÍCULA-->                                 
+                <!-- DIV MATRÍCULA-->                                 
                 </div>                                      
+            
             </fieldset>
+            <!-- DADOS DE MATRÍCULA-->                                   
+
+            <hr>
+
+            <fieldset>
+                <legend>Opção de Atendimento</legend> 
+                <!--OPCAO ATENDIMENTO-->                
+                <div class="row">
+                    <!--ENSINO PRESENCIAL-->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="alert alert-warning" role="alert">
+                            <div class="checkbox checkbox-primary checkbox-inline">
+                                <input id="presencial" type="radio" name="opcao_atendimento" value="presencial" <?php echo ($data['opcao_atendimento'] == 'presencial') ? 'checked' : ''; ?> >
+                                <label for="presencial">
+                                    <strong>Ensino Presencial</strong>
+                                </label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ENSINO REMOTO-->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="alert alert-warning" role="alert">
+                            <div class="checkbox checkbox-primary checkbox-inline">
+                                <input id="remoto" type="radio" name="opcao_atendimento" value="remoto" <?php echo ($data['opcao_atendimento'] == 'remoto') ? 'checked' : ''; ?> >
+                                <label for="remoto">
+                                    <strong>Ensino Remoto</strong>
+                                </label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!--OPCAO ATENDIMENTO-->
+                </div>
+                
+                
+                <!--TERMO-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div id="termo" name="termo" class="alert alert-secondary invisible" role="alert">
+                            
+                            </div>
+                        </div>
+                    </div>                                 
+                </div>
+
+                <!--SPAN DE ERRO DO TERMO-->
+                <div><span id="opcao_atendimento_err" class="text-danger"><?php echo  $data['opcao_atendimento_err']; ?></span> </div>
+
+                <div id="div_aceite" name="div_aceite" style="display:none">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value='1' id="aceite_termo" name="aceite_termo" <?php echo ($data['aceite_termo'] == '1') ? 'checked' : ''; ?>>
+                        <label class="form-check-label" for="aceite_termo">
+                        Aceito o termo
+                        </label>
+                    </div>
+                </div>
+
+                <!--SPAN DE ERRO ACEITE-->
+                <div id="aceite_termo_err" name="aceite_termo_err" style="display:none"><span class="text-danger"><?php echo  $data['aceite_termo_err']; ?></span> </div>
+              
+            </fieldset>
+
+
+
+
+
+
+            
+            <hr>
+            
+            <fieldset>  
+                <legend>Tamanho do Uniforme</legend>                                    
+                <!--UNIFORME-->  
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                          <label for="kit_inverno">Kit Inverno</label>
+                          <select
+                            class="form-control"
+                            name="kit_inverno"
+                            id="kit_inverno"          
+                            placeholder="Tamanho do Kit de Inverno">
+                            <option value="NULL">Selecione o Tamanho</option>
+                            <?php                            
+                              echo(imptamanhounif($data['kit_inverno']));
+                            ?>
+                          </select>
+                          <span id="kit_inverno_err" class="text-danger"><?php echo  $data['kit_inverno_err']; ?></span>                              
+                    </div>
+                   
+
+                    <div class="form-group col-md-3">
+                        <label for="kit_verao">Kit Verão</label>
+                        <select
+                          class="form-control"
+                          name="kit_verao"
+                          id="kit_verao"          
+                          placeholder="Tamanho do Kit de Verão">
+                          <option value="NULL">Selecione o Tamanho</option>
+                          <?php
+                            echo(imptamanhounif($data['kit_verao']));
+                          ?>
+                        </select>
+                        <span id="kit_verao_err" class="text-danger"><?php echo  $data['kit_verao_err']; ?></span>              
+                    </div>
+
+
+                    <div class="form-group col-md-3">
+                        <label for="tam_calcado">Calçado</label>
+                        <select
+                          class="form-control"
+                          name="tam_calcado"
+                          id="tam_calcado"          
+                          placeholder="Tamanho do Calçado">
+                          <option value="NULL">Selecione o Tamanho</option>
+                          <?php
+                            echo(imptamanhocalcado($data['tam_calcado']));
+                          ?>
+                        </select>
+                        <span id="tam_calcado_err" class="text-danger"><?php echo  $data['tam_calcado_err']; ?></span>              
+                    </div>
+
+                <!--PRIMEIRA LINHA DO UNIFORME--> 
+                </div>                
+            
+            </fieldset>
+
+            <hr>
+
+            
 
         <!--BOTÃO SALVAR-->
         <div class="row" style="margin-bottom: 10px;">
