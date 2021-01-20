@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<?php echo URLROOT; ?>
+
+
 <?php flash('mensagem');?>
 
 <script>
@@ -50,7 +51,7 @@
 
 
 <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para aluno_id PARA DEPOIS CHAMAR NO AJAX-->
-<input type="hidden" id="id_cor" name="id_cor" value="">
+<input type="hidden" id="id_grupo" name="id_grupo" value="">
 <input type="hidden" id="aluno_id_linha" name="aluno_id_linha" value="">
  
 
@@ -267,8 +268,9 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach($result as $row) : ?> 
-    <tr>  
+    <?php foreach($result as $row) : ?>
+    <?php $cor = $this->anualModel->getCorGrupo($row['grupo_atendimento']);?> 
+    <tr <?php echo("style='background-color:$cor->cor;'");?>>    
       <td><?php echo $row['nome_aluno']; ?></td>
       <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
       <td><?php echo $row['sexo']; ?></td> 
@@ -279,24 +281,25 @@
       <td><?php echo $row['calcado']; ?></td>      
       <td><?php echo $row['opcao_atendimento']; ?></td>
 
+      
       <td>
       <select class="form-control form-control-sm"
                     name="grupos" 
                     id="grupos"
                     class="form-control" 
                     onChange="
-                            document.getElementById('id_cor').value = this.value;
-                            //preciso passar o id do dados_anuais                                                      
+                            document.getElementById('id_grupo').value = this.value;
+                            document.getElementById('aluno_id_linha').value = <?php echo $row['id']; ?>;                                                     
                             "
                     > 
                                     
                   
-                    <option value="NULL" <?php echo (($_POST['grupos'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-                    <?
+                    <option value="NULL" <?php echo (($_POST['grupos'])=="NULL") ? 'selected' : ''; ?>>Selecione</option>
+                    <?php
                     $grupos = $this->anualModel->getGrupos(); 
                     foreach($grupos as $grupo) : ?> 
-                        <option value="<?php echo $grupo->grupo_id; ?>" 
-                                    <?php //echo $grupo->grupo_id == $row['grupos'] ? 'selected':'';?>
+                        <option value="<?php echo $grupo->grupo_id;?>" 
+                                    <?php echo $grupo->grupo_id == $row['grupo_atendimento'] ? 'selected':'';?>
                         >
                             <?php echo $grupo->nome;?>
                         </option>

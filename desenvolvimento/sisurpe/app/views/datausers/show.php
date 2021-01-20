@@ -39,9 +39,20 @@ if(isset($data['error'])){
 } 
 
 ?>  
-               
+         
 <?php foreach ($data as $registro): ?>
     <div class="card card-body mb-3">
+        
+        <?php $cod_grupo_aluno = $this->dadosModel->getGrupoById($registro['aluno_id']);
+        $grupo_aluno = $cod_grupo_aluno->grupo_atendimento;
+        $cor = $this->dadosModel->getCorGrupo($grupo_aluno);    
+        ?>
+
+        
+        
+        <?php echo("<div style='background-color:$cor->cor; text-align:center; font-size:2.50em' class='card-header'><strong>GRUPO DO ALUNO</strong></div>");?>       
+       
+       <hr>
         
         <!--text-right para alinhar os botões no lado direito-->
         <div class="text-right" style="margin-bottom:2rem;">
@@ -68,7 +79,7 @@ if(isset($data['error'])){
             </div>
         </div> 
         
-        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']); ?></h4>
+        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']);?></h4>
         
         <div class="bg-light p-2 mb-3">
         Nascimento: <b><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></b>

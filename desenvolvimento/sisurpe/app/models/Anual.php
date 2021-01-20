@@ -207,6 +207,40 @@
      }
 
 
+     public function getCorGrupo($grupo_id){
+        $this->db->query('SELECT cor FROM grupos WHERE grupo_id = :grupo_id');
+        // Bind value
+        $this->db->bind(':grupo_id', $grupo_id);
+  
+        $data = $this->db->single();
+  
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $data;
+        } else {
+            return false;
+        }
+      }
+
+
+      public function getGrupoById($aluno_id){
+        $this->db->query('SELECT grupo_atendimento FROM dados_anuais WHERE aluno_id = :aluno_id');
+        // Bind value
+        $this->db->bind(':aluno_id', $aluno_id);
+  
+        $data = $this->db->single();
+  
+        // Check row
+        if($this->db->rowCount() > 0){
+            return $data;
+        } else {
+            return false;
+        }
+      }
+
+      
+
+
 
      //Aqui já executo a sql com o id e status passado pelo método updateStatus
      public function changeGrupo($id_reg,$id_grupo){

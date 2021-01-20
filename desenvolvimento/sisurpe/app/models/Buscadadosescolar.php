@@ -25,7 +25,8 @@
                     etapa.descricao as etapa, 
                     dados_anuais.turno as turno,
                     dados_anuais.ultima_atual as ultima_atual,
-                    dados_anuais.opcao_atendimento as opcao_atendimento
+                    dados_anuais.opcao_atendimento as opcao_atendimento,
+                    dados_anuais.grupo_atendimento as grupo_atendimento
                 FROM 
                   aluno,dados_anuais, 
                   escola, etapa 
@@ -101,6 +102,7 @@
             }
         }
     }  
+    
     
     
     
