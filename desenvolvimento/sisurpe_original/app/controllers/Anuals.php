@@ -39,17 +39,6 @@
             'turno' => trim($_POST['turno'])
           ];
 
-          //checkbox não manda valor no post se não for marcado
-          //por isso tem que verificar se foi marcado
-          //caso contrário o php vai acusar o erro
-          //undefined index                
-          if(isset($_POST['opcao_atendimento'])){
-            $data['opcao_atendimento'] = $_POST['opcao_atendimento'];
-          }   
-          if(($data['opcao_atendimento'])==NULL){
-            $data['opcao_atendimento_err'] = 'Informe a Opção de Atendimento';
-          }   
-
           if(($data['kit_inverno'])=="NULL"){
             $data['kit_inverno_err'] = 'Informe o tamanho do kit de inverno';
           }
@@ -81,7 +70,7 @@
             if((($data['usa_transporte'])=="Sim") && (($data['linha'])=="NULL")){
               $data['linha_err'] = 'Informe a linha';
             } 
-          }          
+          }
 
           // Make sure errors are empty
           if(                    
@@ -92,7 +81,6 @@
             empty($data['etapa_id_err']) &&
             empty($data['turno_err']) &&
             empty($data['usa_transporte_err']) &&
-            empty($data['opcao_atendimento_err']) &&
             empty($data['linha_err'])
             ){
                 // SE TEM O ID DO ALUNO É QUE ESTÁ SENDO EDITADO CASO CONTRÁRIO ESTÁ SENDO INSERIDO

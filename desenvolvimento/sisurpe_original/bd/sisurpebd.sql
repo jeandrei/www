@@ -233,8 +233,6 @@ CREATE TABLE `dados_anuais` (
   `kit_verao` varchar(50) DEFAULT NULL,  
   `tam_calcado` varchar(50) DEFAULT NULL,  
   `turno` char(1) DEFAULT NULL,
-  `opcao_atendimento` varchar(50) DEFAULT NULL,
-  `grupo_atendimento` varchar(50) DEFAULT NULL,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

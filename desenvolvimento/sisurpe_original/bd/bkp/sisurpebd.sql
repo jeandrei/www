@@ -47,33 +47,15 @@ CREATE TABLE `escola` (
 --
 
 INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
-(01, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
-(02, 'CEI DONA BELINHA', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
-(03, 'CEI JULIO CORREA DE MELLO', 1, 'Rua Sebastião Schmitz', 0),
-(04, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'RUA PEDRO JOSÉ GOMES', 0),
-(05, 'CEI MARIA DE LOURDES FRANCISCO GONÇALVES', 1, 'RUA PEDRO JOSÉ GOMES', 0),
-(06, 'CEI MARIA LÚCIA FLORIANO', 1, 'Rua André Serafim Francisco', 108),
-(07, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
-(08, 'CEI PROFª ORLANDINA BENTO MENDES', 1, 'Rua Antônio João Caldeira', 0),
-(09, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 1, 'Rua Lauro Zimerman Filho', 200),
-(10, 'CRECHE CASA DA AMIZADE', 1, 'Rua Artur Silvino dos Reis', 63),
-(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 1, 'Rua João Carlos Alves', 40),
-(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 1, 'Rua Maria Joaquina Bento', 85),
-(13, 'EI ANTONIO JOAQUIM TAVARES', 1, 'Rua Vereador João Manoel Bento', 0),
-(14, 'EI CIPRIANO SILVINO CUSTODIO', 1, 'Avenida Geral da Santa Lidia', 0),
-(15, 'EI MUN HORACINA SOARES FRANCISCO', 1, 'Rua Tiradentes', 0),
-(16, 'EI SÃO NICOLAU', 1, 'Rua Ernesto dos Santos', 0),
-(17, 'ESCOLA BÁSICA MUNICIPAL JOAO ANTONIO PINTO', 1, 'Rua Tijucas', 126),
-(18, 'ESCOLA BÁSICA MUNICIPAL JOÃO BATISTA DA CRUZ', 1, 'Rua Margarida Vieira', 885),
-(19, 'ESCOLA BÁSICA MUNICIPAL RUBENS JOÃO DE SOUZA', 1, 'Rua Calixto Luiz Honório', 325),
-(20, 'ESCOLA MUNICIPAL MARIA EMILIA DA COSTA', 1, 'Rua Arnô Becker', 0),
-(21, 'ESCOLA MUNICIPAL PROFESSORA IVONE NYMPHA MAIA ADRIANO', 1, 'Rua Paraná', 39),
-(22, 'ESCOLA MUNICIPAL ROSALIA VALENTINA DALLAGO', 1, 'Rua Júlia da Costa Flores', 1922),
-(23, 'GRUPO ESCOLAR MUNICIPAL ANTÔNIO JOSÉ TIAGO', 1, 'Rua Felipe João Anacleto', 1058),
-(24, 'GRUPO ESCOLAR MUNICIPAL LACI SIMÃO CORREA', 1, 'Avenida São João', 0),
-(25, 'GRUPO ESCOLAR MUNICIPAL RAQUEL FIGUEREDO DE ASSIS', 1, 'RUA JOÃO MARIANO FURTADO', 274);
-
-
+(4, 'CEI ANJOS DO ITAPOCOROI', 1, 'Avenida São João', 445),
+(5, 'CEI DONA BElinhas', 3, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(6, 'CEI MARA LÚCIA DE SOUZA DE MELO', 1, 'Rua Vereador Arnô Reinaldo da Silva', 0),
+(7, 'CEI PINGO DE GENTE', 1, 'RUA ABÍLIO DE SOUZA - TRAV. BARBACENA', 488),
+(8, 'CEI PROFª ORLANDINA BENTO MENDES', 3, 'Rua Antônio João Caldeira', 0),
+(9, 'CEI PROFESSORA SIMONE APARECIDA REIS DE SOUZA', 5, 'Rua Lauro Zimerman Filho', 200),
+(10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
+(11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
+(12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
 
 -- --------------------------------------------------------
 
@@ -95,18 +77,7 @@ INSERT INTO `etapa` (`id`, `idade`, `descricao`) VALUES
 (1, 1, 'BERÇÁRIO-I'),
 (2, 2, 'BERÇÁRIO-II'),
 (3, 3, 'MATERNAL'),
-(4, 3, 'PRÉ-I'),
-(5, 3, 'PRÉ-II'),
-(6, 3, 'PRÉ-III'),
-(7, 3, '1º ANO'),
-(8, 3, '2º ANO'),
-(9, 3, '3º ANO'),
-(10, 3, '4º ANO'),
-(11, 3, '5º ANO'),
-(12, 3, '6º ANO'),
-(13, 3, '7º ANO'),
-(14, 4, '8º ANO'),
-(15, 4, '9º ANO');
+(4, 4, 'PRÉ-I');
 
 -- --------------------------------------------------------
 
@@ -128,10 +99,7 @@ INSERT INTO `linhas` (`id`, `linha`) VALUES
 (1, '01'),
 (2, '02'),
 (3, '03'),
-(4, '04'),
-(5, '05'),
-(6, '06'),
-(7, '07');
+(4, '04');
 
 -- --------------------------------------------------------
 
@@ -142,10 +110,9 @@ INSERT INTO `linhas` (`id`, `linha`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `cpf` varchar(15),
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `type` varchar(10) DEFAULT 'user',
+  `type` char(5) DEFAULT 'user',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -153,9 +120,10 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `created_at`) VALUES
-(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin', '2018-11-23 10:19:18');
-
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
+(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin' '2018-11-23 10:19:18'),
+(2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36'),
+(3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', '2019-01-09 16:46:20');
 
 --
 -- Estrutura para tabela `aluno`
@@ -177,9 +145,6 @@ CREATE TABLE `aluno` (
   `telefone_resp` char(20) DEFAULT NULL,
   `naturalidade` varchar(255) DEFAULT NULL,
   `nacionalidade` varchar(255) DEFAULT NULL,
-  `end_rua` varchar(255) DEFAULT NULL,
-  `end_numero` int(11) DEFAULT NULL,
-  `end_bairro_id` int(11) DEFAULT NULL,
   `rg` char(15) DEFAULT NULL,
   `uf_rg` char(2) DEFAULT NULL,
   `orgao_emissor` char(5) DEFAULT NULL,
@@ -229,36 +194,29 @@ CREATE TABLE `dados_anuais` (
   `escola_id` int(11) NOT NULL, 
   `etapa_id` int(11) NOT NULL, 
   `ano` char(4), 
-  `kit_inverno` varchar(50) DEFAULT NULL,
-  `kit_verao` varchar(50) DEFAULT NULL,  
-  `tam_calcado` varchar(50) DEFAULT NULL,  
+  `tam_moletom` varchar(50) DEFAULT NULL,
+  `tam_camiseta` varchar(50) DEFAULT NULL,
+  `tam_calca` varchar(50) DEFAULT NULL,
+  `tam_bermuda` varchar(50) DEFAULT NULL,
+  `tam_calcado` varchar(50) DEFAULT NULL,
+  `tam_meia` varchar(50) DEFAULT NULL,  
   `turno` char(1) DEFAULT NULL,
-  `opcao_atendimento` varchar(50) DEFAULT NULL,
-  `grupo_atendimento` varchar(50) DEFAULT NULL,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `bairros`
+-- Estrutura para tabela `endereco`
 --
 
-CREATE TABLE `bairros` (
-  `id` int(11) NOT NULL, 
+CREATE TABLE `endereco` (
+  `id_endereco` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  `rua` varchar(255) NOT NULL,
+  `numero` int(11) NOT NULL,
   `bairro` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Despejando dados para a tabela `bairros`
---
-
-
-INSERT INTO `bairros` (`id`, `bairro`) VALUES
-(1, 'CENTRO'),
-(2, 'SANTA LIDIA'),
-(3, 'SÃO NICOLAU'),
-(4, 'MARISCAL');
 
 --
 -- Índices de tabelas apagadas
@@ -311,11 +269,11 @@ ALTER TABLE `dados_anuais`
   
 
 --
--- Índices de tabela `bairros`
+-- Índices de tabela `endereco`
 --
-ALTER TABLE `bairros`
-  ADD PRIMARY KEY (`id`);
- 
+ALTER TABLE `endereco`
+  ADD PRIMARY KEY (`id_endereco`),
+  ADD KEY `aluno_id` (`aluno_id`);
 
 --
 -- AUTO_INCREMENT de tabelas apagadas
@@ -366,33 +324,28 @@ ALTER TABLE `dados_anuais`
   MODIFY `id_da` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `bairros`
+-- AUTO_INCREMENT de tabela `endereco`
 --
-ALTER TABLE `bairros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `endereco`
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para dumps de tabelas
 --
-
-
-ALTER TABLE `aluno_linhas`
-  ADD CONSTRAINT `aluno_id` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
-
-
-ALTER TABLE `aluno_linhas` 
-  ADD CONSTRAINT `linha_id` FOREIGN KEY (`linha_id`) REFERENCES `linhas`(`id`);
-
 
 --
 -- Restrições para tabelas `dados_anuais`
 --
 ALTER TABLE `dados_anuais`
   ADD CONSTRAINT `dados_anuais_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
+  
+
+--
+-- Restrições para tabelas `endereco`
+--
+ALTER TABLE `endereco`
+  ADD CONSTRAINT `endereco_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`aluno_id`);
 COMMIT;
-
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
