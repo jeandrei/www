@@ -181,4 +181,12 @@
       $this->view('anuals/index', $data);
     }
 
+
+    //aqui é o método chamado pelo jquery lá no index, verifico se o id tem algum valor se sim eu chamo o método changeStatus no model
+    public function updateGrupo(){
+      if (isset($_GET['id_reg'])){
+        $this->anualModel->changeGrupo($_GET['id_reg'],$_GET['id_grupo']);
+      }
+    }
+
 }//class

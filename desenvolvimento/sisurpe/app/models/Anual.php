@@ -208,6 +208,13 @@
 
 
 
+     //Aqui já executo a sql com o id e status passado pelo método updateStatus
+     public function changeGrupo($id_reg,$id_grupo){
+        $this->db->query('UPDATE dados_anuais SET grupo_atendimento = :id_grupo WHERE id_da=:id_da');
+        $this->db->bind(':id_da',$id_reg); 
+        $this->db->bind(':id_grupo',$id_grupo); 
+        $this->db->execute();
+    }
 
 
 

@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-
+<?php echo URLROOT; ?>
 <?php flash('mensagem');?>
 
 <script>
@@ -27,13 +27,18 @@
     }
 
 
-    $(document).ready(function(){
-        //quando clicar no botão do select
-        $('.grupos').click(function() {
-          console.log("clicado");
-        });    
-
-    });
+     //espera a página carregar completamente
+     $(document).ready(function(){  
+           //seleciona o objeto select da página    
+            $(document).on('change','select', function(){ 
+                //atribui os valores do id e do status as variáveis
+                var id_grupo=$("#id_grupo").val();
+                var idRegistro=$("#aluno_id_linha").val();                 
+                    //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
+                    $.get("<?php echo URLROOT; ?>/anuals/updateGrupo?id_reg=" + idRegistro + "&id_grupo=" + id_grupo, function(data){                                          
+                });
+            });
+        });
 
 
 
@@ -42,6 +47,14 @@
 
 
 </script>
+
+
+<!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para aluno_id PARA DEPOIS CHAMAR NO AJAX-->
+<input type="hidden" id="id_cor" name="id_cor" value="">
+<input type="hidden" id="aluno_id_linha" name="aluno_id_linha" value="">
+ 
+
+
 
 <h1><?php echo $data['title']; ?></h1>
 <p><?php echo $data['description']; ?></p>
@@ -269,9 +282,14 @@
       <td>
       <select class="form-control form-control-sm"
                     name="grupos" 
-                    id="linha_<?php echo $row['id'];?>"
+                    id="grupos"
                     class="form-control" 
-                 >                   
+                    onChange="
+                            document.getElementById('id_cor').value = this.value;
+                            //preciso passar o id do dados_anuais                                                      
+                            "
+                    > 
+                                    
                   
                     <option value="NULL" <?php echo (($_POST['grupos'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
                     <?
