@@ -208,7 +208,7 @@
 
 
      public function getCorGrupo($grupo_id){
-        $this->db->query('SELECT cor FROM grupos WHERE grupo_id = :grupo_id');
+        $this->db->query('SELECT cor, nome FROM grupos WHERE grupo_id = :grupo_id');
         // Bind value
         $this->db->bind(':grupo_id', $grupo_id);
   

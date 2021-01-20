@@ -45,12 +45,14 @@ if(isset($data['error'])){
         
         <?php $cod_grupo_aluno = $this->dadosModel->getGrupoById($registro['aluno_id']);
         $grupo_aluno = $cod_grupo_aluno->grupo_atendimento;
-        $cor = $this->dadosModel->getCorGrupo($grupo_aluno);    
+        $grupo = $this->dadosModel->getCorGrupo($grupo_aluno);
+        $cor = $grupo->cor; 
+        $nome_cor = ($grupo->nome<>NULL) ? $grupo->nome : 'Aguardando definição';        
         ?>
 
         
         
-        <?php echo("<div style='background-color:$cor->cor; text-align:center; font-size:2.50em' class='card-header'><strong>GRUPO DO ALUNO</strong></div>");?>       
+        <?php echo("<div style='background-color:$cor; text-align:center; text-transform: uppercase; font-size:2.0em' class='card-header'><strong>GRUPO DO ALUNO: $nome_cor</strong></div>");?>       
        
        <hr>
         
