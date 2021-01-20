@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<?php flash('mensagem');?>
 
+<?php flash('mensagem');?>
 <script>
   function limpar(){
         document.getElementById('ano').value = "";
@@ -15,7 +15,8 @@
         
         document.getElementById('ano').focus(); 
     }    
-       
+    
+    document.getElementById('ano').focus(); 
 
     //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
     function newtab(){
@@ -25,22 +26,6 @@
     function notab(){
       document.getElementById('filtrar').setAttribute('target', '');
     }
-
-
-    $(document).ready(function(){
-        //quando clicar no botão do select
-        $('.grupos').click(function() {
-          console.log("clicado");
-        });    
-
-    });
-
-
-
-
-
-
-
 </script>
 
 <h1><?php echo $data['title']; ?></h1>
@@ -248,8 +233,7 @@
       <th scope="col">Kit de Inverno</th> 
       <th scope="col">Kit de Verão</th>      
       <th scope="col">Calçado</th> 
-      <th scope="col">Atendimento</th>     
-      <th scope="col">Grupo</th>  
+      <th scope="col">Atendimento</th>      
       <th scope="col"></th> 
     </tr>
   </thead>
@@ -265,30 +249,6 @@
       <td><?php echo $row['kit_verao']; ?></td>    
       <td><?php echo $row['calcado']; ?></td>      
       <td><?php echo $row['opcao_atendimento']; ?></td>
-
-      <td>
-      <select class="form-control form-control-sm"
-                    name="grupos" 
-                    id="linha_<?php echo $row['id'];?>"
-                    class="form-control" 
-                 >                   
-                  
-                    <option value="NULL" <?php echo (($_POST['grupos'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
-                    <?
-                    $grupos = $this->anualModel->getGrupos(); 
-                    foreach($grupos as $grupo) : ?> 
-                        <option value="<?php echo $grupo->grupo_id; ?>" 
-                                    <?php //echo $grupo->grupo_id == $row['grupos'] ? 'selected':'';?>
-                        >
-                            <?php echo $grupo->nome;?>
-                        </option>
-                    <?php endforeach; ?>  
-            </select>
-      </td>
-
-
-
-
       <td> </td>
     </tr>
     <?php endforeach; ?>    

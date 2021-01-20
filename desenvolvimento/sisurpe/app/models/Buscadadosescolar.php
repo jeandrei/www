@@ -13,6 +13,7 @@
     
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
         $sql = ("SELECT 
+                    aluno.aluno_id as id,
                     aluno.nome_aluno as nome_aluno, 
                     aluno.nascimento as nascimento,
                     escola.nome as escola,

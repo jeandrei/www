@@ -84,6 +84,16 @@
         }           
     }
 
+    public function getGrupos(){
+        $this->db->query("SELECT * FROM grupos ORDER BY nome DESC"); 
+        $result = $this->db->resultSet(); 
+        if($this->db->rowCount() > 0){
+            return $result;
+        } else {
+            return false;
+        }           
+    }
+
 
     public function getAlunoById($id){
         $this->db->query("SELECT * FROM aluno WHERE aluno_id = :aluno_id"); 
