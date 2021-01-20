@@ -228,6 +228,7 @@ CREATE TABLE `dados_anuais` (
   `aluno_id` int(11) NOT NULL,
   `escola_id` int(11) NOT NULL, 
   `etapa_id` int(11) NOT NULL, 
+  `grupo_id` int(11),
   `ano` char(4), 
   `kit_inverno` varchar(50) DEFAULT NULL,
   `kit_verao` varchar(50) DEFAULT NULL,  
@@ -248,7 +249,7 @@ CREATE TABLE `dados_anuais` (
 --
 
 CREATE TABLE `grupos` (
-  `id_grupo` int(11) NOT NULL,
+  `grupo_id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `cor` varchar(50) DEFAULT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -328,7 +329,7 @@ ALTER TABLE `dados_anuais`
 -- Índices de tabela `grupos`
 --
 ALTER TABLE `grupos`
-  ADD PRIMARY KEY (`id_grupo`);
+  ADD PRIMARY KEY (`grupo_id`);
   
   
 
@@ -391,7 +392,7 @@ ALTER TABLE `dados_anuais`
 -- AUTO_INCREMENT de tabela `grupos`
 --
 ALTER TABLE `grupos`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `grupo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `bairros`
