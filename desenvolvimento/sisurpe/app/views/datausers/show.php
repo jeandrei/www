@@ -46,13 +46,24 @@ if(isset($data['error'])){
         <?php $cod_grupo_aluno = $this->dadosModel->getGrupoById($registro['aluno_id']);
         $grupo_aluno = $cod_grupo_aluno->grupo_atendimento;
         $grupo = $this->dadosModel->getCorGrupo($grupo_aluno);
-        $cor = $grupo->cor; 
-        $nome_cor = ($grupo->nome<>NULL) ? $grupo->nome : 'Aguardando definição';        
+        $cor = $grupo->cor;
+        
+        $dados_anuais = $this->dadosModel->getDadosAnuaisByid($registro['aluno_id']);
+                
+        if($dados_anuais->opcao_atendimento == 'remoto'){
+            $texto = "Atendimento remoto";
+        } 
+        else if($dados_anuais->opcao_atendimento <> NULL){
+            $texto = ($grupo->nome<>NULL) ? "GRUPO DO ALUNO:" . $grupo->nome : 'Aguardando definição do grupo'; 
+        } else {
+            $texto = "Informe os Dados Escolares"; 
+        }
+               
         ?>
 
         
         
-        <?php echo("<div style='background-color:$cor; text-align:center; text-transform: uppercase; font-size:2.0em' class='card-header'><strong>GRUPO DO ALUNO: $nome_cor</strong></div>");?>       
+        <?php echo("<div style='background-color:$cor; text-align:center; text-transform: uppercase; font-size:2.0em' class='card-header'><strong>$texto</strong></div>");?>       
        
        <hr>
         
