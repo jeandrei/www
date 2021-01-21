@@ -54,6 +54,10 @@
             
             $opcao_atendimento =$_GET['opcao_atendimento'];
             $_POST['opcao_atendimento'] =  $opcao_atendimento;
+
+            $grupo_id =$_GET['grupo_id'];
+            $_POST['grupo_id'] =  $grupo_id;
+            
             
         }
         else
@@ -71,13 +75,15 @@
             $etapa_id = $_POST['etapa_id'];
             $turno = $_POST['turno']; 
             $opcao_atendimento = $_POST['opcao_atendimento']; 
+            $grupo_id = $_POST['grupo_id']; 
+            
 
             $page = 1;
         }     
       
         $options = array(
             'results_per_page' => 10,
-            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&sexo=' . $sexo . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&opcao_atendimento=' . $opcao_atendimento . '&kit_inverno=' . $kit_inverno  . '&kit_verao=' . $kit_verao . '&tam_calcado=' . $tam_calcado,
+            'url' => URLROOT . '/buscadadosescolars/index.php?page=*VAR*&nome=' . $nome . '&ano=' . $ano . '&sexo=' . $sexo . '&escola_id=' . $escola_id . '&etapa_id=' . $etapa_id . '&turno=' . $turno . '&opcao_atendimento=' . $opcao_atendimento . '&grupo_id=' . $grupo_id . '&kit_inverno=' . $kit_inverno  . '&kit_verao=' . $kit_verao . '&tam_calcado=' . $tam_calcado,
             'named_params' => array(
                                         ':nome' => $nome,
                                         ':escola_id' => $escola_id,
@@ -88,7 +94,9 @@
                                         ':tam_calcado' => $tam_calcado,                                        
                                         ':etapa_id' => $etapa_id,
                                         ':turno' => $turno,
-                                        ':opcao_atendimento' => $opcao_atendimento
+                                        ':opcao_atendimento' => $opcao_atendimento,
+                                        ':grupo_id' => $grupo_id
+                                        
                                     )     
         );
       

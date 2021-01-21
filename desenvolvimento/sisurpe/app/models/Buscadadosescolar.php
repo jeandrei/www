@@ -84,6 +84,11 @@
           $sql .= " AND dados_anuais.opcao_atendimento = " . "'" . $options['named_params'][':opcao_atendimento'] . "'";         
         }  
 
+
+        if((($options['named_params'][':grupo_id']) != "NULL") && (($options['named_params'][':grupo_id']) != "")  ){                  
+          $sql .= " AND dados_anuais.grupo_atendimento = " . $options['named_params'][':grupo_id'];
+        } 
+
         $sql .= " ORDER BY escola, nome_aluno ASC"; 
         //var_dump($sql);
 

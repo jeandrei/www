@@ -44,9 +44,9 @@ class PDF extends FPDF
             //define o tipo e o tamanho da fonte                                  
             $pdf->SetFont('Arial','B',8);
             //defino as colunas do relatório
-            $colunas =array("N","Nome do Aluno","Etapa", "Turno", "Kit In", "Kit Ver", "Cal", "Sexo", "Ultima Atualização");
+            $colunas =array("N","Nome do Aluno","Etapa", "Turno", "Kit In", "Kit Ver", "Cal", "Sexo","Grupo", "Ultima Atualização");
             //largura das colunas
-            $larguracoll = array(1 => 5, 2 => 110, 3 => 40, 4 => 10, 5 => 10, 6 => 12, 7 => 10, 8 => 10, 9 => 50);
+            $larguracoll = array(1 => 5, 2 => 100, 3 => 40, 4 => 10, 5 => 10, 6 => 12, 7 => 10, 8 => 10, 9 => 30, 10 => 30);
             //tamanho da fonte
             $left = 5; 
            
@@ -96,7 +96,8 @@ class PDF extends FPDF
                         $pdf->Cell($larguracoll[6],$left,utf8_decode($row->kit_verao),1);
                         $pdf->Cell($larguracoll[7],$left,utf8_decode($row->calcado),1);
                         $pdf->Cell($larguracoll[8],$left,utf8_decode($row->sexo),1);
-                        $pdf->Cell($larguracoll[9],$left,utf8_decode($row->ultima_atual),1);                    
+                        $pdf->Cell($larguracoll[9],$left,utf8_decode($row->grupo_atendimento),1);
+                        $pdf->Cell($larguracoll[10],$left,utf8_decode($row->ultima_atual),1);                    
                         
                         //linha nova
                         $pdf->Ln();

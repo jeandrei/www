@@ -66,7 +66,11 @@
 ?>
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
+  
+  <!--NOVA LINHA-->
   <div class="row"> 
+      
+      
       <!-- COLUNA 1 ANO-->
       <div class="col-lg-2">
               <label for="ano">
@@ -80,14 +84,10 @@
                   class="form-control"
                   value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
                   >
-        <!--<div class="col-lg-4">-->
-        </div>
-  <!--<div class="row"> -->  
-  </div>
+      <!--<div class="col-lg-4">-->
+      </div>
 
-<hr>
 
-  <div class="row"> 
       <!-- COLUNA ESCOLA -->
       <div class="col-lg-4">
             <label for="escola_id">
@@ -115,7 +115,9 @@
       <!--div class="col-lg-4-->
       </div>
 
-        <!-- COLUNA ETAPA -->
+
+
+      <!-- COLUNA ETAPA -->
       <div class="col-lg-3">
             <label for="etapa_id">
                 Etapa
@@ -142,6 +144,9 @@
       <!--div class="col-lg-3-->
       </div>
 
+
+
+
       <!-- TURNO -->                              
       <div class="form-group col-md-2">
         <label for="turno">Turno</label>
@@ -155,6 +160,16 @@
             <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
         </select>         
       </div>  
+  
+  
+  
+  <!--<div class="row"> FINAL LINHA -->  
+  </div>
+
+<hr>
+
+  <!--NOVA LINHA-->
+  <div class="row">          
 
       <!-- TIPO DE ATENDIMENTO -->                              
       <div class="form-group col-md-3">
@@ -168,9 +183,43 @@
             <option value="remoto" <?php echo (($_POST['opcao_atendimento'])=="remoto") ? 'selected' : ''; ?> >Remoto</option>            
         </select>         
       </div>  
+
+
+       <!-- GRUPO -->
+       <div class="col-lg-4">
+            <label for="grupo_id">
+                Grupo
+            </label>  
+            <select 
+                name="grupo_id" 
+                id="grupo_id" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Todos</option>
+                    <?php                     
+                    $grupos = $this->anualModel->getGrupos();                                     
+                    foreach($grupos as $grupo) : ?> 
+                        <option value="<?php echo $grupo->grupo_id; ?>"
+                                    <?php if(isset($_POST['grupo_id'])){
+                                    echo $_POST['grupo_id'] == $grupo->grupo_id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $grupo->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+      <!--div class="col-lg-4-->
+      </div>
+
+
   
   <!--<div class="row"> -->  
   </div>
+
+
+
+
 
   <hr>
 
@@ -230,11 +279,12 @@
         </select>         
       </div>   
      
-  <!--div class="row"-->
+  <!--div class="row" FINAL LINHA-->
   </div> 
 
 <hr>
 
+  <!--NOVA LINHA-->                                    
   <div class="row">       
       <!-- LINHA PARA O BOTÃO ATUALIZAR -->    
       <div class="col" style="padding-left:0; margin-top:15px;">
@@ -244,7 +294,7 @@
               <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
           </div>                                                
       </div>
-  <!--div class="row"-->
+  <!--div class="row" FINAL LINHA-->
   </div>
 
 </form>

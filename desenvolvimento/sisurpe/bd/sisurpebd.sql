@@ -227,15 +227,14 @@ CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
   `escola_id` int(11) NOT NULL, 
-  `etapa_id` int(11) NOT NULL, 
-  `grupo_id` int(11),
+  `etapa_id` int(11) NOT NULL,   
   `ano` char(4), 
   `kit_inverno` varchar(50) DEFAULT NULL,
   `kit_verao` varchar(50) DEFAULT NULL,  
   `tam_calcado` varchar(50) DEFAULT NULL,  
   `turno` char(1) DEFAULT NULL,
   `opcao_atendimento` varchar(50) DEFAULT NULL,
-  `grupo_atendimento` varchar(50) DEFAULT NULL,
+  `grupo_atendimento` int(11),
   `aceite_termo` boolean DEFAULT false,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -253,6 +252,18 @@ CREATE TABLE `grupos` (
   `nome` varchar(50) DEFAULT NULL,
   `cor` varchar(50) DEFAULT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(1, 'Azul', '#0066ff');
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(2, 'Amarelo', '#ffff00');
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(3, 'Vermelho', '#ff3300');
+
 
 -- --------------------------------------------------------
 
