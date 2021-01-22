@@ -9,7 +9,7 @@
     
      
     public function GetEscolasUserById($id){
-        $this->db->query("SELECT * FROM escolas_user eu, escola es WHERE eu.escola_id = es.id AND user_id = :user_id;");
+        $this->db->query("SELECT eu.id as id, eu.escola_id as escola_id, eu.user_id as user_id, es.nome as nome FROM escolas_user eu, escola es WHERE eu.escola_id = es.id AND user_id = :user_id;");
         $this->db->bind(':user_id',$id); 
         $result = $this->db->resultSet(); 
         if($this->db->rowCount() > 0){

@@ -76,14 +76,14 @@
         
       //pego o id do usuário 
       $user_id = $this->escolaUsersModel->getUserIdEscolasUser($id); 
-      die(var_dump($id));
+     
       try {
         if($this->escolaUsersModel->deleteEscolasUser($id)){                       
           flash('mensagem', 'Registro removido com sucesso!');                
-          redirect('escolausers/'.$user_id->id);
+          redirect('escolausers/'.$user_id->user_id);
         } else {
           flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
-          redirect('escolausers/'.$user_id->id);
+          redirect('escolausers/'.$user_id->user_id);
         }                
       } catch (Exception $e) {
         die('Ops! Algo deu errado.');  
