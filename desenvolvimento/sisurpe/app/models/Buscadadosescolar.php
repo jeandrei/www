@@ -108,6 +108,18 @@
             }
         }
     }  
+
+
+
+    public function getEscolasUsuario($id){
+      $this->db->query("SELECT * FROM escola ORDER BY nome DESC"); 
+      $result = $this->db->resultSet(); 
+      if($this->db->rowCount() > 0){
+          return $result;
+      } else {
+          return false;
+      }           
+  }
     
     
     
