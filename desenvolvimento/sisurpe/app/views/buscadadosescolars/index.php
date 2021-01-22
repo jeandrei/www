@@ -301,7 +301,7 @@
 
 <br>
 <!-- MONTAR A TABELA -->
-<table class="table table-striped">
+<table style="font-size:13px" class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Nome</th>      
@@ -333,7 +333,7 @@
 
       
       <td>
-      <select class="form-control form-control-sm"
+      <select style="font-size:11px" class="form-control form-control-sm"
                     name="grupos" 
                     id="grupos"
                     class="form-control" 

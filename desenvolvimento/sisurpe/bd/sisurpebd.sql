@@ -157,6 +157,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `created_at`) VA
 (1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin', '2018-11-23 10:19:18');
 
 
+CREATE TABLE `escolas_user` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `escola_id` int(11) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Estrutura para tabela `aluno`
 --
@@ -321,6 +328,12 @@ ALTER TABLE `aluno_linhas`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+  --
+-- Índices de tabela `escolas_user`
+--
+ALTER TABLE `escolas_user`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Índices de tabela `aluno`
 --
@@ -385,6 +398,14 @@ ALTER TABLE `aluno_linhas`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
+
+--
+-- AUTO_INCREMENT de tabela `escolas_user`
+--
+ALTER TABLE `escolas_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+
 
 --
 -- AUTO_INCREMENT de tabela `aluno`

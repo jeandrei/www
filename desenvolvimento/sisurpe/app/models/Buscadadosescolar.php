@@ -26,7 +26,8 @@
                     dados_anuais.turno as turno,
                     dados_anuais.ultima_atual as ultima_atual,
                     dados_anuais.opcao_atendimento as opcao_atendimento,
-                    dados_anuais.grupo_atendimento as grupo_atendimento
+                    dados_anuais.grupo_atendimento as grupo_atendimento,
+                    (SELECT nome FROM grupos WHERE grupo_id = dados_anuais.grupo_atendimento) as grupo
                 FROM 
                   aluno,dados_anuais, 
                   escola, etapa 
@@ -89,7 +90,7 @@
           $sql .= " AND dados_anuais.grupo_atendimento = " . $options['named_params'][':grupo_id'];
         } 
 
-        $sql .= " ORDER BY escola, nome_aluno ASC"; 
+        $sql .= " ORDER BY escola,etapa,grupo,nome_aluno ASC"; 
         //var_dump($sql);
 
         //SE NÃO FOR PARA IMPRIMIR FORMULÁRIO ELE CHAMA A PAGINAÇÃO

@@ -96,7 +96,7 @@ class PDF extends FPDF
                         $pdf->Cell($larguracoll[6],$left,utf8_decode($row->kit_verao),1);
                         $pdf->Cell($larguracoll[7],$left,utf8_decode($row->calcado),1);
                         $pdf->Cell($larguracoll[8],$left,utf8_decode($row->sexo),1);
-                        $pdf->Cell($larguracoll[9],$left,utf8_decode($row->grupo_atendimento),1);
+                        $pdf->Cell($larguracoll[9],$left,utf8_decode($row->grupo),1);
                         $pdf->Cell($larguracoll[10],$left,utf8_decode($row->ultima_atual),1);                    
                         
                         //linha nova

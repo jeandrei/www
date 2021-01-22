@@ -54,7 +54,7 @@ if(isset($data['error'])){
             $texto = "Atendimento remoto";
         } 
         else if($dados_anuais->opcao_atendimento <> NULL){
-            $texto = ($grupo->nome<>NULL) ? "GRUPO DO ALUNO:" . $grupo->nome : 'Aguardando definição do grupo'; 
+            $texto = ($grupo->nome<>NULL) ? "GRUPO DO ALUNO:<p>" . $grupo->nome : 'Aguardando definição do grupo'; 
         } else {
             $texto = "Informe os Dados Escolares"; 
         }

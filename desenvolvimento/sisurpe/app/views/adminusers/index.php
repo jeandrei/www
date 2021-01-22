@@ -119,6 +119,8 @@ $(document).ready(function(){
       <th scope="col">Criado em</th> 
       <th scope="col">Tipo</th>
       <th scope="col"></th> 
+      <th scope="col"></th> 
+      <th scope="col"></th> 
     </tr>
   </thead>
   <tbody>
@@ -155,9 +157,12 @@ $(document).ready(function(){
                           <input type="hidden" id="type" name="type" value="">
                       </td>
                       
-                     
+                     <td style="text-align:right;">
+                     <a href="<?php echo URLROOT; ?>/escolausers/<?php echo $row['id']?>">Escolas</a> 
+                     </td>              
+
                       <!--BOTÃO DE GRAVAR-->            
-                      <td style="text-align:right;">
+                      <td style="text-align:left;">
                           <button 
                               type="button" 
                               class="btn btn-success btn-lg fa fa-floppy-o gravar"
