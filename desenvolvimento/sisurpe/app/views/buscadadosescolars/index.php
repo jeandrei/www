@@ -98,9 +98,10 @@
                 id="escola_id" 
                 class="form-control"                                        
             >
-                    <option value="NULL">Todos</option>
-                    <?php                     
-                    $escolas = $this->anualModel->getEscolas();                                     
+                    <option value="NULL">Selecione</option>
+                    <?php                                  
+                    $escolas = $this->buscadadosescolarsModel->getEscolasUsuario($_SESSION[DB_NAME . '_user_id']);                 
+                    
                     foreach($escolas as $escola) : ?> 
                         <option value="<?php echo $escola->id; ?>"
                                     <?php if(isset($_POST['escola_id'])){
@@ -112,6 +113,7 @@
                         </option>
                     <?php endforeach; ?>  
             </select>
+        <span id="escola_id_err" class="text-danger"><?php echo  $data['escola_id_err']; ?></span>
       <!--div class="col-lg-4-->
       </div>
 

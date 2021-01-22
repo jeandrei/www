@@ -111,8 +111,9 @@
 
 
 
-    public function getEscolasUsuario($id){
-      $this->db->query("SELECT * FROM escola ORDER BY nome DESC"); 
+    public function getEscolasUsuario($id_user){
+      $this->db->query("SELECT es.nome as nome, es.id FROM escola es, escolas_user eu WHERE es.id = eu.escola_id AND eu.user_id = :id_user ORDER BY nome DESC"); 
+      $this->db->bind(':id_user', $id_user);
       $result = $this->db->resultSet(); 
       if($this->db->rowCount() > 0){
           return $result;
