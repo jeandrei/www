@@ -7,12 +7,12 @@
 
  <div class="row align-items-center mb-3">
     <div class="col-md-12">
-        <h1>Dados de Transporte Escolar</h1>
+        <h1>Escolas de acesso do usuário</h1>
 
         <!--BOTÃO VOLTAR-->
         <div class="row" style="margin-bottom: 10px;">
             <div class="col-lg-2">
-                <a href="<?php echo URLROOT; ?>/datausers/show" id="voltar" class="btn btn-default btn-block" style="background-color:#FFFAF0">
+                <a href="<?php echo URLROOT; ?>/adminusers" id="voltar" class="btn btn-default btn-block" style="background-color:#FFFAF0">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar
                 </a>
                 
@@ -20,44 +20,44 @@
         </div>    
               
            
-        <form action="<?php echo URLROOT; ?>/transportes/gravar/<?php echo $data['aluno_id'];?>" method="post" enctype="multipart/form-data">       
+        <form action="<?php echo URLROOT; ?>/escolausers/gravar/<?php echo $data['user_id'];?>" method="post" enctype="multipart/form-data">       
            
             <!-- LINHA -->
             <div class="row" style="margin-bottom:20px;"> 
                 
                 <div class="col-lg-4">
                     <label for="linha">
-                        Selecione a Linha
+                        Selecione a Escola
                     </label>
                         <select 
-                            name="linha" 
-                            id="linha" 
+                            name="escola_id" 
+                            id="escola_id" 
                             class="form-control"                                        
                         >
-                                <option value="NULL">Selecione a Linha</option>
+                                <option value="NULL">Selecione a Escola</option>
                                 <?php 
-                                $linhas =  $this->transporteModel->getLinhas();                  
-                                foreach($linhas as $linha) : ?> 
-                                    <option value="<?php echo $linha->id; ?>"
+                                $escolas =  $this->escolaUsersModel->getEscolas();                  
+                                foreach($escolas as $escola) : ?> 
+                                    <option value="<?php echo $escola->id; ?>"
                                                 <?php 
-                                                if(isset($_POST['linha'])){
-                                                echo $_POST['linha'] == $linha->id ? 'selected':'';
+                                                if(isset($_POST['escolas'])){
+                                                echo $_POST['escolas'] == $escola->id ? 'selected':'';
                                                 } else {
-                                                echo $data['linha'] == $linha->id ? 'selected':'';
+                                                echo $data['escolas'] == $escola->id ? 'selected':'';
                                                 }
                                                 ?>
                                     >
-                                        <?php echo $linha->linha;?>
+                                        <?php echo $escola->nome;?>
                                     </option>
                                 <?php endforeach; ?>  
                         </select>
-                        <span id="fila_err" class="text-danger"><?php echo $data['linha_err']; ?></span> 
+                        <span id="fila_err" class="text-danger"><?php echo $data['escola_err']; ?></span> 
                 </div>
 
                 <div class="col-lg-4" style="margin-top:30px;">
                     <div class="form-group mx-sm-3 mb-2">
                         <!-- BOTÃO GRAVAR o id gravarestado tem que ser o mesmo lá em cima no jquery -->                            
-                        <input type="submit" class="btn btn-primary mb-2" value="Adicionar Linha">   
+                        <input type="submit" class="btn btn-primary mb-2" value="Adicionar Escola">   
                     </div>                                                
                 </div>
                 
@@ -66,13 +66,14 @@
             
         </form>
                                                  
-        <?php $linhas = $this->transporteModel->getLinhasAlunoById($data['aluno_id']);
+        <?php $escolasUser = $this->escolaUsersModel->GetEscolasUserById($data['user_id']);
         
-        if(empty($linhas)){die("Sem Linhas para este aluno! Selecione a linha e clique em Adicionar Linha");}
+               
+        if(empty($escolasUser)){die("Sem Escolas para este usuário! Selecione a Escola e clique em Adicionar Escola");}
         
         ?>
 
-        <?php foreach ($linhas as $registro): ?>
+        <?php foreach ($escolasUser as $registro): ?>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-body mb-2">
@@ -80,7 +81,7 @@
                         <!--text-right para alinhar os botões no lado direito-->
                         <div class="text-right" style="margin-bottom:1rem;">
                             <a 
-                                href="<?php echo URLROOT; ?>/transportes/delete/<?php echo $registro->id;?>" 
+                                href="<?php echo URLROOT; ?>/escolausers/delete/<?php echo $registro->id;?>" 
                                 class="fa fa-remove btn btn-danger btn-lg"
                                 onclick="if(question('Tem certeza que deseja remover o registro?') == true)
                                         {
@@ -95,12 +96,7 @@
                             </a> 
                         </div>                       
                         
-                        <h4 class="card-title"><?php echo "Linha: " . $registro->linha; ?></h4>
-                        
-                        <div class="bg-light p-2 mb-3">
-                        <b>ROTA: <?php echo (!empty($registro->rota)) ? $registro->rota : 'Linha sem informações de rota'; ?></b>
-                        </div> 
-                        
+                        <h4 class="card-title"><?php echo "Escola: " . $registro->nome; ?></h4>   
                     </div>
                 </div>
             </div>

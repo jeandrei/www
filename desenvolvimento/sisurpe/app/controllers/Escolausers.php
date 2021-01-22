@@ -6,16 +6,21 @@
       if(!isLoggedIn()){
         redirect('users/login');
       }       
-      $this->transporteModel = $this->model('Escolauser');    
+      $this->escolaUsersModel = $this->model('Escolauser');    
     }
 
       
-    public function index($id){     
+    public function index($id){
+    $escolaUsers = $this->escolaUsersModel->GetEscolasUserById($id);     
+
     $data = [
-      'id' => $id
+      'user_id' => $id,
+      'escola_id' => $escolaUsers->$escola_id,
+      'escola_nome' => $escolaUsers->$nome
     ];
     
-    die("O id é: " . $id);
+    
+    
     
     $this->view('escolasusers/index', $data);
     } 
@@ -29,27 +34,27 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);      
       
         $data = [              
-          'aluno_id' => $id,
-          'linha' => $_POST['linha']
+          'user_id' => $id,
+          'escola_id' => $_POST['escola_id']
         ];
 
-        if(($data['linha'])=="NULL"){
-          $data['linha_err'] = 'Por favor informe a linha';
+        if(($data['escola_id'])=="NULL"){
+          $data['escola_id_err'] = 'Por favor informe a Escola';
         } 
 
-        if($this->transporteModel->checkAlunoLinha($data['aluno_id'], $data['linha'])){
-          $data['linha_err'] = 'Linha já adicionada';
+        if($this->escolaUsersModel->checkUserEscola($data['user_id'], $data['escola_id'])){
+          $data['escola_err'] = 'Escola já adicionada';
         }
 
         // Make sure errors are empty
         if(                    
-        empty($data['linha_err']) 
+        empty($data['escola_err']) 
         ){
 
             try {
-              if($this->transporteModel->register($data)){                         
+              if($this->escolaUsersModel->register($data)){                         
                 flash('mensagem', 'Dados registrados com sucesso');                     
-                redirect('transportes/index/'.$id);
+                redirect('escolausers/'.$id);
               }                 
             } catch (Exception $e) {
               die('Ops! Algo deu errado.');  
@@ -57,32 +62,28 @@
         
         } else {
           // Load the view with errors
-          $this->view('transportes/index', $data);
+          $this->view('escolasusers/index', $data);
         } 
       } else {
-        $this->view('transportes/index', $data);
+        $this->view('escolasusers/index', $data);
       }      
   }
 
 
 
     public function delete($id){
+      
         
-      //pego o id do usuário que registrou esse aluno
-      $dados = $this->transporteModel->getDadosAlunoLinha($id);   
-      // se for o mesmo id do usuário logado eu permito a exclusão caso contrário bloqueio
-      //echo $dados->$aluno_id;
-      if($dados->user_id != $_SESSION[DB_NAME . '_user_id']){            
-        die("Você não tem permissão para excluir este aluno");
-      }
-
+      //pego o id do usuário 
+      $user_id = $this->escolaUsersModel->getUserIdEscolasUser($id); 
+      die(var_dump($id));
       try {
-        if($this->transporteModel->deleteAlunoLinhas($id)){                       
+        if($this->escolaUsersModel->deleteEscolasUser($id)){                       
           flash('mensagem', 'Registro removido com sucesso!');                
-          redirect("transportes/index/". $dados->aluno_id);
+          redirect('escolausers/'.$user_id->id);
         } else {
           flash('mensagem', 'Falha ao tentar remover o registro', 'alert alert-danger');
-          redirect("transportes/index/". $dados->aluno_id);
+          redirect('escolausers/'.$user_id->id);
         }                
       } catch (Exception $e) {
         die('Ops! Algo deu errado.');  
