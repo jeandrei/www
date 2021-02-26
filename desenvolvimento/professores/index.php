@@ -19,6 +19,13 @@
             });
         });
 
+        //CARREGA DADOS DE LINK E DISCIPLINA
+        $(document).ready(function(){
+            $('#professor_id').change(function(){                
+                $('#result').load('result.php?escola_id='+$('#escola_id').val()+'&turma_id='+$('#turma_id').val()+'&professor_id='+$('#professor_id').val());
+            });
+        });
+
     </script>
 
 
@@ -87,3 +94,5 @@ try
         <select name="professor_id" id="professor_id">
             <option value="0">Escolha uma turma</option>
         </select>
+
+        <div id="result" name="result"></div>
