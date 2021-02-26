@@ -3,10 +3,19 @@
 <script src="js/jquery-3.1.1.js"></script>
 
 <script type="text/javascript">
+
+        //CARREGA AS TURMAS
         $(document).ready(function(){
             $('#escola_id').change(function(){                
-                $('#id_turma').load('turmas.php?escola_id='+$('#escola_id').val() );
+                $('#turma_id').load('turmas.php?escola_id='+$('#escola_id').val() );
 
+            });
+        });
+
+        //CARREGA OS PROFESSORES
+        $(document).ready(function(){
+            $('#turma_id').change(function(){                
+                $('#professor_id').load('professores.php?turma_id='+$('#turma_id').val() );
             });
         });
 
@@ -69,6 +78,12 @@ try
         </div>
 
 
-        <select name="id_turma" id="id_turma">
-    <option value="0">Escolha uma escola</option>
-</select>
+        <!--SELECT DA TURMA-->                           
+        <select name="turma_id" id="turma_id">
+            <option value="0">Escolha uma escola</option>
+        </select>
+
+        <!--SELECT DA TURMA-->                           
+        <select name="professor_id" id="professor_id">
+            <option value="0">Escolha uma turma</option>
+        </select>

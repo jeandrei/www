@@ -26,7 +26,8 @@ include_once 'db.inc.php';
     die("<option>Sem turmas para esta escola</option>");
   }
 
-  foreach($turmas as $turma){
+  echo ("<option>Escolha uma turma</option>");
+  foreach($turmas as $turma){    
     echo "<option value='".$turma['id']."'>".$turma['turma']."</option>";
 
 }
