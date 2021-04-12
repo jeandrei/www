@@ -19,7 +19,7 @@
     
     
         // Grava o histórico       
-        public function gravaHistorico($id,$status,$historico,$usuario="jean"){
+        public function gravaHistorico($id,$status,$historico,$usuario){
             $this->changeStatus($id,$status);
             $this->db->query('INSERT INTO historico_id_fila(fila_id, historico, usuario, status) VALUES (:fila_id, :historico, :usuario, :status)');
             $this->db->bind(':fila_id',$id); 

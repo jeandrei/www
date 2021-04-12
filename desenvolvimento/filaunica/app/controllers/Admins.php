@@ -115,7 +115,7 @@
               // DEPOIS TEM QUE TIRAR ESSE 1 AÍ DA FRENTE E COLOCAR A VARIÁVEL POST COM O ID DO MUNICIPIO
               // IMPORTANTE lá na função changeStatus se executar tem que retornar true para funcionar aqui
               
-              if($this->adminModel->gravaHistorico($_POST['id'],$_POST['status'],$_POST['txthist'])){
+              if($this->adminModel->gravaHistorico($_POST['id'],$_POST['status'],$_POST['txthist'], $_SESSION[DB_NAME . '_user_name'])){
                   
                   /* aqui passo a classe da mensagem e a mensagem de sucesso */
                   $json_ret = array('classe'=>'alert alert-success', 'mensagem'=>'Dados gravados com sucesso');                     
