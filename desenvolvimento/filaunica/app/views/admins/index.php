@@ -258,117 +258,19 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 
 ?>
 <br>
-<!-- MONTAR A TABELA -->
-<table class="container-fluid table table-sm" style="font-size: 12px;">
-  <thead>
-    <tr>
-      <th scope="col">Posição</th> 
-      <th scope="col">Nome da Criança</th>
-      <th scope="col">Nascimento</th>
-      <th scope="col">Etapa</th>     
-      <th scope="col">Protocolo</th>  
-      <th scope="col">Registro</th>   
-      <th scope="col">Contato</th> 
-      <th scope="col">Status</th> 
-      <th scope="col">Hisóticos</th>
-      <th scope="col"></th> 
-      <th scope="col"></th> 
-    </tr>
-  </thead>
-  <tbody>                                           
-    <?php foreach($result as $registro) : ?> 
-    <tr class="<?php 
-                if($registro['status'] == "Aguardando")
-                echo "table-primary";
-                if($registro['status'] == "Cancelado")
-                echo "table-danger";
-                if($registro['status'] == "Matriculado")
-                echo "table-success";                        
-                ?>"
-        id="linha_<?php echo $registro['id'];?>"               
-    >  
-        <td><?php echo $registro['posicao']; ?></td> 
-        <td><?php echo $registro['nomecrianca']; ?></td> 
-        <td><?php echo $registro['nascimento']; ?></td>  
-        <td><?php echo $registro['etapa']; ?></td>
-        <td><?php echo $registro['protocolo']; ?></td>  
-        <td><?php echo $registro['registro']; ?></td>   
-        <td><button type = "button" class="btn btn-secondary btn-lg fa fa-eye ver" value = "Contato" onclick = "ShowContact(
-                                                                                                                '<?php echo $registro['responsavel']; ?>',
-                                                                                                                '<?php echo $registro['telefone']; ?>',
-                                                                                                                '<?php echo $registro['celular']; ?>'
-                                                                                                            );"
-            />
-        </td>          
-        <td>
-            <select class="form-control form-control-sm"
-                    name="statuslista" 
-                    id="<?php echo  $registro['id'];?>" 
-                    class="form-control" 
-                    onChange="
-                            document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>;
-                            document.getElementById('status_reg_fila').value = this.value;
-                            ">                   
-                    <?php 
-                    $status = array('Aguardando','Matriculado','Cancelado');                    
-                    foreach($status as $row => $value) : ?> 
-                        <option value="<?php echo $value; ?>" 
-                                    <?php echo $value == $registro['status'] ? 'selected':'';?>
-                        >
-                            <?php echo $value;?>
-                        </option>
-                    <?php endforeach; ?>  
-            </select>
-
-
-            <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
-            <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['id']; ?>">
-            <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
-            <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
-            <input type="hidden" id="txthist" name="txthist" value="">  
-
-        </td>
-    
-        <td style="width:250px;">
-            <input 
-                class="form-control form-control-sm" 
-                type="text" 
-                id="historico_<?php echo  $registro['id'];?>" 
-                name="historico_<?php echo  $registro['id'];?>">                               
-        </td>
-
+<!-- AQUI VOU MONTAR OS CARDS -->
+    <?php foreach ($result as $registro): ?>
+        <div class="card card-body mb-3">
         
-        <!--BOTÃO DE GRAVAR-->            
-        <td style="text-align:right;">
-            <button 
-                type="button" 
-                class="btn btn-success btn-lg fa fa-floppy-o gravar"
-                onClick="
-                        document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>,   
-                        document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['id'];?>').value,
-                        document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['id'];?>').value;
-                        "
-            >                    
-            
-            </button>
-        </td>
+        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']); ?></h4>
         
-        <!--BOTÃO VER HISTÓRICO-->                
-        <td style="text-align:left;">
-            <a
-                class="btn btn-secondary btn-lg fa fa-eye ver"  
-                href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>">
-            </a>
-        </td>
+        <div class="bg-light p-2 mb-3">
+        Nascimento: <b><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></b>
+        </div>
 
-
-
-    </tr>
-    <?php endforeach; ?>    
-  </tbody>
-</table>
-
-
+        </div>
+    <?php endforeach; ?>
+<!-- FIM DOS CARDS -->
 
 <?php
     // no index a parte da paginação é só essa    
