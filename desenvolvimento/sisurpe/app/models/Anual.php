@@ -84,16 +84,6 @@
         }           
     }
 
-    public function getGrupos(){
-        $this->db->query("SELECT * FROM grupos ORDER BY nome DESC"); 
-        $result = $this->db->resultSet(); 
-        if($this->db->rowCount() > 0){
-            return $result;
-        } else {
-            return false;
-        }           
-    }
-
 
     public function getAlunoById($id){
         $this->db->query("SELECT * FROM aluno WHERE aluno_id = :aluno_id"); 
@@ -121,10 +111,8 @@
                                             etapa_id = :etapa_id,                                                                                       
                                             kit_inverno = :kit_inverno, 
                                             kit_verao = :kit_verao,                                            
-                                            tam_calcado = :tam_calcado,                                                                                      
-                                            turno = :turno,
-                                            opcao_atendimento = :opcao_atendimento, 
-                                            aceite_termo = :aceite_termo                 
+                                            tam_calcado = :tam_calcado, 
+                                            turno = :turno                   
                                         '
                         );
                   
@@ -135,10 +123,8 @@
         $this->db->bind(':kit_inverno',$data['kit_inverno']);
         $this->db->bind(':kit_verao',$data['kit_verao']);       
         $this->db->bind(':tam_calcado',$data['tam_calcado']);       
-        $this->db->bind(':turno',$data['turno']);  
-        $this->db->bind(':opcao_atendimento',$data['opcao_atendimento']);       
-        $this->db->bind(':aceite_termo',$data['aceite_termo']);      
-        
+        $this->db->bind(':turno',$data['turno']);       
+
 
         // Execute
         if($this->db->execute()){
@@ -158,10 +144,8 @@
                                             etapa_id = :etapa_id,                                                                                       
                                             kit_inverno = :kit_inverno, 
                                             kit_verao = :kit_verao,                                          
-                                            tam_calcado = :tam_calcado,                                             
-                                            turno = :turno,
-                                            opcao_atendimento = :opcao_atendimento,
-                                            aceite_termo = :aceite_termo                                              
+                                            tam_calcado = :tam_calcado, 
+                                            turno = :turno  
                                             WHERE aluno_id = :aluno_id');
                   
         // Bind values
@@ -171,10 +155,8 @@
         $this->db->bind(':kit_inverno',$data['kit_inverno']);
         $this->db->bind(':kit_verao',$data['kit_verao']);       
         $this->db->bind(':tam_calcado',$data['tam_calcado']);       
-        $this->db->bind(':turno',$data['turno']);  
-        $this->db->bind(':opcao_atendimento',$data['opcao_atendimento']);      
-        $this->db->bind(':aceite_termo',$data['aceite_termo']); 
-               
+        $this->db->bind(':turno',$data['turno']);       
+              
 
 
         // Execute
@@ -207,48 +189,7 @@
      }
 
 
-     public function getCorGrupo($grupo_id){
-        $this->db->query('SELECT cor, nome FROM grupos WHERE grupo_id = :grupo_id');
-        // Bind value
-        $this->db->bind(':grupo_id', $grupo_id);
-  
-        $data = $this->db->single();
-  
-        // Check row
-        if($this->db->rowCount() > 0){
-            return $data;
-        } else {
-            return false;
-        }
-      }
 
-
-      public function getGrupoById($aluno_id){
-        $this->db->query('SELECT grupo_atendimento FROM dados_anuais WHERE aluno_id = :aluno_id');
-        // Bind value
-        $this->db->bind(':aluno_id', $aluno_id);
-  
-        $data = $this->db->single();
-  
-        // Check row
-        if($this->db->rowCount() > 0){
-            return $data;
-        } else {
-            return false;
-        }
-      }
-
-      
-
-
-
-     //Aqui já executo a sql com o id e status passado pelo método updateStatus
-     public function changeGrupo($id_reg,$id_grupo){
-        $this->db->query('UPDATE dados_anuais SET grupo_atendimento = :id_grupo WHERE id_da=:id_da');
-        $this->db->bind(':id_da',$id_reg); 
-        $this->db->bind(':id_grupo',$id_grupo); 
-        $this->db->execute();
-    }
 
 
 

@@ -67,7 +67,6 @@
             'aluno_id' => $dado->aluno_id,
             'nome_aluno' => $dado->nome_aluno,
             'nascimento' => $dado->nascimento,
-            'grupo_atendimento' => $this->dadosModel->getCorGrupo($dado->aluno_id)->cor,            
             'ultima_atualizacao' => $this->dadosModel->getUltimaAtualizacaoById($dado->aluno_id)
           ];
         }

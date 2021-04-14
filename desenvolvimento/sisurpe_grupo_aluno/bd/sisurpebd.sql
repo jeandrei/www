@@ -157,6 +157,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `created_at`) VA
 (1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin', '2018-11-23 10:19:18');
 
 
+CREATE TABLE `escolas_user` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `escola_id` int(11) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Estrutura para tabela `aluno`
 --
@@ -227,14 +234,43 @@ CREATE TABLE `dados_anuais` (
   `id_da` int(11) NOT NULL,
   `aluno_id` int(11) NOT NULL,
   `escola_id` int(11) NOT NULL, 
-  `etapa_id` int(11) NOT NULL, 
+  `etapa_id` int(11) NOT NULL,   
   `ano` char(4), 
   `kit_inverno` varchar(50) DEFAULT NULL,
   `kit_verao` varchar(50) DEFAULT NULL,  
   `tam_calcado` varchar(50) DEFAULT NULL,  
   `turno` char(1) DEFAULT NULL,
+  `opcao_atendimento` varchar(50) DEFAULT NULL,
+  `grupo_atendimento` int(11),
+  `aceite_termo` boolean DEFAULT false,
   `ultima_atual` DATETIME ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `grupos`
+--
+
+CREATE TABLE `grupos` (
+  `grupo_id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cor` varchar(50) DEFAULT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(1, 'Azul', '#0066ff');
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(2, 'Amarelo', '#ffff00');
+INSERT INTO sisurpe.grupos
+(grupo_id, nome, cor)
+VALUES(3, 'Vermelho', '#ff3300');
+
 
 -- --------------------------------------------------------
 
@@ -292,6 +328,12 @@ ALTER TABLE `aluno_linhas`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+  --
+-- Índices de tabela `escolas_user`
+--
+ALTER TABLE `escolas_user`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Índices de tabela `aluno`
 --
@@ -306,6 +348,13 @@ ALTER TABLE `aluno`
 ALTER TABLE `dados_anuais`
   ADD PRIMARY KEY (`id_da`),
   ADD KEY `aluno_id` (`aluno_id`);
+
+  --
+-- Índices de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  ADD PRIMARY KEY (`grupo_id`);
+  
   
 
 --
@@ -351,6 +400,14 @@ ALTER TABLE `users`
 COMMIT;
 
 --
+-- AUTO_INCREMENT de tabela `escolas_user`
+--
+ALTER TABLE `escolas_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+
+
+--
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
@@ -362,6 +419,12 @@ ALTER TABLE `aluno`
 --
 ALTER TABLE `dados_anuais`
   MODIFY `id_da` int(11) NOT NULL AUTO_INCREMENT;
+
+  --
+-- AUTO_INCREMENT de tabela `grupos`
+--
+ALTER TABLE `grupos`
+  MODIFY `grupo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `bairros`

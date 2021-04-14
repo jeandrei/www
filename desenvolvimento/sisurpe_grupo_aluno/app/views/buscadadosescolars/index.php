@@ -1,5 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+
+
 <?php flash('mensagem');?>
+
 <script>
   function limpar(){
         document.getElementById('ano').value = "";
@@ -13,8 +16,7 @@
         
         document.getElementById('ano').focus(); 
     }    
-    
-    document.getElementById('ano').focus(); 
+       
 
     //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
     function newtab(){
@@ -24,7 +26,36 @@
     function notab(){
       document.getElementById('filtrar').setAttribute('target', '');
     }
+
+
+     //espera a página carregar completamente
+     $(document).ready(function(){  
+           //seleciona o objeto select da página    
+            $(document).on('change','select', function(){ 
+                //atribui os valores do id e do status as variáveis
+                var id_grupo=$("#id_grupo").val();
+                var idRegistro=$("#aluno_id_linha").val();                 
+                    //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
+                    $.get("<?php echo URLROOT; ?>/anuals/updateGrupo?id_reg=" + idRegistro + "&id_grupo=" + id_grupo, function(data){                                          
+                });
+            });
+        });
+
+
+
+
+
+
+
 </script>
+
+
+<!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para aluno_id PARA DEPOIS CHAMAR NO AJAX-->
+<input type="hidden" id="id_grupo" name="id_grupo" value="">
+<input type="hidden" id="aluno_id_linha" name="aluno_id_linha" value="">
+ 
+
+
 
 <h1><?php echo $data['title']; ?></h1>
 <p><?php echo $data['description']; ?></p>
@@ -35,7 +66,11 @@
 ?>
 
 <form id="filtrar" action="<?php echo URLROOT; ?>/buscadadosescolars/index" method="post" enctype="multipart/form-data">
+  
+  <!--NOVA LINHA-->
   <div class="row"> 
+      
+      
       <!-- COLUNA 1 ANO-->
       <div class="col-lg-2">
               <label for="ano">
@@ -49,14 +84,10 @@
                   class="form-control"
                   value="<?php if(isset($_POST['ano'])){htmlout($_POST['ano']);} ?>"               
                   >
-        <!--<div class="col-lg-4">-->
-        </div>
-  <!--<div class="row"> -->  
-  </div>
+      <!--<div class="col-lg-4">-->
+      </div>
 
-<hr>
 
-  <div class="row"> 
       <!-- COLUNA ESCOLA -->
       <div class="col-lg-4">
             <label for="escola_id">
@@ -67,9 +98,10 @@
                 id="escola_id" 
                 class="form-control"                                        
             >
-                    <option value="NULL">Todos</option>
-                    <?php                     
-                    $escolas = $this->anualModel->getEscolas();                                     
+                    <option value="NULL">Selecione</option>
+                    <?php                                  
+                    $escolas = $this->buscadadosescolarsModel->getEscolasUsuario($_SESSION[DB_NAME . '_user_id']);                 
+                    
                     foreach($escolas as $escola) : ?> 
                         <option value="<?php echo $escola->id; ?>"
                                     <?php if(isset($_POST['escola_id'])){
@@ -81,11 +113,14 @@
                         </option>
                     <?php endforeach; ?>  
             </select>
+        <span id="escola_id_err" class="text-danger"><?php echo  $data['escola_id_err']; ?></span>
       <!--div class="col-lg-4-->
       </div>
 
-        <!-- COLUNA ETAPA -->
-      <div class="col-lg-4">
+
+
+      <!-- COLUNA ETAPA -->
+      <div class="col-lg-3">
             <label for="etapa_id">
                 Etapa
             </label>  
@@ -111,22 +146,82 @@
       <!--div class="col-lg-3-->
       </div>
 
+
+
+
       <!-- TURNO -->                              
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-2">
         <label for="turno">Turno</label>
         <select
           class="form-control"      
           name="turno"
           id="turno">
-            <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Selecione</option>
+            <option value="NULL" <?php echo (($_POST['turno'])=="NULL") ? 'selected' : ''; ?> >Todos</option>
             <option value="M" <?php echo (($_POST['turno'])=="M") ? 'selected' : ''; ?> >Matutino</option>
             <option value="V" <?php echo (($_POST['turno'])=="V") ? 'selected' : ''; ?> >Vespertino</option>
             <option value="N" <?php echo (($_POST['turno'])=="N") ? 'selected' : ''; ?> >Noturno</option>
         </select>         
       </div>  
   
+  
+  
+  <!--<div class="row"> FINAL LINHA -->  
+  </div>
+
+<hr>
+
+  <!--NOVA LINHA-->
+  <div class="row">          
+
+      <!-- TIPO DE ATENDIMENTO -->                              
+      <div class="form-group col-md-3">
+        <label for="turno">Tipo de atendimento optado</label>
+        <select
+          class="form-control"      
+          name="opcao_atendimento"
+          id="opcao_atendimento">
+            <option value="NULL" <?php echo (($_POST['opcao_atendimento'])=="NULL") ? 'selected' : ''; ?> >Todos</option>
+            <option value="presencial" <?php echo (($_POST['opcao_atendimento'])=="presencial") ? 'selected' : ''; ?> >Presencial</option>
+            <option value="remoto" <?php echo (($_POST['opcao_atendimento'])=="remoto") ? 'selected' : ''; ?> >Remoto</option>            
+        </select>         
+      </div>  
+
+
+       <!-- GRUPO -->
+       <div class="col-lg-4">
+            <label for="grupo_id">
+                Grupo
+            </label>  
+            <select 
+                name="grupo_id" 
+                id="grupo_id" 
+                class="form-control"                                        
+            >
+                    <option value="NULL">Todos</option>
+                    <?php                     
+                    $grupos = $this->anualModel->getGrupos();                                     
+                    foreach($grupos as $grupo) : ?> 
+                        <option value="<?php echo $grupo->grupo_id; ?>"
+                                    <?php if(isset($_POST['grupo_id'])){
+                                    echo $_POST['grupo_id'] == $grupo->grupo_id ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $grupo->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+      <!--div class="col-lg-4-->
+      </div>
+
+
+  
   <!--<div class="row"> -->  
   </div>
+
+
+
+
 
   <hr>
 
@@ -186,11 +281,12 @@
         </select>         
       </div>   
      
-  <!--div class="row"-->
+  <!--div class="row" FINAL LINHA-->
   </div> 
 
 <hr>
 
+  <!--NOVA LINHA-->                                    
   <div class="row">       
       <!-- LINHA PARA O BOTÃO ATUALIZAR -->    
       <div class="col" style="padding-left:0; margin-top:15px;">
@@ -200,14 +296,14 @@
               <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
           </div>                                                
       </div>
-  <!--div class="row"-->
+  <!--div class="row" FINAL LINHA-->
   </div>
 
 </form>
 
 <br>
 <!-- MONTAR A TABELA -->
-<table class="table table-striped">
+<table style="font-size:13px" class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Nome</th>      
@@ -217,13 +313,16 @@
       <th scope="col">Turno</th>       
       <th scope="col">Kit de Inverno</th> 
       <th scope="col">Kit de Verão</th>      
-      <th scope="col">Calçado</th>      
+      <th scope="col">Calçado</th> 
+      <th scope="col">Atendimento</th>     
+      <th scope="col">Grupo</th>  
       <th scope="col"></th> 
     </tr>
   </thead>
   <tbody>
-    <?php foreach($result as $row) : ?> 
-    <tr>  
+    <?php foreach($result as $row) : ?>
+    <?php $cor = $this->anualModel->getCorGrupo($row['grupo_atendimento']);?> 
+    <tr <?php echo("style='background-color:$cor->cor;'");?>>    
       <td><?php echo $row['nome_aluno']; ?></td>
       <td><?php echo date('d-m-Y', strtotime($row['nascimento'])); ?></td>
       <td><?php echo $row['sexo']; ?></td> 
@@ -231,8 +330,38 @@
       <td><?php echo $row['turno']; ?></td>
       <td><?php echo $row['kit_inverno']; ?></td>
       <td><?php echo $row['kit_verao']; ?></td>    
-      <td><?php echo $row['calcado']; ?></td>
-      <td><?php echo $row['meia']; ?></td>
+      <td><?php echo $row['calcado']; ?></td>      
+      <td><?php echo $row['opcao_atendimento']; ?></td>
+
+      
+      <td>
+      <select style="font-size:11px" class="form-control form-control-sm"
+                    name="grupos" 
+                    id="grupos"
+                    class="form-control" 
+                    onChange="
+                            document.getElementById('id_grupo').value = this.value;
+                            document.getElementById('aluno_id_linha').value = <?php echo $row['id']; ?>;                                                     
+                            "
+                    > 
+                                    
+                  
+                    <option value="NULL" <?php echo (($_POST['grupos'])=="NULL") ? 'selected' : ''; ?>>Selecione</option>
+                    <?php
+                    $grupos = $this->anualModel->getGrupos(); 
+                    foreach($grupos as $grupo) : ?> 
+                        <option value="<?php echo $grupo->grupo_id;?>" 
+                                    <?php echo $grupo->grupo_id == $row['grupo_atendimento'] ? 'selected':'';?>
+                        >
+                            <?php echo $grupo->nome;?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+      </td>
+
+
+
+
       <td> </td>
     </tr>
     <?php endforeach; ?>    

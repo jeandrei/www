@@ -13,7 +13,6 @@
     
         //$paginate = new pagination($page, "SELECT * FROM aluno WHERE nome_aluno LIKE " . "'%" . $options['named_params'][':nome'] . "%'", $options);       
         $sql = ("SELECT 
-                    aluno.aluno_id as id,
                     aluno.nome_aluno as nome_aluno, 
                     aluno.nascimento as nascimento,
                     escola.nome as escola,
@@ -24,10 +23,7 @@
                     dados_anuais.tam_calcado as calcado,                     
                     etapa.descricao as etapa, 
                     dados_anuais.turno as turno,
-                    dados_anuais.ultima_atual as ultima_atual,
-                    dados_anuais.opcao_atendimento as opcao_atendimento,
-                    dados_anuais.grupo_atendimento as grupo_atendimento,
-                    (SELECT nome FROM grupos WHERE grupo_id = dados_anuais.grupo_atendimento) as grupo
+                    dados_anuais.ultima_atual as ultima_atual
                 FROM 
                   aluno,dados_anuais, 
                   escola, etapa 
@@ -79,18 +75,9 @@
 
         if((($options['named_params'][':tam_calcado']) != "NULL") && (($options['named_params'][':tam_calcado']) != "")  ){                  
           $sql .= " AND dados_anuais.tam_calcado = " . $options['named_params'][':tam_calcado'];
-        } 
-        
-        if((($options['named_params'][':opcao_atendimento']) != "NULL") && (($options['named_params'][':opcao_atendimento']) != "")  ){                  
-          $sql .= " AND dados_anuais.opcao_atendimento = " . "'" . $options['named_params'][':opcao_atendimento'] . "'";         
-        }  
+        }        
 
-
-        if((($options['named_params'][':grupo_id']) != "NULL") && (($options['named_params'][':grupo_id']) != "")  ){                  
-          $sql .= " AND dados_anuais.grupo_atendimento = " . $options['named_params'][':grupo_id'];
-        } 
-
-        $sql .= " ORDER BY escola,etapa,grupo,nome_aluno ASC"; 
+        $sql .= " ORDER BY escola, nome_aluno ASC"; 
         //var_dump($sql);
 
         //SE NÃO FOR PARA IMPRIMIR FORMULÁRIO ELE CHAMA A PAGINAÇÃO
@@ -108,20 +95,6 @@
             }
         }
     }  
-
-
-
-    public function getEscolasUsuario($id_user){
-      $this->db->query("SELECT es.nome as nome, es.id FROM escola es, escolas_user eu WHERE es.id = eu.escola_id AND eu.user_id = :id_user ORDER BY nome DESC"); 
-      $this->db->bind(':id_user', $id_user);
-      $result = $this->db->resultSet(); 
-      if($this->db->rowCount() > 0){
-          return $result;
-      } else {
-          return false;
-      }           
-  }
-    
     
     
     

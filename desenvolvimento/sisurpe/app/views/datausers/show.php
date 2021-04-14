@@ -39,33 +39,9 @@ if(isset($data['error'])){
 } 
 
 ?>  
-         
+               
 <?php foreach ($data as $registro): ?>
     <div class="card card-body mb-3">
-        
-        <?php $cod_grupo_aluno = $this->dadosModel->getGrupoById($registro['aluno_id']);
-        $grupo_aluno = $cod_grupo_aluno->grupo_atendimento;
-        $grupo = $this->dadosModel->getCorGrupo($grupo_aluno);
-        $cor = $grupo->cor;
-        
-        $dados_anuais = $this->dadosModel->getDadosAnuaisByid($registro['aluno_id']);
-                
-        if($dados_anuais->opcao_atendimento == 'remoto'){
-            $texto = "Atendimento remoto";
-        } 
-        else if($dados_anuais->opcao_atendimento <> NULL){
-            $texto = ($grupo->nome<>NULL) ? "GRUPO DO ALUNO:<p>" . $grupo->nome : 'Aguardando definição do grupo'; 
-        } else {
-            $texto = "Informe os Dados Escolares"; 
-        }
-               
-        ?>
-
-        
-        
-        <?php echo("<div style='background-color:$cor; text-align:center; text-transform: uppercase; font-size:2.0em' class='card-header'><strong>$texto</strong></div>");?>       
-       
-       <hr>
         
         <!--text-right para alinhar os botões no lado direito-->
         <div class="text-right" style="margin-bottom:2rem;">
@@ -92,7 +68,7 @@ if(isset($data['error'])){
             </div>
         </div> 
         
-        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']);?></h4>
+        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']); ?></h4>
         
         <div class="bg-light p-2 mb-3">
         Nascimento: <b><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></b>
