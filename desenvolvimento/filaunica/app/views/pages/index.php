@@ -45,17 +45,20 @@
             <div class="row justify-content-center align-items-center">
               <div class="col-lg-12">
                   <div class="alert alert-success text-center" role="alert">
-                      Critérios para a inscrição do Fila Única <a href="edital_fila_unica_2019.pdf" target="_blank" class="alert-link"><i class="fa fa-external-link" aria-hidden="true"></i> Abrir edital .</a>
+                      Lei da Fila Única <a href="<?php echo URLROOT; ?>/downloads/Lei da Fila Única.pdf" target="_blank" class="alert-link"><i class="fa fa-external-link" aria-hidden="true"></i> Abrir a Lei.</a>
                   </div>
               </div>
             </div>
 
-
+           
+            
             <!-- FILA ÚNICA DESCRIÇÃO-->
-            <div class="jumbotron jumbotron-fluid text-center">
-                <div class="container">
-                    <h1 class="display-3"><?php echo SITENAME;?></h1>
-                    <p class="lead"><?php echo DESCRIPTION; ?></p>
+            <div class="jumbotron jumbotron-fluid text-center" style="background-image: url(<?php echo URLROOT; ?>/img/mothers-3389671_640.jpg); background-size: 40% 100%; background-repeat: no-repeat, repeat; background-position: center; background-size: cover;">
+                <div class="container"> 
+                    
+                <h1 class="display-3"><?php echo SITENAME;?></h1>
+                <p class="lead">Penha/SC</p>
+                   
                 </div>
             </div>
 
