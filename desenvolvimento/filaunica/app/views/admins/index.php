@@ -282,7 +282,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 </div>                  
             </div>
             <div class="card-body">
-                <h5 class="card-title"><?php echo $registro['nomecrianca']; ?></h5>   
+                <h5 class="card-title"><?php echo $registro['nomecrianca']; ?> | Idade: <?php echo CalculaIdade($registro['nascimento']);?>  </h5>   
                 <!--1ª Linha do card-->
                 <div class="row">
                     <div class="col-sm-2">

@@ -175,4 +175,11 @@ function iniciais($str){
 }
 
 
+function CalculaIdade($data){
+  
+}
+
+
+
+
 ?>

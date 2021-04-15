@@ -22,7 +22,7 @@
         <!-- Primeira coluna da primeira linha -->
         <div class="col text-center">
         <h4> Anote o número do seu protocolo:</h4><h1><?php echo $data['protocolo']; ?></h1>
-          <p style="font-style:italic;">Quando da disponibilidade de uma vaga para a sua solicitação e respeitando a ordem de inscrição, a secretaria de educação entrará em contato
+          <p style="font-style:italic;">Quando da disponibilidade de uma vaga para a sua solicitação e respeitando a ordem de inscrição, a Secretaria de Educação entrará em contato
             para o processo de matrícula do aluno.
             Dúvidas podem ser sanadas nos telefones:<br>
             <br>(47) 3345-4025

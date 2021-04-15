@@ -40,7 +40,7 @@ INSERT INTO `bairro` (`id`, `nome`) VALUES
 (5, 'Armação'),
 (6, 'Gravata'),
 (7, 'Santa Lídia'),
-(8, 'Praia Alegra'),
+(8, 'Praia Alegre'),
 (9, 'Centro'),
 (10, 'São Nicolau'),
 (11, 'NSra de Fátima'),
@@ -74,6 +74,7 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 (10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
 (11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
 (12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85);
+(13, 'CEI JULIO CORREA DE MELLO', 10, 'Rua Sebastião Schmitz', 0);
 
 -- --------------------------------------------------------
 
