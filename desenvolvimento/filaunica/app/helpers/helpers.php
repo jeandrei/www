@@ -175,11 +175,12 @@ function iniciais($str){
 }
 
 
-function CalculaIdade($data){
+// FUNÇÃO QUE RETORNA IDADE EM ANO MES E DIA
+function CalculaIdade($data){     
+    $dataf = date('Y-m-d', strtotime(str_replace('/', '-', $data)));    
+    $interval = date_diff(date_create(), date_create($dataf));
+    echo $interval->format("%Y Ano(s), %M Mês(es), %d Dia(s)");    
   
 }
-
-
-
 
 ?>
