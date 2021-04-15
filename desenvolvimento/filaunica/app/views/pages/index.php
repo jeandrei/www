@@ -56,9 +56,10 @@
             <div class="jumbotron jumbotron-fluid text-center" style="background-image: url(<?php echo URLROOT; ?>/img/mothers-3389671_640.jpg); background-size: 40% 100%; background-repeat: no-repeat, repeat; background-position: center; background-size: cover;">
                 <div class="container"> 
                     
+               
                 <h1 class="display-3"><?php echo SITENAME;?></h1>
                 <p class="lead">Penha/SC</p>
-                   
+               
                 </div>
             </div>
 
