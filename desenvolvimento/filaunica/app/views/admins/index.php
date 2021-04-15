@@ -50,25 +50,7 @@
                         /* aqui a mensagem que vem la do php responseObj.mensagem */                       
                         .html(responseObj.mensagem) 
                         .fadeIn(2000).fadeOut(2000);
-
-                        //aqui eu altero a classe da linha da tabela
-                        // o id da linha é formado por linha_ e o id
-                        // então na linha 5 o nome é linha_5
-                        // lá no tr da tabela id="linha_                       
-                        if(status == "Aguardando"){
-                            //$("#linha_" + idRegistro).addClass("table-primary");
-                            document.getElementById("linha_" + id).className = "table-primary"; 
-                        } 
-
-                        if(status == "Matriculado"){
-                            //$("#linha_" + idRegistro).addClass("table-success"); 
-                            document.getElementById("linha_" + id).className = "table-success";
-                        } 
-
-                        if(status == "Cancelado"){
-                            //$("#linha_" + idRegistro).addClass("table-danger"); 
-                            document.getElementById("linha_" + id).className = "table-danger";
-                        }   
+                         
                     }                    
                 });
             });
@@ -260,14 +242,164 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 <br>
 <!-- AQUI VOU MONTAR OS CARDS -->
     <?php foreach ($result as $registro): ?>
-        <div class="card card-body mb-3">
-        
-        <h4 class="card-title">Nome: <?php echo strtoupper($registro['nome_aluno']); ?></h4>
-        
-        <div class="bg-light p-2 mb-3">
-        Nascimento: <b><?php echo date('d/m/Y', strtotime($registro['nascimento'])); ?></b>
-        </div>
+        <div class="card">
+            <div class="card-header
+            
+           
+            <?php // aqui adiciona a classe conforme o status daí fica cor diferenciada para cada caso
+                if($registro['status'] == "Aguardando")
+                echo "bg-primary text-white";
+                if($registro['status'] == "Cancelado")
+                echo "bg-danger text-white";
+                if($registro['status'] == "Matriculado")
+                echo "bg-success text-white";                        
+                ?>
+            
+            "
+            id="linha_<?php echo $registro['id'];?>"
+            >
+                
+                
+                
+                <div class="row">
+                    <div class="col-sm-10">
+                        Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $registro['status'];?>
+                    </div>
+                    <div class="col-sm-2">
+                       
 
+
+
+                    
+
+
+
+
+
+
+
+                    </div>                    
+                </div>                  
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $registro['nomecrianca']; ?></h5>   
+                <!--1ª Linha do card-->
+                <div class="row">
+                    <div class="col-sm-2">
+                        Nascimento: <?php echo $registro['nascimento']; ?>
+                    </div>
+                    <div class="col-sm-2">
+                        Etapa: <?php echo $registro['etapa']; ?>
+                    </div>
+                    <div class="col-sm-4">
+                        Responsável: <?php echo $registro['responsavel']; ?>
+                    </div>
+                    <div class="col-sm-2">
+                        Telefone: <?php echo $registro['telefone']; ?>
+                    </div>
+                    <div class="col-sm-2">
+                        Celular: <?php echo $registro['celular']; ?>
+                    </div>
+                </div>
+                <!--2ª Linha do card-->
+                <div class="row">
+                    <div class="col-sm-4">
+                        Opção 1: <?php echo $registro['opcao1_id']; ?>                        
+                    </div>
+                    <div class="col-sm-4">
+                        Opção 2: <?php echo $registro['opcao2_id']; ?>
+                    </div>
+                    <div class="col-sm-4">
+                        Opção 3: <?php echo $registro['opcao3_id']; ?>
+                    </div>
+                </div>
+                
+
+                <hr>
+
+                <!--BOTÕES-->
+
+
+                <!-- LINHA PARA O BOTÃO ATUALIZAR E SELECT -->
+                <div class="row" style="margin-top:30px;">
+
+                    <!--COLUNA SELECT-->
+                    <div class="col-2" style="padding-left:0;">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <select class="form-control form-control-sm"
+                                    name="statuslista" 
+                                    id="<?php echo  $registro['id'];?>" 
+                                    class="form-control" 
+                                    onChange="
+                                            document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>;
+                                            document.getElementById('status_reg_fila').value = this.value;
+                                            ">                   
+                                    <?php 
+                                    $status = array('Aguardando','Matriculado','Cancelado');                    
+                                    foreach($status as $row => $value) : ?> 
+                                        <option value="<?php echo $value; ?>" 
+                                                    <?php echo $value == $registro['status'] ? 'selected':'';?>
+                                        >
+                                            <?php echo $value;?>
+                                        </option>
+                                    <?php endforeach; ?>  
+                                    </select>
+                                    <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
+                                    <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['id']; ?>">
+                                    <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
+                                    <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
+                                    <input type="hidden" id="txthist" name="txthist" value="">
+                            </div>
+                    </div>
+
+                    
+
+
+                     <!--COLUNA TEXTO HISTÓRICO-->
+                     Histórico:
+                     <div class="col-6" style="padding-left:0;">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input 
+                                class="form-control form-control-sm" 
+                                type="text" 
+                                id="historico_<?php echo  $registro['id'];?>" 
+                                name="historico_<?php echo  $registro['id'];?>"> 
+                        </div>
+                    </div>
+
+                    <!--COLUNA BOTÕES-->
+                    <div class="col-2" style="padding-left:0;">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <button 
+                                type="button" 
+                                class="btn btn-success btn-sm gravar"
+                                onClick="
+                                        document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>,   
+                                        document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['id'];?>').value,
+                                        document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['id'];?>').value;
+                                        "
+                            >                    
+                            Gravar
+                            </button>
+
+                            <a href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>" class="btn btn-primary btn-sm">Histórico</a>
+                        </div>                                                
+                    </div>
+                    
+                <!-- FIM LINHA BOTÃO ATUALIZAR E SELECT -->
+                </div>      
+
+
+
+
+
+
+
+
+
+                
+                
+            </div>
         </div>
     <?php endforeach; ?>
 <!-- FIM DOS CARDS -->
