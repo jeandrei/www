@@ -294,6 +294,11 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                     <div class="col-sm-2">
                         Turno: <?php echo $registro['opcao_turno']; ?>
                     </div>
+                    
+                </div>
+
+                <!--2ª Linha do card-->
+                <div class="row">
                     <div class="col-sm-4">
                         Responsável: <?php echo $registro['responsavel']; ?>
                     </div>
@@ -302,9 +307,10 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                     </div>
                     <div class="col-sm-2">
                         Celular: <?php echo $registro['celular']; ?>
-                    </div>
-                </div>
-                <!--2ª Linha do card-->
+                    </div>                
+                </div>                  
+                
+                <!--3ª Linha do card-->
                 <div class="row">
                     <div class="col-sm-4">
                         Opção 1: <?php echo $registro['opcao1_id']; ?>                        
