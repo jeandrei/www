@@ -7,6 +7,7 @@
         }
 
         public function cadastrar(){
+          
             
             //apagar as duas linhas abaixo coloquei aqui só para montar o formulário
            // $this->view('filas/sucessoCadastrar', $data = 0);
@@ -44,7 +45,7 @@
                     'opcao1' => html($_POST['opcao1']),                    
                     'opcao2' => html($_POST['opcao2']), 
                     'opcao3' => html($_POST['opcao3']),                    
-                    'opcao_turno' => html($_POST['opcao_turno']),                           
+                    'opcao_turno' => $_POST['opcao_turno'],                           
                     'obs'  => html($_POST['obs']),
                     'responsavel_err' => '',
                     'cpf_err' => '',

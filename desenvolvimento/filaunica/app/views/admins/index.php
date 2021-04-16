@@ -291,6 +291,9 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                     <div class="col-sm-2">
                         Etapa: <?php echo $registro['etapa']; ?>
                     </div>
+                    <div class="col-sm-2">
+                        Turno: <?php echo $registro['opcao_turno']; ?>
+                    </div>
                     <div class="col-sm-4">
                         Responsável: <?php echo $registro['responsavel']; ?>
                     </div>

@@ -70,7 +70,8 @@
        
 /***********************************************************************METODO PARA GRAVAR NA FILA**********************************************************/
        
-        public function register($data){             
+        public function register($data){
+           
                     
             $this->db->query('INSERT INTO fila SET                    
                                 responsavel = :responsavel,  
@@ -132,8 +133,7 @@
             }
                  
              
-            // Execute
-            
+            // Execute            
             if($this->db->execute()){
                 return true;
             } else {
@@ -288,6 +288,16 @@
             }       
             
         
+        }
+
+        public function getTurno($num){
+            if ($num == 1){
+                $turno = "Matutino";
+            }
+            if ($num == 2){
+                $turno = "Vespertino";
+            }
+            return $turno;
         }
            
         

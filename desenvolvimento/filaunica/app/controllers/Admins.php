@@ -94,7 +94,8 @@
                     'status' => $result['status'],
                     'opcao1_id' => $this->filaModel->getEscolasById($result['opcao1_id'])->nome,
                     'opcao2_id' => $this->filaModel->getEscolasById($result['opcao2_id'])->nome,
-                    'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome
+                    'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome,
+                    'opcao_turno' => $this->filaModel->getTurno($result['opcao_turno'])
                   ];
                 }
               } else {
