@@ -356,9 +356,8 @@
                                                                                                 <div class="row">
                                                                                                     <div class="col-lg-12">
                                                                                                         <div class="alert alert-info" role="alert">
-                                                                                                            Manteinha os dados <strong>atualizados</strong>, as informações registradas aqui 
-                                                                                                            servirão de base para a <strong>distribuição dos uniformes escolares</strong>, bem como ajudarão 
-                                                                                                            no <strong>planejamento e melhoria do Trensporte Escolar</strong>.
+                                                                                                        <p>Quando chegar a vez da criança, a equipe da Secretaria da Educação entrará em contato para oferecer a vaga independente das opções escolhidas.</p>
+                                                                                                           <p>Selecione abaixo ao menos a <strong>primeira</strong> opção.</p>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 <!--INFORMATIVO DE OPÇÕES DE ESCOLHA-->

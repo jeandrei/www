@@ -45,11 +45,12 @@
             <div class="row justify-content-center align-items-center">
               <div class="col-lg-12">
                   <div class="alert alert-success text-center" role="alert">
-                      Lei da Fila Única <a href="<?php echo URLROOT; ?>/downloads/Lei da Fila Única.pdf" target="_blank" class="alert-link"><i class="fa fa-external-link" aria-hidden="true"></i> Abrir a Lei.</a>
+                      Fila Única <a href="<?php echo URLROOT; ?>/downloads/Lei da Fila Única.pdf" target="_blank" class="alert-link"><i class="fa fa-external-link" aria-hidden="true"></i> Lei de criação.</a>
+                            
+                        <a href="https://educapenha.com.br/fila-unica/" target="_blank" class="alert-link"><i class="fa fa-external-link" aria-hidden="true"></i> Orientações.</a>
                   </div>
               </div>
             </div>
-
            
             
             <!-- FILA ÚNICA DESCRIÇÃO-->
