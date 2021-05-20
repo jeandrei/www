@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
    
-   <!--Bootstrap CSS-->
-   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
+   <!--Bootstrap CSS CDN-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">   
    
    <!--Font Awesome CDN-->
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -24,8 +24,8 @@
     <!--jquery mask-->
     <script src="<?php echo URLROOT; ?>/js/jquery.mask.js" data-autoinit="true"></script> 
 
-    <!--Botstrap main-->
-    <script src="<?php echo URLROOT; ?>/js/bootstrap.min.js"></script>
+    <!--Botstrap main CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>    
     
     <!--Javascript funções-->
     <script src="<?php echo URLROOT; ?>/js/main.js"></script>
@@ -54,7 +54,7 @@
            
             
             <!-- FILA ÚNICA DESCRIÇÃO-->
-            <div class="jumbotron jumbotron-fluid text-center" style="background-image: url(<?php echo URLROOT; ?>/img/mothers-3389671_640.jpg); background-size: 40% 100%; background-repeat: no-repeat, repeat; background-position: center; background-size: cover;">
+            <div class="jumbotron jumbotron-fluid text-center" style="background-image: url(<?php echo URLROOT; ?>/img/mothers-3389671_640.jpg); background-size: 40% 100%; background-repeat: no-repeat, repeat; background-position: center; background-size: cover; padding:40px; margin-bottom: 1em;">
                 <div class="container"> 
                     
                
@@ -78,7 +78,7 @@
         
         <!--  -->
         <div class="row justify-content-center align-items-center">            
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="protocolo" class="sr-only"></label>                                 

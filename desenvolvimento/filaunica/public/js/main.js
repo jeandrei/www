@@ -82,7 +82,8 @@ $(document).ready(function () {
 //tem que colocar o footer que está neste projeto para lincar com maskedinput.min.js
 $(document).ready(function() {
 	$('.cpf').mask('000.000.000-00', {reverse: true});
-	$(".telefone").mask("(00) 00000-0009");
+	$(".celular").mask("(00) 00000-0009");
+	$(".telefone").mask("(00) 0000-0009");
 	});
 //********************fim mascaras**************** */
 

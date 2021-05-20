@@ -161,7 +161,7 @@
                                                                                                                 name="celular" 
                                                                                                                 id="celular" 
                                                                                                                 maxlength="15"
-                                                                                                                class="form-control telefone <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
+                                                                                                                class="form-control celular <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
                                                                                                                 value="<?php htmlout($data['celular']); ?>"
                                                                                                             >
                                                                                                             <span class="invalid-feedback">
