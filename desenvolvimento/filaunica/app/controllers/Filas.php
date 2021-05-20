@@ -77,21 +77,23 @@
                     $data['responsavel_err'] = '' ;       
                 }
 
-                //valida telefone 1
-                if(empty($data['telefone'])){
-                    $data['telefone_err'] = 'Por favor informe o telefone'; 
-                }
-                elseif(!validacelular($data['telefone'])){
-                    $data['telefone_err'] = 'Telefone inválido';
+                //valida telefone fixo                
+                if((!empty($data['telefone'])) && (!validatelefone($data['telefone']))){
+                    $data['telefone_err'] = 'Telefone inválido';        
                 }else{
-                    $data['telefone_err'] = '';       
+                    $data['telefone_err'] = '';
                 }
                 
-                //valida telefone 2
-                if((!empty($data['celular'])) && (!validacelular($data['celular']))){
+                //valida celular
+                if((!empty($data['celular'])) && (!validatelefone($data['celular']))){
                     $data['celular_err'] = 'Telefone inválido';        
                 }else{
                     $data['celular_err'] = '';
+                }
+
+                if(empty($data['telefone']) && empty($data['celular'])){
+                    $data['telefone_err'] = 'Informe ao menos um telefone';  
+                    $data['celular_err'] = 'Informe ao menos um telefone';   
                 }
 
                 //valida nome
@@ -208,8 +210,10 @@
                
 
                 //pego o id da etapa a partir da data de nascimento
+                // SE QUISER RESTRINGIR PARA ACEITAR COM O MÍNIMO DE 4 MESES TEM QUE IR NO ARQUIVO
+                /// models/Etapa.php e na função getEtapa habilitar as linhas que fazem a verificação
                 $id_etapa = $this->etapaModel->getEtapa($data['nascimento']);   
-                
+                                
                 //a partir do id da etapa pego a descrição
                 $data['desc_etapa'] = $this->etapaModel->getDescricaoEtapa($id_etapa);
 

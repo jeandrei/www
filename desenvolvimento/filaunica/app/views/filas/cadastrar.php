@@ -136,7 +136,7 @@
                                                                                                         <!--CELULAR 1-->
                                                                                                         <div class="col-lg-6">
                                                                                                             <label for="telefone">
-                                                                                                                <span class="obrigatorio">*</span>Telefone para contato:
+                                                                                                                Telefone para contato:
                                                                                                             </label>
                                                                                                             <input 
                                                                                                                 type="text" 
@@ -557,10 +557,7 @@ $("#proximo").on("click",function(){
                 responsavel : {
                     required : true,
                     minlength : 6
-                },
-                telefone : {
-                    required : true                    
-                }, 
+                },                 
                 bairro : {
                     required : true                    
                 },     
@@ -585,10 +582,7 @@ $("#proximo").on("click",function(){
                 responsavel : {
                     required : 'Por favor informe o responsável.',
                     minlength : 'Nome inválido, mínimo 6 Caracteres'
-                },
-                telefone : {
-                    required : 'Por favor informe o telefone'
-                },
+                },                
                 bairro : {
                     required : 'Por favor informe o bairro'                 
                 },     

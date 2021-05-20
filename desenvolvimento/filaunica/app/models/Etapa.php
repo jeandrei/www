@@ -138,14 +138,14 @@
 
         // RETORNA A ETAPA A PARTIR DE UMA DATA DE NASCIMENTO
         public function getEtapa($nasc) {
-            //verifica se tem mínimo de 4 meses
+            /* SE QUISER VERIFICAR SE TEM NO MÍNIMO 4 MESES HABILITE ESSAS LINHAS COMENTADAS
             $this->db->query("SELECT TIMESTAMPDIFF(MONTH, :datanasc, NOW()) AS meses");
             $this->db->bind(':datanasc',$nasc); 
             $num_meses = $this->db->single();            
             
             if($num_meses->meses<4){        
                 return false;
-            }
+            }*/
         
             //pega o id da etapa
             $this->db->query("SELECT * FROM etapa WHERE :nasc>=data_ini AND :nasc<=data_fin");
