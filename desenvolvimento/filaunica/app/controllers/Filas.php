@@ -99,7 +99,7 @@
                 //valida nome
                 if(empty($data['nome'])){
                     $data['nome_err'] = 'Por favor informe o nome da criança';
-                }
+                }/* SE DESEJAR IMPEDIR O CADASTRO COM MESMO NOME E DATA DE NASCIMENTO DA CRIANÇA DESCOMENTE AS LINHAS ABAIXO
                 else{
                     if ($this->filaModel->nomeCadastrado($data['nome'],$data['nascimento']))
                     {
@@ -107,7 +107,7 @@
                     }else{
                         $data['nome_err'] = '';   
                     }
-                }
+                }*/
 
                 //valida nascimento
                 if(empty($data['nascimento'])){        
