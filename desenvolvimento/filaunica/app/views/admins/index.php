@@ -2,6 +2,14 @@
 
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+<?php  
+
+//$situacoes = $this->situacaoModel->getSituacoes(); 
+//die(var_dump($situacoes));
+
+
+?>
+
 
 
 <script>
@@ -9,7 +17,7 @@
     function limpar(){
         document.getElementById('buscanome').value = "";
         document.getElementById('buscaetapa').value = "Todos";
-        document.getElementById('buscastatus').value = "Todos";
+        document.getElementById('buscasituacao').value = "Todos";
         focofield("buscanome");
     }    
     
@@ -139,8 +147,8 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
         </div>
 
 
-         <!-- COLUNA 2 ETAPA -->
-         <div class="col-lg-3">
+        <!-- COLUNA 2 ETAPA -->
+        <div class="col-lg-3">
             <label for="buscaetapa">
                 Busca por Etapa
             </label>                               
@@ -167,32 +175,33 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
         </div>
         
         
+        
         <!-- COLUNA 3 SITUAÇÃO-->
         <div class="col-lg-3">
-            <label for="buscastatus">
-                Busca por Situação
+            <label for="buscasituacao">
+                Busca por Status
             </label> 
-            <!--BOTÃO BUSCA SITUAÇÃO-->
+            <!--BOTÃO BUSCA SITUAÇÃO-->  
+
             <select 
-                name="buscastatus" 
-                id="buscastatus" 
+                name="buscasituacao" 
+                id="buscasituacao" 
                 class="form-control"                                        
-            >   
+            >
                     <option value="Todos">Todos</option>
                     <?php 
-                    $status = array('Aguardando','Matriculado','Cancelado');                    
-                    foreach($status as $row => $value) : ?> 
-                        <option value="<?php echo $value; ?>" 
-                                        <?php // AQUI TIVE QUE COLOCAR COM SESSION POR CONTA DA PAGINAÇÃO
-                                        if(isset($_POST['buscastatus'])){
-                                                echo $_POST['buscastatus'] == $value ? 'selected':'';
-                                            }
-                                        ?>
+                    $situacoes = $this->situacaoModel->getSituacoes();                     
+                    foreach($situacoes as $row) : ?> 
+                        <option value="<?php echo $row->id; ?>"
+                                    <?php if(isset($_POST['buscasituacao'])){
+                                    echo $_POST['buscasituacao'] == $row->id ? 'selected':'';
+                                    }
+                                    ?>
                         >
-                            <?php echo $value;?>
+                            <?php echo $row->descricao;?>
                         </option>
                     <?php endforeach; ?>  
-            </select> 
+            </select>    
         </div>
         
         
@@ -243,46 +252,36 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 <!-- AQUI VOU MONTAR OS CARDS -->
     <?php foreach ($result as $registro): ?>
         <div class="card">
-            <div class="card-header
             
+            <div class="card-header            
            
-            <?php // aqui adiciona a classe conforme o status daí fica cor diferenciada para cada caso
-                if($registro['status'] == "Aguardando")
-                echo "bg-primary text-white";
-                if($registro['status'] == "Cancelado")
-                echo "bg-danger text-white";
-                if($registro['status'] == "Matriculado")
-                echo "bg-success text-white";                        
-                ?>
-            
-            "
-            id="linha_<?php echo $registro['id'];?>"
-            >
-                
-                
-                
-                <div class="row">
-                    <div class="col-sm-10">
-                        Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $registro['status'];?>
-                    </div>
-                    <div class="col-sm-2">
-                       
-
-
-
+                    <?php // aqui adiciona a classe conforme o status daí fica cor diferenciada para cada caso
+                        if($registro['status'] == "Aguardando")
+                        echo "bg-primary text-white";
+                        if($registro['status'] == "Cancelado")
+                        echo "bg-danger text-white";
+                        if($registro['status'] == "Matriculado")
+                        echo "bg-success text-white";                        
+                        ?>
                     
+                    "
+                    id="linha_<?php echo $registro['id'];?>"
+                    >     
+                
+                    <div class="row">
+                        <div class="col-sm-10">
+                            Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $registro['status'];?>
+                        </div>                                        
+                    </div> 
 
-
-
-
-
-
-
-                    </div>                    
-                </div>                  
             </div>
+
+
             <div class="card-body">
+                
+                
                 <h5 class="card-title"><?php echo $registro['nomecrianca']; ?> | Idade: <?php echo CalculaIdade($registro['nascimento']);?>  </h5>   
+                
                 <!--1ª Linha do card-->
                 <div class="row">
                     <div class="col-sm-2">
@@ -323,11 +322,9 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                     </div>
                 </div>
                 
-
                 <hr>
 
                 <!--BOTÕES-->
-
 
                 <!-- LINHA PARA O BOTÃO ATUALIZAR E SELECT -->
                 <div class="row" style="margin-top:30px;">
@@ -344,12 +341,12 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                                             document.getElementById('status_reg_fila').value = this.value;
                                             ">                   
                                     <?php 
-                                    $status = array('Aguardando','Matriculado','Cancelado');                    
-                                    foreach($status as $row => $value) : ?> 
-                                        <option value="<?php echo $value; ?>" 
-                                                    <?php echo $value == $registro['status'] ? 'selected':'';?>
+                                    $situacoes = $this->situacaoModel->getSituacoes();                   
+                                    foreach($situacoes as $row) : ?> 
+                                        <option value="<?php echo $row->id; ?>" 
+                                                    <?php echo $row->id == $registro['situacao_id'] ? 'selected':'';?>
                                         >
-                                            <?php echo $value;?>
+                                            <?php echo $row->descricao;?>
                                         </option>
                                     <?php endforeach; ?>  
                                     </select>
@@ -359,9 +356,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                                     <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
                                     <input type="hidden" id="txthist" name="txthist" value="">
                             </div>
-                    </div>
-
-                    
+                    </div>                    
 
 
                      <!--COLUNA TEXTO HISTÓRICO-->
@@ -396,20 +391,15 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                     </div>
                     
                 <!-- FIM LINHA BOTÃO ATUALIZAR E SELECT -->
-                </div>      
-
-
-
-
-
-
-
-
-
+                </div>                     
                 
-                
+            
+            
             </div>
+       
+       
         </div>
+        
     <?php endforeach; ?>
 <!-- FIM DOS CARDS -->
 

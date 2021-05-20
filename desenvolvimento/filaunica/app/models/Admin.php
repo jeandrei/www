@@ -83,13 +83,14 @@
             }
           
 
-            if(($options['named_params'][':status']) <> "Todos"){
-                $sql .= " AND status = " . "'" . $options['named_params'][':status'] ."'";
+            if(($options['named_params'][':situacao_id']) <> "Todos"){
+                $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
             }
             
              
 
-            $sql .= " ORDER BY registro ASC";     
+            $sql .= " ORDER BY registro ASC";        
+
                
             $paginate = new pagination($page, $sql, $options);
             return  $paginate;

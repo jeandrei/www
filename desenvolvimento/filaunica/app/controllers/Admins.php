@@ -5,6 +5,7 @@
           $this->adminModel = $this->model('Admin'); 
           $this->filaModel = $this->model('Fila'); 
           $this->etapaModel = $this->model('Etapa');           
+          $this->situacaoModel = $this->model('Situacao'); 
         }
 
         public function index(){  
@@ -22,7 +23,7 @@
               // $_GET['status'] VEM LÁ DO LINK DA PAGINAÇÃO
               $status = $_GET['status'];
               // SE ENTROU AQUI É PQ FOI CLICADO NO LINK DA PAGINAÇÃO ENTÃO PARA MANTER O VALOR ATUAL DA BUSCA PASSO O VALOR DO GET PARA O POST
-              $_POST['buscastatus'] = $status;
+              $_POST['buscasituacao'] = $status;
 
                
               // etapa_id vem lá do get &etapa_id
@@ -38,9 +39,9 @@
               // SE ENTROU AQUI É QUE FOI CARREGADO A PÁGINA PELA PRIMEIRA VEZ OU FOI CLICADO EM ATUALIZAR
               // LOGO SE TENHO ALGUM VALOR NO POST DE BUSCA PASSO PARA A VARIÁVEL STATUS E POR FIM SE AINDA ASSIM 
               //A VARIÁVEL ESTIVER VAZIA PASSO O VALOR PADRÃO 'Todos'
-              $status = $_POST['buscastatus'];
-              if(!isset($status)){                
-                  $status = 'Todos';
+              $situacao_id = $_POST['buscasituacao'];
+              if(!isset($situacao_id)){                
+                  $situacao_id = 'Todos';
               }
 
               $etapa_id = $_POST['buscaetapa'];
@@ -57,9 +58,9 @@
           
           $options = array(
               'results_per_page' => 10,
-              'url' => URLROOT . '/admins/index.php?page=*VAR*&status=' . $status . '&etapa_id=' . $etapa_id . '&nome=' . $nome,
+              'url' => URLROOT . '/admins/index.php?page=*VAR*&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&nome=' . $nome,
               'named_params' => array(
-                                      ':status' => $status,
+                                      ':situacao_id' => $situacao_id,
                                       ':etapa_id' => $etapa_id,
                                       ':nome' => $nome
                                      )     
@@ -92,6 +93,7 @@
                     'telefone' => $result['telefone'],
                     'celular' => $result['celular'],
                     'status' => $result['status'],
+                    'status_id' => $result['status_id'],
                     'opcao1_id' => $this->filaModel->getEscolasById($result['opcao1_id'])->nome,
                     'opcao2_id' => $this->filaModel->getEscolasById($result['opcao2_id'])->nome,
                     'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome,

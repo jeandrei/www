@@ -48,6 +48,26 @@ INSERT INTO `bairro` (`id`, `nome`) VALUES
 
 -- --------------------------------------------------------
 
+CREATE TABLE `situacao` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `cor` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Despejando dados para a tabela `bairro`
+--
+
+INSERT INTO `situacao` (`id`, `descricao`, `cor`) VALUES
+(1, 'Aguradando', '#00BFFF'),
+(2, 'Matriculado', '#3CB371'),
+(3, 'Cancelado', '#EE4000'),
+(4, 'Protocolo Vencido', '#CDC1C5'),
+(5, 'Convocado', '#FFC125'),
+(6, 'Desistente', '#836FFF');
+
+-- --------------------------------------------------------
+
 --
 -- Estrutura para tabela `escola`
 --
@@ -94,10 +114,10 @@ CREATE TABLE `etapa` (
 --
 
 INSERT INTO `etapa` (`id`, `data_ini`, `data_fin`, `descricao`) VALUES
-(1, '2019-04-01', '2020-12-31', 'BERÇÁRIO-I'),
-(2, '2018-04-01', '2019-03-31', 'BERÇÁRIO-II'),
-(3, '2017-04-01', '2018-03-31', 'MATERNAL'),
-(4, '2016-04-01', '2017-03-31', 'PRÉ-I');
+(1, '2020-04-01', '2021-12-31', 'BERÇÁRIO-I'),
+(2, '2019-04-01', '2020-03-31', 'BERÇÁRIO-II'),
+(3, '2018-04-01', '2019-03-31', 'MATERNAL'),
+(4, '2017-04-01', '2018-03-31', 'PRÉ-I');
 
 -- --------------------------------------------------------
 
@@ -127,7 +147,8 @@ CREATE TABLE `fila` (
   `observacao` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
   `protocolo` varchar(255) DEFAULT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'Aguardando'
+  `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
+  `situacao_id` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -142,6 +163,7 @@ CREATE TABLE `historico_id_fila` (
   `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `usuario` varchar(255) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
+  `situacao_id` int(11),
   `historico` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -203,6 +225,12 @@ ALTER TABLE `bairro`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `situacao`
+--
+ALTER TABLE `situacao`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `escola`
 --
 ALTER TABLE `escola`
@@ -240,6 +268,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `bairro`
 --
 ALTER TABLE `bairro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+  --
+-- AUTO_INCREMENT de tabela `situacao`
+--
+ALTER TABLE `situacao`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
