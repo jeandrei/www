@@ -47,9 +47,9 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Pos", "Responsável pelo cadastro", "Nome da Criança", "Nascimento", "Etapa", "Protocolo");
+            $colunas =array("Pos", "Responsável pelo cadastro", "Nome da Criança", "Nascimento", "Etapa", "Protocolo", "Situação");
             //largura das colunas
-            $larguracoll = array(1 => 10, 2 => 95, 3 => 95, 4 => 20, 5 => 25, 6 => 25);
+            $larguracoll = array(1 => 10, 2 => 80, 3 => 80, 4 => 20, 5 => 25, 6 => 25, 7 => 30);
             $tam_fonte = 10;    
                         
                
@@ -64,11 +64,10 @@ class PDF extends FPDF
                      $error = "";
                      //adiciona uma nova pagina
                      $pdf->AddPage('L');
-                     //SETA A FONTE PARA TAMANHO 8 NEGRITO
-                     $pdf->SetFont('Arial','B',12);
-                     $pdf->Cell(0, 5,utf8_decode("Listagem da Fila Única"), 0, 1, "C");                    
+                                      
                      $i=0;
                      
+                     //coloca as colunas com os títulos da tabela
                      foreach($colunas as $coluna){
                          $i++;
                          $pdf->SetFont('Arial','B',8);                   
@@ -85,6 +84,7 @@ class PDF extends FPDF
                          $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C',true);
                          $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C',true);
                          $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["protocolo"]),1,0,'C',true);  
+                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["situacao"]),1,0,'C',true);  
                          $pdf->Ln();    
                          
                          $pdf->Cell(90,$tam_fonte,utf8_decode("Op 01: " . $row["opcao1_id"]),1);                           

@@ -251,7 +251,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 
                     <div class="row">
                         <div class="col-sm-10">
-                            Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $this->situacaoModel->getDescricaoSituacaoById($registro['situacao_id']);?>
+                            Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $registro['situacao'];?>
                         </div>                                        
                     </div> 
 

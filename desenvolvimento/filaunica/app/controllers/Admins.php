@@ -92,7 +92,7 @@
                     'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
                     'telefone' => $result['telefone'],
                     'celular' => $result['celular'],
-                    'situacao_id' => $result['situacao_id'],                    
+                    'situacao' => $this->situacaoModel->getDescricaoSituacaoById($result['situacao_id']),                  
                     'opcao1_id' => $this->filaModel->getEscolasById($result['opcao1_id'])->nome,
                     'opcao2_id' => $this->filaModel->getEscolasById($result['opcao2_id'])->nome,
                     'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome,
