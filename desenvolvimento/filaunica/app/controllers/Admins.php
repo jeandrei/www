@@ -21,9 +21,9 @@
               $page = $_GET['page'];   
               
               // $_GET['status'] VEM LÁ DO LINK DA PAGINAÇÃO
-              $status = $_GET['status'];
+              $situacao_id = $_GET['situacao_id'];
               // SE ENTROU AQUI É PQ FOI CLICADO NO LINK DA PAGINAÇÃO ENTÃO PARA MANTER O VALOR ATUAL DA BUSCA PASSO O VALOR DO GET PARA O POST
-              $_POST['buscasituacao'] = $status;
+              $_POST['buscasituacao'] = $situacao_id;
 
                
               // etapa_id vem lá do get &etapa_id
@@ -92,8 +92,7 @@
                     'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
                     'telefone' => $result['telefone'],
                     'celular' => $result['celular'],
-                    'status' => $result['status'],
-                    'status_id' => $result['status_id'],
+                    'situacao_id' => $result['situacao_id'],                    
                     'opcao1_id' => $this->filaModel->getEscolasById($result['opcao1_id'])->nome,
                     'opcao2_id' => $this->filaModel->getEscolasById($result['opcao2_id'])->nome,
                     'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome,

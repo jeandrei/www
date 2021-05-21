@@ -163,7 +163,7 @@
                                         fila.nomecrianca as nome, 
                                         fila.nascimento as nascimento,
                                         fila.protocolo as protocolo,
-                                        fila.status as status,
+                                        fila.situacao_id as situacao_id,
                                         (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                                         
                                     FROM                               
@@ -213,7 +213,7 @@
                     WHERE
                         (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
                     AND
-                        fila.status = :reg_status
+                        fila.situacao_id = :reg_status
                     ORDER BY
                         fila.registro        
                     ");
@@ -246,7 +246,7 @@
             $this->db->query(' 
                                 SELECT 
                                         count(fila.id) as posicao,
-                                        (SELECT fila.status FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
+                                        (SELECT fila.situacao_id FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
                                 FROM 
                                         fila, etapa
                                 WHERE 
@@ -270,7 +270,7 @@
                                         fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
                                 
                                 AND
-                                        fila.status = "Aguardando"                            
+                                        fila.situacao_id = 1                            
         
                             ');
         
@@ -281,7 +281,7 @@
             $row = $this->db->single();  
             //var_dump($row);
                     
-            if(($row->statusprotocolo == "Aguardando") && ($row->posicao <> 0)){
+            if(($row->statusprotocolo == 1) && ($row->posicao <> 0)){
                 return $row->posicao . 'º';
             } else {
                 return false;

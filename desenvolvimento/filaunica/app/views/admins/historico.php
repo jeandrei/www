@@ -21,7 +21,7 @@
         <tr>      
             <td><?php echo $registro['registro']; ?></td>
             <td><?php echo $registro['usuario']; ?></td>
-            <td><?php echo $registro['status']; ?></td>
+            <td><?php echo $this->situacaoModel->getDescricaoSituacaoById($registro['situacao_id']); ?></td>
             <td><?php echo $registro['historico']; ?></td>
         </tr>
     <?php endforeach; ?> 

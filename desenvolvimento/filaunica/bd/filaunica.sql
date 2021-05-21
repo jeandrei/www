@@ -146,8 +146,7 @@ CREATE TABLE `fila` (
   `opcao_turno` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
-  `protocolo` varchar(255) DEFAULT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'Aguardando',
+  `protocolo` varchar(255) DEFAULT NULL,  
   `situacao_id` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -161,8 +160,7 @@ CREATE TABLE `historico_id_fila` (
   `id` int(11) NOT NULL,
   `fila_id` int(11) NOT NULL,
   `registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `usuario` varchar(255) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `usuario` varchar(255) DEFAULT NULL,  
   `situacao_id` int(11),
   `historico` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

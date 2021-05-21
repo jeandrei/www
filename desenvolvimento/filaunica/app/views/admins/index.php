@@ -30,7 +30,7 @@
                 //atribui os valores do id e do status as variáveis
                 var id=$("#id_reg_fila").val();
                 var status=$("#status_reg_fila").val();  
-                var txthist=$("#txthist").val();                           
+                var txthist=$("#txthist").val();               
                     //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
                     $.ajax({
                     /* aqui em url passamos a url do controler e o método que iremos utilizar nesse caso controller jquerys método newEstado */
@@ -64,22 +64,7 @@
             });
         });
 
-        function ShowContact(responsavel,telefone, celular) {   
-                msg = '';                
-                
-                if(typeof responsavel != 'undefined') {
-                msg = msg + 'Responsável: '+responsavel +'\r\n';
-                }
-
-                if(typeof telefone != 'undefined') {
-                msg = msg + 'Telefone: '+telefone +'\r\n';
-                }
-
-                if(typeof celular != 'undefined') {
-                msg = msg + 'Celular: '+celular;
-                }
-               alert (msg.toUpperCase());              
-            }
+        
      
 
 
@@ -242,6 +227,8 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
 $paginate = $data['paginate'];
 $result = $data['results'];
 
+//die(var_dump($result));
+
 // la no controller admins se o resultado da pesquisa não trazer nehuma linha
 // eu retorno false daí se retornar false é que não tem dados para emitir 
 // interrompo o código
@@ -253,24 +240,14 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
     <?php foreach ($result as $registro): ?>
         <div class="card">
             
-            <div class="card-header            
-           
-                    <?php // aqui adiciona a classe conforme o status daí fica cor diferenciada para cada caso
-                        if($registro['status'] == "Aguardando")
-                        echo "bg-primary text-white";
-                        if($registro['status'] == "Cancelado")
-                        echo "bg-danger text-white";
-                        if($registro['status'] == "Matriculado")
-                        echo "bg-success text-white";                        
-                        ?>
-                    
-                    "
-                    id="linha_<?php echo $registro['id'];?>"
-                    >     
+            <div 
+                class="card-header"
+                id="linha_<?php echo $registro['id'];?>"
+                style="background-color:<? echo $this->situacaoModel->getCorSituacaoById($registro['situacao_id']);?>">     
                 
                     <div class="row">
                         <div class="col-sm-10">
-                            Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $registro['status'];?>
+                            Posição: <b><?php echo $registro['posicao']; ?></b> | Protocolo: <?php echo $registro['protocolo']; ?> | Registro: <?php echo $registro['registro']; ?> | Status: <?php echo $this->situacaoModel->getDescricaoSituacaoById($registro['situacao_id']);?>
                         </div>                                        
                     </div> 
 
@@ -353,7 +330,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                                     <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
                                     <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['id']; ?>">
                                     <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
-                                    <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['status']; ?>"> 
+                                    <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['situacao_id']; ?>"> 
                                     <input type="hidden" id="txthist" name="txthist" value="">
                             </div>
                     </div>                    
