@@ -164,6 +164,7 @@
                                         fila.nascimento as nascimento,
                                         fila.protocolo as protocolo,
                                         fila.situacao_id as situacao_id,
+                                        (SELECT descricao FROM situacao WHERE fila.situacao_id = id) as status,
                                         (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa
                                         
                                     FROM                               
