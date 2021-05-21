@@ -45,7 +45,7 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Pos", "Registro", "Responsável", "Iniciais Nome", "Nascimento", "Etapa", "Protocolo");
+            $colunas =array("Pos", "Registro", "Responsável pelo cadastro", "Iniciais da Criança", "Nascimento", "Etapa", "Protocolo");
             //largura das colunas
             $larguracoll = array(1 => 10, 2 => 40, 3 => 120, 4 => 30, 5 => 20, 6 => 25, 7 => 35);
             $tam_fonte = 10;    

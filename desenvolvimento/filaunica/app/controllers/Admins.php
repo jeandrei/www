@@ -8,7 +8,7 @@
           $this->situacaoModel = $this->model('Situacao'); 
         }
 
-        public function index(){  
+        public function index(){              
           
           //se o usuário não tiver feito login redirecionamos para o index
           if(!isset($_SESSION[DB_NAME . '_user_id'])){
@@ -105,9 +105,18 @@
           }       
           
          
-
-            // 4 Chama o view passando os dados
-            $this->view('admins/index', $data);
+          
+          //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO getDados($page, $options,1) ONDE 1 É QUE É PARA IMPRIMIR E 0 É PARA LISTAR NA PAGINAÇÃO
+          if($_POST['botao'] == "Imprimir"){              
+              $data = $data['results'];               
+              // E AQUI CHAMO O RELATÓRIO          
+              $this->view('relatorios/relatorioconsulta' ,$data);
+          } else {
+              // SE NÃO FOR IMPRIMIR CHAMO O INDEX COM OS DADOS NOVAMENTE
+              $this->view('admins/index', $data);
+          }
+           
+            
         }
         
         
@@ -147,5 +156,7 @@
         }
       }
 
+
+    
 
 }

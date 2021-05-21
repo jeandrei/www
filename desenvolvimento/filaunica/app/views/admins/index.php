@@ -65,7 +65,10 @@
         });
 
         
-     
+    //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
+    function newtab(){
+      document.getElementById('filtrar').setAttribute('target', '_blank');
+    }
 
 
 
@@ -198,6 +201,7 @@ e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QU
                 <div class="form-group mx-sm-3 mb-2">
                     <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
                     <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
+                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()">
                 </div>                                                
             </div>
             
