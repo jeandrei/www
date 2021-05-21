@@ -8,6 +8,7 @@
             $this->listaModel = $this->model('Lista');
             $this->etapaModel = $this->model('Etapa');
             $this->filaModel = $this->model('Fila');
+            $this->situacaoModel = $this->model('Situacao');
         }
 
         public function listachamada(){

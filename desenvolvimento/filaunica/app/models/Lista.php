@@ -18,7 +18,7 @@
 
 
         
-       public function getFilaPorEtapaRelatorio($etapa_id,$status) {   
+       public function getFilaPorEtapaRelatorio($etapa_id,$situacao_id) {   
             $this->db->query("SET @contador = 0");
            // $stmt = $pdo->prepare($sql);
             $this->db->execute();
@@ -30,19 +30,20 @@
                         fila.responsavel as responsavel, 
                         fila.nomecrianca as nome, 
                         fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,                 
+                        fila.protocolo as protocolo,  
+                        (SELECT descricao FROM situacao WHERE fila.situacao_id = id) as status,               
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
                     FROM 
                         fila 
                     WHERE
                         (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
                     AND
-                        fila.status = :reg_status
+                        fila.situacao_id = :reg_situacao
                     ORDER BY
                         fila.registro        
                     ");
             
-            $this->db->bind(':reg_status', $status);
+            $this->db->bind(':reg_situacao', $situacao_id);
             $this->db->bind(':etapa_id', $etapa_id);        
             
             
