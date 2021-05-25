@@ -9,13 +9,13 @@ $(document).ready(function(){
     if(situacao == 2){
         $( "#div_escola_mat" ).removeClass( "invisible");
         $( "#div_escola_mat" ).addClass( "visible");
-        $( "#imprimir" ).removeClass( "invisible");
-        $( "#imprimir" ).addClass( "visible");
+        $( "#btn_imprimir" ).removeClass( "invisible");
+        $( "#btn_imprimir" ).addClass( "visible");
     } else {
         $( "#div_escola_mat" ).removeClass( "visible");
         $( "#div_escola_mat" ).addClass( "invisible");
-        $( "#imprimir" ).removeClass( "visible");
-        $( "#imprimir" ).addClass( "invisible");
+        $( "#btn_imprimir" ).removeClass( "visible");
+        $( "#btn_imprimir" ).addClass( "invisible");
     }   
 
  
@@ -37,7 +37,10 @@ $(document).ready(function(){
 });
 
 
-
+ //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
+ function newtab(){
+      document.getElementById('filtrar').setAttribute('target', '_blank');
+    }
 
 </script>
 
@@ -238,7 +241,9 @@ $(document).ready(function(){
                     <div class="row" style="margin-top:30px;">
                         <div class="col-md-12 text-center">                        
                             <input type="submit" value="Gravar" class="btn btn-success">                            
-                            <input type="submit" value="Imprimir" class="btn btn-success invisible" id="imprimir" name="imprimir">                            
+                            <input type="submit" name="btn_imprimir" id="btn_imprimir" class="btn btn-primary" value="Imprimir" onClick="newtab()">   
+                            <a href="<?php echo URLROOT; ?>/imprimir/" class="btn btn-default btn-lg btn-block" role="button">Imprimir</a>                        
+                            
                         </div>  
                     <!-- FIM LINHA BOTÕES -->
                     </div>
