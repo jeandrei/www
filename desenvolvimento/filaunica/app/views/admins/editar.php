@@ -53,18 +53,25 @@ $(document).ready(function(){
                 <form action="<?php echo URLROOT; ?>/admins/edit/<?php echo $data['id']; ?>" method="post">                
                     
                     <h3>Nome da criança: <?php echo $data['nomecrianca'];?></h3>
+                    
                     <div class="row">
-                            <div class="col-md-4">
-                                Nascimento:  <?php echo $data['nascimento'];?>
-                            </div>
+                        <div class="col-md-4">
+                            Certidão de Nascimento:  <?php echo $data['certidaonascimento'];?>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            Nascimento:  <?php echo $data['nascimento'];?>
+                        </div>
 
-                            <div class="col-md-4">
-                                Etapa:  <?php echo $data['etapa'];?>
-                            </div>
+                        <div class="col-md-4">
+                            Etapa:  <?php echo $data['etapa'];?>
+                        </div>
 
-                            <div class="col-md-4">
-                                Turno:  <?php echo $data['opcao_turno'];?>
-                            </div>                    
+                        <div class="col-md-4">
+                            Turno:  <?php echo $data['opcao_turno'];?>
+                        </div>                    
                     </div>
 
                     
@@ -73,28 +80,82 @@ $(document).ready(function(){
                     
                     
                     <div class="row">
-                            <div class="col-md-3">
-                                Responsável:  <?php echo $data['responsavel'];?>
-                            </div>  
+                        <div class="col-md-3">
+                            Responsável:  <?php echo $data['responsavel'];?>
+                        </div> 
+                        <div class="col-md-3">
+                            CPF Responsável:  <?php echo $data['cpfresponsavel'];?>
+                        </div>
+                        <div class="col-md-3">
+                            Deficiente:  <?php echo $data['deficiencia'];?>
+                        </div> 
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            Observação:  <?php echo $data['observacao'];?>
+                        </div>
+                    </div>
+
+                    
+
+
+                    <hr>
+
+
+                    <h3>Endereço</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            Logradouro:  <?php echo $data['logradouro'];?>
+                        </div>  
+
+                        <div class="col-md-4">
+                            Bairro:  <?php echo $data['bairro'];?>
+                        </div> 
+
+                        <div class="col-md-4">
+                            Número:  <?php echo $data['numero'];?>
+                        </div> 
+                        <div class="col-md-4">
+                            Complemento:  <?php echo $data['complemento'];?>
+                        </div>
                     </div>
 
                     <hr>
 
+                    <h3>Contato</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            E-mail:  <?php echo $data['email'];?>
+                        </div>  
+
+                        <div class="col-md-4">
+                            Telefone:  <?php echo $data['telefone'];?>
+                        </div> 
+
+                        <div class="col-md-4">
+                            Celular:  <?php echo $data['celular'];?>
+                        </div> 
+                    </div>
+
+
+                    <hr>
                     
                     
                     <h3>Opções para matrícula escolhidas pelo Responsável.</h3>
                     <div class="row">
-                            <div class="col-md-4">
-                                Opção 01:  <?php echo $data['opcao1_id'];?>
-                            </div>  
+                        <div class="col-md-4">
+                            Opção 01:  <?php echo $data['opcao1_id'];?>
+                        </div>  
 
-                            <div class="col-md-4">
-                                Opção 02:  <?php echo $data['opcao2_id'];?>
-                            </div> 
+                        <div class="col-md-4">
+                            Opção 02:  <?php echo $data['opcao2_id'];?>
+                        </div> 
 
-                            <div class="col-md-4">
-                                Opção 03:  <?php echo $data['opcao3_id'];?>
-                            </div> 
+                        <div class="col-md-4">
+                            Opção 03:  <?php echo $data['opcao3_id'];?>
+                        </div> 
                     </div>
 
 

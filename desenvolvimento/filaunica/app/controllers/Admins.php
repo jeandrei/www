@@ -208,13 +208,24 @@
           'registro' => date('d/m/Y h:i:s', strtotime($fila->registro)),
           'telefone' => $fila->telefone,
           'celular' => $fila->celular,
+          'email' => $fila->email, 
+          'logradouro' => $fila-> logradouro,
+          'bairro' => $this->filaModel->getBairroByid($fila->bairro_id),
+          'numero' => $fila->numero,
+          'complemento' => $fila->complemento,
           'situacao' => $this->situacaoModel->getDescricaoSituacaoById($fila->situacao_id),                  
           'situacao_id' => $fila->situacao_id,
           'opcao1_id' => $this->filaModel->getEscolasById($fila->opcao1_id)->nome,
           'opcao2_id' => $this->filaModel->getEscolasById($fila->opcao2_id)->nome,
           'opcao3_id' => $this->filaModel->getEscolasById($fila->opcao3_id)->nome,
           'opcao_turno' => $this->filaModel->getTurno($fila->opcao_turno),
-          'opcao_matricula' => $fila->opcao_matricula       
+          'opcao_matricula' => $fila->opcao_matricula,
+          'observacao' => $fila->observacao,
+          'deficiencia' => $fila->deficiencia == 1 ? 'Sim':'Não',
+          'cpfresponsavel' => $fila-> cpfresponsavel,
+          'certidaonascimento' => $fila-> certidaonascimento
+
+
         ];
 
         $this->view('admins/editar', $data);

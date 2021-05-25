@@ -16,6 +16,22 @@
             return $this->db->resultSet();
         }
 
+          // Busca etapa por id
+          public function getBairroByid($id){
+            $this->db->query('SELECT * FROM bairro WHERE id = :id');
+            // Bind value
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->single();
+
+            // Check row
+            if($this->db->rowCount() > 0){
+                return $row->nome;
+            } else {
+                return false;
+            }
+        } 
+
         public function getEscolas(){
             $this->db->query("SELECT id, nome FROM escola");
 
