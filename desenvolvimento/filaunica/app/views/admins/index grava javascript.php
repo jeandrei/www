@@ -21,17 +21,83 @@
         focofield("buscanome");
     }    
     
-    window.onload = function(){
-        focofield("buscanome");
-    }     
+    window.onload = function(){focofield("buscanome");}
+
+      //espera a página carregar completamente
+      $(document).ready(function(){  
+           //seleciona o objeto select da página    
+           $('.gravar').click(function() {                
+                //atribui os valores do id e do status as variáveis
+                var id=$("#id_reg_fila").val();
+                var status=$("#status_reg_fila").val();  
+                var txthist=$("#txthist").val();               
+                    //monta a url chamando o método updateStatus no controller e passa através do GET o id e o Status  
+                    $.ajax({
+                    /* aqui em url passamos a url do controler e o método que iremos utilizar nesse caso controller jquerys método newEstado */
+                    /* a newEstado vai receber pelo POST o valor do input estado e por sua vez vai chamar no model addEstado($_POST['estado'])   */
+                    url: '<?php echo URLROOT; ?>/admins/gravar',
+                    /* aqui o método que utilizamos nesse caso POST */
+                    method:'POST',
+                    /* aqui as variáveis que queremos passar para o arquivo php neste caso controller/método */
+                    data:{
+                        id:id,
+                        status: status,
+                        txthist: txthist                     
+                    },                                       
+                    /* aqui se obtiver sucesso imprimimos que os dados foram armazenados com sucesso */                   
+                    success: function(retorno_php){ 
+                    /* para poder retornar um array tranformo os dados que retornam do php em um objeto json agora para chamar a variável que vem do php */
+                    /* faz assim responseObj.variavel ex console.log(responseObj.mensagem); */
+                    /* retorno_php vem de controllers/jquerys/newEstado() */
+                    var responseObj = JSON.parse(retorno_php);                    
+                    $("#messageBox")
+                        .removeClass()
+                        /* aqui em addClass adiciono a classe que vem do php se sucesso ou danger */
+                        /* pode adicionar mais classes se precisar ficaria assim .addClass("confirmbox "+responseObj.classe) */
+                        .addClass(responseObj.classe) 
+                        /* aqui a mensagem que vem la do php responseObj.mensagem */                       
+                        .html(responseObj.mensagem) 
+                        .fadeIn(2000).fadeOut(2000);
+                         
+                    }                    
+                });
+            });
+        });
 
         
     //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
     function newtab(){
       document.getElementById('filtrar').setAttribute('target', '_blank');
     }
+
+
+
 </script>
 
+
+<?php 
+
+
+// A CONEXÃO COM O BANCO DE DADOS É FEITO NA CONSTRUCT DO LIBRARIES/PAGINATOR
+// PROCURE POR "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE" 
+
+/*
+1 A BIBLIOTÉCA PAGINATION QUE ESTÁ EM libraries/Pagination E É CARREGADA AUTOMATICAMENTE PELO sql_autoload_register assim como as outras libraries Core, Database etc
+2 Eu extendi a classe Pagination da biblioteca libraries/Pagination para a database Pagination extends Database assim eu consigo utilizar os mesmos parâmetros de conexão da classe database
+- dúvida procure em libraries/Pagination "AQUI EU ALTEREI FIZ A CONEXÃO COM O BANCO DE DADOS QUE ESTÁ NO DATABASE"
+3 Cria o controller com o código em comentário vai lá no controller Exemplo_paginacao.php index() que vc vai ver
+4 Cria o model com um metodo para buscar os dados no banco de dados getfila($page, $options) E PRINCIPALMENTE ***EXTENDS PARA PAGINATION***
+5 Atribua o resultado desse método a variável $paginate $paginate = $data['paginate'];
+- a variável $data['paginate'] vem do resultado do método getfila
+6 Para passar parâmetros na consulta sql tipo status = Aguardando
+- no controller em options coloca assim  'named_params' => array(':status' => 'Aguardando') 
+7 PARA POSSIBILITAR CONSULTA COM 'named_params' => array(':status' => $status) tem que colocar no input
+e no controller abaixo do if(isset($_GET['page'])) como SESSION É SÓ IR LÁ QUE VC VAI ENTENDER  
+
+*/
+
+
+?>
 
 
 <!-- LINHA PARA A MENSÁGEM DO JQUERY -->
@@ -241,19 +307,79 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 
                 <!--BOTÕES-->
 
-                <!-- LINHA PARA OS BOTÕES -->
+                <!-- LINHA PARA O BOTÃO ATUALIZAR E SELECT -->
                 <div class="row" style="margin-top:30px;">
-                    <div class="col-md-12 text-center">                        
-                        <a href="<?php echo URLROOT; ?>/admins/edit/<?php echo  $registro['id'];?>" class="btn btn-primary btn-sm">Editar</a>
-                        <a href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>" class="btn btn-warning btn-sm">Histórico</a>
-                    </div>  
-                <!-- FIM LINHA BOTÕES -->
-                </div> 
 
-            </div><!--<div class="card-body">-->
+                    <!--COLUNA SELECT-->
+                    <div class="col-2" style="padding-left:0;">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <select class="form-control form-control-sm"
+                                    name="statuslista" 
+                                    id="<?php echo  $registro['id'];?>" 
+                                    class="form-control" 
+                                    onChange="
+                                            document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>;
+                                            document.getElementById('status_reg_fila').value = this.value;
+                                            ">                   
+                                    <?php 
+                                    $situacoes = $this->situacaoModel->getSituacoes();                   
+                                    foreach($situacoes as $row) : ?> 
+                                        <option value="<?php echo $row->id; ?>" 
+                                                    <?php echo $row->id == $registro['situacao_id'] ? 'selected':'';?>
+                                        >
+                                            <?php echo $row->descricao;?>
+                                        </option>
+                                    <?php endforeach; ?>  
+                                    </select>
+                                    <!--JOGO O VALOR DA ID QUE ESTÁ NO SELECT ATRAVÉS DO EVENTO onChange para id_reg_fila PARA DEPOIS CHAMAR NO AJAX-->
+                                    <input type="hidden" id="id_reg_fila" name="id_reg_fila" value="<?php echo $registro['id']; ?>">
+                                    <!--JOGO O VALOR DO STATUS DO SELECT ATRAVÉS DO EVENTO onChange para status_reg_fila PARA DEPOIS CHAMAR NO AJAX--> 
+                                    <input type="hidden" id="status_reg_fila" name="status_reg_fila" value="<?php echo $registro['situacao_id']; ?>"> 
+                                    <input type="hidden" id="txthist" name="txthist" value="">
+                            </div>
+                    </div>                    
 
-        
-        </div><!-- <div class="card">-->
+
+                     <!--COLUNA TEXTO HISTÓRICO-->
+                     Histórico:
+                     <div class="col-6" style="padding-left:0;">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input 
+                                class="form-control form-control-sm" 
+                                type="text" 
+                                id="historico_<?php echo  $registro['id'];?>" 
+                                name="historico_<?php echo  $registro['id'];?>"> 
+                        </div>
+                    </div>
+
+                    <!--COLUNA BOTÕES-->
+                    <div class="col-2" style="padding-left:0;">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <button 
+                                type="button" 
+                                class="btn btn-success btn-sm gravar"
+                                onClick="
+                                        document.getElementById('id_reg_fila').value = <?php echo $registro['id']; ?>,   
+                                        document.getElementById('status_reg_fila').value = document.getElementById('<?php echo $registro['id'];?>').value,
+                                        document.getElementById('txthist').value = document.getElementById('historico_<?php echo  $registro['id'];?>').value;
+                                        "
+                            >                    
+                            Gravar
+                            </button>
+
+                            <a href="<?php echo URLROOT; ?>/admins/historico/<?php echo  $registro['id'];?>" class="btn btn-primary btn-sm">Histórico</a>
+                        </div>                                                
+                    </div>
+                    
+                <!-- FIM LINHA BOTÃO ATUALIZAR E SELECT -->
+                </div>                     
+                
+            
+            
+            </div>
+       
+       
+        </div>
         
     <?php endforeach; ?>
 <!-- FIM DOS CARDS -->

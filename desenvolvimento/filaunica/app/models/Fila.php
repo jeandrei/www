@@ -291,6 +291,35 @@
         
         }
 
+
+
+
+        function buscaFilaById($id) {
+            $this->db->query(' 
+                                SELECT 
+                                       *
+                                FROM 
+                                        fila
+                                WHERE 
+                                        fila.id = :id                                                            
+        
+                            ');
+        
+        
+        
+            $this->db->bind(':id',$id);            
+            
+            $row = $this->db->single();             
+                    
+            if($this->db->rowCount() > 0){
+                return $row;
+            } else {
+                return false;
+            }       
+            
+        
+        }
+
         public function getTurno($num){
             if ($num == 1){
                 $turno = "Matutino";
