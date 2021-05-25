@@ -9,9 +9,13 @@ $(document).ready(function(){
     if(situacao == 2){
         $( "#div_escola_mat" ).removeClass( "invisible");
         $( "#div_escola_mat" ).addClass( "visible");
+        $( "#imprimir" ).removeClass( "invisible");
+        $( "#imprimir" ).addClass( "visible");
     } else {
         $( "#div_escola_mat" ).removeClass( "visible");
         $( "#div_escola_mat" ).addClass( "invisible");
+        $( "#imprimir" ).removeClass( "visible");
+        $( "#imprimir" ).addClass( "invisible");
     }   
 
  
@@ -72,9 +76,7 @@ $(document).ready(function(){
                         <div class="col-md-4">
                             Turno:  <?php echo $data['opcao_turno'];?>
                         </div>                    
-                    </div>
-
-                    
+                    </div>                   
                     
                     
                     
@@ -96,13 +98,9 @@ $(document).ready(function(){
                         <div class="col-md-12">
                             Observação:  <?php echo $data['observacao'];?>
                         </div>
-                    </div>
-
-                    
-
+                    </div>  
 
                     <hr>
-
 
                     <h3>Endereço</h3>
                     <div class="row">
@@ -232,22 +230,15 @@ $(document).ready(function(){
                             <textarea class="form-control rounded-0" name="historico" id="historico" rows="4"></textarea>
                         </div>
                     </div>
-                    <!--linha 02 editar-->
-
-                            
+                    <!--linha 02 editar-->                     
                     
-
-
-                    
-                    
-                    
-                        
 
 
                     <!-- LINHA PARA OS BOTÕES -->
                     <div class="row" style="margin-top:30px;">
                         <div class="col-md-12 text-center">                        
-                            <input type="submit" value="Gravar" class="btn btn-success">  
+                            <input type="submit" value="Gravar" class="btn btn-success">                            
+                            <input type="submit" value="Imprimir" class="btn btn-success invisible" id="imprimir" name="imprimir">                            
                         </div>  
                     <!-- FIM LINHA BOTÕES -->
                     </div>

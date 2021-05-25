@@ -186,7 +186,7 @@
         if(($this->filaModel->update($data)) && ($this->adminModel->gravaHistorico($data['id'],$data['situacao_id'],$data['historico'],$data['usuario']))){                    
           // views/users/login a segunda parte da menságem                       
           flash('register_success', 'Protocolo atualizado com sucesso!');                        
-          redirect('admins/index');
+          redirect('admins/edit/' . $data['id']);
         } else {
             die('Ops! Algo deu errado.');
         }
