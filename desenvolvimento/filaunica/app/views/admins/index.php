@@ -33,14 +33,9 @@
 </script>
 
 
-
 <!-- LINHA PARA A MENSÁGEM DO JQUERY -->
 <div class="container">
-    <div class="row" style="height: 50px;  margin-bottom: 25px;">
-        <div class="col-12">
-            <div role="alert" id="messageBox" style="display:none"></div>
-        </div>
-    </div>
+    <?php flash('register_success');?>
 </div>
 
 
@@ -236,6 +231,16 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                         Opção 3: <?php echo $registro['opcao3_id']; ?>
                     </div>
                 </div>
+
+                <!--4ª Linha do card-->
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?php if($registro['situacao_id'] == 2){
+                            echo "Escola em que a criança foi matriculada: <b>" . $registro['opcao_matricula'] . "</b>";}
+                            ?>                      
+                    </div>                    
+                </div>
+                
                 
                 <hr>
 

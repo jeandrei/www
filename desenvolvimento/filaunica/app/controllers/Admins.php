@@ -97,6 +97,7 @@
                     'opcao1_id' => $this->filaModel->getEscolasById($result['opcao1_id'])->nome,
                     'opcao2_id' => $this->filaModel->getEscolasById($result['opcao2_id'])->nome,
                     'opcao3_id' => $this->filaModel->getEscolasById($result['opcao3_id'])->nome,
+                    'opcao_matricula' => $this->filaModel->getEscolasById($result['opcao_matricula'])->nome,
                     'opcao_turno' => $this->filaModel->getTurno($result['opcao_turno'])
                   ];
                 }
@@ -159,37 +160,65 @@
 
 
       public function edit($id){ 
-      
+        
         //se o usuário não tiver feito login redirecionamos para o index
       if(!isset($_SESSION[DB_NAME . '_user_id'])){
         redirect('index');
       }
+
+      // se o usuário tiver clicado em gravar
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){       
+                
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       
-      //pego os dados do registro da fila
-      $fila = $this->filaModel->buscaFilaById($id);
-      
-      $data = [
-        'id' => $id,
-        'posicao' =>  ($this->filaModel->buscaPosicaoFila($fila->protocolo)) ? $this->filaModel->buscaPosicaoFila($fila->protocolo) : "-",
-        'etapa' => ($this->etapaModel->getEtapaDescricao($fila->nascimento)) ? $this->etapaModel->getEtapaDescricao($fila->nascimento) : "FORA DE TODAS AS ETAPAS",
-        'nomecrianca' => $fila->nomecrianca,
-        'nascimento' => date('d/m/Y', strtotime($fila->nascimento)),
-        'responsavel' => $fila->responsavel,
-        'protocolo' => $fila->protocolo,
-        'registro' => date('d/m/Y h:i:s', strtotime($fila->registro)),
-        'telefone' => $fila->telefone,
-        'celular' => $fila->celular,
-        'situacao' => $this->situacaoModel->getDescricaoSituacaoById($fila->situacao_id),                  
-        'situacao_id' => $fila->situacao_id,
-        'opcao1_id' => $this->filaModel->getEscolasById($fila->opcao1_id)->nome,
-        'opcao2_id' => $this->filaModel->getEscolasById($fila->opcao2_id)->nome,
-        'opcao3_id' => $this->filaModel->getEscolasById($fila->opcao3_id)->nome,
-        'opcao_turno' => $this->filaModel->getTurno($fila->opcao_turno)
-      ];
+        //pego os dados do registro da fila
+        $fila = $this->filaModel->buscaFilaById($id);
+              
+        $data = [
+          'id' => $id,                        
+          'situacao_id' => $_POST['situacao'],         
+          'opcao_matricula' => $_POST['escolamatricula'],
+          'historico' => $_POST['historico'],
+          'usuario' => $_SESSION[DB_NAME . '_user_name']     
+        ];
+
+        // Update User       
+        if(($this->filaModel->update($data)) && ($this->adminModel->gravaHistorico($data['id'],$data['situacao_id'],$data['historico'],$data['usuario']))){                    
+          // views/users/login a segunda parte da menságem                       
+          flash('register_success', 'Protocolo atualizado com sucesso!');                        
+          redirect('admins/index');
+        } else {
+            die('Ops! Algo deu errado.');
+        }
 
 
-     
-      $this->view('admins/editar', $data);
+            
+              
+      } else { 
+        // se o usuário não clicou em gravar carrega os dados atuais       
+        $fila = $this->filaModel->buscaFilaById($id);
+        $data = [
+          'id' => $id,
+          'posicao' =>  ($this->filaModel->buscaPosicaoFila($fila->protocolo)) ? $this->filaModel->buscaPosicaoFila($fila->protocolo) : "-",
+          'etapa' => ($this->etapaModel->getEtapaDescricao($fila->nascimento)) ? $this->etapaModel->getEtapaDescricao($fila->nascimento) : "FORA DE TODAS AS ETAPAS",
+          'nomecrianca' => $fila->nomecrianca,
+          'nascimento' => date('d/m/Y', strtotime($fila->nascimento)),
+          'responsavel' => $fila->responsavel,
+          'protocolo' => $fila->protocolo,
+          'registro' => date('d/m/Y h:i:s', strtotime($fila->registro)),
+          'telefone' => $fila->telefone,
+          'celular' => $fila->celular,
+          'situacao' => $this->situacaoModel->getDescricaoSituacaoById($fila->situacao_id),                  
+          'situacao_id' => $fila->situacao_id,
+          'opcao1_id' => $this->filaModel->getEscolasById($fila->opcao1_id)->nome,
+          'opcao2_id' => $this->filaModel->getEscolasById($fila->opcao2_id)->nome,
+          'opcao3_id' => $this->filaModel->getEscolasById($fila->opcao3_id)->nome,
+          'opcao_turno' => $this->filaModel->getTurno($fila->opcao_turno),
+          'opcao_matricula' => $fila->opcao_matricula       
+        ];
+
+        $this->view('admins/editar', $data);
+      }
          
     }
 

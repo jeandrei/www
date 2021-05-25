@@ -329,6 +329,22 @@
             }
             return $turno;
         }
+
+
+        public function update($data){             
+            $this->db->query('UPDATE fila SET opcao_matricula = :opcao_matricula, situacao_id = :situacao_id WHERE id = :id');
+            // Bind values
+            $this->db->bind(':id',$data['id']);
+            $this->db->bind(':opcao_matricula',$data['opcao_matricula']);            
+            $this->db->bind(':situacao_id',$data['situacao_id']);            
+
+            // Execute
+            if($this->db->execute()){
+                return true;                
+            } else {
+                return false;
+            }
+        }
            
         
         

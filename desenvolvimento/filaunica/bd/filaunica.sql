@@ -143,6 +143,7 @@ CREATE TABLE `fila` (
   `opcao1_id` varchar(11) DEFAULT NULL,
   `opcao2_id` varchar(11) DEFAULT NULL,
   `opcao3_id` varchar(11) DEFAULT NULL,
+  `opcao_matricula` varchar(11) DEFAULT NULL,  
   `opcao_turno` varchar(20) DEFAULT NULL,
   `observacao` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,

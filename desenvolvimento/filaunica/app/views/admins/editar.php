@@ -1,5 +1,45 @@
 <?php require APPROOT . '/views/inc/header.php';?>
 
+<script>
+
+$(document).ready(function(){
+
+    // quando carrega o documento
+    situacao = $("#situacao").val();
+    if(situacao == 2){
+        $( "#div_escola_mat" ).removeClass( "invisible");
+        $( "#div_escola_mat" ).addClass( "visible");
+    } else {
+        $( "#div_escola_mat" ).removeClass( "visible");
+        $( "#div_escola_mat" ).addClass( "invisible");
+    }   
+
+ 
+    // quando altera a situação
+    $("#situacao").change(function(){
+        situacao = $("#situacao").val();
+            if(situacao == 2){
+                $( "#div_escola_mat" ).removeClass( "invisible");
+                $( "#div_escola_mat" ).addClass( "visible");
+            } else {
+                $( "#div_escola_mat" ).removeClass( "visible");
+                $( "#div_escola_mat" ).addClass( "invisible");
+            }   
+    });
+
+
+
+
+});
+
+
+
+
+</script>
+
+
+
+
 <div class="row">
     <div class="col-md-12 mx-auto">
         <?php flash('register_success');?>
@@ -49,11 +89,11 @@
                             </div>  
 
                             <div class="col-md-4">
-                                Opção 01:  <?php echo $data['opcao2_id'];?>
+                                Opção 02:  <?php echo $data['opcao2_id'];?>
                             </div> 
 
                             <div class="col-md-4">
-                                Opção 01:  <?php echo $data['opcao3_id'];?>
+                                Opção 03:  <?php echo $data['opcao3_id'];?>
                             </div> 
                     </div>
 
@@ -91,7 +131,7 @@
                             </div>
 
                                 <!-- COLUNA 3 SITUAÇÃO-->
-                            <div class="form-group col-lg-6">
+                            <div id="div_escola_mat" name="div_escola_mat" class="form-group col-lg-6 invisible">
                                 <label for="escolamatricula">
                                     Escola em que a criança foi matriculada
                                 </label>                        
@@ -106,7 +146,7 @@
                                         foreach($escolas as $row) : ?> 
                                             <option value="<?php echo $row->id; ?>"
                                                         <?php 
-                                                        echo $data['situacao_id'] == $row->id ? 'selected':'';
+                                                        echo $data['opcao_matricula'] == $row->id ? 'selected':'';
                                                         
                                                         ?>
                                             >
@@ -127,8 +167,8 @@
                     <!--linha 02 editar-->
                     <div class="row">   
                         <div class="form-group col-lg-9">
-                            <label for="exampleFormControlTextarea1">Histórico</label>
-                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <label for="historico">Histórico</label>
+                            <textarea class="form-control rounded-0" name="historico" id="historico" rows="4"></textarea>
                         </div>
                     </div>
                     <!--linha 02 editar-->
