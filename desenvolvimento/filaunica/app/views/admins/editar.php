@@ -9,13 +9,13 @@ $(document).ready(function(){
     if(situacao == 2){
         $( "#div_escola_mat" ).removeClass( "invisible");
         $( "#div_escola_mat" ).addClass( "visible");
-        $( "#btn_imprimir" ).removeClass( "invisible");
-        $( "#btn_imprimir" ).addClass( "visible");
+        $( "#botao" ).removeClass( "invisible");
+        $( "#botao" ).addClass( "visible");
     } else {
         $( "#div_escola_mat" ).removeClass( "visible");
         $( "#div_escola_mat" ).addClass( "invisible");
-        $( "#btn_imprimir" ).removeClass( "visible");
-        $( "#btn_imprimir" ).addClass( "invisible");
+        $( "#botao" ).removeClass( "visible");
+        $( "#botao" ).addClass( "invisible");
     }   
 
  
@@ -39,7 +39,7 @@ $(document).ready(function(){
 
  //PARA ABRIR EM UMA NOVA ABA CRIO ESSA FUNÇÃO NEWTAB QUE É CHAMADA NO EVENTO ONCLICK DO BOTÃO IMPRIMIR
  function newtab(){
-      document.getElementById('filtrar').setAttribute('target', '_blank');
+      document.getElementById('editprotocolo').setAttribute('target', '_blank');
     }
 
 </script>
@@ -57,7 +57,7 @@ $(document).ready(function(){
                 
                 <hr>
 
-                <form action="<?php echo URLROOT; ?>/admins/edit/<?php echo $data['id']; ?>" method="post">                
+                <form id="editprotocolo" action="<?php echo URLROOT; ?>/admins/edit/<?php echo $data['id']; ?>" method="post">                
                     
                     <h3>Nome da criança: <?php echo $data['nomecrianca'];?></h3>
                     
@@ -241,9 +241,7 @@ $(document).ready(function(){
                     <div class="row" style="margin-top:30px;">
                         <div class="col-md-12 text-center">                        
                             <input type="submit" value="Gravar" class="btn btn-success">                            
-                            <input type="submit" name="btn_imprimir" id="btn_imprimir" class="btn btn-primary" value="Imprimir" onClick="newtab()">   
-                            <a href="<?php echo URLROOT; ?>/imprimir/" class="btn btn-default btn-lg btn-block" role="button">Imprimir</a>                        
-                            
+                            <input type="submit" name="botao" id="botao" class="btn btn-primary" value="Imprimir" onClick="newtab()">                              
                         </div>  
                     <!-- FIM LINHA BOTÕES -->
                     </div>

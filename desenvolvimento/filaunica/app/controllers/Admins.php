@@ -167,7 +167,7 @@
       }
 
       // se o usuário tiver clicado em gravar
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){       
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){         
                 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       
@@ -178,18 +178,42 @@
           'id' => $id,                        
           'situacao_id' => $_POST['situacao'],         
           'opcao_matricula' => $_POST['escolamatricula'],
+          'unidade_matricula' => $this->filaModel->getEscolasById($_POST['escolamatricula'])->nome,
           'historico' => $_POST['historico'],
-          'usuario' => $_SESSION[DB_NAME . '_user_name']     
+          'usuario' => $_SESSION[DB_NAME . '_user_name'],
+          'etapa' => ($this->etapaModel->getEtapaDescricao($fila->nascimento)) ? $this->etapaModel->getEtapaDescricao($fila->nascimento) : "FORA DE TODAS AS ETAPAS",
+          'nomecrianca' => $fila->nomecrianca,
+          'nascimento' => date('d/m/Y', strtotime($fila->nascimento)),
+          'responsavel' => $fila->responsavel,
+          'protocolo' => $fila->protocolo, 
+          'telefone' => $fila->telefone,
+          'celular' => $fila->celular,
+          'email' => $fila->email, 
+          'logradouro' => $fila-> logradouro,
+          'bairro' => $this->filaModel->getBairroByid($fila->bairro_id),
+          'numero' => $fila->numero,
+          'complemento' => $fila->complemento,
+          'situacao' => $this->situacaoModel->getDescricaoSituacaoById($fila->situacao_id), 
+          'opcao_turno' => $this->filaModel->getTurno($fila->opcao_turno),           
+          'observacao' => $fila->observacao,
+          'deficiencia' => $fila->deficiencia == 1 ? 'Sim':'Não',
+          'cpfresponsavel' => $fila-> cpfresponsavel,
+          'certidaonascimento' => $fila-> certidaonascimento 
         ];
 
-        // Update User       
-        if(($this->filaModel->update($data)) && ($this->adminModel->gravaHistorico($data['id'],$data['situacao_id'],$data['historico'],$data['usuario']))){                    
-          // views/users/login a segunda parte da menságem                       
-          flash('register_success', 'Protocolo atualizado com sucesso!');                        
-          redirect('admins/edit/' . $data['id']);
-        } else {
+
+          //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO EU IMPRIMO O ENCAMINHAMENTO
+          if($_POST['botao'] == "Imprimir"){             
+            // E AQUI CHAMO O RELATÓRIO          
+            $this->view('relatorios/relatoriomatricula' ,$data);
+             //CASO NÃO FOR O BOTÃO IMPRIMIR EU ATUALIZO OS DADOS DO CADASTRO E REGISTRO NO HISTÓRICO
+          } elseif (($this->filaModel->update($data)) && ($this->adminModel->gravaHistorico($data['id'],$data['situacao_id'],$data['historico'],$data['usuario']))){                                  
+            flash('register_success', 'Protocolo atualizado com sucesso!');                        
+            redirect('admins/edit/' . $data['id']);
+          }             
+           else {
             die('Ops! Algo deu errado.');
-        }
+          }
 
 
             
