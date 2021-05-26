@@ -6,30 +6,39 @@ $(document).ready(function(){
 
     // quando carrega o documento
     situacao = $("#situacao").val();
-    if(situacao == 2){
+    if(situacao == 2 || situacao == 5){
         $( "#div_escola_mat" ).removeClass( "invisible");
-        $( "#div_escola_mat" ).addClass( "visible");
-        $( "#botao" ).removeClass( "invisible");
-        $( "#botao" ).addClass( "visible");
+        $( "#div_escola_mat" ).addClass( "visible");       
     } else {
         $( "#div_escola_mat" ).removeClass( "visible");
-        $( "#div_escola_mat" ).addClass( "invisible");
+        $( "#div_escola_mat" ).addClass( "invisible");        
+    }  
+
+
+    if(situacao == 2){        
+        $( "#botao" ).removeClass( "invisible");
+        $( "#botao" ).addClass( "visible");
+    } else {        
         $( "#botao" ).removeClass( "visible");
         $( "#botao" ).addClass( "invisible");
-    }   
+    }    
 
  
     // quando altera a situação
     $("#situacao").change(function(){
         situacao = $("#situacao").val();
-            if(situacao == 2){
-                $( "#div_escola_mat" ).removeClass( "invisible");
-                $( "#div_escola_mat" ).addClass( "visible");
+            if(situacao == 2 || situacao == 5){
+                $( "#div_escola_mat" ).removeClass("invisible");
+                $( "#div_escola_mat" ).addClass("visible");
             } else {
-                $( "#div_escola_mat" ).removeClass( "visible");
-                $( "#div_escola_mat" ).addClass( "invisible");
+                $( "#div_escola_mat" ).removeClass("visible");
+                $( "#div_escola_mat" ).addClass("invisible");
             }   
     });
+
+
+
+    
 
 
 

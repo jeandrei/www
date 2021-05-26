@@ -87,9 +87,8 @@ class PDF extends FPDF
                          $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["situacao"]),1,0,'C',true);  
                          $pdf->Ln();    
                          
-                         $pdf->Cell(90,$tam_fonte,utf8_decode("Op 01: " . $row["opcao1_id"]),1);                           
-                         $pdf->Cell(90,$tam_fonte,utf8_decode("Op 02: " . $row["opcao2_id"]),1); 
-                         $pdf->Cell(90,$tam_fonte,utf8_decode("Op 03: " . $row["opcao3_id"]),1);
+                         $pdf->Cell(270,$tam_fonte,utf8_decode($row["situacao"] . " unidade: " . $row["opcao_matricula"]),1);                          
+                         
                         
                      } 
                     

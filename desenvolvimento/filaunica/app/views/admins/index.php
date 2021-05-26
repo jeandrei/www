@@ -235,7 +235,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 <!--4ª Linha do card-->
                 <div class="row">
                     <div class="col-sm-8">
-                        <?php if($registro['situacao_id'] == 2){
+                        <?php if($registro['situacao_id'] == 2 || $registro['situacao_id'] == 5){
                             echo "Escola em que a criança foi matriculada: <b>" . $registro['opcao_matricula'] . "</b>";}
                             ?>                      
                     </div>                    
