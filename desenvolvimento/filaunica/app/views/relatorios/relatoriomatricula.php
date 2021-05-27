@@ -22,20 +22,20 @@ class PDF extends FPDF
                 $this->Ln(20);
                 // Move to the right
                 $this->Cell(80);                
-                $this->Cell(30,10, utf8_decode("Encaminhamento de matrícula - Fila Única"),0,0,'C');
+                $this->Cell(30,10, utf8_decode("PROTOCOLO DE VAGA PARA EDUCAÇÃO INFANTIL - " . date("Y")),0,0,'C');
                 // Line break
-                $this->Ln(20);                
+                $this->Ln(10);                
             }
 
             // Page footer
             function Footer()
             {
                 // Position at 1.5 cm from bottom
-                $this->SetY(-25);
+               // $this->SetY(-25);
                 // Arial italic 8
-                $this->SetFont('Arial','I',8);
+                //$this->SetFont('Arial','I',8);
                 // Page number
-                $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');
+               // $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');
             }
 }
 
@@ -52,15 +52,16 @@ class PDF extends FPDF
                 {
                      $error = "";
                      //adiciona uma nova pagina                     
-                     $pdf->AddPage('P');   
-
-                     $pdf->Ln();                     
+                     $pdf->AddPage('P');                                          
 
                      $pdf->SetFont('Arial','',18); 
-                     $pdf->Cell(25,10,utf8_decode("Protocolo: "),0,0,'R');      
-                     $pdf->Cell(100,10,utf8_decode($data["protocolo"]),0,0,'L');
-                    
-                     $pdf->Ln();
+                     $pdf->Cell(70,10,utf8_decode("Protocolo: "),0,0,'R');      
+                     $pdf->Cell(120,10,utf8_decode($data["protocolo"]),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->SetFont('Arial','',14); 
+                     $pdf->Cell(70,10,utf8_decode("Unidade de encaminhamento: "),0,0,'R');  
+                     $pdf->Cell(120,10,utf8_decode($data["unidade_matricula"]),0,0,'L');                     
+                     
                      $pdf->Ln();
                      
                      $pdf->SetFont('Arial','',12);
@@ -79,7 +80,7 @@ class PDF extends FPDF
 
                      $pdf->Ln();  
                      $pdf->Cell(45,10,utf8_decode("Endereço: "),1,0,'R');      
-                     $pdf->Cell(150,10,utf8_decode($data["logradouro"] . ", " . $data["numero"] . ", " . $data["bairro"] . " - Complemento: " . $data["complemento"] ),1,0,'L');
+                     $pdf->Cell(150,10,utf8_decode($data["logradouro"] . ", " . $data["numero"] . ", " . $data["bairro"]),1,0,'L');
                     
                      $pdf->Ln();  
                      $pdf->Cell(45,10,utf8_decode("E-mail: "),1,0,'R');      
@@ -95,22 +96,53 @@ class PDF extends FPDF
                      $pdf->Ln();  
                      $pdf->Cell(45,10,utf8_decode("Aluno especial: "),1,0,'R');      
                      $pdf->Cell(150,10,utf8_decode($data["deficiencia"]),1,0,'L');
-
-                     $pdf->Ln();  
-                     $pdf->Cell(195,10,utf8_decode("Unidade de encaminhamento para a matrícula"),1,0,'C');  
-                     $pdf->Ln();      
-                     $pdf->Cell(195,10,utf8_decode($data["unidade_matricula"]),1,0,'C'); 
+                     
                      
                      $pdf->Ln();  
-                     $pdf->Cell(95,10,utf8_decode("Usuario responsável pelo encaminhamento: "),1,0,'R');      
-                     $pdf->Cell(100,10,utf8_decode($data["usuario"]),1,0,'L'); 
+                     $pdf->Cell(95,10,utf8_decode("Usuário responsável pelo encaminhamento: "),1,0,'R');      
+                     $pdf->Cell(100,10,utf8_decode($data["usuario"]),1,0,'L');
+                     
+                     
+
+                     
+                     $pdf->Ln(); 
+                     $pdf->Ln();
+                     $pdf->SetFont('Arial','',12);
+                     $pdf->Cell(195,5,utf8_decode("Documentos para Matrícula: "),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->SetFont('Arial','',10);
+                     $pdf->Cell(195,5,utf8_decode("-Cópia da certidão de nascimento do aluno;"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Cópia do comprovante de residência atualizado (somente talão do IPTU, fatura de água ou energia);"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Declaração de vacinação em dia (levar a carteirinha de vacinação até a Unidade de Saúde"),0,0,'L');  
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("mais próxima para retirar esta declaração);"),0,0,'L');  
+                     
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Carteira, contrato ou declaração de trabalho dos pais ou responsáveis pela criança(se estiver trabalhando);"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Cópia dos documentos dos pais ou responsáviel (RG, CPF e Título de Eleitor);"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Cartão ou carteira de benefício (Bolsa Família), quando a família é beneficiária;"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Para aluno com necessidade nutricional específica (alergia, intolerância e outras) apresentar o diagnóstico médico;"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("-Para o aluno com deficiência, transtorno de espectro autista, altas habilidades ou superdotação,"),0,0,'L'); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("deverão apresentar laudo médico."),0,0,'L');
+
                     
                      $pdf->Ln(); 
                      $pdf->Ln(); 
                      $pdf->Ln(); 
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("Observações: Este protocolo tem validade somente até o dia           /          /" . date("Y")),0,0,'L');
                      $pdf->Ln();  
                      $pdf->Ln(); 
                      $pdf->Ln(); 
+                     $pdf->Ln(); 
+                     $pdf->Ln();  
                      $pdf->Ln(); 
                      $pdf->Ln();  
                      $pdf->Cell(190,10,utf8_decode("________________________________________________ "),0,0,'C');  
