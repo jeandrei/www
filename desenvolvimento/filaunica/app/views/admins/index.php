@@ -45,7 +45,26 @@
     <!-- LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
     <div class="row">     
         
-        <!-- COLUNA 1 NOME-->
+        <!-- COLUNA 1 PROTOCOLO-->
+        <div class="col-lg-2">
+            <label for="buscaprotocolo">
+                Buscar Protocolo
+            </label>
+            <input 
+                type="number" 
+                name="buscaprotocolo" 
+                id="buscaprotocolo" 
+                maxlength="60"
+                class="form-control"
+                value="<?php if(isset($_POST['buscaprotocolo'])){htmlout($_POST['buscaprotocolo']);} ?>"
+                onkeydown="upperCaseF(this)"   
+                ><span class="invalid-feedback">
+                    <?php // echo $data['nome_err']; ?>
+                </span>
+        </div>
+
+
+        <!-- COLUNA 2 NOME-->
         <div class="col-lg-4">
             <label for="buscanome">
                 Buscar por Nome
@@ -64,7 +83,7 @@
         </div>
 
 
-        <!-- COLUNA 2 ETAPA -->
+        <!-- COLUNA 3 ETAPA -->
         <div class="col-lg-3">
             <label for="buscaetapa">
                 Busca por Etapa
@@ -93,7 +112,7 @@
         
         
         
-        <!-- COLUNA 3 SITUAÇÃO-->
+        <!-- COLUNA 4 SITUAÇÃO-->
         <div class="col-lg-3">
             <label for="buscasituacao">
                 Busca por Status

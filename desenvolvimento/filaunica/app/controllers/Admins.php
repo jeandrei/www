@@ -50,6 +50,7 @@
             }             
 
               $nome = $_POST['buscanome'];
+              $protocolo = $_POST['buscaprotocolo'];
 
               $page = 1;
           }      
@@ -58,8 +59,9 @@
           
           $options = array(
               'results_per_page' => 10,
-              'url' => URLROOT . '/admins/index.php?page=*VAR*&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&nome=' . $nome,
+              'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $protocolo . '&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&nome=' . $nome,
               'named_params' => array(
+                                      ':protocolo' => $protocolo,
                                       ':situacao_id' => $situacao_id,
                                       ':etapa_id' => $etapa_id,
                                       ':nome' => $nome
