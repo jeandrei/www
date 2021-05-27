@@ -70,9 +70,11 @@ class PDF extends FPDF
 
                      $pdf->Ln();
                      $pdf->Cell(45,10,utf8_decode("Nascimento: "),1,0,'R');     
-                     $pdf->Cell(50,10,utf8_decode($data["nascimento"]),1,0,'L');  
-                     $pdf->Cell(50,10,utf8_decode("Etapa: "),1,0,'R');      
+                     $pdf->Cell(25,10,utf8_decode($data["nascimento"]),1,0,'L');  
+                     $pdf->Cell(25,10,utf8_decode("Etapa: "),1,0,'R');      
                      $pdf->Cell(50,10,utf8_decode($data["etapa"]),1,0,'L');
+                     $pdf->Cell(20,10,utf8_decode("Turno: "),1,0,'R');      
+                     $pdf->Cell(30,10,utf8_decode($data["opcao_turno"]),1,0,'L');
                      
                      $pdf->Ln();  
                      $pdf->Cell(45,10,utf8_decode("Responsável: "),1,0,'R');      
