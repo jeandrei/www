@@ -16,6 +16,7 @@
     
     function limpar(){
         document.getElementById('buscanome').value = "";
+        document.getElementById('buscaprotocolo').value = "";
         document.getElementById('buscaetapa').value = "Todos";
         document.getElementById('buscasituacao').value = "Todos";
         focofield("buscanome");
