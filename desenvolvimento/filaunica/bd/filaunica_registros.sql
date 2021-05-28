@@ -51,20 +51,21 @@ INSERT INTO `bairro` (`id`, `nome`) VALUES
 CREATE TABLE `situacao` (
   `id` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
-  `cor` varchar(30) NOT NULL
+  `cor` varchar(30) NOT NULL,
+  `ativonafila` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Despejando dados para a tabela `bairro`
 --
 
-INSERT INTO `situacao` (`id`, `descricao`, `cor`) VALUES
-(1, 'Aguradando', '#00BFFF'),
-(2, 'Matriculado', '#3CB371'),
-(3, 'Cancelado', '#EE4000'),
-(4, 'Protocolo Vencido', '#CDC1C5'),
-(5, 'Convocado', '#FFC125'),
-(6, 'Desistente', '#836FFF');
+INSERT INTO `situacao` (`id`, `descricao`, `cor`, `ativonafila`) VALUES
+(1, 'Aguradando', '#00BFFF',1),
+(2, 'Matriculado', '#3CB371',0),
+(3, 'Cancelado', '#EE4000',0),
+(4, 'Protocolo Vencido', '#CDC1C5',0),
+(5, 'Convocado', '#FFC125',1),
+(6, 'Desistente', '#836FFF',0);
 
 -- --------------------------------------------------------
 
@@ -150,6 +151,9 @@ CREATE TABLE `fila` (
   `protocolo` varchar(255) DEFAULT NULL,  
   `situacao_id` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
 
 -- --------------------------------------------------------
 
@@ -308,11 +312,6 @@ INSERT INTO `fila` (`id`, `registro`, `responsavel`, `email`, `telefone`, `celul
 
 -- --------------------------------------------------------
 
-
-
-
-
-
 --
 -- Estrutura para tabela `historico_id_fila`
 --
@@ -367,10 +366,10 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
-(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin' '2018-11-23 10:19:18'),
-(2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji', '2018-11-27 15:29:36'),
-(3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi', '2019-01-09 16:46:20');
+INSERT INTO `users` (`id`, `name`, `email`, `password`,`type`, `created_at`) VALUES
+(1, 'Jeandrei', 'jeandreiwalter@gmail.com', '$2y$10$lyyCqzV/cJw5A8TpddC47Ow8K2iVHOHbKl.Nzs0fm/CgjuDBRZoMq','admin','2018-11-23 10:19:18'),
+(2, 'teste1', 'teste1r@gmail.com', '$2y$10$Y3Phy8lW7ACZ41qrXjqOjuS26Jzj5WEoWa3mjNrNwWcHpyPKnOtji','user', '2018-11-27 15:29:36'),
+(3, 'teste', 'jean.walter@penha.sc.gov.br', '$2y$10$EwxO3Gf78AQdSoVhVf6yxefdZFR2n3ON2w.t9XnyXsZPLJTNXfTGi','user', '2019-01-09 16:46:20');
 
 
 --
