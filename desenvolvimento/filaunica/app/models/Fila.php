@@ -211,7 +211,7 @@
         }
 
 
-        public function getFilaPorEtapaRelatorio($etapa_id,$situacao_id) {  
+        public function getFilaPorEtapaRelatorio($etapa_id) {  
             
             $this->db->query("
                     SELECT                                           
@@ -223,16 +223,17 @@
                         (SELECT descricao FROM situacao WHERE fila.situacao_id = id) as status,               
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
                     FROM 
-                        fila 
+                        fila, situacao
                     WHERE
-                        (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
-                    AND
-                        fila.situacao_id = :reg_situacao
+                        (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id                     
+                    AND 
+                        fila.situacao_id = situacao.id
+                    AND 
+                        situacao.ativonafila = 1
                     ORDER BY
                         fila.registro        
-                    ");
-            
-            $this->db->bind(':reg_situacao', $situacao_id);
+                    ");            
+           
             $this->db->bind(':etapa_id', $etapa_id);        
             
             
@@ -262,8 +263,8 @@
             } 
         }      
         
-
-        function buscaPosicaoFila($protocolo) {
+        //BACKUP DA FUNÇÃO ANTIGA
+        function buscaPosicaoFila_BKP($protocolo) {
             $this->db->query(' 
                                 SELECT 
                                         count(fila.id) as posicao,
@@ -291,7 +292,7 @@
                                         fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
                                 
                                 AND
-                                        fila.situacao_id = 1                            
+                                        (fila.situacao_id = 1 OR fila.situacao_id = 5)                           
         
                             ');
         
@@ -302,7 +303,58 @@
             $row = $this->db->single();  
             //var_dump($row);
                     
-            if(($row->statusprotocolo == 1) && ($row->posicao <> 0)){
+            if(($row->statusprotocolo == 1) || ($row->statusprotocolo == 5) && ($row->posicao <> 0)){
+                return $row->posicao . 'º';
+            } else {
+                return false;
+            }       
+            
+        
+        }
+
+
+
+        function buscaPosicaoFila($protocolo) {
+            $this->db->query(' 
+                                SELECT 
+                                        count(fila.id) as posicao,
+                                        (SELECT fila.situacao_id FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
+                                FROM 
+                                        fila, etapa, situacao
+                                WHERE 
+                                        fila.nascimento>=data_ini
+                                AND 
+                                        fila.nascimento<=data_fin
+                                AND 
+                                        etapa.id = (
+                                                    SELECT 
+                                                        etapa.id 
+                                                    FROM etapa,
+                                                        fila 
+                                                    WHERE 
+                                                        fila.nascimento>=data_ini
+                                                    AND 
+                                                        fila.nascimento<=data_fin
+                                                    AND 
+                                                        fila.protocolo = :protocolo
+                                                )
+                                AND 
+                                        fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)                                
+                                AND
+                                        fila.situacao_id = situacao.id
+                                AND
+                                        situacao.ativonafila = 1                          
+        
+                            ');
+        
+        
+        
+            $this->db->bind(':protocolo',$protocolo);            
+            
+            $row = $this->db->single();  
+            //var_dump($row);
+                    
+            if($row->posicao <> 0){
                 return $row->posicao . 'º';
             } else {
                 return false;
