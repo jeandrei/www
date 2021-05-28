@@ -63,9 +63,9 @@ class PDF extends FPDF
             foreach($etapas as $etapa){ 
                 
                 //se existir registros na etapa com status aguardando 1 é a situação aguardando
-                if($registros = $this->listaModel->getFilaPorEtapaRelatorio($etapa['id'], 1))
+                if($registros = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'], 1))
                 {   //guarda os registros na variável registros
-                    $registros = $this->listaModel->getFilaPorEtapaRelatorio($etapa['id'], 1);                                    
+                    $registros = $this->filaModel->getFilaPorEtapaRelatorio($etapa['id'], 1);                                    
                 }
                 else
                 {

@@ -70,7 +70,7 @@
         
          
 
-          $paginate = $this->adminModel->getFilaBusca($page, $options);
+          $paginate = $this->filaModel->getFilaBusca($page, $options);
 
           if($paginate->success == true)
           {             

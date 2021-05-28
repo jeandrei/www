@@ -211,31 +211,28 @@
         }
 
 
-       public function getFilaPorEtapaRelatorio($etapa_id,$status) {   
-            $this->db->query("SET @contador = 0");
-           // $stmt = $pdo->prepare($sql);
-            $this->db->execute();
+        public function getFilaPorEtapaRelatorio($etapa_id,$situacao_id) {  
             
             $this->db->query("
-                    SELECT 
-                        (SELECT @contador := @contador +1) as posicao,                    
+                    SELECT                                           
                         fila.registro as registro, 
                         fila.responsavel as responsavel, 
                         fila.nomecrianca as nome, 
                         fila.nascimento as nascimento,
-                        fila.protocolo as protocolo,                 
+                        fila.protocolo as protocolo,  
+                        (SELECT descricao FROM situacao WHERE fila.situacao_id = id) as status,               
                         (SELECT descricao FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) as etapa
                     FROM 
                         fila 
                     WHERE
                         (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = :etapa_id 
                     AND
-                        fila.situacao_id = :reg_status
+                        fila.situacao_id = :reg_situacao
                     ORDER BY
                         fila.registro        
                     ");
             
-            $this->db->bind(':reg_status', $status);
+            $this->db->bind(':reg_situacao', $situacao_id);
             $this->db->bind(':etapa_id', $etapa_id);        
             
             
@@ -247,7 +244,13 @@
             {
                 foreach ($result as $row){
                     $aguardando[] = array(
-                        "nome" => $row->nome
+                        "posicao" => $this->buscaPosicaoFila($row->protocolo),
+                        "registro" => date('d/m/Y h:i:s', strtotime($row->registro)),
+                        "responsavel" => $row->responsavel,
+                        "nome" => $row->nome,
+                        "nascimento" => date('d/m/Y', strtotime($row->nascimento)), 
+                        "etapa" => $row->etapa,
+                        "protocolo" => $row->protocolo                        
                     );
                 }
             
@@ -257,7 +260,8 @@
             {
                 return false;
             } 
-        } 
+        }      
+        
 
         function buscaPosicaoFila($protocolo) {
             $this->db->query(' 
@@ -361,7 +365,51 @@
                 return false;
             }
         }
-           
+         
+        
+
+          //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+          public function getFilaBusca($page, $options){             
+        
+
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
+            
+            // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
+            if(($options['named_params'][':etapa_id']) == "Todos"){                    
+                $sql .= " WHERE fila.id";
+            } else {
+                // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
+                $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = " . $options['named_params'][':etapa_id'];          
+               
+            }
+
+            if(!empty($options['named_params'][':nome'])){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+            }
+          
+
+            if(($options['named_params'][':situacao_id']) <> "Todos"){
+                $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
+            }
+            
+             
+
+            $sql .= " ORDER BY registro ASC"; 
+            
+            if(($options['named_params'][':protocolo']) <> ""){
+                $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
+            }
+
+               
+            $paginate = new pagination($page, $sql, $options);
+            return  $paginate;
+        }  
+        
+        //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+        public function getFilaTodos($page, $options){              
+            $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
+            return  $paginate;
+        } 
         
         
     
