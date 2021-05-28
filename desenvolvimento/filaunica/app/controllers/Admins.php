@@ -91,7 +91,7 @@
                     'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
                     'responsavel' => $result['responsavel'],
                     'protocolo' => $result['protocolo'],
-                    'registro' => date('d/m/Y h:i:s', strtotime($result['registro'])),
+                    'registro' => date('d/m/Y H:i:s', strtotime($result['registro'])),
                     'telefone' => $result['telefone'],
                     'celular' => $result['celular'],
                     'situacao' => $this->situacaoModel->getDescricaoSituacaoById($result['situacao_id']),                  
