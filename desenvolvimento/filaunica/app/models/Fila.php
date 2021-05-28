@@ -316,35 +316,23 @@
 
         function buscaPosicaoFila($protocolo) {
             $this->db->query(' 
-                                SELECT 
-                                        count(fila.id) as posicao,
-                                        (SELECT fila.situacao_id FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
-                                FROM 
-                                        fila, etapa, situacao
-                                WHERE 
-                                        fila.nascimento>=data_ini
-                                AND 
-                                        fila.nascimento<=data_fin
-                                AND 
-                                        etapa.id = (
-                                                    SELECT 
-                                                        etapa.id 
-                                                    FROM etapa,
-                                                        fila 
-                                                    WHERE 
-                                                        fila.nascimento>=data_ini
-                                                    AND 
-                                                        fila.nascimento<=data_fin
-                                                    AND 
-                                                        fila.protocolo = :protocolo
-                                                )
-                                AND 
-                                        fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)                                
-                                AND
-                                        fila.situacao_id = situacao.id
-                                AND
-                                        situacao.ativonafila = 1                          
-        
+            SELECT 
+                    count(fila.id) as posicao,
+                    (SELECT situacao.ativonafila FROM situacao, fila WHERE situacao.id = fila.situacao_id AND fila.protocolo = :protocolo) as ativo
+                FROM 
+                    fila, situacao
+                WHERE 
+                    fila.situacao_id = situacao.id
+                AND 
+                    fila.nascimento >= (SELECT etapa.data_ini FROM etapa WHERE etapa.data_ini <= (SELECT fila.nascimento FROM fila WHERE fila.protocolo = :protocolo) AND etapa.data_fin >= (SELECT fila.nascimento FROM fila WHERE fila.protocolo = :protocolo))
+                AND 
+                    fila.nascimento <= (SELECT etapa.data_fin FROM etapa WHERE etapa.data_ini <= (SELECT fila.nascimento FROM fila WHERE fila.protocolo = :protocolo) AND etapa.data_fin >= (SELECT fila.nascimento FROM fila WHERE fila.protocolo = :protocolo))
+                AND 
+                    fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
+                AND 
+                    situacao.ativonafila = 1
+                AND 
+                    fila.situacao_id = situacao.id                              
                             ');
         
         
@@ -354,7 +342,7 @@
             $row = $this->db->single();  
             //var_dump($row);
                     
-            if($row->posicao <> 0){
+            if($row->ativo == 1){
                 return $row->posicao . 'º';
             } else {
                 return false;
