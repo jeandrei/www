@@ -262,56 +262,7 @@
                 return false;
             } 
         }      
-        
-        //BACKUP DA FUNÇÃO ANTIGA
-        function buscaPosicaoFila_BKP($protocolo) {
-            $this->db->query(' 
-                                SELECT 
-                                        count(fila.id) as posicao,
-                                        (SELECT fila.situacao_id FROM fila WHERE fila.protocolo=:protocolo) as statusprotocolo
-                                FROM 
-                                        fila, etapa
-                                WHERE 
-                                        fila.nascimento>=data_ini
-                                AND 
-                                        fila.nascimento<=data_fin
-                                AND 
-                                        etapa.id = (
-                                                    SELECT 
-                                                        etapa.id 
-                                                    FROM etapa,
-                                                        fila 
-                                                    WHERE 
-                                                        fila.nascimento>=data_ini
-                                                    AND 
-                                                        fila.nascimento<=data_fin
-                                                    AND 
-                                                        fila.protocolo = :protocolo
-                                                )
-                                AND 
-                                        fila.registro <= (SELECT fila.registro FROM fila WHERE fila.protocolo = :protocolo)
-                                
-                                AND
-                                        (fila.situacao_id = 1 OR fila.situacao_id = 5)                           
-        
-                            ');
-        
-        
-        
-            $this->db->bind(':protocolo',$protocolo);            
-            
-            $row = $this->db->single();  
-            //var_dump($row);
-                    
-            if(($row->statusprotocolo == 1) || ($row->statusprotocolo == 5) && ($row->posicao <> 0)){
-                return $row->posicao . 'º';
-            } else {
-                return false;
-            }       
-            
-        
-        }
-
+              
 
 
         function buscaPosicaoFila($protocolo) {
@@ -333,7 +284,7 @@
                     situacao.ativonafila = 1
                 AND 
                     fila.situacao_id = situacao.id                              
-                            ');
+            ');
         
         
         
@@ -342,10 +293,16 @@
             $row = $this->db->single();  
             //var_dump($row);
                     
-            if($row->ativo == 1){
+            if($row->ativo == 1 && $row->posicao > 0){
                 return $row->posicao . 'º';
             } else {
-                return false;
+                if($row->posicao == 0)
+                {
+                    return "FE";
+                }else
+                {
+                    return false;
+                }                
             }       
             
         
@@ -444,6 +401,48 @@
             $paginate = new pagination($page, $sql, $options);
             return  $paginate;
         }  
+
+
+
+         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+          public function getFilaBuscaRelatorio($options){             
+        
+
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
+            
+            // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
+            if(($options['named_params'][':etapa_id']) == "Todos"){                    
+                $sql .= " WHERE fila.id";
+            } else {
+                // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
+                $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = " . $options['named_params'][':etapa_id'];          
+               
+            }
+
+            if(!empty($options['named_params'][':nome'])){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+            }
+          
+
+            if(($options['named_params'][':situacao_id']) <> "Todos"){
+                $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
+            }
+            
+             
+
+            $sql .= " ORDER BY etapa, registro ASC"; 
+            
+            /*if(($options['named_params'][':protocolo']) <> ""){
+                $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
+            }*/
+
+            $this->db->query($sql);
+            $result = $this->db->resultSet();
+            
+            return  $result;
+        }  
+
+
         
         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
         public function getFilaTodos($page, $options){              

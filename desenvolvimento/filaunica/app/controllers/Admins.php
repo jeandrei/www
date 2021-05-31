@@ -86,7 +86,7 @@
                   $data['results'][] = [
                     'id' => $result['id'],
                     'posicao' =>  ($this->filaModel->buscaPosicaoFila($result['protocolo'])) ? $this->filaModel->buscaPosicaoFila($result['protocolo']) : "-",
-                    'etapa' => ($this->etapaModel->getEtapaDescricao($result['nascimento'])) ? $this->etapaModel->getEtapaDescricao($result['nascimento']) : "FORA DE TODAS AS ETAPAS",
+                    'etapa' => ($this->etapaModel->getEtapaDescricao($result['nascimento'])) ? $this->etapaModel->getEtapaDescricao($result['nascimento']) : "FORA DAS ETAPAS",
                     'nomecrianca' => $result['nomecrianca'],
                     'nascimento' => date('d/m/Y', strtotime($result['nascimento'])),
                     'responsavel' => $result['responsavel'],
@@ -112,9 +112,39 @@
           
           //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO getDados($page, $options,1) ONDE 1 É QUE É PARA IMPRIMIR E 0 É PARA LISTAR NA PAGINAÇÃO
           if($_POST['botao'] == "Imprimir"){              
-              $data = $data['results'];               
-              // E AQUI CHAMO O RELATÓRIO          
-              $this->view('relatorios/relatorioconsulta' ,$data);
+              
+            $result_r = $this->filaModel->getFilaBuscaRelatorio($options);
+            
+            if(!empty($result_r)){
+              //faço o foreach para poder utilizar os métodos
+              foreach($result_r as $row){
+                $data_r[] = array(
+                  'id' => $row->id,
+                  'posicao' =>  ($this->filaModel->buscaPosicaoFila($row->protocolo)) ? $this->filaModel->buscaPosicaoFila($row->protocolo) : "-",
+                  'etapa' => ($this->etapaModel->getEtapaDescricao($row->nascimento)) ? $this->etapaModel->getEtapaDescricao($row->nascimento) : "FORA ETAPAS",
+                  'nomecrianca' => $row->nomecrianca,
+                  'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
+                  'responsavel' => $row->responsavel,
+                  'protocolo' => $row->protocolo,
+                  'registro' => date('d/m/Y H:i:s', strtotime($row->registro)),
+                  'telefone' => $row->telefone,
+                  'celular' => $row->celular,
+                  'situacao' => $this->situacaoModel->getDescricaoSituacaoById($row->situacao_id),                  
+                  'situacao_id' => $row->situacao_id,
+                  'opcao1_id' => $this->filaModel->getEscolasById($row->opcao1_id)->nome,
+                  'opcao2_id' => $this->filaModel->getEscolasById($row->opcao2_id)->nome,
+                  'opcao3_id' => $this->filaModel->getEscolasById($row->opcao3_id)->nome,
+                  'opcao_matricula' => $this->filaModel->getEscolasById($row->opcao_matricula)->nome,
+                  'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno)
+                );
+              }
+            } else {
+              $data_r = false;
+            }   
+              
+            // E AQUI CHAMO O RELATÓRIO 
+            //die(var_dump($data_r));
+            $this->view('relatorios/relatorioconsulta' ,$data_r);
           } else {
               // SE NÃO FOR IMPRIMIR CHAMO O INDEX COM OS DADOS NOVAMENTE
               $this->view('admins/index', $data);
