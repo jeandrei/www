@@ -136,7 +136,8 @@
                   'opcao2_id' => $this->filaModel->getEscolasById($row->opcao2_id)->nome,
                   'opcao3_id' => $this->filaModel->getEscolasById($row->opcao3_id)->nome,
                   'opcao_matricula' => $this->filaModel->getEscolasById($row->opcao_matricula)->nome,
-                  'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno)
+                  'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno),
+                  'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula)
                 );
               }
             } else {
