@@ -75,21 +75,23 @@ class PDF extends FPDF
                      }
  
                      foreach($data as $row) {       
-                         $pdf->SetFont('Arial','',8);   
-                         $pdf->SetFillColor(255, 255, 179);     
+                         $pdf->SetFont('Arial','',8);  
                          $pdf->Ln();   
-                         $pdf->Cell($larguracoll[1],$tam_fonte,utf8_decode($row["posicao"]),1,0,'C',true);                       
-                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C',true);
-                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["nomecrianca"]),1,0,'C',true);
-                         $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C',true);
-                         $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C',true);
-                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["protocolo"]),1,0,'C',true);  
-                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["situacao"]),1,0,'C',true);  
-                         $pdf->Ln();    
+                         $pdf->Cell($larguracoll[1],$tam_fonte,utf8_decode($row["posicao"]),1,0,'C');                       
+                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C');
+                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["nomecrianca"]),1,0,'C');
+                         $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C');
+                         $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C');
+                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["protocolo"]),1,0,'C');  
+                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["situacao"]),1,0,'C');  
+                            
                          
-                         $pdf->Cell(200,$tam_fonte,utf8_decode($row["situacao"] . " unidade: " . $row["opcao_matricula"]),1);  
-                         $pdf->Cell(70,$tam_fonte,utf8_decode("Turno: " . $row["turno_matricula"]),1);                         
-                         
+                         if($row['opcao_matricula']){
+                         $pdf->Ln(); 
+                         $pdf->SetFillColor(255, 255, 179); 
+                         $pdf->Cell(200,$tam_fonte,utf8_decode($row["situacao"] . " unidade: " . $row["opcao_matricula"]),1,0,'C',true);   
+                         $pdf->Cell(70,$tam_fonte,utf8_decode("Turno: " . $row["turno_matricula"]),1,0,'C',true);                        
+                         }
                         
                      } 
                     
