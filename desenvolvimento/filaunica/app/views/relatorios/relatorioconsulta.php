@@ -47,7 +47,7 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Pos", "Responsável pelo cadastro", "Nome da Criança", "Nascimento", "Etapa", "Protocolo", "Situação");
+            $colunas =array("Pos", "Nome da Criança", "Responsável pelo cadastro", "Nascimento", "Etapa", "Protocolo", "Situação");
             //largura das colunas
             $larguracoll = array(1 => 10, 2 => 80, 3 => 80, 4 => 20, 5 => 25, 6 => 25, 7 => 30);
             $tam_fonte = 10;    
@@ -78,8 +78,8 @@ class PDF extends FPDF
                          $pdf->SetFont('Arial','',8);  
                          $pdf->Ln();   
                          $pdf->Cell($larguracoll[1],$tam_fonte,utf8_decode($row["posicao"]),1,0,'C');                       
-                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C');
-                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["nomecrianca"]),1,0,'C');
+                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["nomecrianca"]),1,0,'C');
+                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C');                         
                          $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C');
                          $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C');
                          $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["protocolo"]),1,0,'C');  
