@@ -251,14 +251,20 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                         Opção 3: <?php echo $registro['opcao3_id']; ?>
                     </div>
                 </div>
-
+                
                 <!--4ª Linha do card-->
                 <div class="row">
                     <div class="col-sm-8">
                         <?php if($registro['situacao_id'] == 2 || $registro['situacao_id'] == 5){
                             echo "Escola em que a criança foi matriculada/convocada: <b>" . $registro['opcao_matricula'] . "</b>";}
                             ?>                      
-                    </div>                    
+                    </div>  
+
+                    <div class="col-sm-4">
+                        <?php if($registro['situacao_id'] == 2 || $registro['situacao_id'] == 5){
+                            echo "Turno da matricula/convocação: " ."<b>" . $registro['turno_matricula'] . "</b>";}
+                            ?>                      
+                    </div>                   
                 </div>
                 
                 

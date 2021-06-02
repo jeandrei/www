@@ -293,19 +293,16 @@
             $row = $this->db->single();  
             //var_dump($row);
                     
-            if($row->ativo == 1 && $row->posicao > 0){
-                return $row->posicao . 'º';
-            } else {
+            if($row->ativo == 0){
+                return false;
+            } elseif($row->ativo == 1 && $row->posicao > 0){
+                return $row->posicao . 'º';  
+            }else{
                 if($row->posicao == 0)
                 {
                     return "FE";
-                }else
-                {
-                    return false;
-                }                
-            }       
-            
-        
+                }
+            }              
         }
 
 
