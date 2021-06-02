@@ -349,12 +349,12 @@
 
 
         public function update($data){             
-            $this->db->query('UPDATE fila SET opcao_matricula = :opcao_matricula, situacao_id = :situacao_id WHERE id = :id');
+            $this->db->query('UPDATE fila SET opcao_matricula = :opcao_matricula, situacao_id = :situacao_id, turno_matricula = :turno_matricula WHERE id = :id');
             // Bind values
             $this->db->bind(':id',$data['id']);
             $this->db->bind(':opcao_matricula',$data['opcao_matricula']);            
             $this->db->bind(':situacao_id',$data['situacao_id']);            
-
+            $this->db->bind(':turno_matricula',$data['turno_matricula']); 
             // Execute
             if($this->db->execute()){
                 return true;                

@@ -7,14 +7,20 @@ $(document).ready(function(){
     // quando carrega o documento
     situacao = $("#situacao").val();
     if(situacao == 2 || situacao == 5){
-        $( "#div_escola_mat" ).removeClass( "invisible");
-        $( "#div_escola_mat" ).addClass( "visible");       
+        $( "#div_escola_mat" ).removeClass("invisible");
+        $( "#div_escola_mat" ).addClass("visible");    
+
+        $( "#div_turno_matricula" ).removeClass("invisible");
+        $( "#div_turno_matricula" ).addClass("visible");    
     } else {
-        $( "#div_escola_mat" ).removeClass( "visible");
-        $( "#div_escola_mat" ).addClass( "invisible");        
+        $( "#div_escola_mat" ).removeClass("visible");
+        $( "#div_escola_mat" ).addClass("invisible"); 
+
+        $( "#div_turno_matricula" ).removeClass("visible");
+        $( "#div_turno_matricula" ).addClass("invisible");       
     }  
 
-
+    
     if(situacao == 2){        
         $( "#botao" ).removeClass( "invisible");
         $( "#botao" ).addClass( "visible");
@@ -30,9 +36,15 @@ $(document).ready(function(){
             if(situacao == 2 || situacao == 5){
                 $( "#div_escola_mat" ).removeClass("invisible");
                 $( "#div_escola_mat" ).addClass("visible");
+
+                $( "#div_turno_matricula" ).removeClass("invisible");
+                $( "#div_turno_matricula" ).addClass("visible");
             } else {
                 $( "#div_escola_mat" ).removeClass("visible");
                 $( "#div_escola_mat" ).addClass("invisible");
+
+                $( "#div_turno_matricula" ).removeClass("visible");
+                $( "#div_turno_matricula" ).addClass("invisible");
             }   
     });
 
@@ -175,7 +187,7 @@ $(document).ready(function(){
                     <!--linha 01 editar-->
                     <div class="row">
                             
-                            <!-- COLUNA 3 SITUAÇÃO-->
+                            <!-- COLUNA 1 SITUAÇÃO-->
                             <div class="form-group col-lg-3">
                                 <label for="situacao">
                                     Situação
@@ -201,7 +213,11 @@ $(document).ready(function(){
                                 </select>    
                             </div>
 
-                                <!-- COLUNA 3 SITUAÇÃO-->
+                            
+                            
+                            
+                            
+                            <!-- COLUNA 2 ESCOLA-->
                             <div id="div_escola_mat" name="div_escola_mat" class="form-group col-lg-6 invisible">
                                 <label for="escolamatricula">
                                     Escola em que a criança foi matriculada
@@ -225,12 +241,33 @@ $(document).ready(function(){
                                             </option>
                                         <?php endforeach; ?>  
                                 </select>    
-                            </div>                                           
+                            </div>   
 
-                        
-                        
-                    <!--linha 01 editar-->                   
-                    </div>
+
+
+                            <!--COLUNA 3 TURNO MATRICULA-->                     
+                            <div id="div_turno_matricula" class="form-group col-lg-3 invisible">
+                                <label for="turno_matricula" class="help-block">
+                                    Turno da matrícula:
+                                </label>
+                                <select 
+                                    name="turno_matricula" 
+                                    id="turno_matricula" 
+                                    class="form-control <?php echo (!empty($data['turno_matricula_err'])) ? 'is-invalid' : ''; ?>"                                       
+                                >
+                                        <option value="">Selecione o turno</option>
+                                        <option value="1" <?php echo $data['turno_matricula'] == '1' ? 'selected':'';?>>Matutino</option>
+                                        <option value="2" <?php echo $data['turno_matricula'] == '2' ? 'selected':'';?>>Vespertino</option>                                                                                                                   
+                                            
+                                </select>                                           
+                                <span class="invalid-feedback">
+                                        <?php echo $data['turno_matricula_err'];?>
+                                </span>
+                                </div>                                                                                                 
+                            <!--TURNO DESEJADO-->
+                            </div>                   
+
+                    <!--linha 01 editar-->  
 
                         
                         
