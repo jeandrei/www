@@ -28,8 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>    
     
     <!--Javascript funções-->
-    <script src="<?php echo URLROOT; ?>/js/main.js"></script>
-      
+    <script src="<?php echo URLROOT; ?>/js/main.js"></script>   
 </head>
 <body>
 
@@ -54,17 +53,14 @@
            
             
             <!-- FILA ÚNICA DESCRIÇÃO-->
-            <div class="jumbotron jumbotron-fluid text-center" style="background-image: url(<?php echo URLROOT; ?>/img/mothers-3389671_640.jpg); background-size: 40% 100%; background-repeat: no-repeat, repeat; background-position: center; background-size: cover; padding:40px; margin-bottom: 1em;">
-                <div class="container"> 
-                    
-               
-                <h1 class="display-3"><?php echo SITENAME;?></h1>
-                <p class="lead">Penha/SC</p>
-               
-                </div>
-            </div>
+         
 
-
+          <div class="row mb-3" id="box-search">
+              <div class="thumbnail text-center">
+                  <img src="<?php echo URLROOT; ?>/img/home_img.jpg" alt="" class="img-fluid">                 
+              </div>
+          </div>
+            
 
     
           <div class="row justify-content-center align-items-center">         
@@ -77,23 +73,29 @@
         <hr>        
         
         <!--  -->
-        <div class="row justify-content-center align-items-center">            
-            <div class="col-lg-4">
-                <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()">                                
-                  <div class="form-group mx-sm-3 mb-2">
-                    <label for="protocolo" class="sr-only"></label>                                 
-                    <input 
-                        type="number" 
-                        class="form-control onlynumbers <?php echo (!empty($data['protocolo_err'])) ? 'is-invalid' : ''; ?>" 
-                        id="protocolo" 
-                        name="protocolo" 
-                        placeholder="Protocolo"
-                    >               
-                  </div>             
-                  <button type="submit" class="btn btn-primary btn-lg mb-2">Consultar</button>
-                </form>     
-            </div>
-        </div>
+        <form action="<?php echo URLROOT; ?>/filas/consultar" class="form-inline" method="post" enctype="multipart/form-data" onsubmit="return validation()"> 
+          <div class="row justify-content-center align-items-center">            
+              <div class="col-lg-4">                                              
+                    <div class="form-group mx-sm-3 mb-2">
+                      <label for="protocolo" class="sr-only"></label>                                 
+                      <input 
+                          type="number" 
+                          class="form-control onlynumbers <?php echo (!empty($data['protocolo_err'])) ? 'is-invalid' : ''; ?>" 
+                          id="protocolo" 
+                          name="protocolo" 
+                          placeholder="Protocolo"
+                      >               
+                    </div> 
+              </div>
+              
+              <div class="col-lg-1">
+                      <button type="submit" class="btn btn-primary btn-lg mb-2">Consultar</button>
+              </div>  
+
+          </div>
+        </form>   
+        
+        
         <span id="protocolo_err" class="text-danger"> 
               <?php if(!empty($data['protocolo_err']))
                 {
