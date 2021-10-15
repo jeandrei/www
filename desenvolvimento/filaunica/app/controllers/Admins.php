@@ -264,7 +264,7 @@
           'nascimento' => date('d/m/Y', strtotime($fila->nascimento)),
           'responsavel' => $fila->responsavel,
           'protocolo' => $fila->protocolo,
-          'registro' => date('d/m/Y h:i:s', strtotime($fila->registro)),
+          'registro' => date('d/m/Y H:i:s', strtotime($fila->registro)),
           'telefone' => $fila->telefone,
           'celular' => $fila->celular,
           'email' => $fila->email, 

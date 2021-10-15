@@ -246,7 +246,7 @@
                 foreach ($result as $row){
                     $aguardando[] = array(
                         "posicao" => $this->buscaPosicaoFila($row->protocolo),
-                        "registro" => date('d/m/Y h:i:s', strtotime($row->registro)),
+                        "registro" => date('d/m/Y H:i:s', strtotime($row->registro)),
                         "responsavel" => $row->responsavel,
                         "nome" => $row->nome,
                         "nascimento" => date('d/m/Y', strtotime($row->nascimento)), 
