@@ -211,6 +211,25 @@
         }
 
 
+        // RETORNA O ÚLTIMO HISTÓRICO O REGISTRO DA FILA
+        public function getLastHistorico($id){
+            $this->db->query("SELECT 
+                                * 
+                              FROM 
+                                historico_id_fila 
+                              WHERE 
+                                fila_id = $id 
+                              ORDER BY 
+                                registro 
+                              DESC 
+                              LIMIT 
+                                1"
+                            );             
+            $result = $this->db->single();           
+            return $result;            
+        }
+
+
         public function getFilaPorEtapaRelatorio($etapa_id) {  
             
             $this->db->query("
